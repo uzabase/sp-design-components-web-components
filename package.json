@@ -1,0 +1,23 @@
+{
+  "name": "@sp-design/components-web-components",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "format": "prettier --write 'src/**/*.ts'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "3.0.0",
+    "prettier-plugin-organize-imports": "^3.2.3"
+  },
+  "dependencies": {
+    "@ub-design/components-web-components": "git+https://github.com/uzabase/ub-design-components-web-components.git#semver:^0.0.1",
+    "@sp-design/token": "git+https://github.com/uzabase/sp-design-token.git#semver:^4.1.0"
+  }
+}
