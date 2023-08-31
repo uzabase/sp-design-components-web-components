@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { SpButton } from "@sp-design/components-web-components/src/";
 </script>
 
 <main>

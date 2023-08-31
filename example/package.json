@@ -19,6 +19,6 @@
     "vite": "^4.4.9"
   },
   "dependencies": {
-    "@sp-design/components-web-components": "git+https://github.com/uzabase/sp-design-components-web-components.git#semver:^0.0.1"
+    "@sp-design/components-web-components": "git+https://github.com/uzabase/sp-design-components-web-components.git#semver:^0.0.3"
   }
 }
