@@ -1,0 +1,61 @@
+.base {
+  display: inline-flex;
+}
+
+.input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.checkmark {
+  display: inline-flex;
+  padding-block: 4px;
+  padding-inline: 4px;
+  cursor: pointer;
+}
+
+.checkmarkIn {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: var(--color-semantic-surface-regular-1) 50% 50% no-repeat;
+  border: 1px solid var(--color-semantic-border-check-unchecked);
+  border-radius: 2px;
+}
+
+:is(.base:hover, .hover) .checkmarkIn {
+  background-color: var(--color-semantic-surface-regular-3);
+}
+
+.base .input:indeterminate + .checkmark .checkmarkIn {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%222%22%20fill%3D%22none%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M0%200h8v2H0z%22%2F%3E%3C%2Fsvg%3E");
+}
+
+.base .input:focus-visible + .checkmark .checkmarkIn {
+  border-color: var(--color-semantic-border-focus);
+  box-shadow: 0 0 0 3px var(--color-semantic-highlight-focus-ring-default);
+}
+
+.base :is(.input:checked, .input:indeterminate) + .checkmark .checkmarkIn {
+  background-color: var(--color-semantic-surface-selected);
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%227%22%20fill%3D%22none%22%3E%3Cpath%20stroke%3D%22%23fff%22%20stroke-width%3D%221.5%22%20d%3D%22m1%203%202%202%204-4%22%2F%3E%3C%2Fsvg%3E");
+  border-color: var(--color-semantic-border-selected);
+}
+
+:is(.base:hover, .hover)
+:is(.input:checked, .input:indeterminate)
++ .checkmark
+.checkmarkIn {
+  background-color: var(--color-semantic-surface-selected-hover);
+  border-color: var(--color-semantic-border-selected-hover);
+}
+
+.base :is(.input:disabled, .input:disabled:hover) + .checkmark {
+  cursor: not-allowed;
+}
+
+.base :is(.input:disabled, .input:disabled:hover) + .checkmark .checkmarkIn {
+  background-color: var(--color-semantic-surface-check-disabled);
+  border-color: var(--color-semantic-border-regular);
+}

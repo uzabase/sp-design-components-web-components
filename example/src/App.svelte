@@ -1,7 +1,9 @@
 <script lang="ts">
+  import "../../src/index";
 </script>
 
 <main>
+  <sp-checkbox on:change={(e)=>(console.log(e))}></sp-checkbox>
   <sp-button></sp-button>
   <sp-button label="なんもないやつ"></sp-button>
   <sp-button label="disabled trueやつ" disabled={true}></sp-button>
