@@ -1,1 +1,1 @@
-export { SpButton } from './components/button/sp-button.ts';
+export { SpButton } from "./components/button/sp-button.ts";
