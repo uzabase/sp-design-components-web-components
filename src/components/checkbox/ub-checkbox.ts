@@ -33,20 +33,18 @@ export class UbCheckbox extends HTMLElement {
     ];
   }
 
-  connectedCallback() {
+  connectedCallback() { // connectedCallbackとattributeChangedCallbackの中身まとめた方がいいのか？
     this.shadowRoot!.innerHTML = render(this);
-    this.shadowRoot!.querySelector("input").addEventListener(
-      "change",
-      this.handleOnChange,
-    );
+    this.shadowRoot!.querySelector("input").addEventListener("change", (e) => {
+      this.handleOnChange(e);
+    });
   }
 
   attributeChangedCallback() {
     this.shadowRoot!.innerHTML = render(this);
-    // this.shadowRoot!.querySelector("input").addEventListener(
-    //   "change",
-    //   this.handleOnChange,
-    // );
+    this.shadowRoot!.querySelector("input").addEventListener("change", (e) => {
+      this.handleOnChange(e);
+    });
   }
 
   get value() {
@@ -102,11 +100,18 @@ export class UbCheckbox extends HTMLElement {
   }
 
   handleOnChange(e) {
+    const { checked, indeterminate } = e.currentTarget;
+    this.checked = checked;
+    this.indeterminate = indeterminate;
     this.dispatchEvent(
-      new Event("change", {
-        bubbles: false,
+      new CustomEvent("change", { // CustomEventらしい名前にしたほうがよいのか？
+        bubbles: true,
         composed: true,
-      })
+        detail: {
+          checked,
+          indeterminate,
+        },
+      }),
     );
   }
 }
