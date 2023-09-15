@@ -1,4 +1,4 @@
-.base {
+.checkmarkBase {
   display: inline-flex;
 }
 
@@ -24,26 +24,29 @@
   border-radius: 2px;
 }
 
-:is(.base:hover, .hover) .checkmarkIn {
+:is(.checkmarkBase:hover, .hover) .checkmarkIn {
   background-color: var(--color-semantic-surface-regular-3);
 }
 
-.base .input:indeterminate + .checkmark .checkmarkIn {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%222%22%20fill%3D%22none%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M0%200h8v2H0z%22%2F%3E%3C%2Fsvg%3E");
-}
-
-.base .input:focus-visible + .checkmark .checkmarkIn {
+.checkmarkBase .input:focus-visible + .checkmark .checkmarkIn {
   border-color: var(--color-semantic-border-focus);
   box-shadow: 0 0 0 3px var(--color-semantic-highlight-focus-ring-default);
 }
 
-.base :is(.input:checked, .input:indeterminate) + .checkmark .checkmarkIn {
+.checkmarkBase :is(.input:checked, .input:indeterminate) + .checkmark .checkmarkIn {
   background-color: var(--color-semantic-surface-selected);
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%227%22%20fill%3D%22none%22%3E%3Cpath%20stroke%3D%22%23fff%22%20stroke-width%3D%221.5%22%20d%3D%22m1%203%202%202%204-4%22%2F%3E%3C%2Fsvg%3E");
   border-color: var(--color-semantic-border-selected);
 }
 
-:is(.base:hover, .hover)
+.checkmarkBase .input:checked + .checkmark .checkmarkIn {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%227%22%20fill%3D%22none%22%3E%3Cpath%20stroke%3D%22%23fff%22%20stroke-width%3D%221.5%22%20d%3D%22m1%203%202%202%204-4%22%2F%3E%3C%2Fsvg%3E");
+}
+
+.checkmarkBase .input:indeterminate + .checkmark .checkmarkIn {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%222%22%20fill%3D%22none%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M0%200h8v2H0z%22%2F%3E%3C%2Fsvg%3E");
+}
+
+:is(.checkmarkBase:hover, .hover)
 :is(.input:checked, .input:indeterminate)
 + .checkmark
 .checkmarkIn {
@@ -51,11 +54,11 @@
   border-color: var(--color-semantic-border-selected-hover);
 }
 
-.base :is(.input:disabled, .input:disabled:hover) + .checkmark {
+.checkmarkBase :is(.input:disabled, .input:disabled:hover) + .checkmark {
   cursor: not-allowed;
 }
 
-.base :is(.input:disabled, .input:disabled:hover) + .checkmark .checkmarkIn {
+.checkmarkBase :is(.input:disabled, .input:disabled:hover) + .checkmark .checkmarkIn {
   background-color: var(--color-semantic-surface-check-disabled);
   border-color: var(--color-semantic-border-regular);
 }

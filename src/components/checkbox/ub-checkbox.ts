@@ -2,49 +2,57 @@
 import resetStyle from "@acab/reset.css" assert { type: "css" };
 
 const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle}`);
+styles.replaceSync(resetStyle);
 
 const render = (x) => `
-<label class="base" data-testid="base">
-  <input
-    type="checkbox"
-    ${x.value}
-    ${x.name}
-    ${x.id}
-    ${x.checked && "checked"}
-    ${x.indeterminate && "indeterminate"}
-    ${x.disabled && "disabled"}
-    class="input"
-    data-testid="input"
-  />
-  <span class="checkmark">
-    <span class="checkmarkIn" />
+<label data-testid="base">
+  <span class="checkmarkBase">
+    <input
+      type="checkbox"
+      ${x.value}
+      ${x.name}
+      ${x.id}
+      ${x.checked && "checked"}
+      ${x.indeterminate && "indeterminate"}
+      ${x.disabled && "disabled"}
+      class="input"
+      data-testid="input"
+    />
+    <span class="checkmark">
+      <span class="checkmarkIn"></span>
+    </span>
   </span>
 </label>
 `;
 
 export class UbCheckbox extends HTMLElement {
+  internals: ElementInternals;
+  static formAssociated = true;
+  input: HTMLInputElement;
+
   constructor() {
     super();
-    this.attachShadow({ mode: "open" });
-    this.shadowRoot!.adoptedStyleSheets = [
+    this.internals = this.attachInternals();
+    const shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
       styles,
     ];
-  }
-
-  connectedCallback() { // connectedCallbackとattributeChangedCallbackの中身まとめた方がいいのか？
-    this.shadowRoot!.innerHTML = render(this);
-    this.shadowRoot!.querySelector("input").addEventListener("change", (e) => {
+    shadowRoot.innerHTML = render(this);
+    this.input = this.shadowRoot.querySelector("input");
+    this.input.addEventListener("change", (e) => {
       this.handleOnChange(e);
     });
   }
+  connectedCallback() {}
 
   attributeChangedCallback() {
-    this.shadowRoot!.innerHTML = render(this);
-    this.shadowRoot!.querySelector("input").addEventListener("change", (e) => {
-      this.handleOnChange(e);
-    });
+    this.input.setAttribute("value", this.value || "");
+    this.input.setAttribute("name", this.name || "");
+    this.input.setAttribute("id", this.id || "");
+    this.input.checked = this.checked;
+    this.input.indeterminate = this.indeterminate;
+    this.input.disabled = this.disabled;
   }
 
   get value() {
@@ -101,10 +109,10 @@ export class UbCheckbox extends HTMLElement {
 
   handleOnChange(e) {
     const { checked, indeterminate } = e.currentTarget;
-    this.checked = checked;
-    this.indeterminate = indeterminate;
+    // this.checked = checked;
+    // this.indeterminate = indeterminate;
     this.dispatchEvent(
-      new CustomEvent("change", { // CustomEventらしい名前にしたほうがよいのか？
+      new CustomEvent("change", {
         bubbles: true,
         composed: true,
         detail: {
