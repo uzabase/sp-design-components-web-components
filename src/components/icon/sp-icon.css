@@ -1,0 +1,24 @@
+
+
+.spdsIcon{
+    display: inline-block;
+}
+.color__black{
+    fill: #191919;
+}
+.color__white{
+    fill: #fff;
+}
+.size__small{
+    width: 16px;
+    height: 16px;
+}
+.size__medium{
+    width: 25px;
+    height: 25px;
+}
+.size__large{
+    width: 42px;
+    height: 42px;
+}
+
