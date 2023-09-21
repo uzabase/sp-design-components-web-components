@@ -3,16 +3,14 @@
 import { speedaIcons } from "./icons.js";
 import iconStyle from "./sp-icon.css" assert { type: "css" };
 
-type color = "black" | "white" | null;
-type size = "small" | "medium" | "large" | null;
+type Color = "black" | "white" | null;
+type Size = "small" | "medium" | "large" | null;
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${iconStyle}`);
 
 const template = (t) => `
-  <svg aria-label="${
-    t.label
-  }" role="img" class="${t.allStyles()}" viewBox="0 0 25 25">
+  <svg aria-label="${t.label}" role="img" class="${t.allStyles()}" viewBox="0 0 25 25">
       <title>${t.label}</title>
       <path d="${speedaIcons[t.type]}"/>
     </svg>
@@ -29,13 +27,13 @@ export class SpIcon extends HTMLElement {
   }
 
   get size() {
-    return this.getAttribute("size");
+    return this.getAttribute("size") as Size;
   }
   set size(value) {
     this.setAttribute("size", value);
   }
   get color() {
-    return this.getAttribute("color");
+    return this.getAttribute("color") as Color;
   }
   set color(value) {
     this.setAttribute("color", value);
