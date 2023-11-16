@@ -24,6 +24,7 @@
     <sp-icon size="small" type="company" color="black" label=""></sp-icon>
     <sp-icon size="large" type="home" color="black" label="ホーム"></sp-icon>
     <sp-icon size="large" type="company" color="black" label=""></sp-icon>
+    <sp-icon size="large" type="settings" color="black" label=""></sp-icon>
   </div>
 </main>
 
