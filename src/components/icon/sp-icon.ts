@@ -1,6 +1,6 @@
-//geterとseterがよくわからない
 
 import { speedaIcons } from "./icons.js";
+
 import iconStyle from "./sp-icon.css" assert { type: "css" };
 
 type Color = "black" | "white" | null;
@@ -15,7 +15,7 @@ const template = (t) => `
       <path d="${speedaIcons[t.type]}"/>
     </svg>
 `;
-
+//<path d="${speedaIcons.normal[t.type]}"/>
 export class SpIcon extends HTMLElement {
   constructor() {
     super();
