@@ -1,11 +1,12 @@
 import { UbButton } from "@ub-design/components-web-components";
+import colorToken from "@sp-design/token/styles/speeda-tokens.css?inline" assert { type: "css" };
 // @ts-ignore
 import foundationStyle from "../foundation.css?inline" assert { type: "css" };
 // @ts-ignore
 import buttonStyle from "./sp-button.css?inline" assert { type: "css" };
 
 const styles = new CSSStyleSheet();
-styles.replaceSync(`${foundationStyle} ${buttonStyle}`);
+styles.replaceSync(`${colorToken.replace(":root", ":host")} ${foundationStyle} ${buttonStyle}`);
 
 export class SpButton extends UbButton {
   constructor() {
