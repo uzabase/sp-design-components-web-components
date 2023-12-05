@@ -1,5 +1,4 @@
 import { UbButton } from "@ub-design/components-web-components";
-import colorToken from "@sp-design/token/styles/speeda-tokens.css?inline" assert { type: "css" };
 // @ts-ignore
 import foundationStyle from "../foundation.css?inline" assert { type: "css" };
 // @ts-ignore
