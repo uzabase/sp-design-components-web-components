@@ -5,7 +5,7 @@ import foundationStyle from "../foundation.css?inline" assert { type: "css" };
 import buttonStyle from "./sp-button.css?inline" assert { type: "css" };
 
 const styles = new CSSStyleSheet();
-styles.replaceSync(`${colorToken.replace(":root", ":host")} ${foundationStyle} ${buttonStyle}`);
+styles.replaceSync(`${foundationStyle} ${buttonStyle}`);
 
 export class SpButton extends UbButton {
   constructor() {
