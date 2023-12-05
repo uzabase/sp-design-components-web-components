@@ -1,4 +1,3 @@
-
 import { speedaIcons } from "./icons.js";
 
 import iconStyle from "./sp-icon.css" assert { type: "css" };
@@ -10,7 +9,9 @@ const styles = new CSSStyleSheet();
 styles.replaceSync(`${iconStyle}`);
 
 const template = (t) => `
-  <svg aria-label="${t.label}" role="img" class="${t.allStyles()}" viewBox="0 0 25 25">
+  <svg aria-label="${
+    t.label
+  }" role="img" class="${t.allStyles()}" viewBox="0 0 25 25">
       <title>${t.label}</title>
       <path d="${speedaIcons[t.type]}"/>
     </svg>

@@ -1,7 +1,3 @@
-html {
-  color-scheme: light;
-}
-
-body {
+:host {
   font-family: Arial,Helvetica,Hiragino Kaku Gothic ProN,"Osaka","メイリオ","Meiryo","ＭＳ Ｐゴシック","MS P Gothic",sans-serif;
 }
