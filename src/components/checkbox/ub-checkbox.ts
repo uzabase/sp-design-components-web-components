@@ -9,12 +9,6 @@ const render = (x) => `
   <span class="checkmarkBase">
     <input
       type="checkbox"
-      ${x.value}
-      ${x.name}
-      ${x.id}
-      ${x.checked && "checked"}
-      ${x.indeterminate && "indeterminate"}
-      ${x.disabled && "disabled"}
       class="input"
       data-testid="input"
     />
@@ -38,69 +32,87 @@ export class UbCheckbox extends HTMLElement {
       ...this.shadowRoot.adoptedStyleSheets,
       styles,
     ];
-    shadowRoot.innerHTML = render(this);
+  }
+  connectedCallback() {
+    this.shadowRoot.innerHTML = render(this);
     this.input = this.shadowRoot.querySelector("input");
     this.input.addEventListener("change", (e) => {
       this.handleOnChange(e);
     });
+    this.temp()
   }
-  connectedCallback() {}
 
-  attributeChangedCallback() {
-    this.input.setAttribute("value", this.value || "");
-    this.input.setAttribute("name", this.name || "");
-    this.input.setAttribute("id", this.id || "");
-    this.input.checked = this.checked;
-    this.input.indeterminate = this.indeterminate;
-    this.input.disabled = this.disabled;
+  attributeChangedCallback(name, oldValue, newValue) {
+    this.temp()
+  }
+
+
+  temp() {
+    if(!this.input) return
+    this.input.setAttribute("value", this.getAttribute("value") || "");
+    this.input.setAttribute("name", this.getAttribute("name") || "");
+    this.input.checked = this.getAttribute("checked") === "true";
+    this.input.indeterminate = this.getAttribute("indeterminate") === "true";
+    this.input.disabled = this.getAttribute("disabled") === "true";
+    console.log(this.getAttribute("checked"))
   }
 
   get value() {
-    return this.getAttribute("value") || "";
+    return this.input?.getAttribute("value");
   }
 
   set value(value) {
-    this.setAttribute("value", value);
+    // this.setAttribute("value", value)
+    this.input?.setAttribute("value", value);
   }
 
   get name() {
-    return this.getAttribute("name") || "";
+    return this.input?.getAttribute("name");
   }
 
   set name(value) {
-    this.setAttribute("name", value);
+    this.input?.setAttribute("name", value);
   }
-
-  get id() {
-    return this.getAttribute("id") || "";
-  }
-
-  set id(value) {
-    this.setAttribute("id", value);
-  }
+  //
+  // get id() {
+  //   return this.getAttribute("id") || "";
+  // }
+  //
+  // set id(value) {
+  //   this.setAttribute("id", value);
+  // }
 
   get checked() {
-    return this.getAttribute("checked") === "true";
+    return this.input?.checked || false
+    // return this.getAttribute("checked") === "true";
   }
 
   set checked(value) {
-    this.setAttribute("checked", value + "");
+    if(!this.input) return
+    this.input.checked = value
+    // this.setAttribute("checked", value + "");
   }
 
   get indeterminate() {
-    return this.getAttribute("indeterminate") === "true";
+    return this.input?.indeterminate || false
+    // return this.getAttribute("indeterminate") === "true";
   }
 
   set indeterminate(value) {
-    this.setAttribute("indeterminate", value + "");
+    if(!this.input) return
+    this.input.indeterminate = value
+    // this.setAttribute("indeterminate", value + "");
   }
 
   get disabled() {
-    return this.getAttribute("disabled") === "true";
+    return this.input?.disabled || false
+    // return this.getAttribute("disabled") === "true";
   }
 
   set disabled(value) {
-    this.setAttribute("disabled", value + "");
+    if(!this.input) return
+    this.input.disabled = value
+    // this.setAttribute("disabled", value + "");
   }
 
   static get observedAttributes() {

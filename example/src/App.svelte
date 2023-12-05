@@ -20,6 +20,7 @@
     <sp-button label="appearance" appearance="fill"></sp-button>
     <sp-button label="size" size="width160"></sp-button>
     <sp-button label="onClickやつ" on:click={()=>(console.log("fire"))}></sp-button>
+    <sp-button label="あああああああ" disabled on:click={()=>(console.log("fire"))}></sp-button>
   </section>
   <section>
     <h1>Checkbox</h1>
@@ -27,12 +28,13 @@
     <sp-checkbox checked={true}></sp-checkbox>
     <sp-checkbox indeterminate={true}></sp-checkbox>
     <sp-checkbox disabled={true}></sp-checkbox>
+    <sp-checkbox value="checkboxValue" name="checkboxName" id="checkboxId"></sp-checkbox>
     <section>
       <h2>外側からチェックを変えるテスト</h2>
       <sp-button on:click={()=>(checked = !checked)} label="Check/UnCheck"></sp-button> Checked: {checked}
       <sp-button on:click={()=>(indeterminate = !indeterminate)} label="Indeterminate/UnIndeterminate"></sp-button> Indeterminate: {indeterminate}
       <sp-button on:click={()=>(disabled = !disabled)} label="Disable/UnDisable"></sp-button> Disable: {disabled}
-      <sp-checkbox checked={checked} disabled={disabled} indeterminate={indeterminate} on:change={(e)=>(console.log(e))}></sp-checkbox>
+      <sp-checkbox id="test" checked={checked} disabled={disabled} indeterminate={indeterminate} on:change={(e)=>(console.log(e))}></sp-checkbox>
     </section>
     <section>
       <h2>Formとしての働き</h2>

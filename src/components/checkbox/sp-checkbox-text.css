@@ -1,0 +1,20 @@
+.base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.base.disabled {
+  cursor: not-allowed;
+}
+
+.label {
+  color: var(--color-semantic-text-body-regular);
+  font-size: 12px;
+  line-height: 1;
+}
+
+.base.disabled .label {
+  color: var(--color-semantic-text-disabled);
+}
