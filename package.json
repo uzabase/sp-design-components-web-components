@@ -19,7 +19,6 @@
   "license": "ISC",
   "dependencies": {
     "@ub-design/components-web-components": "git+https://github.com/uzabase/ub-design-components-web-components.git#feature/storybook",
-    "@sp-design/token": "git+https://github.com/uzabase/sp-design-token.git#semver:^4.2.2",
     "lit": "^3.1.0"
   },
   "devDependencies": {
