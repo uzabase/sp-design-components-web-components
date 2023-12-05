@@ -1,8 +1,8 @@
-import { UbButton } from "@ub-design/components-web-components/src/";
+import { UbButton } from "@ub-design/components-web-components";
 // @ts-ignore
-import foundationStyle from "../foundation.css" assert { type: "css" };
+import foundationStyle from "../foundation.css?inline" assert { type: "css" };
 // @ts-ignore
-import buttonStyle from "./sp-button.css" assert { type: "css" };
+import buttonStyle from "./sp-button.css?inline" assert { type: "css" };
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${buttonStyle}`);

@@ -1,6 +1,6 @@
 import { speedaIcons } from "./icons.js";
 
-import iconStyle from "./sp-icon.css" assert { type: "css" };
+import iconStyle from "./sp-icon.css?inline" assert { type: "css" };
 
 type Color = "black" | "white" | null;
 type Size = "small" | "medium" | "large" | null;
