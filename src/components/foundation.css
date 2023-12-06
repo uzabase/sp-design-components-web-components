@@ -1,3 +1,7 @@
 :host {
-  font-family: Arial,Helvetica,Hiragino Kaku Gothic ProN,"Osaka","メイリオ","Meiryo","ＭＳ Ｐゴシック","MS P Gothic",sans-serif;
+  font-family: var(--font-ja);
+}
+
+:host:lang(zh) {
+  font-family: var(--font-zh);
 }
