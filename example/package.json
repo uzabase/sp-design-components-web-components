@@ -20,6 +20,6 @@
   },
   "dependencies": {
     "@sp-design/token": "git+https://github.com/uzabase/sp-design-token.git#semver:^4.2.0",
-    "@sp-design/components-web-components": "git+https://github.com/uzabase/sp-design-components-web-components.git#semver:^0.0.6"
+    "@sp-design/components-web-components": "git+https://github.com/uzabase/sp-design-components-web-components.git#semver:^0.0.7"
   }
 }
