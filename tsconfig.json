@@ -1,14 +1,5 @@
 {
   "compilerOptions": {
-    "target": "es2021",
-    "module": "es2015",
-    "moduleResolution": "node",
-    "lib": ["es2021", "dom"],
-    "declaration": true,
-    "declarationMap": true,
-    "experimentalDecorators": true,
-    "useDefineForClassFields": false
-  },
-  "include": ["src"],
-  "exclude": ["**/sp-icon.ts"]
+    "allowImportingTsExtensions": true
+  }
 }
