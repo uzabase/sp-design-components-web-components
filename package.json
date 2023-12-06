@@ -11,7 +11,7 @@
     "format": "prettier --write 'src/**/*.ts'",
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "build-storybook -o ./public/storybook"
   },
   "files": [
     "src/components",
