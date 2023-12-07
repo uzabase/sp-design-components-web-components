@@ -39,7 +39,7 @@
   background-color: var(--color-semantic-surface-button-loading);
 }
 
-.type__default.appearance__outline.isLoading .base__label {
+.type__default.appearance__outline.isLoading .base__text {
   visibility: hidden;
 }
 
@@ -74,7 +74,7 @@
   background-color: var(--color-semantic-surface-button-loading);
 }
 
-.type__default.appearance__fill.isLoading .base__label {
+.type__default.appearance__fill.isLoading .base__text {
   visibility: hidden;
 }
 
@@ -108,7 +108,7 @@
   background-color: var(--color-semantic-surface-button-loading);
 }
 
-.type__default.appearance__text.isLoading .base__label {
+.type__default.appearance__text.isLoading .base__text {
   visibility: hidden;
 }
 

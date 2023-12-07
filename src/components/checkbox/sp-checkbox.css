@@ -1,0 +1,8 @@
+.base:hover .checkmark::before {
+  background-color: var(--color-semantic-surface-regular-3);
+}
+
+.base:hover .checkmark:has(:is(.input:checked, .input:indeterminate))::before{
+  background-color: var(--color-semantic-surface-selected-hover);
+  border-color: var(--color-semantic-border-selected-hover);
+}

@@ -1,6 +1,5 @@
-//geterとseterがよくわからない
-
 import { speedaIcons } from "./icons.js";
+
 import iconStyle from "./sp-icon.css" assert { type: "css" };
 
 type Color = "black" | "white" | null;
@@ -10,12 +9,14 @@ const styles = new CSSStyleSheet();
 styles.replaceSync(`${iconStyle}`);
 
 const template = (t) => `
-  <svg aria-label="${t.label}" role="img" class="${t.allStyles()}" viewBox="0 0 25 25">
+  <svg aria-label="${
+    t.label
+  }" role="img" class="${t.allStyles()}" viewBox="0 0 25 25">
       <title>${t.label}</title>
       <path d="${speedaIcons[t.type]}"/>
     </svg>
 `;
-
+//<path d="${speedaIcons.normal[t.type]}"/>
 export class SpIcon extends HTMLElement {
   constructor() {
     super();
