@@ -3,6 +3,7 @@
   import "../../src/components/checkbox/sp-checkbox.ts"
   import "../../src/components/checkbox/sp-checkbox-list.ts"
   import "../../src/components/checkbox/sp-checkbox-text.ts"
+  import "../../src/components/icon/sp-icon.ts"
 </script>
 
 <main>
@@ -23,6 +24,14 @@
     <sp-checkbox></sp-checkbox>
     <sp-checkbox-list text="label"></sp-checkbox-list>
     <sp-checkbox-text text="label"></sp-checkbox-text>
+  </div>
+  <div>
+    <sp-icon size="medium" type="home" color="black" label="ホーム"></sp-icon>
+    <sp-icon size="medium" type="company" color="black" label=""></sp-icon>
+    <sp-icon size="small" type="home" color="black" label="ホーム"></sp-icon>
+    <sp-icon size="small" type="company" color="black" label=""></sp-icon>
+    <sp-icon size="large" type="home" color="black" label="ホーム"></sp-icon>
+    <sp-icon size="large" type="company" color="black" label=""></sp-icon>
   </div>
 </main>
 

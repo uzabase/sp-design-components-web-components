@@ -12,7 +12,7 @@
 .text {
   color: var(--color-semantic-text-body-regular);
   font-size: 12px;
-  line-height: 1;
+  line-height: 1.6;
 }
 
 .base:has(.input:disabled) .text {

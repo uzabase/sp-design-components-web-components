@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "allowImportingTsExtensions": true,
     "target": "es2021",
     "module": "es2015",
     "moduleResolution": "node",
@@ -8,7 +7,7 @@
     "declaration": true,
     "declarationMap": true,
     "experimentalDecorators": true,
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
   },
-  "include": ["src/**/*"]
+  "exclude": ["example"]
 }

@@ -1,0 +1,17 @@
+.icon{
+    display: inline-block;
+}
+.color__black{
+    fill: var(--color-primitive-neutral-100);
+}
+.color__white{
+    fill: var(--color-primitive-neutral-0);
+}
+.size__small{
+    width: 16px;
+    height: 16px;
+}
+.size__medium{
+    width: 24px;
+    height: 24px;
+}

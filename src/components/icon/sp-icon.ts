@@ -1,90 +1,44 @@
-import { speedaIcons } from "./icons.js";
+import { customElement, property, query } from "lit/decorators.js";
+import { UbIcon } from "@ub-design/components-web-components/src/";
+import { speedaIcons } from "./icons";
 
-import iconStyle from "./sp-icon.css" assert { type: "css" };
-
-type Color = "black" | "white" | null;
-type Size = "small" | "medium" | "large" | null;
+// @ts-ignore
+import iconStyle from "./icon.css?inline" assert { type: "css" };
 
 const styles = new CSSStyleSheet();
-styles.replaceSync(`${iconStyle}`);
+styles.replaceSync(iconStyle);
 
-const template = (t) => `
-  <svg aria-label="${
-    t.label
-  }" role="img" class="${t.allStyles()}" viewBox="0 0 25 25">
-      <title>${t.label}</title>
-      <path d="${speedaIcons[t.type]}"/>
-    </svg>
-`;
-//<path d="${speedaIcons.normal[t.type]}"/>
-export class SpIcon extends HTMLElement {
-  constructor() {
-    super();
-    this.attachShadow({ mode: "open" });
-    this.shadowRoot!.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      styles,
-    ];
-  }
+type Color = "black" | "white";
 
-  get size() {
-    return this.getAttribute("size") as Size;
-  }
-  set size(value) {
-    this.setAttribute("size", value);
+@customElement("sp-icon")
+export class SpIcon extends UbIcon {
+  private _color: Color;
+  static styles = [...UbIcon.styles, styles];
+
+  paths = speedaIcons;
+
+  @property({ type: String })
+  set color(val: Color) {
+    this._color = val || "black";
+    setTimeout(() => {
+      this.svg.classList.add("color__" + val);
+    });
   }
   get color() {
-    return this.getAttribute("color") as Color;
-  }
-  set color(value) {
-    this.setAttribute("color", value);
-  }
-  get type() {
-    return this.getAttribute("type");
-  }
-  set type(value) {
-    this.setAttribute("type", value);
+    return this._color;
   }
 
-  get label() {
-    return this.getAttribute("label");
-  }
-  set label(value) {
-    this.setAttribute("label", value);
-  }
+  @query("svg")
+  svg!: SVGElement;
 
-  allStyles = () => {
-    const styles = ["spdsIcon"];
-    switch (this.color) {
-      case "black":
-        styles.push("color__black");
-        break;
-      case "white":
-        styles.push("color__white");
-        break;
-      default:
-        styles.push("color__black");
-        break;
-    }
-    switch (this.size) {
-      case "small":
-        styles.push("size__small");
-        break;
-      case "medium":
-        styles.push("size__medium");
-        break;
-      case "large":
-        styles.push("size__large");
-        break;
-      default:
-        styles.push("size__medium");
-        break;
-    }
-    return styles.join(" ");
-  };
-
-  connectedCallback() {
-    this.shadowRoot.innerHTML = template(this);
+  constructor() {
+    super();
+    this.color = this.color || "black";
   }
 }
-customElements.define("sp-icon", SpIcon);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "sp-icon": SpIcon;
+  }
+}
