@@ -1,5 +1,5 @@
 import { customElement, property, query } from "lit/decorators.js";
-import { UbIcon } from "@ub-design/components-web-components/src/";
+import { UbIcon } from "@ub-design/components-web-components/";
 import { speedaIcons } from "./icons";
 
 // @ts-ignore

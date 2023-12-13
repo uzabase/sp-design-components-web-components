@@ -1,0 +1,7 @@
+:host {
+  font-family: var(--font-ja);
+}
+
+:host:lang(zh) {
+  font-family: var(--font-zh);
+}

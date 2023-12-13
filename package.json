@@ -1,27 +1,30 @@
 {
   "name": "@sp-design/components-web-components",
   "private": true,
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "directories": {
     "example": "example"
   },
   "scripts": {
-    "format": "prettier --write 'src/**/*.ts'",
+    "format": "prettier --write '(src|stories|tools)/**/*.ts'",
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build": "run-s build:*",
+    "build:ts": "tsc -p tsconfig-build.json",
+    "build:css": "node tools/copy-css.js"
   },
   "files": [
-    "src/components",
-    "src/index.ts"
+    "dist"
   ],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@sp-design/token": "git+https://github.com/uzabase/sp-design-token.git#semver:^4.3.0",
-    "@ub-design/components-web-components": "git+https://github.com/uzabase/ub-design-components-web-components.git#semver:^0.0.7"
+    "@ub-design/components-web-components": "git+https://github.com/uzabase/ub-design-components-web-components.git#semver:^0.0.8"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.2",
@@ -31,6 +34,7 @@
     "@storybook/html": "^7.6.2",
     "@storybook/html-vite": "^7.6.2",
     "lit": "^3.1.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "3.1.0",
     "prettier-plugin-organize-imports": "^3.2.4",
     "storybook": "^7.6.2",
