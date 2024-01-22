@@ -1,19 +1,9 @@
+import "../../src/components/checkbox/sp-checkbox";
+import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/styles/speeda-tokens.css";
-import "../../src/components/checkbox/sp-checkbox.ts";
 
-export default {
-  title: "sp-checkbox",
-  tags: ["autodocs"],
-  render(params) {
-    const el = document.createElement("sp-checkbox");
-    params.value && el.setAttribute("value", params.value);
-    params.name && el.setAttribute("name", params.name);
-    params.checked && el.setAttribute("checked", params.checked);
-    params.indeterminate &&
-      el.setAttribute("indeterminate", params.indeterminate);
-    params.disabled && el.setAttribute("disabled", params.disabled);
-    return el;
-  },
+const meta: Meta = {
+  component: "sp-checkbox",
   argTypes: {
     value: { type: "string" },
     name: { type: "string" },
@@ -21,6 +11,16 @@ export default {
     indeterminate: { type: "boolean" },
     disabled: { type: "boolean" },
   },
+  args: {
+    value: "sp-checkbox-value",
+    name: "sp-checkbox-name",
+    checked: false,
+    indeterminate: false,
+    disabled: false,
+  },
 };
+export default meta;
 
-export const Default = {};
+type Story = StoryObj;
+
+export const Basic: Story = {};

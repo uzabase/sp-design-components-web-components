@@ -13,7 +13,7 @@ const styles = new CSSStyleSheet();
 styles.replaceSync(iconStyle);
 let SpIcon = class SpIcon extends UbIcon {
     set color(val) {
-        this._color = val || "black";
+        this._color = val || "regular";
         setTimeout(() => {
             this.svg.classList.add("color__" + val);
         });
@@ -24,7 +24,7 @@ let SpIcon = class SpIcon extends UbIcon {
     constructor() {
         super();
         this.paths = speedaIcons;
-        this.color = this.color || "black";
+        this.color = this.color || "regular";
     }
 };
 SpIcon.styles = [...UbIcon.styles, styles];

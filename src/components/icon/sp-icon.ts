@@ -8,7 +8,7 @@ import iconStyle from "./icon.css?inline" assert { type: "css" };
 const styles = new CSSStyleSheet();
 styles.replaceSync(iconStyle);
 
-type Color = "black" | "white";
+type Color = "regular" | "inverse";
 
 @customElement("sp-icon")
 export class SpIcon extends UbIcon {
@@ -19,7 +19,7 @@ export class SpIcon extends UbIcon {
 
   @property({ type: String })
   set color(val: Color) {
-    this._color = val || "black";
+    this._color = val || "regular";
     setTimeout(() => {
       this.svg.classList.add("color__" + val);
     });
@@ -33,7 +33,7 @@ export class SpIcon extends UbIcon {
 
   constructor() {
     super();
-    this.color = this.color || "black";
+    this.color = this.color || "regular";
   }
 }
 

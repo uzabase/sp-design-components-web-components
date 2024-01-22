@@ -1,5 +1,5 @@
 import { UbIcon } from "@ub-design/components-web-components/";
-type Color = "black" | "white";
+type Color = "regular" | "inverse";
 export declare class SpIcon extends UbIcon {
     private _color;
     static styles: CSSStyleSheet[];

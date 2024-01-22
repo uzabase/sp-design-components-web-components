@@ -1,10 +1,10 @@
 .icon{
     display: inline-block;
 }
-.color__black{
+.color__regular{
     fill: var(--color-primitive-neutral-100);
 }
-.color__white{
+.color__inverse{
     fill: var(--color-primitive-neutral-0);
 }
 .size__small{

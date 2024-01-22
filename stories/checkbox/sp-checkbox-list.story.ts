@@ -1,9 +1,9 @@
-import "../../src/components/checkbox/sp-checkbox-text";
+import "../../src/components/checkbox/sp-checkbox-list";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/styles/speeda-tokens.css";
 
 const meta: Meta = {
-  component: "sp-checkbox-text",
+  component: "sp-checkbox-list",
   argTypes: {
     text: { type: "string" },
     value: { type: "string" },
@@ -13,9 +13,9 @@ const meta: Meta = {
     disabled: { type: "boolean" },
   },
   args: {
-    text: "sp-checkbox-text-text",
-    value: "sp-checkbox-text-value",
-    name: "sp-checkbox-text-name",
+    text: "sp-checkbox-list-text",
+    value: "sp-checkbox-list-value",
+    name: "sp-checkbox-list-name",
     checked: false,
     indeterminate: false,
     disabled: false,

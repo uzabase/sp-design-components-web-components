@@ -1,6 +1,6 @@
 .base {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   cursor: pointer;
 }
@@ -10,6 +10,7 @@
 }
 
 .text {
+  padding-block-start: 2.5px;
   color: var(--color-semantic-text-body-regular);
   font-size: 12px;
   line-height: 1.6;

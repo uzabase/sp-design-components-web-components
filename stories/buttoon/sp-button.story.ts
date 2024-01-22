@@ -1,18 +1,9 @@
+import "../../src/components/button/sp-button";
+import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/styles/speeda-tokens.css";
-import "../../src/components/button/sp-button.ts";
 
-export default {
-  title: "sp-button",
-  tags: ["autodocs"],
-  render(params) {
-    const el = document.createElement("sp-button");
-    el.setAttribute("text", params.text ?? "Button");
-    params.type && el.setAttribute("type", params.type);
-    params.appearance && el.setAttribute("appearance", params.appearance);
-    params.size && el.setAttribute("size", params.size);
-    params.disabled && el.setAttribute("disabled", params.disabled);
-    return el;
-  },
+const meta: Meta = {
+  component: "sp-button",
   argTypes: {
     text: { type: "string" },
     type: {
@@ -29,24 +20,16 @@ export default {
     },
     disabled: { type: "boolean" },
   },
-};
-
-export const Default = {};
-
-export const FilledButton = {
   args: {
+    text: "sp-button-text",
+    type: "default",
     appearance: "fill",
+    size: "medium",
+    disabled: false,
   },
 };
+export default meta;
 
-export const OutlinedButton = {
-  args: {
-    appearance: "outline",
-  },
-};
+type Story = StoryObj;
 
-export const DisabledButton = {
-  args: {
-    disabled: true,
-  },
-};
+export const Basic: Story = {};

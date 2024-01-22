@@ -1,29 +1,34 @@
+import "../../src/components/icon/sp-icon";
+import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/styles/speeda-tokens.css";
-import "../../src/components/icon/sp-icon.ts";
+import { speedaIconTypes } from "../../src/components/icon/icons";
 
-export default {
-  title: "sp-icon",
-  tags: ["autodocs"],
-  render(params) {
-    const el = document.createElement("sp-icon");
-    el.setAttribute("text", params.text ?? "Text");
-    el.setAttribute("type", params.type ?? "home");
-    params.color && el.setAttribute("color", params.color);
-    params.size && el.setAttribute("size", params.size);
-    return el;
-  },
+const meta: Meta = {
+  component: "sp-icon",
   argTypes: {
     text: { type: "string" },
-    type: { type: "string" },
-    color: {
+    type: {
       control: { type: "select" },
-      options: ["black", "white"],
+      options: speedaIconTypes,
     },
     size: {
       control: { type: "select" },
       options: ["small", "medium"],
     },
+    color: {
+      control: { type: "select" },
+      options: ["regular", "inverse"],
+    },
+  },
+  args: {
+    text: "sp-icon-text",
+    type: "home",
+    size: "medium",
+    color: "regular",
   },
 };
+export default meta;
 
-export const Default = {};
+type Story = StoryObj;
+
+export const Basic: Story = {};

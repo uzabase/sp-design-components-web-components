@@ -1,3 +1,4 @@
+export declare const speedaIconTypes: string[];
 export declare const speedaIcons: {
     home: string;
     company: string;
