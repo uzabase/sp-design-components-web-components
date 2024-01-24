@@ -1,7 +1,5 @@
 import { UbIcon } from "@ub-design/components-web-components/";
-type Color = "regular" | "inverse";
 export declare class SpIcon extends UbIcon {
-    private _color;
     static styles: CSSStyleSheet[];
     paths: {
         home: string;
@@ -55,15 +53,10 @@ export declare class SpIcon extends UbIcon {
         sort_down: string;
         sort_up: string;
     };
-    set color(val: Color);
-    get color(): Color;
-    svg: SVGElement;
-    constructor();
 }
 declare global {
     interface HTMLElementTagNameMap {
         "sp-icon": SpIcon;
     }
 }
-export {};
 //# sourceMappingURL=sp-icon.d.ts.map

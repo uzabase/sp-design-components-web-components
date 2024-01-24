@@ -1,6 +1,6 @@
 import "../../src/components/icon/sp-icon";
 import type { Meta, StoryObj } from "@storybook/web-components";
-import "@sp-design/token/styles/speeda-tokens.css";
+import "@sp-design/token/lib/speeda-tokens.css";
 import { speedaIconTypes } from "../../src/components/icon/icons";
 
 const meta: Meta = {
@@ -15,16 +15,11 @@ const meta: Meta = {
       control: { type: "select" },
       options: ["small", "medium"],
     },
-    color: {
-      control: { type: "select" },
-      options: ["regular", "inverse"],
-    },
   },
   args: {
     text: "sp-icon-text",
     type: "home",
     size: "medium",
-    color: "regular",
   },
 };
 export default meta;

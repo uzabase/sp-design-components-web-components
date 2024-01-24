@@ -1,5 +1,6 @@
-export declare const speedaIconTypes: string[];
-export declare const speedaIcons: {
+export declare const speedaIconTypes: readonly ["home", "company", "arrow_left", "arrow_right", "arrow_down", "arrow_up", "doublearrow_left", "doublearrow_right", "doublearrow_down", "plus", "delete", "download", "edit", "close", "arrow_right_link", "arrow_down_link", "arrow_up_link", "search", "help", "settings", "notification", "person", "my_speeda", "operator", "bookmark", "like", "lock", "opinion", "pib", "calendar", "people", "list", "mail", "zip", "folder", "error", "location", "open_in_new", "menu", "create", "copy", "kebab_menu", "drag", "clear", "toggle_arrow_right", "toggle_arrow_down", "check_bold", "sort", "sort_down", "sort_up"];
+export type SpeedaIconTypes = (typeof speedaIconTypes)[number];
+export declare const speedaIconPaths: {
     home: string;
     company: string;
     arrow_left: string;

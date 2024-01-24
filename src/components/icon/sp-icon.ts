@@ -1,40 +1,16 @@
-import { customElement, property, query } from "lit/decorators.js";
 import { UbIcon } from "@ub-design/components-web-components/";
-import { speedaIcons } from "./icons";
+import { speedaIconPaths } from "./icons";
 
 // @ts-ignore
 import iconStyle from "./icon.css?inline" assert { type: "css" };
+import { SpButton } from "../button/sp-button";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(iconStyle);
 
-type Color = "regular" | "inverse";
-
-@customElement("sp-icon")
 export class SpIcon extends UbIcon {
-  private _color: Color;
   static styles = [...UbIcon.styles, styles];
-
-  paths = speedaIcons;
-
-  @property({ type: String })
-  set color(val: Color) {
-    this._color = val || "regular";
-    setTimeout(() => {
-      this.svg.classList.add("color__" + val);
-    });
-  }
-  get color() {
-    return this._color;
-  }
-
-  @query("svg")
-  svg!: SVGElement;
-
-  constructor() {
-    super();
-    this.color = this.color || "regular";
-  }
+  paths = speedaIconPaths;
 }
 
 declare global {
@@ -42,3 +18,5 @@ declare global {
     "sp-icon": SpIcon;
   }
 }
+
+customElements.get("sp-icon") || customElements.define("sp-icon", SpIcon);

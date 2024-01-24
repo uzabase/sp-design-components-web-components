@@ -1,6 +1,6 @@
 import "../../src/components/checkbox/sp-checkbox-list";
 import type { Meta, StoryObj } from "@storybook/web-components";
-import "@sp-design/token/styles/speeda-tokens.css";
+import "@sp-design/token/lib/speeda-tokens.css";
 
 const meta: Meta = {
   component: "sp-checkbox-list",

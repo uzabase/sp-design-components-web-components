@@ -1,17 +1,14 @@
-.icon{
-    display: inline-block;
+.icon {
+  display: inline-block;
+  fill: var(--icon-color, var(--color-primitive-neutral-100));
 }
-.color__regular{
-    fill: var(--color-primitive-neutral-100);
+
+.size__small {
+  width: 16px;
+  height: 16px;
 }
-.color__inverse{
-    fill: var(--color-primitive-neutral-0);
-}
-.size__small{
-    width: 16px;
-    height: 16px;
-}
-.size__medium{
-    width: 24px;
-    height: 24px;
+
+.size__medium {
+  width: 24px;
+  height: 24px;
 }

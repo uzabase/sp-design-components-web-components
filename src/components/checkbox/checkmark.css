@@ -35,12 +35,9 @@
 }
 
 .checkmark:has(:is(.input:disabled, .input:disabled:hover))::before {
-  cursor: not-allowed;
-}
-
-.checkmark:has(:is(.input:disabled, .input:disabled:hover))::before {
   background-color: var(--color-semantic-surface-check-disabled);
   border-color: var(--color-semantic-border-regular);
+  cursor: not-allowed;
 }
 
 .checkmark .input {
