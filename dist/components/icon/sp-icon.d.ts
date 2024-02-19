@@ -1,6 +1,5 @@
 import { UbIcon } from "@ub-design/components-web-components/";
 export declare class SpIcon extends UbIcon {
-    static styles: CSSStyleSheet[];
     paths: {
         home: string;
         company: string;
@@ -53,6 +52,7 @@ export declare class SpIcon extends UbIcon {
         sort_down: string;
         sort_up: string;
     };
+    constructor();
 }
 declare global {
     interface HTMLElementTagNameMap {

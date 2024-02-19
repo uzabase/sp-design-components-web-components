@@ -8,7 +8,13 @@ import checkboxStyle from "./checkbox.css?inline" assert { type: "css" };
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${checkmarkStyle} ${checkboxStyle}`);
 export class SpCheckbox extends UbCheckbox {
+    constructor() {
+        super();
+        this.shadowRoot.adoptedStyleSheets = [
+            ...this.shadowRoot.adoptedStyleSheets,
+            styles,
+        ];
+    }
 }
-SpCheckbox.styles = [...UbCheckbox.styles, styles];
 customElements.get("sp-checkbox") ||
     customElements.define("sp-checkbox", SpCheckbox);

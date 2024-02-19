@@ -3,14 +3,20 @@ import { speedaIconPaths } from "./icons";
 
 // @ts-ignore
 import iconStyle from "./icon.css?inline" assert { type: "css" };
-import { SpButton } from "../button/sp-button";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(iconStyle);
 
 export class SpIcon extends UbIcon {
-  static styles = [...UbIcon.styles, styles];
   paths = speedaIconPaths;
+
+  constructor() {
+    super();
+    this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      styles,
+    ];
+  }
 }
 
 declare global {

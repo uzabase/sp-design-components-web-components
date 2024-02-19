@@ -6,9 +6,12 @@ const styles = new CSSStyleSheet();
 styles.replaceSync(iconStyle);
 export class SpIcon extends UbIcon {
     constructor() {
-        super(...arguments);
+        super();
         this.paths = speedaIconPaths;
+        this.shadowRoot.adoptedStyleSheets = [
+            ...this.shadowRoot.adoptedStyleSheets,
+            styles,
+        ];
     }
 }
-SpIcon.styles = [...UbIcon.styles, styles];
 customElements.get("sp-icon") || customElements.define("sp-icon", SpIcon);

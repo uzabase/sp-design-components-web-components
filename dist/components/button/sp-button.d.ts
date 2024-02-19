@@ -1,12 +1,12 @@
 import { UbButton } from "@ub-design/components-web-components/";
-import "../icon/sp-icon";
 import { SpeedaIconTypes } from "../icon/icons";
 export declare class SpButton extends UbButton {
     #private;
-    static styles: CSSStyleSheet[];
-    set icon(val: SpeedaIconTypes | "");
     get icon(): SpeedaIconTypes | "";
-    button: HTMLButtonElement;
+    set icon(val: SpeedaIconTypes | "");
+    static get observedAttributes(): string[];
+    constructor();
+    attributeChangedCallback(name: string, oldValue: string, newValue: string): void;
 }
 declare global {
     interface HTMLElementTagNameMap {

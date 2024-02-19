@@ -19,7 +19,7 @@
     "vite": "^5.0.5"
   },
   "dependencies": {
-    "@sp-design/token": "git+https://github.com/uzabase/sp-design-token.git#semver:^4.2.0",
-    "@ub-design/components-web-components": "git+https://github.com/uzabase/ub-design-components-web-components.git#d6db6e231ba90d58d42ff449b37c3285cc39b275"
+    "@sp-design/token": "git+https://github.com/uzabase/sp-design-token.git#semver:^6.0.0",
+    "@sp-design/components-web-components": "git+https://github.com/uzabase/sp-design-components-web-components.git#semver:^0.0.11"
   }
 }

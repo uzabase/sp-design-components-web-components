@@ -1,6 +1,6 @@
 import { UbCheckboxText } from "@ub-design/components-web-components/";
 export declare class SpCheckboxText extends UbCheckboxText {
-    static styles: CSSStyleSheet[];
+    constructor();
 }
 declare global {
     interface HTMLElementTagNameMap {

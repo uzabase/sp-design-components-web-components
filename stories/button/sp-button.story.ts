@@ -2,6 +2,7 @@ import "../../src/components/button/sp-button";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
 import { speedaIconTypes } from "../../src/components/icon/icons";
+import { action } from "@storybook/addon-actions";
 
 const meta: Meta = {
   component: "sp-button",
@@ -26,6 +27,9 @@ const meta: Meta = {
     loading: { type: "boolean" },
     selected: { type: "boolean" },
     disabled: { type: "boolean" },
+    onclick: {
+      action: "onclick",
+    },
   },
   args: {
     text: "sp-button-text",
@@ -36,6 +40,7 @@ const meta: Meta = {
     loading: false,
     selected: false,
     disabled: false,
+    onclick: action("onclick"),
   },
 };
 export default meta;

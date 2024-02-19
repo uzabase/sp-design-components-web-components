@@ -1,6 +1,8 @@
 import "../../src/components/checkbox/sp-checkbox-list";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
+import { html } from "lit";
+import { action } from "@storybook/addon-actions";
 
 const meta: Meta = {
   component: "sp-checkbox-list",
@@ -11,6 +13,9 @@ const meta: Meta = {
     checked: { type: "boolean" },
     indeterminate: { type: "boolean" },
     disabled: { type: "boolean" },
+    onchange: {
+      action: "onchange",
+    },
   },
   args: {
     text: "sp-checkbox-list-text",
@@ -19,6 +24,7 @@ const meta: Meta = {
     checked: false,
     indeterminate: false,
     disabled: false,
+    onchange: action("onchange"),
   },
 };
 export default meta;
@@ -26,3 +32,15 @@ export default meta;
 type Story = StoryObj;
 
 export const Basic: Story = {};
+
+export const Form: Story = {
+  decorators: [
+    (story) => html`
+      <form>
+        <input type="checkbox" name="sp-checkbox-list-name" value="primitive" />
+        ${story()}
+        <input type="submit" />
+      </form>
+    `,
+  ],
+};
