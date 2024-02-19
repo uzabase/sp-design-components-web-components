@@ -3,6 +3,7 @@
 
   display: flex;
   align-items: center;
+  justify-content: center;
   grid-column-gap: 4px;
   color: var(--color-semantic-text-button-outline-default);
   border-radius: 5px;
