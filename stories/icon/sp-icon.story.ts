@@ -2,6 +2,7 @@ import "../../src/components/icon/sp-icon";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
 import { speedaIconTypes } from "../../src/components/icon/icons";
+import { html } from "lit";
 
 const meta: Meta = {
   component: "sp-icon",
@@ -26,4 +27,13 @@ export default meta;
 
 type Story = StoryObj;
 
-export const Basic: Story = {};
+export const Property: Story = {};
+
+export const Attribute: Story = {
+  render: (args) =>
+    html`<sp-icon
+      text=${args.text}
+      type=${args.type}
+      size=${args.size}
+    ></sp-icon>`,
+};

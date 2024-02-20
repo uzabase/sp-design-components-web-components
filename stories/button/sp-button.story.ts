@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
 import { speedaIconTypes } from "../../src/components/icon/icons";
 import { action } from "@storybook/addon-actions";
+import { html } from "lit";
 
 const meta: Meta = {
   component: "sp-button",
@@ -47,4 +48,32 @@ export default meta;
 
 type Story = StoryObj;
 
-export const Basic: Story = {};
+export const Property: Story = {};
+
+export const Attribute: Story = {
+  render: (args) =>
+    html`<sp-button
+      text=${args.text}
+      icon=${args.icon}
+      type=${args.type}
+      appearance=${args.appearance}
+      size=${args.size}
+      loading=${args.loading}
+      selected=${args.selected}
+      disabled=${args.disabled}
+    ></sp-button>`,
+};
+
+export const AttributeHTML: Story = {
+  render: (args) =>
+    html`<sp-button
+      text=${args.text}
+      icon=${args.icon}
+      type=${args.type}
+      appearance=${args.appearance}
+      size=${args.size}
+      ?loading=${args.loading}
+      ?selected=${args.selected}
+      ?disabled=${args.disabled}
+    ></sp-button>`,
+};

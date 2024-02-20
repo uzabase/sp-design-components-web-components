@@ -31,16 +31,50 @@ export default meta;
 
 type Story = StoryObj;
 
-export const Basic: Story = {};
+export const Property: Story = {};
+
+export const Attribute: Story = {
+  render: (args) =>
+    html`<sp-checkbox-list
+      text=${args.text}
+      value=${args.value}
+      name=${args.name}
+      checked=${args.checked}
+      indeterminate=${args.indeterminate}
+      disabled=${args.disabled}
+      @change=${args.onchange}
+    ></sp-checkbox-list>`,
+};
+
+export const AttributeHTML: Story = {
+  render: (args) =>
+    html`<sp-checkbox-list
+      text=${args.text}
+      value=${args.value}
+      name=${args.name}
+      ?checked=${args.checked}
+      ?indeterminate=${args.indeterminate}
+      ?disabled=${args.disabled}
+      @change=${args.onchange}
+    ></sp-checkbox-list>`,
+};
 
 export const Form: Story = {
-  decorators: [
-    (story) => html`
-      <form>
-        <input type="checkbox" name="sp-checkbox-list-name" value="primitive" />
-        ${story()}
-        <input type="submit" />
-      </form>
-    `,
-  ],
+  render: (args) => html`
+    <form>
+      <input type="checkbox" name=${args.name} value="primitive1" />
+      <input type="checkbox" name=${args.name} value="primitive2" />
+      <sp-checkbox-list
+        .text=${args.text}
+        .value=${args.value}
+        .name=${args.name}
+        .checked=${args.checked}
+        .indeterminate=${args.indeterminate}
+        .disabled=${args.disabled}
+        @change=${args.onchange}
+      ></sp-checkbox-list>
+      <input type="reset" />
+      <input type="submit" />
+    </form>
+  `,
 };
