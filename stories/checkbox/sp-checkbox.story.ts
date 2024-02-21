@@ -17,8 +17,6 @@ const meta: Meta = {
     },
   },
   args: {
-    value: "sp-checkbox-value",
-    name: "sp-checkbox-name",
     checked: false,
     indeterminate: false,
     disabled: false,
@@ -29,9 +27,26 @@ export default meta;
 
 type Story = StoryObj;
 
-export const Property: Story = {};
+export const Basic: Story = {
+  args: {
+    checked: undefined,
+    indeterminate: undefined,
+    disabled: undefined,
+  },
+};
+
+export const Property: Story = {
+  args: {
+    value: "sp-checkbox-value",
+    name: "sp-checkbox-name",
+  },
+};
 
 export const Attribute: Story = {
+  args: {
+    value: "sp-checkbox-value",
+    name: "sp-checkbox-name",
+  },
   render: (args) =>
     html`<sp-checkbox
       value=${args.value}
@@ -44,6 +59,10 @@ export const Attribute: Story = {
 };
 
 export const AttributeHTML: Story = {
+  args: {
+    value: "sp-checkbox-value",
+    name: "sp-checkbox-name",
+  },
   render: (args) =>
     html`<sp-checkbox
       value=${args.value}
@@ -56,6 +75,10 @@ export const AttributeHTML: Story = {
 };
 
 export const Form: Story = {
+  args: {
+    value: "sp-checkbox-value",
+    name: "sp-checkbox-name",
+  },
   render: (args) => html`
     <form>
       <input type="checkbox" name=${args.name} value="primitive1" />
