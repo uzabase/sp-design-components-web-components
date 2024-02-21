@@ -96,3 +96,35 @@ export const Form: Story = {
     </form>
   `,
 };
+
+export const ALL: Story = {
+  render: (args) => html`
+    <table>
+      <thead>
+        <tr>
+          <td></td>
+          <th>default</th>
+          <th>checked</th>
+          <th>indeterminate</th>
+          <th>checked && indeterminate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>default</td>
+          <td><sp-checkbox></sp-checkbox></td>
+          <td><sp-checkbox checked></sp-checkbox></td>
+          <td><sp-checkbox indeterminate></sp-checkbox></td>
+          <td><sp-checkbox checked indeterminate></sp-checkbox></td>
+        </tr>
+        <tr>
+          <td>disabled</td>
+          <td><sp-checkbox disabled></sp-checkbox></td>
+          <td><sp-checkbox checked disabled></sp-checkbox></td>
+          <td><sp-checkbox indeterminate disabled></sp-checkbox></td>
+          <td><sp-checkbox checked indeterminate disabled></sp-checkbox></td>
+        </tr>
+      </tbody>
+    </table>
+  `,
+};
