@@ -10,5 +10,5 @@
     "useDefineForClassFields": false,
     "outDir": "dist"
   },
-  "exclude": ["example", "stories", "dist"]
+  "exclude": ["example", "stories", "dist", "tools"]
 }

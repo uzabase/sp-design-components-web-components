@@ -5,6 +5,11 @@
   cursor: pointer;
 }
 
+.base:has(.input:focus-visible) {
+  outline: 2px solid var(--color-semantic-text-body-regular);
+  outline-offset: 2px;
+}
+
 .base:has(.input:disabled) {
   cursor: not-allowed;
 }

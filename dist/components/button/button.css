@@ -31,7 +31,7 @@
   color: var(--color-semantic-text-button-outline-hover);
 }
 
-.type__default.appearance__outline:focus:not(:disabled) {
+.type__default.appearance__outline:focus-visible:not(:is(:disabled, .isSelected)) {
   --icon-color: var(--color-semantic-text-button-outline-focus);
 
   border-color: var(--color-semantic-border-button-outline-focus);
@@ -51,7 +51,7 @@
   background-color: var(--color-semantic-surface-button-fill-hover);
 }
 
-.type__default.appearance__fill:focus:not(:disabled) {
+.type__default.appearance__fill:focus-visible:not(:is(:disabled, .isSelected)) {
   border-color: var(--color-semantic-border-button-fill-focus);
   background-color: var(--color-semantic-surface-button-fill-focus);
 }
@@ -66,7 +66,7 @@
   background-color: var(--color-semantic-surface-button-text-hover);
 }
 
-.type__default.appearance__text:focus:not(:disabled) {
+.type__default.appearance__text:focus-visible:not(:is(:disabled, .isSelected)) {
   border-color: var(--color-semantic-border-button-text-focus);
   background-color: var(--color-semantic-surface-button-text-focus);
 }
@@ -101,7 +101,7 @@
   color: var(--color-semantic-text-button-outline-destructive-hover);
 }
 
-.type__destructive.appearance__outline:focus:not(:disabled) {
+.type__destructive.appearance__outline:focus-visible:not(:disabled) {
   --icon-color: var(--color-semantic-text-button-outline-destructive-focus);
 
   border-color: var(--color-semantic-border-button-outline-destructive-focus);
@@ -123,7 +123,7 @@
   background-color: var(--color-semantic-surface-button-fill-destructive-hover);
 }
 
-.type__destructive.appearance__fill:focus:not(:disabled) {
+.type__destructive.appearance__fill:focus-visible:not(:disabled) {
   border-color: var(--color-semantic-border-button-fill-destructive-focus);
   background-color: var(--color-semantic-surface-button-fill-destructive-focus);
 }
@@ -141,7 +141,7 @@
   background-color: var(--color-semantic-surface-button-text-destructive-hover);
 }
 
-.type__destructive.appearance__text:focus:not(:disabled) {
+.type__destructive.appearance__text:focus-visible:not(:disabled) {
   border-color: var(--color-semantic-border-button-text-destructive-focus);
   background-color: var(--color-semantic-surface-button-text-destructive-focus);
 }
@@ -200,14 +200,14 @@
   visibility: hidden;
 }
 
-.size__large {
+.type__default.size__large {
   grid-column-gap: 8px;
   min-height: 32px;
   padding-inline: 24px;
   font-size: 12px;
 }
 
-.size__xLarge {
+.type__default.size__xLarge {
   grid-column-gap: 8px;
   min-height: 40px;
   padding-inline: 40px;

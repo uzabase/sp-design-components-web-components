@@ -19,13 +19,20 @@ const meta: Meta = {
   },
   args: {
     text: "sp-icon-text",
-    type: "home",
+    type: "edit",
     size: "medium",
   },
 };
 export default meta;
 
 type Story = StoryObj;
+
+export const Basic: Story = {
+  args: {
+    text: undefined,
+    size: undefined,
+  },
+};
 
 export const Property: Story = {};
 
@@ -36,4 +43,15 @@ export const Attribute: Story = {
       type=${args.type}
       size=${args.size}
     ></sp-icon>`,
+};
+
+export const ALL: Story = {
+  render: () => {
+    return html`
+      ${speedaIconTypes.map(
+        (type) =>
+          html`<sp-icon text="${type}のアイコン" type="${type}"></sp-icon>`,
+      )}
+    `;
+  },
 };

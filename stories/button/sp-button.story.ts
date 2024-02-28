@@ -855,7 +855,7 @@ export const ALL: Story = {
             ></sp-button>
           </td>
         </tr>
-        <tr>
+        <tr style="background: #ccc">
           <th>state: selected</th>
           <td>
             <sp-button
@@ -921,7 +921,7 @@ export const ALL: Story = {
             ></sp-button>
           </td>
         </tr>
-        <tr>
+        <tr style="background: #ccc">
           <th>state: loading</th>
           <td>
             <sp-button
@@ -956,7 +956,7 @@ export const ALL: Story = {
         </tr>
       </tbody>
     </table>
-    <table>
+    <table style="background: #ccc">
       <caption>
         size: large / type: destructive / icon: edit
       </caption>
@@ -1100,7 +1100,7 @@ export const ALL: Story = {
         </tr>
       </tbody>
     </table>
-    <table>
+    <table style="background: #ccc">
       <caption>
         size: xLarge / type: destructive / icon: edit
       </caption>
@@ -1287,7 +1287,7 @@ export const ALL: Story = {
             ></sp-button>
           </td>
         </tr>
-        <tr>
+        <tr style="background: #ccc">
           <th>state: selected</th>
           <td>
             <sp-button
@@ -1353,7 +1353,7 @@ export const ALL: Story = {
             ></sp-button>
           </td>
         </tr>
-        <tr>
+        <tr style="background: #ccc">
           <th>state: loading</th>
           <td>
             <sp-button
@@ -1431,7 +1431,7 @@ export const ALL: Story = {
             ></sp-button>
           </td>
         </tr>
-        <tr>
+        <tr style="background: #ccc">
           <th>state: selected</th>
           <td>
             <sp-button
@@ -1497,7 +1497,7 @@ export const ALL: Story = {
             ></sp-button>
           </td>
         </tr>
-        <tr>
+        <tr style="background: #ccc">
           <th>state: loading</th>
           <td>
             <sp-button
