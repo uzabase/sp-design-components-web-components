@@ -55,3 +55,15 @@ export const ALL: Story = {
     `;
   },
 };
+export const WithString: Story = {
+  decorators: [
+    (story) => html`
+      ${story()}
+      <span style="font-size:12px;">もじ</span>
+      <div style="display: flex;align-items: center;">
+        ${story()}
+        <span style="font-size:12px;">もじ</span>
+      </div>
+    `,
+  ],
+};
