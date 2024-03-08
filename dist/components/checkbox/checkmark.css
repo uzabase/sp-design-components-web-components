@@ -1,4 +1,6 @@
 .checkmark {
+  flex-grow: 0;
+  flex-shrink: 0;
   display: inline-flex;
   padding-block: 4px;
   padding-inline: 4px;

@@ -1,3 +1,9 @@
+:host {
+  display: inline-block;
+  min-width: 0;
+  max-width: 100%;
+}
+
 .base {
   display: flex;
   flex-wrap: wrap;
@@ -21,7 +27,6 @@
 }
 
 .text {
-  flex-grow: 1;
   min-width: 0;
   color: var(--color-semantic-text-body-regular);
   font-size: 12px;
@@ -37,6 +42,7 @@
 }
 
 .radio {
+  flex-grow: 0;
   flex-shrink: 0;
   display: inline-flex;
   padding-block: 4px;

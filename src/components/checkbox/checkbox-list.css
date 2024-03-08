@@ -1,3 +1,8 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
 .base {
   display: flex;
   align-items: flex-start;
@@ -28,10 +33,12 @@
 }
 
 .text {
+  min-width: 0;
   padding-block-start: 2.5px;
   color: var(--color-semantic-text-body-regular);
   font-size: 12px;
   line-height: 1.6;
+  overflow-wrap : break-word;
 }
 
 .base:has(input:disabled) .text {

@@ -49,8 +49,14 @@ export const ALL: Story = {
   render: () => {
     return html`
       ${speedaIconTypes.map(
-        (type) =>
-          html`<sp-icon text="${type}のアイコン" type="${type}"></sp-icon>`,
+        (type) => html`
+          <sp-icon text="${type}のアイコン" type="${type}"></sp-icon>
+          <sp-icon
+            text="${type}のアイコン"
+            type="${type}"
+            size="small"
+          ></sp-icon>
+        `,
       )}
     `;
   },

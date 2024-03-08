@@ -95,6 +95,18 @@ export const Form: Story = {
   ],
 };
 
+export const OverflowWrap: Story = {
+  decorators: [
+    (story) => html`
+      ${story()}
+      <div style="display: flex;">
+        <div>サンプルdiv</div>
+        ${story()}
+      </div>
+    `,
+  ],
+};
+
 export const ALL: Story = {
   render: (args) => html`
     <table>

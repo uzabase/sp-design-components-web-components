@@ -1,23 +1,35 @@
-.base {
+:host {
   --icon-color: var(--color-semantic-text-button-outline-default);
+  --padding-inline: 16px;
 
-  display: flex;
+  display: inline-block;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.base {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  grid-column-gap: 4px;
+  column-gap: 4px;
   color: var(--color-semantic-text-button-outline-default);
   border-radius: 5px;
-  font-size: 10px;
-  font-weight: bold;
-  line-height: 100%;
-  word-break: break-word;
   border: 1px solid transparent;
   background-color: transparent;
   min-height: 28px;
-  padding-inline: 16px;
+  max-width: calc(100% - var(--padding-inline)*2);
+  padding-inline: var(--padding-inline);
   position: relative;
   overflow: hidden;
   cursor: pointer;
+}
+
+.base__text {
+  min-width: 0;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  overflow-wrap : break-word;
 }
 
 .type__default.appearance__outline {
@@ -201,25 +213,29 @@
 }
 
 .type__default.size__large {
-  grid-column-gap: 8px;
+  --padding-inline: 24px;
+
+  column-gap: 8px;
   min-height: 32px;
-  padding-inline: 24px;
   font-size: 12px;
 }
 
 .type__default.size__xLarge {
-  grid-column-gap: 8px;
+  --padding-inline: 40px;
+
+  column-gap: 8px;
   min-height: 40px;
-  padding-inline: 40px;
   font-size: 12px;
 }
 
 .size__width80 {
+  --padding-inline: 4px;
+
   width: 80px;
-  padding-inline: 4px;
 }
 
 .size__width160 {
+  --padding-inline: 4px;
+
   width: 160px;
-  padding-inline: 4px;
 }

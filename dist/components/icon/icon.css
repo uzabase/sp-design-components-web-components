@@ -1,4 +1,6 @@
 :host {
+  flex-grow: 0;
+  flex-shrink: 0;
   display: inline-block;
   line-height: 0;
   vertical-align: middle;
