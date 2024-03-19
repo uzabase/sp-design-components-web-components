@@ -1,4 +1,4 @@
-import "../../src/components/radio/sp-radio-button-text-group";
+import "../../src/components/segmentedControl/sp-segmented-control";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
 import { html } from "lit";
@@ -37,21 +37,16 @@ const data = [
 ];
 
 const meta: Meta = {
-  component: "sp-radio-button-text-group",
+  component: "sp-segmented-control",
   argTypes: {
     name: { type: "string" },
-    direction: {
-      control: { type: "select" },
-      options: ["horizontal", "vertical"],
-    },
     data: { type: "string" },
     onchange: {
       action: "onchange",
     },
   },
   args: {
-    name: "sp-radio-button-text-group-name",
-    direction: "horizontal",
+    name: "sp-segmented-control-name",
     data: data,
     onchange: action("onchange"),
   },
@@ -60,57 +55,7 @@ export default meta;
 
 type Story = StoryObj;
 
-export const Basic: Story = {
-  args: {
-    name: undefined,
-    direction: undefined,
-  },
-};
-
-export const Attribute: Story = {
-  args: {
-    data: undefined,
-  },
-  render: (args) =>
-    html`<sp-radio-button-text-group
-      name=${args.name}
-      direction=${args.direction}
-      json-data=${JSON.stringify(data)}
-      @change=${args.onchange}
-    ></sp-radio-button-text-group>`,
-};
-
-export const Form: Story = {
-  decorators: [
-    (story) => html`
-      <form action="" method="get">
-        <label>
-          <input type="radio" name="primitive-radio-group" value="primitive1" />
-          <span>primitive1</span>
-        </label>
-        <label>
-          <input type="radio" name="primitive-radio-group" value="primitive2" />
-          <span>primitive2</span>
-        </label>
-        ${story()}
-        <input type="reset" />
-        <input type="submit" />
-      </form>
-    `,
-  ],
-};
-
-export const OverflowWrap: Story = {
-  decorators: [
-    (story) => html`
-      ${story()}
-      <div style="display: flex;">
-        <div>サンプルdiv</div>
-        ${story()}
-      </div>
-    `,
-  ],
-};
+export const Basic: Story = {};
 
 export const ALL: Story = {
   render: (args) => html`
@@ -126,84 +71,65 @@ export const ALL: Story = {
         <tr>
           <td>default</td>
           <td>
-            <sp-radio-button-text-group
+            <sp-segmented-control
               json-data=${JSON.stringify([{ text: "text" }])}
-            ></sp-radio-button-text-group>
+            ></sp-segmented-control>
           </td>
           <td>
-            <sp-radio-button-text-group
+            <sp-segmented-control
               json-data=${JSON.stringify([{ text: "text", checked: true }])}
-            ></sp-radio-button-text-group>
+            ></sp-segmented-control>
           </td>
         </tr>
         <tr>
           <td>disabled</td>
           <td>
-            <sp-radio-button-text-group
+            <sp-segmented-control
               json-data=${JSON.stringify([{ text: "text", disabled: true }])}
-            ></sp-radio-button-text-group>
+            ></sp-segmented-control>
           </td>
-          <td>
-            <sp-radio-button-text-group
+          <td style="background: #ccc">
+            <sp-segmented-control
               json-data=${JSON.stringify([
                 { text: "text", checked: true, disabled: true },
               ])}
-            ></sp-radio-button-text-group>
+            ></sp-segmented-control>
           </td>
         </tr>
       </tbody>
     </table>
   `,
 };
-
 export const Sandbox: Story = {
+  args: {
+    direction: undefined,
+  },
   decorators: [
     (story) => html`
-      <fieldset aria-labelledby="legend1" aria-invalid="true">
+      <fieldset aria-labelledby="legend1" style="min-inline-size: auto;">
         <legend id="legend1">らじおぐるーぷ</legend>
         ${story()}
       </fieldset>
       <fieldset>
-        <legend>らじおぐるーぷ２だよspanつき</legend>
-        <ul role="radiogroup">
-          <li style="list-style: none">
-            <label>
-              <span>email</span> <input type="radio" name="test" />
-            </label>
-          </li>
-          <li style="list-style: none">
-            <label> <span>abb</span> <input type="radio" name="test" /> </label>
-          </li>
-        </ul>
+        <legend>aaa</legend>
+        よこにもじ
+        <sp-segmented-control
+          json-data=${JSON.stringify([
+            { text: "text", checked: false },
+            { text: "text", checked: true },
+            { text: "text", checked: false },
+          ])}
+        ></sp-segmented-control>
       </fieldset>
-      <fieldset>
-        <legend>IDでforするやつらじおぐるーぷ３だよspanつき</legend>
-        <ul>
-          <li style="list-style: none">
-            <label for="idfor1">
-              <span>email</span>
-            </label>
-            <input type="radio" name="test2" id="idfor1" />
-          </li>
-          <li style="list-style: none">
-            <label for="idfor2">
-              <span>abb</span>
-            </label>
-            <input type="radio" name="test2" id="idfor2" />
-          </li>
-        </ul>
-      </fieldset>
-      <fieldset>
-        <legend>らじおぐるーぷ4だよspanなし</legend>
-        <ul role="radiogroup">
-          <li style="list-style: none">
-            <label> email <input type="radio" name="test" /> </label>
-          </li>
-          <li style="list-style: none">
-            <label> abb <input type="radio" name="test" /> </label>
-          </li>
-        </ul>
-      </fieldset>
+      <p>親がflex</p>
+      <div style="display: flex;">${story()}</div>
+      <sp-segmented-control
+        json-data=${JSON.stringify([
+          { text: "text", checked: false },
+          { text: "text", checked: true },
+          { text: "text", checked: false },
+        ])}
+      ></sp-segmented-control>
     `,
   ],
 };
