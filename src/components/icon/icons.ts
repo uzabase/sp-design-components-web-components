@@ -55,7 +55,7 @@ export const speedaIconTypes = [
 ] as const;
 export type SpeedaIconTypes = (typeof speedaIconTypes)[number];
 
-export const speedaIconPaths = {
+export const speedaIconPaths: {[key in SpeedaIconTypes]: string} = {
 arrow_down: '<path d="M12 16.99L4 8.98999L5.06 7.92999L12 14.87L18.94 7.92999L20 8.98999L12 16.99Z"/>',
 arrow_down_link: '<path d="M11.98 20.03L18.42 13.6L17.36 12.53L12.73 17.16V4.04001H11.23V17.16L6.59 12.53L5.59 13.6L11.98 20.03Z"/>',
 arrow_left: '<path d="M14.99 20L7 12L14.99 4L16.05 5.06L9.12 12L16.05 18.94L14.99 20Z"/>',

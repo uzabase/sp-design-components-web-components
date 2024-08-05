@@ -97,7 +97,7 @@ const main = async () => {
       "\n" +
       "] as const;\n" +
       "export type SpeedaIconTypes = (typeof speedaIconTypes)[number];\n\n" +
-      "export const speedaIconPaths = {\n" +
+      "export const speedaIconPaths: {[key in SpeedaIconTypes]: string} = {\n" +
       icons.map((value) => value.name + ": '" + value.path + "',").join("\n") +
       "\n" +
       "};\n",
