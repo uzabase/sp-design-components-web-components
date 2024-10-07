@@ -8,10 +8,12 @@ export class SpIcon extends UbIcon {
     constructor() {
         super();
         this.paths = speedaIconPaths;
-        this.shadowRoot.adoptedStyleSheets = [
-            ...this.shadowRoot.adoptedStyleSheets,
-            styles,
-        ];
+        if (this.shadowRoot) {
+            this.shadowRoot.adoptedStyleSheets = [
+                ...this.shadowRoot.adoptedStyleSheets,
+                styles,
+            ];
+        }
     }
 }
 customElements.get("sp-icon") || customElements.define("sp-icon", SpIcon);

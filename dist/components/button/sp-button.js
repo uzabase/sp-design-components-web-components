@@ -43,10 +43,12 @@ export class SpButton extends UbButton {
         _SpButton_instances.add(this);
         _SpButton_icon.set(this, "");
         _SpButton_iconElement.set(this, new SpIcon());
-        this.shadowRoot.adoptedStyleSheets = [
-            ...this.shadowRoot.adoptedStyleSheets,
-            styles,
-        ];
+        if (this.shadowRoot) {
+            this.shadowRoot.adoptedStyleSheets = [
+                ...this.shadowRoot.adoptedStyleSheets,
+                styles,
+            ];
+        }
         __classPrivateFieldGet(this, _SpButton_iconElement, "f").classList.add("base__icon");
         __classPrivateFieldGet(this, _SpButton_iconElement, "f").size = "small";
     }

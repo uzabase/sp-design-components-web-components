@@ -1,6 +1,16 @@
 import { UbIcon } from "@ub-design/components-web-components/";
 export declare class SpIcon extends UbIcon {
     paths: {
+        search: string;
+        sort: string;
+        error: string;
+        location: string;
+        clear: string;
+        copy: string;
+        menu: string;
+        close: string;
+        drag: string;
+        calendar: string;
         arrow_down: string;
         arrow_down_link: string;
         arrow_left: string;
@@ -10,30 +20,22 @@ export declare class SpIcon extends UbIcon {
         arrow_up: string;
         arrow_up_link: string;
         bookmark: string;
-        calendar: string;
         check: string;
         check_bold: string;
-        clear: string;
-        close: string;
-        copy: string;
         create: string;
         delete: string;
         doublearrow_down: string;
         doublearrow_left: string;
         doublearrow_right: string;
         download: string;
-        drag: string;
         edit: string;
-        error: string;
         folder: string;
         help: string;
         kebab_menu: string;
         like: string;
         list: string;
-        location: string;
         lock: string;
         mail: string;
-        menu: string;
         my_speeda: string;
         notification: string;
         open_in_new: string;
@@ -43,9 +45,7 @@ export declare class SpIcon extends UbIcon {
         person: string;
         pib: string;
         plus: string;
-        search: string;
         settings: string;
-        sort: string;
         sort_down: string;
         sort_up: string;
         toggle_arrow_down: string;
