@@ -103,7 +103,7 @@ export const Form: Story = {
 };
 
 export const OverflowWrap: Story = {
-  render: (args) => html`
+  render: () => html`
     <sp-checkbox-text
       text="texttexttexttexttexttexttextttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext"
     ></sp-checkbox-text>
@@ -123,7 +123,7 @@ export const OverflowWrap: Story = {
 };
 
 export const ALL: Story = {
-  render: (args) => html`
+  render: () => html`
     <table>
       <thead>
         <tr>

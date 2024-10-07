@@ -12,10 +12,13 @@ export class SpIcon extends UbIcon {
 
   constructor() {
     super();
-    this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      styles,
-    ];
+
+    if (this.shadowRoot) {
+      this.shadowRoot.adoptedStyleSheets = [
+        ...this.shadowRoot.adoptedStyleSheets,
+        styles,
+      ];
+    }
   }
 }
 

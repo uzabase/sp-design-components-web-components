@@ -10,10 +10,13 @@ styles.replaceSync(`${foundationStyle} ${segmentedControlStyle}`);
 export class SpSegmentedControl extends UbRadioButtonTextGroup {
   constructor() {
     super();
-    this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      styles,
-    ];
+
+    if (this.shadowRoot) {
+      this.shadowRoot.adoptedStyleSheets = [
+        ...this.shadowRoot.adoptedStyleSheets,
+        styles,
+      ];
+    }
   }
 }
 

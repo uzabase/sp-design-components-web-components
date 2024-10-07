@@ -5,6 +5,14 @@ import * as path from "path";
 const TOKEN = process.env.FIGMA_TOKEN;
 const FIGMA_FILE_KEY = process.env.FIGMA_DESIGN_FILE_KEY;
 
+if (!TOKEN) {
+  throw new Error("FIGMA_TOKEN is not set");
+}
+
+if (!FIGMA_FILE_KEY) {
+  throw new Error("FIGMA_DESIGN_FILE_KEY is not set");
+}
+
 type FigmaResponseComponent = {
   [id: string]: {
     key: string;
@@ -29,15 +37,15 @@ const writeFile = promisify(fs.writeFile);
 async function fetchFigma(
   target: string,
   figmaFileKey: string,
-  options?: string,
+  options?: string
 ): Promise<any> {
   const response: any = await fetch(
     `https://api.figma.com/v1/${target}/${figmaFileKey}?${options}`,
     {
       headers: {
-        "X-FIGMA-TOKEN": TOKEN,
+        "X-FIGMA-TOKEN": TOKEN!,
       },
-    },
+    }
   ).then((response) => response.json());
   return response;
 }
@@ -45,6 +53,9 @@ async function fetchFigma(
 async function fetchImageAndExtractPath(url: string): Promise<string> {
   const response: any = await fetch(url).then((response) => response.text());
   const match = /<svg.*?>([\s\S]*?)<\/svg>/.exec(response);
+  if (!match) {
+    throw new Error("SVG not found");
+  }
   return match[1].replace(/\sfill=".*"/, "").replace(/\n|\r/g, "");
 }
 
@@ -52,7 +63,7 @@ const main = async () => {
   const components: FigmaResponseComponent[] = await fetchFigma(
     "files",
     FIGMA_FILE_KEY,
-    "ids=5835:6407",
+    "ids=5835:6407"
   ).then((response) => response.components);
   let icons: Icon[] = [];
   const ids: string[] = [];
@@ -60,7 +71,7 @@ const main = async () => {
   Object.entries(components).map(([key, value]) => {
     const name = String(value.name).toLowerCase();
     const test = /^icon\/(?!globalnavigation|sectionmessage).*/.test(
-      name.replace(/\s+/g, ""),
+      name.replace(/\s+/g, "")
     );
     if (test) {
       ids.push(key);
@@ -75,14 +86,17 @@ const main = async () => {
   const images: FigmaResponseImages[] = await fetchFigma(
     "images",
     FIGMA_FILE_KEY,
-    "ids=" + ids.join() + "&format=svg",
+    "ids=" + ids.join() + "&format=svg"
   ).then((response) => response.images);
 
   await Promise.all(
     Object.entries(images).map(async ([key, value]) => {
       const path = await fetchImageAndExtractPath(String(value)); // TODO:型がよくわからん
-      icons.find((icon) => icon.id === key).path = path;
-    }),
+      const icon = icons.find((icon) => icon.id === key);
+      if (icon) {
+        icon.path = path;
+      }
+    })
   );
 
   icons.sort((a, b) => (a.name > b.name ? 1 : -1));
@@ -100,7 +114,7 @@ const main = async () => {
       "export const speedaIconPaths: {[key in SpeedaIconTypes]: string} = {\n" +
       icons.map((value) => value.name + ": '" + value.path + "',").join("\n") +
       "\n" +
-      "};\n",
+      "};\n"
   );
 
   console.log("DONE");
