@@ -9,14 +9,6 @@ styles.replaceSync(`${foundationStyle} ${spDefinitionListDdStyle}`);
 export class SpDefinitionListDd extends HTMLElement {
   #ddElement = document.createElement("dd");
 
-  set text(value: string) {
-    this.#ddElement.innerText = value;
-  }
-
-  static get observedAttributes() {
-    return ["text"];
-  }
-
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -28,13 +20,8 @@ export class SpDefinitionListDd extends HTMLElement {
     this.shadowRoot.appendChild(this.#ddElement);
   }
 
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    if (oldValue === newValue) return;
-    switch (name) {
-      case "text":
-        this.text = newValue;
-        break;
-    }
+  connectedCallback() {
+    this.#ddElement.textContent = this.textContent;
   }
 }
 

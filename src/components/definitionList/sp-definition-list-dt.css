@@ -1,4 +1,5 @@
 .base {
+  display: inline-block;
   width: 160px;
   height: 28px;
   box-sizing: border-box;

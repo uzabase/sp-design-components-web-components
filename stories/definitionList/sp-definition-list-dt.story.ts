@@ -4,12 +4,11 @@ import "@sp-design/token/lib/speeda-tokens.css";
 
 const meta: Meta = {
   component: "sp-definition-list-dt",
-  argTypes: {
-    text: { type: "string" },
-  },
   args: {
     text: "Label",
   },
+  render: ({ text }) =>
+    `<sp-definition-list-dt>${text}</sp-definition-list-dt>`,
 };
 export default meta;
 
