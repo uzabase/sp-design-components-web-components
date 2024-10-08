@@ -1,0 +1,10 @@
+.base {
+  height: 28px;
+  box-sizing: border-box;
+  margin-inline-start: 8px;
+  padding: 4.5px 0;
+  color: var(--color-semantic-text-body-regular);
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.6;
+}
