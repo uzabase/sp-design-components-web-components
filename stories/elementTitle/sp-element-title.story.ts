@@ -13,6 +13,6 @@ type Story = StoryObj;
 
 export const Basic: Story = {
   args: {
-    text: "タイトル",
+    text: "Element Title",
   },
 };

@@ -1,3 +1,8 @@
+import elementTitleStyle from "./element-title.css?inline" assert { type: "css"};
+
+const styles = new CSSStyleSheet();
+styles.replaceSync(elementTitleStyle);
+
 export class SpElementTitle extends HTMLElement {
   #spanElement = document.createElement("span");
 
@@ -8,6 +13,8 @@ export class SpElementTitle extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+
+    this.shadowRoot.adoptedStyleSheets = [styles];
   }
 
   connectedCallback() {
@@ -22,4 +29,4 @@ declare global {
 }
 
 customElements.get("sp-element-title") ||
-  customElements.define("sp-element-title", SpElementTitle);
+customElements.define("sp-element-title", SpElementTitle);

@@ -1,0 +1,13 @@
+:host {
+    display: block;
+    height: 28px;
+}
+
+span {
+    padding-block: 3px;
+    padding-inline: 8px 0;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+    border-left: 2px solid var(--color-semantic-surface-regular-6);
+}
