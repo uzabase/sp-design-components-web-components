@@ -1,4 +1,5 @@
-import elementTitleStyle from "./element-title.css?inline" assert { type: "css"};
+// @ts-ignore
+import elementTitleStyle from "./element-title.css?inline" assert { type: "css" };
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(elementTitleStyle);
@@ -38,7 +39,7 @@ export class SpElementTitle extends HTMLElement {
     const main = document.createElement("div");
     main.classList.add("main");
     main.appendChild(this.#spanElement);
-    main.appendChild(this.createLinks())
+    main.appendChild(this.createLinks());
     return main;
   }
 
@@ -64,4 +65,4 @@ declare global {
 }
 
 customElements.get("sp-element-title") ||
-customElements.define("sp-element-title", SpElementTitle);
+  customElements.define("sp-element-title", SpElementTitle);

@@ -31,27 +31,27 @@ export const WithLinks: Story = {
 };
 
 export const WithButtons: Story = {
-    args: {
-      text: "Element Title",
-    },
-    render: (args) => html`
-      <sp-element-title .text=${args.text}>
-        <button slot="buttons">Button 1</button>
-        <button slot="buttons">Button 2</button>
-      </sp-element-title>
-    `,
-  };
+  args: {
+    text: "Element Title",
+  },
+  render: (args) => html`
+    <sp-element-title .text=${args.text}>
+      <button slot="buttons">Button 1</button>
+      <button slot="buttons">Button 2</button>
+    </sp-element-title>
+  `,
+};
 
 export const WithFullContents: Story = {
-    args: {
-      text: "Element Title",
-    },
-    render: (args) => html`
-      <sp-element-title .text=${args.text}>
-        <a href="#" slot="links">Link 1</a>
-        <a href="#" slot="links">Link 2</a>
-        <button slot="buttons">Button 1</button>
-        <button slot="buttons">Button 2</button>
-      </sp-element-title>
-    `,
-  };
+  args: {
+    text: "Element Title",
+  },
+  render: (args) => html`
+    <sp-element-title .text=${args.text}>
+      <a href="#" slot="links">Link 1</a>
+      <a href="#" slot="links">Link 2</a>
+      <button slot="buttons">Button 1</button>
+      <button slot="buttons">Button 2</button>
+    </sp-element-title>
+  `,
+};
