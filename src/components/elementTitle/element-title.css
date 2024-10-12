@@ -3,6 +3,31 @@
     height: 28px;
 }
 
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+}
+
+.links {
+    margin-left: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 span {
     padding-block: 3px;
     padding-inline: 8px 0;

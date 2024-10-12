@@ -5,6 +5,8 @@ styles.replaceSync(elementTitleStyle);
 
 export class SpElementTitle extends HTMLElement {
   #spanElement = document.createElement("span");
+  #linkSlotElement = document.createElement("slot");
+  #buttonSlotElement = document.createElement("slot");
 
   set text(value: string) {
     this.#spanElement.textContent = value;
@@ -15,10 +17,43 @@ export class SpElementTitle extends HTMLElement {
     this.attachShadow({ mode: "open" });
 
     this.shadowRoot.adoptedStyleSheets = [styles];
+
+    this.#linkSlotElement.name = "links";
+    this.#buttonSlotElement.name = "buttons";
   }
 
   connectedCallback() {
-    this.shadowRoot.appendChild(this.#spanElement);
+    this.shadowRoot.appendChild(this.createContainer());
+  }
+
+  createContainer() {
+    const container = document.createElement("div");
+    container.classList.add("container");
+    container.appendChild(this.createMain());
+    container.appendChild(this.createButtons());
+    return container;
+  }
+
+  createMain() {
+    const main = document.createElement("div");
+    main.classList.add("main");
+    main.appendChild(this.#spanElement);
+    main.appendChild(this.createLinks())
+    return main;
+  }
+
+  createLinks() {
+    const links = document.createElement("div");
+    links.classList.add("links");
+    links.appendChild(this.#linkSlotElement);
+    return links;
+  }
+
+  createButtons() {
+    const buttons = document.createElement("div");
+    buttons.classList.add("buttons");
+    buttons.appendChild(this.#buttonSlotElement);
+    return buttons;
   }
 }
 
