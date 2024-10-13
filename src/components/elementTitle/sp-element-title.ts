@@ -6,7 +6,8 @@ styles.replaceSync(elementTitleStyle);
 
 export class SpElementTitle extends HTMLElement {
   #headingElement = document.createElement("h3");
-  #linkSlotElement = document.createElement("slot");
+  #helpLinkElement = document.createElement("slot");
+  #textLinkSlotElement = document.createElement("slot");
   #buttonSlotElement = document.createElement("slot");
 
   set text(value: string) {
@@ -19,38 +20,47 @@ export class SpElementTitle extends HTMLElement {
 
     this.shadowRoot.adoptedStyleSheets = [styles];
 
-    this.#linkSlotElement.name = "links";
+    this.#helpLinkElement.name = "help-link";
+    this.#textLinkSlotElement.name = "text-links";
     this.#buttonSlotElement.name = "buttons";
   }
 
   connectedCallback() {
-    this.shadowRoot.appendChild(this.createContainer());
+    this.shadowRoot.appendChild(this.#createContainer());
   }
 
-  createContainer() {
+  #createContainer() {
     const container = document.createElement("div");
     container.classList.add("container");
-    container.appendChild(this.createMain());
-    container.appendChild(this.createButtons());
+    container.appendChild(this.#createMain());
+    container.appendChild(this.#createButtons());
     return container;
   }
 
-  createMain() {
+  #createMain() {
     const main = document.createElement("div");
     main.classList.add("main");
     main.appendChild(this.#headingElement);
-    main.appendChild(this.createLinks());
+    main.appendChild(this.#createHelpLink());
+    main.appendChild(this.#createTextLinks());
     return main;
   }
 
-  createLinks() {
+  #createHelpLink() {
+    const helpLink = document.createElement("div");
+    helpLink.classList.add("help-link");
+    helpLink.appendChild(this.#helpLinkElement);
+    return helpLink;
+  }
+
+  #createTextLinks() {
     const links = document.createElement("div");
-    links.classList.add("links");
-    links.appendChild(this.#linkSlotElement);
+    links.classList.add("text-links");
+    links.appendChild(this.#textLinkSlotElement);
     return links;
   }
 
-  createButtons() {
+  #createButtons() {
     const buttons = document.createElement("div");
     buttons.classList.add("buttons");
     buttons.appendChild(this.#buttonSlotElement);
