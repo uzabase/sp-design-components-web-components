@@ -1,6 +1,5 @@
 :host {
     display: block;
-    height: 28px;
 }
 
 .container {
@@ -34,5 +33,15 @@ h3 {
     font-size: 14px;
     font-weight: bold;
     line-height: 1;
-    border-left: 2px solid var(--color-semantic-surface-regular-6);
+    position: relative;
+}
+
+h3::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--color-semantic-surface-regular-6);
 }

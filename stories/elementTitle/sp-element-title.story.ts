@@ -1,4 +1,6 @@
 import "../../src/components/elementTitle/sp-element-title";
+import "../../src/components/button/sp-button";
+import "@sp-design/token/lib/speeda-tokens.css";
 import { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
@@ -48,10 +50,16 @@ export const WithFullContents: Story = {
   },
   render: (args) => html`
     <sp-element-title .text=${args.text}>
-      <a href="#" slot="links">Link 1</a>
-      <a href="#" slot="links">Link 2</a>
-      <button slot="buttons">Button 1</button>
-      <button slot="buttons">Button 2</button>
+      <a href="#" slot="links" style="font-size: 12px; color: var(--color-semantic-text-text-link);">TextLink1</a>
+      <a href="#" slot="links" style="font-size: 12px; color: var(--color-semantic-text-text-link);">TextLink2</a>
+      <sp-button
+        text="Button1"
+        slot="buttons"
+      ></sp-button>
+      <sp-button
+        text="Button2"
+        slot="buttons"
+      ></sp-button>
     </sp-element-title>
   `,
 };
