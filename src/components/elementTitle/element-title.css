@@ -28,9 +28,9 @@
     gap: 8px;
 }
 
-span {
+h3 {
     padding-block: 3px;
-    padding-inline: 8px 0;
+    padding-inline-start: 8px;
     font-size: 14px;
     font-weight: bold;
     line-height: 1;

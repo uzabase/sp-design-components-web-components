@@ -5,12 +5,12 @@ const styles = new CSSStyleSheet();
 styles.replaceSync(elementTitleStyle);
 
 export class SpElementTitle extends HTMLElement {
-  #spanElement = document.createElement("span");
+  #headingElement = document.createElement("h3");
   #linkSlotElement = document.createElement("slot");
   #buttonSlotElement = document.createElement("slot");
 
   set text(value: string) {
-    this.#spanElement.textContent = value;
+    this.#headingElement.textContent = value;
   }
 
   constructor() {
@@ -38,7 +38,7 @@ export class SpElementTitle extends HTMLElement {
   createMain() {
     const main = document.createElement("div");
     main.classList.add("main");
-    main.appendChild(this.#spanElement);
+    main.appendChild(this.#headingElement);
     main.appendChild(this.createLinks());
     return main;
   }
