@@ -1,7 +1,6 @@
 .base {
   display: inline-block;
-  width: 160px;
-  height: 28px;
+  min-width: 160px;
   padding: 4.5px 0;
   color: var(--color-semantic-text-body-regular);
   font-size: 12px;
