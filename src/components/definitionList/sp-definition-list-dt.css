@@ -1,5 +1,4 @@
 .base {
-  display: inline-block;
   min-width: 160px;
   padding: 4.5px 0;
   color: var(--color-semantic-text-body-regular);
