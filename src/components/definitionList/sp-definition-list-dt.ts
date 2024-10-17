@@ -1,10 +1,12 @@
 // @ts-ignore
+import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
+// @ts-ignore
 import foundationStyle from "../foundation.css?inline" assert { type: "css" };
 // @ts-ignore
 import spDefinitionListDtStyle from "./sp-definition-list-dt.css?inline" assert { type: "css" };
 
 const styles = new CSSStyleSheet();
-styles.replaceSync(`${foundationStyle} ${spDefinitionListDtStyle}`);
+styles.replaceSync(`${resetStyle} ${foundationStyle} ${spDefinitionListDtStyle}`);
 
 export class SpDefinitionListDt extends HTMLElement {
   #dtElement = document.createElement("dt");

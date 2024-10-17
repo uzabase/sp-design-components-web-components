@@ -2,7 +2,6 @@
   display: inline-block;
   width: 480px;
   height: 28px;
-  box-sizing: border-box;
   margin-inline-start: 8px;
   padding: 4.5px 0;
   color: var(--color-semantic-text-body-regular);
