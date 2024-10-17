@@ -1,6 +1,4 @@
 .base {
-  display: inline-block;
-  margin-inline-start: 8px;
   padding: 4.5px 0;
   color: var(--color-semantic-text-body-regular);
   font-size: 12px;
