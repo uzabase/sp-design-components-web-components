@@ -18,7 +18,7 @@ function queryIcon() {
 
 function isElementMatchingIcon(
   svg: HTMLElement,
-  iconName: keyof typeof speedaIconPaths
+  iconName: keyof typeof speedaIconPaths,
 ) {
   const path = svg.querySelector("path");
   return `<path d="${path.getAttribute("d")}"/>` === speedaIconPaths[iconName];
