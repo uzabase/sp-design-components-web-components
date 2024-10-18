@@ -15,8 +15,9 @@
     "build": "run-s build:*",
     "build:ts": "tsc -p tsconfig-build.json",
     "build:css": "node tools/copy-css.js",
-    "format": "run-s format:*",
-    "format:prettier": "prettier --write '(.storybook|src|stories|tools)/**/*.ts'",
+    "format": "run-s \"format:* !format:prettier:check\"",
+    "format:prettier": "prettier --write '(.storybook|src|stories|tests|tools)/**/*.ts'",
+    "format:prettier:check": "prettier --check '(.storybook|src|stories|tests|tools)/**/*.ts'",
     "format:lint": "stylelint --fix 'src/**/*.css'",
     "test": "vitest"
   },
