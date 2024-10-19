@@ -40,31 +40,38 @@ export class SpElementTitle extends HTMLElement {
   #createMain() {
     const main = document.createElement("div");
     main.classList.add("main");
-    main.appendChild(this.#headingElement);
-    main.appendChild(this.#createHelpLink());
+    main.appendChild(this.#createHeadingBlock());
     main.appendChild(this.#createTextLinks());
     return main;
   }
 
+  #createHeadingBlock() {
+    const div = document.createElement("div");
+    div.classList.add("heading");
+    div.appendChild(this.#headingElement);
+    div.appendChild(this.#createHelpLink());
+    return div;
+  }
+
   #createHelpLink() {
-    const helpLink = document.createElement("div");
-    helpLink.classList.add("help-link");
-    helpLink.appendChild(this.#helpLinkElement);
-    return helpLink;
+    const div = document.createElement("div");
+    div.classList.add("help-link");
+    div.appendChild(this.#helpLinkElement);
+    return div;
   }
 
   #createTextLinks() {
-    const links = document.createElement("div");
-    links.classList.add("text-links");
-    links.appendChild(this.#textLinkSlotElement);
-    return links;
+    const div = document.createElement("div");
+    div.classList.add("text-links");
+    div.appendChild(this.#textLinkSlotElement);
+    return div;
   }
 
   #createButtons() {
-    const buttons = document.createElement("div");
-    buttons.classList.add("buttons");
-    buttons.appendChild(this.#buttonSlotElement);
-    return buttons;
+    const div = document.createElement("div");
+    div.classList.add("buttons");
+    div.appendChild(this.#buttonSlotElement);
+    return div;
   }
 }
 

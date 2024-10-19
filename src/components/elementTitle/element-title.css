@@ -6,22 +6,29 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
+    min-height: 30px;
+    gap: 16px;
 }
 
 .main {
     display: flex;
     align-items: center;
+    gap: 16px;
+}
+
+.heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .help-link {
     display: flex;
     align-items: center;
-    margin-left: 8px;
+    min-width: max-content;
 }
 
 .text-links {
-    margin-left: 16px;
     display: flex;
     align-items: center;
     gap: 16px;
@@ -34,6 +41,7 @@
 }
 
 h3 {
+    margin: 0;
     padding-block: 3px;
     padding-inline-start: 8px;
     font-size: 14px;
