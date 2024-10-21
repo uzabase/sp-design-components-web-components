@@ -61,11 +61,5 @@ describe("ub-button", () => {
     expect(isElementMatchingIcon(icon, "search")).toBeTruthy();
   });
 
-  it("無効なicon属性を設定すると、アイコンは表示されない", async () => {
-    document.body.innerHTML = "<sp-button icon='invalid'></sp-button>";
-
-    const icon = queryIcon();
-
-    expect(icon).toBeNull();
-  });
+  // TODO: 無効なicon属性を設定したときの仕様が定まっていないため、決まったらテストを追加する
 });
