@@ -8,7 +8,8 @@
     "declarationMap": true,
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
-    "outDir": "dist"
+    "outDir": "dist",
+    "skipLibCheck": true
   },
   "exclude": ["example", "stories", "dist", "tools"]
 }
