@@ -1,6 +1,5 @@
 :host {
   display: inline-block;
-  min-width: 0;
   max-width: 100%;
 }
 
@@ -22,12 +21,10 @@
 }
 
 .text {
-  min-width: 0;
   padding-block-start: 2.5px;
   color: var(--color-semantic-text-body-regular);
   font-size: 12px;
   line-height: 1.6;
-  overflow-wrap: break-word;
 }
 
 .base:has(.input:disabled) .text {

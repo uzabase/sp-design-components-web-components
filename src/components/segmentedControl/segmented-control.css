@@ -1,6 +1,5 @@
 :host {
   display: inline-block;
-  min-width: 0;
   max-width: 100%;
   line-height: 0;
   vertical-align: middle;
@@ -37,7 +36,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 0;
   padding-block: 8px;
   padding-inline: 8px;
   background-color: var(--color-semantic-surface-regular-2);
@@ -47,7 +45,6 @@
   font-size: 10px;
   line-height: 1.6;
   text-align: center;
-  overflow-wrap : break-word;
 }
 
 .text:hover {
@@ -81,9 +78,4 @@
   background-color: var(--color-semantic-surface-regular-2);
   color: var(--color-semantic-text-disabled);
   cursor: not-allowed;
-}
-
-.text-inner {
-  min-width: 0;
-  overflow-wrap: break-word;
 }
