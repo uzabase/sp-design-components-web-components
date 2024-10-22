@@ -1,7 +1,16 @@
+:host, * {
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
 :host {
   font-family: var(--font-ja);
 }
 
 :host:lang(zh) {
   font-family: var(--font-zh);
+}
+
+button {
+  box-sizing: border-box;
 }

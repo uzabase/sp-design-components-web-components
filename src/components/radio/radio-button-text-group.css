@@ -1,6 +1,5 @@
 :host {
   display: inline-block;
-  min-width: 0;
   max-width: 100%;
 }
 
@@ -26,15 +25,12 @@
   display: inline-flex;
   justify-content: flex-start;
   align-items: flex-start;
-  min-width: 0;
 }
 
 .text {
-  min-width: 0;
   color: var(--color-semantic-text-body-regular);
   font-size: 12px;
   line-height: 1.6;
-  overflow-wrap : break-word;
   padding-block: 2.5px;
   cursor: pointer;
 }
