@@ -3,20 +3,19 @@ import { UbButton } from "@ub-design/components-web-components/";
 import foundationStyle from "../foundation.css?inline" assert { type: "css" };
 // @ts-ignore
 import buttonStyle from "./button.css?inline" assert { type: "css" };
-import { SpeedaIconTypes } from "../icon/icons";
 import { SpIcon } from "../icon/sp-icon";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${buttonStyle}`);
 
 export class SpButton extends UbButton {
-  #icon: SpeedaIconTypes | "" = "";
+  #icon = "";
   #iconElement = new SpIcon();
 
   get icon() {
     return this.#icon;
   }
-  set icon(val: SpeedaIconTypes | "") {
+  set icon(val: string) {
     if (!this.#icon && val) {
       this.#appendIconElement();
       this.#updateIconElement(val);
@@ -47,7 +46,7 @@ export class SpButton extends UbButton {
     super.attributeChangedCallback(name, oldValue, newValue);
     switch (name) {
       case "icon":
-        this.icon = newValue as SpeedaIconTypes;
+        this.icon = newValue;
         break;
     }
   }
@@ -60,7 +59,7 @@ export class SpButton extends UbButton {
     this.#iconElement.remove();
   }
 
-  #updateIconElement(type: SpeedaIconTypes) {
+  #updateIconElement(type: string) {
     this.#iconElement.type = type;
   }
 }
