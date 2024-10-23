@@ -1,14 +1,18 @@
 import { UbIcon } from "@ub-design/components-web-components/";
-import { speedaIconPaths } from "./icons";
+import { speedaIconPaths, SpeedaIconTypes } from "./icons";
 
 // @ts-ignore
 import iconStyle from "./icon.css?inline" assert { type: "css" };
+
+function isSpeedaIconType(type: string): type is SpeedaIconTypes {
+  return speedaIconPaths.hasOwnProperty(type);
+}
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(iconStyle);
 
 export class SpIcon extends UbIcon {
-  paths = speedaIconPaths;
+  paths = { ...speedaIconPaths, "": "" };
 
   constructor() {
     super();
@@ -16,6 +20,23 @@ export class SpIcon extends UbIcon {
       ...this.shadowRoot.adoptedStyleSheets,
       styles,
     ];
+  }
+
+  set type(value: string) {
+    super.type = isSpeedaIconType(value) ? value : "";
+  }
+
+  attributeChangedCallback(
+    name: string,
+    oldValue: string,
+    newValue: string,
+  ): void {
+    if (name === "type") {
+      const type = isSpeedaIconType(newValue) ? newValue : "";
+      super.attributeChangedCallback(name, oldValue, type);
+    } else {
+      super.attributeChangedCallback(name, oldValue, newValue);
+    }
   }
 }
 

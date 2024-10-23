@@ -1,7 +1,7 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, test } from "vitest";
 import { getByShadowRole, queryByShadowRole } from "shadow-dom-testing-library";
 import { SpButton } from "../../src/components/button/sp-button";
-import { speedaIconPaths } from "../../src/components/icon/icons";
+import { isElementMatchingSpeedaIcon } from "../utils/icon";
 import "../../src/components/button/sp-button";
 
 function getSpButton() {
@@ -16,50 +16,42 @@ function queryIcon() {
   return queryByShadowRole(document.body, "img");
 }
 
-function isElementMatchingIcon(
-  svg: HTMLElement,
-  iconName: keyof typeof speedaIconPaths,
-) {
-  const path = svg.querySelector("path");
-  return `<path d="${path.getAttribute("d")}"/>` === speedaIconPaths[iconName];
-}
-
 describe("ub-button", () => {
-  it("icon属性を設定すると、そのアイコンが表示される", async () => {
-    document.body.innerHTML = "<sp-button icon='edit'></sp-button>";
+  describe("icon属性", () => {
+    test("icon属性を設定すると、そのアイコンが表示される", async () => {
+      document.body.innerHTML = "<sp-button icon='edit'></sp-button>";
 
-    const icon = getIcon();
+      const icon = getIcon();
 
-    expect(isElementMatchingIcon(icon, "edit")).toBeTruthy();
+      expect(isElementMatchingSpeedaIcon(icon, "edit")).toBeTruthy();
+    });
+
+    test("icon属性を設定しない場合、アイコンは表示されない", async () => {
+      document.body.innerHTML = "<sp-button icon='edit'></sp-button>";
+
+      const icon = queryIcon();
+
+      expect(icon).not.toBeNull();
+    });
+
+    test("icon属性を空文字に設定すると、アイコンは表示されない", async () => {
+      document.body.innerHTML = "<sp-button icon=''></sp-button>";
+
+      const icon = queryIcon();
+
+      expect(icon).toBeNull();
+    });
+
+    test("icon属性を更新すると、更新後のアイコンが表示される", async () => {
+      document.body.innerHTML = "<sp-button icon='edit'></sp-button>";
+
+      const spButton = getSpButton();
+      const icon = getIcon();
+
+      spButton.setAttribute("icon", "search");
+
+      expect(isElementMatchingSpeedaIcon(icon, "edit")).toBeFalsy();
+      expect(isElementMatchingSpeedaIcon(icon, "search")).toBeTruthy();
+    });
   });
-
-  it("icon属性を設定しない場合、アイコンは表示されない", async () => {
-    document.body.innerHTML = "<sp-button icon='edit'></sp-button>";
-
-    const icon = queryIcon();
-
-    expect(icon).not.toBeNull();
-  });
-
-  it("icon属性を空文字に設定すると、アイコンは表示されない", async () => {
-    document.body.innerHTML = "<sp-button icon=''></sp-button>";
-
-    const icon = queryIcon();
-
-    expect(icon).toBeNull();
-  });
-
-  it("icon属性を更新すると、更新後のアイコンが表示される", async () => {
-    document.body.innerHTML = "<sp-button icon='edit'></sp-button>";
-
-    const spButton = getSpButton();
-    const icon = getIcon();
-
-    spButton.setAttribute("icon", "search");
-
-    expect(isElementMatchingIcon(icon, "edit")).toBeFalsy();
-    expect(isElementMatchingIcon(icon, "search")).toBeTruthy();
-  });
-
-  // TODO: 無効なicon属性を設定したときの仕様が定まっていないため、決まったらテストを追加する
 });
