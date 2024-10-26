@@ -9,23 +9,19 @@ const meta: Meta = {
   argTypes: {
     text: { type: "string" },
   },
+  args: {
+    text: "Element Title",
+  },
 };
 export default meta;
 
 type Story = StoryObj;
 
-export const Basic: Story = {
-  args: {
-    text: "Element Title",
-  },
-};
+export const Basic: Story = {};
 
 export const WithTextLinks: Story = {
-  args: {
-    text: "Element Title",
-  },
   render: (args) => html`
-    <sp-element-title .text=${args.text}>
+    <sp-element-title text=${args.text}>
       <a
         href="#"
         slot="text-links"
@@ -43,11 +39,8 @@ export const WithTextLinks: Story = {
 };
 
 export const WithButtons: Story = {
-  args: {
-    text: "Element Title",
-  },
   render: (args) => html`
-    <sp-element-title .text=${args.text}>
+    <sp-element-title text=${args.text}>
       <sp-button text="Button1" slot="buttons"></sp-button>
       <sp-button text="Button2" slot="buttons"></sp-button>
     </sp-element-title>
@@ -55,11 +48,8 @@ export const WithButtons: Story = {
 };
 
 export const WithFullContents: Story = {
-  args: {
-    text: "Element Title",
-  },
   render: (args) => html`
-    <sp-element-title .text=${args.text}>
+    <sp-element-title text=${args.text}>
       <a
         href="#"
         slot="text-links"

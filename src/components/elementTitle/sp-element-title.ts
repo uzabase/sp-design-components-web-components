@@ -18,6 +18,10 @@ export class SpElementTitle extends HTMLElement {
     this.#headingElement.textContent = value;
   }
 
+  static get observedAttributes() {
+    return ["text"];
+  }
+
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -30,6 +34,12 @@ export class SpElementTitle extends HTMLElement {
 
   connectedCallback() {
     this.shadowRoot.appendChild(this.#createContainer());
+  }
+
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (name === "text" && oldValue !== newValue) {
+      this.text = newValue;
+    }
   }
 
   #createContainer() {
