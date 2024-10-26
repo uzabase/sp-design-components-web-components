@@ -11,7 +11,6 @@ styles.replaceSync(elementTitleStyle);
 
 export class SpElementTitle extends HTMLElement {
   #headingElement = document.createElement("h3");
-  #helpLinkElement = document.createElement("slot");
   #textLinkSlotElement = document.createElement("slot");
   #buttonSlotElement = document.createElement("slot");
 
@@ -25,7 +24,6 @@ export class SpElementTitle extends HTMLElement {
 
     this.shadowRoot.adoptedStyleSheets = [resetStyles, styles];
 
-    this.#helpLinkElement.name = "help-link";
     this.#textLinkSlotElement.name = "text-links";
     this.#buttonSlotElement.name = "buttons";
   }
@@ -54,14 +52,6 @@ export class SpElementTitle extends HTMLElement {
     const div = document.createElement("div");
     div.classList.add("heading");
     div.appendChild(this.#headingElement);
-    div.appendChild(this.#createHelpLink());
-    return div;
-  }
-
-  #createHelpLink() {
-    const div = document.createElement("div");
-    div.classList.add("help-link");
-    div.appendChild(this.#helpLinkElement);
     return div;
   }
 

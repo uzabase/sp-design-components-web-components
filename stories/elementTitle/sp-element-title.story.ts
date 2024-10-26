@@ -1,6 +1,5 @@
 import "../../src/components/elementTitle/sp-element-title";
 import "../../src/components/button/sp-button";
-import "../../src/components/icon/sp-icon";
 import "@sp-design/token/lib/speeda-tokens.css";
 import { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
@@ -19,17 +18,6 @@ export const Basic: Story = {
   args: {
     text: "Element Title",
   },
-};
-
-export const WithHelpIcon: Story = {
-  args: {
-    text: "Element Title",
-  },
-  render: (args) => html`
-    <sp-element-title .text=${args.text}>
-      <sp-icon type="help" slot="help-link"></sp-icon>
-    </sp-element-title>
-  `,
 };
 
 export const WithTextLinks: Story = {
@@ -72,7 +60,6 @@ export const WithFullContents: Story = {
   },
   render: (args) => html`
     <sp-element-title .text=${args.text}>
-      <sp-icon type="help" slot="help-link"></sp-icon>
       <a
         href="#"
         slot="text-links"
