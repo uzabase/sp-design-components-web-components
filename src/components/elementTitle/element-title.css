@@ -10,7 +10,6 @@
 }
 
 .main {
-    margin-block: 3px;
     display: flex;
     align-items: center;
     gap: 16px;
@@ -41,12 +40,11 @@
 }
 
 h3 {
-    margin: 0;
-    padding-block: 3px;
+    margin-block: 2.8px;
     padding-inline-start: 8px;
     font-size: 14px;
     font-weight: bold;
-    line-height: 1;
+    line-height: 1.6;
     position: relative;
 }
 
@@ -54,8 +52,9 @@ h3::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 0;
-    bottom: 0;
+    top: 50%;
+    transform: translateY(-50%);
     width: 2px;
+    height: calc(100% - 2.4px);
     background-color: var(--color-semantic-surface-regular-6);
 }

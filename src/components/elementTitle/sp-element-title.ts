@@ -1,5 +1,10 @@
 // @ts-ignore
+import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
+// @ts-ignore
 import elementTitleStyle from "./element-title.css?inline" assert { type: "css" };
+
+const resetStyles = new CSSStyleSheet();
+resetStyles.replaceSync(resetStyle);
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(elementTitleStyle);
@@ -18,7 +23,7 @@ export class SpElementTitle extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
 
-    this.shadowRoot.adoptedStyleSheets = [styles];
+    this.shadowRoot.adoptedStyleSheets = [resetStyles, styles];
 
     this.#helpLinkElement.name = "help-link";
     this.#textLinkSlotElement.name = "text-links";

@@ -26,7 +26,8 @@
   "license": "ISC",
   "dependencies": {
     "@sp-design/token": "git+https://github.com/uzabase/sp-design-token.git#semver:^6.0.1",
-    "@ub-design/components-web-components": "git+https://github.com/uzabase/ub-design-components-web-components.git#semver:^0.1.1"
+    "@ub-design/components-web-components": "git+https://github.com/uzabase/ub-design-components-web-components.git#semver:^0.1.1",
+    "@acab/reset.css": "0.10.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^8.3.4",

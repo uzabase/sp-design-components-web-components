@@ -38,8 +38,18 @@ export const WithTextLinks: Story = {
   },
   render: (args) => html`
     <sp-element-title .text=${args.text}>
-      <a href="#" slot="text-links">Link 1</a>
-      <a href="#" slot="text-links">Link 2</a>
+      <a
+        href="#"
+        slot="text-links"
+        style="font-size: 12px; color: var(--color-semantic-text-text-link);"
+        >TextLink1</a
+      >
+      <a
+        href="#"
+        slot="text-links"
+        style="font-size: 12px; color: var(--color-semantic-text-text-link);"
+        >TextLink2</a
+      >
     </sp-element-title>
   `,
 };
@@ -50,8 +60,8 @@ export const WithButtons: Story = {
   },
   render: (args) => html`
     <sp-element-title .text=${args.text}>
-      <button slot="buttons">Button 1</button>
-      <button slot="buttons">Button 2</button>
+      <sp-button text="Button1" slot="buttons"></sp-button>
+      <sp-button text="Button2" slot="buttons"></sp-button>
     </sp-element-title>
   `,
 };
