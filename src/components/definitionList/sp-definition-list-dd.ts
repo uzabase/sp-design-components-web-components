@@ -24,7 +24,7 @@ export class SpDefinitionListDd extends HTMLElement {
       styles,
     ];
     this.#ddElement.classList.add("base");
-    this.#ddElement.textContent = this.textContent;
+    this.#ddElement.innerHTML = this.innerHTML;
     this.shadowRoot.appendChild(this.#ddElement);
   }
 }
