@@ -14,18 +14,18 @@ export class SpDefinitionList extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+  }
+
+  connectedCallback() {
     this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
       styles,
     ];
     this.#dlElement.classList.add("base");
-    this.shadowRoot.appendChild(this.#dlElement);
-  }
-
-  connectedCallback() {
     while (this.firstChild) {
       this.#dlElement.appendChild(this.firstChild);
     }
+    this.shadowRoot.appendChild(this.#dlElement);
   }
 }
 

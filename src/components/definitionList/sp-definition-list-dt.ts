@@ -16,16 +16,16 @@ export class SpDefinitionListDt extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+  }
+  
+  connectedCallback() {
     this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
       styles,
     ];
     this.#dtElement.classList.add("base");
-    this.shadowRoot.appendChild(this.#dtElement);
-  }
-
-  connectedCallback() {
     this.#dtElement.textContent = this.textContent;
+    this.shadowRoot.appendChild(this.#dtElement);
   }
 }
 
