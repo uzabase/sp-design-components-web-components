@@ -2,6 +2,14 @@ import { promisify } from "util";
 import * as fs from "fs";
 import * as path from "path";
 
+if (!process.env.FIGMA_TOKEN) {
+  throw new Error("FIGMA_TOKENが設定されていません");
+}
+
+if (!process.env.FIGMA_DESIGN_FILE_KEY) {
+  throw new Error("FIGMA_DESIGN_FILE_KEYが設定されていません");
+}
+
 const TOKEN = process.env.FIGMA_TOKEN;
 const FIGMA_FILE_KEY = process.env.FIGMA_DESIGN_FILE_KEY;
 
@@ -45,6 +53,9 @@ async function fetchFigma(
 async function fetchImageAndExtractPath(url: string): Promise<string> {
   const response: any = await fetch(url).then((response) => response.text());
   const match = /<svg.*?>([\s\S]*?)<\/svg>/.exec(response);
+  if (!match) {
+    throw new Error("SVGが見つかりません");
+  }
   return match[1].replace(/\sfill=".*"/, "").replace(/\n|\r/g, "");
 }
 
@@ -81,7 +92,10 @@ const main = async () => {
   await Promise.all(
     Object.entries(images).map(async ([key, value]) => {
       const path = await fetchImageAndExtractPath(String(value)); // TODO:型がよくわからん
-      icons.find((icon) => icon.id === key).path = path;
+      const icon = icons.find((icon) => icon.id === key);
+      if (icon) {
+        icon.path = path;
+      }
     }),
   );
 
