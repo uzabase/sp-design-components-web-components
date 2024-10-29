@@ -98,7 +98,7 @@ export const Form: Story = {
 };
 
 export const ALL: Story = {
-  render: (args) => html`
+  render: () => html`
     <table>
       <thead>
         <tr>
