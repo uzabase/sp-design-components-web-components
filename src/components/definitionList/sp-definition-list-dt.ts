@@ -17,14 +17,14 @@ export class SpDefinitionListDt extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
   }
-  
+
   connectedCallback() {
     this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
       styles,
     ];
     this.#dtElement.classList.add("base");
-    this.#dtElement.textContent = this.textContent;
+    this.#dtElement.innerHTML = this.innerHTML;
     this.shadowRoot.appendChild(this.#dtElement);
   }
 }
