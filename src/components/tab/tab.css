@@ -1,5 +1,4 @@
 :host {
-  --icon-color: var(--color-semantic-text-button-outline-default);
   --padding-inline: 16px;
 
   display: inline-block;
@@ -35,16 +34,12 @@
     background-color: var(--color-semantic-surface-regular-2);
     color: var(--color-semantic-text-disabled);
     cursor: not-allowed;
-    --icon-color: var(--color-semantic-text-disabled);
   }
 
   &.-selected{
     border: 1px solid var(--color-semantic-border-selected);
     background-color: var(--color-semantic-surface-selected);
     color: var(--color-semantic-text-inverse);
-
-    --icon-color: var(--color-semantic-text-button-selected);
-
     font-weight: bold;
 
     &:hover{
@@ -55,9 +50,6 @@
     &:disabled{
       border: 1px solid var(--color-semantic-border-regular);
       background-color: var(--color-semantic-surface-regular-2);
-
-      --icon-color: var(--color-semantic-text-disabled);
-
       color: var(--color-semantic-text-disabled);
       cursor: not-allowed;
       font-weight: normal;
@@ -87,22 +79,14 @@
         background-color: var(--color-semantic-surface-regular-2);
         color: var(--color-semantic-text-disabled);
         cursor: not-allowed;
-        --icon-color: var(--color-semantic-text-disabled);
-      }
-      &:disabled{
-        border: 1px solid var(--color-semantic-border-regular);
-        background-color: var(--color-semantic-surface-regular-2);
-        color: var(--color-semantic-text-disabled);
-        cursor: not-allowed;
-        --icon-color: var(--color-semantic-text-disabled);
       }
     }
+
     &:disabled{
       border: 1px solid var(--color-semantic-border-regular);
       background-color: var(--color-semantic-surface-regular-2);
       color: var(--color-semantic-text-disabled);
       cursor: not-allowed;
-      --icon-color: var(--color-semantic-text-disabled);
     }
   }
 
@@ -113,28 +97,30 @@
     &:hover{
       background-color: var(--color-semantic-surface-regular-3);
     }
+
     &.-selected {
       border: 1px solid var(--color-semantic-border-selected);
       background-color: var(--color-semantic-surface-selected);
       color: var(--color-semantic-text-inverse);
+
       &:hover {
         border: 1px solid var(--color-semantic-surface-selected-hover);
         background-color: var(--color-semantic-surface-selected-hover);
       }
+
       &:disabled{
         border: 1px solid var(--color-semantic-border-regular);
         background-color: var(--color-semantic-surface-regular-2);
         color: var(--color-semantic-text-disabled);
         cursor: not-allowed;
-        --icon-color: var(--color-semantic-text-disabled);
       }
     }
+
     &:disabled{
       border: 1px solid var(--color-semantic-border-regular);
       background-color: var(--color-semantic-surface-regular-2);
       color: var(--color-semantic-text-disabled);
       cursor: not-allowed;
-      --icon-color: var(--color-semantic-text-disabled);
     }
   }
 

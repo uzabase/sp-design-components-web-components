@@ -1,5 +1,4 @@
 :host {
-  --icon-color: var(--color-semantic-text-button-outline-default);
   --padding-inline: 16px;
 
   display: inline-block;
@@ -37,21 +36,18 @@
 }
 
 .type__default.appearance__outline:hover:not(:disabled) {
-  --icon-color: var(--color-semantic-text-button-outline-hover);
 
   border-color: var(--color-semantic-border-button-outline-hover);
   color: var(--color-semantic-text-button-outline-hover);
 }
 
 .type__default.appearance__outline:focus-visible:not(:is(:disabled, .isSelected)) {
-  --icon-color: var(--color-semantic-text-button-outline-focus);
 
   border-color: var(--color-semantic-border-button-outline-focus);
   color: var(--color-semantic-text-button-outline-focus);
 }
 
 .type__default.appearance__fill {
-  --icon-color: var(--color-semantic-text-button-fill-default);
 
   border-color: var(--color-semantic-border-button-fill-default);
   background-color: var(--color-semantic-surface-button-fill-default);
@@ -84,7 +80,6 @@
 }
 
 .type__default.isSelected {
-  --icon-color: var(--color-semantic-text-button-selected);
 
   border-color: var(--color-semantic-border-button-selected);
   background-color: var(--color-semantic-surface-button-selected);
@@ -92,7 +87,6 @@
 }
 
 .type__default.isSelected:hover:not(:disabled) {
-  --icon-color: var(--color-semantic-text-button-selected);
 
   border-color: var(--color-semantic-border-button-selected-hover);
   background-color: var(--color-semantic-surface-button-selected-hover);
@@ -100,28 +94,24 @@
 }
 
 .type__destructive.appearance__outline {
-  --icon-color: var(--color-semantic-text-button-outline-destructive-default);
 
   border-color: var(--color-semantic-border-button-outline-destructive-default);
   color: var(--color-semantic-text-button-outline-destructive-default);
 }
 
 .type__destructive.appearance__outline:hover:not(:disabled) {
-  --icon-color: var(--color-semantic-text-button-outline-destructive-hover);
 
   border-color: var(--color-semantic-border-button-outline-destructive-hover);
   color: var(--color-semantic-text-button-outline-destructive-hover);
 }
 
 .type__destructive.appearance__outline:focus-visible:not(:disabled) {
-  --icon-color: var(--color-semantic-text-button-outline-destructive-focus);
 
   border-color: var(--color-semantic-border-button-outline-destructive-focus);
   color: var(--color-semantic-text-button-outline-destructive-focus);
 }
 
 .type__destructive.appearance__fill {
-  --icon-color: var(--color-semantic-text-button-fill-destructive-default);
 
   border-color: var(--color-semantic-border-button-fill-destructive-default);
   background-color: var(
@@ -141,7 +131,6 @@
 }
 
 .type__destructive.appearance__text {
-  --icon-color: var(--color-semantic-text-button-text-destructive-default);
 
   border-color: transparent;
   background-color: transparent;
@@ -160,7 +149,6 @@
 
 /* disabledとisLoadingにおいては、上記の詳細度と同等とするために:isを不可している */
 :is(.type__default, .type__destructive):disabled {
-  --icon-color: var(--color-semantic-text-button-disabled);
 
   border-color: var(--color-semantic-border-button-disabled);
   background-color: var(--color-semantic-surface-button-disabled);
