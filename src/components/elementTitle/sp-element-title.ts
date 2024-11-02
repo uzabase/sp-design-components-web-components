@@ -33,6 +33,14 @@ export class SpElementTitle extends HTMLElement {
 
   connectedCallback() {
     this.shadowRoot.appendChild(this.#createContainer());
+
+    if (this.#textLinkSlotElement.assignedElements().length === 0) {
+      this.shadowRoot.querySelector(".text-links")?.remove();
+    }
+
+    if (this.#buttonSlotElement.assignedElements().length === 0) {
+      this.shadowRoot.querySelector(".buttons")?.remove();
+    }
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
