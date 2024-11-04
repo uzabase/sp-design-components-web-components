@@ -9,9 +9,6 @@ const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${spDefinitionListStyle}`);
 
 export class SpDefinitionList extends HTMLElement {
-  #dlElement = document.createElement("dl");
-  #slotElement = document.createElement("slot");
-
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -22,9 +19,11 @@ export class SpDefinitionList extends HTMLElement {
       ...this.shadowRoot.adoptedStyleSheets,
       styles,
     ];
-    this.#dlElement.classList.add("base");
-    this.#dlElement.appendChild(this.#slotElement);
-    this.shadowRoot.appendChild(this.#dlElement);
+    this.shadowRoot.innerHTML = `
+      <dl class="base">
+        <slot></slot>
+      </dl>
+    `;
   }
 }
 
