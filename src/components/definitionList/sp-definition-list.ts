@@ -10,6 +10,7 @@ styles.replaceSync(`${resetStyle} ${foundationStyle} ${spDefinitionListStyle}`);
 
 export class SpDefinitionList extends HTMLElement {
   #dlElement = document.createElement("dl");
+  #slotElement = document.createElement("slot");
 
   constructor() {
     super();
@@ -22,9 +23,7 @@ export class SpDefinitionList extends HTMLElement {
       styles,
     ];
     this.#dlElement.classList.add("base");
-    while (this.firstChild) {
-      this.#dlElement.appendChild(this.firstChild);
-    }
+    this.#dlElement.appendChild(this.#slotElement);
     this.shadowRoot.appendChild(this.#dlElement);
   }
 }
