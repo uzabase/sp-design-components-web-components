@@ -41,7 +41,7 @@
   background-color: var(--color-semantic-surface-regular-2);
   border: 1px solid var(--color-semantic-border-regular);
   border-right: none;
-  color: var(--color-semantic-text-body-semi-weak);
+  color: var(--color-semantic-text-weak);
   font-size: 10px;
   line-height: 1.6;
   text-align: center;

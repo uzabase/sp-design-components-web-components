@@ -28,7 +28,7 @@
 }
 
 .text {
-  color: var(--color-semantic-text-body-regular);
+  color: var(--color-semantic-text-regular);
   font-size: 12px;
   line-height: 1.6;
   padding-block: 2.5px;
