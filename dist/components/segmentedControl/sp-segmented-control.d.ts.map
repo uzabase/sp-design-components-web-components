@@ -1,1 +1,0 @@
-{"version":3,"file":"sp-segmented-control.d.ts","sourceRoot":"","sources":["../../../src/components/segmentedControl/sp-segmented-control.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,sBAAsB,EAAE,MAAM,uCAAuC,CAAC;AAS/E,qBAAa,kBAAmB,SAAQ,sBAAsB;;CAQ7D;AAED,OAAO,CAAC,MAAM,CAAC;IACb,UAAU,qBAAqB;QAC7B,sBAAsB,EAAE,kBAAkB,CAAC;KAC5C;CACF"}
