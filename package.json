@@ -27,7 +27,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@sp-design/token": "git+https://github.com/uzabase/sp-design-token.git#semver:^6.0.1",
+    "@sp-design/token": "git+https://github.com/uzabase/sp-design-token.git#semver:^8.0.0",
     "@ub-design/components-web-components": "git+https://github.com/uzabase/ub-design-components-web-components.git#semver:^0.1.1"
   },
   "devDependencies": {
