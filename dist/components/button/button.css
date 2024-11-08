@@ -3,7 +3,6 @@
   --padding-inline: 16px;
 
   display: inline-block;
-  min-width: 0;
   max-width: 100%;
 }
 
@@ -17,7 +16,7 @@
   border: 1px solid transparent;
   background-color: transparent;
   min-height: 28px;
-  max-width: calc(100% - var(--padding-inline)*2);
+  max-width: 100%;
   padding-inline: var(--padding-inline);
   position: relative;
   overflow: hidden;
@@ -25,11 +24,9 @@
 }
 
 .base__text {
-  min-width: 0;
   font-size: 10px;
   font-weight: bold;
   line-height: 1;
-  overflow-wrap : break-word;
 }
 
 .type__default.appearance__outline {
