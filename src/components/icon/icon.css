@@ -8,7 +8,7 @@
 
 .icon {
   display: inline-block;
-  fill: currentcolor;
+  fill: var(--icon-color, var(--color-primitive-neutral-100));
 }
 
 .size__small {
