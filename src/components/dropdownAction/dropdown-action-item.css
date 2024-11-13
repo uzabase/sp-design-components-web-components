@@ -1,0 +1,16 @@
+.action {
+  width: 100%;
+  padding-block: 7px;
+  padding-inline: 8px;
+  background: none;
+  border: 0;
+  color: var(--color-semantic-text-regular);
+  font-size: 12px;
+  text-align: left;
+  line-height: 1;
+}
+
+.action:hover,
+.action:focus {
+  background: var(--color-semantic-surface-regular-3);
+}

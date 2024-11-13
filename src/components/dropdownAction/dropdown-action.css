@@ -1,0 +1,16 @@
+.base {
+  position: relative;
+}
+
+.contents {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 80px;
+  margin-block-start: 8px;
+  padding-block: 8px;
+  background: var(--color-semantic-surface-regular-1);
+  border: 1px solid var(--color-semantic-border-regular);
+  border-radius: 5px;
+  box-shadow: 0px 3px 12px 0px var(--color-semantic-elevation-regular);
+}
