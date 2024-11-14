@@ -36,3 +36,13 @@ export const Disabled: Story = {
     </sp-dropdown-action>
   `,
 };
+
+export const Show: Story = {
+  render: () => html`
+    <sp-dropdown-action label="ダッシュボード新規作成" show>
+      <sp-dropdown-action-item text="企業を作成"></sp-dropdown-action-item>
+      <sp-dropdown-action-item text="業界を作成"></sp-dropdown-action-item>
+      <sp-dropdown-action-item text="技術を作成"></sp-dropdown-action-item>
+    </sp-dropdown-action>
+  `,
+};

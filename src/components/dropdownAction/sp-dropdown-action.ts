@@ -13,10 +13,20 @@ export class SpDropdownAction extends HTMLElement {
   #buttonElement = document.createElement("sp-dropdown-action-button");
   #contentsElement = document.createElement("div");
 
+  #show: boolean = false;
   #disabled: boolean = false;
 
   set label(value: string) {
     this.#buttonElement.text = value;
+  }
+
+  get show() {
+    return this.#show;
+  }
+  set show(value: boolean) {
+    this.#show = value;
+    // TODO: ちゃんとした実装にする
+    this.#contentsElement.style.display = value ? "block" : "none";
   }
 
   get disabled() {
@@ -28,7 +38,7 @@ export class SpDropdownAction extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["label", "disabled"];
+    return ["label", "show", "disabled"];
   }
 
   constructor() {
@@ -36,6 +46,9 @@ export class SpDropdownAction extends HTMLElement {
 
     const shadowRoot = this.attachShadow({ mode: "open" });
     shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
+
+    this.show = false;
+    this.disabled = false;
   }
 
   connectedCallback() {
@@ -62,6 +75,9 @@ export class SpDropdownAction extends HTMLElement {
       case "label":
         this.label = newValue;
         break;
+      case "show":
+        this.show = newValue === "true" || newValue === "";
+        break;
       case "disabled":
         this.disabled = newValue === "true" || newValue === "";
         break;
@@ -69,7 +85,9 @@ export class SpDropdownAction extends HTMLElement {
   }
 
   #toggleButton() {
+    // TODO: 両方とも個別にトグルしていてズレそうだと考えてしまうので、同期させる仕組みにしたい
     this.#buttonElement.toggleAttribute("selected");
+    this.show = !this.show;
   }
 }
 
