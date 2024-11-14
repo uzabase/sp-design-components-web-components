@@ -10,9 +10,9 @@ const meta: Meta = {
     text: { type: "string" },
     type: {
       control: { type: "select" },
-      options: ["tabWhite", "tabGray"],
+      options: ["fillWhite", "fillGray"],
     },
-    createNewIcon: { type: "boolean" },
+    plusIcon: { type: "boolean" },
     selected: { type: "boolean" },
     disabled: { type: "boolean" },
     onclick: {
@@ -21,8 +21,8 @@ const meta: Meta = {
   },
   args: {
     text: "sp-tab",
-    type: "tabGray",
-    createNewIcon: false,
+    type: "fillGray",
+    plusIcon: false,
     selected: false,
     disabled: false,
     onclick: action("onclick"),
@@ -34,32 +34,32 @@ type Story = StoryObj;
 
 export const Basic: Story = {
   args: {
-    type: undefined,
-    createNewIcon: undefined,
+    type: "fillGray",
+    plusIcon: undefined,
     selected: undefined,
     disabled: undefined,
   },
 };
 export const typeGray: Story = {
   args: {
-    type: "tabGray",
-    createNewIcon: undefined,
+    type: "fillGray",
+    plusIcon: undefined,
     selected: undefined,
     disabled: undefined,
   },
 };
 export const typeWhite: Story = {
   args: {
-    type: "tabWhite",
-    createNewIcon: undefined,
+    type: "fillWhite",
+    plusIcon: undefined,
     selected: undefined,
     disabled: undefined,
   },
 };
-export const createNewIcon: Story = {
+export const plusIcon: Story = {
   args: {
     type: undefined,
-    createNewIcon: true,
+    plusIcon: true,
     selected: undefined,
     disabled: undefined,
   },
@@ -71,21 +71,21 @@ export const list: Story = {
       <sp-tab
         text="タブのリストだよ"
         type=${args.type}
-        create-new-icon=${args.createNewIcon}
+        plus-icon=${args.plusIcon}
         selected=${args.selected}
         disabled=${args.disabled}
       ></sp-tab>
       <sp-tab
         text="タブのリストだよ"
         type=${args.type}
-        create-new-icon=${args.createNewIcon}
+        plus-icon=${args.plusIcon}
         selected=${args.selected}
         disabled=${args.disabled}
       ></sp-tab>
       <sp-tab
         text="タブのリストだよ"
         type=${args.type}
-        create-new-icon=${args.createNewIcon}
+        plus-icon=${args.plusIcon}
         selected=${args.selected}
         disabled=${args.disabled}
       ></sp-tab>
@@ -100,8 +100,8 @@ export const All: Story = {
         <div class="sampleAll__contents">
           <sp-tab
             text="Grayのタブだよ"
-            type="tabGray"
-            create-new-icon=${args.createNewIcon}
+            type="fillGray"
+            plus-icon=${args.plusIcon}
             selected=${args.selected}
             disabled=${args.disabled}
           ></sp-tab>
@@ -112,8 +112,8 @@ export const All: Story = {
         <div class="sampleAll__contents">
           <sp-tab
             text="Whiteのタブだよ"
-            type="tabWhite"
-            create-new-icon=${args.createNewIcon}
+            type="fillWhite"
+            plus-icon=${args.plusIcon}
             selected=${args.selected}
             disabled=${args.disabled}
           ></sp-tab>
@@ -125,7 +125,7 @@ export const All: Story = {
           <sp-tab
             text="新規作成アイコン付き"
             type=${args.type}
-            create-new-icon="true"
+            plus-icon="true"
             selected=${args.selected}
             disabled=${args.disabled}
           ></sp-tab>
@@ -138,21 +138,21 @@ export const All: Story = {
             <sp-tab
               text="タブのリストだよ"
               type=${args.type}
-              create-new-icon=${args.createNewIcon}
+              plus-icon=${args.plusIcon}
               selected=${args.selected}
               disabled=${args.disabled}
             ></sp-tab>
             <sp-tab
               text="タブのリストだよ"
               type=${args.type}
-              create-new-icon=${args.createNewIcon}
+              plus-icon=${args.plusIcon}
               selected=${args.selected}
               disabled=${args.disabled}
             ></sp-tab>
             <sp-tab
               text="タブのリストだよ"
               type=${args.type}
-              create-new-icon=${args.createNewIcon}
+              plus-icon=${args.plusIcon}
               selected=${args.selected}
               disabled=${args.disabled}
             ></sp-tab>
