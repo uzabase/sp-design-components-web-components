@@ -13,12 +13,22 @@ export class SpDropdownAction extends HTMLElement {
   #buttonElement = document.createElement("sp-dropdown-action-button");
   #contentsElement = document.createElement("div");
 
+  #disabled: boolean = false;
+
   set label(value: string) {
     this.#buttonElement.text = value;
   }
 
+  get disabled() {
+    return this.#disabled;
+  }
+  set disabled(value: boolean) {
+    this.#disabled = value;
+    this.#buttonElement.disabled = value;
+  }
+
   static get observedAttributes() {
-    return ["label"];
+    return ["label", "disabled"];
   }
 
   constructor() {
@@ -51,6 +61,9 @@ export class SpDropdownAction extends HTMLElement {
     switch (name) {
       case "label":
         this.label = newValue;
+        break;
+      case "disabled":
+        this.disabled = newValue === "true" || newValue === "";
         break;
     }
   }
