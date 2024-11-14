@@ -46,3 +46,18 @@ export const Show: Story = {
     </sp-dropdown-action>
   `,
 };
+
+export const Right: Story = {
+  render: () => html`
+    <div style="display: flex; justify-content: end">
+      <sp-dropdown-action label="ダッシュボード新規作成" show>
+        <sp-dropdown-action-item
+          >AAAAAAAAAAAAAAAAAAAAAAAAA</sp-dropdown-action-item
+        >
+        <sp-dropdown-action-item>企業を作成</sp-dropdown-action-item>
+        <sp-dropdown-action-item>業界を作成</sp-dropdown-action-item>
+        <sp-dropdown-action-item>技術を作成</sp-dropdown-action-item>
+      </sp-dropdown-action>
+    </div>
+  `,
+};

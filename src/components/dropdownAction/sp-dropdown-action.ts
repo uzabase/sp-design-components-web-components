@@ -16,6 +16,8 @@ export class SpDropdownAction extends HTMLElement {
   #show: boolean = false;
   #disabled: boolean = false;
 
+  #resizeObserver: ResizeObserver;
+
   set label(value: string) {
     this.#buttonElement.text = value;
   }
@@ -49,6 +51,10 @@ export class SpDropdownAction extends HTMLElement {
 
     this.show = false;
     this.disabled = false;
+
+    this.#resizeObserver = new ResizeObserver(() => {
+      this.#updateContentsPosition();
+    });
   }
 
   connectedCallback() {
@@ -67,6 +73,12 @@ export class SpDropdownAction extends HTMLElement {
     this.#baseElement.classList.add("base");
 
     this.shadowRoot?.appendChild(this.#baseElement);
+
+    this.#setupPositionObservers();
+  }
+
+  disconnectedCallback() {
+    this.#removePositionObservers();
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -88,6 +100,56 @@ export class SpDropdownAction extends HTMLElement {
     // TODO: 両方とも個別にトグルしていてズレそうだと考えてしまうので、同期させる仕組みにしたい
     this.#buttonElement.toggleAttribute("selected");
     this.show = !this.show;
+
+    this.#updateContentsPosition();
+  }
+
+  #setupPositionObservers() {
+    this.#resizeObserver.observe(this.#contentsElement);
+
+    window.addEventListener(
+      "resize",
+      this.#updateContentsPosition.bind(this),
+      true,
+    );
+
+    window.addEventListener(
+      "scroll",
+      this.#updateContentsPosition.bind(this),
+      true,
+    );
+  }
+
+  #removePositionObservers() {
+    this.#resizeObserver.unobserve(this.#contentsElement);
+
+    window.removeEventListener(
+      "resize",
+      this.#updateContentsPosition.bind(this),
+      true,
+    );
+
+    window.removeEventListener(
+      "scroll",
+      this.#updateContentsPosition.bind(this),
+      true,
+    );
+  }
+
+  #updateContentsPosition() {
+    if (!this.show) return;
+
+    const buttonRect = this.#buttonElement.getBoundingClientRect();
+    const contentsRect = this.#contentsElement.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+
+    if (buttonRect.left + contentsRect.width > viewportWidth) {
+      this.#contentsElement.style.right = "0";
+      this.#contentsElement.style.left = "auto";
+    } else {
+      this.#contentsElement.style.left = "0";
+      this.#contentsElement.style.right = "auto";
+    }
   }
 }
 
