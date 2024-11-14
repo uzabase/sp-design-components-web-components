@@ -10,14 +10,6 @@ export class SpDropdownActionItem extends HTMLElement {
   #baseElement = document.createElement("div");
   #buttonElement = document.createElement("button");
 
-  set text(value: string) {
-    this.#buttonElement.innerText = value;
-  }
-
-  static get observedAttributes() {
-    return ["text"];
-  }
-
   constructor() {
     super();
 
@@ -29,19 +21,12 @@ export class SpDropdownActionItem extends HTMLElement {
     this.#baseElement.classList.add("base");
     this.#baseElement.role = "menuitem";
 
+    const slot = document.createElement("slot");
+    this.#buttonElement.appendChild(slot);
     this.#buttonElement.classList.add("action");
 
     this.#baseElement.appendChild(this.#buttonElement);
     this.shadowRoot?.appendChild(this.#baseElement);
-  }
-
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    if (oldValue === newValue) return;
-    switch (name) {
-      case "text":
-        this.text = newValue;
-        break;
-    }
   }
 }
 

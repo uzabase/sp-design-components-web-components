@@ -18,11 +18,11 @@ export const WithItems: Story = {
   render: () => html`
     <sp-dropdown-action label="ダッシュボード新規作成">
       <sp-dropdown-action-item
-        text="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-      ></sp-dropdown-action-item>
-      <sp-dropdown-action-item text="企業を作成"></sp-dropdown-action-item>
-      <sp-dropdown-action-item text="業界を作成"></sp-dropdown-action-item>
-      <sp-dropdown-action-item text="技術を作成"></sp-dropdown-action-item>
+        >AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</sp-dropdown-action-item
+      >
+      <sp-dropdown-action-item>企業を作成</sp-dropdown-action-item>
+      <sp-dropdown-action-item>業界を作成</sp-dropdown-action-item>
+      <sp-dropdown-action-item>技術を作成</sp-dropdown-action-item>
     </sp-dropdown-action>
   `,
 };
@@ -30,9 +30,9 @@ export const WithItems: Story = {
 export const Disabled: Story = {
   render: () => html`
     <sp-dropdown-action label="ダッシュボード新規作成" disabled>
-      <sp-dropdown-action-item text="企業を作成"></sp-dropdown-action-item>
-      <sp-dropdown-action-item text="業界を作成"></sp-dropdown-action-item>
-      <sp-dropdown-action-item text="技術を作成"></sp-dropdown-action-item>
+      <sp-dropdown-action-item>企業を作成</sp-dropdown-action-item>
+      <sp-dropdown-action-item>業界を作成</sp-dropdown-action-item>
+      <sp-dropdown-action-item>技術を作成</sp-dropdown-action-item>
     </sp-dropdown-action>
   `,
 };
@@ -40,9 +40,9 @@ export const Disabled: Story = {
 export const Show: Story = {
   render: () => html`
     <sp-dropdown-action label="ダッシュボード新規作成" show>
-      <sp-dropdown-action-item text="企業を作成"></sp-dropdown-action-item>
-      <sp-dropdown-action-item text="業界を作成"></sp-dropdown-action-item>
-      <sp-dropdown-action-item text="技術を作成"></sp-dropdown-action-item>
+      <sp-dropdown-action-item>企業を作成</sp-dropdown-action-item>
+      <sp-dropdown-action-item>業界を作成</sp-dropdown-action-item>
+      <sp-dropdown-action-item>技術を作成</sp-dropdown-action-item>
     </sp-dropdown-action>
   `,
 };
