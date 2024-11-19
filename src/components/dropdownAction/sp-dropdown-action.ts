@@ -12,6 +12,7 @@ export class SpDropdownAction extends HTMLElement {
   #baseElement = document.createElement("div");
   #buttonElement = document.createElement("sp-dropdown-action-button");
   #contentsElement = document.createElement("div");
+  #contentsSlotElement = document.createElement("slot");
 
   #show: boolean = false;
   #disabled: boolean = false;
@@ -74,7 +75,9 @@ export class SpDropdownAction extends HTMLElement {
 
     this.#contentsElement.classList.add("contents");
     this.#contentsElement.role = "menu";
-    this.#contentsElement.appendChild(document.createElement("slot"));
+    this.#contentsElement.appendChild(this.#contentsSlotElement);
+
+    this.#contentsSlotElement.addEventListener("click", this.#hideContents.bind(this));
 
     this.#baseElement.appendChild(this.#contentsElement);
     this.#baseElement.classList.add("base");
@@ -85,6 +88,7 @@ export class SpDropdownAction extends HTMLElement {
   }
 
   disconnectedCallback() {
+    this.#contentsSlotElement.removeEventListener("click", this.#hideContents.bind(this));
     this.#removePositionObservers();
   }
 
@@ -106,6 +110,10 @@ export class SpDropdownAction extends HTMLElement {
   #toggleButton() {
     this.show = !this.show;
     this.#updateContentsPosition();
+  }
+  
+  #hideContents() {
+    this.show = false;
   }
 
   #setupPositionObservers() {

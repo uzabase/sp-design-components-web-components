@@ -20,7 +20,7 @@ export const WithItems: Story = {
       <sp-dropdown-action-item
         >AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</sp-dropdown-action-item
       >
-      <sp-dropdown-action-item>企業を作成</sp-dropdown-action-item>
+      <sp-dropdown-action-item @click=${() => alert("企業を作成")}>企業を作成</sp-dropdown-action-item>
       <sp-dropdown-action-item>業界を作成</sp-dropdown-action-item>
       <sp-dropdown-action-item>技術を作成</sp-dropdown-action-item>
     </sp-dropdown-action>
