@@ -27,6 +27,13 @@ export class SpDropdownAction extends HTMLElement {
   }
   set show(value: boolean) {
     this.#show = value;
+    
+    if (value) {
+      this.#buttonElement.setAttribute("selected", "");
+    } else {
+      this.#buttonElement.removeAttribute("selected");
+    }
+
     // TODO: ちゃんとした実装にする
     this.#contentsElement.style.display = value ? "block" : "none";
   }
@@ -97,10 +104,7 @@ export class SpDropdownAction extends HTMLElement {
   }
 
   #toggleButton() {
-    // TODO: 両方とも個別にトグルしていてズレそうだと考えてしまうので、同期させる仕組みにしたい
-    this.#buttonElement.toggleAttribute("selected");
     this.show = !this.show;
-
     this.#updateContentsPosition();
   }
 
