@@ -94,7 +94,7 @@ export class SpDropdownAction extends HTMLElement {
   connectedCallback() {
     this.#buttonElement.addEventListener(
       "click",
-      this.#toggleMenuVisibility.bind(this),
+      this.#handleClickButton.bind(this),
     );
 
     this.#baseElement.appendChild(this.#buttonElement);
@@ -103,8 +103,8 @@ export class SpDropdownAction extends HTMLElement {
     this.#menuElement.role = "menu";
     this.#menuElement.appendChild(this.#menuSlotElement);
 
-    this.#menuSlotElement.addEventListener("click", this.#closeMenu.bind(this));
-    window.addEventListener("click", this.#closeMenu.bind(this));
+    this.#menuSlotElement.addEventListener("click", this.#handleClickMenu.bind(this));
+    window.addEventListener("click", this.#handleClickOutside.bind(this));
 
     this.#baseElement.appendChild(this.#menuElement);
     this.#baseElement.classList.add("base");
@@ -116,8 +116,8 @@ export class SpDropdownAction extends HTMLElement {
   }
 
   disconnectedCallback() {
-    this.#menuSlotElement.removeEventListener("click", this.#closeMenu.bind(this));
-    window.removeEventListener("click", this.#closeMenu.bind(this));
+    this.#menuSlotElement.removeEventListener("click", this.#handleClickMenu.bind(this));
+    window.removeEventListener("click", this.#handleClickOutside.bind(this));
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -142,20 +142,27 @@ export class SpDropdownAction extends HTMLElement {
     }
   }
 
-  #toggleMenuVisibility(event: MouseEvent) {
+  #handleClickButton(event: MouseEvent) {
     event.stopPropagation();
 
     this.open = !this.open;
     this.#updateAriaExpandedAttribute();
   }
 
-  #closeMenu() {
-    if (!this.open) {
-      return
-    };
+  #handleClickMenu(event: MouseEvent) {
+    event.stopPropagation();
 
     this.open = false;
     this.#updateAriaExpandedAttribute();
+  }
+  
+  #handleClickOutside(event: MouseEvent) {
+    event.stopPropagation();
+
+    if (!this.contains(event.target as Node)) {
+      this.open = false;
+      this.#updateAriaExpandedAttribute();
+    }
   }
   
   #updateMenuDisplay() {
