@@ -28,6 +28,7 @@ export class SpDropdownAction extends HTMLElement {
 
   set label(value: string) {
     this.#buttonElement.text = value;
+    this.#syncContentsMinWidthWithButtonWidth();
   }
 
   get show() {
@@ -58,8 +59,6 @@ export class SpDropdownAction extends HTMLElement {
     return this.#position;
   }
   set position(value: Position) {
-    console.log({position:value});
-    
     if (value === "left") {
       this.#contentsElement.style.right = "auto";
       this.#contentsElement.style.left = "0";
@@ -104,6 +103,8 @@ export class SpDropdownAction extends HTMLElement {
     this.#baseElement.classList.add("base");
 
     this.shadowRoot?.appendChild(this.#baseElement);
+
+    this.#syncContentsMinWidthWithButtonWidth();
   }
 
   disconnectedCallback() {
@@ -138,6 +139,11 @@ export class SpDropdownAction extends HTMLElement {
   
   #hideContents() {
     this.show = false;
+  }
+  
+  #syncContentsMinWidthWithButtonWidth() {
+    const buttonWidth = this.#buttonElement.offsetWidth;
+    this.#contentsElement.style.minWidth = `${buttonWidth}px`;
   }
 }
 
