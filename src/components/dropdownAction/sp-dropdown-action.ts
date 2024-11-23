@@ -49,7 +49,7 @@ export class SpDropdownAction extends HTMLElement {
       this.#buttonElement.removeAttribute("selected");
     }
 
-    this.#menuElement.style.display = value ? "block" : "none";
+    this.#updateMenuDisplay();
   }
 
   get disabled() {
@@ -58,6 +58,7 @@ export class SpDropdownAction extends HTMLElement {
   set disabled(value: boolean) {
     this.#disabled = value;
     this.#buttonElement.disabled = value;
+    this.#updateMenuDisplay();
   }
   
   get position() {
@@ -102,7 +103,7 @@ export class SpDropdownAction extends HTMLElement {
     this.#menuElement.role = "menu";
     this.#menuElement.appendChild(this.#menuSlotElement);
 
-    this.#menuSlotElement.addEventListener("click", this.#hideMenu.bind(this));
+    this.#menuSlotElement.addEventListener("click", this.#closeMenu.bind(this));
 
     this.#baseElement.appendChild(this.#menuElement);
     this.#baseElement.classList.add("base");
@@ -114,7 +115,7 @@ export class SpDropdownAction extends HTMLElement {
   }
 
   disconnectedCallback() {
-    this.#menuSlotElement.removeEventListener("click", this.#hideMenu.bind(this));
+    this.#menuSlotElement.removeEventListener("click", this.#closeMenu.bind(this));
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -143,12 +144,16 @@ export class SpDropdownAction extends HTMLElement {
     this.open = !this.open;
     this.#updateAriaExpandedAttribute();
   }
-  
-  #hideMenu() {
+
+  #closeMenu() {
     this.open = false;
     this.#updateAriaExpandedAttribute();
   }
   
+  #updateMenuDisplay() {
+    this.#menuElement.style.display = this.open && !this.disabled ? "block" : "none";
+  }
+
   #setupAccessibilityAttributes() {
     this.#buttonElement.setAriaHasPopup("true");
     this.#buttonElement.setAriaControls(this.#menuId);
