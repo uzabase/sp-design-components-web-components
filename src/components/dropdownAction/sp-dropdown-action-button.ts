@@ -3,10 +3,12 @@ import { UbButton } from "@ub-design/components-web-components/";
 import foundationStyle from "../foundation.css?inline" assert { type: "css" };
 // @ts-ignore
 import buttonStyle from "../button/button.css?inline" assert { type: "css" };
+// @ts-ignore
+import dropdownActionButtonStyle from "./dropdown-action-button.css?inline" assert { type: "css" };
 import "../icon/sp-icon";
 
 const styles = new CSSStyleSheet();
-styles.replaceSync(`${foundationStyle} ${buttonStyle}`);
+styles.replaceSync(`${foundationStyle} ${buttonStyle} ${dropdownActionButtonStyle}`);
 
 export class SpDropdownActionButton extends UbButton {
   constructor() {
