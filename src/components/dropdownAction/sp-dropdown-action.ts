@@ -104,6 +104,7 @@ export class SpDropdownAction extends HTMLElement {
     this.#menuElement.appendChild(this.#menuSlotElement);
 
     this.#menuSlotElement.addEventListener("click", this.#closeMenu.bind(this));
+    window.addEventListener("click", this.#closeMenu.bind(this));
 
     this.#baseElement.appendChild(this.#menuElement);
     this.#baseElement.classList.add("base");
@@ -116,6 +117,7 @@ export class SpDropdownAction extends HTMLElement {
 
   disconnectedCallback() {
     this.#menuSlotElement.removeEventListener("click", this.#closeMenu.bind(this));
+    window.removeEventListener("click", this.#closeMenu.bind(this));
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -140,12 +142,18 @@ export class SpDropdownAction extends HTMLElement {
     }
   }
 
-  #toggleMenuVisibility() {
+  #toggleMenuVisibility(event: MouseEvent) {
+    event.stopPropagation();
+
     this.open = !this.open;
     this.#updateAriaExpandedAttribute();
   }
 
   #closeMenu() {
+    if (!this.open) {
+      return
+    };
+
     this.open = false;
     this.#updateAriaExpandedAttribute();
   }
