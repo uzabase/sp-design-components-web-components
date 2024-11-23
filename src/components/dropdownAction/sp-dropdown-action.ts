@@ -22,7 +22,7 @@ export class SpDropdownAction extends HTMLElement {
   #menuElement = document.createElement("div");
   #menuSlotElement = document.createElement("slot");
 
-  #show: boolean = false;
+  #open: boolean = false;
   #disabled: boolean = false;
   #position: Position = "left";
 
@@ -31,11 +31,11 @@ export class SpDropdownAction extends HTMLElement {
     this.#syncMenuMinWidthWithButtonWidth();
   }
 
-  get show() {
-    return this.#show;
+  get open() {
+    return this.#open;
   }
-  set show(value: boolean) {
-    this.#show = value;
+  set open(value: boolean) {
+    this.#open = value;
     
     if (value) {
       this.#buttonElement.setAttribute("selected", "");
@@ -70,7 +70,7 @@ export class SpDropdownAction extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["label", "show", "disabled", "position"];
+    return ["label", "open", "disabled", "position"];
   }
 
   constructor() {
@@ -79,7 +79,7 @@ export class SpDropdownAction extends HTMLElement {
     const shadowRoot = this.attachShadow({ mode: "open" });
     shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
 
-    this.show = false;
+    this.open = false;
     this.disabled = false;
     this.position = "left";
   }
@@ -87,7 +87,7 @@ export class SpDropdownAction extends HTMLElement {
   connectedCallback() {
     this.#buttonElement.addEventListener(
       "click",
-      this.#toggleButton.bind(this),
+      this.#toggle.bind(this),
     );
 
     this.#baseElement.appendChild(this.#buttonElement);
@@ -116,8 +116,8 @@ export class SpDropdownAction extends HTMLElement {
       case "label":
         this.label = newValue;
         break;
-      case "show":
-        this.show = newValue === "true" || newValue === "";
+      case "open":
+        this.open = newValue === "true" || newValue === "";
         break;
       case "disabled":
         this.disabled = newValue === "true" || newValue === "";
@@ -132,12 +132,12 @@ export class SpDropdownAction extends HTMLElement {
     }
   }
 
-  #toggleButton() {
-    this.show = !this.show;
+  #toggle() {
+    this.open = !this.open;
   }
   
   #hideMenu() {
-    this.show = false;
+    this.open = false;
   }
   
   #syncMenuMinWidthWithButtonWidth() {

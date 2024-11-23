@@ -37,9 +37,9 @@ export const Disabled: Story = {
   `,
 };
 
-export const Show: Story = {
+export const Open: Story = {
   render: () => html`
-    <sp-dropdown-action label="ダッシュボード新規作成" show>
+    <sp-dropdown-action label="ダッシュボード新規作成" open>
       <sp-dropdown-action-item>企業を作成</sp-dropdown-action-item>
       <sp-dropdown-action-item>業界を作成</sp-dropdown-action-item>
       <sp-dropdown-action-item>技術を作成</sp-dropdown-action-item>
@@ -50,7 +50,7 @@ export const Show: Story = {
 export const RightPosition: Story = {
   render: () => html`
     <div style="display: flex; justify-content: end">
-      <sp-dropdown-action label="ダッシュボード新規作成" show position="right">
+      <sp-dropdown-action label="ダッシュボード新規作成" oep position="right">
         <sp-dropdown-action-item
           >AAAAAAAAAAAAAAAAAAAAAAAAA</sp-dropdown-action-item
         >
