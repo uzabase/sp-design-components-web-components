@@ -39,6 +39,20 @@ export const RightPosition: Story = {
   `,
 };
 
+export const FullWidth: Story = {
+  render: () => html`
+    <style>
+      sp-dropdown-action::part(button) {
+        width: 100%;
+      }
+    </style>
+    <sp-dropdown-action label="ダッシュボード新規作成">
+      <sp-dropdown-action-item>企業を作成</sp-dropdown-action-item>
+      <sp-dropdown-action-item>業界を作成</sp-dropdown-action-item>
+    </sp-dropdown-action>
+  `,
+};
+
 export const Disabled: Story = {
   render: () => html`
     <sp-dropdown-action label="ダッシュボード新規作成" disabled>
