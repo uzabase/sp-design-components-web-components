@@ -19,8 +19,8 @@ styles.replaceSync(`${foundationStyle} ${dropdownActionStyle}`);
 export class SpDropdownAction extends HTMLElement {
   #baseElement = document.createElement("div");
   #buttonElement = document.createElement("sp-dropdown-action-button");
-  #contentsElement = document.createElement("div");
-  #contentsSlotElement = document.createElement("slot");
+  #menuElement = document.createElement("div");
+  #menuSlotElement = document.createElement("slot");
 
   #show: boolean = false;
   #disabled: boolean = false;
@@ -28,7 +28,7 @@ export class SpDropdownAction extends HTMLElement {
 
   set label(value: string) {
     this.#buttonElement.text = value;
-    this.#syncContentsMinWidthWithButtonWidth();
+    this.#syncMenuMinWidthWithButtonWidth();
   }
 
   get show() {
@@ -43,8 +43,7 @@ export class SpDropdownAction extends HTMLElement {
       this.#buttonElement.removeAttribute("selected");
     }
 
-    // TODO: ちゃんとした実装にする
-    this.#contentsElement.style.display = value ? "block" : "none";
+    this.#menuElement.style.display = value ? "block" : "none";
   }
 
   get disabled() {
@@ -60,11 +59,11 @@ export class SpDropdownAction extends HTMLElement {
   }
   set position(value: Position) {
     if (value === "left") {
-      this.#contentsElement.style.right = "auto";
-      this.#contentsElement.style.left = "0";
+      this.#menuElement.style.right = "auto";
+      this.#menuElement.style.left = "0";
     } else {
-      this.#contentsElement.style.right = "0";
-      this.#contentsElement.style.left = "auto";
+      this.#menuElement.style.right = "0";
+      this.#menuElement.style.left = "auto";
     }
 
     this.#position = value;
@@ -93,22 +92,22 @@ export class SpDropdownAction extends HTMLElement {
 
     this.#baseElement.appendChild(this.#buttonElement);
 
-    this.#contentsElement.classList.add("contents");
-    this.#contentsElement.role = "menu";
-    this.#contentsElement.appendChild(this.#contentsSlotElement);
+    this.#menuElement.classList.add("menu");
+    this.#menuElement.role = "menu";
+    this.#menuElement.appendChild(this.#menuSlotElement);
 
-    this.#contentsSlotElement.addEventListener("click", this.#hideContents.bind(this));
+    this.#menuSlotElement.addEventListener("click", this.#hideMenu.bind(this));
 
-    this.#baseElement.appendChild(this.#contentsElement);
+    this.#baseElement.appendChild(this.#menuElement);
     this.#baseElement.classList.add("base");
 
     this.shadowRoot?.appendChild(this.#baseElement);
 
-    this.#syncContentsMinWidthWithButtonWidth();
+    this.#syncMenuMinWidthWithButtonWidth();
   }
 
   disconnectedCallback() {
-    this.#contentsSlotElement.removeEventListener("click", this.#hideContents.bind(this));
+    this.#menuSlotElement.removeEventListener("click", this.#hideMenu.bind(this));
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -137,13 +136,13 @@ export class SpDropdownAction extends HTMLElement {
     this.show = !this.show;
   }
   
-  #hideContents() {
+  #hideMenu() {
     this.show = false;
   }
   
-  #syncContentsMinWidthWithButtonWidth() {
+  #syncMenuMinWidthWithButtonWidth() {
     const buttonWidth = this.#buttonElement.offsetWidth;
-    this.#contentsElement.style.minWidth = `${buttonWidth}px`;
+    this.#menuElement.style.minWidth = `${buttonWidth}px`;
   }
 }
 

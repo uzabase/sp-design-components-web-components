@@ -2,11 +2,10 @@
   position: relative;
 }
 
-.contents {
+.menu {
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 80px;
   margin-block-start: 8px;
   padding-block: 8px;
   background: var(--color-semantic-surface-regular-1);
