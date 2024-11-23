@@ -47,10 +47,10 @@ export const Show: Story = {
   `,
 };
 
-export const Right: Story = {
+export const RightPosition: Story = {
   render: () => html`
     <div style="display: flex; justify-content: end">
-      <sp-dropdown-action label="ダッシュボード新規作成" show>
+      <sp-dropdown-action label="ダッシュボード新規作成" show position="right">
         <sp-dropdown-action-item
           >AAAAAAAAAAAAAAAAAAAAAAAAA</sp-dropdown-action-item
         >

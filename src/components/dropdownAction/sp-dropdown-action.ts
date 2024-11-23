@@ -5,6 +5,14 @@ import dropdownActionStyle from "./dropdown-action.css?inline" assert { type: "c
 import "./sp-dropdown-action-button";
 import "./sp-dropdown-action-item";
 
+type Position = "left" | "right";
+
+const positions: Position[] = ["left", "right"];
+
+function isValidPosition(value: string): value is Position {
+  return positions.some((position) => position === value);
+}
+
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${dropdownActionStyle}`);
 
@@ -16,6 +24,7 @@ export class SpDropdownAction extends HTMLElement {
 
   #show: boolean = false;
   #disabled: boolean = false;
+  #position: Position = "left";
 
   set label(value: string) {
     this.#buttonElement.text = value;
@@ -44,9 +53,26 @@ export class SpDropdownAction extends HTMLElement {
     this.#disabled = value;
     this.#buttonElement.disabled = value;
   }
+  
+  get position() {
+    return this.#position;
+  }
+  set position(value: Position) {
+    console.log({position:value});
+    
+    if (value === "left") {
+      this.#contentsElement.style.right = "auto";
+      this.#contentsElement.style.left = "0";
+    } else {
+      this.#contentsElement.style.right = "0";
+      this.#contentsElement.style.left = "auto";
+    }
+
+    this.#position = value;
+  }
 
   static get observedAttributes() {
-    return ["label", "show", "disabled"];
+    return ["label", "show", "disabled", "position"];
   }
 
   constructor() {
@@ -57,6 +83,7 @@ export class SpDropdownAction extends HTMLElement {
 
     this.show = false;
     this.disabled = false;
+    this.position = "left";
   }
 
   connectedCallback() {
@@ -95,6 +122,13 @@ export class SpDropdownAction extends HTMLElement {
       case "disabled":
         this.disabled = newValue === "true" || newValue === "";
         break;
+      case "position":
+        if (isValidPosition(newValue)) {
+          this.position = newValue;
+        } else {
+          console.warn(`${newValue}は無効なposition属性です。`);
+          this.position = "left";
+        }
     }
   }
 
