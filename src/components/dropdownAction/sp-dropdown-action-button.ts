@@ -20,6 +20,10 @@ export class SpDropdownActionButton extends UbButton {
         styles,
       ];
     }
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback();
 
     this.#insertIconElement();
   }
