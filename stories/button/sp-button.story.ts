@@ -1,32 +1,26 @@
 import "../../src/components/button/sp-button";
 import type { Meta, StoryObj } from "@storybook/web-components";
-import "@sp-design/token/lib/speeda-tokens.css";
-import { speedaIconTypes } from "../../src/components/icon/icons";
 import { action } from "@storybook/addon-actions";
 import { html } from "lit";
+import "yakuhanjp/dist/css/yakuhanjp_s.css";
 
 const meta: Meta = {
   component: "sp-button",
   argTypes: {
     text: { type: "string" },
-    icon: {
-      control: { type: "select" },
-      options: ["", ...speedaIconTypes],
-    },
     type: {
       control: { type: "select" },
-      options: ["default", "destructive"],
+      options: ["normal", "danger"],
     },
-    appearance: {
+    hierarchy: {
       control: { type: "select" },
-      options: ["outline", "fill", "text"],
+      options: ["primary", "secondary", "tertiary"],
     },
     size: {
       control: { type: "select" },
-      options: ["medium", "large", "xLarge", "width160", "width80"],
+      options: ["medium", "large", "xLarge"],
     },
     loading: { type: "boolean" },
-    selected: { type: "boolean" },
     disabled: { type: "boolean" },
     onclick: {
       action: "onclick",
@@ -35,11 +29,10 @@ const meta: Meta = {
   args: {
     text: "sp-button-text",
     icon: "",
-    type: "default",
-    appearance: "fill",
+    type: "normal",
+    hierarchy: "primary",
     size: "medium",
     loading: false,
-    selected: false,
     disabled: false,
     onclick: action("onclick"),
   },
@@ -50,12 +43,10 @@ type Story = StoryObj;
 
 export const Basic: Story = {
   args: {
-    icon: undefined,
     type: undefined,
-    appearance: undefined,
+    hierarchy: undefined,
     size: undefined,
     loading: undefined,
-    selected: undefined,
     disabled: undefined,
   },
 };
@@ -68,10 +59,9 @@ export const Attribute: Story = {
       text=${args.text}
       icon=${args.icon}
       type=${args.type}
-      appearance=${args.appearance}
+      hierarchy=${args.hierarchy}
       size=${args.size}
       loading=${args.loading}
-      selected=${args.selected}
       disabled=${args.disabled}
     ></sp-button>`,
 };
@@ -82,26 +72,27 @@ export const AttributeHTML: Story = {
       text=${args.text}
       icon=${args.icon}
       type=${args.type}
-      appearance=${args.appearance}
+      hierarchy=${args.hierarchy}
       size=${args.size}
       ?loading=${args.loading}
-      ?selected=${args.selected}
       ?disabled=${args.disabled}
     ></sp-button>`,
 };
 
 export const OverflowWrap: Story = {
   render: () => html`
-    <p style="overflow-wrap: break-word;">
+    <p style="overflow-wrap: anywhere;">
       texttexttexttexttexttexttextttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
     </p>
+    <div>
+      <sp-button text="text" style="width: 100%;"></sp-button>
+    </div>
     <sp-button text="text"></sp-button>
     <sp-button text="text"></sp-button>
     <sp-button
       text="texttexttexttexttexttexttextttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext"
     ></sp-button>
     <sp-button
-      icon="edit"
       text="texttexttexttexttexttexttextttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext"
     ></sp-button>
     <sp-button
@@ -119,7 +110,6 @@ export const OverflowWrap: Story = {
     <div style="display: flex; min-width: 0;">
       <div>サンプルdiv</div>
       <sp-button
-        icon="edit"
         text="texttexttexttexttexttexttextttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttextexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext"
       ></sp-button>
     </div>
@@ -130,14 +120,22 @@ export const ALL: Story = {
   render: () => html`
     <table>
       <caption>
-        size: medium / type: default / icon: edit
+        size: medium
       </caption>
       <thead>
         <tr>
-          <th>appearance</th>
-          <th>outline</th>
-          <th>fill</th>
-          <th>text</th>
+          <th></th>
+          <th colspan="3">normal</th>
+          <th colspan="3">danger</th>
+        </tr>
+        <tr>
+          <th>state</th>
+          <th>primary</th>
+          <th>secondary</th>
+          <th>tertiary</th>
+          <th>primary</th>
+          <th>secondary</th>
+          <th>tertiary</th>
         </tr>
       </thead>
       <tbody>
@@ -147,60 +145,48 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="medium"
-              type="default"
-              icon="edit"
-              appearance="outline"
+              type="normal"
+              hierarchy="primary"
             ></sp-button>
           </td>
           <td>
             <sp-button
               text="text"
               size="medium"
-              type="default"
-              icon="edit"
-              appearance="fill"
+              type="normal"
+              hierarchy="secondary"
             ></sp-button>
           </td>
           <td>
             <sp-button
               text="text"
               size="medium"
-              type="default"
-              icon="edit"
-              appearance="text"
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: selected</th>
-          <td>
-            <sp-button
-              text="text"
-              size="medium"
-              type="default"
-              icon="edit"
-              appearance="outline"
-              selected
+              type="normal"
+              hierarchy="tertiary"
             ></sp-button>
           </td>
           <td>
             <sp-button
               text="text"
               size="medium"
-              type="default"
-              icon="edit"
-              appearance="fill"
-              selected
+              type="danger"
+              hierarchy="primary"
             ></sp-button>
           </td>
           <td>
             <sp-button
               text="text"
               size="medium"
-              type="default"
-              icon="edit"
-              appearance="text"
-              selected
+              type="danger"
+              hierarchy="secondary"
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="medium"
+              type="danger"
+              hierarchy="tertiary"
             ></sp-button>
           </td>
         </tr>
@@ -210,9 +196,8 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="medium"
-              type="default"
-              icon="edit"
-              appearance="outline"
+              type="normal"
+              hierarchy="primary"
               disabled
             ></sp-button>
           </td>
@@ -220,9 +205,8 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="medium"
-              type="default"
-              icon="edit"
-              appearance="fill"
+              type="normal"
+              hierarchy="secondary"
               disabled
             ></sp-button>
           </td>
@@ -230,9 +214,35 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="medium"
-              type="default"
-              icon="edit"
-              appearance="text"
+              type="normal"
+              hierarchy="tertiary"
+              disabled
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="medium"
+              type="danger"
+              hierarchy="primary"
+              disabled
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="medium"
+              type="danger"
+              hierarchy="secondary"
+              disabled
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="medium"
+              type="danger"
+              hierarchy="tertiary"
               disabled
             ></sp-button>
           </td>
@@ -243,9 +253,8 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="medium"
-              type="default"
-              icon="edit"
-              appearance="outline"
+              type="normal"
+              hierarchy="primary"
               loading
             ></sp-button>
           </td>
@@ -253,9 +262,8 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="medium"
-              type="default"
-              icon="edit"
-              appearance="fill"
+              type="normal"
+              hierarchy="secondary"
               loading
             ></sp-button>
           </td>
@@ -263,9 +271,35 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="medium"
-              type="default"
-              icon="edit"
-              appearance="text"
+              type="normal"
+              hierarchy="tertiary"
+              loading
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="medium"
+              type="danger"
+              hierarchy="primary"
+              loading
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="medium"
+              type="danger"
+              hierarchy="secondary"
+              loading
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="medium"
+              type="danger"
+              hierarchy="tertiary"
               loading
             ></sp-button>
           </td>
@@ -274,14 +308,22 @@ export const ALL: Story = {
     </table>
     <table>
       <caption>
-        size: large / type: default / icon: edit
+        size: large
       </caption>
       <thead>
         <tr>
-          <th>appearance</th>
-          <th>outline</th>
-          <th>fill</th>
-          <th>text</th>
+          <th></th>
+          <th colspan="3">normal</th>
+          <th colspan="3">danger</th>
+        </tr>
+        <tr>
+          <th>state</th>
+          <th>primary</th>
+          <th>secondary</th>
+          <th>tertiary</th>
+          <th>primary</th>
+          <th>secondary</th>
+          <th>tertiary</th>
         </tr>
       </thead>
       <tbody>
@@ -291,60 +333,48 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="large"
-              type="default"
-              icon="edit"
-              appearance="outline"
+              type="normal"
+              hierarchy="primary"
             ></sp-button>
           </td>
           <td>
             <sp-button
               text="text"
               size="large"
-              type="default"
-              icon="edit"
-              appearance="fill"
+              type="normal"
+              hierarchy="secondary"
             ></sp-button>
           </td>
           <td>
             <sp-button
               text="text"
               size="large"
-              type="default"
-              icon="edit"
-              appearance="text"
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: selected</th>
-          <td>
-            <sp-button
-              text="text"
-              size="large"
-              type="default"
-              icon="edit"
-              appearance="outline"
-              selected
+              type="normal"
+              hierarchy="tertiary"
             ></sp-button>
           </td>
           <td>
             <sp-button
               text="text"
               size="large"
-              type="default"
-              icon="edit"
-              appearance="fill"
-              selected
+              type="danger"
+              hierarchy="primary"
             ></sp-button>
           </td>
           <td>
             <sp-button
               text="text"
               size="large"
-              type="default"
-              icon="edit"
-              appearance="text"
-              selected
+              type="danger"
+              hierarchy="secondary"
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="large"
+              type="danger"
+              hierarchy="tertiary"
             ></sp-button>
           </td>
         </tr>
@@ -354,9 +384,8 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="large"
-              type="default"
-              icon="edit"
-              appearance="outline"
+              type="normal"
+              hierarchy="primary"
               disabled
             ></sp-button>
           </td>
@@ -364,9 +393,8 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="large"
-              type="default"
-              icon="edit"
-              appearance="fill"
+              type="normal"
+              hierarchy="secondary"
               disabled
             ></sp-button>
           </td>
@@ -374,9 +402,35 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="large"
-              type="default"
-              icon="edit"
-              appearance="text"
+              type="normal"
+              hierarchy="tertiary"
+              disabled
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="large"
+              type="danger"
+              hierarchy="primary"
+              disabled
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="large"
+              type="danger"
+              hierarchy="secondary"
+              disabled
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="large"
+              type="danger"
+              hierarchy="tertiary"
               disabled
             ></sp-button>
           </td>
@@ -387,9 +441,8 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="large"
-              type="default"
-              icon="edit"
-              appearance="outline"
+              type="normal"
+              hierarchy="primary"
               loading
             ></sp-button>
           </td>
@@ -397,9 +450,8 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="large"
-              type="default"
-              icon="edit"
-              appearance="fill"
+              type="normal"
+              hierarchy="secondary"
               loading
             ></sp-button>
           </td>
@@ -407,9 +459,35 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="large"
-              type="default"
-              icon="edit"
-              appearance="text"
+              type="normal"
+              hierarchy="tertiary"
+              loading
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="large"
+              type="danger"
+              hierarchy="primary"
+              loading
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="large"
+              type="danger"
+              hierarchy="secondary"
+              loading
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="large"
+              type="danger"
+              hierarchy="tertiary"
               loading
             ></sp-button>
           </td>
@@ -418,14 +496,22 @@ export const ALL: Story = {
     </table>
     <table>
       <caption>
-        size: xLarge / type: default / icon: edit
+        size: medium
       </caption>
       <thead>
         <tr>
-          <th>appearance</th>
-          <th>outline</th>
-          <th>fill</th>
-          <th>text</th>
+          <th></th>
+          <th colspan="3">normal</th>
+          <th colspan="3">danger</th>
+        </tr>
+        <tr>
+          <th>state</th>
+          <th>primary</th>
+          <th>secondary</th>
+          <th>tertiary</th>
+          <th>primary</th>
+          <th>secondary</th>
+          <th>tertiary</th>
         </tr>
       </thead>
       <tbody>
@@ -435,60 +521,48 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="xLarge"
-              type="default"
-              icon="edit"
-              appearance="outline"
+              type="normal"
+              hierarchy="primary"
             ></sp-button>
           </td>
           <td>
             <sp-button
               text="text"
               size="xLarge"
-              type="default"
-              icon="edit"
-              appearance="fill"
+              type="normal"
+              hierarchy="secondary"
             ></sp-button>
           </td>
           <td>
             <sp-button
               text="text"
               size="xLarge"
-              type="default"
-              icon="edit"
-              appearance="text"
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: selected</th>
-          <td>
-            <sp-button
-              text="text"
-              size="xLarge"
-              type="default"
-              icon="edit"
-              appearance="outline"
-              selected
+              type="normal"
+              hierarchy="tertiary"
             ></sp-button>
           </td>
           <td>
             <sp-button
               text="text"
               size="xLarge"
-              type="default"
-              icon="edit"
-              appearance="fill"
-              selected
+              type="danger"
+              hierarchy="primary"
             ></sp-button>
           </td>
           <td>
             <sp-button
               text="text"
               size="xLarge"
-              type="default"
-              icon="edit"
-              appearance="text"
-              selected
+              type="danger"
+              hierarchy="secondary"
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="xLarge"
+              type="danger"
+              hierarchy="tertiary"
             ></sp-button>
           </td>
         </tr>
@@ -498,9 +572,8 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="xLarge"
-              type="default"
-              icon="edit"
-              appearance="outline"
+              type="normal"
+              hierarchy="primary"
               disabled
             ></sp-button>
           </td>
@@ -508,9 +581,8 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="xLarge"
-              type="default"
-              icon="edit"
-              appearance="fill"
+              type="normal"
+              hierarchy="secondary"
               disabled
             ></sp-button>
           </td>
@@ -518,9 +590,35 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="xLarge"
-              type="default"
-              icon="edit"
-              appearance="text"
+              type="normal"
+              hierarchy="tertiary"
+              disabled
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="xLarge"
+              type="danger"
+              hierarchy="primary"
+              disabled
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="xLarge"
+              type="danger"
+              hierarchy="secondary"
+              disabled
+            ></sp-button>
+          </td>
+          <td>
+            <sp-button
+              text="text"
+              size="xLarge"
+              type="danger"
+              hierarchy="tertiary"
               disabled
             ></sp-button>
           </td>
@@ -531,9 +629,8 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="xLarge"
-              type="default"
-              icon="edit"
-              appearance="outline"
+              type="normal"
+              hierarchy="primary"
               loading
             ></sp-button>
           </td>
@@ -541,9 +638,8 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="xLarge"
-              type="default"
-              icon="edit"
-              appearance="fill"
+              type="normal"
+              hierarchy="secondary"
               loading
             ></sp-button>
           </td>
@@ -551,709 +647,8 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="xLarge"
-              type="default"
-              icon="edit"
-              appearance="text"
-              loading
-            ></sp-button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table>
-      <caption>
-        size: width80 / type: default / icon: edit
-      </caption>
-      <thead>
-        <tr>
-          <th>appearance</th>
-          <th>outline</th>
-          <th>fill</th>
-          <th>text</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>state: default</th>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="default"
-              icon="edit"
-              appearance="outline"
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="default"
-              icon="edit"
-              appearance="fill"
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="default"
-              icon="edit"
-              appearance="text"
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: selected</th>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="default"
-              icon="edit"
-              appearance="outline"
-              selected
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="default"
-              icon="edit"
-              appearance="fill"
-              selected
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="default"
-              icon="edit"
-              appearance="text"
-              selected
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: disabled</th>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="default"
-              icon="edit"
-              appearance="outline"
-              disabled
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="default"
-              icon="edit"
-              appearance="fill"
-              disabled
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="default"
-              icon="edit"
-              appearance="text"
-              disabled
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: loading</th>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="default"
-              icon="edit"
-              appearance="outline"
-              loading
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="default"
-              icon="edit"
-              appearance="fill"
-              loading
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="default"
-              icon="edit"
-              appearance="text"
-              loading
-            ></sp-button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table>
-      <caption>
-        size: width160 / type: default / icon: edit
-      </caption>
-      <thead>
-        <tr>
-          <th>appearance</th>
-          <th>outline</th>
-          <th>fill</th>
-          <th>text</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>state: default</th>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="default"
-              icon="edit"
-              appearance="outline"
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="default"
-              icon="edit"
-              appearance="fill"
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="default"
-              icon="edit"
-              appearance="text"
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: selected</th>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="default"
-              icon="edit"
-              appearance="outline"
-              selected
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="default"
-              icon="edit"
-              appearance="fill"
-              selected
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="default"
-              icon="edit"
-              appearance="text"
-              selected
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: disabled</th>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="default"
-              icon="edit"
-              appearance="outline"
-              disabled
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="default"
-              icon="edit"
-              appearance="fill"
-              disabled
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="default"
-              icon="edit"
-              appearance="text"
-              disabled
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: loading</th>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="default"
-              icon="edit"
-              appearance="outline"
-              loading
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="default"
-              icon="edit"
-              appearance="fill"
-              loading
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="default"
-              icon="edit"
-              appearance="text"
-              loading
-            ></sp-button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table>
-      <caption>
-        size: medium / type: destructive / icon: edit
-      </caption>
-      <thead>
-        <tr>
-          <th>appearance</th>
-          <th>outline</th>
-          <th>fill</th>
-          <th>text</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>state: default</th>
-          <td>
-            <sp-button
-              text="text"
-              size="medium"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="medium"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="medium"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-            ></sp-button>
-          </td>
-        </tr>
-        <tr style="background: #ccc">
-          <th>state: selected</th>
-          <td>
-            <sp-button
-              text="text"
-              size="medium"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-              selected
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="medium"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-              selected
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="medium"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-              selected
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: disabled</th>
-          <td>
-            <sp-button
-              text="text"
-              size="medium"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-              disabled
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="medium"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-              disabled
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="medium"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-              disabled
-            ></sp-button>
-          </td>
-        </tr>
-        <tr style="background: #ccc">
-          <th>state: loading</th>
-          <td>
-            <sp-button
-              text="text"
-              size="medium"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-              loading
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="medium"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-              loading
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="medium"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-              loading
-            ></sp-button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table style="background: #ccc">
-      <caption>
-        size: large / type: destructive / icon: edit
-      </caption>
-      <thead>
-        <tr>
-          <th>appearance</th>
-          <th>outline</th>
-          <th>fill</th>
-          <th>text</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>state: default</th>
-          <td>
-            <sp-button
-              text="text"
-              size="large"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="large"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="large"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: selected</th>
-          <td>
-            <sp-button
-              text="text"
-              size="large"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-              selected
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="large"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-              selected
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="large"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-              selected
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: disabled</th>
-          <td>
-            <sp-button
-              text="text"
-              size="large"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-              disabled
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="large"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-              disabled
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="large"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-              disabled
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: loading</th>
-          <td>
-            <sp-button
-              text="text"
-              size="large"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-              loading
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="large"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-              loading
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="large"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-              loading
-            ></sp-button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table style="background: #ccc">
-      <caption>
-        size: xLarge / type: destructive / icon: edit
-      </caption>
-      <thead>
-        <tr>
-          <th>appearance</th>
-          <th>outline</th>
-          <th>fill</th>
-          <th>text</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>state: default</th>
-          <td>
-            <sp-button
-              text="text"
-              size="xLarge"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="xLarge"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="xLarge"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: selected</th>
-          <td>
-            <sp-button
-              text="text"
-              size="xLarge"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-              selected
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="xLarge"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-              selected
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="xLarge"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-              selected
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: disabled</th>
-          <td>
-            <sp-button
-              text="text"
-              size="xLarge"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-              disabled
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="xLarge"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-              disabled
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="xLarge"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-              disabled
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: loading</th>
-          <td>
-            <sp-button
-              text="text"
-              size="xLarge"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
+              type="normal"
+              hierarchy="tertiary"
               loading
             ></sp-button>
           </td>
@@ -1261,9 +656,8 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="xLarge"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
+              type="danger"
+              hierarchy="primary"
               loading
             ></sp-button>
           </td>
@@ -1271,297 +665,17 @@ export const ALL: Story = {
             <sp-button
               text="text"
               size="xLarge"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-              loading
-            ></sp-button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table>
-      <caption>
-        size: width80 / type: destructive / icon: edit
-      </caption>
-      <thead>
-        <tr>
-          <th>appearance</th>
-          <th>outline</th>
-          <th>fill</th>
-          <th>text</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>state: default</th>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-            ></sp-button>
-          </td>
-        </tr>
-        <tr style="background: #ccc">
-          <th>state: selected</th>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-              selected
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-              selected
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-              selected
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: disabled</th>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-              disabled
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-              disabled
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-              disabled
-            ></sp-button>
-          </td>
-        </tr>
-        <tr style="background: #ccc">
-          <th>state: loading</th>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
+              type="danger"
+              hierarchy="secondary"
               loading
             ></sp-button>
           </td>
           <td>
             <sp-button
               text="text"
-              size="width80"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-              loading
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width80"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-              loading
-            ></sp-button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table>
-      <caption>
-        size: width160 / type: destructive / icon: edit
-      </caption>
-      <thead>
-        <tr>
-          <th>appearance</th>
-          <th>outline</th>
-          <th>fill</th>
-          <th>text</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th>state: default</th>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-            ></sp-button>
-          </td>
-        </tr>
-        <tr style="background: #ccc">
-          <th>state: selected</th>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-              selected
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-              selected
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-              selected
-            ></sp-button>
-          </td>
-        </tr>
-        <tr>
-          <th>state: disabled</th>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-              disabled
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-              disabled
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="destructive"
-              icon="edit"
-              appearance="text"
-              disabled
-            ></sp-button>
-          </td>
-        </tr>
-        <tr style="background: #ccc">
-          <th>state: loading</th>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="destructive"
-              icon="edit"
-              appearance="outline"
-              loading
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="destructive"
-              icon="edit"
-              appearance="fill"
-              loading
-            ></sp-button>
-          </td>
-          <td>
-            <sp-button
-              text="text"
-              size="width160"
-              type="destructive"
-              icon="edit"
-              appearance="text"
+              size="xLarge"
+              type="danger"
+              hierarchy="tertiary"
               loading
             ></sp-button>
           </td>

@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
 import { html } from "lit";
 import { action } from "@storybook/addon-actions";
+import "yakuhanjp/dist/css/yakuhanjp_s.css";
 
 const meta: Meta = {
   component: "sp-checkbox",

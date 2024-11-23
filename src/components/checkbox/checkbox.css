@@ -2,16 +2,15 @@
   display: inline-block;
 }
 
-.base:has(.input:focus-visible) {
-  outline: 2px solid var(--color-semantic-text-regular);
-  outline-offset: 2px;
+.checkmark:has(.input:focus-visible)::before {
+  box-shadow: 0 0 0 1px #FFF, 0 0 0 3px #191919;
 }
 
 .base:hover .checkmark:has(:not(.input:disabled))::before {
-  background-color: var(--color-semantic-surface-regular-3);
+  border-color: rgb(0 0 0 / 54%);
 }
 
 .base:hover .checkmark:has(:is(.input:checked, .input:indeterminate)):has(:not(.input:disabled))::before{
-  background-color: var(--color-semantic-surface-selected-hover);
-  border-color: var(--color-semantic-border-selected-hover);
+  background-color: #2666BF;
+  border-color: #2666BF;
 }

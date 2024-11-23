@@ -1,14 +1,28 @@
 :host, * {
-  overflow-wrap: break-word;
-  min-width: 0;
+  overflow-wrap: anywhere;
+  line-break: strict;
 }
 
 :host {
-  font-family: var(--font-ja);
+  font-family: var(--font-family-ja);
+  font-weight: var(--font-weight-normal);
+
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+}
+
+:root:lang(ja) {
+  --font-weight-normal: 300;
+  --font-weight-bold: 600;
+}
+
+:root:lang(en) {
+  --font-weight-normal: 300;
+  --font-weight-bold: 600;
 }
 
 :host:lang(zh) {
-  font-family: var(--font-zh);
+  font-family: var(--font-family-zh);
 }
 
 button {

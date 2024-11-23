@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
 import { html } from "lit";
 import { action } from "@storybook/addon-actions";
+import "yakuhanjp/dist/css/yakuhanjp_s.css";
 
 const meta: Meta = {
   component: "sp-checkbox-text",
@@ -18,7 +19,7 @@ const meta: Meta = {
     },
   },
   args: {
-    text: "sp-checkbox-text-text",
+    text: "あいう（えお）じゃ「がげ」があう。sp-checkbox-text-text",
     checked: false,
     indeterminate: false,
     disabled: false,
