@@ -8,7 +8,9 @@ import dropdownActionButtonStyle from "./dropdown-action-button.css?inline" asse
 import "../icon/sp-icon";
 
 const styles = new CSSStyleSheet();
-styles.replaceSync(`${foundationStyle} ${buttonStyle} ${dropdownActionButtonStyle}`);
+styles.replaceSync(
+  `${foundationStyle} ${buttonStyle} ${dropdownActionButtonStyle}`,
+);
 
 export class SpDropdownActionButton extends UbButton {
   constructor() {
@@ -34,11 +36,11 @@ export class SpDropdownActionButton extends UbButton {
     iconElement.size = "small";
     this.buttonElement.insertBefore(iconElement, this.textElement.nextSibling);
   }
-  
+
   setAriaHasPopup(value: string) {
     this.buttonElement.setAttribute("aria-haspopup", value);
   }
-  
+
   setAriaExpanded(value: string) {
     this.buttonElement.setAttribute("aria-expanded", value);
   }

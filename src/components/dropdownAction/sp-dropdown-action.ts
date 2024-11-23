@@ -25,7 +25,7 @@ export class SpDropdownAction extends HTMLElement {
   #buttonElement = document.createElement("sp-dropdown-action-button");
   #menuElement = document.createElement("div");
   #menuSlotElement = document.createElement("slot");
-  
+
   #menuId = createMenuId();
 
   #open: boolean = false;
@@ -42,7 +42,7 @@ export class SpDropdownAction extends HTMLElement {
   }
   set open(value: boolean) {
     this.#open = value;
-    
+
     if (value) {
       this.#buttonElement.setAttribute("selected", "");
     } else {
@@ -60,7 +60,7 @@ export class SpDropdownAction extends HTMLElement {
     this.#buttonElement.disabled = value;
     this.#updateMenuDisplay();
   }
-  
+
   get position() {
     return this.#position;
   }
@@ -92,6 +92,7 @@ export class SpDropdownAction extends HTMLElement {
   }
 
   connectedCallback() {
+    this.#buttonElement.setAttribute("part", "button");
     this.#buttonElement.addEventListener(
       "click",
       this.#handleClickButton.bind(this),
@@ -103,7 +104,10 @@ export class SpDropdownAction extends HTMLElement {
     this.#menuElement.role = "menu";
     this.#menuElement.appendChild(this.#menuSlotElement);
 
-    this.#menuSlotElement.addEventListener("click", this.#handleClickMenu.bind(this));
+    this.#menuSlotElement.addEventListener(
+      "click",
+      this.#handleClickMenu.bind(this),
+    );
     window.addEventListener("click", this.#handleClickOutside.bind(this));
 
     this.#baseElement.appendChild(this.#menuElement);
@@ -116,7 +120,10 @@ export class SpDropdownAction extends HTMLElement {
   }
 
   disconnectedCallback() {
-    this.#menuSlotElement.removeEventListener("click", this.#handleClickMenu.bind(this));
+    this.#menuSlotElement.removeEventListener(
+      "click",
+      this.#handleClickMenu.bind(this),
+    );
     window.removeEventListener("click", this.#handleClickOutside.bind(this));
   }
 
@@ -155,7 +162,7 @@ export class SpDropdownAction extends HTMLElement {
     this.open = false;
     this.#updateAriaExpandedAttribute();
   }
-  
+
   #handleClickOutside(event: MouseEvent) {
     event.stopPropagation();
 
@@ -164,9 +171,10 @@ export class SpDropdownAction extends HTMLElement {
       this.#updateAriaExpandedAttribute();
     }
   }
-  
+
   #updateMenuDisplay() {
-    this.#menuElement.style.display = this.open && !this.disabled ? "block" : "none";
+    this.#menuElement.style.display =
+      this.open && !this.disabled ? "block" : "none";
   }
 
   #setupAccessibilityAttributes() {
@@ -175,11 +183,11 @@ export class SpDropdownAction extends HTMLElement {
     this.#menuElement.setAttribute("id", this.#menuId);
     this.#updateAriaExpandedAttribute();
   }
-  
+
   #updateAriaExpandedAttribute() {
     this.#buttonElement.setAriaExpanded(this.open ? "true" : "false");
   }
-  
+
   #syncMenuMinWidthWithButtonWidth() {
     const buttonWidth = this.#buttonElement.offsetWidth;
     this.#menuElement.style.minWidth = `${buttonWidth}px`;

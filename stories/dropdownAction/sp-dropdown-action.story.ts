@@ -15,8 +15,12 @@ type Story = StoryObj;
 export const Basic: Story = {
   render: () => html`
     <sp-dropdown-action label="ダッシュボード新規作成">
-      <sp-dropdown-action-item @click=${() => alert("企業を作成")}>企業を作成</sp-dropdown-action-item>
-      <sp-dropdown-action-item @click=${() => alert("業界を作成")}>業界を作成</sp-dropdown-action-item>
+      <sp-dropdown-action-item @click=${() => alert("企業を作成")}
+        >企業を作成</sp-dropdown-action-item
+      >
+      <sp-dropdown-action-item @click=${() => alert("業界を作成")}
+        >業界を作成</sp-dropdown-action-item
+      >
     </sp-dropdown-action>
   `,
 };
@@ -24,7 +28,9 @@ export const Basic: Story = {
 export const LongText: Story = {
   render: () => html`
     <sp-dropdown-action label="ダッシュボード新規作成">
-      <sp-dropdown-action-item>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</sp-dropdown-action-item>
+      <sp-dropdown-action-item
+        >AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</sp-dropdown-action-item
+      >
     </sp-dropdown-action>
   `,
 };
@@ -33,7 +39,9 @@ export const RightPosition: Story = {
   render: () => html`
     <div style="display: flex; justify-content: end">
       <sp-dropdown-action label="ダッシュボード新規作成" open position="right">
-        <sp-dropdown-action-item>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</sp-dropdown-action-item>
+        <sp-dropdown-action-item
+          >AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</sp-dropdown-action-item
+        >
       </sp-dropdown-action>
     </div>
   `,
