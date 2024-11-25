@@ -1,6 +1,7 @@
 import { UbIcon } from "@ub-design/components-web-components/";
 export declare class SpIcon extends UbIcon {
     paths: {
+        "": string;
         arrow_down: string;
         arrow_down_link: string;
         arrow_left: string;
@@ -53,6 +54,8 @@ export declare class SpIcon extends UbIcon {
         zip: string;
     };
     constructor();
+    set type(value: string);
+    attributeChangedCallback(name: string, oldValue: string, newValue: string): void;
 }
 declare global {
     interface HTMLElementTagNameMap {

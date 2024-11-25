@@ -1,7 +1,7 @@
 {
   "name": "@sp-design/components-web-components",
   "private": true,
-  "version": "0.2.2",
+  "version": "0.2.4",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -27,7 +27,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@sp-design/token": "git+https://github.com/uzabase/sp-design-token.git#semver:^6.0.1",
+    "@sp-design/token": "git+https://github.com/uzabase/sp-design-token.git#semver:^8.0.0",
     "@ub-design/components-web-components": "git+https://github.com/uzabase/ub-design-components-web-components.git#semver:^0.1.1",
     "@acab/reset.css": "0.10.0"
   },

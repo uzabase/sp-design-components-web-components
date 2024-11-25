@@ -15,7 +15,7 @@
 }
 
 .base:has(.input:focus-visible) {
-  outline: 2px solid var(--color-semantic-text-body-regular);
+  outline: 2px solid var(--color-semantic-text-regular);
   outline-offset: 2px;
 }
 
@@ -33,7 +33,7 @@
 
 .text {
   padding-block-start: 2.5px;
-  color: var(--color-semantic-text-body-regular);
+  color: var(--color-semantic-text-regular);
   font-size: 12px;
   line-height: 1.6;
 }

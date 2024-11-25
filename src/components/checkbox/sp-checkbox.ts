@@ -12,10 +12,13 @@ styles.replaceSync(`${foundationStyle} ${checkmarkStyle} ${checkboxStyle}`);
 export class SpCheckbox extends UbCheckbox {
   constructor() {
     super();
-    this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      styles,
-    ];
+
+    if (this.shadowRoot) {
+      this.shadowRoot.adoptedStyleSheets = [
+        ...this.shadowRoot.adoptedStyleSheets,
+        styles,
+      ];
+    }
   }
 }
 

@@ -5,5 +5,5 @@ export function isElementMatchingSpeedaIcon(
   iconName: keyof typeof speedaIconPaths,
 ) {
   const path = svg.querySelector("path");
-  return `<path d="${path.getAttribute("d")}"/>` === speedaIconPaths[iconName];
+  return `<path d="${path?.getAttribute("d")}"/>` === speedaIconPaths[iconName];
 }

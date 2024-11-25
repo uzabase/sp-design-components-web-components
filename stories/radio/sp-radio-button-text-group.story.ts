@@ -113,7 +113,7 @@ export const OverflowWrap: Story = {
 };
 
 export const ALL: Story = {
-  render: (args) => html`
+  render: () => html`
     <table>
       <thead>
         <tr>
