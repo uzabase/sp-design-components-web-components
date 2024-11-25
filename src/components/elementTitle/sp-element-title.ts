@@ -25,21 +25,21 @@ export class SpElementTitle extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
 
-    this.shadowRoot.adoptedStyleSheets = [styles];
+    this.shadowRoot!.adoptedStyleSheets = [styles];
 
     this.#textLinkSlotElement.name = "text-links";
     this.#buttonSlotElement.name = "buttons";
   }
 
   connectedCallback() {
-    this.shadowRoot.appendChild(this.#createContainer());
+    this.shadowRoot!.appendChild(this.#createContainer());
 
     if (this.#textLinkSlotElement.assignedElements().length === 0) {
-      this.shadowRoot.querySelector(".text-links")?.remove();
+      this.shadowRoot!.querySelector(".text-links")?.remove();
     }
 
     if (this.#buttonSlotElement.assignedElements().length === 0) {
-      this.shadowRoot.querySelector(".buttons")?.remove();
+      this.shadowRoot!.querySelector(".buttons")?.remove();
     }
   }
 
