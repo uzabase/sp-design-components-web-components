@@ -1,4 +1,4 @@
-import { UbButton } from "@ub-design/components-web-components/";
+import { SpButton } from "../button/sp-button";
 // @ts-ignore
 import foundationStyle from "../foundation.css?inline" assert { type: "css" };
 // @ts-ignore
@@ -12,7 +12,7 @@ styles.replaceSync(
   `${foundationStyle} ${buttonStyle} ${dropdownActionButtonStyle}`,
 );
 
-export class SpDropdownActionButton extends UbButton {
+export class SpDropdownActionButton extends SpButton {
   constructor() {
     super();
 
@@ -27,14 +27,7 @@ export class SpDropdownActionButton extends UbButton {
   connectedCallback(): void {
     super.connectedCallback();
 
-    this.#insertIconElement();
-  }
-
-  #insertIconElement() {
-    const iconElement = document.createElement("sp-icon");
-    iconElement.type = "arrow_down";
-    iconElement.size = "small";
-    this.buttonElement.insertBefore(iconElement, this.textElement.nextSibling);
+    this.icon = "arrow_down";
   }
 
   setAriaHasPopup(value: string) {
