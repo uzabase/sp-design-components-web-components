@@ -1,4 +1,6 @@
 // @ts-ignore
+import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
+// @ts-ignore
 import foundationStyle from "../foundation.css?inline" assert { type: "css" };
 // @ts-ignore
 import dropdownActionStyle from "./dropdown-action.css?inline" assert { type: "css" };
@@ -18,7 +20,7 @@ function createMenuId() {
 }
 
 const styles = new CSSStyleSheet();
-styles.replaceSync(`${foundationStyle} ${dropdownActionStyle}`);
+styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownActionStyle}`);
 
 export class SpDropdownAction extends HTMLElement {
   #baseElement = document.createElement("div");
