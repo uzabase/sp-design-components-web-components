@@ -22,7 +22,7 @@ describe("sp-definition-list-dd", () => {
 
       const definitionList = getSpDefinitionListDd();
       expect(definitionList.innerHTML).toBe("Description<br>Description");
-      expect(definitionList.innerText).toBe(`DescriptionDescription`);
+      expect(definitionList.innerText).toBe("Description\nDescription");
     });
 
     test("子要素に何も入れない場合、何も表示されない", async () => {

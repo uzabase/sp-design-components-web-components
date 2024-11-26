@@ -22,7 +22,7 @@ describe("sp-definition-list-dt", () => {
 
       const definitionList = getSpDefinitionListDt();
       expect(definitionList.innerHTML).toBe("Term<br>Term");
-      expect(definitionList.innerText).toBe(`TermTerm`);
+      expect(definitionList.innerText).toBe("Term\nTerm");
     });
 
     test("子要素に何も入れない場合、何も表示されない", async () => {
