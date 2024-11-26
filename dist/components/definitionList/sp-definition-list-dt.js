@@ -19,13 +19,15 @@ export class SpDefinitionListDt extends HTMLElement {
         this.attachShadow({ mode: "open" });
     }
     connectedCallback() {
-        this.shadowRoot.adoptedStyleSheets = [
-            ...this.shadowRoot.adoptedStyleSheets,
-            styles,
-        ];
-        __classPrivateFieldGet(this, _SpDefinitionListDt_dtElement, "f").classList.add("base");
-        __classPrivateFieldGet(this, _SpDefinitionListDt_dtElement, "f").innerHTML = this.innerHTML;
-        this.shadowRoot.appendChild(__classPrivateFieldGet(this, _SpDefinitionListDt_dtElement, "f"));
+        if (this.shadowRoot) {
+            this.shadowRoot.adoptedStyleSheets = [
+                ...this.shadowRoot.adoptedStyleSheets,
+                styles,
+            ];
+            __classPrivateFieldGet(this, _SpDefinitionListDt_dtElement, "f").classList.add("base");
+            __classPrivateFieldGet(this, _SpDefinitionListDt_dtElement, "f").innerHTML = this.innerHTML;
+            this.shadowRoot.appendChild(__classPrivateFieldGet(this, _SpDefinitionListDt_dtElement, "f"));
+        }
     }
 }
 _SpDefinitionListDt_dtElement = new WeakMap();

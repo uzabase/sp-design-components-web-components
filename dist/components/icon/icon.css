@@ -1,0 +1,22 @@
+:host {
+  flex-grow: 0;
+  flex-shrink: 0;
+  display: inline-block;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.icon {
+  display: inline-block;
+  fill: var(--icon-color, var(--color-primitive-neutral-100));
+}
+
+.size__small {
+  width: 16px;
+  height: 16px;
+}
+
+.size__medium {
+  width: 24px;
+  height: 24px;
+}
