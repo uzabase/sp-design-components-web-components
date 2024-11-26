@@ -13,3 +13,13 @@
   border-radius: 5px;
   box-shadow: 0 3px 12px 0 var(--color-semantic-elevation-regular);
 }
+
+.menu.position__left {
+  left: 0;
+  right: auto;
+}
+
+.menu.position__right {
+  left: auto;
+  right: 0;
+}

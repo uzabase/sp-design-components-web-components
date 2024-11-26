@@ -68,11 +68,11 @@ export class SpDropdownAction extends HTMLElement {
   }
   set position(value: Position) {
     if (value === "left") {
-      this.#menuElement.style.right = "auto";
-      this.#menuElement.style.left = "0";
+      this.#menuElement.classList.add("position__left");
+      this.#menuElement.classList.remove("position__right");
     } else {
-      this.#menuElement.style.right = "0";
-      this.#menuElement.style.left = "auto";
+      this.#menuElement.classList.add("position__right");
+      this.#menuElement.classList.remove("position__left");
     }
 
     this.#position = value;
