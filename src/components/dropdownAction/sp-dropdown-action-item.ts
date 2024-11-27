@@ -7,9 +7,6 @@ const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${dropdownActionItemStyle}`);
 
 export class SpDropdownActionItem extends HTMLElement {
-  #baseElement = document.createElement("div");
-  #buttonElement = document.createElement("button");
-
   constructor() {
     super();
 
@@ -18,15 +15,17 @@ export class SpDropdownActionItem extends HTMLElement {
   }
 
   connectedCallback() {
-    this.#baseElement.classList.add("base");
-    this.#baseElement.role = "menuitem";
+    const baseElement = document.createElement("div");
+    const buttonElement = document.createElement("button");
+    const slotElement = document.createElement("slot");
+    
+    this.role = "menuitem";
+    baseElement.classList.add("base");
+    buttonElement.classList.add("action");
 
-    const slot = document.createElement("slot");
-    this.#buttonElement.appendChild(slot);
-    this.#buttonElement.classList.add("action");
-
-    this.#baseElement.appendChild(this.#buttonElement);
-    this.shadowRoot?.appendChild(this.#baseElement);
+    buttonElement.appendChild(slotElement);
+    baseElement.appendChild(buttonElement);
+    this.shadowRoot?.appendChild(baseElement);
   }
 }
 

@@ -27,6 +27,7 @@ export class SpDropdownAction extends HTMLElement {
   #buttonElement = document.createElement("sp-dropdown-action-button");
   #menuElement = document.createElement("div");
   #menuSlotElement = document.createElement("slot");
+  #menuItemElements: HTMLElement[] = [];
 
   #menuId = createMenuId();
 
@@ -107,9 +108,10 @@ export class SpDropdownAction extends HTMLElement {
     this.#menuElement.appendChild(this.#menuSlotElement);
 
     this.#menuSlotElement.addEventListener(
-      "click",
-      this.#handleClickMenu.bind(this),
+      "slotchange",
+      this.#handleSlotChange.bind(this),
     );
+
     window.addEventListener("click", this.#handleClickOutside.bind(this));
 
     this.#baseElement.appendChild(this.#menuElement);
@@ -122,10 +124,18 @@ export class SpDropdownAction extends HTMLElement {
   }
 
   disconnectedCallback() {
+    this.#menuItemElements.forEach((element) => {
+      element.removeEventListener(
+        "click",
+        this.#handleClickMenuItem.bind(this),
+      );
+    });
+
     this.#menuSlotElement.removeEventListener(
-      "click",
-      this.#handleClickMenu.bind(this),
+      "slotchange",
+      this.#handleSlotChange.bind(this),
     );
+
     window.removeEventListener("click", this.#handleClickOutside.bind(this));
   }
 
@@ -158,7 +168,17 @@ export class SpDropdownAction extends HTMLElement {
     this.#updateAriaExpandedAttribute();
   }
 
-  #handleClickMenu(event: MouseEvent) {
+  #handleSlotChange() {
+    this.#menuItemElements = this.#menuSlotElement
+      .assignedElements()
+      .filter((element) => element instanceof HTMLElement);
+
+    this.#menuItemElements.forEach((element) => {
+      element.addEventListener("click", this.#handleClickMenuItem.bind(this));
+    });
+  }
+
+  #handleClickMenuItem(event: MouseEvent) {
     event.stopPropagation();
 
     this.open = false;
