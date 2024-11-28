@@ -21,6 +21,7 @@ export class SpDropdown extends HTMLElement {
 
   #selectType: SelectType = "single";
   #expanded = false;
+  #value: string = "DefaultDefaultDefaultDefault";
 
   get selectType() {
     return this.#selectType;
@@ -46,6 +47,7 @@ export class SpDropdown extends HTMLElement {
   connectedCallback() {
     this.#selectElement.role = "combobox";
     this.#selectElement.setAttribute("aria-controls", LISTBOX_ARIA_CONTROLS);
+    this.#selectElement.value = this.#value;
 
     this.#listboxElement.id = LISTBOX_ARIA_CONTROLS;
     this.#listboxElement.classList.add("listbox");
@@ -86,7 +88,7 @@ export class SpDropdown extends HTMLElement {
 
   #toggleListbox() {
     this.#expanded = !this.#expanded;
-    this.#listboxElement.hidden = !this.#expanded
+    this.#listboxElement.hidden = !this.#expanded;
   }
 
   #hideContents() {
