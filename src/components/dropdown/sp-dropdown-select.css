@@ -1,5 +1,36 @@
 .base {
-  /* display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 16px 8px; */
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  color: var(--color-semantic-text-regular);
+}
+
+.input {
+  border-radius: var(--border-radius-1, 2px);
+  border: 1px solid var(--color-semantic-border-regular);
+  background: var(--color-semantic-surface-regular-1);
+  height: 28px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 160%;
+  padding-inline: 8px 34px;
+  text-overflow: ellipsis;
+}
+
+/* TODO: focus-lingが表示されるので、消すか相談する */
+.input:focus {
+  border: 1px solid var(--color-semantic-border-focus);
+  box-shadow: 0 0 0 3px #e2e5f5;
+}
+
+.input:disabled {
+  border: 1px solid var(--color-semantic-border-regular);
+  background: var(--color-semantic-surface-regular-4);
+}
+
+.icon-wrapper {
+  padding: 5px;
+  display: flex;
+  inset-inline-end: 0;
+  position: absolute;
 }
