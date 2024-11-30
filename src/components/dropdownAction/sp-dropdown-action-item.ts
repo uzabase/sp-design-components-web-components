@@ -18,7 +18,7 @@ export class SpDropdownActionItem extends HTMLElement {
     const baseElement = document.createElement("div");
     const buttonElement = document.createElement("button");
     const slotElement = document.createElement("slot");
-    
+
     this.role = "menuitem";
     baseElement.classList.add("base");
     buttonElement.classList.add("action");
