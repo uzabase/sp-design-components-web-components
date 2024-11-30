@@ -7,8 +7,8 @@ function getSpDefinitionList() {
 }
 
 describe("sp-definition-list", () => {
-  describe("小要素", () => {
-    test("小要素にsp-definition-list-dtとsp-definition-list-ddを複数入れることができる", async () => {
+  describe("子要素", () => {
+    test("子要素にsp-definition-list-dtとsp-definition-list-ddを複数入れることができる", async () => {
       document.body.innerHTML = `
         <sp-definition-list>
           <sp-definition-list-dt>Term1</sp-definition-list-dt>
@@ -30,7 +30,7 @@ describe("sp-definition-list", () => {
       expect(ddElements.length).toBe(2);
     });
 
-    test("小要素に何も入れない場合、何も表示されない", async () => {
+    test("子要素に何も入れない場合、何も表示されない", async () => {
       document.body.innerHTML = "<sp-definition-list></sp-definition-list>";
 
       const definitionList = getSpDefinitionList();
