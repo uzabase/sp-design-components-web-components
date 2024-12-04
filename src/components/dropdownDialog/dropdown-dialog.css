@@ -1,0 +1,27 @@
+.base {
+  position: relative;
+}
+
+.dialog {
+  position: absolute;
+  z-index: 1;
+  min-width: 560px;
+  margin-block-start: 8px;
+  padding: 24px;
+  background: var(--color-semantic-surface-regular-1);
+  border: 1px solid var(--color-semantic-border-semi-weak);
+  border-radius: 5px;
+  box-shadow: 0 3px 12px 0 var(--color-semantic-elevation-regular);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.dialog.position__left {
+  left: 0;
+  right: auto;
+}
+
+.dialog.position__right {
+  left: auto;
+  right: 0;
+}
