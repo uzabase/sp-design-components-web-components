@@ -14,13 +14,17 @@ type Story = StoryObj;
 
 export const Basic: Story = {
   render: () => html`
-    <sp-dropdown-dialog label="検索式を表示"> 検索式の内容 </sp-dropdown-dialog>
+    <sp-dropdown-dialog label="ダイアログを表示">
+      <h1>ダイアログのタイトル</h1>
+      ダイアログの内容
+    </sp-dropdown-dialog>
   `,
 };
 
 export const LongText: Story = {
   render: () => html`
     <sp-dropdown-dialog label="検索式を表示">
+      <h1>検索式</h1>
       <div>S001 FI：G08G1/16?</div>
       <div>S002 FI：B60W30?+B60W40?+B60W50?</div>
       <div>S003 FI：B60?+G01C21/?+G08G1/?+G05D1/?</div>
@@ -48,8 +52,9 @@ export const LongText: Story = {
 export const RightPosition: Story = {
   render: () => html`
     <div style="display: flex; justify-content: end">
-      <sp-dropdown-dialog label="検索式を表示" open position="right">
-        検索式の内容
+      <sp-dropdown-dialog label="ダイアログを表示" open position="right">
+        <h1>ダイアログのタイトル</h1>
+        ダイアログの内容
       </sp-dropdown-dialog>
     </div>
   `,
@@ -57,6 +62,6 @@ export const RightPosition: Story = {
 
 export const Disabled: Story = {
   render: () => html`
-    <sp-dropdown-dialog label="検索式を表示" disabled> </sp-dropdown-dialog>
+    <sp-dropdown-dialog label="ダイアログを表示" disabled></sp-dropdown-dialog>
   `,
 };
