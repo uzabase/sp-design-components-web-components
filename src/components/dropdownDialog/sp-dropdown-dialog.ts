@@ -4,6 +4,7 @@ import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
 import foundationStyle from "../foundation.css?inline" assert { type: "css" };
 // @ts-ignore
 import dropdownDialogStyle from "./dropdown-dialog.css?inline" assert { type: "css" };
+import "../button/sp-button";
 
 type Position = "left" | "right";
 
