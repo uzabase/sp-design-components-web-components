@@ -1,4 +1,5 @@
 import "../../src/components/dropdown/sp-dropdown";
+import "../../src/components/dropdown/sp-dropdown-option";
 
 import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
@@ -8,7 +9,7 @@ const meta: Meta = {
   args: {},
   render: (args) => html`
     <sp-dropdown select-type=${args.selectType}>
-      <sp-dropdown-option> iii </sp-dropdown-option>
+      <sp-dropdown-option text="Text"></sp-dropdown-option>
     </sp-dropdown>
   `,
 };
