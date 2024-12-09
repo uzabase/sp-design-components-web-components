@@ -1,0 +1,25 @@
+.base {
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-block-start: 8px;
+  padding-block: 8px;
+  background: var(--color-semantic-surface-regular-1);
+  border: 1px solid var(--color-semantic-border-regular);
+  border-radius: 5px;
+  box-shadow: 0 3px 12px 0 var(--color-semantic-elevation-regular);
+}
+
+.menu.position__left {
+  left: 0;
+  right: auto;
+}
+
+.menu.position__right {
+  left: auto;
+  right: 0;
+}

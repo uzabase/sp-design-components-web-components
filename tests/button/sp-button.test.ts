@@ -16,7 +16,7 @@ function queryIcon() {
   return queryByShadowRole(document.body, "img");
 }
 
-describe("ub-button", () => {
+describe("sp-button", () => {
   describe("icon属性", () => {
     test("icon属性を設定すると、そのアイコンが表示される", async () => {
       document.body.innerHTML = "<sp-button icon='edit'></sp-button>";

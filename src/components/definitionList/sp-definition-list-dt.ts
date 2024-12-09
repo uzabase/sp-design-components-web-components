@@ -19,13 +19,15 @@ export class SpDefinitionListDt extends HTMLElement {
   }
 
   connectedCallback() {
-    this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      styles,
-    ];
-    this.#dtElement.classList.add("base");
-    this.#dtElement.innerHTML = this.innerHTML;
-    this.shadowRoot.appendChild(this.#dtElement);
+    if (this.shadowRoot) {
+      this.shadowRoot.adoptedStyleSheets = [
+        ...this.shadowRoot.adoptedStyleSheets,
+        styles,
+      ];
+      this.#dtElement.classList.add("base");
+      this.#dtElement.innerHTML = this.innerHTML;
+      this.shadowRoot.appendChild(this.#dtElement);
+    }
   }
 }
 
