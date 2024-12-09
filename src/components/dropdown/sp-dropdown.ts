@@ -37,6 +37,10 @@ export class SpDropdown extends HTMLElement {
     this.#expanded = value;
   }
 
+  static get observedAttributes() {
+    return ["select-type"];
+  }
+
   constructor() {
     super();
 
@@ -53,7 +57,7 @@ export class SpDropdown extends HTMLElement {
     this.#listboxElement.classList.add("listbox");
     this.#listboxElement.role = "listbox";
     this.#listboxElement.appendChild(this.#slotElement);
-
+    
     this.#baseElement.classList.add("base");
     this.#baseElement.appendChild(this.#selectElement);
     this.#baseElement.appendChild(this.#listboxElement);
