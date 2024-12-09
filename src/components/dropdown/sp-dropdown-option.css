@@ -1,5 +1,23 @@
+:host {
+  width: 100%;
+}
+
 .base {
-  /* display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 16px 8px; */
+  display: flex;
+  padding: 3.5px 8px;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.base:hover {
+  background: var(--color-semantic-surface-regular-3);
+}
+
+.icon-area {
+  width: var(--icon-icon-small, 16px);
+}
+
+.text {
+  font-size: 12px;
+  line-height: 1.6;
 }

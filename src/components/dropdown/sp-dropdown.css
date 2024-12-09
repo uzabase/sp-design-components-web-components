@@ -1,5 +1,17 @@
 .base {
-  /* display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 16px 8px; */
+  position: relative;
+}
+
+.listbox {
+  position: absolute;
+  top: calc(var(--spacing-vertical-spacing-vertical-2, 8px) + 28px);
+  display: flex;
+  width: 100%;
+  padding: var(--spacing-vertical-spacing-vertical-2, 8px) 0;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: var(--border-radius-2, 5px);
+  border: 1px solid var(--color-semantic-border-regular);
+  background: var(--color-semantic-surface-regular-1);
+  box-shadow: 0 3px 12px 0 var(--color-semantic-elevation-regular);
 }

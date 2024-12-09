@@ -27,6 +27,10 @@ class SpDropdownSelect extends HTMLElement {
     this.#inputElement.value = val;
   }
 
+  static get observedAttributes() {
+    return ["value"];
+  }
+
   constructor() {
     super();
 
