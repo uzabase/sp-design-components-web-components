@@ -6,7 +6,9 @@ import "@sp-design/token/lib/speeda-tokens.css";
 import { html } from "lit";
 
 const meta: Meta = {
-  args: {},
+  args: {
+    selectType: "single",
+  },
   render: (args) => html`
     <sp-dropdown select-type=${args.selectType}>
       <sp-dropdown-option text="Text"></sp-dropdown-option>
