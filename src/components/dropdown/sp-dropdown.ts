@@ -22,7 +22,7 @@ export class SpDropdown extends HTMLElement {
 
   #selectType: SelectType = "single";
   #expanded = false;
-  #value: string = "DefaultDefaultDefaultDefault";
+  #value: string = "Default";
 
   get selectType() {
     return this.#selectType;
@@ -37,6 +37,16 @@ export class SpDropdown extends HTMLElement {
   }
   set expanded(value: boolean) {
     this.#expanded = value;
+  }
+
+  get value() {
+    return this.#value;
+  }
+
+  set value(val: string) {
+    this.#value = val;
+    this.#selectElement.value = val;
+    this.updateOptions();
   }
 
   static get observedAttributes() {
@@ -59,7 +69,7 @@ export class SpDropdown extends HTMLElement {
     this.#listboxElement.classList.add("listbox");
     this.#listboxElement.role = "listbox";
     this.#listboxElement.appendChild(this.#slotElement);
-    
+
     this.#baseElement.classList.add("base");
     this.#baseElement.appendChild(this.#selectElement);
     this.#baseElement.appendChild(this.#listboxElement);
@@ -106,12 +116,24 @@ export class SpDropdown extends HTMLElement {
     this.#listboxElement.hidden = true;
   }
 
+  handleClickOption(value: string) {
+    this.value = value;
+    this.#hideContents();
+  }
+
   updateOptions() {
     const options = this.#slotElement.assignedElements();
-    options.forEach(option => {
-      if (option instanceof SpDropdownOption) {
-        option.setAttribute("select-type", this.#selectType);
+    options.forEach((option) => {
+      if (!(option instanceof SpDropdownOption)) return;
+
+      option.setAttribute("select-type", this.#selectType);
+      if (option.text === this.#value) {
+        option.setAttribute("selected", "");
+      } else {
+        console.log("remove selected attr");
+        option.removeAttribute("selected");
       }
+      option.onClick = this.handleClickOption.bind(this);
     });
   }
 }

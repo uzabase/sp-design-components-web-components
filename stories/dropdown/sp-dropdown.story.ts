@@ -11,7 +11,10 @@ const meta: Meta = {
   },
   render: (args) => html`
     <sp-dropdown select-type=${args.selectType}>
-      <sp-dropdown-option text="Text"></sp-dropdown-option>
+      <sp-dropdown-option text="Text1"></sp-dropdown-option>
+      <sp-dropdown-option text="Text2"></sp-dropdown-option>
+      <sp-dropdown-option text="Text3"></sp-dropdown-option>
+      <sp-dropdown-option text="Text4"></sp-dropdown-option>
     </sp-dropdown>
   `,
 };
