@@ -17,6 +17,8 @@ export class SpDropdownOption extends HTMLElement {
 
   #text: string = "Text";
   #selectType: string = "single";
+  #selected: boolean = false;
+  #onClick: ((val: string) => void) | null = null;
 
   get text() {
     return this.#text;
@@ -35,8 +37,32 @@ export class SpDropdownOption extends HTMLElement {
     this.#selectType = value;
   }
 
+  get selected() {
+    return this.#selected;
+  }
+
+  set selected(value: boolean) {
+    console.log("🚀 ~ SpDropdownOption ~ setselected ~ value:", value);
+    this.#selected = value;
+    if (value) {
+      this.#baseElement.setAttribute("aria-selected", "true");
+      this.#iconElement.hidden = false;
+    } else {
+      this.#baseElement.removeAttribute("aria-selected");
+      this.#iconElement.hidden = true;
+    }
+  }
+
+  get onClick() {
+    return this.#onClick;
+  }
+
+  set onClick(callback: ((val: string) => void) | null) {
+    this.#onClick = callback;
+  }
+
   static get observedAttributes() {
-    return ["text", "select-type"];
+    return ["text", "select-type", "selected", "on-click"];
   }
 
   constructor() {
@@ -50,6 +76,7 @@ export class SpDropdownOption extends HTMLElement {
     this.#iconElement.size = "small";
     this.#iconElement.type = "check";
     this.#iconElement.text = "check";
+    this.#iconElement.hidden = true;
 
     this.#iconAreaElement.classList.add("icon-area");
     this.#iconAreaElement.appendChild(this.#iconElement);
@@ -62,6 +89,10 @@ export class SpDropdownOption extends HTMLElement {
     this.#baseElement.appendChild(this.#textElement);
 
     this.shadowRoot?.appendChild(this.#baseElement);
+
+    this.#baseElement.addEventListener("click", () => {
+      this.#onClick?.(this.#text);
+    });
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -72,6 +103,9 @@ export class SpDropdownOption extends HTMLElement {
         break;
       case "select-type":
         this.selectType = newValue === "multiple" ? "multiple" : "single";
+        break;
+      case "selected":
+        this.selected = newValue !== null;
         break;
     }
   }
