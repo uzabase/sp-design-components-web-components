@@ -5,6 +5,7 @@ import foundationStyle from "../foundation.css?inline" assert { type: "css" };
 // @ts-ignore
 import dropdownActionStyle from "./sp-dropdown.css?inline" assert { type: "css" };
 import "./sp-dropdown-select";
+import { SpDropdownOption } from "./sp-dropdown-option";
 
 type SelectType = "single" | "multiple";
 
@@ -28,6 +29,7 @@ export class SpDropdown extends HTMLElement {
   }
   set selectType(value: SelectType) {
     this.#selectType = value;
+    this.updateOptions();
   }
 
   get expanded() {
@@ -72,6 +74,10 @@ export class SpDropdown extends HTMLElement {
       "click",
       this.#hideContents.bind(this),
     );
+
+    this.#slotElement.addEventListener("slotchange", () => {
+      this.updateOptions();
+    });
   }
 
   disconnectedCallback() {
@@ -98,6 +104,15 @@ export class SpDropdown extends HTMLElement {
   #hideContents() {
     this.#expanded = false;
     this.#listboxElement.hidden = true;
+  }
+
+  updateOptions() {
+    const options = this.#slotElement.assignedElements();
+    options.forEach(option => {
+      if (option instanceof SpDropdownOption) {
+        option.setAttribute("select-type", this.#selectType);
+      }
+    });
   }
 }
 

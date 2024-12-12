@@ -16,20 +16,27 @@ export class SpDropdownOption extends HTMLElement {
   #textElement = document.createElement("span");
 
   #text: string = "Text";
+  #selectType: string = "single";
 
   get text() {
     return this.#text;
   }
 
   set text(val: string) {
-    console.log("🚀 ~ SpDropdownOption ~ settext ~ val:", val);
     this.#text = val;
     this.#textElement.textContent = val;
-    console.log({ val });
+  }
+
+  get selectType() {
+    return this.#selectType;
+  }
+
+  set selectType(value: string) {
+    this.#selectType = value;
   }
 
   static get observedAttributes() {
-    return ["text"];
+    return ["text", "select-type"];
   }
 
   constructor() {
@@ -62,6 +69,9 @@ export class SpDropdownOption extends HTMLElement {
     switch (name) {
       case "text":
         this.text = newValue;
+        break;
+      case "select-type":
+        this.selectType = newValue === "multiple" ? "multiple" : "single";
         break;
     }
   }
