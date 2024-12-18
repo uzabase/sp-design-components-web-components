@@ -1,0 +1,15 @@
+.base {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #eee;
+  padding-block: 8px;
+  padding-inline: 16px;
+}
+
+.content {
+  font-size: 12px;
+  line-height: 1.6;
+}
