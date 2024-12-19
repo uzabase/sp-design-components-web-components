@@ -2,14 +2,34 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid;
   border-radius: 5px;
-  background: #eee;
   padding-block: 8px;
   padding-inline: 16px;
+}
+
+.base.variant__error {
+  border-color: var(--color-semantic-border-error);
+  background-color: var(--color-semantic-surface-error-1);
+}
+
+.base.variant__info {
+  border-color: var(--color-semantic-border-information);
+  background-color: var(--color-semantic-surface-information-1);
+}
+
+.base.variant__success {
+  border-color: var(--color-semantic-border-success);
+  background-color: var(--color-semantic-surface-success-1);
+}
+
+.base.variant__warning {
+  border-color: var(--color-semantic-border-warning);
+  background-color: var(--color-semantic-surface-warning-1);
 }
 
 .content {
   font-size: 12px;
   line-height: 1.6;
+  color: var(--color-semantic-text-regular);
 }

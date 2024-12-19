@@ -13,6 +13,19 @@ type Story = StoryObj;
 
 export const Basic: Story = {
   render: () => html`
-    <sp-notification-message>Hello World</sp-notification-message>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <sp-notification-message variant="error"
+        >Hello World</sp-notification-message
+      >
+      <sp-notification-message variant="info"
+        >Hello World</sp-notification-message
+      >
+      <sp-notification-message variant="success"
+        >Hello World</sp-notification-message
+      >
+      <sp-notification-message variant="warning"
+        >Hello World</sp-notification-message
+      >
+    </div>
   `,
 };
