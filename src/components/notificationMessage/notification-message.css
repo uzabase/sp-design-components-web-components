@@ -9,7 +9,7 @@
 
 .icon {
   display: inline-block;
-  fill: var(--icon-color, var(--color-primitive-neutral-100));
+  flex-shrink: 0;
   width: 24px;
   height: 24px;
 }
