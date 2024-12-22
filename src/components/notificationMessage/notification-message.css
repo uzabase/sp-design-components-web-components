@@ -8,6 +8,13 @@
   padding-inline: 16px;
 }
 
+.icon {
+  display: inline-block;
+  fill: var(--icon-color, var(--color-primitive-neutral-100));
+  width: 24px;
+  height: 24px;
+}
+
 .base.variant__error {
   border-color: var(--color-semantic-border-error);
   background-color: var(--color-semantic-surface-error-1);
