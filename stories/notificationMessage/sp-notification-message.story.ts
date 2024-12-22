@@ -29,3 +29,14 @@ export const Basic: Story = {
     </div>
   `,
 };
+
+export const MultipleLines: Story = {
+  render: () => html`
+    <sp-notification-message variant="error">
+      <p style="margin: 0">表示可能な検索結果は1,000件です</p>
+      <p style="margin: 0">
+        キーワードを変更するか誤字脱字がないか確認してください
+      </p>
+    </sp-notification-message>
+  `,
+};

@@ -1,6 +1,5 @@
 .base {
   display: flex;
-  align-items: center;
   gap: 8px;
   border: 1px solid;
   border-radius: 5px;
@@ -38,5 +37,6 @@
 .content {
   font-size: 12px;
   line-height: 1.6;
+  padding-block: 2.5px;
   color: var(--color-semantic-text-regular);
 }
