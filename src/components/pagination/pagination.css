@@ -26,5 +26,6 @@
 
 .page.selected {
   color: var(--color-semantic-text-current);
+  background-color: var(--color-semantic-surface-regular-3);
   font-weight: bold;
 }
