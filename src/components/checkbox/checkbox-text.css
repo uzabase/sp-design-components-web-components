@@ -13,7 +13,7 @@
 }
 
 .checkmark:has(.input:focus-visible)::before {
-  box-shadow: 0 0 0 1px #FFF, 0 0 0 3px #191919;
+  box-shadow: 0 0 0 2px #FFF, 0 0 0 4px #191919;
 }
 
 .base:has(.input:disabled) {

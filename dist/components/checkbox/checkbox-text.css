@@ -7,35 +7,42 @@
   display: inline-flex;
   align-items: flex-start;
   justify-content: flex-start;
+  column-gap: 2px;
   max-width: 100%;
   cursor: pointer;
 }
 
-.base:has(.input:focus-visible) {
-  outline: 2px solid var(--color-semantic-text-regular);
-  outline-offset: 2px;
+.checkmark:has(.input:focus-visible)::before {
+  box-shadow: 0 0 0 1px #FFF, 0 0 0 3px #191919;
 }
 
 .base:has(.input:disabled) {
   cursor: not-allowed;
 }
 
+.text-wrap {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding-block-start: 1.5px;
+}
+
 .text {
-  padding-block-start: 2.5px;
-  color: var(--color-semantic-text-regular);
-  font-size: 12px;
-  line-height: 1.6;
+  color: rgb(0 0 0 / 84%);
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
 }
 
 .base:has(.input:disabled) .text {
-  color: var(--color-semantic-text-disabled);
+  color: rgb(0 0 0 / 35%);
 }
 
 .base:hover .checkmark:has(:not(.input:disabled))::before {
-  background-color: var(--color-semantic-surface-regular-3);
+  border-color: rgb(0 0 0 / 54%);
 }
 
 .base:hover .checkmark:has(:is(.input:checked, .input:indeterminate)):has(:not(.input:disabled))::before{
-  background-color: var(--color-semantic-surface-selected-hover);
-  border-color: var(--color-semantic-border-selected-hover);
+  background-color: #2666BF;
+  border-color: #2666BF;
 }

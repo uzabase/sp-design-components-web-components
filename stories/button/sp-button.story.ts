@@ -129,7 +129,7 @@ export const ALL: Story = {
           <th colspan="3">danger</th>
         </tr>
         <tr>
-          <th>state</th>
+          <th>hierarchy</th>
           <th>primary</th>
           <th>secondary</th>
           <th>tertiary</th>

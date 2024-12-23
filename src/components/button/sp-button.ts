@@ -17,7 +17,7 @@ export class SpButton extends UbButton {
         styles,
       ];
     }
-    console.log("sp constructor done")
+    console.log("sp constructor done");
   }
 }
 

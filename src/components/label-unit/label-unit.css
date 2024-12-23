@@ -1,0 +1,60 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+}
+
+.legend {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 8px;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+
+    &.required {
+        &::after {
+            content: "required";
+            display: block;
+            padding-block: 2px;
+            padding-inline: 6px;
+            background: #FFEDEB;
+            border-radius: 6px;
+            color: #C92812;
+            font-size: 11px;
+            font-weight: var(--font-weight-normal);
+            line-height: 1.5;
+            letter-spacing: 0.02em;
+        }
+
+        &:lang(ja)::after {
+            content: "必須";
+        }
+    }
+
+    &.medium {
+        font-size: 21px;
+    }
+
+    &.large {
+        font-size: 24px;
+    }
+}
+
+.support {
+    color: rgb(0 0 0 / 54%);
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+
+    &.medium {
+        font-size: 18px;
+    }
+
+    &.large {
+        font-size: 21px;
+    }
+
+    &:empty {
+        display: none;
+    }
+}

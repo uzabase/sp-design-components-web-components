@@ -1,28 +1,36 @@
-:host, * {
-  overflow-wrap: anywhere;
-  line-break: strict;
-}
-
 :host {
-  font-family: var(--font-family-ja);
-  font-weight: var(--font-weight-normal);
-
   --font-weight-normal: 400;
   --font-weight-bold: 700;
+
+  &, * {
+    font-family: var(--font-family-ja);
+    font-weight: var(--font-weight-normal);
+    overflow-wrap: anywhere;
+    line-break: strict;
+  }
+
+  :lang(ja) {
+    --font-weight-normal: 300;
+    --font-weight-bold: 600;
+  }
+
+  :lang(en) {
+    --font-weight-normal: 300;
+    --font-weight-bold: 600;
+  }
+
+  :lang(zh) {
+    font-family: var(--font-family-zh);
+  }
+
 }
 
-:root:lang(ja) {
-  --font-weight-normal: 300;
-  --font-weight-bold: 600;
+:where(:focus-visible) {
+  outline: inherit;
 }
 
-:root:lang(en) {
-  --font-weight-normal: 300;
-  --font-weight-bold: 600;
-}
-
-:host:lang(zh) {
-  font-family: var(--font-family-zh);
+fieldset {
+  border: none;
 }
 
 button {

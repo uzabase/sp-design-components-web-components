@@ -1,0 +1,40 @@
+.base {
+    display: inline-flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.field {
+    display: inline-flex;
+    flex-direction: column;
+    row-gap: 4px;
+}
+
+.input {
+    min-width: 256px;
+    padding-block: 4px;
+    padding-inline: 8px;
+    background: #fff;
+    border: 1px solid rgb(0 0 0 / 29%);
+    border-radius: 6px;
+    color: #282828;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+
+    &:focus-visible {
+        box-shadow: 0 0 0 2px #FFF, 0 0 0 4px #191919;
+    }
+
+    .medium & {
+        font-size: 21px;
+    }
+
+    .large & {
+        font-size: 24px;
+    }
+}
