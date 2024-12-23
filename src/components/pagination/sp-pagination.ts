@@ -93,6 +93,7 @@ export class SpPagination extends HTMLElement {
 
       if (pageNumber === this.current) {
         button.classList.add("selected");
+        button.setAttribute("aria-current", "page");
       }
 
       li.appendChild(button);
