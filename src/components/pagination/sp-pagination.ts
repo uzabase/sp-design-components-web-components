@@ -84,6 +84,14 @@ export class SpPagination extends HTMLElement {
   #updatePageGroup() {
     this.#pageGroupElement.innerHTML = "";
 
+    const previousButton = document.createElement("button");
+    const previousList = document.createElement("li");
+    previousButton.textContent = "前へ";
+    previousButton.classList.add("previous");
+    previousButton.addEventListener("click", () => this.#handlePreviousClick());
+    previousList.appendChild(previousButton);
+    this.#pageGroupElement.appendChild(previousList);
+
     const firstVisiblePageNumber = Math.min(
       Math.max(1, this.current - 4),
       this.total - 9,
@@ -115,6 +123,14 @@ export class SpPagination extends HTMLElement {
 
       this.#pageGroupElement.appendChild(li);
     }
+
+    const nextButton = document.createElement("button");
+    const nextList = document.createElement("li");
+    nextButton.textContent = "次へ";
+    nextButton.classList.add("next");
+    nextButton.addEventListener("click", () => this.#handleNextClick());
+    nextList.appendChild(nextButton);
+    this.#pageGroupElement.appendChild(nextList);
   }
 
   #handlePageClick(pageNumber: number) {
@@ -125,6 +141,36 @@ export class SpPagination extends HTMLElement {
       this.dispatchEvent(
         new CustomEvent("page-change", {
           detail: { page: pageNumber },
+        }),
+      );
+
+      this.#updatePageGroup();
+    }
+  }
+
+  #handlePreviousClick() {
+    if (this.current > 1) {
+      this.current--;
+      this.setAttribute("current", String(this.current));
+
+      this.dispatchEvent(
+        new CustomEvent("page-change", {
+          detail: { page: this.current },
+        }),
+      );
+
+      this.#updatePageGroup();
+    }
+  }
+
+  #handleNextClick() {
+    if (this.current < this.total) {
+      this.current++;
+      this.setAttribute("current", String(this.current));
+
+      this.dispatchEvent(
+        new CustomEvent("page-change", {
+          detail: { page: this.current },
         }),
       );
 

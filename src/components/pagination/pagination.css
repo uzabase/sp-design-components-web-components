@@ -1,31 +1,45 @@
 .page-group {
   display: inline-flex;
-  gap: 6px;
 }
 
-.page {
+.page,
+.previous,
+.next {
   display: grid;
   place-content: center;
   border-radius: 2px;
-  width: 20px;
   height: 20px;
-
   color: var(--color-semantic-text-regular);
   font-size: 12px;
   line-height: 1.6;
 }
 
-.page:hover {
+.page:hover,
+.previous:hover,
+.next:hover {
   background-color: var(--color-semantic-surface-regular-3);
 }
 
-.page:focus {
+.page:focus,
+.previous:focus,
+.next:focus {
   background-color: var(--color-semantic-surface-regular-3);
   outline: none;
 }
 
-.page.selected {
+.page.selected,
+.previous.selected,
+.next.selected {
   color: var(--color-semantic-text-current);
   background-color: var(--color-semantic-surface-regular-3);
   font-weight: bold;
+}
+
+.page {
+  padding-inline: 6px;
+}
+
+.previous,
+.next {
+  padding-inline: 8px;
 }
