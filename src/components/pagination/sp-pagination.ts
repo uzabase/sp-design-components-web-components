@@ -96,9 +96,26 @@ export class SpPagination extends HTMLElement {
         button.setAttribute("aria-current", "page");
       }
 
+      button.addEventListener("click", () => this.#handlePageClick(pageNumber));
+
       li.appendChild(button);
 
       this.#pageGroupElement.appendChild(li);
+    }
+  }
+
+  #handlePageClick(pageNumber: number) {
+    if (pageNumber !== this.current) {
+      this.current = pageNumber;
+      this.setAttribute("current", String(pageNumber));
+
+      this.dispatchEvent(
+        new CustomEvent("page-change", {
+          detail: { page: pageNumber },
+        }),
+      );
+
+      this.#updatePageGroup();
     }
   }
 }
