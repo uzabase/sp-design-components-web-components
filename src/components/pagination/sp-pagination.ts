@@ -84,7 +84,20 @@ export class SpPagination extends HTMLElement {
   #updatePageGroup() {
     this.#pageGroupElement.innerHTML = "";
 
-    for (let pageNumber = 1; pageNumber <= this.total; pageNumber++) {
+    const firstVisiblePageNumber = Math.min(
+      Math.max(1, this.current - 4),
+      this.total - 9,
+    );
+    const lastVisiblePageNumber = Math.max(
+      Math.min(this.total, this.current + 5),
+      10,
+    );
+
+    for (
+      let pageNumber = firstVisiblePageNumber;
+      pageNumber <= lastVisiblePageNumber;
+      pageNumber++
+    ) {
       const button = document.createElement("button");
       const li = document.createElement("li");
 

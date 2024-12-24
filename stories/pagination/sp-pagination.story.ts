@@ -19,3 +19,7 @@ type Story = StoryObj;
 export const Basic: Story = {
   render: () => html`<sp-pagination total="10" current="1"></sp-pagination>`,
 };
+
+export const ManyPages: Story = {
+  render: () => html`<sp-pagination total="20" current="10"></sp-pagination>`,
+};
