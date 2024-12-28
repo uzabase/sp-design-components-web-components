@@ -69,6 +69,7 @@ export class SpNotificationMessage extends HTMLElement {
 
     this.#iconElement.setAttribute("role", "img");
     this.#iconElement.setAttribute("viewBox", "0 0 24 24");
+    this.#iconElement.setAttribute("aria-hidden", "true");
     this.#iconElement.classList.add("icon");
     this.#iconElement.innerHTML = iconPaths[this.type];
 
