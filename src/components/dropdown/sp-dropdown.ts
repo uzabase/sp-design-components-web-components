@@ -8,6 +8,25 @@ import "./sp-dropdown-select";
 import { SpDropdownOption } from "./sp-dropdown-option";
 
 type SelectType = "single" | "multiple";
+type Width = "liquid" | "80" | "120" | "160" | "240" | "320" | "400" | "480";
+
+const selectTypes: SelectType[] = ["single", "multiple"];
+const widths: Width[] = [
+  "liquid",
+  "80",
+  "120",
+  "160",
+  "240",
+  "320",
+];
+
+function isValidType(value: string): value is SelectType {
+  return selectTypes.some((type) => type === value);
+}
+
+function isValidWidth(value: string): value is Width {
+  return widths.some((width) => width === value);
+}
 
 const LISTBOX_ARIA_CONTROLS = "sp-dropdown-listbox";
 
@@ -15,12 +34,17 @@ const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownActionStyle}`);
 
 export class SpDropdown extends HTMLElement {
+  // elements
   #baseElement = document.createElement("div");
   #selectElement = document.createElement("sp-dropdown-select");
   #listboxElement = document.createElement("div");
   #slotElement = document.createElement("slot");
 
+  // attributes
   #selectType: SelectType = "single";
+  #width: Width = "liquid";
+
+  // states
   #expanded = false;
   #value: string = "Default";
 
@@ -30,6 +54,18 @@ export class SpDropdown extends HTMLElement {
   set selectType(value: SelectType) {
     this.#selectType = value;
     this.updateOptions();
+  }
+
+  get width() {
+    return this.#width;
+  }
+
+  set width(value: Width) {
+    this.#width = value;
+    this.#selectElement.style.minWidth = value === "liquid" ? "80px" : `${value}px`;
+    this.#selectElement.style.maxWidth = value === "liquid" ? "320px" : `${value}px`;
+    this.#listboxElement.style.minWidth = value === "liquid" ? "80px" : `${value}px`;
+    this.#listboxElement.style.maxWidth = value === "liquid" ? "320px" : `${value}px`;
   }
 
   get expanded() {
@@ -50,7 +86,7 @@ export class SpDropdown extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["select-type"];
+    return ["select-type", "width"];
   }
 
   constructor() {
@@ -61,7 +97,6 @@ export class SpDropdown extends HTMLElement {
   }
 
   connectedCallback() {
-    this.#selectElement.role = "combobox";
     this.#selectElement.setAttribute("aria-controls", LISTBOX_ARIA_CONTROLS);
     this.#selectElement.value = this.#value;
 
@@ -101,7 +136,10 @@ export class SpDropdown extends HTMLElement {
     if (oldValue === newValue) return;
     switch (name) {
       case "select-type":
-        this.selectType = newValue === "multiple" ? "multiple" : "single";
+        this.selectType = isValidType(newValue) ? newValue : "single";
+        break;
+      case "width":
+        this.width = isValidWidth(newValue) ? newValue : "liquid";
         break;
     }
   }
