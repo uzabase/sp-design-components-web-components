@@ -3,7 +3,7 @@ import { screen } from "shadow-dom-testing-library";
 import {
   iconPaths,
   SpNotificationMessage,
-  Variant,
+  Type,
 } from "../../src/components/notificationMessage/sp-notification-message";
 import "../../src/components/notificationMessage/sp-notification-message";
 
@@ -22,19 +22,19 @@ function queryContentByText(text: string) {
 }
 
 describe("sp-notification-message", () => {
-  describe("variant属性", () => {
-    test.each<[Variant]>([["error"], ["warning"], ["info"], ["success"]])(
-      "variant属性に%sを設定すると、その値に対応するアイコンが表示される",
-      async (variant) => {
-        document.body.innerHTML = `<sp-notification-message variant='${variant}'></sp-notification-message>`;
+  describe("type属性", () => {
+    test.each<[Type]>([["error"], ["warning"], ["info"], ["success"]])(
+      "type属性に%sを設定すると、その値に対応するアイコンが表示される",
+      async (type) => {
+        document.body.innerHTML = `<sp-notification-message type='${type}'></sp-notification-message>`;
 
         const icon = getIcon();
 
-        expect(icon.innerHTML).toBe(iconPaths[variant]);
+        expect(icon.innerHTML).toBe(iconPaths[type]);
       },
     );
 
-    test("variant属性を設定しない場合、デフォルトのインフォメーションアイコンが表示される", async () => {
+    test("type属性を設定しない場合、デフォルトのインフォメーションアイコンが表示される", async () => {
       document.body.innerHTML = `<sp-notification-message></sp-notification-message>`;
 
       const icon = getIcon();
@@ -42,19 +42,19 @@ describe("sp-notification-message", () => {
       expect(icon.innerHTML).toBe(iconPaths["info"]);
     });
 
-    test("variant属性を更新すると、新しいアイコンが設定される", async () => {
-      document.body.innerHTML = `<sp-notification-message variant='info'></sp-notification-message>`;
+    test("type属性を更新すると、新しいアイコンが設定される", async () => {
+      document.body.innerHTML = `<sp-notification-message type='info'></sp-notification-message>`;
 
       const spNotificationMessage = getSpNotificationMessage();
       const icon = getIcon();
 
-      spNotificationMessage.setAttribute("variant", "error");
+      spNotificationMessage.setAttribute("type", "error");
 
       expect(icon.innerHTML).toBe(iconPaths["error"]);
     });
 
-    test("無効なvariant属性を設定すると、デフォルトのインフォメーションアイコンが表示される", async () => {
-      document.body.innerHTML = `<sp-notification-message variant='invalid'></sp-notification-message>`;
+    test("無効なtype属性を設定すると、デフォルトのインフォメーションアイコンが表示される", async () => {
+      document.body.innerHTML = `<sp-notification-message type='invalid'></sp-notification-message>`;
 
       const icon = getIcon();
 
