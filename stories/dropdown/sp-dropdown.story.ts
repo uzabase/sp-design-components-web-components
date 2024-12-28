@@ -8,10 +8,11 @@ import { html } from "lit";
 const meta: Meta = {
   args: {
     selectType: "single",
+    width: "480"
   },
   render: (args) => html`
-    <sp-dropdown select-type=${args.selectType}>
-      <sp-dropdown-option text="Text1"></sp-dropdown-option>
+    <sp-dropdown select-type=${args.selectType} width=${args.width}>
+      <sp-dropdown-option text="Text1Text1Text1Text1"></sp-dropdown-option>
       <sp-dropdown-option text="Text2"></sp-dropdown-option>
       <sp-dropdown-option text="Text3"></sp-dropdown-option>
       <sp-dropdown-option text="Text4"></sp-dropdown-option>
