@@ -17,7 +17,9 @@ export const Basic: Story = {
       <sp-notification-message type="error"
         >Hello World</sp-notification-message
       >
-      <sp-notification-message type="info">Hello World</sp-notification-message>
+      <sp-notification-message type="information"
+        >Hello World</sp-notification-message
+      >
       <sp-notification-message type="success"
         >Hello World</sp-notification-message
       >

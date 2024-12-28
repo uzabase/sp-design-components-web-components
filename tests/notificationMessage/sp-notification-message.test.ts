@@ -23,7 +23,7 @@ function queryContentByText(text: string) {
 
 describe("sp-notification-message", () => {
   describe("type属性", () => {
-    test.each<[Type]>([["error"], ["warning"], ["info"], ["success"]])(
+    test.each<[Type]>([["error"], ["warning"], ["information"], ["success"]])(
       "type属性に%sを設定すると、その値に対応するアイコンが表示される",
       async (type) => {
         document.body.innerHTML = `<sp-notification-message type='${type}'></sp-notification-message>`;
@@ -39,11 +39,11 @@ describe("sp-notification-message", () => {
 
       const icon = getIcon();
 
-      expect(icon.innerHTML).toBe(iconPaths["info"]);
+      expect(icon.innerHTML).toBe(iconPaths["information"]);
     });
 
     test("type属性を更新すると、新しいアイコンが設定される", async () => {
-      document.body.innerHTML = `<sp-notification-message type='info'></sp-notification-message>`;
+      document.body.innerHTML = `<sp-notification-message type='information'></sp-notification-message>`;
 
       const spNotificationMessage = getSpNotificationMessage();
       const icon = getIcon();
@@ -58,7 +58,7 @@ describe("sp-notification-message", () => {
 
       const icon = getIcon();
 
-      expect(icon.innerHTML).toBe(iconPaths["info"]);
+      expect(icon.innerHTML).toBe(iconPaths["information"]);
     });
   });
 
