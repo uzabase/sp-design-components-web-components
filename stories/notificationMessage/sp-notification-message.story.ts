@@ -14,25 +14,37 @@ type Story = StoryObj;
 export const Basic: Story = {
   render: () => html`
     <div style="display: flex; flex-direction: column; gap: 16px;">
-      <sp-notification-message variant="error"
+      <sp-notification-message type="error"
         >Hello World</sp-notification-message
       >
-      <sp-notification-message variant="info"
+      <sp-notification-message type="info">Hello World</sp-notification-message>
+      <sp-notification-message type="success"
         >Hello World</sp-notification-message
       >
-      <sp-notification-message variant="success"
-        >Hello World</sp-notification-message
-      >
-      <sp-notification-message variant="warning"
+      <sp-notification-message type="warning"
         >Hello World</sp-notification-message
       >
     </div>
   `,
 };
 
-export const MultipleLines: Story = {
+export const LongText: Story = {
   render: () => html`
-    <sp-notification-message variant="error">
+    <sp-notification-message>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+      est laborum.
+    </sp-notification-message>
+  `,
+};
+
+export const MultipleParagraphs: Story = {
+  render: () => html`
+    <sp-notification-message type="error">
       <p style="margin: 0">表示可能な検索結果は1,000件です</p>
       <p style="margin: 0">
         キーワードを変更するか誤字脱字がないか確認してください

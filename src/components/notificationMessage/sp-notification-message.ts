@@ -5,22 +5,22 @@ import foundationStyle from "../foundation.css?inline" assert { type: "css" };
 // @ts-ignore
 import notificationMessageStyle from "./notification-message.css?inline" assert { type: "css" };
 
-export type Variant = "error" | "warning" | "info" | "success";
+export type Type = "error" | "warning" | "info" | "success";
 
-const variants: Variant[] = ["error", "warning", "info", "success"];
+const types: Type[] = ["error", "warning", "info", "success"];
 
-function isValidVariant(value: string): value is Variant {
-  return variants.some((variant) => variant === value);
+function isValidType(value: string): value is Type {
+  return types.some((type) => type === value);
 }
 
-const variantClasses: Record<Variant, string> = {
-  error: "variant__error",
-  warning: "variant__warning",
-  info: "variant__info",
-  success: "variant__success",
+const typeClasses: Record<Type, string> = {
+  error: "type__error",
+  warning: "type__warning",
+  info: "type__info",
+  success: "type__success",
 };
 
-export const iconPaths: Record<Variant, string> = {
+export const iconPaths: Record<Type, string> = {
   error:
     '<path fill-rule="evenodd" clip-rule="evenodd" d="M2.58 18.8574L11.3416 3.99902H12.6459L21.4075 18.8574L20.7554 19.999H3.23212L2.58 18.8574ZM11.2 9.5V14.5H12.8V9.5H11.2ZM11.2 16V17.5H12.8V16H11.2Z" fill="#CA3232"></path>',
   info: '<path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM11.2 7.71997V9.49997H12.8V7.71997H11.2ZM10.5 16.2V16.72H13.5V16.2L12.8 16V11H10.5V11.8L11.2 12V16L10.5 16.2Z" fill="#3978BF"></path>',
@@ -36,23 +36,23 @@ styles.replaceSync(
 );
 
 export class SpNotificationMessage extends HTMLElement {
-  #variant: Variant = "info";
+  #type: Type = "info";
 
   #baseElement = document.createElement("div");
   #iconElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
-  get variant() {
-    return this.#variant;
+  get type() {
+    return this.#type;
   }
-  set variant(value: Variant) {
-    this.#baseElement.classList.remove(variantClasses[this.#variant]);
-    this.#baseElement.classList.add(variantClasses[value]);
+  set type(value: Type) {
+    this.#baseElement.classList.remove(typeClasses[this.#type]);
+    this.#baseElement.classList.add(typeClasses[value]);
     this.#iconElement.innerHTML = iconPaths[value];
-    this.#variant = value;
+    this.#type = value;
   }
 
   static get observedAttributes() {
-    return ["variant"];
+    return ["type"];
   }
 
   constructor() {
@@ -61,7 +61,7 @@ export class SpNotificationMessage extends HTMLElement {
     const shadowRoot = this.attachShadow({ mode: "open" });
     shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
 
-    this.variant = "info";
+    this.type = "info";
   }
 
   connectedCallback() {
@@ -70,7 +70,7 @@ export class SpNotificationMessage extends HTMLElement {
     this.#iconElement.setAttribute("role", "img");
     this.#iconElement.setAttribute("viewBox", "0 0 24 24");
     this.#iconElement.classList.add("icon");
-    this.#iconElement.innerHTML = iconPaths[this.variant];
+    this.#iconElement.innerHTML = iconPaths[this.type];
 
     const content = document.createElement("div");
     content.classList.add("content");
@@ -87,12 +87,12 @@ export class SpNotificationMessage extends HTMLElement {
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (oldValue === newValue) return;
     switch (name) {
-      case "variant":
-        if (isValidVariant(newValue)) {
-          this.variant = newValue;
+      case "type":
+        if (isValidType(newValue)) {
+          this.type = newValue;
         } else {
-          console.warn(`${newValue}は無効なvariant属性です。`);
-          this.variant = "info";
+          console.warn(`${newValue}は無効なtype属性です。`);
+          this.type = "info";
         }
     }
   }
