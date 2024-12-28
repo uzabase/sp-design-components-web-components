@@ -14,7 +14,7 @@ function getSpNotificationMessage() {
 }
 
 function getIcon() {
-  return screen.getByShadowRole("img");
+  return screen.getByShadowRole("img", { hidden: true });
 }
 
 function queryContentByText(text: string) {
