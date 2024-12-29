@@ -11,6 +11,7 @@
   background: var(--color-semantic-surface-regular-1);
   min-width: 80px;
   max-width: 320px;
+  width: 160px;
   height: 28px;
   font-size: 12px;
   font-weight: 400;
