@@ -20,7 +20,8 @@ class SpDropdownSelect extends HTMLElement {
   #iconElement = document.createElement("sp-icon");
 
   // TODO: set defaultValue prop
-  #value: string = "default";
+  #value: string = "";
+  #width: "liquid" | number = "liquid";
 
   get value() {
     return this.#value;
@@ -32,8 +33,18 @@ class SpDropdownSelect extends HTMLElement {
     this.#adjustInputWidth();
   }
 
+  get width() {
+    return this.#width;
+  }
+
+  set width(val: "liquid" | number) {
+    console.log("🚀 ~ SpDropdownSelect ~ setwidth ~ val:", val)
+    this.#width = val;
+    this.#inputElement.style.width = val === "liquid" ? "auto" : `${val}px`;
+  }
+
   static get observedAttributes() {
-    return ["value"];
+    return ["value", "width"];
   }
 
   constructor() {
@@ -67,6 +78,8 @@ class SpDropdownSelect extends HTMLElement {
     this.#baseElement.appendChild(this.#iconWrapperElement);
 
     this.shadowRoot?.appendChild(this.#baseElement);
+
+    this.#adjustInputWidth();
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -75,14 +88,17 @@ class SpDropdownSelect extends HTMLElement {
       case "value":
         this.value = newValue;
         break;
+      case "width":
+        this.width = isNaN(Number(newValue)) ? "liquid" : Number(newValue);
     }
   }
 
   #adjustInputWidth() {
+    if (this.width !== "liquid") return;
     this.#dummyTextBoxElement.textContent = this.#inputElement.value || "";
     // 左右のborderの分（2px）余裕を持たないとellipsisになってしまう
-    this.#inputElement.style.width = this.#dummyTextBoxElement.clientWidth + 2 + 'px';
-    console.log("🚀 ~ SpDropdownSelect ~ #adjustInputWidth ~ this.#dummyTextBoxElement.clientWidth:", this.#dummyTextBoxElement.clientWidth)
+    this.#inputElement.style.width =
+      this.#dummyTextBoxElement.clientWidth + 2 + "px";
   }
 }
 
@@ -94,3 +110,5 @@ declare global {
 
 customElements.get("sp-dropdown-select") ||
   customElements.define("sp-dropdown-select", SpDropdownSelect);
+
+export type { SpDropdownSelect };

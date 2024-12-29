@@ -8,24 +8,20 @@ import "./sp-dropdown-select";
 import { SpDropdownOption } from "./sp-dropdown-option";
 
 type SelectType = "single" | "multiple";
-type Width = "liquid" | "80" | "120" | "160" | "240" | "320" | "400" | "480";
-
 const selectTypes: SelectType[] = ["single", "multiple"];
-const widths: Width[] = [
-  "liquid",
-  "80",
-  "120",
-  "160",
-  "240",
-  "320",
-];
 
-function isValidType(value: string): value is SelectType {
+type Width = "liquid" | number;
+const MIN_WIDTH = 80;
+const MAX_WIDTH = 320;
+
+export function isValidSelectType(value: string): value is SelectType {
   return selectTypes.some((type) => type === value);
 }
 
-function isValidWidth(value: string): value is Width {
-  return widths.some((width) => width === value);
+function toValidWidth(value: number) {
+  if (value < MIN_WIDTH) return MIN_WIDTH;
+  if (value > MAX_WIDTH) return MAX_WIDTH;
+  return value;
 }
 
 const LISTBOX_ARIA_CONTROLS = "sp-dropdown-listbox";
@@ -62,10 +58,11 @@ export class SpDropdown extends HTMLElement {
 
   set width(value: Width) {
     this.#width = value;
-    this.#selectElement.style.minWidth = value === "liquid" ? "80px" : `${value}px`;
-    this.#selectElement.style.maxWidth = value === "liquid" ? "320px" : `${value}px`;
-    this.#listboxElement.style.minWidth = value === "liquid" ? "80px" : `${value}px`;
-    this.#listboxElement.style.maxWidth = value === "liquid" ? "320px" : `${value}px`;
+    this.#selectElement.style.width =
+      value === "liquid" ? "auto" : `${value}px`;
+    this.#listboxElement.style.width =
+      value === "liquid" ? "auto" : `${value}px`;
+    this.#selectElement.setAttribute("width", String(value));
   }
 
   get expanded() {
@@ -136,10 +133,10 @@ export class SpDropdown extends HTMLElement {
     if (oldValue === newValue) return;
     switch (name) {
       case "select-type":
-        this.selectType = isValidType(newValue) ? newValue : "single";
+        this.selectType = isValidSelectType(newValue) ? newValue : "single";
         break;
       case "width":
-        this.width = isValidWidth(newValue) ? newValue : "liquid";
+        this.width = isNaN(Number(newValue)) ? "liquid" : toValidWidth(Number(newValue));
         break;
     }
   }
@@ -168,7 +165,6 @@ export class SpDropdown extends HTMLElement {
       if (option.text === this.#value) {
         option.setAttribute("selected", "");
       } else {
-        console.log("remove selected attr");
         option.removeAttribute("selected");
       }
       option.onClick = this.handleClickOption.bind(this);
