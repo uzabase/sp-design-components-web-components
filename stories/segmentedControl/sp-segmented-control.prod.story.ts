@@ -1,7 +1,6 @@
 import "../../src/components/segmentedControl/sp-segmented-control";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
-import { html } from "lit";
 import { action } from "@storybook/addon-actions";
 
 const data = [
@@ -37,6 +36,7 @@ const data = [
 ];
 
 const meta: Meta = {
+  title: "SegmentedControl/sp-segmented-control",
   component: "sp-segmented-control",
   argTypes: {
     name: { type: "string" },
@@ -55,79 +55,4 @@ export default meta;
 
 type Story = StoryObj;
 
-export const ALL: Story = {
-  render: () => html`
-    <table>
-      <thead>
-        <tr>
-          <td></td>
-          <th>default</th>
-          <th>checked</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>default</td>
-          <td>
-            <sp-segmented-control
-              json-data=${JSON.stringify([{ text: "text" }])}
-            ></sp-segmented-control>
-          </td>
-          <td>
-            <sp-segmented-control
-              json-data=${JSON.stringify([{ text: "text", checked: true }])}
-            ></sp-segmented-control>
-          </td>
-        </tr>
-        <tr>
-          <td>disabled</td>
-          <td>
-            <sp-segmented-control
-              json-data=${JSON.stringify([{ text: "text", disabled: true }])}
-            ></sp-segmented-control>
-          </td>
-          <td style="background: #ccc">
-            <sp-segmented-control
-              json-data=${JSON.stringify([
-                { text: "text", checked: true, disabled: true },
-              ])}
-            ></sp-segmented-control>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  `,
-};
-export const Sandbox: Story = {
-  args: {
-    direction: undefined,
-  },
-  decorators: [
-    (story) => html`
-      <fieldset aria-labelledby="legend1" style="min-inline-size: auto;">
-        <legend id="legend1">らじおぐるーぷ</legend>
-        ${story()}
-      </fieldset>
-      <fieldset>
-        <legend>aaa</legend>
-        よこにもじ
-        <sp-segmented-control
-          json-data=${JSON.stringify([
-            { text: "text", checked: false },
-            { text: "text", checked: true },
-            { text: "text", checked: false },
-          ])}
-        ></sp-segmented-control>
-      </fieldset>
-      <p>親がflex</p>
-      <div style="display: flex;">${story()}</div>
-      <sp-segmented-control
-        json-data=${JSON.stringify([
-          { text: "text", checked: false },
-          { text: "text", checked: true },
-          { text: "text", checked: false },
-        ])}
-      ></sp-segmented-control>
-    `,
-  ],
-};
+export const Basic: Story = {};

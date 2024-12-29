@@ -5,6 +5,7 @@ import { speedaIconTypes } from "../../src/components/icon/icons";
 import { html } from "lit";
 
 const meta: Meta = {
+  title: "Icon/sp-icon",
   component: "sp-icon",
   argTypes: {
     text: { type: "string" },
@@ -26,13 +27,6 @@ const meta: Meta = {
 export default meta;
 
 type Story = StoryObj;
-
-export const Basic: Story = {
-  args: {
-    text: undefined,
-    size: undefined,
-  },
-};
 
 export const Property: Story = {};
 

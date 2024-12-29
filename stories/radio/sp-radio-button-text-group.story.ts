@@ -37,6 +37,7 @@ const data = [
 ];
 
 const meta: Meta = {
+  title: "Radio/sp-radio-button-text-group",
   component: "sp-radio-button-text-group",
   argTypes: {
     name: { type: "string" },
@@ -59,13 +60,6 @@ const meta: Meta = {
 export default meta;
 
 type Story = StoryObj;
-
-export const Basic: Story = {
-  args: {
-    name: undefined,
-    direction: undefined,
-  },
-};
 
 export const Attribute: Story = {
   args: {

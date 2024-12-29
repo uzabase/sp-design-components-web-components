@@ -5,6 +5,7 @@ import { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
 const meta: Meta = {
+  title: "ElementTitle/sp-element-title",
   component: "sp-element-title",
   argTypes: {
     text: { type: "string" },
@@ -16,8 +17,6 @@ const meta: Meta = {
 export default meta;
 
 type Story = StoryObj;
-
-export const Basic: Story = {};
 
 export const WithTextLinks: Story = {
   render: (args) => html`

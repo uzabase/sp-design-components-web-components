@@ -24,16 +24,4 @@ export default meta;
 
 type Story = StoryObj;
 
-export const OverflowWrap: Story = {
-  args: {
-    termText: "LongTermLongTermLongTermLongTerm",
-    definitionText:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  },
-};
-
-export const Break: Story = {
-  args: {
-    definitionText: html`break <br />break`,
-  },
-};
+export const Basic: Story = {};

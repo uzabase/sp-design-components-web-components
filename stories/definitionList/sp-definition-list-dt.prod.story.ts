@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
 
 const meta: Meta = {
+  title: "DefinitionList/sp-definition-list-dt",
   component: "sp-definition-list-dt",
   args: {
     text: "Label",

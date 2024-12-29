@@ -5,6 +5,7 @@ import { html } from "lit";
 import { action } from "@storybook/addon-actions";
 
 const meta: Meta = {
+  title: "Checkbox/sp-checkbox-text",
   component: "sp-checkbox-text",
   argTypes: {
     text: { type: "string" },
@@ -28,14 +29,6 @@ const meta: Meta = {
 export default meta;
 
 type Story = StoryObj;
-
-export const Basic: Story = {
-  args: {
-    checked: undefined,
-    indeterminate: undefined,
-    disabled: undefined,
-  },
-};
 
 export const Property: Story = {
   args: {

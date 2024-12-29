@@ -6,6 +6,7 @@ import { action } from "@storybook/addon-actions";
 import { html } from "lit";
 
 const meta: Meta = {
+  title: "Button/sp-button",
   component: "sp-button",
   argTypes: {
     text: { type: "string" },
@@ -47,18 +48,6 @@ const meta: Meta = {
 export default meta;
 
 type Story = StoryObj;
-
-export const Basic: Story = {
-  args: {
-    icon: undefined,
-    type: undefined,
-    appearance: undefined,
-    size: undefined,
-    loading: undefined,
-    selected: undefined,
-    disabled: undefined,
-  },
-};
 
 export const Property: Story = {};
 
