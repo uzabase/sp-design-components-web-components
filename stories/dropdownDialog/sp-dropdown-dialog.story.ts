@@ -19,6 +19,7 @@ export const Basic: Story = {
       ダイアログの内容
     </sp-dropdown-dialog>
   `,
+  tags: ["!dev-only"],
 };
 
 export const LongText: Story = {

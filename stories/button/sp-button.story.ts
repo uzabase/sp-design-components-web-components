@@ -58,6 +58,7 @@ export const Basic: Story = {
     selected: undefined,
     disabled: undefined,
   },
+  tags: ["!dev-only"],
 };
 
 export const Property: Story = {};

@@ -32,6 +32,7 @@ export const Basic: Story = {
     text: undefined,
     size: undefined,
   },
+  tags: ["!dev-only"],
 };
 
 export const Property: Story = {};

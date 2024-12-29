@@ -65,6 +65,7 @@ export const Basic: Story = {
     name: undefined,
     direction: undefined,
   },
+  tags: ["!dev-only"],
 };
 
 export const Attribute: Story = {

@@ -33,6 +33,7 @@ export const Basic: Story = {
     indeterminate: undefined,
     disabled: undefined,
   },
+  tags: ["!dev-only"],
 };
 
 export const Property: Story = {

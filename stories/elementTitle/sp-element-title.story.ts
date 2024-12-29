@@ -17,7 +17,9 @@ export default meta;
 
 type Story = StoryObj;
 
-export const Basic: Story = {};
+export const Basic: Story = {
+  tags: ["!dev-only"],
+};
 
 export const WithTextLinks: Story = {
   render: (args) => html`

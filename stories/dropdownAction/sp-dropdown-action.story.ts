@@ -23,6 +23,7 @@ export const Basic: Story = {
       >
     </sp-dropdown-action>
   `,
+  tags: ["!dev-only"],
 };
 
 export const LongText: Story = {
