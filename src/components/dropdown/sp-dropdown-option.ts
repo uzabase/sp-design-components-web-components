@@ -5,6 +5,7 @@ import foundationStyle from "../foundation.css?inline" assert { type: "css" };
 // @ts-ignore
 import dropdownOptionStyle from "./sp-dropdown-option.css?inline" assert { type: "css" };
 import "../icon/sp-icon";
+import { isValidSelectType } from "./sp-dropdown";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownOptionStyle}`);
@@ -15,7 +16,8 @@ export class SpDropdownOption extends HTMLElement {
   #iconElement = document.createElement("sp-icon");
   #textElement = document.createElement("span");
 
-  #text: string = "Text";
+  #text: string = "";
+  #value: string = "";
   #selectType: string = "single";
   #selected: boolean = false;
   #onClick: ((val: string) => void) | null = null;
@@ -27,6 +29,14 @@ export class SpDropdownOption extends HTMLElement {
   set text(val: string) {
     this.#text = val;
     this.#textElement.textContent = val;
+  }
+
+  get value() {
+    return this.#value;
+  }
+
+  set value(val: string) {
+    this.#value = val;
   }
 
   get selectType() {
@@ -42,7 +52,6 @@ export class SpDropdownOption extends HTMLElement {
   }
 
   set selected(value: boolean) {
-    console.log("🚀 ~ SpDropdownOption ~ setselected ~ value:", value);
     this.#selected = value;
     if (value) {
       this.#baseElement.setAttribute("aria-selected", "true");
@@ -62,7 +71,7 @@ export class SpDropdownOption extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["text", "select-type", "selected", "on-click"];
+    return ["text", "value", "select-type", "selected", "on-click"];
   }
 
   constructor() {
@@ -91,7 +100,7 @@ export class SpDropdownOption extends HTMLElement {
     this.shadowRoot?.appendChild(this.#baseElement);
 
     this.#baseElement.addEventListener("click", () => {
-      this.#onClick?.(this.#text);
+      this.#onClick?.(this.text);
     });
   }
 
@@ -101,8 +110,11 @@ export class SpDropdownOption extends HTMLElement {
       case "text":
         this.text = newValue;
         break;
+      case "value":
+        this.value = newValue;
+        break;
       case "select-type":
-        this.selectType = newValue === "multiple" ? "multiple" : "single";
+        this.selectType = isValidSelectType(newValue) ? newValue : "single";
         break;
       case "selected":
         this.selected = newValue !== null;
