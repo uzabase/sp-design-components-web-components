@@ -5,7 +5,7 @@ import foundationStyle from "../foundation.css?inline" assert { type: "css" };
 // @ts-ignore
 import dropdownActionStyle from "./sp-dropdown.css?inline" assert { type: "css" };
 import "./sp-dropdown-select";
-import { SpDropdownOption } from "./sp-dropdown-option";
+import { ClickEventDetail, SpDropdownOption } from "./sp-dropdown-option";
 
 type SelectType = "single" | "multiple";
 const selectTypes: SelectType[] = ["single", "multiple"];
@@ -49,7 +49,7 @@ export class SpDropdown extends HTMLElement {
   }
   set selectType(value: SelectType) {
     this.#selectType = value;
-    this.updateOptions();
+    this.#updateOptions();
   }
 
   get width() {
@@ -58,9 +58,7 @@ export class SpDropdown extends HTMLElement {
 
   set width(value: Width) {
     this.#width = value;
-    this.#selectElement.style.width =
-      value === "liquid" ? "auto" : `${value}px`;
-    this.#listboxElement.style.width =
+    this.#listboxElement.style.minWidth =
       value === "liquid" ? "auto" : `${value}px`;
     this.#selectElement.setAttribute("width", String(value));
   }
@@ -79,7 +77,7 @@ export class SpDropdown extends HTMLElement {
   set value(val: string) {
     this.#value = val;
     this.#selectElement.value = val;
-    this.updateOptions();
+    this.#updateOptions();
   }
 
   static get observedAttributes() {
@@ -118,7 +116,11 @@ export class SpDropdown extends HTMLElement {
     );
 
     this.#slotElement.addEventListener("slotchange", () => {
-      this.updateOptions();
+      this.#updateOptions();
+    });
+
+    this.addEventListener("sp-dropdown-option-click", (e) => {
+      if (e instanceof CustomEvent) this.#handleClickOption(e);
     });
   }
 
@@ -136,7 +138,9 @@ export class SpDropdown extends HTMLElement {
         this.selectType = isValidSelectType(newValue) ? newValue : "single";
         break;
       case "width":
-        this.width = isNaN(Number(newValue)) ? "liquid" : toValidWidth(Number(newValue));
+        this.width = isNaN(Number(newValue))
+          ? "liquid"
+          : toValidWidth(Number(newValue));
         break;
     }
   }
@@ -151,12 +155,13 @@ export class SpDropdown extends HTMLElement {
     this.#listboxElement.hidden = true;
   }
 
-  handleClickOption(value: string) {
+  #handleClickOption(event: CustomEvent<ClickEventDetail>) {
+    const { value } = event.detail;
     this.value = value;
     this.#hideContents();
   }
 
-  updateOptions() {
+  #updateOptions() {
     const options = this.#slotElement.assignedElements();
     options.forEach((option) => {
       if (!(option instanceof SpDropdownOption)) return;
@@ -167,7 +172,6 @@ export class SpDropdown extends HTMLElement {
       } else {
         option.removeAttribute("selected");
       }
-      option.onClick = this.handleClickOption.bind(this);
     });
   }
 }
