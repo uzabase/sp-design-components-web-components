@@ -10,6 +10,8 @@ import { isValidSelectType } from "./sp-dropdown";
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownOptionStyle}`);
 
+export type ClickEventDetail = { value: string };
+
 export class SpDropdownOption extends HTMLElement {
   #baseElement = document.createElement("div");
   #iconAreaElement = document.createElement("div");
@@ -20,7 +22,6 @@ export class SpDropdownOption extends HTMLElement {
   #value: string = "";
   #selectType: string = "single";
   #selected: boolean = false;
-  #onClick: ((val: string) => void) | null = null;
 
   get text() {
     return this.#text;
@@ -62,14 +63,6 @@ export class SpDropdownOption extends HTMLElement {
     }
   }
 
-  get onClick() {
-    return this.#onClick;
-  }
-
-  set onClick(callback: ((val: string) => void) | null) {
-    this.#onClick = callback;
-  }
-
   static get observedAttributes() {
     return ["text", "value", "select-type", "selected", "on-click"];
   }
@@ -100,7 +93,13 @@ export class SpDropdownOption extends HTMLElement {
     this.shadowRoot?.appendChild(this.#baseElement);
 
     this.#baseElement.addEventListener("click", () => {
-      this.#onClick?.(this.text);
+      this.dispatchEvent(
+        new CustomEvent<ClickEventDetail>("sp-dropdown-option-click", {
+          bubbles: true,
+          composed: true,
+          detail: { value: this.#value },
+        }),
+      );
     });
   }
 
