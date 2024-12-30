@@ -38,7 +38,6 @@ class SpDropdownSelect extends HTMLElement {
   }
 
   set width(val: "liquid" | number) {
-    console.log("🚀 ~ SpDropdownSelect ~ setwidth ~ val:", val)
     this.#width = val;
     this.#inputElement.style.width = val === "liquid" ? "auto" : `${val}px`;
   }

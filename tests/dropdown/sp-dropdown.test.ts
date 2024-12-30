@@ -1,9 +1,20 @@
 import { describe, expect, test } from "vitest";
+import { screen } from "shadow-dom-testing-library";
 import { SpDropdown } from "../../src/components/dropdown/sp-dropdown";
 import "../../src/components/dropdown/sp-dropdown";
+import "../../src/components/dropdown/sp-dropdown-option";
+import userEvent from "@testing-library/user-event";
 
 function getSpDropdown() {
   return document.querySelector("sp-dropdown") as SpDropdown;
+}
+
+function getInput() {
+  return screen.getByShadowRole("textbox");
+}
+
+function getOption(text: string) {
+  return screen.getByShadowRole("option", { name: text });
 }
 
 describe("sp-dropdown", () => {
@@ -116,6 +127,25 @@ describe("sp-dropdown", () => {
 
       spDropdown.setAttribute("width", "80");
       expect(spDropdown.width).toBe(80);
+    });
+  });
+
+  describe("value属性", () => {
+    test("optionを選択すると、valueが変更される", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown>
+          <sp-dropdown-option value="Value1" text="Value1"></sp-dropdown-option>
+        </sp-dropdown>
+      `;
+
+      const user = userEvent.setup();
+
+      const input = getInput();
+      await user.click(input);
+
+      const option = getOption("Value1");
+      await user.click(option);
+      expect(getSpDropdown().value).toBe("Value1");
     });
   });
 });

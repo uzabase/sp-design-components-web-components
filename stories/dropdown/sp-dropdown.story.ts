@@ -12,10 +12,9 @@ const meta: Meta = {
   },
   render: (args) => html`
     <sp-dropdown select-type=${args.selectType} width=${args.width}>
-      <sp-dropdown-option text="Text1Text1Text1Text1"></sp-dropdown-option>
-      <sp-dropdown-option text="Text2"></sp-dropdown-option>
-      <sp-dropdown-option text="Text3"></sp-dropdown-option>
-      <sp-dropdown-option text="Text4"></sp-dropdown-option>
+      <sp-dropdown-option text="Text1Text1Text1Text1" value="Text1Text1Text1Text1"></sp-dropdown-option>
+      <sp-dropdown-option text="Text2" value="Text2"></sp-dropdown-option>
+      <sp-dropdown-option text="Text3" value="Text3"></sp-dropdown-option>
     </sp-dropdown>
   `,
 };
