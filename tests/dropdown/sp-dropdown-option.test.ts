@@ -67,7 +67,70 @@ describe("sp-dropdown-option", () => {
       expect(spDropdownOption.value).toBe("NewValue");
     });
   });
-  describe("selectType属性", () => {});
-  describe("selected属性", () => {});
-  describe("onClick属性", () => {});
+  describe("selectType属性", () => {
+    test.each(["single", "multiple"])(
+      "selectType属性に%sを設定できる",
+      async (value) => {
+        document.body.innerHTML = `
+        <sp-dropdown-option select-type="${value}"></sp-dropdown-option>
+      `;
+
+        const spDropdownOption = getSpDropdownOption();
+        expect(spDropdownOption.selectType).toBe(value);
+      },
+    );
+
+    test("selectType属性を設定しないと、singleになる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown-option></sp-dropdown-option>
+      `;
+
+      const spDropdownOption = getSpDropdownOption();
+      expect(spDropdownOption.selectType).toBe("single");
+    });
+
+    test("selectType属性に不正な値を設定すると、singleになる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown-option select-type="invalid"></sp-dropdown-option>
+      `;
+
+      const spDropdownOption = getSpDropdownOption();
+      expect(spDropdownOption.selectType).toBe("single");
+    });
+
+    test("selectType属性を変更できる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown-option select-type="single"></sp-dropdown-option>
+      `;
+
+      const spDropdownOption = getSpDropdownOption();
+      expect(spDropdownOption.selectType).toBe("single");
+
+      spDropdownOption.setAttribute("select-type", "multiple");
+      expect(spDropdownOption.selectType).toBe("multiple");
+    });
+  });
+  describe("selected属性", () => {
+    test("selected属性を設定できる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown-option selected></sp-dropdown-option>
+      `;
+
+      const spDropdownOption = getSpDropdownOption();
+      expect(spDropdownOption.selected).toBe(true);
+    });
+
+    test("selected属性を更新すると、選択状態が変わる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown-option></sp-dropdown-option>
+      `;
+
+      const spDropdownOption = getSpDropdownOption();
+      spDropdownOption.setAttribute("selected", "");
+      expect(spDropdownOption.selected).toBe(true);
+
+      spDropdownOption.removeAttribute("selected");
+      expect(spDropdownOption.selected).toBe(false);
+    });
+  });
 });
