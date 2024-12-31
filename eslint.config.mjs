@@ -25,7 +25,6 @@ export default [
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
       "import/no-unresolved": "off", // FIXME: 正しいインポート文でも警告が表示されることがあるので一旦無効化
-      "import/no-duplicates": "off", // FIXME: 現在のテストの書き方では警告が表示されるので一旦無効化
     },
   },
   prettier,

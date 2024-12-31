@@ -2,7 +2,7 @@ import "../../src/components/button/sp-button";
 
 import { describe, expect, test } from "vitest";
 
-import { SpDefinitionListDt } from "../../src/components/definitionList/sp-definition-list-dt";
+import type { SpDefinitionListDt } from "../../src/components/definitionList/sp-definition-list-dt";
 
 function getSpDefinitionListDt() {
   return document.querySelector("sp-definition-list-dt") as SpDefinitionListDt;
