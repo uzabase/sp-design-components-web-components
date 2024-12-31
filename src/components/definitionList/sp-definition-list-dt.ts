@@ -1,9 +1,6 @@
-// @ts-ignore
-import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import spDefinitionListDtStyle from "./sp-definition-list-dt.css?inline" assert { type: "css" };
+import resetStyle from "@acab/reset.css?inline";
+import foundationStyle from "../foundation.css?inline";
+import spDefinitionListDtStyle from "./sp-definition-list-dt.css?inline";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(
@@ -31,8 +28,9 @@ export class SpDefinitionListDt extends HTMLElement {
   }
 }
 
-customElements.get("sp-definition-list-dt") ||
+if (!customElements.get("sp-definition-list-dt")) {
   customElements.define("sp-definition-list-dt", SpDefinitionListDt);
+}
 
 declare global {
   interface HTMLElementTagNameMap {

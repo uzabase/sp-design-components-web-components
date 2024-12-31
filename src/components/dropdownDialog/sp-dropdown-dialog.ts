@@ -1,9 +1,6 @@
-// @ts-ignore
-import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import dropdownDialogStyle from "./dropdown-dialog.css?inline" assert { type: "css" };
+import resetStyle from "@acab/reset.css?inline";
+import foundationStyle from "../foundation.css?inline";
+import dropdownDialogStyle from "./dropdown-dialog.css?inline";
 import "../button/sp-button";
 
 type Position = "left" | "right";
@@ -158,5 +155,6 @@ declare global {
   }
 }
 
-customElements.get("sp-dropdown-dialog") ||
+if (!customElements.get("sp-dropdown-dialog")) {
   customElements.define("sp-dropdown-dialog", SpDropdownDialog);
+}

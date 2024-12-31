@@ -1,9 +1,6 @@
-// @ts-ignore
-import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import dropdownActionStyle from "./dropdown-action.css?inline" assert { type: "css" };
+import resetStyle from "@acab/reset.css?inline";
+import foundationStyle from "../foundation.css?inline";
+import dropdownActionStyle from "./dropdown-action.css?inline";
 import "./sp-dropdown-action-button";
 import "./sp-dropdown-action-item";
 
@@ -222,5 +219,6 @@ declare global {
   }
 }
 
-customElements.get("sp-dropdown-action") ||
+if (!customElements.get("sp-dropdown-action")) {
   customElements.define("sp-dropdown-action", SpDropdownAction);
+}
