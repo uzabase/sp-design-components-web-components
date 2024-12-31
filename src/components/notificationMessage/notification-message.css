@@ -19,7 +19,7 @@
   background-color: var(--color-semantic-surface-error-1);
 }
 
-.base.type__info {
+.base.type__information {
   border-color: var(--color-semantic-border-information);
   background-color: var(--color-semantic-surface-information-1);
 }
