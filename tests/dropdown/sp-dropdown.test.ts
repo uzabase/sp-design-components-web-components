@@ -17,6 +17,10 @@ function getOption(text: string) {
   return screen.getByShadowRole("option", { name: text });
 }
 
+function queryListbox() {
+  return screen.queryByShadowRole("listbox");
+}
+
 describe("sp-dropdown", () => {
   describe("selectType属性", () => {
     describe("selectType属性を設定できる", async () => {
@@ -146,6 +150,61 @@ describe("sp-dropdown", () => {
       const option = getOption("Value1");
       await user.click(option);
       expect(getSpDropdown().value).toBe("Value1");
+    });
+  });
+
+  describe("選択肢の表示", () => {
+    test("inputをクリックすると、選択肢が表示される", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown>
+          <sp-dropdown-option value="Value1" text="Value1"></sp-dropdown-option>
+        </sp-dropdown>
+      `;
+
+      const user = userEvent.setup();
+
+      const input = getInput();
+      await user.click(input);
+
+      const listbox = queryListbox();
+      expect(listbox).not.toBe(null);
+    });
+
+    test("選択肢をクリックすると、選択肢が非表示になる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown>
+          <sp-dropdown-option value="Value1" text="Value1"></sp-dropdown-option>
+        </sp-dropdown>
+      `;
+
+      const user = userEvent.setup();
+
+      const input = getInput();
+      await user.click(input);
+
+      const option = getOption("Value1");
+      await user.click(option);
+
+      const listbox = queryListbox();
+      expect(listbox).toBe(null);
+    });
+
+    test("選択肢の外側をクリックすると、選択肢が非表示になる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown>
+          <sp-dropdown-option value="Value1" text="Value1"></sp-dropdown-option>
+        </sp-dropdown>
+      `;
+
+      const user = userEvent.setup();
+
+      const input = getInput();
+      await user.click(input);
+
+      await user.click(document.body);
+
+      const listbox = queryListbox();
+      expect(listbox).toBe(null);
     });
   });
 });
