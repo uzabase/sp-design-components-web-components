@@ -32,6 +32,8 @@ export class SpDropdownAction extends HTMLElement {
   #disabled: boolean = false;
   #position: Position = "left";
 
+  #clickOutsideHandler = this.#handleClickOutside.bind(this);
+
   set label(value: string) {
     this.#buttonElement.text = value;
     this.#syncMenuMinWidthWithButtonWidth();
@@ -109,7 +111,7 @@ export class SpDropdownAction extends HTMLElement {
       this.#handleSlotChange.bind(this),
     );
 
-    window.addEventListener("click", this.#handleClickOutside.bind(this));
+    window.addEventListener("click", this.#clickOutsideHandler);
 
     this.#baseElement.appendChild(this.#menuElement);
     this.#baseElement.classList.add("base");
@@ -133,7 +135,7 @@ export class SpDropdownAction extends HTMLElement {
       this.#handleSlotChange.bind(this),
     );
 
-    window.removeEventListener("click", this.#handleClickOutside.bind(this));
+    window.removeEventListener("click", this.#clickOutsideHandler);
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {

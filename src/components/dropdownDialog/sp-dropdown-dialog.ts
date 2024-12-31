@@ -24,6 +24,8 @@ export class SpDropdownDialog extends HTMLElement {
   #disabled: boolean = false;
   #position: Position = "left";
 
+  #clickOutsideHandler = this.#handleClickOutside.bind(this);
+
   set label(value: string) {
     this.#buttonElement.text = value;
   }
@@ -95,7 +97,7 @@ export class SpDropdownDialog extends HTMLElement {
     this.#dialogElement.role = "dialog";
     this.#dialogElement.appendChild(this.#dialogSlotElement);
 
-    window.addEventListener("click", this.#handleClickOutside.bind(this));
+    window.addEventListener("click", this.#clickOutsideHandler);
 
     this.#baseElement.appendChild(this.#dialogElement);
     this.#baseElement.classList.add("base");
@@ -104,7 +106,7 @@ export class SpDropdownDialog extends HTMLElement {
   }
 
   disconnectedCallback() {
-    window.removeEventListener("click", this.#handleClickOutside.bind(this));
+    window.removeEventListener("click", this.#clickOutsideHandler);
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
