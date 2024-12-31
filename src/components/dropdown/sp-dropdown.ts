@@ -114,7 +114,7 @@ export class SpDropdown extends HTMLElement {
     );
     this.#listboxElement.addEventListener(
       "click",
-      this.#hideContents.bind(this),
+      this.#hideListbox.bind(this),
     );
 
     this.#slotElement.addEventListener("slotchange", () => {
@@ -125,13 +125,17 @@ export class SpDropdown extends HTMLElement {
     this.addEventListener("sp-dropdown-option-click", (e) => {
       if (e instanceof CustomEvent) this.#handleClickOption(e);
     });
+
+    window.addEventListener("click", this.#handleClickOutside.bind(this));
   }
 
   disconnectedCallback() {
     this.#slotElement.removeEventListener(
       "click",
-      this.#hideContents.bind(this),
+      this.#hideListbox.bind(this),
     );
+
+    window.removeEventListener("click", this.#handleClickOutside.bind(this));
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -141,9 +145,7 @@ export class SpDropdown extends HTMLElement {
         this.selectType = isValidSelectType(newValue) ? newValue : "single";
         break;
       case "width":
-        this.width = isNaN(Number(newValue))
-          ? "liquid"
-          : (Number(newValue));
+        this.width = isNaN(Number(newValue)) ? "liquid" : toValidSelectWidth(Number(newValue));
         break;
     }
   }
@@ -153,7 +155,7 @@ export class SpDropdown extends HTMLElement {
     this.#listboxElement.hidden = !this.#expanded;
   }
 
-  #hideContents() {
+  #hideListbox() {
     this.#expanded = false;
     this.#listboxElement.hidden = true;
   }
@@ -161,7 +163,7 @@ export class SpDropdown extends HTMLElement {
   #handleClickOption(event: CustomEvent<ClickEventDetail>) {
     const { value } = event.detail;
     this.value = value;
-    this.#hideContents();
+    this.#hideListbox();
   }
 
   // MIN_WIDTH ~ MAX_WIDTHの範囲で、listboxの幅に合わせる
@@ -182,6 +184,13 @@ export class SpDropdown extends HTMLElement {
         option.removeAttribute("selected");
       }
     });
+  }
+
+  #handleClickOutside(event: MouseEvent) {
+    event.stopPropagation();
+    if (!this.contains(event.target as Node)) {
+      this.#hideListbox();
+    }
   }
 }
 
