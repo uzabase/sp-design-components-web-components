@@ -8,7 +8,7 @@ import { html } from "lit";
 const meta: Meta = {
   args: {
     selectType: "single",
-    width: "480"
+    width: "80"
   },
   render: (args) => html`
     <sp-dropdown select-type=${args.selectType} width=${args.width}>
