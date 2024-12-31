@@ -1,6 +1,7 @@
 import "../../src/components/definitionList/sp-definition-list-dd";
-import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
+
+import type { Meta, StoryObj } from "@storybook/web-components";
 
 const meta: Meta = {
   component: "sp-definition-list-dd",

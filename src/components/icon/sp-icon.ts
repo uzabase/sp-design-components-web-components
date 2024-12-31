@@ -1,7 +1,7 @@
 import { UbIcon } from "@ub-design/components-web-components/";
-import { speedaIconPaths, SpeedaIconTypes } from "./icons";
 
 import iconStyle from "./icon.css?inline";
+import { speedaIconPaths, SpeedaIconTypes } from "./icons";
 
 function isSpeedaIconType(type: string): type is SpeedaIconTypes {
   return Object.hasOwnProperty.call(speedaIconPaths, type);

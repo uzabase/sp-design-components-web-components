@@ -1,8 +1,10 @@
-import resetStyle from "@acab/reset.css?inline";
-import foundationStyle from "../foundation.css?inline";
-import dropdownActionStyle from "./dropdown-action.css?inline";
 import "./sp-dropdown-action-button";
 import "./sp-dropdown-action-item";
+
+import resetStyle from "@acab/reset.css?inline";
+
+import foundationStyle from "../foundation.css?inline";
+import dropdownActionStyle from "./dropdown-action.css?inline";
 
 type Position = "left" | "right";
 

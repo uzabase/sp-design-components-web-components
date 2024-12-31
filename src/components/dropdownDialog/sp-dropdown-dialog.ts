@@ -1,7 +1,9 @@
+import "../button/sp-button";
+
 import resetStyle from "@acab/reset.css?inline";
+
 import foundationStyle from "../foundation.css?inline";
 import dropdownDialogStyle from "./dropdown-dialog.css?inline";
-import "../button/sp-button";
 
 type Position = "left" | "right";
 

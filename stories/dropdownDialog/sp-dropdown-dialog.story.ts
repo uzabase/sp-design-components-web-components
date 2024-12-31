@@ -1,7 +1,8 @@
 import "@sp-design/token/lib/speeda-tokens.css";
+import "../../src/components/dropdownDialog/sp-dropdown-dialog";
+
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
-import "../../src/components/dropdownDialog/sp-dropdown-dialog";
 
 const meta: Meta = {
   component: "sp-dropdown-dialog",

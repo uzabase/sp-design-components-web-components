@@ -1,7 +1,8 @@
 import "../../src/components/elementTitle/sp-element-title";
 import "../../src/components/button/sp-button";
 import "@sp-design/token/lib/speeda-tokens.css";
-import { Meta, StoryObj } from "@storybook/web-components";
+
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
 const meta: Meta = {

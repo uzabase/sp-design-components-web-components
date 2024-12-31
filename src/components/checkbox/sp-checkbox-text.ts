@@ -1,7 +1,8 @@
 import { UbCheckboxText } from "@ub-design/components-web-components/";
+
 import foundationStyle from "../foundation.css?inline";
-import checkmarkStyle from "./checkmark.css?inline";
 import checkboxTextStyle from "./checkbox-text.css?inline";
+import checkmarkStyle from "./checkmark.css?inline";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${checkmarkStyle} ${checkboxTextStyle}`);

@@ -1,8 +1,10 @@
-import { describe, expect, test } from "vitest";
+import "../../src/components/button/sp-button";
+
 import { getByShadowRole, queryByShadowRole } from "shadow-dom-testing-library";
+import { describe, expect, test } from "vitest";
+
 import { SpButton } from "../../src/components/button/sp-button";
 import { isElementMatchingSpeedaIcon } from "../utils/icon";
-import "../../src/components/button/sp-button";
 
 function getSpButton() {
   return document.querySelector("sp-button") as SpButton;

@@ -1,8 +1,9 @@
+import "../icon/sp-icon";
+
+import buttonStyle from "../button/button.css?inline";
 import { SpButton } from "../button/sp-button";
 import foundationStyle from "../foundation.css?inline";
-import buttonStyle from "../button/button.css?inline";
 import dropdownActionButtonStyle from "./dropdown-action-button.css?inline";
-import "../icon/sp-icon";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(

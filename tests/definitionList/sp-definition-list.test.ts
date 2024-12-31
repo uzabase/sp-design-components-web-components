@@ -1,5 +1,7 @@
-import { describe, expect, test } from "vitest";
 import "../../src/components/button/sp-button";
+
+import { describe, expect, test } from "vitest";
+
 import { SpDefinitionList } from "../../src/components/definitionList/sp-definition-list";
 
 function getSpDefinitionList() {
