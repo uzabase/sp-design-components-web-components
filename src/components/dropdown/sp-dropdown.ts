@@ -18,7 +18,7 @@ export function isValidSelectType(value: string): value is SelectType {
   return selectTypes.some((type) => type === value);
 }
 
-function toValidWidth(value: number) {
+function toValidSelectWidth(value: number) {
   if (value < MIN_WIDTH) return MIN_WIDTH;
   if (value > MAX_WIDTH) return MAX_WIDTH;
   return value;
@@ -52,6 +52,8 @@ export class SpDropdown extends HTMLElement {
     this.#updateOptions();
   }
 
+  // liquidの時: listboxに合わせてselectの幅が決まる
+  // fixedの時: widthをselectとlistboxに渡す
   get width() {
     return this.#width;
   }
@@ -117,6 +119,7 @@ export class SpDropdown extends HTMLElement {
 
     this.#slotElement.addEventListener("slotchange", () => {
       this.#updateOptions();
+      if (this.width === "liquid") this.#calculateSelectWidth();
     });
 
     this.addEventListener("sp-dropdown-option-click", (e) => {
@@ -140,7 +143,7 @@ export class SpDropdown extends HTMLElement {
       case "width":
         this.width = isNaN(Number(newValue))
           ? "liquid"
-          : toValidWidth(Number(newValue));
+          : (Number(newValue));
         break;
     }
   }
@@ -159,6 +162,12 @@ export class SpDropdown extends HTMLElement {
     const { value } = event.detail;
     this.value = value;
     this.#hideContents();
+  }
+
+  // MIN_WIDTH ~ MAX_WIDTHの範囲で、listboxの幅に合わせる
+  #calculateSelectWidth() {
+    const listboxWidth = this.#listboxElement.clientWidth;
+    this.width = toValidSelectWidth(listboxWidth);
   }
 
   #updateOptions() {

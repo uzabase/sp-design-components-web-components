@@ -9,6 +9,8 @@ import "../icon/sp-icon";
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownSelectStyle}`);
 
+export const DEFAULT_WIDTH = 160;
+
 class SpDropdownSelect extends HTMLElement {
   #baseElement = document.createElement("div");
   #inputElement = document.createElement("input");
@@ -21,7 +23,7 @@ class SpDropdownSelect extends HTMLElement {
 
   // TODO: set defaultValue prop
   #value: string = "";
-  #width: "liquid" | number = "liquid";
+  #width: number = DEFAULT_WIDTH;
 
   get value() {
     return this.#value;
@@ -30,16 +32,15 @@ class SpDropdownSelect extends HTMLElement {
   set value(val: string) {
     this.#value = val;
     this.#inputElement.value = val;
-    this.#adjustInputWidth();
   }
 
   get width() {
     return this.#width;
   }
 
-  set width(val: "liquid" | number) {
+  set width(val: number) {
     this.#width = val;
-    this.#inputElement.style.width = val === "liquid" ? "auto" : `${val}px`;
+    this.#inputElement.style.width = `${val}px`;
   }
 
   static get observedAttributes() {
@@ -77,8 +78,6 @@ class SpDropdownSelect extends HTMLElement {
     this.#baseElement.appendChild(this.#iconWrapperElement);
 
     this.shadowRoot?.appendChild(this.#baseElement);
-
-    this.#adjustInputWidth();
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -88,16 +87,8 @@ class SpDropdownSelect extends HTMLElement {
         this.value = newValue;
         break;
       case "width":
-        this.width = isNaN(Number(newValue)) ? "liquid" : Number(newValue);
+        this.width = isNaN(Number(newValue)) ? DEFAULT_WIDTH : Number(newValue);
     }
-  }
-
-  #adjustInputWidth() {
-    if (this.width !== "liquid") return;
-    this.#dummyTextBoxElement.textContent = this.#inputElement.value || "";
-    // 左右のborderの分（2px）余裕を持たないとellipsisになってしまう
-    this.#inputElement.style.width =
-      this.#dummyTextBoxElement.clientWidth + 2 + "px";
   }
 }
 
