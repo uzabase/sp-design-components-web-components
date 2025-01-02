@@ -39,10 +39,11 @@ export class SpDropdown extends HTMLElement {
   // attributes
   #selectType: SelectType = "single";
   #width: Width = "liquid";
+  #placeholder: string = "";
 
   // states
   #expanded = false;
-  #value: string = "Default";
+  #value: string = "";
 
   get selectType() {
     return this.#selectType;
@@ -65,6 +66,15 @@ export class SpDropdown extends HTMLElement {
     this.#selectElement.setAttribute("width", String(value));
   }
 
+  get placeholder() {
+    return this.#placeholder;
+  }
+
+  set placeholder(value: string) {
+    this.#placeholder = value;
+    this.#selectElement.setAttribute("placeholder", value);
+  }
+
   get expanded() {
     return this.#expanded;
   }
@@ -83,7 +93,7 @@ export class SpDropdown extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["select-type", "width"];
+    return ["select-type", "width", "placeholder"];
   }
 
   constructor() {
@@ -95,6 +105,7 @@ export class SpDropdown extends HTMLElement {
 
   connectedCallback() {
     this.#selectElement.setAttribute("aria-controls", LISTBOX_ARIA_CONTROLS);
+    this.#selectElement.setAttribute("placeholder", this.placeholder);
     this.#selectElement.value = this.#value;
 
     this.#listboxElement.id = LISTBOX_ARIA_CONTROLS;
@@ -145,7 +156,12 @@ export class SpDropdown extends HTMLElement {
         this.selectType = isValidSelectType(newValue) ? newValue : "single";
         break;
       case "width":
-        this.width = isNaN(Number(newValue)) ? "liquid" : toValidSelectWidth(Number(newValue));
+        this.width = isNaN(Number(newValue))
+          ? "liquid"
+          : toValidSelectWidth(Number(newValue));
+        break;
+      case "placeholder":
+        this.placeholder = newValue;
         break;
     }
   }
