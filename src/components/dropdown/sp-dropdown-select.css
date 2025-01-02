@@ -20,6 +20,10 @@
   text-overflow: ellipsis;
 }
 
+.input::placeholder {
+  color: var(--color-semantic-text-weak);
+}
+
 /* TODO: focus-lingが表示されるので、消すか相談する */
 .input:focus {
   border: 1px solid var(--color-semantic-border-focus);
@@ -29,20 +33,6 @@
 .input:disabled {
   border: 1px solid var(--color-semantic-border-regular);
   background: var(--color-semantic-surface-regular-4);
-}
-
-.dummy-text-box {
-  position: absolute;
-  display: inline-block;
-  height: 0;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 160%;
-  padding-inline: 8px 34px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  clip: rect(0 0 0 0);
 }
 
 .icon-wrapper {
