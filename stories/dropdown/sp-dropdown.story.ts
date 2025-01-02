@@ -8,10 +8,11 @@ import { html } from "lit";
 const meta: Meta = {
   args: {
     selectType: "single",
-    width: "80"
+    width: "320",
+    placeholder: "選択してください"
   },
   render: (args) => html`
-    <sp-dropdown select-type=${args.selectType} width=${args.width}>
+    <sp-dropdown select-type=${args.selectType} width=${args.width} placeholder=${args.placeholder}>
       <sp-dropdown-option text="Text1Text1Text1Text1" value="Text1Text1Text1Text1"></sp-dropdown-option>
       <sp-dropdown-option text="Text2" value="Text2"></sp-dropdown-option>
       <sp-dropdown-option text="Text3" value="Text3"></sp-dropdown-option>
@@ -23,7 +24,6 @@ const meta: Meta = {
       <sp-dropdown-option text="Text9" value="Text9"></sp-dropdown-option>
       <sp-dropdown-option text="Text10" value="Text10"></sp-dropdown-option>
       <sp-dropdown-option text="Text11" value="Text11"></sp-dropdown-option>
-
     </sp-dropdown>
   `,
 };

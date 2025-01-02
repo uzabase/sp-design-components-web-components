@@ -58,7 +58,7 @@ describe("sp-dropdown-select", () => {
       `;
       const spDropdownSelect = getSpDropdownSelect();
       expect(spDropdownSelect.width).toBe(DEFAULT_WIDTH);
-    })
+    });
 
     test("width属性を設定しないと、DEFAULT_WIDTHが設定される", async () => {
       document.body.innerHTML = `
@@ -78,6 +78,37 @@ describe("sp-dropdown-select", () => {
 
       spDropdownSelect.setAttribute("width", "80");
       expect(spDropdownSelect.width).toBe(80);
+    });
+  });
+
+  describe("placeholder属性", () => {
+    test("placeholder属性を設定できる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown-select placeholder="Placeholder"></sp-dropdown-select>
+      `;
+
+      const spDropdownSelect = getSpDropdownSelect();
+      expect(spDropdownSelect.placeholder).toBe("Placeholder");
+    });
+
+    test("placeholder属性を設定しないと、空文字列が設定される", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown-select></sp-dropdown-select>
+      `;
+      const spDropdownSelect = getSpDropdownSelect();
+      expect(spDropdownSelect.placeholder).toBe("");
+    });
+
+    test("placeholder属性を変更できる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown-select placeholder="Placeholder"></sp-dropdown-select>
+      `;
+
+      const spDropdownSelect = getSpDropdownSelect();
+      expect(spDropdownSelect.placeholder).toBe("Placeholder");
+
+      spDropdownSelect.setAttribute("placeholder", "NewPlaceholder");
+      expect(spDropdownSelect.placeholder).toBe("NewPlaceholder");
     });
   });
 });
