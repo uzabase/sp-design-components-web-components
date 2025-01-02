@@ -153,6 +153,38 @@ describe("sp-dropdown", () => {
     });
   });
 
+  describe("placeholder属性", () => {
+    test("placeholder属性を設定できる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown placeholder="Placeholder"></sp-dropdown>
+      `;
+
+      const spDropdown = getSpDropdown();
+      expect(spDropdown.placeholder).toBe("Placeholder");
+    });
+
+    test("placeholder属性を設定しないと、空文字列が設定される", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown></sp-dropdown>
+      `;
+
+      const spDropdown = getSpDropdown();
+      expect(spDropdown.placeholder).toBe("");
+    });
+
+    test("placeholder属性を変更できる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown placeholder="Placeholder"></sp-dropdown>
+      `;
+
+      const spDropdown = getSpDropdown();
+      expect(spDropdown.placeholder).toBe("Placeholder");
+
+      spDropdown.setAttribute("placeholder", "NewPlaceholder");
+      expect(spDropdown.placeholder).toBe("NewPlaceholder");
+    });
+  });
+
   describe("選択肢の表示", () => {
     test("inputをクリックすると、選択肢が表示される", async () => {
       document.body.innerHTML = `

@@ -14,16 +14,13 @@ export const DEFAULT_WIDTH = 160;
 class SpDropdownSelect extends HTMLElement {
   #baseElement = document.createElement("div");
   #inputElement = document.createElement("input");
-  // 横幅を文字に応じて変えるために https://www.bring-flower.com/blog/adjust-width-of-input-element/ の方法を使用している。
-  // CSSの field-sizing がstableになったらそちらを使えば良い
-  #inputWrapperElement = document.createElement("div");
-  #dummyTextBoxElement = document.createElement("span");
   #iconWrapperElement = document.createElement("div");
   #iconElement = document.createElement("sp-icon");
 
   // TODO: set defaultValue prop
   #value: string = "";
   #width: number = DEFAULT_WIDTH;
+  #placeholder: string = "";
 
   get value() {
     return this.#value;
@@ -43,8 +40,17 @@ class SpDropdownSelect extends HTMLElement {
     this.#inputElement.style.width = `${val}px`;
   }
 
+  get placeholder() {
+    return this.#placeholder;
+  }
+
+  set placeholder(val: string) {
+    this.#placeholder = val;
+    this.#inputElement.setAttribute("placeholder", val);
+  }
+
   static get observedAttributes() {
-    return ["value", "width"];
+    return ["value", "width", "placeholder"];
   }
 
   constructor() {
@@ -58,13 +64,7 @@ class SpDropdownSelect extends HTMLElement {
     this.#inputElement.classList.add("input");
     this.#inputElement.type = "text";
     this.#inputElement.readOnly = true;
-
-    this.#dummyTextBoxElement.classList.add("dummy-text-box");
-    this.#dummyTextBoxElement.ariaHidden = "true";
-
-    this.#inputWrapperElement.classList.add("input-wrapper");
-    this.#inputWrapperElement.appendChild(this.#inputElement);
-    this.#inputWrapperElement.appendChild(this.#dummyTextBoxElement);
+    this.#inputElement.setAttribute("placeholder", this.placeholder);
 
     this.#iconElement.size = "small";
     this.#iconElement.type = "arrow_down";
@@ -74,8 +74,7 @@ class SpDropdownSelect extends HTMLElement {
     this.#iconWrapperElement.appendChild(this.#iconElement);
 
     this.#baseElement.classList.add("base");
-    this.#baseElement.appendChild(this.#inputWrapperElement);
-    this.#baseElement.appendChild(this.#iconWrapperElement);
+    this.#baseElement.appendChild(this.#inputElement);
 
     this.shadowRoot?.appendChild(this.#baseElement);
   }
@@ -88,6 +87,9 @@ class SpDropdownSelect extends HTMLElement {
         break;
       case "width":
         this.width = isNaN(Number(newValue)) ? DEFAULT_WIDTH : Number(newValue);
+        break;
+      case "placeholder":
+        this.placeholder = newValue;
     }
   }
 }
