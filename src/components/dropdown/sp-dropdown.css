@@ -8,6 +8,8 @@
   position: absolute;
   top: calc(var(--spacing-vertical-spacing-vertical-2, 8px) + 28px);
   min-width: 80px;
+  max-height: 276px; /* optionの高さ(26px) * 10 + 上下の余白(16px) */
+  overflow-y: scroll;
   display: flex;
   padding: var(--spacing-vertical-spacing-vertical-2, 8px) 0;
   flex-direction: column;
