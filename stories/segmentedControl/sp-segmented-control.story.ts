@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
 import { html } from "lit";
 import { action } from "@storybook/addon-actions";
+import { SpSegmentedControl } from "../../src/components/segmentedControl/sp-segmented-control";
 
 const data = [
   {
@@ -36,7 +37,7 @@ const data = [
   },
 ];
 
-const meta: Meta = {
+const meta = {
   component: "sp-segmented-control",
   argTypes: {
     name: { type: "string" },
@@ -50,10 +51,10 @@ const meta: Meta = {
     data: data,
     onchange: action("onchange"),
   },
-};
-export default meta;
+} satisfies Meta<SpSegmentedControl>;
 
-type Story = StoryObj;
+export default meta;
+type Story = StoryObj<SpSegmentedControl>;
 
 export const Basic: Story = {
   tags: ["!dev-only"],
@@ -102,6 +103,7 @@ export const ALL: Story = {
     </table>
   `,
 };
+
 export const Sandbox: Story = {
   args: {
     direction: undefined,

@@ -3,8 +3,9 @@ import "../../src/components/button/sp-button";
 import "@sp-design/token/lib/speeda-tokens.css";
 import { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
+import { SpElementTitle } from "../../src/components/elementTitle/sp-element-title";
 
-const meta: Meta = {
+const meta = {
   component: "sp-element-title",
   argTypes: {
     text: { type: "string" },
@@ -12,10 +13,10 @@ const meta: Meta = {
   args: {
     text: "Element Title",
   },
-};
-export default meta;
+} satisfies Meta<SpElementTitle>;
 
-type Story = StoryObj;
+export default meta;
+type Story = StoryObj<SpElementTitle>;
 
 export const Basic: Story = {
   tags: ["!dev-only"],

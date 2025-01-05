@@ -4,8 +4,14 @@ import "../../src/components/definitionList/sp-definition-list";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
 import { html } from "lit";
+import { SpDefinitionList } from "../../src/components/definitionList/sp-definition-list";
 
-const meta: Meta = {
+type StoryArgs = SpDefinitionList & {
+  termText: string;
+  definitionText: string | ReturnType<typeof html>;
+};
+
+const meta = {
   args: {
     termText: "Term",
     definitionText: "Definition",
@@ -18,10 +24,10 @@ const meta: Meta = {
       <sp-definition-list-dd>${definitionText}</sp-definition-list-dd>
     </sp-definition-list>
   `,
-};
-export default meta;
+} satisfies Meta<StoryArgs>;
 
-type Story = StoryObj;
+export default meta;
+type Story = StoryObj<StoryArgs>;
 
 export const Basic: Story = {
   tags: ["!dev-only"],
