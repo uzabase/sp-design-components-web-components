@@ -4,8 +4,9 @@ import "@sp-design/token/lib/speeda-tokens.css";
 import { speedaIconTypes } from "../../src/components/icon/icons";
 import { action } from "@storybook/addon-actions";
 import { html } from "lit";
+import { SpButton } from "../../src/components/button/sp-button";
 
-const meta: Meta = {
+const meta = {
   component: "sp-button",
   argTypes: {
     text: { type: "string" },
@@ -43,10 +44,10 @@ const meta: Meta = {
     disabled: false,
     onclick: action("onclick"),
   },
-};
-export default meta;
+} satisfies Meta<SpButton>;
 
-type Story = StoryObj;
+export default meta;
+type Story = StoryObj<SpButton>;
 
 export const Basic: Story = {
   args: {
@@ -58,6 +59,7 @@ export const Basic: Story = {
     selected: undefined,
     disabled: undefined,
   },
+  tags: ["!dev-only"],
 };
 
 export const Property: Story = {};

@@ -2,15 +2,16 @@ import "@sp-design/token/lib/speeda-tokens.css";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "../../src/components/dropdownAction/sp-dropdown-action";
+import { SpDropdownAction } from "../../src/components/dropdownAction/sp-dropdown-action";
 
-const meta: Meta = {
+const meta = {
   component: "sp-dropdown-action",
   argTypes: {},
   args: {},
-};
-export default meta;
+} satisfies Meta<SpDropdownAction>;
 
-type Story = StoryObj;
+export default meta;
+type Story = StoryObj<SpDropdownAction>;
 
 export const Basic: Story = {
   render: () => html`
@@ -23,6 +24,7 @@ export const Basic: Story = {
       >
     </sp-dropdown-action>
   `,
+  tags: ["!dev-only"],
 };
 
 export const LongText: Story = {

@@ -1,5 +1,7 @@
 import type { StorybookConfig } from "@storybook/web-components-vite";
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const config: StorybookConfig = {
   stories: [
     "../stories/**/*.mdx",
@@ -12,6 +14,9 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: false,
+  },
+  tags: {
+    "dev-only": { excludeFromSidebar: isProduction },
   },
 };
 export default config;
