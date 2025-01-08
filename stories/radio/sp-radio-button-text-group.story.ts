@@ -1,9 +1,11 @@
-import "../../src/components/radio/sp-radio-button-text-group";
 import "@sp-design/token/lib/speeda-tokens.css";
+import "../../src/components/radio/sp-radio-button-text-group";
 
 import { action } from "@storybook/addon-actions";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
+
+import type { SpRadioButtonTextGroup } from "../../src/components/radio/sp-radio-button-text-group";
 
 const data = [
   {
@@ -37,7 +39,7 @@ const data = [
   },
 ];
 
-const meta: Meta = {
+const meta = {
   component: "sp-radio-button-text-group",
   argTypes: {
     name: { type: "string" },
@@ -56,16 +58,17 @@ const meta: Meta = {
     data: data,
     onchange: action("onchange"),
   },
-};
-export default meta;
+} satisfies Meta<SpRadioButtonTextGroup>;
 
-type Story = StoryObj;
+export default meta;
+type Story = StoryObj<SpRadioButtonTextGroup>;
 
 export const Basic: Story = {
   args: {
     name: undefined,
     direction: undefined,
   },
+  tags: ["!dev-only"],
 };
 
 export const Attribute: Story = {

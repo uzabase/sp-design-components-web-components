@@ -1,11 +1,13 @@
-import "../../src/components/checkbox/sp-checkbox-text";
 import "@sp-design/token/lib/speeda-tokens.css";
+import "../../src/components/checkbox/sp-checkbox-text";
 
 import { action } from "@storybook/addon-actions";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
-const meta: Meta = {
+import type { SpCheckboxText } from "../../src/components/checkbox/sp-checkbox-text";
+
+const meta = {
   component: "sp-checkbox-text",
   argTypes: {
     text: { type: "string" },
@@ -25,10 +27,10 @@ const meta: Meta = {
     disabled: false,
     onchange: action("onchange"),
   },
-};
-export default meta;
+} satisfies Meta<SpCheckboxText>;
 
-type Story = StoryObj;
+export default meta;
+type Story = StoryObj<SpCheckboxText>;
 
 export const Basic: Story = {
   args: {
@@ -36,6 +38,7 @@ export const Basic: Story = {
     indeterminate: undefined,
     disabled: undefined,
   },
+  tags: ["!dev-only"],
 };
 
 export const Property: Story = {

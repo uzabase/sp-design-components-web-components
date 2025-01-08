@@ -1,18 +1,26 @@
-import "../../src/components/definitionList/sp-definition-list-dd";
 import "@sp-design/token/lib/speeda-tokens.css";
+import "../../src/components/definitionList/sp-definition-list-dd";
 
 import type { Meta, StoryObj } from "@storybook/web-components";
 
-const meta: Meta = {
+import type { SpDefinitionListDd } from "../../src/components/definitionList/sp-definition-list-dd";
+
+type StoryArgs = SpDefinitionListDd & {
+  text: string;
+};
+
+const meta = {
   component: "sp-definition-list-dd",
   args: {
     text: "Text",
   },
   render: ({ text }) =>
     `<sp-definition-list-dd>${text}</sp-definition-list-dd>`,
-};
+} satisfies Meta<StoryArgs>;
+
 export default meta;
+type Story = StoryObj<StoryArgs>;
 
-type Story = StoryObj;
-
-export const Basic: Story = {};
+export const Basic: Story = {
+  tags: ["!dev-only"],
+};

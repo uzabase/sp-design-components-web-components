@@ -4,14 +4,16 @@ import "../../src/components/dropdownDialog/sp-dropdown-dialog";
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
-const meta: Meta = {
+import type { SpDropdownDialog } from "../../src/components/dropdownDialog/sp-dropdown-dialog";
+
+const meta = {
   component: "sp-dropdown-dialog",
   argTypes: {},
   args: {},
-};
-export default meta;
+} satisfies Meta<SpDropdownDialog>;
 
-type Story = StoryObj;
+export default meta;
+type Story = StoryObj<SpDropdownDialog>;
 
 export const Basic: Story = {
   render: () => html`
@@ -20,6 +22,7 @@ export const Basic: Story = {
       ダイアログの内容
     </sp-dropdown-dialog>
   `,
+  tags: ["!dev-only"],
 };
 
 export const LongText: Story = {
