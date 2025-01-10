@@ -16,11 +16,18 @@
   line-height: 1.6;
 }
 
-.page:hover,
-.previous:hover,
-.next:hover,
-.first:hover,
-.last:hover {
+.previous:disabled,
+.next:disabled,
+.first:disabled,
+.last:disabled {
+  color: var(--color-semantic-text-disabled);
+}
+
+.page:hover:enabled,
+.previous:hover:enabled,
+.next:hover:enabled,
+.first:hover:enabled,
+.last:hover:enabled {
   background-color: var(--color-semantic-surface-regular-3);
 }
 
