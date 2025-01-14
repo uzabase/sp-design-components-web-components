@@ -119,6 +119,7 @@ export class SpPagination extends HTMLElement {
     const button = document.createElement("button");
     button.textContent = String(pageNumber);
     button.classList.add("page");
+    button.setAttribute("aria-label", `${pageNumber}ページ目へ`);
 
     if (pageNumber === this.current) {
       button.classList.add("selected");
