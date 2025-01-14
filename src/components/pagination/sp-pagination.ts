@@ -87,7 +87,7 @@ export class SpPagination extends HTMLElement {
     const firstButtonItem = this.#createFirstPageButtonItem();
     this.#pageGroupElement.appendChild(firstButtonItem);
 
-    const previousButtonItem = this.#createPreviousButtonItem();
+    const previousButtonItem = this.#createPreviousPageButtonItem();
     this.#pageGroupElement.appendChild(previousButtonItem);
 
     const firstVisiblePageNumber = Math.min(
@@ -108,7 +108,7 @@ export class SpPagination extends HTMLElement {
       this.#pageGroupElement.appendChild(pageButtonItem);
     }
 
-    const nextButtonItem = this.#createNextButtonItem();
+    const nextButtonItem = this.#createNextPageButtonItem();
     this.#pageGroupElement.appendChild(nextButtonItem);
 
     const lastButtonItem = this.#createLastPageButtonItem();
@@ -152,6 +152,7 @@ export class SpPagination extends HTMLElement {
   #createFirstPageButtonItem() {
     const firstPageButton = document.createElement("button");
     firstPageButton.textContent = "最初へ";
+    firstPageButton.disabled = this.current === 1;
     firstPageButton.classList.add("first");
     firstPageButton.addEventListener("click", () => this.#handlePageClick(1));
 
@@ -164,6 +165,7 @@ export class SpPagination extends HTMLElement {
   #createLastPageButtonItem() {
     const lastPageButton = document.createElement("button");
     lastPageButton.textContent = "最後へ";
+    lastPageButton.disabled = this.current === this.total;
     lastPageButton.classList.add("last");
     lastPageButton.addEventListener("click", () =>
       this.#handlePageClick(this.total),
@@ -175,16 +177,19 @@ export class SpPagination extends HTMLElement {
     return lastPageListItem;
   }
 
-  #createPreviousButtonItem() {
-    const previousButton = document.createElement("button");
-    previousButton.textContent = "前へ";
-    previousButton.classList.add("previous");
-    previousButton.addEventListener("click", () => this.#handlePreviousClick());
+  #createPreviousPageButtonItem() {
+    const previousPageButton = document.createElement("button");
+    previousPageButton.textContent = "前へ";
+    previousPageButton.disabled = this.current === 1;
+    previousPageButton.classList.add("previous");
+    previousPageButton.addEventListener("click", () =>
+      this.#handlePreviousClick(),
+    );
 
-    const previousListItem = document.createElement("li");
-    previousListItem.appendChild(previousButton);
+    const previousPageListItem = document.createElement("li");
+    previousPageListItem.appendChild(previousPageButton);
 
-    return previousListItem;
+    return previousPageListItem;
   }
 
   #handlePreviousClick() {
@@ -202,16 +207,17 @@ export class SpPagination extends HTMLElement {
     }
   }
 
-  #createNextButtonItem() {
-    const nextButton = document.createElement("button");
-    nextButton.textContent = "次へ";
-    nextButton.classList.add("next");
-    nextButton.addEventListener("click", () => this.#handleNextClick());
+  #createNextPageButtonItem() {
+    const nextPageButton = document.createElement("button");
+    nextPageButton.textContent = "次へ";
+    nextPageButton.disabled = this.current === this.total;
+    nextPageButton.classList.add("next");
+    nextPageButton.addEventListener("click", () => this.#handleNextClick());
 
-    const nextListItem = document.createElement("li");
-    nextListItem.appendChild(nextButton);
+    const nextPageListItem = document.createElement("li");
+    nextPageListItem.appendChild(nextPageButton);
 
-    return nextListItem;
+    return nextPageListItem;
   }
 
   #handleNextClick() {
