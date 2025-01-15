@@ -10,12 +10,9 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
 var _SpNotificationMessage_type, _SpNotificationMessage_baseElement, _SpNotificationMessage_iconElement;
-// @ts-ignore
-import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import notificationMessageStyle from "./notification-message.css?inline" assert { type: "css" };
+import resetStyle from "@acab/reset.css?inline";
+import foundationStyle from "../foundation.css?inline";
+import notificationMessageStyle from "./notification-message.css?inline";
 const types = ["error", "warning", "information", "success"];
 function isValidType(value) {
     return types.some((type) => type === value);
@@ -87,5 +84,6 @@ export class SpNotificationMessage extends HTMLElement {
     }
 }
 _SpNotificationMessage_type = new WeakMap(), _SpNotificationMessage_baseElement = new WeakMap(), _SpNotificationMessage_iconElement = new WeakMap();
-customElements.get("sp-notification-message") ||
+if (!customElements.get("sp-notification-message")) {
     customElements.define("sp-notification-message", SpNotificationMessage);
+}

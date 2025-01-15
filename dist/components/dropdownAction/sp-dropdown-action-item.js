@@ -1,7 +1,5 @@
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import dropdownActionItemStyle from "./dropdown-action-item.css?inline" assert { type: "css" };
+import foundationStyle from "../foundation.css?inline";
+import dropdownActionItemStyle from "./dropdown-action-item.css?inline";
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${dropdownActionItemStyle}`);
 export class SpDropdownActionItem extends HTMLElement {
@@ -22,5 +20,6 @@ export class SpDropdownActionItem extends HTMLElement {
         this.shadowRoot?.appendChild(baseElement);
     }
 }
-customElements.get("sp-dropdown-action-item") ||
+if (!customElements.get("sp-dropdown-action-item")) {
     customElements.define("sp-dropdown-action-item", SpDropdownActionItem);
+}

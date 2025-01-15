@@ -1,8 +1,6 @@
 import { UbRadioButtonTextGroup } from "@ub-design/components-web-components/";
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import segmentedControlStyle from "./segmented-control.css?inline" assert { type: "css" };
+import foundationStyle from "../foundation.css?inline";
+import segmentedControlStyle from "./segmented-control.css?inline";
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${segmentedControlStyle}`);
 export class SpSegmentedControl extends UbRadioButtonTextGroup {
@@ -16,5 +14,6 @@ export class SpSegmentedControl extends UbRadioButtonTextGroup {
         }
     }
 }
-customElements.get("sp-segmented-control") ||
+if (!customElements.get("sp-segmented-control")) {
     customElements.define("sp-segmented-control", SpSegmentedControl);
+}
