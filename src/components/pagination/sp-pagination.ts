@@ -11,7 +11,7 @@ styles.replaceSync(`${resetStyle} ${foundationStyle} ${paginationStyle}`);
 export class SpPagination extends HTMLElement {
   #total = 0;
   #current = 0;
-
+  #nav = document.createElement("nav");
   #pageGroupElement = document.createElement("ul");
 
   get total() {
@@ -40,11 +40,14 @@ export class SpPagination extends HTMLElement {
   }
 
   connectedCallback() {
-    this.shadowRoot!.appendChild(this.#pageGroupElement);
-
-    this.#pageGroupElement.classList.add("page-group");
-
+    this.#setupNavigation();
     this.#updatePageGroup();
+  }
+
+  #setupNavigation() {
+    this.#pageGroupElement.classList.add("page-group");
+    this.#nav.appendChild(this.#pageGroupElement);
+    this.shadowRoot!.appendChild(this.#nav);
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
