@@ -74,7 +74,7 @@ export class SpPagination extends HTMLElement {
         parsedValue > 0
       ) {
         this.current = parsedValue;
-        this.#updatePageGroup();
+        this.#updatePageButtonStates();
       } else {
         console.warn(`${newValue}は無効なcurrent属性です。`);
       }
@@ -145,7 +145,7 @@ export class SpPagination extends HTMLElement {
         }),
       );
 
-      this.#updatePageGroup();
+      this.#updatePageButtonStates();
     }
   }
 
@@ -203,7 +203,7 @@ export class SpPagination extends HTMLElement {
         }),
       );
 
-      this.#updatePageGroup();
+      this.#updatePageButtonStates();
     }
   }
 
@@ -231,8 +231,35 @@ export class SpPagination extends HTMLElement {
         }),
       );
 
-      this.#updatePageGroup();
+      this.#updatePageButtonStates();
     }
+  }
+
+  #updatePageButtonStates() {
+    const buttons = this.#pageGroupElement.querySelectorAll("button");
+
+    buttons.forEach((button) => {
+      if (button.classList.contains("page")) {
+        const pageNumber = Number(button.textContent);
+        if (pageNumber === this.current) {
+          button.classList.add("selected");
+          button.setAttribute("aria-current", "page");
+        } else {
+          button.classList.remove("selected");
+          button.removeAttribute("aria-current");
+        }
+      } else if (
+        button.classList.contains("first") ||
+        button.classList.contains("previous")
+      ) {
+        button.disabled = this.current === 1;
+      } else if (
+        button.classList.contains("last") ||
+        button.classList.contains("next")
+      ) {
+        button.disabled = this.current === this.total;
+      }
+    });
   }
 }
 
