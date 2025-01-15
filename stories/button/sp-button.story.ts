@@ -1,10 +1,12 @@
-import "../../src/components/button/sp-button";
-import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
-import { speedaIconTypes } from "../../src/components/icon/icons";
+import "../../src/components/button/sp-button";
+
 import { action } from "@storybook/addon-actions";
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
-import { SpButton } from "../../src/components/button/sp-button";
+
+import type { SpButton } from "../../src/components/button/sp-button";
+import { speedaIconTypes } from "../../src/components/icon/icons";
 
 const meta = {
   component: "sp-button",

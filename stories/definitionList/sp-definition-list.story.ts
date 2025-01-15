@@ -1,10 +1,12 @@
 import "../../src/components/definitionList/sp-definition-list-dt";
 import "../../src/components/definitionList/sp-definition-list-dd";
-import "../../src/components/definitionList/sp-definition-list";
-import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
+import "../../src/components/definitionList/sp-definition-list";
+
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
-import { SpDefinitionList } from "../../src/components/definitionList/sp-definition-list";
+
+import type { SpDefinitionList } from "../../src/components/definitionList/sp-definition-list";
 
 type StoryArgs = SpDefinitionList & {
   termText: string;

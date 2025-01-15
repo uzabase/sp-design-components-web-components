@@ -1,7 +1,9 @@
-import "../../src/components/definitionList/sp-definition-list-dd";
-import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
-import { SpDefinitionListDd } from "../../src/components/definitionList/sp-definition-list-dd";
+import "../../src/components/definitionList/sp-definition-list-dd";
+
+import type { Meta, StoryObj } from "@storybook/web-components";
+
+import type { SpDefinitionListDd } from "../../src/components/definitionList/sp-definition-list-dd";
 
 type StoryArgs = SpDefinitionListDd & {
   text: string;

@@ -1,15 +1,18 @@
-import "../../src/components/notificationMessage/sp-notification-message";
 import "../../src/components/button/sp-button";
 import "@sp-design/token/lib/speeda-tokens.css";
-import { Meta, StoryObj } from "@storybook/web-components";
+import "../../src/components/notificationMessage/sp-notification-message";
+
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
-const meta: Meta = {
-  component: "sp-notification-message",
-};
-export default meta;
+import type { SpNotificationMessage } from "../../src/components/notificationMessage/sp-notification-message";
 
-type Story = StoryObj;
+const meta = {
+  component: "sp-notification-message",
+} satisfies Meta<SpNotificationMessage>;
+
+export default meta;
+type Story = StoryObj<SpNotificationMessage>;
 
 export const Basic: Story = {
   render: () => html`

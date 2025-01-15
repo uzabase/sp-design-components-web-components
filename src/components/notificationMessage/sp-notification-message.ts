@@ -1,9 +1,7 @@
-// @ts-ignore
-import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import notificationMessageStyle from "./notification-message.css?inline" assert { type: "css" };
+import resetStyle from "@acab/reset.css?inline";
+
+import foundationStyle from "../foundation.css?inline";
+import notificationMessageStyle from "./notification-message.css?inline";
 
 export type Type = "error" | "warning" | "information" | "success";
 
@@ -106,5 +104,6 @@ declare global {
   }
 }
 
-customElements.get("sp-notification-message") ||
+if (!customElements.get("sp-notification-message")) {
   customElements.define("sp-notification-message", SpNotificationMessage);
+}

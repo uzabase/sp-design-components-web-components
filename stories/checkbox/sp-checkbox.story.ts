@@ -1,9 +1,11 @@
-import "../../src/components/checkbox/sp-checkbox";
-import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
-import { html } from "lit";
+import "../../src/components/checkbox/sp-checkbox";
+
 import { action } from "@storybook/addon-actions";
-import { SpCheckbox } from "../../src/components/checkbox/sp-checkbox";
+import type { Meta, StoryObj } from "@storybook/web-components";
+import { html } from "lit";
+
+import type { SpCheckbox } from "../../src/components/checkbox/sp-checkbox";
 
 const meta = {
   component: "sp-checkbox",

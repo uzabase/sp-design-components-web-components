@@ -1,11 +1,9 @@
-import { SpButton } from "../button/sp-button";
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import buttonStyle from "../button/button.css?inline" assert { type: "css" };
-// @ts-ignore
-import dropdownActionButtonStyle from "./dropdown-action-button.css?inline" assert { type: "css" };
 import "../icon/sp-icon";
+
+import buttonStyle from "../button/button.css?inline";
+import { SpButton } from "../button/sp-button";
+import foundationStyle from "../foundation.css?inline";
+import dropdownActionButtonStyle from "./dropdown-action-button.css?inline";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(
@@ -49,5 +47,6 @@ declare global {
   }
 }
 
-customElements.get("sp-dropdown-action-button") ||
+if (!customElements.get("sp-dropdown-action-button")) {
   customElements.define("sp-dropdown-action-button", SpDropdownActionButton);
+}

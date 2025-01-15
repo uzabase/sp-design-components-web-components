@@ -1,11 +1,12 @@
-import { describe, expect, test } from "vitest";
 import { screen } from "shadow-dom-testing-library";
+import { describe, expect, test } from "vitest";
+
 import {
   iconPaths,
   SpNotificationMessage,
   Type,
 } from "../../src/components/notificationMessage/sp-notification-message";
-import "../../src/components/notificationMessage/sp-notification-message";
+
 
 function getSpNotificationMessage() {
   return document.querySelector(

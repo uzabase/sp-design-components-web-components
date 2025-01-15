@@ -1,9 +1,11 @@
-import "../../src/components/radio/sp-radio-button-text-group";
-import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
-import { html } from "lit";
+import "../../src/components/radio/sp-radio-button-text-group";
+
 import { action } from "@storybook/addon-actions";
-import { SpRadioButtonTextGroup } from "../../src/components/radio/sp-radio-button-text-group";
+import type { Meta, StoryObj } from "@storybook/web-components";
+import { html } from "lit";
+
+import type { SpRadioButtonTextGroup } from "../../src/components/radio/sp-radio-button-text-group";
 
 const data = [
   {

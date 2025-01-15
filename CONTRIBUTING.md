@@ -69,6 +69,7 @@ TODO: コンポーネントのインタラクティブな機能には、イベ�
 
 - [Prettier](https://prettier.io/)によるコードのフォーマットチェック
 - [Stylelint](https://stylelint.io/)によるCSSのリントチェック
+- [ESLint](https://eslint.org/)によるコードのリントチェック
 - TypeScriptコードのコンパイルチェック
 - [Vitest](https://vitest.dev/)によるユニットテスト
 

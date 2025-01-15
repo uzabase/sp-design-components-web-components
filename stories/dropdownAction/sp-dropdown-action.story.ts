@@ -1,8 +1,10 @@
 import "@sp-design/token/lib/speeda-tokens.css";
+import "../../src/components/dropdownAction/sp-dropdown-action";
+
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
-import "../../src/components/dropdownAction/sp-dropdown-action";
-import { SpDropdownAction } from "../../src/components/dropdownAction/sp-dropdown-action";
+
+import type { SpDropdownAction } from "../../src/components/dropdownAction/sp-dropdown-action";
 
 const meta = {
   component: "sp-dropdown-action",

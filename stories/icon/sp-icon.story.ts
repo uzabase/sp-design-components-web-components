@@ -1,9 +1,11 @@
-import "../../src/components/icon/sp-icon";
-import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
-import { speedaIconTypes } from "../../src/components/icon/icons";
+import "../../src/components/icon/sp-icon";
+
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
-import { SpIcon } from "../../src/components/icon/sp-icon";
+
+import { speedaIconTypes } from "../../src/components/icon/icons";
+import type { SpIcon } from "../../src/components/icon/sp-icon";
 
 const meta = {
   component: "sp-icon",
