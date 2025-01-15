@@ -21,7 +21,9 @@ export class SpPagination extends HTMLElement {
   #current = 0;
   #nav = document.createElement("nav");
   #pageGroupElement = document.createElement("ul");
+
   #pageButtons: NavigationButton[] = [];
+  #buttonElements: HTMLButtonElement[] = [];
 
   get total() {
     return this.#total;
@@ -95,6 +97,7 @@ export class SpPagination extends HTMLElement {
 
   #updatePageGroup() {
     this.#pageGroupElement.innerHTML = "";
+    this.#buttonElements = [];
 
     this.#pageButtons = [
       { type: "first", text: "最初へ", targetPage: 1 },
@@ -155,6 +158,8 @@ export class SpPagination extends HTMLElement {
     button.disabled = isDisabled;
     button.onclick = () => this.#handlePageChange(targetPage);
 
+    this.#buttonElements.push(button);
+
     const li = document.createElement("li");
     li.appendChild(button);
     return li;
@@ -189,8 +194,6 @@ export class SpPagination extends HTMLElement {
   }
 
   #updatePageButtonStates() {
-    const buttons = this.#pageGroupElement.querySelectorAll("button");
-
     this.#pageButtons = [
       { type: "first", text: "最初へ", targetPage: 1 },
       { type: "previous", text: "前へ", targetPage: this.current - 1 },
@@ -199,7 +202,7 @@ export class SpPagination extends HTMLElement {
       { type: "last", text: "最後へ", targetPage: this.total },
     ];
 
-    buttons.forEach((button, index) => {
+    this.#buttonElements.forEach((button, index) => {
       const buttonData = this.#pageButtons[index];
 
       if (button.classList.contains("page")) {
