@@ -8,11 +8,20 @@ import paginationStyle from "./pagination.css?inline" assert { type: "css" };
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${paginationStyle}`);
 
+type ButtonType = "first" | "previous" | "next" | "last" | "page";
+
+interface NavigationButton {
+  type: ButtonType;
+  text: string;
+  targetPage: number;
+}
+
 export class SpPagination extends HTMLElement {
   #total = 0;
   #current = 0;
   #nav = document.createElement("nav");
   #pageGroupElement = document.createElement("ul");
+  #pageButtons: NavigationButton[] = [];
 
   get total() {
     return this.#total;
@@ -87,181 +96,128 @@ export class SpPagination extends HTMLElement {
   #updatePageGroup() {
     this.#pageGroupElement.innerHTML = "";
 
-    const firstButtonItem = this.#createFirstPageButtonItem();
-    this.#pageGroupElement.appendChild(firstButtonItem);
+    this.#pageButtons = [
+      { type: "first", text: "最初へ", targetPage: 1 },
+      { type: "previous", text: "前へ", targetPage: this.current - 1 },
+      ...this.#createPageButtons(),
+      { type: "next", text: "次へ", targetPage: this.current + 1 },
+      { type: "last", text: "最後へ", targetPage: this.total },
+    ];
 
-    const previousButtonItem = this.#createPreviousPageButtonItem();
-    this.#pageGroupElement.appendChild(previousButtonItem);
+    this.#pageButtons
+      .map((button) => this.#createButtonItem(button))
+      .forEach((item) => this.#pageGroupElement.appendChild(item));
+  }
 
-    const firstVisiblePageNumber = Math.min(
+  #createPageButtons(): NavigationButton[] {
+    const { firstVisiblePage, lastVisiblePage } = this.#calculateVisiblePages();
+
+    return Array.from(
+      { length: lastVisiblePage - firstVisiblePage + 1 },
+      (_, index) => {
+        const pageNumber = firstVisiblePage + index;
+        return {
+          type: "page",
+          text: String(pageNumber),
+          targetPage: pageNumber,
+        };
+      },
+    );
+  }
+
+  #calculateVisiblePages() {
+    const firstVisiblePage = Math.min(
       Math.max(1, this.current - 4),
       this.total - 9,
     );
-    const lastVisiblePageNumber = Math.max(
+    const lastVisiblePage = Math.max(
       Math.min(this.total, this.current + 5),
       10,
     );
 
-    for (
-      let pageNumber = firstVisiblePageNumber;
-      pageNumber <= lastVisiblePageNumber;
-      pageNumber++
-    ) {
-      const pageButtonItem = this.#createPageButtonItem(pageNumber);
-      this.#pageGroupElement.appendChild(pageButtonItem);
-    }
-
-    const nextButtonItem = this.#createNextPageButtonItem();
-    this.#pageGroupElement.appendChild(nextButtonItem);
-
-    const lastButtonItem = this.#createLastPageButtonItem();
-    this.#pageGroupElement.appendChild(lastButtonItem);
+    return { firstVisiblePage, lastVisiblePage };
   }
 
-  #createPageButtonItem(pageNumber: number) {
+  #createButtonItem({ type, text, targetPage }: NavigationButton) {
     const button = document.createElement("button");
-    button.textContent = String(pageNumber);
-    button.classList.add("page");
-    button.setAttribute("aria-label", `${pageNumber}ページ目へ`);
+    button.textContent = text;
+    button.classList.add(type);
 
-    if (pageNumber === this.current) {
-      button.classList.add("selected");
-      button.setAttribute("aria-current", "page");
+    if (type === "page") {
+      button.setAttribute("aria-label", `${targetPage}ページ目へ`);
+      if (targetPage === this.current) {
+        button.classList.add("selected");
+        button.setAttribute("aria-current", "page");
+      }
     }
 
-    button.addEventListener("click", () => this.#handlePageClick(pageNumber));
+    const isDisabled = this.#isButtonDisabled(type);
+    button.disabled = isDisabled;
+    button.onclick = () => this.#handlePageChange(targetPage);
 
     const li = document.createElement("li");
     li.appendChild(button);
-
     return li;
   }
 
-  #handlePageClick(pageNumber: number) {
-    if (pageNumber !== this.current) {
-      this.current = pageNumber;
-      this.setAttribute("current", String(pageNumber));
-
-      this.dispatchEvent(
-        new CustomEvent("page-change", {
-          detail: { page: pageNumber },
-        }),
-      );
-
-      this.#updatePageButtonStates();
+  #isButtonDisabled(type: ButtonType): boolean {
+    switch (type) {
+      case "first":
+      case "previous":
+        return this.current === 1;
+      case "next":
+      case "last":
+        return this.current === this.total;
+      default:
+        return false;
     }
   }
 
-  #createFirstPageButtonItem() {
-    const firstPageButton = document.createElement("button");
-    firstPageButton.textContent = "最初へ";
-    firstPageButton.disabled = this.current === 1;
-    firstPageButton.classList.add("first");
-    firstPageButton.addEventListener("click", () => this.#handlePageClick(1));
+  #handlePageChange(newPage: number) {
+    if (newPage === this.current || newPage < 1 || newPage > this.total) return;
 
-    const firstPageListItem = document.createElement("li");
-    firstPageListItem.appendChild(firstPageButton);
+    this.current = newPage;
+    this.setAttribute("current", String(newPage));
 
-    return firstPageListItem;
-  }
-
-  #createLastPageButtonItem() {
-    const lastPageButton = document.createElement("button");
-    lastPageButton.textContent = "最後へ";
-    lastPageButton.disabled = this.current === this.total;
-    lastPageButton.classList.add("last");
-    lastPageButton.addEventListener("click", () =>
-      this.#handlePageClick(this.total),
+    this.dispatchEvent(
+      new CustomEvent("page-change", {
+        detail: { page: newPage },
+      }),
     );
 
-    const lastPageListItem = document.createElement("li");
-    lastPageListItem.appendChild(lastPageButton);
-
-    return lastPageListItem;
-  }
-
-  #createPreviousPageButtonItem() {
-    const previousPageButton = document.createElement("button");
-    previousPageButton.textContent = "前へ";
-    previousPageButton.disabled = this.current === 1;
-    previousPageButton.classList.add("previous");
-    previousPageButton.addEventListener("click", () =>
-      this.#handlePreviousClick(),
-    );
-
-    const previousPageListItem = document.createElement("li");
-    previousPageListItem.appendChild(previousPageButton);
-
-    return previousPageListItem;
-  }
-
-  #handlePreviousClick() {
-    if (this.current > 1) {
-      this.current--;
-      this.setAttribute("current", String(this.current));
-
-      this.dispatchEvent(
-        new CustomEvent("page-change", {
-          detail: { page: this.current },
-        }),
-      );
-
-      this.#updatePageButtonStates();
-    }
-  }
-
-  #createNextPageButtonItem() {
-    const nextPageButton = document.createElement("button");
-    nextPageButton.textContent = "次へ";
-    nextPageButton.disabled = this.current === this.total;
-    nextPageButton.classList.add("next");
-    nextPageButton.addEventListener("click", () => this.#handleNextClick());
-
-    const nextPageListItem = document.createElement("li");
-    nextPageListItem.appendChild(nextPageButton);
-
-    return nextPageListItem;
-  }
-
-  #handleNextClick() {
-    if (this.current < this.total) {
-      this.current++;
-      this.setAttribute("current", String(this.current));
-
-      this.dispatchEvent(
-        new CustomEvent("page-change", {
-          detail: { page: this.current },
-        }),
-      );
-
-      this.#updatePageButtonStates();
-    }
+    this.#updatePageButtonStates();
   }
 
   #updatePageButtonStates() {
     const buttons = this.#pageGroupElement.querySelectorAll("button");
 
-    buttons.forEach((button) => {
+    this.#pageButtons = [
+      { type: "first", text: "最初へ", targetPage: 1 },
+      { type: "previous", text: "前へ", targetPage: this.current - 1 },
+      ...this.#createPageButtons(),
+      { type: "next", text: "次へ", targetPage: this.current + 1 },
+      { type: "last", text: "最後へ", targetPage: this.total },
+    ];
+
+    buttons.forEach((button, index) => {
+      const buttonData = this.#pageButtons[index];
+
       if (button.classList.contains("page")) {
-        const pageNumber = Number(button.textContent);
-        if (pageNumber === this.current) {
-          button.classList.add("selected");
+        button.textContent = buttonData.text;
+        const isCurrentPage = buttonData.targetPage === this.current;
+        button.classList.toggle("selected", isCurrentPage);
+        button.setAttribute("aria-label", `${buttonData.targetPage}ページ目へ`);
+
+        if (isCurrentPage) {
           button.setAttribute("aria-current", "page");
         } else {
-          button.classList.remove("selected");
           button.removeAttribute("aria-current");
         }
-      } else if (
-        button.classList.contains("first") ||
-        button.classList.contains("previous")
-      ) {
-        button.disabled = this.current === 1;
-      } else if (
-        button.classList.contains("last") ||
-        button.classList.contains("next")
-      ) {
-        button.disabled = this.current === this.total;
       }
+
+      const isDisabled = this.#isButtonDisabled(buttonData.type);
+      button.disabled = isDisabled;
+      button.onclick = () => this.#handlePageChange(buttonData.targetPage);
     });
   }
 }
