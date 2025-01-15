@@ -7,7 +7,6 @@ import {
   Type,
 } from "../../src/components/notificationMessage/sp-notification-message";
 
-
 function getSpNotificationMessage() {
   return document.querySelector(
     "sp-notification-message",
