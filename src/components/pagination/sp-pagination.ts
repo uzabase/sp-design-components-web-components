@@ -129,13 +129,14 @@ export class SpPagination extends HTMLElement {
   }
 
   #calculateVisiblePages() {
-    const firstVisiblePage = Math.min(
-      Math.max(1, this.current - 4),
-      this.total - 9,
+    const firstVisiblePage = Math.max(
+      Math.min(this.current - 4, this.total - 9),
+      1,
     );
-    const lastVisiblePage = Math.max(
-      Math.min(this.total, this.current + 5),
-      10,
+
+    const lastVisiblePage = Math.min(
+      Math.max(this.current + 5, 10),
+      this.total,
     );
 
     return { firstVisiblePage, lastVisiblePage };

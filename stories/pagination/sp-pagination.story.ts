@@ -23,3 +23,7 @@ export const Basic: Story = {
 export const ManyPages: Story = {
   render: () => html`<sp-pagination total="20" current="10"></sp-pagination>`,
 };
+
+export const OnePage: Story = {
+  render: () => html`<sp-pagination total="1" current="1"></sp-pagination>`,
+};
