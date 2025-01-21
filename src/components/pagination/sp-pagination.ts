@@ -1,9 +1,7 @@
-// @ts-ignore
-import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import paginationStyle from "./pagination.css?inline" assert { type: "css" };
+import resetStyle from "@acab/reset.css?inline";
+
+import foundationStyle from "../foundation.css?inline";
+import paginationStyle from "./pagination.css?inline";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${paginationStyle}`);
@@ -241,5 +239,6 @@ declare global {
   }
 }
 
-customElements.get("sp-pagination") ||
+if (!customElements.get("sp-pagination")) {
   customElements.define("sp-pagination", SpPagination);
+}

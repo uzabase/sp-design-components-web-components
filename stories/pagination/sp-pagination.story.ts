@@ -1,24 +1,20 @@
 import "../../src/components/pagination/sp-pagination";
 import "@sp-design/token/lib/speeda-tokens.css";
-import { Meta, StoryObj } from "@storybook/web-components";
+
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
+
+import type { SpPagination } from "../../src/components/pagination/sp-pagination";
 
 const meta: Meta = {
   component: "sp-pagination",
-  argTypes: {
-    text: { type: "string" },
-  },
-  args: {
-    text: "Pagination",
-  },
-};
+  args: { total: 10, selected: 1 },
+} satisfies Meta<SpPagination>;
+
 export default meta;
+type Story = StoryObj<SpPagination>;
 
-type Story = StoryObj;
-
-export const Basic: Story = {
-  render: () => html`<sp-pagination total="10" selected="1"></sp-pagination>`,
-};
+export const Basic: Story = {};
 
 export const ManyPages: Story = {
   render: () => html`<sp-pagination total="20" selected="10"></sp-pagination>`,
