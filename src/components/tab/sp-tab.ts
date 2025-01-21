@@ -1,12 +1,12 @@
 // @ts-ignore
+import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
+// @ts-ignore
 import foundationStyle from "../foundation.css?inline" assert { type: "css" };
 // @ts-ignore
 import tabStyle from "./tab.css?inline" assert { type: "css" };
-// @ts-ignore
-import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
-import { SpIcon } from "../icon/sp-icon";
 
-type TabType = "fillWhite" | "fillGray";
+import { SpIcon } from "../icon/sp-icon";
+type TabType = "white" | "gray";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${tabStyle} ${resetStyle}`);
@@ -14,7 +14,7 @@ styles.replaceSync(`${foundationStyle} ${tabStyle} ${resetStyle}`);
 export class SpTab extends HTMLElement {
   #selected: boolean = false;
   #disabled: boolean = false;
-  #type!: TabType;
+  #fill!: TabType;
   #plusIconElement = new SpIcon();
   #tabElement = document.createElement("button");
   #textElement = document.createElement("span");
@@ -32,34 +32,33 @@ export class SpTab extends HTMLElement {
 
   set selected(value: boolean) {
     this.#selected = value;
-    value ? this.#tabElement.classList.add("-selected") : this.#tabElement.classList.remove("-selected")
-    this.#tabElement.setAttribute("aria-selected", this.#selected+"");
+    value
+      ? this.#tabElement.classList.add("-selected")
+      : this.#tabElement.classList.remove("-selected");
+    this.#tabElement.setAttribute("aria-selected", this.#selected + "");
   }
-  set type(value: TabType) {
-    this.#type = value;
+  set fill(value: TabType) {
+    this.#fill = value;
     const tab = this.#tabElement;
-    const typeClassList = {
-      fillWhite: "-fillWhite",
-      fillGray: "-fillGray",
+    const fillClassList = {
+      white: "-white",
+      gray: "-gray",
     };
-    tab.classList.remove(typeClassList[this.#type]);
-    tab.classList.add(typeClassList[this.#type]);
+    tab.classList.remove(fillClassList[this.#fill]);
+    tab.classList.add(fillClassList[this.#fill]);
   }
 
   set plusIcon(value: boolean) {
     this.#tabElement.appendChild(this.#textElement);
     if (value) {
-      this.#tabElement.insertBefore(
-        this.#plusIconElement,
-        this.#textElement,
-      );
+      this.#tabElement.insertBefore(this.#plusIconElement, this.#textElement);
     } else {
       this.#plusIconElement.remove();
     }
   }
 
   static get observedAttributes() {
-    return ["text", "selected", "plus-icon", "disabled", "type"];
+    return ["text", "selected", "plus-icon", "disabled", "fill"];
   }
 
   constructor() {
@@ -72,14 +71,14 @@ export class SpTab extends HTMLElement {
   }
   connectedCallback() {
     this.#tabElement.classList.add("spds__tab");
-    this.#tabElement.setAttribute("role", "tab");
-    this.#tabElement.setAttribute("aria-tabindex", "0");
+    //this.#tabElement.setAttribute("role", "tab");
+    //this.#tabElement.setAttribute("tabindex", "0");
     this.#textElement.classList.add("spds__tabText");
 
     this.#plusIconElement.classList.add("base__icon");
     this.#plusIconElement.size = "small";
     this.#plusIconElement.type = "plus";
-    this.setAttribute("role", "tablist");
+    this.setAttribute("role", "tab");
     this.shadowRoot!.appendChild(this.#tabElement);
   }
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -94,15 +93,14 @@ export class SpTab extends HTMLElement {
       case "disabled":
         this.disabled = newValue === "true" || newValue === "";
         break;
-      case "type":
-        this.type = newValue as TabType;
+      case "fill":
+        this.fill = newValue as TabType;
         break;
       case "plus-icon":
         this.plusIcon = newValue === "true" || newValue === "";
         break;
     }
   }
-
 }
 
 customElements.get("sp-tab") || customElements.define("sp-tab", SpTab);

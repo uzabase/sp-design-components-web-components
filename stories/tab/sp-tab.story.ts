@@ -8,9 +8,9 @@ const meta: Meta = {
   component: "sp-tab",
   argTypes: {
     text: { type: "string" },
-    type: {
+    fill: {
       control: { type: "select" },
-      options: ["fillWhite", "fillGray"],
+      options: ["white", "gray"],
     },
     plusIcon: { type: "boolean" },
     selected: { type: "boolean" },
@@ -21,7 +21,7 @@ const meta: Meta = {
   },
   args: {
     text: "sp-tab",
-    type: "fillGray",
+    fill: "gray",
     plusIcon: false,
     selected: false,
     disabled: false,
@@ -34,7 +34,7 @@ type Story = StoryObj;
 
 export const Basic: Story = {
   args: {
-    type: "fillGray",
+    fill: "gray",
     plusIcon: undefined,
     selected: undefined,
     disabled: undefined,
@@ -42,7 +42,7 @@ export const Basic: Story = {
 };
 export const typeGray: Story = {
   args: {
-    type: "fillGray",
+    fill: "gray",
     plusIcon: undefined,
     selected: undefined,
     disabled: undefined,
@@ -50,7 +50,7 @@ export const typeGray: Story = {
 };
 export const typeWhite: Story = {
   args: {
-    type: "fillWhite",
+    fill: "white",
     plusIcon: undefined,
     selected: undefined,
     disabled: undefined,
@@ -58,7 +58,7 @@ export const typeWhite: Story = {
 };
 export const plusIcon: Story = {
   args: {
-    type: undefined,
+    fill: undefined,
     plusIcon: true,
     selected: undefined,
     disabled: undefined,
@@ -70,21 +70,21 @@ export const list: Story = {
     html`<div class="tabList">
       <sp-tab
         text="タブのリストだよ"
-        type=${args.type}
+        fill=${args.fill}
         plus-icon=${args.plusIcon}
         selected=${args.selected}
         disabled=${args.disabled}
       ></sp-tab>
       <sp-tab
         text="タブのリストだよ"
-        type=${args.type}
+        fill=${args.fill}
         plus-icon=${args.plusIcon}
         selected=${args.selected}
         disabled=${args.disabled}
       ></sp-tab>
       <sp-tab
         text="タブのリストだよ"
-        type=${args.type}
+        fill=${args.fill}
         plus-icon=${args.plusIcon}
         selected=${args.selected}
         disabled=${args.disabled}
@@ -100,7 +100,7 @@ export const All: Story = {
         <div class="sampleAll__contents">
           <sp-tab
             text="Grayのタブだよ"
-            type="fillGray"
+            fill="gray"
             plus-icon=${args.plusIcon}
             selected=${args.selected}
             disabled=${args.disabled}
@@ -112,7 +112,7 @@ export const All: Story = {
         <div class="sampleAll__contents">
           <sp-tab
             text="Whiteのタブだよ"
-            type="fillWhite"
+            fill="white"
             plus-icon=${args.plusIcon}
             selected=${args.selected}
             disabled=${args.disabled}
@@ -124,7 +124,7 @@ export const All: Story = {
         <div class="sampleAll__contents">
           <sp-tab
             text="新規作成アイコン付き"
-            type=${args.type}
+            fill=${args.fill}
             plus-icon="true"
             selected=${args.selected}
             disabled=${args.disabled}
@@ -137,21 +137,21 @@ export const All: Story = {
           <div class="tabList">
             <sp-tab
               text="タブのリストだよ"
-              type=${args.type}
+              fill=${args.fill}
               plus-icon=${args.plusIcon}
               selected=${args.selected}
               disabled=${args.disabled}
             ></sp-tab>
             <sp-tab
               text="タブのリストだよ"
-              type=${args.type}
+              fill=${args.fill}
               plus-icon=${args.plusIcon}
               selected=${args.selected}
               disabled=${args.disabled}
             ></sp-tab>
             <sp-tab
               text="タブのリストだよ"
-              type=${args.type}
+              fill=${args.fill}
               plus-icon=${args.plusIcon}
               selected=${args.selected}
               disabled=${args.disabled}

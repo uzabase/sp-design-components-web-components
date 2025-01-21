@@ -1,6 +1,5 @@
 :host {
   display: inline-block;
-  min-width: 0;
   max-width: 100%;
 }
 
@@ -24,11 +23,13 @@
   border-radius: 1rem;
   min-height: 28px;
   column-gap: 4px;
+  line-height: 160%;
 
     &:hover{
       cursor:pointer;
     }
-    &.-fillGray{
+
+    &.-gray{
       border: 1px solid var(--color-semantic-border-regular);
       background-color: var(--color-semantic-surface-regular-2);
 
@@ -40,6 +41,7 @@
         border-color: var(--color-semantic-border-selected);
         background-color: var(--color-semantic-surface-selected);
         color: var(--color-semantic-text-inverse);
+        font-weight: bold;
 
         &:hover {
           border-color: var(--color-semantic-surface-selected-hover);
@@ -62,7 +64,7 @@
       }
     }
 
-  &.-fillWhite{
+  &.-white{
     border: 1px solid var(--color-semantic-border-regular);
     background-color: var(--color-semantic-surface-regular-1);
 
@@ -74,11 +76,13 @@
       border-color: var(--color-semantic-border-selected);
       background-color: var(--color-semantic-surface-selected);
       color: var(--color-semantic-text-inverse);
+      font-weight: bold;
 
     &:hover {
       border-color: var(--color-semantic-surface-selected-hover);
       background-color: var(--color-semantic-surface-selected-hover);
     }
+
     &:disabled{
       border-color: var(--color-semantic-border-regular);
       background-color: var(--color-semantic-surface-regular-2);
