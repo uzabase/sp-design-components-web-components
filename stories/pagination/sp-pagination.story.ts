@@ -17,13 +17,13 @@ export default meta;
 type Story = StoryObj;
 
 export const Basic: Story = {
-  render: () => html`<sp-pagination total="10" current="1"></sp-pagination>`,
+  render: () => html`<sp-pagination total="10" selected="1"></sp-pagination>`,
 };
 
 export const ManyPages: Story = {
-  render: () => html`<sp-pagination total="20" current="10"></sp-pagination>`,
+  render: () => html`<sp-pagination total="20" selected="10"></sp-pagination>`,
 };
 
 export const OnePage: Story = {
-  render: () => html`<sp-pagination total="1" current="1"></sp-pagination>`,
+  render: () => html`<sp-pagination total="1" selected="1"></sp-pagination>`,
 };

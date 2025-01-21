@@ -18,7 +18,7 @@ interface NavigationButton {
 
 export class SpPagination extends HTMLElement {
   #total = 0;
-  #current = 0;
+  #selected = 0;
   #nav = document.createElement("nav");
   #pageGroupElement = document.createElement("ul");
 
@@ -32,15 +32,15 @@ export class SpPagination extends HTMLElement {
     this.#total = value;
   }
 
-  get current() {
-    return this.#current;
+  get selected() {
+    return this.#selected;
   }
-  set current(value: number) {
-    this.#current = value;
+  set selected(value: number) {
+    this.#selected = value;
   }
 
   static get observedAttributes() {
-    return ["total", "current"];
+    return ["total", "selected"];
   }
 
   constructor() {
@@ -79,7 +79,7 @@ export class SpPagination extends HTMLElement {
       } else {
         console.warn(`${newValue}は無効なtotal属性です。`);
       }
-    } else if (name === "current") {
+    } else if (name === "selected") {
       const parsedValue = Number(newValue);
 
       if (
@@ -87,10 +87,10 @@ export class SpPagination extends HTMLElement {
         !Number.isInteger(parsedValue) ||
         parsedValue > 0
       ) {
-        this.current = parsedValue;
+        this.selected = parsedValue;
         this.#updatePageButtonStates();
       } else {
-        console.warn(`${newValue}は無効なcurrent属性です。`);
+        console.warn(`${newValue}は無効なselected属性です。`);
       }
     }
   }
@@ -101,9 +101,9 @@ export class SpPagination extends HTMLElement {
 
     this.#pageButtons = [
       { type: "first", text: "最初へ", targetPage: 1 },
-      { type: "previous", text: "前へ", targetPage: this.current - 1 },
+      { type: "previous", text: "前へ", targetPage: this.selected - 1 },
       ...this.#createPageButtons(),
-      { type: "next", text: "次へ", targetPage: this.current + 1 },
+      { type: "next", text: "次へ", targetPage: this.selected + 1 },
       { type: "last", text: "最後へ", targetPage: this.total },
     ];
 
@@ -130,12 +130,12 @@ export class SpPagination extends HTMLElement {
 
   #calculateVisiblePages() {
     const firstVisiblePage = Math.max(
-      Math.min(this.current - 4, this.total - 9),
+      Math.min(this.selected - 4, this.total - 9),
       1,
     );
 
     const lastVisiblePage = Math.min(
-      Math.max(this.current + 5, 10),
+      Math.max(this.selected + 5, 10),
       this.total,
     );
 
@@ -149,7 +149,7 @@ export class SpPagination extends HTMLElement {
 
     if (type === "page") {
       button.setAttribute("aria-label", `${targetPage}ページ目へ`);
-      if (targetPage === this.current) {
+      if (targetPage === this.selected) {
         button.classList.add("selected");
         button.setAttribute("aria-current", "page");
       }
@@ -170,20 +170,22 @@ export class SpPagination extends HTMLElement {
     switch (type) {
       case "first":
       case "previous":
-        return this.current === 1;
+        return this.selected === 1;
       case "next":
       case "last":
-        return this.current === this.total;
+        return this.selected === this.total;
       default:
         return false;
     }
   }
 
   #handlePageChange(newPage: number) {
-    if (newPage === this.current || newPage < 1 || newPage > this.total) return;
+    if (newPage === this.selected || newPage < 1 || newPage > this.total) {
+      return;
+    }
 
-    this.current = newPage;
-    this.setAttribute("current", String(newPage));
+    this.selected = newPage;
+    this.setAttribute("selected", String(newPage));
 
     this.dispatchEvent(
       new CustomEvent("page-change", {
@@ -197,9 +199,9 @@ export class SpPagination extends HTMLElement {
   #updatePageButtonStates() {
     this.#pageButtons = [
       { type: "first", text: "最初へ", targetPage: 1 },
-      { type: "previous", text: "前へ", targetPage: this.current - 1 },
+      { type: "previous", text: "前へ", targetPage: this.selected - 1 },
       ...this.#createPageButtons(),
-      { type: "next", text: "次へ", targetPage: this.current + 1 },
+      { type: "next", text: "次へ", targetPage: this.selected + 1 },
       { type: "last", text: "最後へ", targetPage: this.total },
     ];
 
@@ -208,7 +210,7 @@ export class SpPagination extends HTMLElement {
 
       if (button.classList.contains("page")) {
         button.textContent = buttonData.text;
-        const isCurrentPage = buttonData.targetPage === this.current;
+        const isCurrentPage = buttonData.targetPage === this.selected;
         button.classList.toggle("selected", isCurrentPage);
         button.setAttribute("aria-label", `${buttonData.targetPage}ページ目へ`);
 
