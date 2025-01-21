@@ -27,3 +27,11 @@ export const ManyPages: Story = {
 export const OnePage: Story = {
   render: () => html`<sp-pagination total="1" selected="1"></sp-pagination>`,
 };
+
+export const InvalidTotal: Story = {
+  render: () => html`<sp-pagination total="0" selected="1"></sp-pagination>`,
+};
+
+export const InvalidSelected: Story = {
+  render: () => html`<sp-pagination total="5" selected="10"></sp-pagination>`,
+};

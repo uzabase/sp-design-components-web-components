@@ -69,29 +69,36 @@ export class SpPagination extends HTMLElement {
     if (name === "total") {
       const parsedValue = Number(newValue);
 
-      if (
-        Number.isNaN(parsedValue) ||
-        !Number.isInteger(parsedValue) ||
-        parsedValue > 0
-      ) {
+      const isValueValid =
+        !Number.isNaN(parsedValue) &&
+        Number.isInteger(parsedValue) &&
+        parsedValue > 0;
+
+      if (isValueValid) {
         this.total = parsedValue;
-        this.#updatePageGroup();
       } else {
         console.warn(`${newValue}は無効なtotal属性です。`);
+        this.total = 1;
       }
+
+      this.#updatePageGroup();
     } else if (name === "selected") {
       const parsedValue = Number(newValue);
 
-      if (
-        Number.isNaN(parsedValue) ||
-        !Number.isInteger(parsedValue) ||
-        parsedValue > 0
-      ) {
+      const isValueValid =
+        !Number.isNaN(parsedValue) &&
+        Number.isInteger(parsedValue) &&
+        parsedValue > 0 &&
+        parsedValue <= this.total;
+
+      if (isValueValid) {
         this.selected = parsedValue;
-        this.#updatePageButtonStates();
       } else {
         console.warn(`${newValue}は無効なselected属性です。`);
+        this.selected = 1;
       }
+
+      this.#updatePageButtonStates();
     }
   }
 
