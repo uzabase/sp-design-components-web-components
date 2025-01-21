@@ -1,10 +1,9 @@
-// @ts-ignore
-import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import dropdownDialogStyle from "./dropdown-dialog.css?inline" assert { type: "css" };
 import "../button/sp-button";
+
+import resetStyle from "@acab/reset.css?inline";
+
+import foundationStyle from "../foundation.css?inline";
+import dropdownDialogStyle from "./dropdown-dialog.css?inline";
 
 type Position = "left" | "right";
 
@@ -26,6 +25,8 @@ export class SpDropdownDialog extends HTMLElement {
   #open: boolean = false;
   #disabled: boolean = false;
   #position: Position = "left";
+
+  #clickOutsideHandler = this.#handleClickOutside.bind(this);
 
   set label(value: string) {
     this.#buttonElement.text = value;
@@ -98,7 +99,7 @@ export class SpDropdownDialog extends HTMLElement {
     this.#dialogElement.role = "dialog";
     this.#dialogElement.appendChild(this.#dialogSlotElement);
 
-    window.addEventListener("click", this.#handleClickOutside.bind(this));
+    window.addEventListener("click", this.#clickOutsideHandler);
 
     this.#baseElement.appendChild(this.#dialogElement);
     this.#baseElement.classList.add("base");
@@ -107,7 +108,7 @@ export class SpDropdownDialog extends HTMLElement {
   }
 
   disconnectedCallback() {
-    window.removeEventListener("click", this.#handleClickOutside.bind(this));
+    window.removeEventListener("click", this.#clickOutsideHandler);
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -158,5 +159,6 @@ declare global {
   }
 }
 
-customElements.get("sp-dropdown-dialog") ||
+if (!customElements.get("sp-dropdown-dialog")) {
   customElements.define("sp-dropdown-dialog", SpDropdownDialog);
+}

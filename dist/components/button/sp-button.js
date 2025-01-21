@@ -11,11 +11,9 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
 };
 var _SpButton_instances, _SpButton_icon, _SpButton_iconElement, _SpButton_appendIconElement, _SpButton_removeIconElement, _SpButton_updateIconElement;
 import { UbButton } from "@ub-design/components-web-components/";
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import buttonStyle from "./button.css?inline" assert { type: "css" };
+import foundationStyle from "../foundation.css?inline";
 import { SpIcon } from "../icon/sp-icon";
+import buttonStyle from "./button.css?inline";
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${buttonStyle}`);
 export class SpButton extends UbButton {
@@ -70,4 +68,6 @@ _SpButton_icon = new WeakMap(), _SpButton_iconElement = new WeakMap(), _SpButton
 }, _SpButton_updateIconElement = function _SpButton_updateIconElement(type) {
     __classPrivateFieldGet(this, _SpButton_iconElement, "f").type = type;
 };
-customElements.get("sp-button") || customElements.define("sp-button", SpButton);
+if (!customElements.get("sp-button")) {
+    customElements.define("sp-button", SpButton);
+}

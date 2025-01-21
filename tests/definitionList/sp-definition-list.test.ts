@@ -1,6 +1,8 @@
-import { describe, expect, test } from "vitest";
 import "../../src/components/button/sp-button";
-import { SpDefinitionList } from "../../src/components/definitionList/sp-definition-list";
+
+import { describe, expect, test } from "vitest";
+
+import type { SpDefinitionList } from "../../src/components/definitionList/sp-definition-list";
 
 function getSpDefinitionList() {
   return document.querySelector("sp-definition-list") as SpDefinitionList;
