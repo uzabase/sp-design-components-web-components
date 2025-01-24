@@ -18,5 +18,16 @@ const config: StorybookConfig = {
   tags: {
     "dev-only": { excludeFromSidebar: isProduction },
   },
+  async viteFinal(config) {
+    const { mergeConfig } = await import("vite");
+
+    const repo = process.env.REPOSITORY_NAME;
+    const basePath = process.env.STORYBOOK_BASE_PATH;
+    const base = basePath ? `/${repo}/${basePath}/` : `/${repo}/`;
+
+    return mergeConfig(config, {
+      base,
+    });
+  },
 };
 export default config;
