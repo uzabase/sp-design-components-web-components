@@ -105,6 +105,14 @@
     outline-offset: 1px;
     background-color: var(--color-semantic-surface-regular-4);
   }
+
+  .spds__tabIcon{
+    display: none;
+
+    &.-show{
+      display: block;
+    }
+  }
 }
 
 

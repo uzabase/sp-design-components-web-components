@@ -49,11 +49,10 @@ export class SpTab extends HTMLElement {
   }
 
   set plusIcon(value: boolean) {
-    this.#tabElement.appendChild(this.#textElement);
     if (value) {
-      this.#tabElement.insertBefore(this.#plusIconElement, this.#textElement);
+      this.#plusIconElement.classList.add("-show");
     } else {
-      this.#plusIconElement.remove();
+      this.#plusIconElement.classList.remove("-show");
     }
   }
 
@@ -71,15 +70,15 @@ export class SpTab extends HTMLElement {
   }
   connectedCallback() {
     this.#tabElement.classList.add("spds__tab");
-    //this.#tabElement.setAttribute("role", "tab");
-    //this.#tabElement.setAttribute("tabindex", "0");
     this.#textElement.classList.add("spds__tabText");
-
-    this.#plusIconElement.classList.add("base__icon");
+    this.#plusIconElement.classList.add("spds__tabIcon");
     this.#plusIconElement.size = "small";
     this.#plusIconElement.type = "plus";
     this.setAttribute("role", "tab");
+    this.#tabElement.appendChild(this.#plusIconElement);
+    this.#tabElement.appendChild(this.#textElement);
     this.shadowRoot!.appendChild(this.#tabElement);
+
   }
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (oldValue === newValue) return;
