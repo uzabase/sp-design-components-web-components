@@ -1,11 +1,10 @@
-// @ts-ignore
-import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import dropdownOptionStyle from "./sp-dropdown-option.css?inline" assert { type: "css" };
 import "../icon/sp-icon";
+
+import resetStyle from "@acab/reset.css?inline";
+
+import foundationStyle from "../foundation.css?inline";
 import { isValidSelectType } from "./sp-dropdown";
+import dropdownOptionStyle from "./sp-dropdown-option.css?inline";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownOptionStyle}`);
@@ -128,5 +127,6 @@ declare global {
   }
 }
 
-customElements.get("sp-dropdown-option") ||
+if (!customElements.get("sp-dropdown-option")) {
   customElements.define("sp-dropdown-option", SpDropdownOption);
+}
