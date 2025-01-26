@@ -188,7 +188,7 @@ export class SpDropdown extends HTMLElement {
 
   // MIN_WIDTH ~ MAX_WIDTHの範囲で、listboxの幅に合わせる
   #calculateSelectWidth() {
-    const listboxWidth = this.#listboxElement.clientWidth;
+    const listboxWidth = this.#listboxElement.offsetWidth;
     this.width = toValidSelectWidth(listboxWidth);
   }
 
