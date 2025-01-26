@@ -9,14 +9,11 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _SpDropdownDialog_instances, _SpDropdownDialog_baseElement, _SpDropdownDialog_buttonElement, _SpDropdownDialog_dialogElement, _SpDropdownDialog_dialogSlotElement, _SpDropdownDialog_open, _SpDropdownDialog_disabled, _SpDropdownDialog_position, _SpDropdownDialog_handleClickButton, _SpDropdownDialog_handleClickOutside, _SpDropdownDialog_updateDialogDisplay;
-// @ts-ignore
-import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import dropdownDialogStyle from "./dropdown-dialog.css?inline" assert { type: "css" };
+var _SpDropdownDialog_instances, _SpDropdownDialog_baseElement, _SpDropdownDialog_buttonElement, _SpDropdownDialog_dialogElement, _SpDropdownDialog_dialogSlotElement, _SpDropdownDialog_open, _SpDropdownDialog_disabled, _SpDropdownDialog_position, _SpDropdownDialog_clickOutsideHandler, _SpDropdownDialog_handleClickButton, _SpDropdownDialog_handleClickOutside, _SpDropdownDialog_updateDialogDisplay;
 import "../button/sp-button";
+import resetStyle from "@acab/reset.css?inline";
+import foundationStyle from "../foundation.css?inline";
+import dropdownDialogStyle from "./dropdown-dialog.css?inline";
 const positions = ["left", "right"];
 function isValidPosition(value) {
     return positions.some((position) => position === value);
@@ -75,6 +72,7 @@ export class SpDropdownDialog extends HTMLElement {
         _SpDropdownDialog_open.set(this, false);
         _SpDropdownDialog_disabled.set(this, false);
         _SpDropdownDialog_position.set(this, "left");
+        _SpDropdownDialog_clickOutsideHandler.set(this, __classPrivateFieldGet(this, _SpDropdownDialog_instances, "m", _SpDropdownDialog_handleClickOutside).bind(this));
         const shadowRoot = this.attachShadow({ mode: "open" });
         shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
         this.open = false;
@@ -88,13 +86,13 @@ export class SpDropdownDialog extends HTMLElement {
         __classPrivateFieldGet(this, _SpDropdownDialog_dialogElement, "f").classList.add("dialog");
         __classPrivateFieldGet(this, _SpDropdownDialog_dialogElement, "f").role = "dialog";
         __classPrivateFieldGet(this, _SpDropdownDialog_dialogElement, "f").appendChild(__classPrivateFieldGet(this, _SpDropdownDialog_dialogSlotElement, "f"));
-        window.addEventListener("click", __classPrivateFieldGet(this, _SpDropdownDialog_instances, "m", _SpDropdownDialog_handleClickOutside).bind(this));
+        window.addEventListener("click", __classPrivateFieldGet(this, _SpDropdownDialog_clickOutsideHandler, "f"));
         __classPrivateFieldGet(this, _SpDropdownDialog_baseElement, "f").appendChild(__classPrivateFieldGet(this, _SpDropdownDialog_dialogElement, "f"));
         __classPrivateFieldGet(this, _SpDropdownDialog_baseElement, "f").classList.add("base");
         this.shadowRoot?.appendChild(__classPrivateFieldGet(this, _SpDropdownDialog_baseElement, "f"));
     }
     disconnectedCallback() {
-        window.removeEventListener("click", __classPrivateFieldGet(this, _SpDropdownDialog_instances, "m", _SpDropdownDialog_handleClickOutside).bind(this));
+        window.removeEventListener("click", __classPrivateFieldGet(this, _SpDropdownDialog_clickOutsideHandler, "f"));
     }
     attributeChangedCallback(name, oldValue, newValue) {
         if (oldValue === newValue)
@@ -120,7 +118,7 @@ export class SpDropdownDialog extends HTMLElement {
         }
     }
 }
-_SpDropdownDialog_baseElement = new WeakMap(), _SpDropdownDialog_buttonElement = new WeakMap(), _SpDropdownDialog_dialogElement = new WeakMap(), _SpDropdownDialog_dialogSlotElement = new WeakMap(), _SpDropdownDialog_open = new WeakMap(), _SpDropdownDialog_disabled = new WeakMap(), _SpDropdownDialog_position = new WeakMap(), _SpDropdownDialog_instances = new WeakSet(), _SpDropdownDialog_handleClickButton = function _SpDropdownDialog_handleClickButton(event) {
+_SpDropdownDialog_baseElement = new WeakMap(), _SpDropdownDialog_buttonElement = new WeakMap(), _SpDropdownDialog_dialogElement = new WeakMap(), _SpDropdownDialog_dialogSlotElement = new WeakMap(), _SpDropdownDialog_open = new WeakMap(), _SpDropdownDialog_disabled = new WeakMap(), _SpDropdownDialog_position = new WeakMap(), _SpDropdownDialog_clickOutsideHandler = new WeakMap(), _SpDropdownDialog_instances = new WeakSet(), _SpDropdownDialog_handleClickButton = function _SpDropdownDialog_handleClickButton(event) {
     event.stopPropagation();
     this.open = !this.open;
 }, _SpDropdownDialog_handleClickOutside = function _SpDropdownDialog_handleClickOutside(event) {
@@ -132,5 +130,6 @@ _SpDropdownDialog_baseElement = new WeakMap(), _SpDropdownDialog_buttonElement =
     __classPrivateFieldGet(this, _SpDropdownDialog_dialogElement, "f").style.display =
         this.open && !this.disabled ? "block" : "none";
 };
-customElements.get("sp-dropdown-dialog") ||
+if (!customElements.get("sp-dropdown-dialog")) {
     customElements.define("sp-dropdown-dialog", SpDropdownDialog);
+}

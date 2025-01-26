@@ -1,11 +1,10 @@
 import { UbIcon } from "@ub-design/components-web-components/";
+
+import iconStyle from "./icon.css?inline";
 import { speedaIconPaths, SpeedaIconTypes } from "./icons";
 
-// @ts-ignore
-import iconStyle from "./icon.css?inline" assert { type: "css" };
-
 function isSpeedaIconType(type: string): type is SpeedaIconTypes {
-  return speedaIconPaths.hasOwnProperty(type);
+  return Object.hasOwnProperty.call(speedaIconPaths, type);
 }
 
 const styles = new CSSStyleSheet();
@@ -49,4 +48,6 @@ declare global {
   }
 }
 
-customElements.get("sp-icon") || customElements.define("sp-icon", SpIcon);
+if (!customElements.get("sp-icon")) {
+  customElements.define("sp-icon", SpIcon);
+}

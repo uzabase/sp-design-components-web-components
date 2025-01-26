@@ -1,9 +1,8 @@
 import { UbIcon } from "@ub-design/components-web-components/";
+import iconStyle from "./icon.css?inline";
 import { speedaIconPaths } from "./icons";
-// @ts-ignore
-import iconStyle from "./icon.css?inline" assert { type: "css" };
 function isSpeedaIconType(type) {
-    return speedaIconPaths.hasOwnProperty(type);
+    return Object.hasOwnProperty.call(speedaIconPaths, type);
 }
 const styles = new CSSStyleSheet();
 styles.replaceSync(iconStyle);
@@ -31,4 +30,6 @@ export class SpIcon extends UbIcon {
         }
     }
 }
-customElements.get("sp-icon") || customElements.define("sp-icon", SpIcon);
+if (!customElements.get("sp-icon")) {
+    customElements.define("sp-icon", SpIcon);
+}

@@ -1,8 +1,10 @@
-import { describe, expect, test } from "vitest";
-import { screen } from "shadow-dom-testing-library";
-import userEvent from "@testing-library/user-event";
-import { SpDropdownAction } from "../../src/components/dropdownAction/sp-dropdown-action";
 import "../../src/components/dropdownAction/sp-dropdown-action";
+
+import userEvent from "@testing-library/user-event";
+import { screen } from "shadow-dom-testing-library";
+import { describe, expect, test } from "vitest";
+
+import type { SpDropdownAction } from "../../src/components/dropdownAction/sp-dropdown-action";
 
 function getSpDropdownAction() {
   return document.querySelector("sp-dropdown-action") as SpDropdownAction;

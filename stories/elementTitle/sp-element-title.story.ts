@@ -1,10 +1,13 @@
-import "../../src/components/elementTitle/sp-element-title";
 import "../../src/components/button/sp-button";
 import "@sp-design/token/lib/speeda-tokens.css";
-import { Meta, StoryObj } from "@storybook/web-components";
+import "../../src/components/elementTitle/sp-element-title";
+
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
-const meta: Meta = {
+import type { SpElementTitle } from "../../src/components/elementTitle/sp-element-title";
+
+const meta = {
   component: "sp-element-title",
   argTypes: {
     text: { type: "string" },
@@ -12,12 +15,14 @@ const meta: Meta = {
   args: {
     text: "Element Title",
   },
-};
+} satisfies Meta<SpElementTitle>;
+
 export default meta;
+type Story = StoryObj<SpElementTitle>;
 
-type Story = StoryObj;
-
-export const Basic: Story = {};
+export const Basic: Story = {
+  tags: ["!dev-only"],
+};
 
 export const WithTextLinks: Story = {
   render: (args) => html`

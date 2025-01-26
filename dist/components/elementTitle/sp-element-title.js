@@ -4,12 +4,9 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _SpElementTitle_instances, _SpElementTitle_headingElement, _SpElementTitle_textLinkSlotElement, _SpElementTitle_buttonSlotElement, _SpElementTitle_createContainer, _SpElementTitle_createMain, _SpElementTitle_createHeadingBlock, _SpElementTitle_createTextLinks, _SpElementTitle_createButtons;
-// @ts-ignore
-import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import elementTitleStyle from "./element-title.css?inline" assert { type: "css" };
+import resetStyle from "@acab/reset.css?inline";
+import foundationStyle from "../foundation.css?inline";
+import elementTitleStyle from "./element-title.css?inline";
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${elementTitleStyle}`);
 export class SpElementTitle extends HTMLElement {
@@ -73,5 +70,6 @@ _SpElementTitle_headingElement = new WeakMap(), _SpElementTitle_textLinkSlotElem
     div.appendChild(__classPrivateFieldGet(this, _SpElementTitle_buttonSlotElement, "f"));
     return div;
 };
-customElements.get("sp-element-title") ||
+if (!customElements.get("sp-element-title")) {
     customElements.define("sp-element-title", SpElementTitle);
+}
