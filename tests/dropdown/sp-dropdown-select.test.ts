@@ -4,7 +4,6 @@ import {
   DEFAULT_WIDTH,
   SpDropdownSelect,
 } from "../../src/components/dropdown/sp-dropdown-select";
-import "../../src/components/dropdown/sp-dropdown-select";
 
 function getSpDropdownSelect() {
   return document.querySelector("sp-dropdown-select") as SpDropdownSelect;
