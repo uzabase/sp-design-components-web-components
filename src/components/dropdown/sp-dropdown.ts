@@ -13,6 +13,8 @@ type Width = "liquid" | number;
 const MIN_WIDTH = 80;
 const MAX_WIDTH = 320;
 
+type Position = "left" | "right";
+
 export function isValidSelectType(value: string): value is SelectType {
   return selectTypes.some((type) => type === value);
 }
@@ -43,6 +45,7 @@ export class SpDropdown extends HTMLElement {
   // states
   #expanded = false;
   #value: string = "";
+  #position: Position = "left";
 
   get selectType() {
     return this.#selectType;
@@ -91,6 +94,22 @@ export class SpDropdown extends HTMLElement {
     this.#updateOptions();
   }
 
+  get position() {
+    return this.#position;
+  }
+
+  set position(value: Position) {
+    if (value === "left") {
+      this.#listboxElement.classList.add("position__left");
+      this.#listboxElement.classList.remove("position__right");
+    } else {
+      this.#listboxElement.classList.add("position__right");
+      this.#listboxElement.classList.remove("position__left");
+    }
+
+    this.#position = value;
+  }
+
   static get observedAttributes() {
     return ["select-type", "width", "placeholder"];
   }
@@ -131,10 +150,14 @@ export class SpDropdown extends HTMLElement {
       this.#updateOptions();
       if (this.width === "liquid") this.#calculateSelectWidth();
     });
+    this.#updateOptions();
+    if (this.width === "liquid") this.#calculateSelectWidth();
 
     this.addEventListener("sp-dropdown-option-click", this.#handleClickOption);
 
     window.addEventListener("click", this.#clickOutsideHandler);
+    window.addEventListener("resize", this.#adjustListboxPositionHandler);
+    this.#adjustListboxPosition(); // 初期ロード時に位置を調整
   }
 
   disconnectedCallback() {
@@ -149,6 +172,7 @@ export class SpDropdown extends HTMLElement {
     );
 
     window.removeEventListener("click", this.#clickOutsideHandler);
+    window.removeEventListener("resize", this.#adjustListboxPositionHandler);
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -212,8 +236,19 @@ export class SpDropdown extends HTMLElement {
       this.#hideListbox();
     }
   }
-
   #clickOutsideHandler = this.#handleClickOutside.bind(this);
+
+  #adjustListboxPosition() {
+    const selectLeft = this.#selectElement.getBoundingClientRect().left;
+    const listboxWidth = this.#listboxElement.offsetWidth;
+    const listboxRight = selectLeft + listboxWidth;
+    if (listboxRight > window.innerWidth) {
+      this.position = "right";
+    } else {
+      this.position = "left";
+    }
+  }
+  #adjustListboxPositionHandler = this.#adjustListboxPosition.bind(this);
 }
 
 declare global {
