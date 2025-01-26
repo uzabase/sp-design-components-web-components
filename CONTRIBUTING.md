@@ -83,7 +83,7 @@ Storybookに表示するストーリーを記載したファイルは、`stories
 
 このリポジトリでは、StorybookをGitHub Pagesで公開しています（[リンク](https://uzabase.github.io/sp-design-components-web-components/)）。コンポーネントを実装する際は、利用者がStorybookからコンポーネントの使い方を理解できるように、ストーリーを追加してください。
 
-注意点として、開発環境用にビルドしたStorybookにはすべてのストーリーが表示されますが、GitHub Pagesに公開するStorybookに表示するには設定が必要です。具体的には、以下のように`!dev-only`タグを設定してください。
+注意点として、開発環境用にビルドしたStorybookにはすべてのストーリーが表示されますが、GitHub Pages上にも表示するには、以下のように`!dev-only`タグを設定してください。
 
 ```ts
 export const Basic: Story = {
