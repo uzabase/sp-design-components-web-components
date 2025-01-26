@@ -6,21 +6,52 @@ import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
 const meta: Meta = {
-  args: {
-    selectType: "single",
-    width: "320",
-    placeholder: "選択してください",
-  },
-  render: (args) => html`
-    <sp-dropdown
-      select-type=${args.selectType}
-      width=${args.width}
-      placeholder=${args.placeholder}
-    >
+  component: "sp-dropdown",
+  args: {},
+};
+export default meta;
+
+type Story = StoryObj;
+
+export const Basic: Story = {
+  render: () => html`
+    <sp-dropdown placeholder="選択してください">
+      <sp-dropdown-option text="Text1" value="Text1"></sp-dropdown-option>
+      <sp-dropdown-option text="Text2" value="Text2"></sp-dropdown-option>
+      <sp-dropdown-option text="Text3" value="Text3"></sp-dropdown-option>
+    </sp-dropdown>
+  `,
+};
+
+export const LongText: Story = {
+  render: () => html`
+    <sp-dropdown placeholder="選択してください">
       <sp-dropdown-option
         text="Text1Text1Text1Text1"
         value="Text1Text1Text1Text1"
       ></sp-dropdown-option>
+      <sp-dropdown-option text="Text2" value="Text2"></sp-dropdown-option>
+      <sp-dropdown-option text="Text3" value="Text3"></sp-dropdown-option>
+    </sp-dropdown>
+  `,
+};
+
+export const RightPosition: Story = {
+  render: () => html`
+    <div style="display: flex; justify-content: end">
+      <sp-dropdown placeholder="選択してください" position="right">
+        <sp-dropdown-option text="Text1Text1Text1Text1Text1Text1Text1Text1Text1Text1Text1Text1" value="Text1"></sp-dropdown-option>
+        <sp-dropdown-option text="Text2" value="Text2"></sp-dropdown-option>
+        <sp-dropdown-option text="Text3" value="Text3"></sp-dropdown-option>
+      </sp-dropdown>
+    </div>
+  `,
+};
+
+export const Scroll: Story = {
+  render: () => html`
+    <sp-dropdown placeholder="選択してください">
+      <sp-dropdown-option text="Text1" value="Text1"></sp-dropdown-option>
       <sp-dropdown-option text="Text2" value="Text2"></sp-dropdown-option>
       <sp-dropdown-option text="Text3" value="Text3"></sp-dropdown-option>
       <sp-dropdown-option text="Text4" value="Text4"></sp-dropdown-option>
@@ -34,8 +65,3 @@ const meta: Meta = {
     </sp-dropdown>
   `,
 };
-export default meta;
-
-type Story = StoryObj;
-
-export const Basic: Story = {};

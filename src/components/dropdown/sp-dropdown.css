@@ -19,3 +19,11 @@
   background: var(--color-semantic-surface-regular-1);
   box-shadow: 0 3px 12px 0 var(--color-semantic-elevation-regular);
 }
+
+.position__left {
+  left: 0;
+}
+
+.position__right {
+  right: 0;
+}
