@@ -1,10 +1,9 @@
-// @ts-ignore
-import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import dropdownActionStyle from "./sp-dropdown.css?inline" assert { type: "css" };
 import "./sp-dropdown-select";
+
+import resetStyle from "@acab/reset.css?inline";
+
+import foundationStyle from "../foundation.css?inline";
+import dropdownActionStyle from "./sp-dropdown.css?inline";
 import { ClickEventDetail, SpDropdownOption } from "./sp-dropdown-option";
 
 type SelectType = "single" | "multiple";
@@ -133,11 +132,9 @@ export class SpDropdown extends HTMLElement {
       if (this.width === "liquid") this.#calculateSelectWidth();
     });
 
-    this.addEventListener("sp-dropdown-option-click", (e) => {
-      if (e instanceof CustomEvent) this.#handleClickOption(e);
-    });
+    this.addEventListener("sp-dropdown-option-click", this.#handleClickOption);
 
-    window.addEventListener("click", this.#handleClickOutside.bind(this));
+    window.addEventListener("click", this.#clickOutsideHandler);
   }
 
   disconnectedCallback() {
@@ -146,7 +143,12 @@ export class SpDropdown extends HTMLElement {
       this.#hideListbox.bind(this),
     );
 
-    window.removeEventListener("click", this.#handleClickOutside.bind(this));
+    this.removeEventListener(
+      "sp-dropdown-option-click",
+      this.#handleClickOption,
+    );
+
+    window.removeEventListener("click", this.#clickOutsideHandler);
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -176,8 +178,10 @@ export class SpDropdown extends HTMLElement {
     this.#listboxElement.hidden = true;
   }
 
-  #handleClickOption(event: CustomEvent<ClickEventDetail>) {
-    const { value } = event.detail;
+  #handleClickOption(event: Event) {
+    if (!(event instanceof CustomEvent)) return;
+    const customEvent = event as CustomEvent<ClickEventDetail>;
+    const { value } = customEvent.detail;
     this.value = value;
     this.#hideListbox();
   }
@@ -208,6 +212,8 @@ export class SpDropdown extends HTMLElement {
       this.#hideListbox();
     }
   }
+
+  #clickOutsideHandler = this.#handleClickOutside.bind(this);
 }
 
 declare global {
@@ -216,5 +222,6 @@ declare global {
   }
 }
 
-customElements.get("sp-dropdown") ||
+if (!customElements.get("sp-dropdown")) {
   customElements.define("sp-dropdown", SpDropdown);
+}
