@@ -63,6 +63,41 @@ TODO: コンポーネントのインタラクティブな機能には、イベ�
 - コンポーネントの内部構造に強く依存するテスト
   - 例えば、DOMの構造を過度にチェックするテストは避けてください。コンポーネントの内部構造はリファクタリングなどで簡単に変更される可能性があり、その度にテストを修正する必要が生じます。ただし、コンポーネントの振る舞いを実現するために不可欠なHTML要素については、これらがコンポーネントの品質に大きな影響を与えるため、適切にテストすることが重要です。
 
+## Storybook
+
+このリポジトリでは、[Storybook](https://storybook.js.org/)を利用してコンポーネントをプレビューできるようにしています。Storybookを利用することで、コンポーネントのUIや振る舞いを確認しながら開発を進めることができます。
+
+### Storybookの起動
+
+Storybookを起動するには、以下のコマンドを使用してください。
+
+```sh
+npm run storybook
+```
+
+### ストーリーの配置
+
+Storybookに表示するストーリーを記載したファイルは、`stories`ディレクトリ内に配置します。例えば、コンポーネントの実装ファイルが`src/components/button/sp-button.ts`の場合、対応するストーリーのファイルは`stories/button/sp-button.story.ts`となります。
+
+### GitHub Pagesでの公開
+
+このリポジトリでは、StorybookをGitHub Pagesで公開しています（[リンク](https://uzabase.github.io/sp-design-components-web-components/)）。コンポーネントを実装する際は、利用者がStorybookからコンポーネントの使い方を理解できるように、ストーリーを追加してください。
+
+注意点として、開発環境用にビルドしたStorybookにはすべてのストーリーが表示されますが、GitHub Pages上にも表示するには、以下のように`!dev-only`タグを設定してください。
+
+```ts
+export const Basic: Story = {
+  tags: ["!dev-only"],
+}
+```
+
+GitHub Pagesでの表示を手元で確認するには、本番環境用のStorybookをビルドし、ローカルサーバーを立ち上げてください。例えば、以下のコマンドを使用してください。
+
+```sh
+npm run build-storybook
+npx http-server storybook-static
+```
+
 ## CI
 
 このリポジトリでは、[GitHub Actions](https://github.com/features/actions)を利用して以下のようなチェックを行っています。
