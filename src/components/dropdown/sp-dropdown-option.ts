@@ -43,27 +43,27 @@ export class SpDropdownOption extends HTMLElement {
     return this.#selectType;
   }
 
-  set selectType(value: string) {
-    this.#selectType = value;
+  set selectType(val: string) {
+    this.#selectType = val;
   }
 
   get selected() {
     return this.#selected;
   }
 
-  set selected(value: boolean) {
-    this.#selected = value;
-    if (value) {
+  set selected(val: boolean) {
+    this.#selected = val;
+    if (val) {
       this.#baseElement.setAttribute("aria-selected", "true");
       this.#iconElement.hidden = false;
     } else {
-      this.#baseElement.removeAttribute("aria-selected");
+      this.#baseElement.setAttribute("aria-selected", "false");
       this.#iconElement.hidden = true;
     }
   }
 
   static get observedAttributes() {
-    return ["text", "value", "select-type", "selected", "on-click"];
+    return ["text", "value", "select-type", "selected"];
   }
 
   constructor() {
@@ -96,7 +96,7 @@ export class SpDropdownOption extends HTMLElement {
         new CustomEvent<ClickEventDetail>("sp-dropdown-option-click", {
           bubbles: true,
           composed: true,
-          detail: { value: this.#value },
+          detail: { value: this.value },
         }),
       );
     });
