@@ -34,11 +34,11 @@ export class SpDropdown extends HTMLElement {
   // attributes
   #selectType: SelectType = "single";
   #placeholder: string = "";
+  #value: string = "";
 
   // states
   #width: Width = DEFAULT_WIDTH;
   #expanded = false;
-  #value: string = "";
   #position: Position = "left";
 
   get selectType() {
@@ -89,8 +89,8 @@ export class SpDropdown extends HTMLElement {
     return this.#position;
   }
 
-  set position(value: Position) {
-    if (value === "left") {
+  set position(val: Position) {
+    if (val === "left") {
       this.#listboxElement.classList.add("position__left");
       this.#listboxElement.classList.remove("position__right");
     } else {
@@ -98,11 +98,11 @@ export class SpDropdown extends HTMLElement {
       this.#listboxElement.classList.remove("position__left");
     }
 
-    this.#position = value;
+    this.#position = val;
   }
 
   static get observedAttributes() {
-    return ["select-type", "placeholder"];
+    return ["select-type", "placeholder", "value"];
   }
 
   constructor() {
@@ -174,6 +174,9 @@ export class SpDropdown extends HTMLElement {
         break;
       case "placeholder":
         this.placeholder = newValue;
+        break;
+      case "value":
+        this.value = newValue;
         break;
     }
   }
