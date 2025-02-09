@@ -71,6 +71,33 @@ describe("sp-dropdown", () => {
   });
 
   describe("value属性", () => {
+    test("value属性を設定できる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown value="Value1"></sp-dropdown>
+      `;
+
+      const spDropdown = getSpDropdown();
+      expect(spDropdown.value).toBe("Value1");
+    });
+    test("value属性を設定しないと、空文字列が設定される", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown></sp-dropdown>
+      `;
+
+      const spDropdown = getSpDropdown();
+      expect(spDropdown.value).toBe("");
+    });
+    test("value属性を変更できる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown value="Value1"></sp-dropdown>
+      `;
+
+      const spDropdown = getSpDropdown();
+      expect(spDropdown.value).toBe("Value1");
+
+      spDropdown.setAttribute("value", "NewValue");
+      expect(spDropdown.value).toBe("NewValue");
+    });
     test("optionを選択すると、valueが変更される", async () => {
       document.body.innerHTML = `
         <sp-dropdown>
