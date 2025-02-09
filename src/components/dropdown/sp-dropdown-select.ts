@@ -16,7 +16,6 @@ class SpDropdownSelect extends HTMLElement {
   #iconWrapperElement = document.createElement("div");
   #iconElement = document.createElement("sp-icon");
 
-  // TODO: set defaultValue prop
   #value: string = "";
   #width: number = DEFAULT_WIDTH;
   #placeholder: string = "";
@@ -35,6 +34,7 @@ class SpDropdownSelect extends HTMLElement {
   }
 
   set width(val: number) {
+    console.log("🚀 ~ SpDropdownSelect ~ setwidth ~ val:", val)
     this.#width = val;
     this.#inputElement.style.width = `${val}px`;
   }
@@ -74,6 +74,7 @@ class SpDropdownSelect extends HTMLElement {
 
     this.#baseElement.classList.add("base");
     this.#baseElement.appendChild(this.#inputElement);
+    this.#baseElement.appendChild(this.#iconWrapperElement);
 
     this.shadowRoot?.appendChild(this.#baseElement);
   }
@@ -104,3 +105,33 @@ if (!customElements.get("sp-dropdown-select")) {
 }
 
 export type { SpDropdownSelect };
+
+// sp-dropdown-selectに任意のvalueを入れた時の幅を計算する関数
+export function calculateDropDownSelectWidth(value: string): number {
+  const baseElement = document.createElement("div");
+  const inputElement = document.createElement("span");
+  const iconWrapperElement = document.createElement("div");
+  const iconElement = document.createElement("sp-icon");
+
+  inputElement.classList.add("input");
+  inputElement.innerText = value;
+
+  iconElement.size = "small";
+  iconElement.type = "arrow_down";
+  iconElement.text = "arrow_down";
+
+  iconWrapperElement.classList.add("icon-wrapper");
+  iconWrapperElement.appendChild(iconElement);
+
+  baseElement.classList.add("base");
+  baseElement.appendChild(inputElement);
+  baseElement.appendChild(iconWrapperElement);
+
+  document.body.appendChild(baseElement);
+
+  const width = inputElement.offsetWidth;
+
+  document.body.removeChild(baseElement);
+
+  return width;
+}

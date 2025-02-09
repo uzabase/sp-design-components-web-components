@@ -40,7 +40,10 @@ export const RightPosition: Story = {
   render: () => html`
     <div style="display: flex; justify-content: end">
       <sp-dropdown placeholder="選択してください" position="right">
-        <sp-dropdown-option text="Text1Text1Text1Text1Text1Text1Text1Text1Text1Text1Text1Text1" value="Text1"></sp-dropdown-option>
+        <sp-dropdown-option
+          text="Text1Text1Text1Text1Text1Text1Text1Text1Text1Text1Text1Text1"
+          value="Text1"
+        ></sp-dropdown-option>
         <sp-dropdown-option text="Text2" value="Text2"></sp-dropdown-option>
         <sp-dropdown-option text="Text3" value="Text3"></sp-dropdown-option>
       </sp-dropdown>
@@ -62,6 +65,16 @@ export const Scroll: Story = {
       <sp-dropdown-option text="Text9" value="Text9"></sp-dropdown-option>
       <sp-dropdown-option text="Text10" value="Text10"></sp-dropdown-option>
       <sp-dropdown-option text="Text11" value="Text11"></sp-dropdown-option>
+    </sp-dropdown>
+  `,
+};
+
+export const NoPlaceholder: Story = {
+  render: () => html`
+    <sp-dropdown>
+      <sp-dropdown-option text="Text1" value="Text1"></sp-dropdown-option>
+      <sp-dropdown-option text="Text2" value="Text2"></sp-dropdown-option>
+      <sp-dropdown-option text="Text3" value="Text3"></sp-dropdown-option>
     </sp-dropdown>
   `,
 };
