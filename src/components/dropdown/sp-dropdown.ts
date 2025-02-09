@@ -1,17 +1,15 @@
-import "./sp-dropdown-select";
-
 import resetStyle from "@acab/reset.css?inline";
 
 import foundationStyle from "../foundation.css?inline";
 import dropdownActionStyle from "./sp-dropdown.css?inline";
 import { ClickEventDetail, SpDropdownOption } from "./sp-dropdown-option";
-
-const DEFAULT_WIDTH = 160;
+import {
+  calculateDropDownSelectWidth,
+  DEFAULT_WIDTH,
+} from "./sp-dropdown-select";
 
 type SelectType = "single" | "multiple";
 const selectTypes: SelectType[] = ["single", "multiple"];
-
-type Width = number;
 
 type Position = "left" | "right";
 
@@ -37,42 +35,42 @@ export class SpDropdown extends HTMLElement {
   #value: string = "";
 
   // states
-  #width: Width = DEFAULT_WIDTH;
+  #selectWidth = DEFAULT_WIDTH;
   #expanded = false;
   #position: Position = "left";
 
   get selectType() {
     return this.#selectType;
   }
-  set selectType(value: SelectType) {
-    this.#selectType = value;
+  set selectType(val: SelectType) {
+    this.#selectType = val;
     this.#updateOptions();
   }
 
-  get width() {
-    return this.#width;
+  get selectWidth() {
+    return this.#selectWidth;
   }
 
-  set width(value: Width) {
-    this.#width = value;
-    this.#listboxElement.style.minWidth = `${value}px`;
-    this.#selectElement.setAttribute("width", String(value));
+  set selectWidth(val: number) {
+    this.#selectWidth = val;
+    this.#listboxElement.style.minWidth = `${val}px`;
+    this.#selectElement.setAttribute("width", String(val));
   }
 
   get placeholder() {
     return this.#placeholder;
   }
 
-  set placeholder(value: string) {
-    this.#placeholder = value;
-    this.#selectElement.setAttribute("placeholder", value);
+  set placeholder(val: string) {
+    this.#placeholder = val;
+    this.#selectElement.setAttribute("placeholder", val);
   }
 
   get expanded() {
     return this.#expanded;
   }
-  set expanded(value: boolean) {
-    this.#expanded = value;
+  set expanded(val: boolean) {
+    this.#expanded = val;
   }
 
   get value() {
@@ -199,16 +197,36 @@ export class SpDropdown extends HTMLElement {
     this.#hideListbox();
   }
 
+  /**
+   * optionの各値とplaceholderをそれぞれselectに入れた時の幅を計算し、最も大きい幅をselectの幅として設定する
+   */
   #calculateSelectWidth() {
-    const listboxWidth = this.#listboxElement.offsetWidth;
-    this.width = listboxWidth;
+    let maxSelectWidth = 0;
+    const options = this.#slotElement
+      .assignedElements()
+      .filter((element) => element instanceof SpDropdownOption);
+
+    const candidateValues = [
+      this.#placeholder,
+      ...options.map((option) => option.text),
+    ];
+
+    candidateValues.forEach((value) => {
+      const selectWidth = calculateDropDownSelectWidth(value);
+      if (selectWidth > maxSelectWidth) {
+        maxSelectWidth = selectWidth;
+      }
+    });
+
+    this.selectWidth = maxSelectWidth;
   }
 
   #updateOptions() {
-    const options = this.#slotElement.assignedElements();
-    options.forEach((option) => {
-      if (!(option instanceof SpDropdownOption)) return;
+    const options = this.#slotElement
+      .assignedElements()
+      .filter((element) => element instanceof SpDropdownOption);
 
+    options.forEach((option) => {
       option.setAttribute("select-type", this.#selectType);
       if (option.text === this.#value) {
         option.setAttribute("selected", "");
