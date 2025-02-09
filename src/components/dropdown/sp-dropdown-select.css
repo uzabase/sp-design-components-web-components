@@ -24,10 +24,14 @@
   color: var(--color-semantic-text-weak);
 }
 
-/* TODO: focus-lingが表示されるので、消すか相談する */
 .input:focus {
   border: 1px solid var(--color-semantic-border-focus);
   box-shadow: 0 0 0 3px #e2e5f5;
+}
+
+/* disable focus-ring */
+.input:focus-visible {
+  outline: none;
 }
 
 .input:disabled {
