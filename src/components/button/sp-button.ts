@@ -1,4 +1,4 @@
-import { UbButton } from "@ub-design/components-web-components/";
+import { UbButton } from "@ub-design/components-web-components";
 
 import foundationStyle from "../foundation.css?inline";
 import { SpIcon } from "../icon/sp-icon";
