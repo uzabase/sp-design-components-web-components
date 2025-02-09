@@ -27,8 +27,8 @@ export const LongText: Story = {
   render: () => html`
     <sp-dropdown placeholder="選択してください">
       <sp-dropdown-option
-        text="Text1Text1Text1Text1"
-        value="Text1Text1Text1Text1"
+        text="Text1Text1Text1Text1Text1Text1Text1Text1Text1Text1"
+        value="Text1Text1Text1Text1Text1Text1Text1Text1Text1Text1"
       ></sp-dropdown-option>
       <sp-dropdown-option text="Text2" value="Text2"></sp-dropdown-option>
       <sp-dropdown-option text="Text3" value="Text3"></sp-dropdown-option>
