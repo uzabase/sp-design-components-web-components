@@ -6,28 +6,41 @@ import { html } from "lit";
 
 import type { SpPagination } from "../../src/components/pagination/sp-pagination";
 
-const meta: Meta = {
+const meta = {
   component: "sp-pagination",
-  args: { total: 10, selected: 1 },
+  argTypes: {
+    total: { control: "number" },
+    selected: { control: "number" },
+  },
+  render: (args) => html`
+    <sp-pagination
+      total="${args.total}"
+      selected="${args.selected}"
+    >
+    </sp-pagination>
+  `,
 } satisfies Meta<SpPagination>;
 
 export default meta;
 type Story = StoryObj<SpPagination>;
 
-export const Basic: Story = {};
+export const Basic: Story = {
+  args: { total: 10, selected: 1 },
+  tags: ["!dev-only"],
+};
 
 export const ManyPages: Story = {
-  render: () => html`<sp-pagination total="20" selected="10"></sp-pagination>`,
+  args: { total: 20, selected: 10 },
 };
 
 export const OnePage: Story = {
-  render: () => html`<sp-pagination total="1" selected="1"></sp-pagination>`,
+  args: { total: 1, selected: 1 },
 };
 
 export const InvalidTotal: Story = {
-  render: () => html`<sp-pagination total="0" selected="1"></sp-pagination>`,
+  args: { total: 0, selected: 1 },
 };
 
-export const InvalidSelected: Story = {
-  render: () => html`<sp-pagination total="5" selected="10"></sp-pagination>`,
+export const SelectedMoreThanTotal: Story = {
+  args: { total: 5, selected: 10 },
 };
