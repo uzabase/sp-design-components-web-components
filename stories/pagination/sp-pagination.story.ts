@@ -13,10 +13,7 @@ const meta = {
     selected: { control: "number" },
   },
   render: (args) => html`
-    <sp-pagination
-      total="${args.total}"
-      selected="${args.selected}"
-    >
+    <sp-pagination total="${args.total}" selected="${args.selected}">
     </sp-pagination>
   `,
 } satisfies Meta<SpPagination>;

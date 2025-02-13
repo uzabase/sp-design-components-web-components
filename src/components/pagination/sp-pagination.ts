@@ -15,8 +15,8 @@ interface NavigationButton {
 }
 
 export class SpPagination extends HTMLElement {
-  #total = 0;
-  #selected = 0;
+  #total = 1;
+  #selected = 1;
   #nav = document.createElement("nav");
   #pageGroupElement = document.createElement("ul");
 
@@ -193,7 +193,7 @@ export class SpPagination extends HTMLElement {
     this.setAttribute("selected", String(newPage));
 
     this.dispatchEvent(
-      new CustomEvent("page-change", {
+      new CustomEvent("change", {
         detail: { page: newPage },
       }),
     );
