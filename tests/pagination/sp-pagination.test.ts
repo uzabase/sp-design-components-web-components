@@ -23,6 +23,13 @@ function getPageButton(page: number) {
   return screen.getByShadowRole("button", { name }) as HTMLButtonElement;
 }
 
+function getCurrentPageButton() {
+  const pageButtons = getPageButtons();
+  return pageButtons.find((button) =>
+    button.classList.contains("selected"),
+  ) as HTMLButtonElement;
+}
+
 function getFirstPageButton() {
   return screen.getByShadowRole("button", {
     name: "最初へ",
@@ -47,16 +54,38 @@ function getLastPageButton() {
   }) as HTMLButtonElement;
 }
 
+function assertVisiblePages(expected: number[]) {
+  const pageNumbers = getPageButtons().map((button) => button.textContent);
+  expect(pageNumbers).toEqual(expected.map(String));
+}
+
+function assertSelectedPage(expected: number) {
+  const pageButtons = getPageButtons();
+  const index = expected - 1;
+
+  const expectedHasSelectedClasses = Array(pageButtons.length).fill(false);
+  expectedHasSelectedClasses[index] = true;
+
+  const expectedAriaCurrentAttributes = Array(pageButtons.length).fill(null);
+  expectedAriaCurrentAttributes[index] = "page";
+
+  const actualHasSelectedClasses = pageButtons.map((button) =>
+    button.classList.contains("selected"),
+  );
+  const actualAriaCurrentAttributes = pageButtons.map((button) =>
+    button.getAttribute("aria-current"),
+  );
+
+  expect(actualHasSelectedClasses).toEqual(expectedHasSelectedClasses);
+  expect(actualAriaCurrentAttributes).toEqual(expectedAriaCurrentAttributes);
+}
+
 describe("sp-pagination", () => {
   describe("total属性", () => {
     test("total属性に正の整数を設定すると、1からtotalまでのページボタンが表示される", async () => {
-      document.body.innerHTML = "<sp-pagination total='5'></sp-pagination>";
+      document.body.innerHTML = "<sp-pagination total='3'></sp-pagination>";
 
-      const pageButtons = getPageButtons();
-      const pageNumbers = pageButtons.map((button) => button.textContent);
-
-      expect(pageButtons).toHaveLength(5);
-      expect(pageNumbers).toEqual(["1", "2", "3", "4", "5"]);
+      assertVisiblePages([1, 2, 3]);
     });
 
     test("total属性を更新すると、更新後のページボタンが表示される", async () => {
@@ -65,31 +94,19 @@ describe("sp-pagination", () => {
       const pagination = getSpPagination();
       pagination.setAttribute("total", "3");
 
-      const pageButtons = getPageButtons();
-      const pageNumbers = pageButtons.map((button) => button.textContent);
-
-      expect(pageButtons).toHaveLength(3);
-      expect(pageNumbers).toEqual(["1", "2", "3"]);
+      assertVisiblePages([1, 2, 3]);
     });
 
-    test("total属性に0以下の値を設定すると、1ページ目のボタンのみが表示される", async () => {
+    test("total属性に0以下の無効な値を設定すると、1ページ目のボタンのみが表示される", async () => {
       document.body.innerHTML = "<sp-pagination total='-1'></sp-pagination>";
 
-      const pageButtons = getPageButtons();
-      const pageNumbers = pageButtons.map((button) => button.textContent);
-
-      expect(pageButtons).toHaveLength(1);
-      expect(pageNumbers).toEqual(["1"]);
+      assertVisiblePages([1]);
     });
 
     test("total属性を設定しない場合、1ページ目のボタンのみが表示される", async () => {
       document.body.innerHTML = "<sp-pagination></sp-pagination>";
 
-      const pageButtons = getPageButtons();
-      const pageNumbers = pageButtons.map((button) => button.textContent);
-
-      expect(pageButtons).toHaveLength(1);
-      expect(pageNumbers).toEqual(["1"]);
+      assertVisiblePages([1]);
     });
   });
 
@@ -98,48 +115,21 @@ describe("sp-pagination", () => {
       document.body.innerHTML =
         "<sp-pagination total='3' selected='2'></sp-pagination>";
 
-      const pageButtons = getPageButtons();
-      const hasSelectedClasses = pageButtons.map((button) =>
-        button.classList.contains("selected"),
-      );
-      const ariaCurrentAttributes = pageButtons.map((pageButton) =>
-        pageButton.getAttribute("aria-current"),
-      );
-
-      expect(hasSelectedClasses).toEqual([false, true, false]);
-      expect(ariaCurrentAttributes).toEqual([null, "page", null]);
+      assertSelectedPage(2);
     });
 
-    test("selected属性に0以下の値を設定すると、1ページ目が選択される", async () => {
+    test("selected属性に0以下の無効な値を設定すると、1ページ目が選択される", async () => {
       document.body.innerHTML =
         "<sp-pagination total='3' selected='0'></sp-pagination>";
 
-      const pageButtons = getPageButtons();
-      const hasSelectedClasses = pageButtons.map((button) =>
-        button.classList.contains("selected"),
-      );
-      const ariaCurrentAttributes = pageButtons.map((pageButton) =>
-        pageButton.getAttribute("aria-current"),
-      );
-
-      expect(hasSelectedClasses).toEqual([true, false, false]);
-      expect(ariaCurrentAttributes).toEqual(["page", null, null]);
+      assertSelectedPage(1);
     });
 
     test("selected属性に合計ページ数より大きい値を設定すると、1ページ目が選択される", async () => {
       document.body.innerHTML =
         "<sp-pagination total='3' selected='4'></sp-pagination>";
 
-      const pageButtons = getPageButtons();
-      const hasSelectedClasses = pageButtons.map((button) =>
-        button.classList.contains("selected"),
-      );
-      const ariaCurrentAttributes = pageButtons.map((pageButton) =>
-        pageButton.getAttribute("aria-current"),
-      );
-
-      expect(hasSelectedClasses).toEqual([true, false, false]);
-      expect(ariaCurrentAttributes).toEqual(["page", null, null]);
+      assertSelectedPage(1);
     });
 
     test("selected属性を更新すると、更新後のページが選択される", async () => {
@@ -149,31 +139,13 @@ describe("sp-pagination", () => {
       const pagination = getSpPagination();
       pagination.setAttribute("selected", "3");
 
-      const pageButtons = getPageButtons();
-      const hasSelectedClasses = pageButtons.map((button) =>
-        button.classList.contains("selected"),
-      );
-      const ariaCurrentAttributes = pageButtons.map((pageButton) =>
-        pageButton.getAttribute("aria-current"),
-      );
-
-      expect(hasSelectedClasses).toEqual([false, false, true]);
-      expect(ariaCurrentAttributes).toEqual([null, null, "page"]);
+      assertSelectedPage(3);
     });
 
     test("selected属性を設定しない場合、1ページ目が選択される", async () => {
       document.body.innerHTML = "<sp-pagination total='3'></sp-pagination>";
 
-      const pageButtons = getPageButtons();
-      const hasSelectedClasses = pageButtons.map((button) =>
-        button.classList.contains("selected"),
-      );
-      const ariaCurrentAttributes = pageButtons.map((pageButton) =>
-        pageButton.getAttribute("aria-current"),
-      );
-
-      expect(hasSelectedClasses).toEqual([true, false, false]);
-      expect(ariaCurrentAttributes).toEqual(["page", null, null]);
+      assertSelectedPage(1);
     });
   });
 
@@ -187,16 +159,7 @@ describe("sp-pagination", () => {
       const secondPageButton = getPageButton(2);
       await user.click(secondPageButton);
 
-      const pageButtons = getPageButtons();
-      const hasSelectedClasses = pageButtons.map((button) =>
-        button.classList.contains("selected"),
-      );
-      const ariaCurrentAttributes = pageButtons.map((pageButton) =>
-        pageButton.getAttribute("aria-current"),
-      );
-
-      expect(hasSelectedClasses).toEqual([false, true, false]);
-      expect(ariaCurrentAttributes).toEqual([null, "page", null]);
+      assertSelectedPage(2);
     });
 
     describe("一度に表示されるページボタンの仕様", () => {
@@ -204,77 +167,28 @@ describe("sp-pagination", () => {
         document.body.innerHTML =
           "<sp-pagination total='20' selected='10'></sp-pagination>";
 
-        const pageButtons = getPageButtons();
-        const pageNumbers = pageButtons.map((button) => button.textContent);
-
-        expect(pageButtons).toHaveLength(10);
-        expect(pageNumbers).toEqual([
-          "6",
-          "7",
-          "8",
-          "9",
-          "10",
-          "11",
-          "12",
-          "13",
-          "14",
-          "15",
-        ]);
+        assertVisiblePages([6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
       });
 
       test("現在のページが先頭に近い場合は、、最初の10ページが表示される", async () => {
         document.body.innerHTML =
           "<sp-pagination total='20' selected='3'></sp-pagination>";
 
-        const pageNumbers = getPageButtons().map(
-          (button) => button.textContent,
-        );
-
-        expect(pageNumbers).toEqual([
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-          "6",
-          "7",
-          "8",
-          "9",
-          "10",
-        ]);
+        assertVisiblePages([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
       });
 
       test("現在のページが末尾に近い場合は、最後の10ページが表示される", async () => {
         document.body.innerHTML =
           "<sp-pagination total='20' selected='18'></sp-pagination>";
 
-        const pageNumbers = getPageButtons().map(
-          (button) => button.textContent,
-        );
-
-        expect(pageNumbers).toEqual([
-          "11",
-          "12",
-          "13",
-          "14",
-          "15",
-          "16",
-          "17",
-          "18",
-          "19",
-          "20",
-        ]);
+        assertVisiblePages([11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
       });
 
       test("表示可能なページが10個未満の場合は、全てのページボタンが表示される", async () => {
         document.body.innerHTML =
           "<sp-pagination total='7' selected='4'></sp-pagination>";
 
-        const pageButtons = getPageButtons();
-        const pageNumbers = pageButtons.map((button) => button.textContent);
-
-        expect(pageButtons).toHaveLength(7);
-        expect(pageNumbers).toEqual(["1", "2", "3", "4", "5", "6", "7"]);
+        assertVisiblePages([1, 2, 3, 4, 5, 6, 7]);
       });
     });
   });
@@ -290,16 +204,7 @@ describe("sp-pagination", () => {
         const firstButton = getFirstPageButton();
         await user.click(firstButton);
 
-        const pageButtons = getPageButtons();
-        const hasSelectedClasses = pageButtons.map((button) =>
-          button.classList.contains("selected"),
-        );
-        const ariaCurrentAttributes = pageButtons.map((pageButton) =>
-          pageButton.getAttribute("aria-current"),
-        );
-
-        expect(hasSelectedClasses).toEqual([true, false, false]);
-        expect(ariaCurrentAttributes).toEqual(["page", null, null]);
+        assertSelectedPage(1);
       });
 
       test("1ページ目を選択中は、最初へボタンが無効化される", async () => {
@@ -307,7 +212,6 @@ describe("sp-pagination", () => {
           "<sp-pagination total='3' selected='1'></sp-pagination>";
 
         const firstButton = getFirstPageButton();
-
         expect(firstButton.disabled).toBe(true);
       });
     });
@@ -322,16 +226,7 @@ describe("sp-pagination", () => {
         const prevButton = getPreviousPageButton();
         await user.click(prevButton);
 
-        const pageButtons = getPageButtons();
-        const hasSelectedClasses = pageButtons.map((button) =>
-          button.classList.contains("selected"),
-        );
-        const ariaCurrentAttributes = pageButtons.map((pageButton) =>
-          pageButton.getAttribute("aria-current"),
-        );
-
-        expect(hasSelectedClasses).toEqual([false, true, false]);
-        expect(ariaCurrentAttributes).toEqual([null, "page", null]);
+        assertSelectedPage(2);
       });
 
       test("1ページ目を選択中は、前へボタンが無効化される", async () => {
@@ -339,7 +234,6 @@ describe("sp-pagination", () => {
           "<sp-pagination total='3' selected='1'></sp-pagination>";
 
         const previousButton = getPreviousPageButton();
-
         expect(previousButton.disabled).toBe(true);
       });
     });
@@ -354,16 +248,7 @@ describe("sp-pagination", () => {
         const nextButton = getNextPageButton();
         await user.click(nextButton);
 
-        const pageButtons = getPageButtons();
-        const hasSelectedClasses = pageButtons.map((button) =>
-          button.classList.contains("selected"),
-        );
-        const ariaCurrentAttributes = pageButtons.map((pageButton) =>
-          pageButton.getAttribute("aria-current"),
-        );
-
-        expect(hasSelectedClasses).toEqual([false, true, false]);
-        expect(ariaCurrentAttributes).toEqual([null, "page", null]);
+        assertSelectedPage(2);
       });
 
       test("最後のページを選択中は、次へボタンが無効化される", async () => {
@@ -371,7 +256,6 @@ describe("sp-pagination", () => {
           "<sp-pagination total='3' selected='3'></sp-pagination>";
 
         const nextButton = getNextPageButton();
-
         expect(nextButton.disabled).toBe(true);
       });
     });
@@ -386,16 +270,7 @@ describe("sp-pagination", () => {
         const lastButton = getLastPageButton();
         await user.click(lastButton);
 
-        const pageButtons = getPageButtons();
-        const hasSelectedClasses = pageButtons.map((button) =>
-          button.classList.contains("selected"),
-        );
-        const ariaCurrentAttributes = pageButtons.map((pageButton) =>
-          pageButton.getAttribute("aria-current"),
-        );
-
-        expect(hasSelectedClasses).toEqual([false, false, true]);
-        expect(ariaCurrentAttributes).toEqual([null, null, "page"]);
+        assertSelectedPage(3);
       });
 
       test("最後のページを選択中は、最後へボタンが無効化される", async () => {
@@ -403,7 +278,6 @@ describe("sp-pagination", () => {
           "<sp-pagination total='3' selected='3'></sp-pagination>";
 
         const lastButton = getLastPageButton();
-
         expect(lastButton.disabled).toBe(true);
       });
     });
@@ -411,24 +285,30 @@ describe("sp-pagination", () => {
 
   describe("ページ変更イベント", () => {
     test("ページボタンをクリックすると、changeイベントが発火する", async () => {
+      const user = userEvent.setup();
+
       document.body.innerHTML =
         "<sp-pagination total='5' selected='1'></sp-pagination>";
+
       const pagination = getSpPagination();
 
       let emittedPage: number | null = null;
-      pagination.addEventListener("change", ((e: CustomEvent) => {
-        emittedPage = e.detail.page;
+      pagination.addEventListener("change", ((event: CustomEvent) => {
+        emittedPage = event.detail.page;
       }) as EventListener);
 
-      const pageButtons = getPageButtons();
-      pageButtons[1].click(); // 2ページ目をクリック
+      const pageButton = getPageButton(2);
+      await user.click(pageButton);
 
       expect(emittedPage).toBe(2);
     });
 
     test("同じページを選択した場合、changeイベントは発火しない", async () => {
+      const user = userEvent.setup();
+
       document.body.innerHTML =
         "<sp-pagination total='5' selected='2'></sp-pagination>";
+
       const pagination = getSpPagination();
 
       let eventFired = false;
@@ -436,11 +316,8 @@ describe("sp-pagination", () => {
         eventFired = true;
       });
 
-      const pageButtons = getPageButtons();
-      const currentPageButton = pageButtons.find(
-        (button) => button.getAttribute("aria-current") === "page",
-      );
-      currentPageButton?.click();
+      const currentPageButton = getCurrentPageButton();
+      await user.click(currentPageButton);
 
       expect(eventFired).toBe(false);
     });
@@ -448,17 +325,18 @@ describe("sp-pagination", () => {
     test("ナビゲーションボタンをクリックしても、changeイベントが発火する", async () => {
       document.body.innerHTML =
         "<sp-pagination total='5' selected='2'></sp-pagination>";
+
       const pagination = getSpPagination();
 
-      const emittedPages: number[] = [];
-      pagination.addEventListener("change", ((e: CustomEvent) => {
-        emittedPages.push(e.detail.page);
+      let emittedPage: number | null = null;
+      pagination.addEventListener("change", ((event: CustomEvent) => {
+        emittedPage = event.detail.page;
       }) as EventListener);
 
-      const nextButton = screen.getByShadowText("次へ");
-      nextButton.click();
+      const nextPageButton = getNextPageButton();
+      await userEvent.click(nextPageButton);
 
-      expect(emittedPages).toEqual([3]);
+      expect(emittedPage).toEqual(3);
     });
   });
 });
