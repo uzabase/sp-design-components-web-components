@@ -183,39 +183,6 @@ export const ALL: Story = {
               text
             </sp-button>
           </td>
-          <td>
-            <sp-button2
-              text="text"
-              size="medium"
-              type="default"
-              icon="edit"
-              appearance="outline"
-            >
-              text
-            </sp-button2>
-          </td>
-          <td>
-            <sp-button2
-              text="text"
-              size="medium"
-              type="default"
-              icon="edit"
-              appearance="fill"
-            >
-              text
-            </sp-button2>
-          </td>
-          <td>
-            <sp-button2
-              text="text"
-              size="medium"
-              type="default"
-              icon="edit"
-              appearance="text"
-            >
-              text
-            </sp-button2>
-          </td>
         </tr>
         <tr>
           <th>state: selected</th>
