@@ -42,7 +42,7 @@ export class SpButton extends UbButton {
     this.#iconElement.classList.add("base__icon");
     this.#iconElement.size = "small";
   }
-  
+
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (oldValue === newValue) return;
     super.attributeChangedCallback(name, oldValue, newValue);
