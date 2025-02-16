@@ -4,12 +4,9 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _SpDefinitionListDd_ddElement;
-// @ts-ignore
-import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import spDefinitionListDdStyle from "./sp-definition-list-dd.css?inline" assert { type: "css" };
+import resetStyle from "@acab/reset.css?inline";
+import foundationStyle from "../foundation.css?inline";
+import spDefinitionListDdStyle from "./sp-definition-list-dd.css?inline";
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${spDefinitionListDdStyle}`);
 export class SpDefinitionListDd extends HTMLElement {
@@ -31,5 +28,6 @@ export class SpDefinitionListDd extends HTMLElement {
     }
 }
 _SpDefinitionListDd_ddElement = new WeakMap();
-customElements.get("sp-definition-list-dd") ||
+if (!customElements.get("sp-definition-list-dd")) {
     customElements.define("sp-definition-list-dd", SpDefinitionListDd);
+}

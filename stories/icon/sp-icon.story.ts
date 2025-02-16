@@ -1,10 +1,13 @@
-import "../../src/components/icon/sp-icon";
-import type { Meta, StoryObj } from "@storybook/web-components";
 import "@sp-design/token/lib/speeda-tokens.css";
-import { speedaIconTypes } from "../../src/components/icon/icons";
+import "../../src/components/icon/sp-icon";
+
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
-const meta: Meta = {
+import { speedaIconTypes } from "../../src/components/icon/icons";
+import type { SpIcon } from "../../src/components/icon/sp-icon";
+
+const meta = {
   component: "sp-icon",
   argTypes: {
     text: { type: "string" },
@@ -22,16 +25,17 @@ const meta: Meta = {
     type: "edit",
     size: "medium",
   },
-};
-export default meta;
+} satisfies Meta<SpIcon>;
 
-type Story = StoryObj;
+export default meta;
+type Story = StoryObj<SpIcon>;
 
 export const Basic: Story = {
   args: {
     text: undefined,
     size: undefined,
   },
+  tags: ["!dev-only"],
 };
 
 export const Property: Story = {};
@@ -61,6 +65,7 @@ export const ALL: Story = {
     `;
   },
 };
+
 export const WithString: Story = {
   decorators: [
     (story) => html`

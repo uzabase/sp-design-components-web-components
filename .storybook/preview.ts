@@ -11,6 +11,7 @@ const preview: Preview = {
       },
     },
   },
+  tags: ["autodocs", "dev-only"],
 };
 
 export default preview;

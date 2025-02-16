@@ -1,10 +1,8 @@
 import { UbCheckboxText } from "@ub-design/components-web-components/";
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import checkmarkStyle from "./checkmark.css?inline" assert { type: "css" };
-// @ts-ignore
-import checkboxListStyle from "./checkbox-list.css?inline" assert { type: "css" };
+
+import foundationStyle from "../foundation.css?inline";
+import checkboxListStyle from "./checkbox-list.css?inline";
+import checkmarkStyle from "./checkmark.css?inline";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${checkmarkStyle} ${checkboxListStyle}`);
@@ -28,5 +26,6 @@ declare global {
   }
 }
 
-customElements.get("sp-checkbox-list") ||
+if (!customElements.get("sp-checkbox-list")) {
   customElements.define("sp-checkbox-list", SpCheckboxList);
+}

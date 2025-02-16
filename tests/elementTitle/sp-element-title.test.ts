@@ -1,7 +1,9 @@
-import { describe, expect, test } from "vitest";
-import { getByShadowRole } from "shadow-dom-testing-library";
-import { SpElementTitle } from "../../src/components/elementTitle/sp-element-title";
 import "../../src/components/elementTitle/sp-element-title";
+
+import { getByShadowRole } from "shadow-dom-testing-library";
+import { describe, expect, test } from "vitest";
+
+import type { SpElementTitle } from "../../src/components/elementTitle/sp-element-title";
 
 function getSpElementTitle() {
   return document.querySelector("sp-element-title") as SpElementTitle;

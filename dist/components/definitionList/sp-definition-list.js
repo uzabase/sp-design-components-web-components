@@ -4,12 +4,9 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _SpDefinitionList_dlElement, _SpDefinitionList_slotElement;
-// @ts-ignore
-import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import spDefinitionListStyle from "./sp-definition-list.css?inline" assert { type: "css" };
+import resetStyle from "@acab/reset.css?inline";
+import foundationStyle from "../foundation.css?inline";
+import spDefinitionListStyle from "./sp-definition-list.css?inline";
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${spDefinitionListStyle}`);
 export class SpDefinitionList extends HTMLElement {
@@ -32,5 +29,6 @@ export class SpDefinitionList extends HTMLElement {
     }
 }
 _SpDefinitionList_dlElement = new WeakMap(), _SpDefinitionList_slotElement = new WeakMap();
-customElements.get("sp-definition-list") ||
+if (!customElements.get("sp-definition-list")) {
     customElements.define("sp-definition-list", SpDefinitionList);
+}
