@@ -1,9 +1,7 @@
-// @ts-ignore
-import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import sectionTitleStyle from "./section-title.css?inline" assert { type: "css" };
+import resetStyle from "@acab/reset.css?inline";
+
+import foundationStyle from "../foundation.css?inline";
+import sectionTitleStyle from "./section-title.css?inline";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${sectionTitleStyle}`);
@@ -93,5 +91,6 @@ declare global {
   }
 }
 
-customElements.get("sp-section-title") ||
+if (!customElements.get("sp-section-title")) {
   customElements.define("sp-section-title", SpSectionTitle);
+}
