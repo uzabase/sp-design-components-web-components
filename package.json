@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
+    "@storybook/addon-actions": "^8.5.6",
     "@storybook/addon-essentials": "^8.5.2",
     "@storybook/blocks": "^8.5.2",
     "@storybook/web-components": "^8.5.2",

@@ -35,17 +35,20 @@ const meta = {
       action: "onclick",
     },
   },
-  args: {
-    slot: "sp-button-text",
-    icon: "",
-    type: "default",
-    appearance: "outline",
-    size: "medium",
-    loading: false,
-    selected: false,
-    disabled: false,
-    onclick: action("onclick"),
-  },
+  render: (args) => html`
+    <sp-button
+      icon=${args.icon}
+      type=${args.type}
+      appearance=${args.appearance}
+      size=${args.size}
+      ?loading=${args.loading}
+      ?selected=${args.selected}
+      ?disabled=${args.disabled}
+      @click=${args.onclick}
+    >
+      ${args.slot}
+    </sp-button>
+  `,
 } satisfies Meta<SpButton>;
 
 export default meta;
@@ -53,47 +56,10 @@ type Story = StoryObj<SpButton>;
 
 export const Basic: Story = {
   args: {
-    icon: undefined,
-    type: undefined,
-    appearance: undefined,
-    size: undefined,
-    loading: undefined,
-    selected: undefined,
-    disabled: undefined,
+    slot: "sp-button-text",
+    onclick: action("click"),
   },
   tags: ["!dev-only"],
-};
-
-export const Property: Story = {};
-
-export const Attribute: Story = {
-  render: (args) =>
-    html`<sp-button
-      icon=${args.icon}
-      type=${args.type}
-      appearance=${args.appearance}
-      size=${args.size}
-      ?loading=${args.loading}
-      ?selected=${args.selected}
-      ?disabled=${args.disabled}
-    >
-      ${args.slot}
-    </sp-button>`,
-};
-
-export const AttributeHTML: Story = {
-  render: (args) =>
-    html`<sp-button
-      icon=${args.icon}
-      type=${args.type}
-      appearance=${args.appearance}
-      size=${args.size}
-      ?loading=${args.loading}
-      ?selected=${args.selected}
-      ?disabled=${args.disabled}
-    >
-      ${args.slot}
-    </sp-button>`,
 };
 
 export const OverflowWrap: Story = {
