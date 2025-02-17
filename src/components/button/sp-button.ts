@@ -1,7 +1,8 @@
+import { UbButton } from "@ub-design/components-web-components";
+
 import foundationStyle from "../foundation.css?inline";
 import { SpIcon } from "../icon/sp-icon";
 import buttonStyle from "./button.css?inline";
-import { UbButton } from "./ub-button";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${buttonStyle}`);
