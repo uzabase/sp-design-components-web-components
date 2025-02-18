@@ -32,6 +32,7 @@ export class SpDropdown extends HTMLElement {
   #value: string = "";
 
   // states
+  #text = "";
   #selectWidth = 0;
   #expanded = false;
   #position: Position = "left";
@@ -44,12 +45,20 @@ export class SpDropdown extends HTMLElement {
     this.#updateOptions();
   }
 
+  get text() {
+    return this.#text;
+  }
+
+  set text(val: string) {
+    this.#text = val;
+    this.#selectElement.setAttribute("text", val);
+  }
+
   get selectWidth() {
     return this.#selectWidth;
   }
 
   set selectWidth(val: number) {
-    console.log("🚀 ~ SpDropdown ~ setselectWidth ~ val:", val)
     this.#selectWidth = val;
     this.#listboxElement.style.minWidth = `${val}px`;
     this.#selectElement.setAttribute("width", String(val));
@@ -77,7 +86,6 @@ export class SpDropdown extends HTMLElement {
 
   set value(val: string) {
     this.#value = val;
-    this.#selectElement.value = val;
     this.#updateOptions();
   }
 
@@ -111,7 +119,7 @@ export class SpDropdown extends HTMLElement {
   connectedCallback() {
     this.#selectElement.setAttribute("aria-controls", LISTBOX_ARIA_CONTROLS);
     this.#selectElement.setAttribute("placeholder", this.placeholder);
-    this.#selectElement.value = this.#value;
+    this.#selectElement.text = this.#text;
 
     this.#listboxElement.id = LISTBOX_ARIA_CONTROLS;
     this.#listboxElement.classList.add("listbox");
@@ -190,8 +198,9 @@ export class SpDropdown extends HTMLElement {
   #handleClickOption(event: Event) {
     if (!(event instanceof CustomEvent)) return;
     const customEvent = event as CustomEvent<ClickEventDetail>;
-    const { value } = customEvent.detail;
+    const { value, text } = customEvent.detail;
     this.value = value;
+    this.text = text;
     this.#hideListbox();
   }
 
@@ -226,7 +235,7 @@ export class SpDropdown extends HTMLElement {
 
     options.forEach((option) => {
       option.setAttribute("select-type", this.#selectType);
-      if (option.text === this.#value) {
+      if (option.value === this.#value) {
         option.setAttribute("selected", "");
       } else {
         option.removeAttribute("selected");

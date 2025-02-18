@@ -16,9 +16,9 @@ type Story = StoryObj;
 export const Basic: Story = {
   render: () => html`
     <sp-dropdown placeholder="選択してください">
-      <sp-dropdown-option text="Text1" value="Text1"></sp-dropdown-option>
-      <sp-dropdown-option text="Text2" value="Text2"></sp-dropdown-option>
-      <sp-dropdown-option text="Text3" value="Text3"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢1" value="value1"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢2" value="value2"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢3" value="value3"></sp-dropdown-option>
     </sp-dropdown>
   `,
 };
@@ -27,11 +27,11 @@ export const LongText: Story = {
   render: () => html`
     <sp-dropdown placeholder="選択してください">
       <sp-dropdown-option
-        text="Text1Text1Text1Text1Text1Text1Text1Text1Text1Text1"
-        value="Text1Text1Text1Text1Text1Text1Text1Text1Text1Text1"
+        text="長ーーーーーーーーーーーーーーーーーーーーーーーい選択肢"
+        value="value1"
       ></sp-dropdown-option>
-      <sp-dropdown-option text="Text2" value="Text2"></sp-dropdown-option>
-      <sp-dropdown-option text="Text3" value="Text3"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢2" value="value2"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢3" value="value3"></sp-dropdown-option>
     </sp-dropdown>
   `,
 };
@@ -41,11 +41,11 @@ export const RightPosition: Story = {
     <div style="display: flex; justify-content: end">
       <sp-dropdown placeholder="選択してください" position="right">
         <sp-dropdown-option
-          text="Text1Text1Text1Text1Text1Text1Text1Text1Text1Text1Text1Text1"
-          value="Text1"
+          text="長ーーーーーーーーーーーーーーーーーーーーーーーい選択肢"
+          value="value1"
         ></sp-dropdown-option>
-        <sp-dropdown-option text="Text2" value="Text2"></sp-dropdown-option>
-        <sp-dropdown-option text="Text3" value="Text3"></sp-dropdown-option>
+        <sp-dropdown-option text="選択肢2" value="value2"></sp-dropdown-option>
+        <sp-dropdown-option text="選択肢3" value="value3"></sp-dropdown-option>
       </sp-dropdown>
     </div>
   `,
@@ -54,17 +54,18 @@ export const RightPosition: Story = {
 export const Scroll: Story = {
   render: () => html`
     <sp-dropdown placeholder="選択してください">
-      <sp-dropdown-option text="Text1" value="Text1"></sp-dropdown-option>
-      <sp-dropdown-option text="Text2" value="Text2"></sp-dropdown-option>
-      <sp-dropdown-option text="Text3" value="Text3"></sp-dropdown-option>
-      <sp-dropdown-option text="Text4" value="Text4"></sp-dropdown-option>
-      <sp-dropdown-option text="Text5" value="Text5"></sp-dropdown-option>
-      <sp-dropdown-option text="Text6" value="Text6"></sp-dropdown-option>
-      <sp-dropdown-option text="Text7" value="Text7"></sp-dropdown-option>
-      <sp-dropdown-option text="Text8" value="Text8"></sp-dropdown-option>
-      <sp-dropdown-option text="Text9" value="Text9"></sp-dropdown-option>
-      <sp-dropdown-option text="Text10" value="Text10"></sp-dropdown-option>
-      <sp-dropdown-option text="Text11" value="Text11"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢1" value="value1"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢2" value="value2"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢3" value="value3"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢4" value="value4"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢5" value="value5"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢6" value="value6"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢7" value="value7"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢8" value="value8"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢9" value="value9"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢10" value="value10"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢11" value="value11"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢12" value="value12"></sp-dropdown-option>
     </sp-dropdown>
   `,
 };
@@ -72,9 +73,9 @@ export const Scroll: Story = {
 export const NoPlaceholder: Story = {
   render: () => html`
     <sp-dropdown>
-      <sp-dropdown-option text="Text1" value="Text1"></sp-dropdown-option>
-      <sp-dropdown-option text="Text2" value="Text2"></sp-dropdown-option>
-      <sp-dropdown-option text="Text3" value="Text3"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢1" value="value1"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢2" value="value2"></sp-dropdown-option>
+      <sp-dropdown-option text="選択肢3" value="value3"></sp-dropdown-option>
     </sp-dropdown>
   `,
 };

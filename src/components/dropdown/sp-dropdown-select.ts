@@ -14,16 +14,16 @@ class SpDropdownSelect extends HTMLElement {
   #iconWrapperElement = document.createElement("div");
   #iconElement = document.createElement("sp-icon");
 
-  #value: string = "";
+  #text: string = "";
   #width: number = 0;
   #placeholder: string = "";
 
-  get value() {
-    return this.#value;
+  get text() {
+    return this.#text;
   }
 
-  set value(val: string) {
-    this.#value = val;
+  set text(val: string) {
+    this.#text = val;
     this.#inputElement.value = val;
   }
 
@@ -46,7 +46,7 @@ class SpDropdownSelect extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["value", "width", "placeholder"];
+    return ["text", "width", "placeholder"];
   }
 
   constructor() {
@@ -79,8 +79,8 @@ class SpDropdownSelect extends HTMLElement {
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (oldValue === newValue) return;
     switch (name) {
-      case "value":
-        this.value = newValue;
+      case "text":
+        this.text = newValue;
         break;
       case "width":
         this.width = Number(newValue);
