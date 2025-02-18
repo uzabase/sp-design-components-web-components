@@ -9,7 +9,7 @@ import dropdownOptionStyle from "./sp-dropdown-option.css?inline";
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownOptionStyle}`);
 
-export type ClickEventDetail = { value: string };
+export type ClickEventDetail = { value: string; text: string };
 
 export class SpDropdownOption extends HTMLElement {
   #baseElement = document.createElement("div");
@@ -96,7 +96,7 @@ export class SpDropdownOption extends HTMLElement {
         new CustomEvent<ClickEventDetail>("sp-dropdown-option-click", {
           bubbles: true,
           composed: true,
-          detail: { value: this.value },
+          detail: { value: this.value, text: this.text },
         }),
       );
     });
