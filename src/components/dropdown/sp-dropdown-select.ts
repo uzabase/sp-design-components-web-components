@@ -8,8 +8,6 @@ import dropdownSelectStyle from "./sp-dropdown-select.css?inline";
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownSelectStyle}`);
 
-export const DEFAULT_WIDTH = 160;
-
 class SpDropdownSelect extends HTMLElement {
   #baseElement = document.createElement("div");
   #inputElement = document.createElement("input");
@@ -17,7 +15,7 @@ class SpDropdownSelect extends HTMLElement {
   #iconElement = document.createElement("sp-icon");
 
   #value: string = "";
-  #width: number = DEFAULT_WIDTH;
+  #width: number = 0;
   #placeholder: string = "";
 
   get value() {
@@ -34,7 +32,6 @@ class SpDropdownSelect extends HTMLElement {
   }
 
   set width(val: number) {
-    console.log("🚀 ~ SpDropdownSelect ~ setwidth ~ val:", val)
     this.#width = val;
     this.#inputElement.style.width = `${val}px`;
   }
@@ -86,7 +83,7 @@ class SpDropdownSelect extends HTMLElement {
         this.value = newValue;
         break;
       case "width":
-        this.width = isNaN(Number(newValue)) ? DEFAULT_WIDTH : Number(newValue);
+        this.width = Number(newValue);
         break;
       case "placeholder":
         this.placeholder = newValue;
@@ -106,32 +103,17 @@ if (!customElements.get("sp-dropdown-select")) {
 
 export type { SpDropdownSelect };
 
-// sp-dropdown-selectに任意のvalueを入れた時の幅を計算する関数
-export function calculateDropDownSelectWidth(value: string): number {
-  const baseElement = document.createElement("div");
-  const inputElement = document.createElement("span");
-  const iconWrapperElement = document.createElement("div");
-  const iconElement = document.createElement("sp-icon");
-
-  inputElement.classList.add("input");
-  inputElement.innerText = value;
-
-  iconElement.size = "small";
-  iconElement.type = "arrow_down";
-  iconElement.text = "arrow_down";
-
-  iconWrapperElement.classList.add("icon-wrapper");
-  iconWrapperElement.appendChild(iconElement);
-
-  baseElement.classList.add("base");
-  baseElement.appendChild(inputElement);
-  baseElement.appendChild(iconWrapperElement);
-
-  document.body.appendChild(baseElement);
-
-  const width = inputElement.offsetWidth;
-
-  document.body.removeChild(baseElement);
-
+// sp-dropdown-selectに特定のvalueを設定した際の幅を計算する関数
+export function calculateDropdownSelectWidth(value: string): number {
+  const paddingWidth = 42; // input要素の左右のpadding
+  const borderWidth = 2; // input要素の左右のborder
+  const fontSize = 12; // input要素のフォントサイズ
+  const spanElement = document.createElement("span");
+  spanElement.innerText = value;
+  spanElement.style.fontSize = `${fontSize}px`;
+  spanElement.style.visibility = "hidden";
+  document.body.appendChild(spanElement);
+  const width = spanElement.offsetWidth + paddingWidth + borderWidth;
+  document.body.removeChild(spanElement);
   return width;
 }

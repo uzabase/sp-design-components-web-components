@@ -3,10 +3,7 @@ import resetStyle from "@acab/reset.css?inline";
 import foundationStyle from "../foundation.css?inline";
 import dropdownActionStyle from "./sp-dropdown.css?inline";
 import { ClickEventDetail, SpDropdownOption } from "./sp-dropdown-option";
-import {
-  calculateDropDownSelectWidth,
-  DEFAULT_WIDTH,
-} from "./sp-dropdown-select";
+import { calculateDropdownSelectWidth } from "./sp-dropdown-select";
 
 type SelectType = "single" | "multiple";
 const selectTypes: SelectType[] = ["single", "multiple"];
@@ -35,7 +32,7 @@ export class SpDropdown extends HTMLElement {
   #value: string = "";
 
   // states
-  #selectWidth = DEFAULT_WIDTH;
+  #selectWidth = 0;
   #expanded = false;
   #position: Position = "left";
 
@@ -52,6 +49,7 @@ export class SpDropdown extends HTMLElement {
   }
 
   set selectWidth(val: number) {
+    console.log("🚀 ~ SpDropdown ~ setselectWidth ~ val:", val)
     this.#selectWidth = val;
     this.#listboxElement.style.minWidth = `${val}px`;
     this.#selectElement.setAttribute("width", String(val));
@@ -212,7 +210,7 @@ export class SpDropdown extends HTMLElement {
     ];
 
     candidateValues.forEach((value) => {
-      const selectWidth = calculateDropDownSelectWidth(value);
+      const selectWidth = calculateDropdownSelectWidth(value);
       if (selectWidth > maxSelectWidth) {
         maxSelectWidth = selectWidth;
       }
