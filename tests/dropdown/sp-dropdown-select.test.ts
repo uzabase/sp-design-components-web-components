@@ -10,34 +10,34 @@ function getSpDropdownSelect() {
 }
 
 describe("sp-dropdown-select", () => {
-  describe("value属性", () => {
-    test("value属性を設定できる", async () => {
+  describe("text属性", () => {
+    test("text属性を設定できる", async () => {
       document.body.innerHTML = `
-        <sp-dropdown-select value="Value"></sp-dropdown-select>
+        <sp-dropdown-select text="Text"></sp-dropdown-select>
       `;
 
       const spDropdownSelect = getSpDropdownSelect();
-      expect(spDropdownSelect.value).toBe("Value");
+      expect(spDropdownSelect.text).toBe("Text");
     });
 
-    test("value属性を設定しないと、空文字列が設定される", async () => {
+    test("text属性を設定しないと、空文字列が設定される", async () => {
       document.body.innerHTML = `
         <sp-dropdown-select></sp-dropdown-select>
       `;
       const spDropdownSelect = getSpDropdownSelect();
-      expect(spDropdownSelect.value).toBe("");
+      expect(spDropdownSelect.text).toBe("");
     });
 
-    test("value属性を変更できる", async () => {
+    test("text属性を変更できる", async () => {
       document.body.innerHTML = `
-        <sp-dropdown-select value="Value"></sp-dropdown-select>
+        <sp-dropdown-select text="Text"></sp-dropdown-select>
       `;
 
       const spDropdownSelect = getSpDropdownSelect();
-      expect(spDropdownSelect.value).toBe("Value");
+      expect(spDropdownSelect.text).toBe("Text");
 
-      spDropdownSelect.setAttribute("value", "NewValue");
-      expect(spDropdownSelect.value).toBe("NewValue");
+      spDropdownSelect.setAttribute("text", "NewText");
+      expect(spDropdownSelect.text).toBe("NewText");
     });
   });
 

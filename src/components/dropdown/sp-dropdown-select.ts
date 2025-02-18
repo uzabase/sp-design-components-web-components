@@ -5,6 +5,8 @@ import resetStyle from "@acab/reset.css?inline";
 import foundationStyle from "../foundation.css?inline";
 import dropdownSelectStyle from "./sp-dropdown-select.css?inline";
 
+export const DEFAULT_WIDTH = 160;
+
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownSelectStyle}`);
 
@@ -15,7 +17,7 @@ class SpDropdownSelect extends HTMLElement {
   #iconElement = document.createElement("sp-icon");
 
   #text: string = "";
-  #width: number = 0;
+  #width: number = DEFAULT_WIDTH;
   #placeholder: string = "";
 
   get text() {
@@ -83,7 +85,7 @@ class SpDropdownSelect extends HTMLElement {
         this.text = newValue;
         break;
       case "width":
-        this.width = Number(newValue);
+        this.width = Number(newValue) ? Number(newValue) : DEFAULT_WIDTH;
         break;
       case "placeholder":
         this.placeholder = newValue;
