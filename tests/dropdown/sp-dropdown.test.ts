@@ -1,10 +1,11 @@
 import "../../src/components/dropdown/sp-dropdown-option";
+import "../../src/components/dropdown/sp-dropdown";
 
 import userEvent from "@testing-library/user-event";
 import { screen } from "shadow-dom-testing-library";
 import { describe, expect, test } from "vitest";
 
-import { SpDropdown } from "../../src/components/dropdown/sp-dropdown";
+import type { SpDropdown } from "../../src/components/dropdown/sp-dropdown";
 
 function getSpDropdown() {
   return document.querySelector("sp-dropdown") as SpDropdown;

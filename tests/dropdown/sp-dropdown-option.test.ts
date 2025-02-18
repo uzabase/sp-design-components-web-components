@@ -1,6 +1,8 @@
+import "../../src/components/dropdown/sp-dropdown-option";
+
 import { describe, expect, test } from "vitest";
 
-import { SpDropdownOption } from "../../src/components/dropdown/sp-dropdown-option";
+import type { SpDropdownOption } from "../../src/components/dropdown/sp-dropdown-option";
 
 function getSpDropdownOption() {
   return document.querySelector("sp-dropdown-option") as SpDropdownOption;

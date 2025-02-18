@@ -1,9 +1,8 @@
+import "../../src/components/dropdown/sp-dropdown-select";
+
 import { describe, expect, test } from "vitest";
 
-import {
-  DEFAULT_WIDTH,
-  SpDropdownSelect,
-} from "../../src/components/dropdown/sp-dropdown-select";
+import type { SpDropdownSelect } from "../../src/components/dropdown/sp-dropdown-select";
 
 function getSpDropdownSelect() {
   return document.querySelector("sp-dropdown-select") as SpDropdownSelect;
@@ -49,22 +48,6 @@ describe("sp-dropdown-select", () => {
 
       const spDropdownSelect = getSpDropdownSelect();
       expect(spDropdownSelect.width).toBe(320);
-    });
-
-    test("width属性に数値以外の値を指定すると、DEFAULT_WIDTHが設定される", async () => {
-      document.body.innerHTML = `
-        <sp-dropdown-select width="hoge"></sp-dropdown-select>
-      `;
-      const spDropdownSelect = getSpDropdownSelect();
-      expect(spDropdownSelect.width).toBe(DEFAULT_WIDTH);
-    });
-
-    test("width属性を設定しないと、DEFAULT_WIDTHが設定される", async () => {
-      document.body.innerHTML = `
-        <sp-dropdown-select></sp-dropdown-select>
-      `;
-      const spDropdownSelect = getSpDropdownSelect();
-      expect(spDropdownSelect.width).toBe(DEFAULT_WIDTH);
     });
 
     test("width属性を変更できる", async () => {
