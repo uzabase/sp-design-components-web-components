@@ -30,6 +30,13 @@ export const iconPaths: Record<Type, string> = {
     '<path fill-rule="evenodd" clip-rule="evenodd" d="M2.58 18.8574L11.3416 3.99902H12.6459L21.4075 18.8574L20.7554 19.999H3.23212L2.58 18.8574ZM11.2 9.5V14.5H12.8V9.5H11.2ZM11.2 16V17.5H12.8V16H11.2Z" fill="#EAB100"></path>',
 };
 
+export const iconAriaLabels: Record<Type, string> = {
+  error: "エラー",
+  warning: "警告",
+  information: "情報",
+  success: "成功",
+};
+
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${notificationBarStyle}`);
 
@@ -68,6 +75,7 @@ export class SpNotificationBar extends HTMLElement {
     this.#iconElement.setAttribute("role", "img");
     this.#iconElement.setAttribute("viewBox", "0 0 24 24");
     this.#iconElement.setAttribute("aria-hidden", "true");
+    this.#iconElement.setAttribute("aria-label", iconAriaLabels[this.type]);
     this.#iconElement.classList.add("icon");
     this.#iconElement.innerHTML = iconPaths[this.type];
 
@@ -82,6 +90,10 @@ export class SpNotificationBar extends HTMLElement {
 
     const closeButton = document.createElement("button");
     closeButton.classList.add("close");
+    closeButton.setAttribute("aria-label", "閉じる");
+    closeButton.addEventListener("click", () => {
+      this.dispatchEvent(new CustomEvent("close"));
+    });
 
     const action = document.createElement("div");
     action.classList.add("action");
