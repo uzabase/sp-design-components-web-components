@@ -42,6 +42,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/node": "^22.13.1",
     "@vitest/browser": "^3.0.5",
+    "dedent": "^1.5.3",
     "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-import": "^2.31.0",
