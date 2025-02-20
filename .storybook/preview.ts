@@ -1,4 +1,5 @@
 import type { Preview } from "@storybook/web-components";
+import dedent from "dedent";
 
 const preview: Preview = {
   parameters: {
@@ -8,6 +9,13 @@ const preview: Preview = {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
+      },
+    },
+    docs: {
+      source: {
+        transform: (src: string) => {
+          return dedent(src);
+        },
       },
     },
   },
