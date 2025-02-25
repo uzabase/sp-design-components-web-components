@@ -17,9 +17,9 @@ const meta = {
     slot: { type: "string" },
   },
   render: (args) => html`
-    <sp-notification-bar type=${ifDefined(args.type)}
-      >${args.slot}</sp-notification-bar
-    >
+    <sp-notification-bar type=${ifDefined(args.type)}>
+      ${args.slot}
+    </sp-notification-bar>
   `,
 } satisfies Meta<SpNotificationBar>;
 
@@ -49,13 +49,7 @@ export const AllTypes: Story = {
 
 export const LongText: Story = {
   args: {
-    slot: `Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-    commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-    est laborum.`,
+    slot: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
 };
 
