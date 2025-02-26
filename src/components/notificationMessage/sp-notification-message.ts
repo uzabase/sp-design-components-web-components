@@ -11,6 +11,13 @@ function isValidType(value: string): value is Type {
   return types.some((type) => type === value);
 }
 
+export const iconAriaLabels: Record<Type, string> = {
+  error: "エラー",
+  warning: "警告",
+  information: "情報",
+  success: "成功",
+};
+
 const typeClasses: Record<Type, string> = {
   error: "type__error",
   warning: "type__warning",
@@ -68,7 +75,8 @@ export class SpNotificationMessage extends HTMLElement {
 
     this.#iconElement.setAttribute("role", "img");
     this.#iconElement.setAttribute("viewBox", "0 0 24 24");
-    this.#iconElement.setAttribute("aria-hidden", "true");
+    this.#iconElement.setAttribute("aria-hidden", "false");
+    this.#iconElement.setAttribute("aria-label", iconAriaLabels[this.type]);
     this.#iconElement.classList.add("icon");
     this.#iconElement.innerHTML = iconPaths[this.type];
 
