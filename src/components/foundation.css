@@ -1,3 +1,5 @@
+@import url("@sp-design/token/lib/speeda-tokens-host.css");
+
 :host, * {
   overflow-wrap: break-word;
   min-width: 0;
