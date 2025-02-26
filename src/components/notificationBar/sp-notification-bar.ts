@@ -74,7 +74,7 @@ export class SpNotificationBar extends HTMLElement {
 
     this.#iconElement.setAttribute("role", "img");
     this.#iconElement.setAttribute("viewBox", "0 0 24 24");
-    this.#iconElement.setAttribute("aria-hidden", "true");
+    this.#iconElement.setAttribute("aria-hidden", "false");
     this.#iconElement.setAttribute("aria-label", iconAriaLabels[this.type]);
     this.#iconElement.classList.add("icon");
     this.#iconElement.innerHTML = iconPaths[this.type];
@@ -87,6 +87,7 @@ export class SpNotificationBar extends HTMLElement {
 
     const closeIcon = new SpIcon();
     closeIcon.type = "close";
+    closeIcon.setAttribute("aria-hidden", "true");
 
     const closeButton = document.createElement("button");
     closeButton.classList.add("close");
