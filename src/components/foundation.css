@@ -6,11 +6,11 @@
 }
 
 :host {
-  font-family: var(--font-ja);
+  font-family: var(--font-family-ja);
 }
 
 :host:lang(zh) {
-  font-family: var(--font-zh);
+  font-family: var(--font-family-zh);
 }
 
 button {
