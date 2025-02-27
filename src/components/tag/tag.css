@@ -1,0 +1,11 @@
+.base {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1.6;
+  padding-block: 0.5px;
+  padding-inline: 8px;
+  color: var(--color-semantic-text-regular);
+  background-color: var(--color-semantic-surface-regular-2);
+  border-radius: 2px;
+  border: 1px solid var(--color-semantic-border-regular);
+}
