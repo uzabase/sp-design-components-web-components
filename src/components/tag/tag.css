@@ -1,5 +1,8 @@
 .base {
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
   font-size: 12px;
   line-height: 1.6;
   padding-block: 0.5px;
@@ -8,4 +11,8 @@
   background-color: var(--color-semantic-surface-regular-2);
   border-radius: 2px;
   border: 1px solid var(--color-semantic-border-regular);
+}
+
+.remove {
+  color: var(--color-primitive-neutral-100);
 }

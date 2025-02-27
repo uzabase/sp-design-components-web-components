@@ -10,12 +10,14 @@ const meta = {
   component: "sp-tag",
   argTypes: {
     slot: { type: "string" },
+    removable: { type: "boolean" },
   },
   args: {
     slot: "sp-tag-text",
+    removable: false,
   },
   render: (args) => {
-    return html` <sp-tag> ${args.slot}</sp-tag> `;
+    return html`<sp-tag ?removable=${args.removable}>${args.slot}</sp-tag>`;
   },
 } satisfies Meta<SpTag>;
 
@@ -24,4 +26,10 @@ type Story = StoryObj<SpTag>;
 
 export const Basic: Story = {
   tags: ["!dev-only"],
+};
+
+export const Removable: Story = {
+  args: {
+    removable: true,
+  },
 };

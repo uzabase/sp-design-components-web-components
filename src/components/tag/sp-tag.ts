@@ -1,3 +1,5 @@
+import "../icon/sp-icon";
+
 import resetStyle from "@acab/reset.css?inline";
 
 import foundationStyle from "../foundation.css?inline";
@@ -7,6 +9,10 @@ const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${tagStyle}`);
 
 export class SpTag extends HTMLElement {
+  #baseElement = document.createElement("span");
+
+  removable = false;
+
   constructor() {
     super();
 
@@ -18,13 +24,29 @@ export class SpTag extends HTMLElement {
   }
 
   connectedCallback() {
-    const baseElement = document.createElement("span");
-    baseElement.classList.add("base");
+    this.#baseElement.classList.add("base");
 
     const slotElement = document.createElement("slot");
 
-    baseElement.appendChild(slotElement);
-    this.shadowRoot!.appendChild(baseElement);
+    this.#baseElement.appendChild(slotElement);
+    this.#addRemoveButton();
+    this.shadowRoot!.appendChild(this.#baseElement);
+  }
+
+  #addRemoveButton() {
+    const removeButton = document.createElement("button");
+    removeButton.classList.add("remove");
+
+    const removeIcon = document.createElement("sp-icon");
+    removeIcon.size = "small";
+    removeIcon.type = "close";
+
+    removeButton.appendChild(removeIcon);
+    removeButton.addEventListener("click", () =>
+      this.dispatchEvent(new CustomEvent("remove")),
+    );
+
+    this.#baseElement.appendChild(removeButton);
   }
 }
 
