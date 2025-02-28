@@ -7,13 +7,37 @@
   line-height: 1.6;
   padding-block: 0.5px;
   padding-inline: 8px;
-  background-color: var(--color-semantic-surface-regular-2);
   border-radius: 2px;
-  border: 1px solid var(--color-semantic-border-regular);
+  border: 1px solid;
 }
 
-.base:hover {
+.color__gray {
+  background-color: var(--color-semantic-surface-regular-2);
+  border-color: var(--color-semantic-border-regular);
+}
+
+.color__gray:hover {
   background-color: var(--color-semantic-surface-regular-4);
+}
+
+.color__green {
+  background-color: var(--color-semantic-surface-temp-tag-green);
+  border-color: var(--color-semantic-border-temp-tag-green);
+}
+
+.color__red {
+  background-color: var(--color-semantic-surface-temp-tag-red);
+  border-color: var(--color-semantic-border-temp-tag-red);
+}
+
+.color__yellow {
+  background-color: var(--color-semantic-surface-temp-tag-yellow);
+  border-color: var(--color-semantic-border-temp-tag-yellow);
+}
+
+.color__blue {
+  background-color: var(--color-semantic-surface-temp-tag-marine);
+  border-color: var(--color-semantic-border-temp-tag-marine);
 }
 
 .label {
