@@ -11,8 +11,6 @@ styles.replaceSync(`${resetStyle} ${foundationStyle} ${tagStyle}`);
 export class SpTag extends HTMLElement {
   #removable = false;
 
-  #baseElement = document.createElement("span");
-
   get removable() {
     return this.#removable;
   }
@@ -53,30 +51,38 @@ export class SpTag extends HTMLElement {
 
   #render() {
     this.shadowRoot!.textContent = "";
-    this.#baseElement.textContent = "";
 
-    this.#baseElement.classList.add("base");
+    const baseElement = document.createElement("div");
+    baseElement.classList.add("base");
+    baseElement.setAttribute("role", "tag");
 
+    const contentElement = document.createElement("span");
+    contentElement.classList.add("label");
     const slotElement = document.createElement("slot");
-    this.#baseElement.appendChild(slotElement);
+    contentElement.appendChild(slotElement);
+
+    baseElement.appendChild(contentElement);
 
     if (this.#removable) {
       const removeButton = document.createElement("button");
       removeButton.classList.add("remove");
+      removeButton.setAttribute("aria-label", "削除");
+      removeButton.setAttribute("type", "button");
 
       const removeIcon = document.createElement("sp-icon");
       removeIcon.size = "small";
       removeIcon.type = "close";
+      removeIcon.setAttribute("aria-hidden", "true");
 
       removeButton.appendChild(removeIcon);
       removeButton.addEventListener("click", () =>
         this.dispatchEvent(new CustomEvent("remove")),
       );
 
-      this.#baseElement.appendChild(removeButton);
+      baseElement.appendChild(removeButton);
     }
 
-    this.shadowRoot!.appendChild(this.#baseElement);
+    this.shadowRoot!.appendChild(baseElement);
   }
 }
 

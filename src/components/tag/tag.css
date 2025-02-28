@@ -7,7 +7,6 @@
   line-height: 1.6;
   padding-block: 0.5px;
   padding-inline: 8px;
-  color: var(--color-semantic-text-regular);
   background-color: var(--color-semantic-surface-regular-2);
   border-radius: 2px;
   border: 1px solid var(--color-semantic-border-regular);
@@ -15,6 +14,10 @@
 
 .base:hover {
   background-color: var(--color-semantic-surface-regular-4);
+}
+
+.label {
+  color: var(--color-semantic-text-regular);
 }
 
 .remove {
