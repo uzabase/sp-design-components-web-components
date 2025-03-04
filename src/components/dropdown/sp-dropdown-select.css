@@ -6,16 +6,16 @@
 }
 
 .input {
-  border-radius: var(--border-radius-1, 2px);
+  border-radius: 2px;
   border: 1px solid var(--color-semantic-border-regular);
   background: var(--color-semantic-surface-regular-1);
   min-width: 80px;
   max-width: 320px;
-  height: 28px;
   font-size: 12px;
   font-weight: 400;
   line-height: 160%;
   padding-inline: 8px 34px;
+  padding-block: 3.5px;
   text-overflow: ellipsis;
 }
 
