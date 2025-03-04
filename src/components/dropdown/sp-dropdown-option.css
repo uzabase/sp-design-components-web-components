@@ -14,7 +14,7 @@
 }
 
 .icon-area {
-  width: var(--icon-icon-small, 16px);
+  width: 16px;
 }
 
 .text {
