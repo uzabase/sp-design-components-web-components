@@ -1,5 +1,4 @@
 import "../../src/components/button/sp-button";
-import "@sp-design/token/lib/speeda-tokens.css";
 import "../../src/components/notificationMessage/sp-notification-message";
 
 import type { Meta, StoryObj } from "@storybook/web-components";

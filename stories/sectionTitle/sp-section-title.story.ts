@@ -1,4 +1,3 @@
-import "@sp-design/token/lib/speeda-tokens.css";
 import "../../src/components/button/sp-button";
 import "../../src/components/sectionTitle/sp-section-title";
 

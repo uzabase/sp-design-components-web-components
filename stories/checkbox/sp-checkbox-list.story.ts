@@ -1,4 +1,3 @@
-import "@sp-design/token/lib/speeda-tokens.css";
 import "../../src/components/checkbox/sp-checkbox-list";
 
 import { action } from "@storybook/addon-actions";

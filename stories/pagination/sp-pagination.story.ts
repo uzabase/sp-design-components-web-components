@@ -1,5 +1,4 @@
 import "../../src/components/pagination/sp-pagination";
-import "@sp-design/token/lib/speeda-tokens.css";
 
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";

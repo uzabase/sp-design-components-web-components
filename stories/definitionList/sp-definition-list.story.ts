@@ -1,6 +1,5 @@
 import "../../src/components/definitionList/sp-definition-list-dt";
 import "../../src/components/definitionList/sp-definition-list-dd";
-import "@sp-design/token/lib/speeda-tokens.css";
 import "../../src/components/definitionList/sp-definition-list";
 
 import type { Meta, StoryObj } from "@storybook/web-components";
