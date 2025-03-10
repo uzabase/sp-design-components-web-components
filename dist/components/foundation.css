@@ -1,14 +1,16 @@
+@import url("@sp-design/token/lib/speeda-tokens-host.css");
+
 :host, * {
   overflow-wrap: break-word;
   min-width: 0;
 }
 
 :host {
-  font-family: var(--font-ja);
+  font-family: var(--font-family-ja);
 }
 
 :host:lang(zh) {
-  font-family: var(--font-zh);
+  font-family: var(--font-family-zh);
 }
 
 button {
