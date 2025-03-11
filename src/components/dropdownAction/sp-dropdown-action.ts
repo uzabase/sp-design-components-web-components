@@ -37,7 +37,7 @@ export class SpDropdownAction extends HTMLElement {
   #clickOutsideHandler = this.#handleClickOutside.bind(this);
 
   set label(value: string) {
-    this.#buttonElement.text = value;
+    this.#buttonElement.textContent = value;
     this.#syncMenuMinWidthWithButtonWidth();
   }
 

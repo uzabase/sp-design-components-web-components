@@ -11,14 +11,6 @@ export class SpElementTitle extends HTMLElement {
   #textLinkSlotElement = document.createElement("slot");
   #buttonSlotElement = document.createElement("slot");
 
-  set text(value: string) {
-    this.#headingElement.textContent = value;
-  }
-
-  static get observedAttributes() {
-    return ["text"];
-  }
-
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -41,12 +33,6 @@ export class SpElementTitle extends HTMLElement {
     }
   }
 
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    if (name === "text" && oldValue !== newValue) {
-      this.text = newValue;
-    }
-  }
-
   #createContainer() {
     const container = document.createElement("div");
     container.classList.add("container");
@@ -64,6 +50,9 @@ export class SpElementTitle extends HTMLElement {
   }
 
   #createHeadingBlock() {
+    const slot = document.createElement("slot");
+    this.#headingElement.appendChild(slot);
+
     const div = document.createElement("div");
     div.classList.add("heading");
     div.appendChild(this.#headingElement);
