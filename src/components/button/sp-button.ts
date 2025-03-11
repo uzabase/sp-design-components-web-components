@@ -1,4 +1,4 @@
-import { UbButton } from "@ub-design/components-web-components/";
+import { UbButton } from "@ub-design/components-web-components";
 
 import foundationStyle from "../foundation.css?inline";
 import { SpIcon } from "../icon/sp-icon";
@@ -55,7 +55,7 @@ export class SpButton extends UbButton {
   }
 
   #appendIconElement() {
-    this.buttonElement.insertBefore(this.#iconElement, this.textElement);
+    this.buttonElement.prepend(this.#iconElement);
   }
 
   #removeIconElement() {

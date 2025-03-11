@@ -1,5 +1,4 @@
 import "../../src/components/button/sp-button";
-import "@sp-design/token/lib/speeda-tokens.css";
 import "../../src/components/elementTitle/sp-element-title";
 
 import type { Meta, StoryObj } from "@storybook/web-components";
@@ -10,11 +9,12 @@ import type { SpElementTitle } from "../../src/components/elementTitle/sp-elemen
 const meta = {
   component: "sp-element-title",
   argTypes: {
-    text: { type: "string" },
+    slot: { type: "string" },
   },
   args: {
-    text: "Element Title",
+    slot: "Element Title",
   },
+  render: (args) => html`<sp-element-title>${args.slot}</sp-element-title>`,
 } satisfies Meta<SpElementTitle>;
 
 export default meta;
@@ -26,7 +26,8 @@ export const Basic: Story = {
 
 export const WithTextLinks: Story = {
   render: (args) => html`
-    <sp-element-title text=${args.text}>
+    <sp-element-title>
+      ${args.slot}
       <a
         href="#"
         slot="text-links"
@@ -45,7 +46,8 @@ export const WithTextLinks: Story = {
 
 export const WithButtons: Story = {
   render: (args) => html`
-    <sp-element-title text=${args.text}>
+    <sp-element-title>
+      ${args.slot}
       <sp-button text="Button1" slot="buttons"></sp-button>
       <sp-button text="Button2" slot="buttons"></sp-button>
     </sp-element-title>
@@ -54,7 +56,8 @@ export const WithButtons: Story = {
 
 export const WithFullContents: Story = {
   render: (args) => html`
-    <sp-element-title text=${args.text}>
+    <sp-element-title>
+      ${args.slot}
       <a
         href="#"
         slot="text-links"

@@ -1,4 +1,4 @@
-import { UbButton } from "@ub-design/components-web-components/";
+import { UbButton } from "@ub-design/components-web-components";
 export declare class SpButton extends UbButton {
     #private;
     get icon(): string;

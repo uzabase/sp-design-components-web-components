@@ -10,7 +10,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
 var _SpButton_instances, _SpButton_icon, _SpButton_iconElement, _SpButton_appendIconElement, _SpButton_removeIconElement, _SpButton_updateIconElement;
-import { UbButton } from "@ub-design/components-web-components/";
+import { UbButton } from "@ub-design/components-web-components";
 import foundationStyle from "../foundation.css?inline";
 import { SpIcon } from "../icon/sp-icon";
 import buttonStyle from "./button.css?inline";
@@ -62,7 +62,7 @@ export class SpButton extends UbButton {
     }
 }
 _SpButton_icon = new WeakMap(), _SpButton_iconElement = new WeakMap(), _SpButton_instances = new WeakSet(), _SpButton_appendIconElement = function _SpButton_appendIconElement() {
-    this.buttonElement.insertBefore(__classPrivateFieldGet(this, _SpButton_iconElement, "f"), this.textElement);
+    this.buttonElement.prepend(__classPrivateFieldGet(this, _SpButton_iconElement, "f"));
 }, _SpButton_removeIconElement = function _SpButton_removeIconElement() {
     __classPrivateFieldGet(this, _SpButton_iconElement, "f").remove();
 }, _SpButton_updateIconElement = function _SpButton_updateIconElement(type) {
