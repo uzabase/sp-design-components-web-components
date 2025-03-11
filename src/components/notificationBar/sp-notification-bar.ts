@@ -71,6 +71,7 @@ export class SpNotificationBar extends HTMLElement {
 
   connectedCallback() {
     this.#baseElement.classList.add("base");
+    this.#baseElement.setAttribute("role", "alert");
 
     this.#iconElement.setAttribute("role", "img");
     this.#iconElement.setAttribute("viewBox", "0 0 24 24");
