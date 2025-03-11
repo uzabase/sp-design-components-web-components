@@ -22,7 +22,7 @@ const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownDialogStyle}`);
 export class SpDropdownDialog extends HTMLElement {
     set label(value) {
-        __classPrivateFieldGet(this, _SpDropdownDialog_buttonElement, "f").text = value;
+        __classPrivateFieldGet(this, _SpDropdownDialog_buttonElement, "f").textContent = value;
     }
     get open() {
         return __classPrivateFieldGet(this, _SpDropdownDialog_open, "f");
