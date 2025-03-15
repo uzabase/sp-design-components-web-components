@@ -44,6 +44,8 @@ export class SpNotificationBar extends HTMLElement {
   #type: Type = "information";
 
   #baseElement = document.createElement("div");
+  #bodyElement = document.createElement("div");
+  #endElement = document.createElement("div");
   #iconElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
   get type() {
@@ -71,8 +73,12 @@ export class SpNotificationBar extends HTMLElement {
 
   connectedCallback() {
     this.#baseElement.classList.add("base");
-    this.#baseElement.setAttribute("role", "alert");
 
+    // Create body element with role="alert"
+    this.#bodyElement.classList.add("body");
+    this.#bodyElement.setAttribute("role", "alert");
+
+    // Icon setup
     this.#iconElement.setAttribute("role", "img");
     this.#iconElement.setAttribute("viewBox", "0 0 24 24");
     this.#iconElement.setAttribute("aria-hidden", "false");
@@ -80,12 +86,20 @@ export class SpNotificationBar extends HTMLElement {
     this.#iconElement.classList.add("icon");
     this.#iconElement.innerHTML = iconPaths[this.type];
 
+    // Content setup
     const content = document.createElement("div");
     content.classList.add("content");
-
     const slot = document.createElement("slot");
     content.appendChild(slot);
 
+    // Add icon and content to body
+    this.#bodyElement.appendChild(this.#iconElement);
+    this.#bodyElement.appendChild(content);
+
+    // End element with close button
+    this.#endElement.classList.add("action");
+
+    // Close button setup
     const closeIcon = new SpIcon();
     closeIcon.type = "close";
     closeIcon.setAttribute("aria-hidden", "true");
@@ -97,15 +111,12 @@ export class SpNotificationBar extends HTMLElement {
       this.dispatchEvent(new CustomEvent("close"));
     });
 
-    const action = document.createElement("div");
-    action.classList.add("action");
-
-    this.#baseElement.appendChild(this.#iconElement);
-    this.#baseElement.appendChild(content);
-
     closeButton.appendChild(closeIcon);
-    action.appendChild(closeButton);
-    this.#baseElement.appendChild(action);
+    this.#endElement.appendChild(closeButton);
+
+    // Add body and end to base
+    this.#baseElement.appendChild(this.#bodyElement);
+    this.#baseElement.appendChild(this.#endElement);
 
     this.shadowRoot!.appendChild(this.#baseElement);
   }
