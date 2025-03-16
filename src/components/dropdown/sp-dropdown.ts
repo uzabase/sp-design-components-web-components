@@ -114,7 +114,10 @@ export class SpDropdown extends HTMLElement {
   constructor() {
     super();
 
-    const shadowRoot = this.attachShadow({ mode: "open" });
+    const shadowRoot = this.attachShadow({
+      mode: "open",
+      delegatesFocus: true,
+    });
     shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
   }
 
@@ -154,6 +157,8 @@ export class SpDropdown extends HTMLElement {
 
     this.addEventListener("sp-dropdown-option-click", this.#handleClickOption);
 
+    this.addEventListener("keydown", this.#handleKeyDown);
+
     window.addEventListener("click", this.#clickOutsideHandler);
     window.addEventListener("resize", this.#adjustListboxPositionHandler);
     this.#adjustListboxPosition(); // 初期ロード時に位置を調整
@@ -169,6 +174,8 @@ export class SpDropdown extends HTMLElement {
       "sp-dropdown-option-click",
       this.#handleClickOption,
     );
+
+    this.removeEventListener("keydown", this.#handleKeyDown);
 
     window.removeEventListener("click", this.#clickOutsideHandler);
     window.removeEventListener("resize", this.#adjustListboxPositionHandler);
@@ -190,7 +197,6 @@ export class SpDropdown extends HTMLElement {
   }
 
   #toggleListbox() {
-    console.log("toggle", this.expanded);
     this.expanded = !this.expanded;
   }
 
@@ -207,14 +213,18 @@ export class SpDropdown extends HTMLElement {
     this.#hideListbox();
   }
 
+  #getOptions() {
+    return this.#slotElement
+      .assignedElements()
+      .filter((element) => element instanceof SpDropdownOption);
+  }
+
   /**
    * optionの各値とplaceholderをそれぞれselectに入れた時の幅を計算し、最も大きい幅をselectの幅として設定する
    */
   #calculateSelectWidth() {
     let maxSelectWidth = 0;
-    const options = this.#slotElement
-      .assignedElements()
-      .filter((element) => element instanceof SpDropdownOption);
+    const options = this.#getOptions();
 
     const candidateValues = [
       this.#placeholder,
@@ -232,9 +242,7 @@ export class SpDropdown extends HTMLElement {
   }
 
   #updateOptions() {
-    const options = this.#slotElement
-      .assignedElements()
-      .filter((element) => element instanceof SpDropdownOption);
+    const options = this.#getOptions();
 
     options.forEach((option) => {
       option.setAttribute("select-type", this.selectType);
@@ -265,6 +273,66 @@ export class SpDropdown extends HTMLElement {
     }
   }
   #adjustListboxPositionHandler = this.#adjustListboxPosition.bind(this);
+
+  #focusNextOption() {
+    const options = this.#getOptions();
+    const activeElement = document.activeElement;
+    const focusedIndex = options.findIndex(
+      (option) => option === activeElement,
+    );
+    if (focusedIndex === -1) {
+      options[0].focus();
+    } else if (focusedIndex < options.length - 1) {
+      options[focusedIndex + 1].focus();
+    }
+  }
+
+  #focusPreviousOption() {
+    const options = this.#getOptions();
+    const activeElement = document.activeElement;
+    const focusedIndex = options.findIndex(
+      (option) => option === activeElement,
+    );
+    if (focusedIndex > 0) {
+      options[focusedIndex - 1].focus();
+    } else if (focusedIndex === -1) {
+      options[options.length - 1].focus();
+    }
+  }
+
+  #selectFocusedOption() {
+    const options = this.#getOptions();
+    const activeElement = document.activeElement;
+    const focusedOption = options.find((option) => option === activeElement);
+    if (focusedOption) {
+      focusedOption.click();
+    }
+    this.#selectElement.focus();
+  }
+
+  #handleKeyDown(event: KeyboardEvent) {
+    switch (event.key) {
+      case "ArrowDown":
+        // 次のオプションにフォーカス
+        this.expanded = true;
+        this.#focusNextOption();
+        break;
+      case "ArrowUp":
+        // 前のオプションにフォーカス
+        this.expanded = true;
+        this.#focusPreviousOption();
+        break;
+      case "Enter":
+      case " ":
+        // フォーカスされているオプションを選択
+        this.#selectFocusedOption();
+        break;
+      case "Escape":
+        // ドロップダウンを閉じる
+        this.expanded = false;
+        break;
+    }
+  }
 }
 
 declare global {

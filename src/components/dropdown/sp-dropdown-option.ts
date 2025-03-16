@@ -69,7 +69,7 @@ export class SpDropdownOption extends HTMLElement {
   constructor() {
     super();
 
-    const shadowRoot = this.attachShadow({ mode: "open" });
+    const shadowRoot = this.attachShadow({ mode: "open", delegatesFocus: true });
     shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
   }
 
@@ -88,18 +88,15 @@ export class SpDropdownOption extends HTMLElement {
     this.#baseElement.role = "option";
     this.#baseElement.appendChild(this.#iconAreaElement);
     this.#baseElement.appendChild(this.#textElement);
+    this.#baseElement.tabIndex = 0;
 
     this.shadowRoot?.appendChild(this.#baseElement);
 
-    this.#baseElement.addEventListener("click", () => {
-      this.dispatchEvent(
-        new CustomEvent<ClickEventDetail>("sp-dropdown-option-click", {
-          bubbles: true,
-          composed: true,
-          detail: { value: this.value, text: this.text },
-        }),
-      );
-    });
+    this.addEventListener("click", this.#handleClick);
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener("click", this.#handleClick);
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -118,6 +115,16 @@ export class SpDropdownOption extends HTMLElement {
         this.selected = newValue !== null;
         break;
     }
+  }
+
+  #handleClick() {
+    this.dispatchEvent(
+      new CustomEvent<ClickEventDetail>("sp-dropdown-option-click", {
+        bubbles: true,
+        composed: true,
+        detail: { value: this.value, text: this.text },
+      }),
+    );
   }
 }
 

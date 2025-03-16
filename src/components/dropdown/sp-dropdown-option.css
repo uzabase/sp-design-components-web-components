@@ -13,6 +13,11 @@
   background: var(--color-semantic-surface-regular-3);
 }
 
+.base:focus-visible {
+  background: var(--color-semantic-surface-regular-3);
+  outline: none;
+} 
+
 .icon-area {
   width: 16px;
 }
