@@ -11,6 +11,10 @@ function getSpDropdown() {
   return document.querySelector("sp-dropdown") as SpDropdown;
 }
 
+function getSpDropdownOptions() {
+  return document.querySelectorAll("sp-dropdown-option");
+}
+
 function getInput() {
   return screen.getByShadowRole("textbox");
 }
@@ -198,6 +202,145 @@ describe("sp-dropdown", () => {
       await user.click(input);
 
       await user.click(document.body);
+
+      const listbox = queryListbox();
+      expect(listbox).toBe(null);
+    });
+  });
+
+  describe("キーボード操作", () => {
+    test("inputにフォーカスがある状態で、上矢印キーを押すと、選択肢が表示される。また、最後の選択肢がフォーカスされる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown>
+          <sp-dropdown-option value="Value1" text="Value1"></sp-dropdown-option>
+          <sp-dropdown-option value="Value2" text="Value2"></sp-dropdown-option>
+        </sp-dropdown>
+      `;
+
+      const input = getInput();
+      input.focus();
+      await userEvent.keyboard("{ArrowUp}");
+
+      const listbox = queryListbox();
+      expect(listbox).not.toBe(null);
+      const activeElement = document.activeElement;
+      expect(activeElement).toBe(getSpDropdownOptions()[1]);
+    });
+
+    test("inputにフォーカスがある状態で、下矢印キーを押すと、選択肢が表示される。また、最初の選択肢がフォーカスされる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown>
+          <sp-dropdown-option value="Value1" text="Value1"></sp-dropdown-option>
+          <sp-dropdown-option value="Value2" text="Value2"></sp-dropdown-option>
+        </sp-dropdown>
+      `;
+
+      const input = getInput();
+      input.focus();
+      await userEvent.keyboard("{ArrowDown}");
+
+      const listbox = queryListbox();
+      expect(listbox).not.toBe(null);
+      const activeElement = document.activeElement;
+      expect(activeElement).toBe(getSpDropdownOptions()[0]);
+    });
+
+    test("選択肢にフォーカスがある状態で、上矢印キーを押すと、前の選択肢がフォーカスされる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown>
+          <sp-dropdown-option value="Value1" text="Value1"></sp-dropdown-option>
+          <sp-dropdown-option value="Value2" text="Value2"></sp-dropdown-option>
+        </sp-dropdown>
+      `;
+
+      const input = getInput();
+      input.focus();
+      await userEvent.keyboard("{ArrowUp}");
+      const activeElement = document.activeElement;
+      expect(activeElement).toBe(getSpDropdownOptions()[1]);
+
+      await userEvent.keyboard("{ArrowUp}");
+      const activeElement2 = document.activeElement;
+      expect(activeElement2).toBe(getSpDropdownOptions()[0]);
+    });
+
+    test("選択肢にフォーカスがある状態で、下矢印キーを押すと、次の選択肢がフォーカスされる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown>
+          <sp-dropdown-option value="Value1" text="Value1"></sp-dropdown-option>
+          <sp-dropdown-option value="Value2" text="Value2"></sp-dropdown-option>
+        </sp-dropdown>
+      `;
+      const user = userEvent.setup();
+
+      const input = getInput();
+      input.focus();
+      await user.keyboard("{ArrowDown}");
+      const activeElement = document.activeElement;
+      expect(activeElement).toBe(getSpDropdownOptions()[0]);
+
+      await user.keyboard("{ArrowDown}");
+      const activeElement2 = document.activeElement;
+      expect(activeElement2).toBe(getSpDropdownOptions()[1]);
+    });
+
+    test("選択肢にフォーカスがある状態で、Enterキーを押すと、その選択肢を選択できる。また、inputにフォーカスが移動する", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown>
+          <sp-dropdown-option value="Value1" text="Value1"></sp-dropdown-option>
+          <sp-dropdown-option value="Value2" text="Value2"></sp-dropdown-option>
+        </sp-dropdown>
+      `;
+      const user = userEvent.setup();
+
+      const input = getInput();
+
+      await user.click(input);
+      await user.keyboard("{ArrowDown}");
+      await user.keyboard("{Enter}");
+
+      const listbox = queryListbox();
+      expect(listbox).toBe(null);
+      expect(getSpDropdown().value).toBe("Value1");
+      const activeElement = document.activeElement;
+      expect(activeElement).toBe(getSpDropdown());
+    });
+
+    test("選択肢にフォーカスがある状態で、Spaceキーを押すと、その選択肢を選択できる。また、inputにフォーカスが移動する", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown>
+          <sp-dropdown-option value="Value1" text="Value1"></sp-dropdown-option>
+          <sp-dropdown-option value="Value2" text="Value2"></sp-dropdown-option>
+        </sp-dropdown>
+      `;
+      const user = userEvent.setup();
+
+      const input = getInput();
+
+      await user.click(input);
+      await user.keyboard("{ArrowDown}");
+      await user.keyboard(" ");
+
+      const listbox = queryListbox();
+      expect(listbox).toBe(null);
+      expect(getSpDropdown().value).toBe("Value1");
+      const activeElement = document.activeElement;
+      expect(activeElement).toBe(getSpDropdown());
+    });
+
+    test("選択肢にフォーカスがある状態で、Escapeキーを押すと、選択肢が非表示になる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown>
+          <sp-dropdown-option value="Value1" text="Value1"></sp-dropdown-option>
+          <sp-dropdown-option value="Value2" text="Value2"></sp-dropdown-option>
+        </sp-dropdown>
+      `;
+      const user = userEvent.setup();
+
+      const input = getInput();
+
+      await user.click(input);
+      await user.keyboard("{Escape}");
 
       const listbox = queryListbox();
       expect(listbox).toBe(null);
