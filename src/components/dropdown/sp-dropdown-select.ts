@@ -11,7 +11,7 @@ const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownSelectStyle}`);
 
 class SpDropdownSelect extends HTMLElement {
-  #baseElement = document.createElement("label");
+  #baseElement = document.createElement("span");
   #inputElement = document.createElement("input");
   #iconWrapperElement = document.createElement("div");
   #iconElement = document.createElement("sp-icon");
