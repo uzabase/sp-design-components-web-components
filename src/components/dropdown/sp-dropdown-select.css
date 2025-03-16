@@ -1,22 +1,30 @@
 .base {
   display: inline-flex;
   align-items: center;
-  position: relative;
+  min-width: 80px;
+  max-width: 320px;
   color: var(--color-semantic-text-regular);
-}
-
-.input {
   border-radius: 2px;
   border: 1px solid var(--color-semantic-border-regular);
   background: var(--color-semantic-surface-regular-1);
-  min-width: 80px;
-  max-width: 320px;
+}
+
+.base:focus-within {
+  border: 1px solid var(--color-semantic-border-focus);
+  box-shadow: 0 0 0 3px #e2e5f5;
+}
+
+.input {
+  flex-grow: 1;
+  padding-inline: 8px;
+  padding-block: 3.5px;
+  border: none;
+  background-color: inherit;
   font-size: 12px;
   font-weight: 400;
   line-height: 160%;
-  padding-inline: 8px 34px;
-  padding-block: 3.5px;
   text-overflow: ellipsis;
+  cursor: pointer;
 }
 
 .input::placeholder {
@@ -24,8 +32,8 @@
 }
 
 .input:focus {
-  border: 1px solid var(--color-semantic-border-focus);
-  box-shadow: 0 0 0 3px #e2e5f5;
+  border: none;
+  box-shadow: none;
 }
 
 /* disable focus-ring */
@@ -39,8 +47,7 @@
 }
 
 .icon-wrapper {
-  padding: 5px;
+  flex-shrink: 0;
   display: flex;
-  inset-inline-end: 0;
-  position: absolute;
+  padding: 5px;
 }
