@@ -1,7 +1,6 @@
 .base {
   position: relative;
-  min-width: 80px;
-  max-width: 320px;
+  display: inline;
 }
 
 .listbox {

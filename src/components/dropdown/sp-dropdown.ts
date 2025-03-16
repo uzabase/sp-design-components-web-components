@@ -78,6 +78,8 @@ export class SpDropdown extends HTMLElement {
   }
   set expanded(val: boolean) {
     this.#expanded = val;
+    this.#listboxElement.hidden = !val;
+    this.#selectElement.setAttribute("aria-expanded", String(val));
   }
 
   get value() {
@@ -117,7 +119,9 @@ export class SpDropdown extends HTMLElement {
   }
 
   connectedCallback() {
+    this.#selectElement.role = "combobox";
     this.#selectElement.setAttribute("aria-controls", LISTBOX_ARIA_CONTROLS);
+    this.#selectElement.setAttribute("aria-expanded", String(this.expanded));
     this.#selectElement.setAttribute("placeholder", this.placeholder);
     this.#selectElement.text = this.#text;
 
@@ -186,13 +190,12 @@ export class SpDropdown extends HTMLElement {
   }
 
   #toggleListbox() {
-    this.#expanded = !this.#expanded;
-    this.#listboxElement.hidden = !this.#expanded;
+    console.log("toggle", this.expanded);
+    this.expanded = !this.expanded;
   }
 
   #hideListbox() {
-    this.#expanded = false;
-    this.#listboxElement.hidden = true;
+    this.expanded = false;
   }
 
   #handleClickOption(event: Event) {
@@ -234,7 +237,7 @@ export class SpDropdown extends HTMLElement {
       .filter((element) => element instanceof SpDropdownOption);
 
     options.forEach((option) => {
-      option.setAttribute("select-type", this.#selectType);
+      option.setAttribute("select-type", this.selectType);
       if (option.value === this.#value) {
         option.setAttribute("selected", "");
       } else {
