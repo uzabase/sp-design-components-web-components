@@ -7,6 +7,7 @@
   border-radius: 2px;
   border: 1px solid var(--color-semantic-border-regular);
   background: var(--color-semantic-surface-regular-1);
+  cursor: pointer;
 }
 
 .base:focus-within {
