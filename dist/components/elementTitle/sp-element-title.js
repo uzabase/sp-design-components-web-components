@@ -10,12 +10,6 @@ import elementTitleStyle from "./element-title.css?inline";
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${elementTitleStyle}`);
 export class SpElementTitle extends HTMLElement {
-    set text(value) {
-        __classPrivateFieldGet(this, _SpElementTitle_headingElement, "f").textContent = value;
-    }
-    static get observedAttributes() {
-        return ["text"];
-    }
     constructor() {
         super();
         _SpElementTitle_instances.add(this);
@@ -36,11 +30,6 @@ export class SpElementTitle extends HTMLElement {
             this.shadowRoot.querySelector(".buttons")?.remove();
         }
     }
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (name === "text" && oldValue !== newValue) {
-            this.text = newValue;
-        }
-    }
 }
 _SpElementTitle_headingElement = new WeakMap(), _SpElementTitle_textLinkSlotElement = new WeakMap(), _SpElementTitle_buttonSlotElement = new WeakMap(), _SpElementTitle_instances = new WeakSet(), _SpElementTitle_createContainer = function _SpElementTitle_createContainer() {
     const container = document.createElement("div");
@@ -55,6 +44,8 @@ _SpElementTitle_headingElement = new WeakMap(), _SpElementTitle_textLinkSlotElem
     main.appendChild(__classPrivateFieldGet(this, _SpElementTitle_instances, "m", _SpElementTitle_createTextLinks).call(this));
     return main;
 }, _SpElementTitle_createHeadingBlock = function _SpElementTitle_createHeadingBlock() {
+    const slot = document.createElement("slot");
+    __classPrivateFieldGet(this, _SpElementTitle_headingElement, "f").appendChild(slot);
     const div = document.createElement("div");
     div.classList.add("heading");
     div.appendChild(__classPrivateFieldGet(this, _SpElementTitle_headingElement, "f"));

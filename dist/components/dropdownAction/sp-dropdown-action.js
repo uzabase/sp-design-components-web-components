@@ -26,7 +26,7 @@ const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownActionStyle}`);
 export class SpDropdownAction extends HTMLElement {
     set label(value) {
-        __classPrivateFieldGet(this, _SpDropdownAction_buttonElement, "f").text = value;
+        __classPrivateFieldGet(this, _SpDropdownAction_buttonElement, "f").textContent = value;
         __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_syncMenuMinWidthWithButtonWidth).call(this);
     }
     get open() {

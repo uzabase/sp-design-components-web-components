@@ -1,4 +1,3 @@
-import "@sp-design/token/lib/speeda-tokens.css";
 import "../../src/components/radio/sp-radio-button-text-group";
 
 import { action } from "@storybook/addon-actions";

@@ -1,7 +1,8 @@
 import resetStyle from "@acab/reset.css?inline";
 
 import foundationStyle from "../foundation.css?inline";
-import notificationMessageStyle from "./notification-message.css?inline";
+import { SpIcon } from "../icon/sp-icon";
+import notificationBarStyle from "./notification-bar.css?inline";
 
 export type Type = "error" | "warning" | "information" | "success";
 
@@ -10,13 +11,6 @@ const types: Type[] = ["error", "warning", "information", "success"];
 function isValidType(value: string): value is Type {
   return types.some((type) => type === value);
 }
-
-export const iconAriaLabels: Record<Type, string> = {
-  error: "エラー",
-  warning: "警告",
-  information: "情報",
-  success: "成功",
-};
 
 const typeClasses: Record<Type, string> = {
   error: "type__error",
@@ -36,15 +30,22 @@ export const iconPaths: Record<Type, string> = {
     '<path fill-rule="evenodd" clip-rule="evenodd" d="M2.58 18.8574L11.3416 3.99902H12.6459L21.4075 18.8574L20.7554 19.999H3.23212L2.58 18.8574ZM11.2 9.5V14.5H12.8V9.5H11.2ZM11.2 16V17.5H12.8V16H11.2Z" fill="#EAB100"></path>',
 };
 
-const styles = new CSSStyleSheet();
-styles.replaceSync(
-  `${resetStyle} ${foundationStyle} ${notificationMessageStyle}`,
-);
+export const iconAriaLabels: Record<Type, string> = {
+  error: "エラー",
+  warning: "警告",
+  information: "情報",
+  success: "成功",
+};
 
-export class SpNotificationMessage extends HTMLElement {
+const styles = new CSSStyleSheet();
+styles.replaceSync(`${resetStyle} ${foundationStyle} ${notificationBarStyle}`);
+
+export class SpNotificationBar extends HTMLElement {
   #type: Type = "information";
 
   #baseElement = document.createElement("div");
+  #bodyElement = document.createElement("div");
+  #endElement = document.createElement("div");
   #iconElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
   get type() {
@@ -73,6 +74,11 @@ export class SpNotificationMessage extends HTMLElement {
   connectedCallback() {
     this.#baseElement.classList.add("base");
 
+    // Create body element with role="alert"
+    this.#bodyElement.classList.add("body");
+    this.#bodyElement.setAttribute("role", "alert");
+
+    // Icon setup
     this.#iconElement.setAttribute("role", "img");
     this.#iconElement.setAttribute("viewBox", "0 0 24 24");
     this.#iconElement.setAttribute("aria-hidden", "false");
@@ -80,14 +86,37 @@ export class SpNotificationMessage extends HTMLElement {
     this.#iconElement.classList.add("icon");
     this.#iconElement.innerHTML = iconPaths[this.type];
 
+    // Content setup
     const content = document.createElement("div");
     content.classList.add("content");
-
     const slot = document.createElement("slot");
     content.appendChild(slot);
 
-    this.#baseElement.appendChild(this.#iconElement);
-    this.#baseElement.appendChild(content);
+    // Add icon and content to body
+    this.#bodyElement.appendChild(this.#iconElement);
+    this.#bodyElement.appendChild(content);
+
+    // End element with close button
+    this.#endElement.classList.add("action");
+
+    // Close button setup
+    const closeIcon = new SpIcon();
+    closeIcon.type = "close";
+    closeIcon.setAttribute("aria-hidden", "true");
+
+    const closeButton = document.createElement("button");
+    closeButton.classList.add("close");
+    closeButton.setAttribute("aria-label", "閉じる");
+    closeButton.addEventListener("click", () => {
+      this.dispatchEvent(new CustomEvent("close"));
+    });
+
+    closeButton.appendChild(closeIcon);
+    this.#endElement.appendChild(closeButton);
+
+    // Add body and end to base
+    this.#baseElement.appendChild(this.#bodyElement);
+    this.#baseElement.appendChild(this.#endElement);
 
     this.shadowRoot!.appendChild(this.#baseElement);
   }
@@ -108,10 +137,10 @@ export class SpNotificationMessage extends HTMLElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "sp-notification-message": SpNotificationMessage;
+    "sp-notification-bar": SpNotificationBar;
   }
 }
 
-if (!customElements.get("sp-notification-message")) {
-  customElements.define("sp-notification-message", SpNotificationMessage);
+if (!customElements.get("sp-notification-bar")) {
+  customElements.define("sp-notification-bar", SpNotificationBar);
 }

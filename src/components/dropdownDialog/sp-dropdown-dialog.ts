@@ -29,7 +29,7 @@ export class SpDropdownDialog extends HTMLElement {
   #clickOutsideHandler = this.#handleClickOutside.bind(this);
 
   set label(value: string) {
-    this.#buttonElement.text = value;
+    this.#buttonElement.textContent = value;
   }
 
   get open() {
