@@ -17,6 +17,12 @@ const types = ["error", "warning", "information", "success"];
 function isValidType(value) {
     return types.some((type) => type === value);
 }
+export const iconAriaLabels = {
+    error: "エラー",
+    warning: "警告",
+    information: "情報",
+    success: "成功",
+};
 const typeClasses = {
     error: "type__error",
     warning: "type__warning",
@@ -57,7 +63,8 @@ export class SpNotificationMessage extends HTMLElement {
         __classPrivateFieldGet(this, _SpNotificationMessage_baseElement, "f").classList.add("base");
         __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").setAttribute("role", "img");
         __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").setAttribute("viewBox", "0 0 24 24");
-        __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").setAttribute("aria-hidden", "true");
+        __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").setAttribute("aria-hidden", "false");
+        __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").setAttribute("aria-label", iconAriaLabels[this.type]);
         __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").classList.add("icon");
         __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").innerHTML = iconPaths[this.type];
         const content = document.createElement("div");

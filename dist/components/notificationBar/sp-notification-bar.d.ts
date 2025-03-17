@@ -1,7 +1,7 @@
 export type Type = "error" | "warning" | "information" | "success";
-export declare const iconAriaLabels: Record<Type, string>;
 export declare const iconPaths: Record<Type, string>;
-export declare class SpNotificationMessage extends HTMLElement {
+export declare const iconAriaLabels: Record<Type, string>;
+export declare class SpNotificationBar extends HTMLElement {
     #private;
     get type(): Type;
     set type(value: Type);
@@ -12,7 +12,7 @@ export declare class SpNotificationMessage extends HTMLElement {
 }
 declare global {
     interface HTMLElementTagNameMap {
-        "sp-notification-message": SpNotificationMessage;
+        "sp-notification-bar": SpNotificationBar;
     }
 }
-//# sourceMappingURL=sp-notification-message.d.ts.map
+//# sourceMappingURL=sp-notification-bar.d.ts.map
