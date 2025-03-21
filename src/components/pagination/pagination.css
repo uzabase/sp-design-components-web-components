@@ -1,0 +1,62 @@
+.page-group {
+  display: inline-flex;
+}
+
+.page,
+.previous,
+.next,
+.first,
+.last {
+  display: grid;
+  place-content: center;
+  border-radius: 2px;
+  padding-block: 0.5px;
+  color: var(--color-semantic-text-regular);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.page {
+  padding-inline: 6px;
+}
+
+.previous,
+.next,
+.first,
+.last {
+  padding-inline: 8px;
+}
+
+.previous:disabled,
+.next:disabled,
+.first:disabled,
+.last:disabled {
+  color: var(--color-semantic-text-disabled);
+}
+
+.page:focus,
+.previous:focus,
+.next:focus,
+.first:focus,
+.last:focus {
+  background-color: var(--color-semantic-surface-regular-3);
+  outline: none;
+}
+
+.page:hover:enabled,
+.previous:hover:enabled,
+.next:hover:enabled,
+.first:hover:enabled,
+.last:hover:enabled {
+  background-color: var(--color-semantic-surface-regular-3);
+}
+
+.page.selected,
+.previous.selected,
+.next.selected,
+.first.selected,
+.last.selected {
+  color: var(--color-semantic-text-current);
+  background-color: var(--color-semantic-surface-regular-3);
+  font-weight: bold;
+}

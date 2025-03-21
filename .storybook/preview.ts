@@ -1,4 +1,5 @@
 import type { Preview } from "@storybook/web-components";
+import dedent from "dedent";
 
 const preview: Preview = {
   parameters: {
@@ -10,7 +11,15 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    docs: {
+      source: {
+        transform: (src: string) => {
+          return dedent(src);
+        },
+      },
+    },
   },
+  tags: ["autodocs", "dev-only"],
 };
 
 export default preview;

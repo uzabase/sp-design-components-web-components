@@ -1,8 +1,10 @@
-import { describe, expect, test } from "vitest";
-import { getByShadowRole, queryByShadowRole } from "shadow-dom-testing-library";
-import { SpButton } from "../../src/components/button/sp-button";
-import { isElementMatchingSpeedaIcon } from "../utils/icon";
 import "../../src/components/button/sp-button";
+
+import { getByShadowRole, queryByShadowRole } from "shadow-dom-testing-library";
+import { describe, expect, test } from "vitest";
+
+import type { SpButton } from "../../src/components/button/sp-button";
+import { isElementMatchingSpeedaIcon } from "../utils/icon";
 
 function getSpButton() {
   return document.querySelector("sp-button") as SpButton;
@@ -16,7 +18,7 @@ function queryIcon() {
   return queryByShadowRole(document.body, "img");
 }
 
-describe("ub-button", () => {
+describe("sp-button", () => {
   describe("icon属性", () => {
     test("icon属性を設定すると、そのアイコンが表示される", async () => {
       document.body.innerHTML = "<sp-button icon='edit'></sp-button>";

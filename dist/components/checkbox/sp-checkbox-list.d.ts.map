@@ -1,0 +1,1 @@
+{"version":3,"file":"sp-checkbox-list.d.ts","sourceRoot":"","sources":["../../../src/components/checkbox/sp-checkbox-list.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,MAAM,uCAAuC,CAAC;AASvE,qBAAa,cAAe,SAAQ,cAAc;;CAWjD;AAED,OAAO,CAAC,MAAM,CAAC;IACb,UAAU,qBAAqB;QAC7B,kBAAkB,EAAE,cAAc,CAAC;KACpC;CACF"}

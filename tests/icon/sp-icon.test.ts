@@ -1,7 +1,9 @@
-import { describe, expect, test } from "vitest";
-import { getByShadowRole } from "shadow-dom-testing-library";
-import { isElementMatchingSpeedaIcon } from "../utils/icon";
 import "../../src/components/icon/sp-icon";
+
+import { getByShadowRole } from "shadow-dom-testing-library";
+import { describe, expect, test } from "vitest";
+
+import { isElementMatchingSpeedaIcon } from "../utils/icon";
 
 function getIcon() {
   return getByShadowRole(document.body, "img");

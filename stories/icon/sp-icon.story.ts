@@ -1,10 +1,12 @@
 import "../../src/components/icon/sp-icon";
+
 import type { Meta, StoryObj } from "@storybook/web-components";
-import "@sp-design/token/lib/speeda-tokens.css";
-import { speedaIconTypes } from "../../src/components/icon/icons";
 import { html } from "lit";
 
-const meta: Meta = {
+import { speedaIconTypes } from "../../src/components/icon/icons";
+import type { SpIcon } from "../../src/components/icon/sp-icon";
+
+const meta = {
   component: "sp-icon",
   argTypes: {
     text: { type: "string" },
@@ -22,27 +24,16 @@ const meta: Meta = {
     type: "edit",
     size: "medium",
   },
-};
-export default meta;
+  render: (args) => html`
+    <sp-icon text=${args.text} type=${args.type} size=${args.size}></sp-icon>
+  `,
+} satisfies Meta<SpIcon>;
 
-type Story = StoryObj;
+export default meta;
+type Story = StoryObj<SpIcon>;
 
 export const Basic: Story = {
-  args: {
-    text: undefined,
-    size: undefined,
-  },
-};
-
-export const Property: Story = {};
-
-export const Attribute: Story = {
-  render: (args) =>
-    html`<sp-icon
-      text=${args.text}
-      type=${args.type}
-      size=${args.size}
-    ></sp-icon>`,
+  tags: ["!dev-only"],
 };
 
 export const ALL: Story = {
@@ -61,6 +52,7 @@ export const ALL: Story = {
     `;
   },
 };
+
 export const WithString: Story = {
   decorators: [
     (story) => html`

@@ -1,9 +1,8 @@
-import { UbButton } from "@ub-design/components-web-components/";
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import buttonStyle from "./button.css?inline" assert { type: "css" };
+import { UbButton } from "@ub-design/components-web-components";
+
+import foundationStyle from "../foundation.css?inline";
 import { SpIcon } from "../icon/sp-icon";
+import buttonStyle from "./button.css?inline";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${buttonStyle}`);
@@ -56,7 +55,7 @@ export class SpButton extends UbButton {
   }
 
   #appendIconElement() {
-    this.buttonElement.insertBefore(this.#iconElement, this.textElement);
+    this.buttonElement.prepend(this.#iconElement);
   }
 
   #removeIconElement() {
@@ -68,7 +67,9 @@ export class SpButton extends UbButton {
   }
 }
 
-customElements.get("sp-button") || customElements.define("sp-button", SpButton);
+if (!customElements.get("sp-button")) {
+  customElements.define("sp-button", SpButton);
+}
 
 declare global {
   interface HTMLElementTagNameMap {
