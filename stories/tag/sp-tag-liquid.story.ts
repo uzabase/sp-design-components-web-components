@@ -4,25 +4,15 @@ import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
 const meta: Meta = {
-  title: "Component/Tag/SpTagLiquid",
-  tags: ["autodocs", "!dev-only"],
-  render: (args) => html`
-    <sp-tag-liquid color="${args.color}" mode="${args.mode}"
-      >${args.text}</sp-tag-liquid
-    >
-  `,
+  component: "sp-tag-liquid",
   argTypes: {
     color: {
-      control: {
-        type: "select",
-        options: ["gray", "green", "red", "yellow", "blue"],
-      },
+      control: { type: "select" },
+      options: ["gray", "green", "red", "yellow", "blue"],
     },
     mode: {
-      control: {
-        type: "select",
-        options: ["light", "dark"],
-      },
+      control: { type: "select" },
+      options: ["light", "dark"],
       description:
         "ライト/ダークモード（※Grayカラーではlightモードのみ使用可）",
     },
@@ -32,19 +22,21 @@ const meta: Meta = {
     mode: "light",
     text: "タグ",
   },
+  render: (args) => html`
+    <sp-tag-liquid color="${args.color}" mode="${args.mode}"
+      >${args.text}</sp-tag-liquid
+    >
+  `,
 };
 
 export default meta;
 
 type Story = StoryObj;
 
-// 基本的な使用方法
 export const Basic: Story = {
   tags: ["!dev-only"],
-  render: () => html`<sp-tag-liquid>基本タグ</sp-tag-liquid>`,
 };
 
-// カラーバリエーション（Light）
 export const ThemeColors: Story = {
   tags: ["!dev-only"],
   render: () => html`
@@ -58,7 +50,6 @@ export const ThemeColors: Story = {
   `,
 };
 
-// カラーバリエーション（Dark）
 export const DarkThemeColors: Story = {
   tags: ["!dev-only"],
   render: () => html`
@@ -71,7 +62,6 @@ export const DarkThemeColors: Story = {
   `,
 };
 
-// 全バリエーション
 export const AllVariants: Story = {
   tags: ["!dev-only"],
   render: () => html`
