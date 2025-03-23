@@ -12,7 +12,7 @@ export class SpTagRemovable extends HTMLElement {
   #disabled = false;
 
   #removeButton = document.createElement("button");
-  
+
   get disabled() {
     return this.#disabled;
   }
@@ -31,14 +31,14 @@ export class SpTagRemovable extends HTMLElement {
 
   constructor() {
     super();
-    
+
     this.attachShadow({ mode: "open" });
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
       styles,
     ];
-    
-    this.disabled = false
+
+    this.disabled = false;
   }
 
   connectedCallback() {

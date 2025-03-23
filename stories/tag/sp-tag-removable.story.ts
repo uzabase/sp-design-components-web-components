@@ -17,7 +17,9 @@ const meta = {
     disabled: false,
   },
   render: (args) => {
-    return html`<sp-tag-removable ?disabled=${args.disabled}>${args.slot}</sp-tag-removable>`;
+    return html`<sp-tag-removable ?disabled=${args.disabled}
+      >${args.slot}</sp-tag-removable
+    >`;
   },
 } satisfies Meta<SpTagRemovable>;
 
@@ -32,4 +34,4 @@ export const Disabled: Story = {
   args: {
     disabled: true,
   },
-}
+};

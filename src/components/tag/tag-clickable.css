@@ -1,0 +1,52 @@
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  line-height: 1.6;
+  padding-block: 0.5px;
+  padding-inline: 8px;
+  border-radius: 2px;
+  border: 1px solid;
+  background-color: var(--color-semantic-surface-regular-2);
+  border-color: var(--color-semantic-border-regular);
+  color: var(--color-semantic-text-regular);
+  cursor: pointer;
+  appearance: none;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.button:hover {
+  background-color: var(--color-semantic-surface-regular-4);
+}
+
+.button:focus {
+  outline: 2px solid var(--color-semantic-border-focus);
+  outline-offset: 2px;
+}
+
+:host([selected]) .button {
+  font-weight: bold;
+  color: var(--color-semantic-text-inverse);
+  background-color: var(--color-semantic-surface-selected);
+  border-color: var(--color-semantic-border-selected);
+}
+
+:host([disabled]) {
+  pointer-events: none;
+}
+
+:host([disabled]) .button {
+  background-color: var(--color-semantic-surface-regular-2);
+  border-color: var(--color-semantic-border-regular);
+  color: var(--color-semantic-text-disabled);
+  cursor: default;
+}
+
+:host([selected]) .button:hover {
+  background-color: var(--color-semantic-surface-selected-hover);
+  border-color: var(--color-semantic-border-selected-hover);
+}
