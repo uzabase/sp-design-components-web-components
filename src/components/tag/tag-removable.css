@@ -28,6 +28,26 @@
   justify-content: center;
 }
 
+.drag-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  --icon-color: var(--color-semantic-text-regular);
+
+  cursor: grab;
+  margin-right: 2px;
+}
+
+.drag-icon:active {
+  cursor: grabbing;
+}
+
+:host(.dragging) .base {
+  opacity: 0.8;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
+}
+
 :host([disabled]) .base {
   background-color: var(--color-semantic-surface-regular-2);
   border-color: var(--color-semantic-border-regular);
@@ -39,4 +59,10 @@
 
 :host([disabled]) .remove {
   --icon-color: var(--color-semantic-text-disabled);
+}
+
+:host([disabled]) .drag-icon {
+  --icon-color: var(--color-semantic-text-disabled);
+
+  cursor: default;
 }
