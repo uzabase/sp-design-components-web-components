@@ -32,9 +32,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  --icon-color: var(--color-semantic-text-regular);
-
+  color: var(--color-semantic-text-regular);
   cursor: grab;
   margin-right: 2px;
 }
@@ -58,11 +56,10 @@
 }
 
 :host([disabled]) .remove {
-  --icon-color: var(--color-semantic-text-disabled);
+  color: var(--color-semantic-text-disabled);
 }
 
 :host([disabled]) .drag-icon {
-  --icon-color: var(--color-semantic-text-disabled);
-
+  color: var(--color-semantic-text-disabled);
   cursor: default;
 }
