@@ -15,7 +15,7 @@
   display: inline-flex;
   min-width: 80px;
   padding-block: 2px;
-  padding-inline: 16px;
+  padding-inline: 20px;
   justify-content: center;
   align-items: center;
   color: var(--color-semantic-text-regular);
@@ -23,7 +23,7 @@
   border-radius: 1rem;
   min-height: 28px;
   column-gap: 4px;
-  line-height: 160%;
+  line-height: 150%;
 
     &:hover{
       cursor:pointer;
@@ -53,6 +53,7 @@
           background-color: var(--color-semantic-surface-regular-2);
           color: var(--color-semantic-text-disabled);
           cursor: not-allowed;
+          font-weight: normal;
         }
       }
 
@@ -113,6 +114,9 @@
       display: block;
     }
   }
+}
+.spds__tabText{
+  padding-top: 1px;
 }
 
 
