@@ -14,12 +14,10 @@ export class SpDropdownActionButton extends SpButton {
   constructor() {
     super();
 
-    if (this.shadowRoot) {
-      this.shadowRoot.adoptedStyleSheets = [
-        ...this.shadowRoot!.adoptedStyleSheets,
-        styles,
-      ];
-    }
+    this.shadowRoot!.adoptedStyleSheets = [
+      ...this.shadowRoot!.adoptedStyleSheets,
+      styles,
+    ];
   }
 
   connectedCallback(): void {

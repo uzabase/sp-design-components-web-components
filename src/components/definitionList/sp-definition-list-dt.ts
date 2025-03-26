@@ -17,15 +17,14 @@ export class SpDefinitionListDt extends HTMLElement {
   }
 
   connectedCallback() {
-    if (this.shadowRoot) {
-      this.shadowRoot.adoptedStyleSheets = [
-        ...this.shadowRoot.adoptedStyleSheets,
-        styles,
-      ];
-      this.#dtElement.classList.add("base");
-      this.#dtElement.innerHTML = this.innerHTML;
-      this.shadowRoot.appendChild(this.#dtElement);
-    }
+    this.shadowRoot!.adoptedStyleSheets = [
+      ...this.shadowRoot!.adoptedStyleSheets,
+      styles,
+    ];
+
+    this.#dtElement.classList.add("base");
+    this.#dtElement.innerHTML = this.innerHTML;
+    this.shadowRoot!.appendChild(this.#dtElement);
   }
 }
 
