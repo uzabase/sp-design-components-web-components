@@ -5,8 +5,11 @@ styles.replaceSync(`${foundationStyle} ${dropdownActionItemStyle}`);
 export class SpDropdownActionItem extends HTMLElement {
     constructor() {
         super();
-        const shadowRoot = this.attachShadow({ mode: "open" });
-        shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
+        this.attachShadow({ mode: "open" });
+        this.shadowRoot.adoptedStyleSheets = [
+            ...this.shadowRoot.adoptedStyleSheets,
+            styles,
+        ];
     }
     connectedCallback() {
         const baseElement = document.createElement("div");
@@ -17,7 +20,7 @@ export class SpDropdownActionItem extends HTMLElement {
         buttonElement.classList.add("action");
         buttonElement.appendChild(slotElement);
         baseElement.appendChild(buttonElement);
-        this.shadowRoot?.appendChild(baseElement);
+        this.shadowRoot.appendChild(baseElement);
     }
 }
 if (!customElements.get("sp-dropdown-action-item")) {

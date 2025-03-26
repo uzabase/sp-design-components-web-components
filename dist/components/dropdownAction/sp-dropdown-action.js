@@ -80,8 +80,11 @@ export class SpDropdownAction extends HTMLElement {
         _SpDropdownAction_disabled.set(this, false);
         _SpDropdownAction_position.set(this, "left");
         _SpDropdownAction_clickOutsideHandler.set(this, __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_handleClickOutside).bind(this));
-        const shadowRoot = this.attachShadow({ mode: "open" });
-        shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
+        this.attachShadow({ mode: "open" });
+        this.shadowRoot.adoptedStyleSheets = [
+            ...this.shadowRoot.adoptedStyleSheets,
+            styles,
+        ];
         this.open = false;
         this.disabled = false;
         this.position = "left";
@@ -97,7 +100,7 @@ export class SpDropdownAction extends HTMLElement {
         window.addEventListener("click", __classPrivateFieldGet(this, _SpDropdownAction_clickOutsideHandler, "f"));
         __classPrivateFieldGet(this, _SpDropdownAction_baseElement, "f").appendChild(__classPrivateFieldGet(this, _SpDropdownAction_menuElement, "f"));
         __classPrivateFieldGet(this, _SpDropdownAction_baseElement, "f").classList.add("base");
-        this.shadowRoot?.appendChild(__classPrivateFieldGet(this, _SpDropdownAction_baseElement, "f"));
+        this.shadowRoot.appendChild(__classPrivateFieldGet(this, _SpDropdownAction_baseElement, "f"));
         __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_setupAccessibilityAttributes).call(this);
         __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_syncMenuMinWidthWithButtonWidth).call(this);
     }

@@ -40,8 +40,11 @@ export class SpPagination extends HTMLElement {
         _SpPagination_pageGroupElement.set(this, document.createElement("ul"));
         _SpPagination_pageButtons.set(this, []);
         _SpPagination_buttonElements.set(this, []);
-        const shadowRoot = this.attachShadow({ mode: "open" });
-        shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
+        this.attachShadow({ mode: "open" });
+        this.shadowRoot.adoptedStyleSheets = [
+            ...this.shadowRoot.adoptedStyleSheets,
+            styles,
+        ];
     }
     connectedCallback() {
         __classPrivateFieldGet(this, _SpPagination_instances, "m", _SpPagination_setupNavigation).call(this);

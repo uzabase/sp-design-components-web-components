@@ -58,8 +58,11 @@ export class SpNotificationBar extends HTMLElement {
         _SpNotificationBar_bodyElement.set(this, document.createElement("div"));
         _SpNotificationBar_endElement.set(this, document.createElement("div"));
         _SpNotificationBar_iconElement.set(this, document.createElementNS("http://www.w3.org/2000/svg", "svg"));
-        const shadowRoot = this.attachShadow({ mode: "open" });
-        shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
+        this.attachShadow({ mode: "open" });
+        this.shadowRoot.adoptedStyleSheets = [
+            ...this.shadowRoot.adoptedStyleSheets,
+            styles,
+        ];
         this.type = "information";
     }
     connectedCallback() {

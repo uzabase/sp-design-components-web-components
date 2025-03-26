@@ -55,8 +55,11 @@ export class SpNotificationMessage extends HTMLElement {
         _SpNotificationMessage_type.set(this, "information");
         _SpNotificationMessage_baseElement.set(this, document.createElement("div"));
         _SpNotificationMessage_iconElement.set(this, document.createElementNS("http://www.w3.org/2000/svg", "svg"));
-        const shadowRoot = this.attachShadow({ mode: "open" });
-        shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
+        this.attachShadow({ mode: "open" });
+        this.shadowRoot.adoptedStyleSheets = [
+            ...this.shadowRoot.adoptedStyleSheets,
+            styles,
+        ];
         this.type = "information";
     }
     connectedCallback() {
