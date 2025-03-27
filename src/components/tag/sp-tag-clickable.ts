@@ -28,9 +28,9 @@ export class SpTagClickable extends HTMLElement {
 
     this.#selected = value;
     if (value) {
-      this.setAttribute("selected", "");
+      this.#buttonElement.classList.add("isSelected");
     } else {
-      this.removeAttribute("selected");
+      this.#buttonElement.classList.remove("isSelected");
     }
   }
 
@@ -49,11 +49,13 @@ export class SpTagClickable extends HTMLElement {
 
     this.#disabled = value;
     if (value) {
-      this.setAttribute("disabled", "");
       this.setAttribute("aria-disabled", "true");
+      this.#buttonElement.disabled = true;
+      this.#buttonElement.classList.add("isDisabled");
     } else {
-      this.removeAttribute("disabled");
       this.removeAttribute("aria-disabled");
+      this.#buttonElement.disabled = false;
+      this.#buttonElement.classList.remove("isDisabled");
     }
   }
 
@@ -69,6 +71,9 @@ export class SpTagClickable extends HTMLElement {
       ...this.shadowRoot!.adoptedStyleSheets,
       styles,
     ];
+
+    this.selected = false;
+    this.disabled = false;
   }
 
   connectedCallback() {
@@ -99,11 +104,7 @@ export class SpTagClickable extends HTMLElement {
     if (this.disabled) return;
 
     this.dispatchEvent(
-      new CustomEvent("click", {
-        bubbles: true,
-        composed: true,
-        detail: { originalEvent: event },
-      }),
+      new CustomEvent("click", { detail: { originalEvent: event } }),
     );
   }
 
