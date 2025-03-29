@@ -1,76 +1,167 @@
-import { describe, expect, it } from "vitest";
+import "../../src/components/tag/sp-tag-liquid";
 
-import {
-  SpTagLiquid,
-  SpTagLiquidColor,
-  SpTagLiquidMode,
-} from "../../src/components/tag/sp-tag-liquid";
+import { describe, expect, test } from "vitest";
 
-describe("SpTagLiquid", () => {
-  const createTag = (color?: SpTagLiquidColor, mode?: SpTagLiquidMode) => {
-    const tag = document.createElement("sp-tag-liquid") as SpTagLiquid;
+import type { SpTagLiquid } from "../../src/components/tag/sp-tag-liquid";
 
-    if (color) {
-      tag.setAttribute("color", color);
-    }
+function getSpTagLiquid() {
+  return document.querySelector("sp-tag-liquid") as SpTagLiquid;
+}
 
-    if (mode) {
-      tag.setAttribute("mode", mode);
-    }
+function getBaseElement(element: SpTagLiquid): HTMLElement {
+  return element.shadowRoot!.querySelector(".base") as HTMLElement;
+}
 
-    document.body.appendChild(tag);
-    return tag;
-  };
+describe("sp-tag-liquid", () => {
+  describe("スロット", () => {
+    test("スロットに渡されたテキストが正しく表示される", async () => {
+      document.body.innerHTML = `<sp-tag-liquid>Hello, World!</sp-tag-liquid>`;
 
-  it("should render with default values", () => {
-    const tag = createTag();
-
-    expect(tag.color).toBe("gray");
-    expect(tag.mode).toBe("light");
+      const spTagLiquid = await getSpTagLiquid();
+      const slot = spTagLiquid.shadowRoot!.querySelector(
+        "slot",
+      ) as HTMLSlotElement;
+      const [text] = slot.assignedNodes();
+      expect(text.textContent).toBe("Hello, World!");
+    });
   });
 
-  it("should set initial color and mode from attributes", () => {
-    const tag = createTag("green", "dark");
+  describe("color属性", () => {
+    test("color属性にgreenを設定すると、クラスにtheme__greenが設定される", () => {
+      document.body.innerHTML = `<sp-tag-liquid color="green">Hello, World!</sp-tag-liquid>`;
 
-    expect(tag.color).toBe("green");
-    expect(tag.mode).toBe("dark");
+      const tagLiquid = getSpTagLiquid();
+      const baseElement = getBaseElement(tagLiquid);
+
+      expect(baseElement.classList.contains("theme__green")).toBe(true);
+    });
+
+    test("color属性を設定しない場合、クラスにデフォルト値のtheme__grayが設定される", () => {
+      document.body.innerHTML = `<sp-tag-liquid>Hello, World!</sp-tag-liquid>`;
+
+      const tagLiquid = getSpTagLiquid();
+      const baseElement = getBaseElement(tagLiquid);
+
+      expect(baseElement.classList.contains("theme__gray")).toBe(true);
+    });
+
+    test("color属性を更新すると、クラスから古い値が削除され、新しい値が設定される", () => {
+      document.body.innerHTML = `<sp-tag-liquid color="green">Hello, World!</sp-tag-liquid>`;
+
+      const tagLiquid = getSpTagLiquid();
+      tagLiquid.setAttribute("color", "blue");
+      const baseElement = getBaseElement(tagLiquid);
+
+      expect(baseElement.classList.contains("theme__green")).toBe(false);
+      expect(baseElement.classList.contains("theme__blue")).toBe(true);
+    });
+
+    test("無効なcolor属性を設定すると、クラスにデフォルト値のtheme__grayが設定される", () => {
+      document.body.innerHTML = `<sp-tag-liquid color="invalid">Hello, World!</sp-tag-liquid>`;
+
+      const tagLiquid = getSpTagLiquid();
+      const baseElement = getBaseElement(tagLiquid);
+
+      expect(baseElement.classList.contains("theme__gray")).toBe(true);
+    });
+
+    test.each([
+      ["gray", "theme__gray"],
+      ["green", "theme__green"],
+      ["red", "theme__red"],
+      ["yellow", "theme__yellow"],
+      ["blue", "theme__blue"],
+    ])(
+      "color属性に%sを設定すると、クラスに%sが設定される",
+      (color, className) => {
+        document.body.innerHTML = `<sp-tag-liquid color="${color}">Hello, World!</sp-tag-liquid>`;
+
+        const tagLiquid = getSpTagLiquid();
+        const baseElement = getBaseElement(tagLiquid);
+
+        expect(baseElement.classList.contains(className)).toBe(true);
+      },
+    );
   });
 
-  it("should update color when attribute changes", () => {
-    const tag = createTag("gray", "light");
+  describe("mode属性", () => {
+    test("mode属性にdarkを設定すると、クラスにmode__darkが設定される", () => {
+      document.body.innerHTML = `<sp-tag-liquid color="green" mode="dark">Hello, World!</sp-tag-liquid>`;
 
-    tag.setAttribute("color", "blue");
-    expect(tag.color).toBe("blue");
+      const tagLiquid = getSpTagLiquid();
+      const baseElement = getBaseElement(tagLiquid);
+
+      expect(baseElement.classList.contains("mode__dark")).toBe(true);
+    });
+
+    test("mode属性を設定しない場合、クラスにデフォルト値のmode__lightが設定される", () => {
+      document.body.innerHTML = `<sp-tag-liquid>Hello, World!</sp-tag-liquid>`;
+
+      const tagLiquid = getSpTagLiquid();
+      const baseElement = getBaseElement(tagLiquid);
+
+      expect(baseElement.classList.contains("mode__light")).toBe(true);
+    });
+
+    test("mode属性を更新すると、クラスから古い値が削除され、新しい値が設定される", () => {
+      document.body.innerHTML = `<sp-tag-liquid color="green" mode="light">Hello, World!</sp-tag-liquid>`;
+
+      const tagLiquid = getSpTagLiquid();
+      tagLiquid.setAttribute("mode", "dark");
+      const baseElement = getBaseElement(tagLiquid);
+
+      expect(baseElement.classList.contains("mode__light")).toBe(false);
+      expect(baseElement.classList.contains("mode__dark")).toBe(true);
+    });
+
+    test("無効なmode属性を設定すると、クラスにデフォルト値のmode__lightが設定される", () => {
+      document.body.innerHTML = `<sp-tag-liquid mode="invalid">Hello, World!</sp-tag-liquid>`;
+
+      const tagLiquid = getSpTagLiquid();
+      const baseElement = getBaseElement(tagLiquid);
+
+      expect(baseElement.classList.contains("mode__light")).toBe(true);
+    });
+
+    test.each([
+      ["light", "mode__light"],
+      ["dark", "mode__dark"],
+    ])(
+      "color属性がgray以外の場合、mode属性に%sを設定すると、クラスに%sが設定される",
+      (mode, className) => {
+        document.body.innerHTML = `<sp-tag-liquid color="green" mode="${mode}">Hello, World!</sp-tag-liquid>`;
+
+        const tagLiquid = getSpTagLiquid();
+        const baseElement = getBaseElement(tagLiquid);
+
+        expect(baseElement.classList.contains(className)).toBe(true);
+      },
+    );
   });
 
-  it("should update mode when attribute changes", () => {
-    const tag = createTag("gray", "light");
+  describe("color属性とmode属性の制約", () => {
+    test("colorがgrayでmode属性にdarkを設定すると、クラスにmode__lightが設定される", () => {
+      document.body.innerHTML = `<sp-tag-liquid color="gray" mode="dark">Hello, World!</sp-tag-liquid>`;
 
-    tag.setAttribute("mode", "dark");
-    expect(tag.mode).toBe("dark");
-  });
+      const tagLiquid = getSpTagLiquid();
+      const baseElement = getBaseElement(tagLiquid);
 
-  it("should use default color when invalid color is provided", () => {
-    // @ts-expect-error: Testing invalid input
-    const tag = createTag("invalid", "light");
+      expect(baseElement.classList.contains("mode__light")).toBe(true);
+      expect(baseElement.classList.contains("mode__dark")).toBe(false);
+    });
 
-    expect(tag.color).toBe("gray");
-  });
+    test("modeがdarkのときにcolor属性をgrayに変更すると、クラスからmode__darkが削除され、mode__lightが設定される", () => {
+      document.body.innerHTML = `<sp-tag-liquid color="green" mode="dark">Hello, World!</sp-tag-liquid>`;
 
-  it("should use default mode when invalid mode is provided", () => {
-    // @ts-expect-error: Testing invalid input
-    const tag = createTag("gray", "invalid");
+      const tagLiquid = getSpTagLiquid();
+      const baseElement = getBaseElement(tagLiquid);
 
-    expect(tag.mode).toBe("light");
-  });
+      expect(baseElement.classList.contains("mode__dark")).toBe(true);
 
-  it("should update dynamically using properties", () => {
-    const tag = createTag();
+      tagLiquid.setAttribute("color", "gray");
 
-    tag.color = "red";
-    tag.mode = "dark";
-
-    expect(tag.color).toBe("red");
-    expect(tag.mode).toBe("dark");
+      expect(baseElement.classList.contains("mode__light")).toBe(true);
+      expect(baseElement.classList.contains("mode__dark")).toBe(false);
+    });
   });
 });

@@ -132,7 +132,7 @@ export class SpTagLiquid extends HTMLElement {
     this.#baseElement.classList.add("base");
     this.#baseElement.classList.add(`theme__${this.#color}`);
     this.#baseElement.classList.add(`mode__${this.#mode}`);
-    this.#baseElement.setAttribute("role", "tag");
+    // Adobe Spectrum Web Componentsに合わせて、role属性とaria-label属性は使用しない
 
     const slotElement = document.createElement("slot");
     this.#baseElement.appendChild(slotElement);
