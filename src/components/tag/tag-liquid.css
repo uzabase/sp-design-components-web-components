@@ -2,10 +2,10 @@
   display: inline-flex;
   align-items: center;
   font-size: 12px;
-  line-height: 1.6;
-  height: 24px;
   border-radius: 2px;
-  padding: 0 8px;
+  line-height: 1.6;
+  padding-block: 0.5px;
+  padding-inline: 8px;
   white-space: nowrap;
   box-sizing: border-box;
   border: 1px solid;
