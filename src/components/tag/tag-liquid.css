@@ -9,18 +9,15 @@
   white-space: nowrap;
   box-sizing: border-box;
   border: 1px solid;
-  /* 機能固有のスタイル */
   justify-content: center;
 }
 
-/* Gray theme */
 .theme__gray.mode__light {
   background-color: var(--color-semantic-surface-temp-tag-gray);
   border-color: var(--color-semantic-border-temp-tag-gray);
   color: var(--color-semantic-text-regular);
 }
 
-/* Green theme */
 .theme__green.mode__light {
   background-color: var(--color-semantic-surface-temp-tag-green);
   border-color: var(--color-semantic-border-temp-tag-green);
@@ -33,7 +30,6 @@
   color: var(--color-semantic-text-inverse);
 }
 
-/* Red theme */
 .theme__red.mode__light {
   background-color: var(--color-semantic-surface-temp-tag-red);
   border-color: var(--color-semantic-border-temp-tag-red);
@@ -46,7 +42,6 @@
   color: var(--color-semantic-text-inverse);
 }
 
-/* Yellow theme */
 .theme__yellow.mode__light {
   background-color: var(--color-semantic-surface-temp-tag-yellow);
   border-color: var(--color-semantic-border-temp-tag-yellow);
@@ -59,7 +54,6 @@
   color: var(--color-semantic-text-inverse);
 }
 
-/* Blue theme */
 .theme__blue.mode__light {
   background-color: var(--color-semantic-surface-temp-tag-marine);
   border-color: var(--color-semantic-border-temp-tag-marine);

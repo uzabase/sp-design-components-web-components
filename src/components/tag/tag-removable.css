@@ -9,7 +9,6 @@
   white-space: nowrap;
   box-sizing: border-box;
   border: 1px solid;
-  /* 機能固有のスタイル */
   justify-content: center;
   gap: 4px;
   background-color: var(--color-semantic-surface-regular-2);
