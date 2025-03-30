@@ -75,7 +75,6 @@ export const MultipleDraggable: Story = {
             <div id="drag-status" style="font-size: 12px; color: #666;"></div>
           </div>
           <script>
-            // Storybook内でのみ実行される
             setTimeout(() => {
               const tag = document.getElementById("draggable-tag");
               const status = document.getElementById("drag-status");
