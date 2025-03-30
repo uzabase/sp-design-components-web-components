@@ -1,14 +1,17 @@
 .base {
   display: inline-flex;
-  justify-content: center;
   align-items: center;
-  gap: 4px;
   font-size: 12px;
+  border-radius: 2px;
   line-height: 1.6;
   padding-block: 0.5px;
   padding-inline: 8px;
-  border-radius: 2px;
+  white-space: nowrap;
+  box-sizing: border-box;
   border: 1px solid;
+  /* 機能固有のスタイル */
+  justify-content: center;
+  gap: 4px;
   background-color: var(--color-semantic-surface-regular-2);
   border-color: var(--color-semantic-border-regular);
 }
