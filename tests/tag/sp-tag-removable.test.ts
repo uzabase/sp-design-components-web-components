@@ -134,7 +134,7 @@ describe("sp-tag-removable", () => {
       expect(removeHandler).toHaveBeenCalled();
     });
 
-    test("disabled=trueの場合、削除ボタンをクリックしてもremoveイベントは発火しない", async () => {
+    test("disabled状態の場合、削除ボタンをクリックしてもremoveイベントは発火しない", async () => {
       const user = userEvent.setup();
 
       document.body.innerHTML = `<sp-tag-removable disabled>Hello, World!</sp-tag-removable>`;
@@ -166,7 +166,7 @@ describe("sp-tag-removable", () => {
       expect(dragStartHandler).toHaveBeenCalled();
     });
 
-    test("disabled=trueの場合、ドラッグアイコンのマウスダウンでdragstartイベントは発火しない", async () => {
+    test("disabled状態の場合、ドラッグアイコンのマウスダウンでdragstartイベントは発火しない", async () => {
       const user = userEvent.setup();
 
       document.body.innerHTML = `<sp-tag-removable disabled draggable>Hello, World!</sp-tag-removable>`;
@@ -221,7 +221,7 @@ describe("sp-tag-removable", () => {
       expect(dragEndHandler).toHaveBeenCalled();
     });
 
-    test("ドラッグ中はbaseElementにdraggingクラスが追加される", async () => {
+    test("ドラッグ中はクラスにdraggingクラスが追加される", async () => {
       const user = userEvent.setup();
 
       document.body.innerHTML = `<sp-tag-removable draggable>Hello, World!</sp-tag-removable>`;
