@@ -94,23 +94,20 @@ export class SpTagRemovable extends HTMLElement {
     this.#dragStartX = event.clientX;
     this.#dragStartY = event.clientY;
 
-    // Apply dragging style
-    this.classList.add("dragging");
+    const baseElement = this.shadowRoot?.querySelector(".base");
+    if (baseElement) {
+      baseElement.classList.add("dragging");
+    }
 
-    // Dispatch custom dragstart event
     this.dispatchEvent(
-      new CustomEvent("sp-dragstart", {
-        bubbles: true,
-        composed: true,
+      new CustomEvent("dragstart", {
         detail: { x: event.clientX, y: event.clientY },
       }),
     );
 
-    // Add global event listeners
     document.addEventListener("mousemove", this.#onDrag);
     document.addEventListener("mouseup", this.#onDragEnd);
 
-    // Prevent default text selection during drag
     event.preventDefault();
   };
 
@@ -120,11 +117,8 @@ export class SpTagRemovable extends HTMLElement {
     const deltaX = event.clientX - this.#dragStartX;
     const deltaY = event.clientY - this.#dragStartY;
 
-    // Dispatch custom drag event
     this.dispatchEvent(
-      new CustomEvent("sp-drag", {
-        bubbles: true,
-        composed: true,
+      new CustomEvent("drag", {
         detail: {
           x: event.clientX,
           y: event.clientY,
@@ -140,25 +134,22 @@ export class SpTagRemovable extends HTMLElement {
 
     this.#isDragging = false;
 
-    // Remove dragging style
-    this.classList.remove("dragging");
+    const baseElement = this.shadowRoot?.querySelector(".base");
+    if (baseElement) {
+      baseElement.classList.remove("dragging");
+    }
 
-    // Dispatch custom dragend event
     this.dispatchEvent(
-      new CustomEvent("sp-dragend", {
-        bubbles: true,
-        composed: true,
+      new CustomEvent("dragend", {
         detail: { x: event.clientX, y: event.clientY },
       }),
     );
 
-    // Remove global event listeners
     document.removeEventListener("mousemove", this.#onDrag);
     document.removeEventListener("mouseup", this.#onDragEnd);
   };
 
   disconnectedCallback() {
-    // Clean up any event listeners when component is removed
     if (this.#dragIcon) {
       this.#dragIcon.removeEventListener("mousedown", this.#onDragStart);
     }
@@ -180,12 +171,10 @@ export class SpTagRemovable extends HTMLElement {
       this.#dragIcon.setAttribute("aria-hidden", "true");
       this.#dragIcon.classList.add("drag-icon");
 
-      // Add cursor style and ARIA attributes
       this.#dragIcon.style.cursor = this.#disabled ? "default" : "grab";
       this.#dragIcon.setAttribute("role", "button");
       this.#dragIcon.setAttribute("aria-label", "ドラッグハンドル");
 
-      // Add drag event listener to the icon
       if (!this.#disabled) {
         this.#dragIcon.addEventListener("mousedown", this.#onDragStart);
       }

@@ -41,7 +41,7 @@
   cursor: grabbing;
 }
 
-:host(.dragging) .base {
+.base.dragging {
   opacity: 0.8;
   box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
 }
