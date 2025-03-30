@@ -81,15 +81,15 @@ export const MultipleDraggable: Story = {
               const status = document.getElementById("drag-status");
 
               if (tag && status) {
-                tag.addEventListener("sp-dragstart", () => {
+                tag.addEventListener("dragstart", () => {
                   status.textContent = "ドラッグ開始";
                 });
 
-                tag.addEventListener("sp-drag", (e) => {
+                tag.addEventListener("drag", (e) => {
                   status.textContent = \`ドラッグ中: x:\${e.detail.deltaX.toFixed(0)}, y:\${e.detail.deltaY.toFixed(0)}\`;
                 });
 
-                tag.addEventListener("sp-dragend", () => {
+                tag.addEventListener("dragend", () => {
                   status.textContent = "ドラッグ終了";
                 });
               }
