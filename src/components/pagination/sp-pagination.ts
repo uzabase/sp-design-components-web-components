@@ -14,13 +14,14 @@ interface NavigationButton {
   targetPage: number;
 }
 
+const MAX_VISIBLE_PAGES = 10; // 表示する最大ページ数
+const PAGES_BEFORE_SELECTED = 4; // 選択ページの前に表示するページ数
+
 export class SpPagination extends HTMLElement {
   #total = 1;
   #selected = 1;
   #nav = document.createElement("nav");
   #pageGroupElement = document.createElement("ul");
-
-  #pageButtons: NavigationButton[] = [];
   #buttonElements: HTMLButtonElement[] = [];
 
   get total() {
@@ -68,60 +69,81 @@ export class SpPagination extends HTMLElement {
     }
 
     if (name === "total") {
-      const parsedValue = Number(newValue);
-
-      const isValueValid =
-        !Number.isNaN(parsedValue) &&
-        Number.isInteger(parsedValue) &&
-        parsedValue > 0;
-
-      if (isValueValid) {
-        this.total = parsedValue;
-      } else {
-        console.warn(`${newValue}は無効なtotal属性です。`);
-        this.total = 1;
-      }
-
-      this.#updatePageGroup();
-    } else if (name === "selected") {
-      const parsedValue = Number(newValue);
-
-      const isValueValid =
-        !Number.isNaN(parsedValue) &&
-        Number.isInteger(parsedValue) &&
-        parsedValue > 0 &&
-        parsedValue <= this.total;
-
-      if (isValueValid) {
-        this.selected = parsedValue;
-      } else {
-        console.warn(`${newValue}は無効なselected属性です。`);
-        this.selected = 1;
-      }
-
-      this.#updatePageButtonStates();
+      this.#handleTotalAttribute(newValue);
     }
+
+    if (name === "selected") {
+      this.#handleSelectedAttribute(newValue);
+    }
+  }
+
+  #handleTotalAttribute(value: string) {
+    const parsedValue = Number(value);
+    const isValueValid =
+      !Number.isNaN(parsedValue) &&
+      Number.isInteger(parsedValue) &&
+      parsedValue > 0;
+
+    if (isValueValid) {
+      this.total = parsedValue;
+    } else {
+      console.warn(`${value}は無効なtotal属性です。`);
+      this.total = 1;
+    }
+
+    this.#updatePageGroup();
+  }
+
+  #handleSelectedAttribute(value: string) {
+    const parsedValue = Number(value);
+    const isValueValid =
+      !Number.isNaN(parsedValue) &&
+      Number.isInteger(parsedValue) &&
+      parsedValue > 0 &&
+      parsedValue <= this.total;
+
+    if (isValueValid) {
+      this.selected = parsedValue;
+    } else {
+      console.warn(`${value}は無効なselected属性です。`);
+      this.selected = 1;
+    }
+
+    this.#updatePageButtonStates();
   }
 
   #updatePageGroup() {
     this.#pageGroupElement.innerHTML = "";
     this.#buttonElements = [];
 
-    this.#pageButtons = [
-      { type: "first", text: "最初へ", targetPage: 1 },
-      { type: "previous", text: "前へ", targetPage: this.selected - 1 },
-      ...this.#createPageButtons(),
-      { type: "next", text: "次へ", targetPage: this.selected + 1 },
-      { type: "last", text: "最後へ", targetPage: this.total },
-    ];
+    const navigationButtons = this.#getNavigationButtons();
 
-    this.#pageButtons
+    navigationButtons
       .map((button) => this.#createButtonItem(button))
       .forEach((item) => this.#pageGroupElement.appendChild(item));
   }
 
-  #createPageButtons(): NavigationButton[] {
-    const { firstVisiblePage, lastVisiblePage } = this.#calculateVisiblePages();
+  #getNavigationButtons(): NavigationButton[] {
+    return [
+      { type: "first", text: "最初へ", targetPage: 1 },
+      {
+        type: "previous",
+        text: "前へ",
+        targetPage: Math.max(1, this.selected - 1),
+      },
+      ...this.#getPageButtons(),
+      {
+        type: "next",
+        text: "次へ",
+        targetPage: Math.min(this.total, this.selected + 1),
+      },
+      { type: "last", text: "最後へ", targetPage: this.total },
+    ];
+  }
+
+  #getPageButtons(): NavigationButton[] {
+    const { firstVisiblePage, lastVisiblePage } =
+      this.#calculateVisiblePageRange();
 
     return Array.from(
       { length: lastVisiblePage - firstVisiblePage + 1 },
@@ -136,37 +158,25 @@ export class SpPagination extends HTMLElement {
     );
   }
 
-  #calculateVisiblePages() {
-    const firstVisiblePage = Math.max(
-      Math.min(this.selected - 4, this.total - 9),
-      1,
-    );
+  #calculateVisiblePageRange() {
+    // 選択ページを中心に表示（選択ページの前にPAGES_BEFORE_SELECTED分のページを表示）
+    let firstVisiblePage = Math.max(1, this.selected - PAGES_BEFORE_SELECTED);
+
+    // 最後のページが表示範囲を超える場合は調整
+    if (firstVisiblePage + MAX_VISIBLE_PAGES - 1 > this.total) {
+      firstVisiblePage = Math.max(1, this.total - MAX_VISIBLE_PAGES + 1);
+    }
 
     const lastVisiblePage = Math.min(
-      Math.max(this.selected + 5, 10),
       this.total,
+      firstVisiblePage + MAX_VISIBLE_PAGES - 1,
     );
 
     return { firstVisiblePage, lastVisiblePage };
   }
 
   #createButtonItem({ type, text, targetPage }: NavigationButton) {
-    const button = document.createElement("button");
-    button.textContent = text;
-    button.classList.add(type);
-
-    if (type === "page") {
-      button.setAttribute("aria-label", `${targetPage}ページ目へ`);
-      if (targetPage === this.selected) {
-        button.classList.add("selected");
-        button.setAttribute("aria-current", "page");
-      }
-    }
-
-    const isDisabled = this.#isButtonDisabled(type);
-    button.disabled = isDisabled;
-    button.onclick = () => this.#handlePageChange(targetPage);
-
+    const button = this.#createButton(type, text, targetPage);
     this.#buttonElements.push(button);
 
     const li = document.createElement("li");
@@ -174,65 +184,103 @@ export class SpPagination extends HTMLElement {
     return li;
   }
 
-  #isButtonDisabled(type: ButtonType): boolean {
-    switch (type) {
-      case "first":
-      case "previous":
-        return this.selected === 1;
-      case "next":
-      case "last":
-        return this.selected === this.total;
-      default:
-        return false;
+  #createButton(type: ButtonType, text: string, targetPage: number) {
+    const button = document.createElement("button");
+    button.textContent = text;
+    button.classList.add(type);
+
+    if (type === "page") {
+      this.#setupPageButton(button, targetPage);
+    }
+
+    const isDisabled = this.#isButtonDisabled(type);
+    button.disabled = isDisabled;
+    button.onclick = () => this.#handlePageChange(targetPage);
+
+    return button;
+  }
+
+  #setupPageButton(button: HTMLButtonElement, targetPage: number) {
+    button.setAttribute("aria-label", `${targetPage}ページ目へ`);
+    if (targetPage === this.selected) {
+      button.classList.add("selected");
+      button.setAttribute("aria-current", "page");
     }
   }
 
+  #isButtonDisabled(type: ButtonType): boolean {
+    if (type === "first" || type === "previous") {
+      return this.selected === 1;
+    }
+
+    if (type === "next" || type === "last") {
+      return this.selected === this.total;
+    }
+
+    return false;
+  }
+
   #handlePageChange(newPage: number) {
-    if (newPage === this.selected || newPage < 1 || newPage > this.total) {
+    if (this.#isInvalidPageChange(newPage)) {
       return;
     }
 
+    this.#updateSelectedPage(newPage);
+    this.#dispatchChangeEvent(newPage);
+    this.#updatePageButtonStates();
+  }
+
+  #isInvalidPageChange(newPage: number): boolean {
+    return newPage === this.selected || newPage < 1 || newPage > this.total;
+  }
+
+  #updateSelectedPage(newPage: number) {
     this.selected = newPage;
     this.setAttribute("selected", String(newPage));
+  }
 
+  #dispatchChangeEvent(newPage: number) {
     this.dispatchEvent(
       new CustomEvent("change", {
         detail: { page: newPage },
       }),
     );
-
-    this.#updatePageButtonStates();
   }
 
   #updatePageButtonStates() {
-    this.#pageButtons = [
-      { type: "first", text: "最初へ", targetPage: 1 },
-      { type: "previous", text: "前へ", targetPage: this.selected - 1 },
-      ...this.#createPageButtons(),
-      { type: "next", text: "次へ", targetPage: this.selected + 1 },
-      { type: "last", text: "最後へ", targetPage: this.total },
-    ];
+    const navigationButtons = this.#getNavigationButtons();
 
     this.#buttonElements.forEach((button, index) => {
-      const buttonData = this.#pageButtons[index];
+      const buttonData = navigationButtons[index];
 
       if (button.classList.contains("page")) {
-        button.textContent = buttonData.text;
-        const isCurrentPage = buttonData.targetPage === this.selected;
-        button.classList.toggle("selected", isCurrentPage);
-        button.setAttribute("aria-label", `${buttonData.targetPage}ページ目へ`);
-
-        if (isCurrentPage) {
-          button.setAttribute("aria-current", "page");
-        } else {
-          button.removeAttribute("aria-current");
-        }
+        this.#updatePageButtonDisplay(button, buttonData);
       }
 
-      const isDisabled = this.#isButtonDisabled(buttonData.type);
-      button.disabled = isDisabled;
-      button.onclick = () => this.#handlePageChange(buttonData.targetPage);
+      this.#updateButtonState(button, buttonData);
     });
+  }
+
+  #updatePageButtonDisplay(
+    button: HTMLButtonElement,
+    buttonData: NavigationButton,
+  ) {
+    button.textContent = buttonData.text;
+    const isCurrentPage = buttonData.targetPage === this.selected;
+    button.classList.toggle("selected", isCurrentPage);
+    button.setAttribute("aria-label", `${buttonData.targetPage}ページ目へ`);
+
+    if (isCurrentPage) {
+      button.setAttribute("aria-current", "page");
+    } else {
+      button.removeAttribute("aria-current");
+    }
+  }
+
+  #updateButtonState(button: HTMLButtonElement, buttonData: NavigationButton) {
+    const isDisabled = this.#isButtonDisabled(buttonData.type);
+    button.disabled = isDisabled;
+    button.onclick = () => this.#handlePageChange(buttonData.targetPage);
   }
 }
 

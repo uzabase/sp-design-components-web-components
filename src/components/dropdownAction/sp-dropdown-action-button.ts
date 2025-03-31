@@ -22,7 +22,10 @@ export class SpDropdownActionButton extends SpButton {
 
   connectedCallback(): void {
     super.connectedCallback();
+    this.#setupIcon();
+  }
 
+  #setupIcon() {
     this.icon = "arrow_down";
   }
 
