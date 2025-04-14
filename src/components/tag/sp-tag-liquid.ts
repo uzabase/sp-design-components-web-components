@@ -6,33 +6,33 @@ import tagLiquidStyle from "./tag-liquid.css?inline";
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${tagLiquidStyle}`);
 
-export type SpTagLiquidColor = "gray" | "green" | "red" | "yellow" | "blue";
+export type SpTagLiquidType = "gray" | "green" | "red" | "yellow" | "blue";
 export type SpTagLiquidMode = "light" | "dark";
 
 export class SpTagLiquid extends HTMLElement {
-  #color: SpTagLiquidColor = "gray";
+  #type: SpTagLiquidType = "gray";
   #mode: SpTagLiquidMode = "light";
   #baseElement: HTMLElement = document.createElement("div");
 
-  get color(): SpTagLiquidColor {
-    return this.#color;
+  get type(): SpTagLiquidType {
+    return this.#type;
   }
 
-  set color(value: SpTagLiquidColor) {
-    if (this.#color === value) return;
+  set type(value: SpTagLiquidType) {
+    if (this.#type === value) return;
 
-    this.#baseElement.classList.remove(`theme__${this.#color}`);
+    this.#baseElement.classList.remove(`theme__${this.#type}`);
 
-    if (this.#isValidColor(value)) {
-      this.#color = value;
+    if (this.#isValidType(value)) {
+      this.#type = value;
       this.#baseElement.classList.add(`theme__${value}`);
 
       if (value === "gray" && this.#mode === "dark") {
         this.mode = "light";
       }
     } else {
-      console.warn(`${value}は無効なcolor属性です。`);
-      this.#color = "gray";
+      console.warn(`${value}は無効なtype属性です。`);
+      this.#type = "gray";
       this.#baseElement.classList.add(`theme__gray`);
     }
   }
@@ -42,7 +42,7 @@ export class SpTagLiquid extends HTMLElement {
   }
 
   set mode(value: SpTagLiquidMode) {
-    if (this.#color === "gray" && value === "dark") {
+    if (this.#type === "gray" && value === "dark") {
       console.warn(
         "grayカラーではdarkモードは使用できません。lightモードが適用されます。",
       );
@@ -64,7 +64,7 @@ export class SpTagLiquid extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["color", "mode"];
+    return ["type", "mode"];
   }
 
   constructor() {
@@ -78,7 +78,7 @@ export class SpTagLiquid extends HTMLElement {
   }
 
   connectedCallback() {
-    this.#color = this.#getInitialColorValue();
+    this.#type = this.#getInitialTypeValue();
     this.#mode = this.#getInitialModeValue();
 
     this.#render();
@@ -88,8 +88,8 @@ export class SpTagLiquid extends HTMLElement {
     if (oldValue === newValue) return;
 
     switch (name) {
-      case "color":
-        this.color = newValue as SpTagLiquidColor;
+      case "type":
+        this.type = newValue as SpTagLiquidType;
         break;
       case "mode":
         this.mode = newValue as SpTagLiquidMode;
@@ -97,28 +97,28 @@ export class SpTagLiquid extends HTMLElement {
     }
   }
 
-  #getInitialColorValue(): SpTagLiquidColor {
-    const color = this.getAttribute("color");
-    return this.#isValidColor(color) ? (color as SpTagLiquidColor) : "gray";
+  #getInitialTypeValue(): SpTagLiquidType {
+    const type = this.getAttribute("type");
+    return this.#isValidType(type) ? (type as SpTagLiquidType) : "gray";
   }
 
   #getInitialModeValue(): SpTagLiquidMode {
     const mode = this.getAttribute("mode");
 
-    if (this.#color === "gray") {
+    if (this.#type === "gray") {
       return "light";
     }
 
     return this.#isValidMode(mode) ? (mode as SpTagLiquidMode) : "light";
   }
 
-  #isValidColor(color: string | null): color is SpTagLiquidColor {
+  #isValidType(type: string | null): type is SpTagLiquidType {
     return (
-      color === "gray" ||
-      color === "green" ||
-      color === "red" ||
-      color === "yellow" ||
-      color === "blue"
+      type === "gray" ||
+      type === "green" ||
+      type === "red" ||
+      type === "yellow" ||
+      type === "blue"
     );
   }
 
@@ -130,7 +130,7 @@ export class SpTagLiquid extends HTMLElement {
     this.shadowRoot!.textContent = "";
 
     this.#baseElement.classList.add("base");
-    this.#baseElement.classList.add(`theme__${this.#color}`);
+    this.#baseElement.classList.add(`theme__${this.#type}`);
     this.#baseElement.classList.add(`mode__${this.#mode}`);
     // Adobe Spectrum Web Componentsに合わせて、role属性とaria-label属性は使用しない
 
