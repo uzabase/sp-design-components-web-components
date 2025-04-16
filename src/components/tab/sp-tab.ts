@@ -19,6 +19,7 @@ export class SpTab extends HTMLElement {
   #plusIconElement = new SpIcon();
   #tabElement = document.createElement("button");
   #textElement = document.createElement("span");
+  #textSlotElement = document.createElement("slot");
 
   set text(value: string) {
     this.#textElement.innerText = value;
@@ -78,6 +79,8 @@ export class SpTab extends HTMLElement {
   connectedCallback() {
     this.#tabElement.classList.add("spds__tab");
     this.#textElement.classList.add("spds__tabText");
+    this.#textElement.appendChild(this.#textSlotElement);
+
     this.#plusIconElement.classList.add("spds__tabIcon");
     this.#plusIconElement.size = "small";
     this.#plusIconElement.type = "plus";

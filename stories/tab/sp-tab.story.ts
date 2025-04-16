@@ -8,7 +8,7 @@ import { SpTab } from "../../src/components/tab/sp-tab";
 const meta = {
   component: "sp-tab",
   argTypes: {
-    text: { type: "string" },
+    slot: { type: "string" },
     fill: {
       control: { type: "select" },
       options: ["white", "gray"],
@@ -21,7 +21,7 @@ const meta = {
     },
   },
   args: {
-    text: "sp-tab",
+    slot: "sp-tab",
     fill: "gray",
     plusIcon: false,
     selected: false,
@@ -30,13 +30,13 @@ const meta = {
   },
   render: (args) => html`
     <sp-tab
-      text=${args.text}
       fill=${args.fill}
       plus-icon=${args.plusIcon}
       ?selected=${args.selected}
       ?disabled=${args.disabled}
       @click=${args.onclick}
     >
+      ${args.slot}
     </sp-tab>
   `,
 } satisfies Meta<SpTab>;

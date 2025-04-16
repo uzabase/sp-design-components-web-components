@@ -1,6 +1,7 @@
 :host {
   display: inline-block;
   max-width: 100%;
+  --icon-color: var(--color-semantic-text-button-outline-default);
 }
 
 .tabList{
@@ -15,7 +16,7 @@
   display: inline-flex;
   min-width: 80px;
   padding-block: 2px;
-  padding-inline: 20px;
+  padding-inline: 16px;
   justify-content: center;
   align-items: center;
   color: var(--color-semantic-text-regular);
@@ -23,7 +24,7 @@
   border-radius: 1rem;
   min-height: 28px;
   column-gap: 4px;
-  line-height: 150%;
+  line-height: 160%;
 
     &:hover{
       cursor:pointer;
@@ -42,6 +43,7 @@
         background-color: var(--color-semantic-surface-selected);
         color: var(--color-semantic-text-inverse);
         font-weight: bold;
+        --icon-color: var(--color-semantic-text-button-selected);
 
         &:hover {
           border-color: var(--color-semantic-surface-selected-hover);
@@ -54,6 +56,7 @@
           color: var(--color-semantic-text-disabled);
           cursor: not-allowed;
           font-weight: normal;
+          --icon-color: var(--color-semantic-text-button-disabled);
         }
       }
 
@@ -62,6 +65,7 @@
         background-color: var(--color-semantic-surface-regular-2);
         color: var(--color-semantic-text-disabled);
         cursor: not-allowed;
+        --icon-color: var(--color-semantic-text-button-disabled);
       }
     }
 
@@ -78,27 +82,27 @@
       background-color: var(--color-semantic-surface-selected);
       color: var(--color-semantic-text-inverse);
       font-weight: bold;
-
-    &:hover {
-      border-color: var(--color-semantic-surface-selected-hover);
-      background-color: var(--color-semantic-surface-selected-hover);
-    }
-
-    &:disabled{
-      border-color: var(--color-semantic-border-regular);
-      background-color: var(--color-semantic-surface-regular-2);
-      color: var(--color-semantic-text-disabled);
-      cursor: not-allowed;
-    }
+      --icon-color: var(--color-semantic-text-button-selected);
+        &:hover {
+          border-color: var(--color-semantic-surface-selected-hover);
+          background-color: var(--color-semantic-surface-selected-hover);
+        }
+      &:disabled{
+        border-color: var(--color-semantic-border-regular);
+        background-color: var(--color-semantic-surface-regular-2);
+        color: var(--color-semantic-text-disabled);
+        cursor: not-allowed;
+        font-weight: normal;
+        --icon-color: var(--color-semantic-text-button-disabled);
+      }
   }
-
-    &:disabled{
-      border-color: var(--color-semantic-border-regular);
-      background-color: var(--color-semantic-surface-regular-2);
-      color: var(--color-semantic-text-disabled);
-      cursor: not-allowed;
-    }
+  &:disabled{
+    border-color: var(--color-semantic-border-regular);
+    background-color: var(--color-semantic-surface-regular-2);
+    color: var(--color-semantic-text-disabled);
+    cursor: not-allowed;
   }
+}
 
   &:focus-visible{
     outline: canvastext solid 3px;
@@ -114,9 +118,6 @@
       display: block;
     }
   }
-}
-.spds__tabText{
-  padding-top: 1px;
 }
 
 
