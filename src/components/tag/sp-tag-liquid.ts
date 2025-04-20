@@ -11,7 +11,7 @@ export type SpTagLiquidMode = "light" | "dark";
 
 export class SpTagLiquid extends HTMLElement {
   #type: SpTagLiquidType = "gray";
-  #mode: SpTagLiquidMode = "light";
+  #light: boolean = true;
   #baseElement: HTMLElement = document.createElement("div");
 
   get type(): SpTagLiquidType {
@@ -21,50 +21,43 @@ export class SpTagLiquid extends HTMLElement {
   set type(value: SpTagLiquidType) {
     if (this.#type === value) return;
 
-    this.#baseElement.classList.remove(`theme__${this.#type}`);
+    this.#baseElement.classList.remove(`type__${this.#type}`);
 
     if (this.#isValidType(value)) {
       this.#type = value;
-      this.#baseElement.classList.add(`theme__${value}`);
-
-      if (value === "gray" && this.#mode === "dark") {
-        this.mode = "light";
-      }
+      this.#baseElement.classList.add(`type__${value}`);
+      this.light = this.hasAttribute("light");
     } else {
       console.warn(`${value}は無効なtype属性です。`);
       this.#type = "gray";
-      this.#baseElement.classList.add(`theme__gray`);
+      this.#baseElement.classList.add(`type__gray`);
     }
   }
 
-  get mode(): SpTagLiquidMode {
-    return this.#mode;
+  get light(): boolean {
+    return this.#light;
   }
 
-  set mode(value: SpTagLiquidMode) {
-    if (this.#type === "gray" && value === "dark") {
-      console.warn(
-        "grayカラーではdarkモードは使用できません。lightモードが適用されます。",
-      );
-      value = "light";
-    }
+  set light(value: boolean) {
+    if (this.#light === value) return;
 
-    if (this.#mode === value) return;
-
-    this.#baseElement.classList.remove(`mode__${this.#mode}`);
-
-    if (this.#isValidMode(value)) {
-      this.#mode = value;
-      this.#baseElement.classList.add(`mode__${value}`);
+    if (value) {
+      this.#baseElement.classList.add("light");
     } else {
-      console.warn(`${value}は無効なmode属性です。`);
-      this.#mode = "light";
-      this.#baseElement.classList.add(`mode__light`);
+      this.#baseElement.classList.remove("light");
+    }
+
+    this.#light = value;
+
+    if (value) {
+      this.setAttribute("light", "");
+    } else {
+      this.removeAttribute("light");
     }
   }
 
   static get observedAttributes() {
-    return ["type", "mode"];
+    return ["type", "light"];
   }
 
   constructor() {
@@ -79,7 +72,7 @@ export class SpTagLiquid extends HTMLElement {
 
   connectedCallback() {
     this.#type = this.#getInitialTypeValue();
-    this.#mode = this.#getInitialModeValue();
+    this.#light = this.#getInitialLightValue();
 
     this.#render();
   }
@@ -91,8 +84,8 @@ export class SpTagLiquid extends HTMLElement {
       case "type":
         this.type = newValue as SpTagLiquidType;
         break;
-      case "mode":
-        this.mode = newValue as SpTagLiquidMode;
+      case "light":
+        this.light = newValue === "true" || newValue === "";
         break;
     }
   }
@@ -102,14 +95,12 @@ export class SpTagLiquid extends HTMLElement {
     return this.#isValidType(type) ? (type as SpTagLiquidType) : "gray";
   }
 
-  #getInitialModeValue(): SpTagLiquidMode {
-    const mode = this.getAttribute("mode");
-
+  #getInitialLightValue(): boolean {
     if (this.#type === "gray") {
-      return "light";
+      return true;
     }
 
-    return this.#isValidMode(mode) ? (mode as SpTagLiquidMode) : "light";
+    return this.hasAttribute("light");
   }
 
   #isValidType(type: string | null): type is SpTagLiquidType {
@@ -122,17 +113,15 @@ export class SpTagLiquid extends HTMLElement {
     );
   }
 
-  #isValidMode(mode: string | null): mode is SpTagLiquidMode {
-    return mode === "light" || mode === "dark";
-  }
-
   #render() {
     this.shadowRoot!.textContent = "";
 
     this.#baseElement.classList.add("base");
-    this.#baseElement.classList.add(`theme__${this.#type}`);
-    this.#baseElement.classList.add(`mode__${this.#mode}`);
-    // Adobe Spectrum Web Componentsに合わせて、role属性とaria-label属性は使用しない
+    this.#baseElement.classList.add(`type__${this.#type}`);
+
+    if (this.#light) {
+      this.#baseElement.classList.add("light");
+    }
 
     const slotElement = document.createElement("slot");
     this.#baseElement.appendChild(slotElement);

@@ -10,22 +10,20 @@ const meta: Meta = {
       control: { type: "select" },
       options: ["gray", "green", "red", "yellow", "blue"],
     },
-    mode: {
-      control: { type: "select" },
-      options: ["light", "dark"],
-      description:
-        "ライト/ダークモード（※Grayカラーではlightモードのみ使用可）",
+    light: {
+      control: { type: "boolean" },
+      description: "ライト/ダークモード（※grayカラーはライトモードのみ）",
     },
   },
   args: {
     type: "gray",
-    mode: "light",
+    light: false,
     text: "タグ",
   },
   render: (args) => html`
-    <sp-tag-liquid type="${args.type}" mode="${args.mode}"
-      >${args.text}</sp-tag-liquid
-    >
+    <sp-tag-liquid type="${args.type}" ?light="${args.light}">
+      ${args.text}
+    </sp-tag-liquid>
   `,
 };
 
@@ -37,15 +35,15 @@ export const Basic: Story = {
   tags: ["!dev-only"],
 };
 
-export const ThemeColors: Story = {
+export const LightThemeColors: Story = {
   tags: ["!dev-only"],
   render: () => html`
     <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-      <sp-tag-liquid type="gray" mode="light">Gray Light</sp-tag-liquid>
-      <sp-tag-liquid type="green" mode="light">Green Light</sp-tag-liquid>
-      <sp-tag-liquid type="red" mode="light">Red Light</sp-tag-liquid>
-      <sp-tag-liquid type="yellow" mode="light">Yellow Light</sp-tag-liquid>
-      <sp-tag-liquid type="blue" mode="light">Blue Light</sp-tag-liquid>
+      <sp-tag-liquid type="gray" light>Gray Light</sp-tag-liquid>
+      <sp-tag-liquid type="green" light>Green Light</sp-tag-liquid>
+      <sp-tag-liquid type="red" light>Red Light</sp-tag-liquid>
+      <sp-tag-liquid type="yellow" light>Yellow Light</sp-tag-liquid>
+      <sp-tag-liquid type="blue" light>Blue Light</sp-tag-liquid>
     </div>
   `,
 };
@@ -54,10 +52,10 @@ export const DarkThemeColors: Story = {
   tags: ["!dev-only"],
   render: () => html`
     <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-      <sp-tag-liquid type="green" mode="dark">Green Dark</sp-tag-liquid>
-      <sp-tag-liquid type="red" mode="dark">Red Dark</sp-tag-liquid>
-      <sp-tag-liquid type="yellow" mode="dark">Yellow Dark</sp-tag-liquid>
-      <sp-tag-liquid type="blue" mode="dark">Blue Dark</sp-tag-liquid>
+      <sp-tag-liquid type="green">Green Dark</sp-tag-liquid>
+      <sp-tag-liquid type="red">Red Dark</sp-tag-liquid>
+      <sp-tag-liquid type="yellow">Yellow Dark</sp-tag-liquid>
+      <sp-tag-liquid type="blue">Blue Dark</sp-tag-liquid>
     </div>
   `,
 };
@@ -69,22 +67,20 @@ export const AllVariants: Story = {
       <div>
         <h3>Light Variants</h3>
         <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
-          <sp-tag-liquid type="gray" mode="light">Gray Light</sp-tag-liquid>
-          <sp-tag-liquid type="green" mode="light">Green Light</sp-tag-liquid>
-          <sp-tag-liquid type="red" mode="light">Red Light</sp-tag-liquid>
-          <sp-tag-liquid type="yellow" mode="light"
-            >Yellow Light</sp-tag-liquid
-          >
-          <sp-tag-liquid type="blue" mode="light">Blue Light</sp-tag-liquid>
+          <sp-tag-liquid type="gray" light>Gray Light</sp-tag-liquid>
+          <sp-tag-liquid type="green" light>Green Light</sp-tag-liquid>
+          <sp-tag-liquid type="red" light>Red Light</sp-tag-liquid>
+          <sp-tag-liquid type="yellow" light>Yellow Light</sp-tag-liquid>
+          <sp-tag-liquid type="blue" light>Blue Light</sp-tag-liquid>
         </div>
       </div>
       <div>
         <h3>Dark Variants</h3>
         <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
-          <sp-tag-liquid type="green" mode="dark">Green Dark</sp-tag-liquid>
-          <sp-tag-liquid type="red" mode="dark">Red Dark</sp-tag-liquid>
-          <sp-tag-liquid type="yellow" mode="dark">Yellow Dark</sp-tag-liquid>
-          <sp-tag-liquid type="blue" mode="dark">Blue Dark</sp-tag-liquid>
+          <sp-tag-liquid type="green">Green Dark</sp-tag-liquid>
+          <sp-tag-liquid type="red">Red Dark</sp-tag-liquid>
+          <sp-tag-liquid type="yellow">Yellow Dark</sp-tag-liquid>
+          <sp-tag-liquid type="blue">Blue Dark</sp-tag-liquid>
         </div>
       </div>
     </div>

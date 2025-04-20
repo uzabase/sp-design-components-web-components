@@ -27,22 +27,22 @@ describe("sp-tag-liquid", () => {
   });
 
   describe("type属性", () => {
-    test("type属性にgreenを設定すると、クラスにtheme__greenが設定される", () => {
+    test("type属性にgreenを設定すると、クラスにtype__greenが設定される", () => {
       document.body.innerHTML = `<sp-tag-liquid type="green">Hello, World!</sp-tag-liquid>`;
 
       const tagLiquid = getSpTagLiquid();
       const baseElement = getBaseElement(tagLiquid);
 
-      expect(baseElement.classList.contains("theme__green")).toBe(true);
+      expect(baseElement.classList.contains("type__green")).toBe(true);
     });
 
-    test("type属性を設定しない場合、クラスにデフォルト値のtheme__grayが設定される", () => {
+    test("type属性を設定しない場合、クラスにデフォルト値のtype__grayが設定される", () => {
       document.body.innerHTML = `<sp-tag-liquid>Hello, World!</sp-tag-liquid>`;
 
       const tagLiquid = getSpTagLiquid();
       const baseElement = getBaseElement(tagLiquid);
 
-      expect(baseElement.classList.contains("theme__gray")).toBe(true);
+      expect(baseElement.classList.contains("type__gray")).toBe(true);
     });
 
     test("type属性を更新すると、クラスから古い値が削除され、新しい値が設定される", () => {
@@ -52,25 +52,25 @@ describe("sp-tag-liquid", () => {
       tagLiquid.setAttribute("type", "blue");
       const baseElement = getBaseElement(tagLiquid);
 
-      expect(baseElement.classList.contains("theme__green")).toBe(false);
-      expect(baseElement.classList.contains("theme__blue")).toBe(true);
+      expect(baseElement.classList.contains("type__green")).toBe(false);
+      expect(baseElement.classList.contains("type__blue")).toBe(true);
     });
 
-    test("無効なtype属性を設定すると、クラスにデフォルト値のtheme__grayが設定される", () => {
+    test("無効なtype属性を設定すると、クラスにデフォルト値のtype__grayが設定される", () => {
       document.body.innerHTML = `<sp-tag-liquid type="invalid">Hello, World!</sp-tag-liquid>`;
 
       const tagLiquid = getSpTagLiquid();
       const baseElement = getBaseElement(tagLiquid);
 
-      expect(baseElement.classList.contains("theme__gray")).toBe(true);
+      expect(baseElement.classList.contains("type__gray")).toBe(true);
     });
 
     test.each([
-      ["gray", "theme__gray"],
-      ["green", "theme__green"],
-      ["red", "theme__red"],
-      ["yellow", "theme__yellow"],
-      ["blue", "theme__blue"],
+      ["gray", "type__gray"],
+      ["green", "type__green"],
+      ["red", "type__red"],
+      ["yellow", "type__yellow"],
+      ["blue", "type__blue"],
     ])(
       "type属性に%sを設定すると、クラスに%sが設定される",
       (type, className) => {
@@ -84,84 +84,51 @@ describe("sp-tag-liquid", () => {
     );
   });
 
-  describe("mode属性", () => {
-    test("mode属性にdarkを設定すると、クラスにmode__darkが設定される", () => {
-      document.body.innerHTML = `<sp-tag-liquid type="green" mode="dark">Hello, World!</sp-tag-liquid>`;
+  describe("light属性", () => {
+    test("light属性にtrueを設定すると、クラスにlightが設定される", () => {
+      document.body.innerHTML = `<sp-tag-liquid type="green" light="true">Hello, World!</sp-tag-liquid>`;
 
       const tagLiquid = getSpTagLiquid();
       const baseElement = getBaseElement(tagLiquid);
 
-      expect(baseElement.classList.contains("mode__dark")).toBe(true);
+      expect(baseElement.classList.contains("light")).toBe(true);
     });
 
-    test("mode属性を設定しない場合、クラスにデフォルト値のmode__lightが設定される", () => {
-      document.body.innerHTML = `<sp-tag-liquid>Hello, World!</sp-tag-liquid>`;
+    test("light属性に空文字を設定すると、クラスにlightが設定される", () => {
+      document.body.innerHTML = `<sp-tag-liquid type="green" light="">Hello, World!</sp-tag-liquid>`;
 
       const tagLiquid = getSpTagLiquid();
       const baseElement = getBaseElement(tagLiquid);
 
-      expect(baseElement.classList.contains("mode__light")).toBe(true);
+      expect(baseElement.classList.contains("light")).toBe(true);
     });
 
-    test("mode属性を更新すると、クラスから古い値が削除され、新しい値が設定される", () => {
-      document.body.innerHTML = `<sp-tag-liquid type="green" mode="light">Hello, World!</sp-tag-liquid>`;
+    test("light属性にfalseを設定すると、クラスにlightが設定されない", () => {
+      document.body.innerHTML = `<sp-tag-liquid type="green" light="false">Hello, World!</sp-tag-liquid>`;
 
       const tagLiquid = getSpTagLiquid();
-      tagLiquid.setAttribute("mode", "dark");
       const baseElement = getBaseElement(tagLiquid);
 
-      expect(baseElement.classList.contains("mode__light")).toBe(false);
-      expect(baseElement.classList.contains("mode__dark")).toBe(true);
+      expect(baseElement.classList.contains("light")).toBe(false);
     });
 
-    test("無効なmode属性を設定すると、クラスにデフォルト値のmode__lightが設定される", () => {
-      document.body.innerHTML = `<sp-tag-liquid mode="invalid">Hello, World!</sp-tag-liquid>`;
+    test("light属性を設定しない場合、クラスにlightが設定されない", () => {
+      document.body.innerHTML = `<sp-tag-liquid type="green">Hello, World!</sp-tag-liquid>`;
 
       const tagLiquid = getSpTagLiquid();
       const baseElement = getBaseElement(tagLiquid);
 
-      expect(baseElement.classList.contains("mode__light")).toBe(true);
+      expect(baseElement.classList.contains("light")).toBe(false);
     });
 
-    test.each([
-      ["light", "mode__light"],
-      ["dark", "mode__dark"],
-    ])(
-      "type属性がgray以外の場合、mode属性に%sを設定すると、クラスに%sが設定される",
-      (mode, className) => {
-        document.body.innerHTML = `<sp-tag-liquid type="green" mode="${mode}">Hello, World!</sp-tag-liquid>`;
-
-        const tagLiquid = getSpTagLiquid();
-        const baseElement = getBaseElement(tagLiquid);
-
-        expect(baseElement.classList.contains(className)).toBe(true);
-      },
-    );
-  });
-
-  describe("type属性とmode属性の制約", () => {
-    test("typeがgrayでmode属性にdarkを設定すると、クラスにmode__lightが設定される", () => {
-      document.body.innerHTML = `<sp-tag-liquid type="gray" mode="dark">Hello, World!</sp-tag-liquid>`;
+    test("light属性を更新すると、クラスのlight設定が更新される", () => {
+      document.body.innerHTML = `<sp-tag-liquid type="green">Hello, World!</sp-tag-liquid>`;
 
       const tagLiquid = getSpTagLiquid();
+      tagLiquid.setAttribute("light", "");
+
       const baseElement = getBaseElement(tagLiquid);
-
-      expect(baseElement.classList.contains("mode__light")).toBe(true);
-      expect(baseElement.classList.contains("mode__dark")).toBe(false);
-    });
-
-    test("modeがdarkのときにtype属性をgrayに変更すると、クラスからmode__darkが削除され、mode__lightが設定される", () => {
-      document.body.innerHTML = `<sp-tag-liquid type="green" mode="dark">Hello, World!</sp-tag-liquid>`;
-
-      const tagLiquid = getSpTagLiquid();
-      const baseElement = getBaseElement(tagLiquid);
-
-      expect(baseElement.classList.contains("mode__dark")).toBe(true);
-
-      tagLiquid.setAttribute("type", "gray");
-
-      expect(baseElement.classList.contains("mode__light")).toBe(true);
-      expect(baseElement.classList.contains("mode__dark")).toBe(false);
+      expect(baseElement.classList.contains("light")).toBe(true);
     });
   });
 });
