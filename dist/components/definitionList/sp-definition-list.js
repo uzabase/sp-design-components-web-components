@@ -17,15 +17,13 @@ export class SpDefinitionList extends HTMLElement {
         this.attachShadow({ mode: "open" });
     }
     connectedCallback() {
-        if (this.shadowRoot) {
-            this.shadowRoot.adoptedStyleSheets = [
-                ...this.shadowRoot.adoptedStyleSheets,
-                styles,
-            ];
-            __classPrivateFieldGet(this, _SpDefinitionList_dlElement, "f").classList.add("base");
-            __classPrivateFieldGet(this, _SpDefinitionList_dlElement, "f").appendChild(__classPrivateFieldGet(this, _SpDefinitionList_slotElement, "f"));
-            this.shadowRoot.appendChild(__classPrivateFieldGet(this, _SpDefinitionList_dlElement, "f"));
-        }
+        this.shadowRoot.adoptedStyleSheets = [
+            ...this.shadowRoot.adoptedStyleSheets,
+            styles,
+        ];
+        __classPrivateFieldGet(this, _SpDefinitionList_dlElement, "f").classList.add("base");
+        __classPrivateFieldGet(this, _SpDefinitionList_dlElement, "f").appendChild(__classPrivateFieldGet(this, _SpDefinitionList_slotElement, "f"));
+        this.shadowRoot.appendChild(__classPrivateFieldGet(this, _SpDefinitionList_dlElement, "f"));
     }
 }
 _SpDefinitionList_dlElement = new WeakMap(), _SpDefinitionList_slotElement = new WeakMap();

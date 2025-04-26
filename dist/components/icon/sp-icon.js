@@ -10,12 +10,10 @@ export class SpIcon extends UbIcon {
     constructor() {
         super();
         this.paths = { ...speedaIconPaths, "": "" };
-        if (this.shadowRoot) {
-            this.shadowRoot.adoptedStyleSheets = [
-                ...this.shadowRoot.adoptedStyleSheets,
-                styles,
-            ];
-        }
+        this.shadowRoot.adoptedStyleSheets = [
+            ...this.shadowRoot.adoptedStyleSheets,
+            styles,
+        ];
     }
     set type(value) {
         super.type = isSpeedaIconType(value) ? value : "";

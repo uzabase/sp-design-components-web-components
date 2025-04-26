@@ -16,15 +16,14 @@ export class SpDefinitionList extends HTMLElement {
   }
 
   connectedCallback() {
-    if (this.shadowRoot) {
-      this.shadowRoot.adoptedStyleSheets = [
-        ...this.shadowRoot.adoptedStyleSheets,
-        styles,
-      ];
-      this.#dlElement.classList.add("base");
-      this.#dlElement.appendChild(this.#slotElement);
-      this.shadowRoot.appendChild(this.#dlElement);
-    }
+    this.shadowRoot!.adoptedStyleSheets = [
+      ...this.shadowRoot!.adoptedStyleSheets,
+      styles,
+    ];
+
+    this.#dlElement.classList.add("base");
+    this.#dlElement.appendChild(this.#slotElement);
+    this.shadowRoot!.appendChild(this.#dlElement);
   }
 }
 

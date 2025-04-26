@@ -9,7 +9,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _SpDropdownAction_instances, _SpDropdownAction_baseElement, _SpDropdownAction_buttonElement, _SpDropdownAction_menuElement, _SpDropdownAction_menuSlotElement, _SpDropdownAction_menuItemElements, _SpDropdownAction_menuId, _SpDropdownAction_open, _SpDropdownAction_disabled, _SpDropdownAction_position, _SpDropdownAction_clickOutsideHandler, _SpDropdownAction_handleClickButton, _SpDropdownAction_handleSlotChange, _SpDropdownAction_handleClickMenuItem, _SpDropdownAction_handleClickOutside, _SpDropdownAction_updateMenuDisplay, _SpDropdownAction_setupAccessibilityAttributes, _SpDropdownAction_updateAriaExpandedAttribute, _SpDropdownAction_syncMenuMinWidthWithButtonWidth;
+var _SpDropdownAction_instances, _SpDropdownAction_baseElement, _SpDropdownAction_buttonElement, _SpDropdownAction_menuElement, _SpDropdownAction_menuSlotElement, _SpDropdownAction_menuItemElements, _SpDropdownAction_menuId, _SpDropdownAction_open, _SpDropdownAction_disabled, _SpDropdownAction_position, _SpDropdownAction_clickOutsideHandler, _SpDropdownAction_setupButtonElement, _SpDropdownAction_setupMenuElement, _SpDropdownAction_setupBaseElement, _SpDropdownAction_setupEventListeners, _SpDropdownAction_setupAccessibilityAttributes, _SpDropdownAction_syncMenuMinWidthWithButtonWidth, _SpDropdownAction_handleLabelAttribute, _SpDropdownAction_handleOpenAttribute, _SpDropdownAction_handleDisabledAttribute, _SpDropdownAction_handlePositionAttribute, _SpDropdownAction_handleClickButton, _SpDropdownAction_handleSlotChange, _SpDropdownAction_handleClickMenuItem, _SpDropdownAction_handleClickOutside, _SpDropdownAction_updateMenuDisplay, _SpDropdownAction_updateAriaExpandedAttribute;
 import "./sp-dropdown-action-button";
 import "./sp-dropdown-action-item";
 import resetStyle from "@acab/reset.css?inline";
@@ -80,24 +80,21 @@ export class SpDropdownAction extends HTMLElement {
         _SpDropdownAction_disabled.set(this, false);
         _SpDropdownAction_position.set(this, "left");
         _SpDropdownAction_clickOutsideHandler.set(this, __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_handleClickOutside).bind(this));
-        const shadowRoot = this.attachShadow({ mode: "open" });
-        shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
+        this.attachShadow({ mode: "open" });
+        this.shadowRoot.adoptedStyleSheets = [
+            ...this.shadowRoot.adoptedStyleSheets,
+            styles,
+        ];
         this.open = false;
         this.disabled = false;
         this.position = "left";
     }
     connectedCallback() {
-        __classPrivateFieldGet(this, _SpDropdownAction_buttonElement, "f").setAttribute("part", "button");
-        __classPrivateFieldGet(this, _SpDropdownAction_buttonElement, "f").addEventListener("click", __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_handleClickButton).bind(this));
-        __classPrivateFieldGet(this, _SpDropdownAction_baseElement, "f").appendChild(__classPrivateFieldGet(this, _SpDropdownAction_buttonElement, "f"));
-        __classPrivateFieldGet(this, _SpDropdownAction_menuElement, "f").classList.add("menu");
-        __classPrivateFieldGet(this, _SpDropdownAction_menuElement, "f").role = "menu";
-        __classPrivateFieldGet(this, _SpDropdownAction_menuElement, "f").appendChild(__classPrivateFieldGet(this, _SpDropdownAction_menuSlotElement, "f"));
-        __classPrivateFieldGet(this, _SpDropdownAction_menuSlotElement, "f").addEventListener("slotchange", __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_handleSlotChange).bind(this));
-        window.addEventListener("click", __classPrivateFieldGet(this, _SpDropdownAction_clickOutsideHandler, "f"));
-        __classPrivateFieldGet(this, _SpDropdownAction_baseElement, "f").appendChild(__classPrivateFieldGet(this, _SpDropdownAction_menuElement, "f"));
-        __classPrivateFieldGet(this, _SpDropdownAction_baseElement, "f").classList.add("base");
-        this.shadowRoot?.appendChild(__classPrivateFieldGet(this, _SpDropdownAction_baseElement, "f"));
+        __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_setupButtonElement).call(this);
+        __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_setupMenuElement).call(this);
+        __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_setupBaseElement).call(this);
+        __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_setupEventListeners).call(this);
+        this.shadowRoot.appendChild(__classPrivateFieldGet(this, _SpDropdownAction_baseElement, "f"));
         __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_setupAccessibilityAttributes).call(this);
         __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_syncMenuMinWidthWithButtonWidth).call(this);
     }
@@ -111,28 +108,57 @@ export class SpDropdownAction extends HTMLElement {
     attributeChangedCallback(name, oldValue, newValue) {
         if (oldValue === newValue)
             return;
-        switch (name) {
-            case "label":
-                this.label = newValue;
-                break;
-            case "open":
-                this.open = newValue === "true" || newValue === "";
-                break;
-            case "disabled":
-                this.disabled = newValue === "true" || newValue === "";
-                break;
-            case "position":
-                if (isValidPosition(newValue)) {
-                    this.position = newValue;
-                }
-                else {
-                    console.warn(`${newValue}は無効なposition属性です。`);
-                    this.position = "left";
-                }
+        if (name === "label") {
+            __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_handleLabelAttribute).call(this, newValue);
+        }
+        if (name === "open") {
+            __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_handleOpenAttribute).call(this, newValue);
+        }
+        if (name === "disabled") {
+            __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_handleDisabledAttribute).call(this, newValue);
+        }
+        if (name === "position") {
+            __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_handlePositionAttribute).call(this, newValue);
         }
     }
 }
-_SpDropdownAction_baseElement = new WeakMap(), _SpDropdownAction_buttonElement = new WeakMap(), _SpDropdownAction_menuElement = new WeakMap(), _SpDropdownAction_menuSlotElement = new WeakMap(), _SpDropdownAction_menuItemElements = new WeakMap(), _SpDropdownAction_menuId = new WeakMap(), _SpDropdownAction_open = new WeakMap(), _SpDropdownAction_disabled = new WeakMap(), _SpDropdownAction_position = new WeakMap(), _SpDropdownAction_clickOutsideHandler = new WeakMap(), _SpDropdownAction_instances = new WeakSet(), _SpDropdownAction_handleClickButton = function _SpDropdownAction_handleClickButton(event) {
+_SpDropdownAction_baseElement = new WeakMap(), _SpDropdownAction_buttonElement = new WeakMap(), _SpDropdownAction_menuElement = new WeakMap(), _SpDropdownAction_menuSlotElement = new WeakMap(), _SpDropdownAction_menuItemElements = new WeakMap(), _SpDropdownAction_menuId = new WeakMap(), _SpDropdownAction_open = new WeakMap(), _SpDropdownAction_disabled = new WeakMap(), _SpDropdownAction_position = new WeakMap(), _SpDropdownAction_clickOutsideHandler = new WeakMap(), _SpDropdownAction_instances = new WeakSet(), _SpDropdownAction_setupButtonElement = function _SpDropdownAction_setupButtonElement() {
+    __classPrivateFieldGet(this, _SpDropdownAction_buttonElement, "f").setAttribute("part", "button");
+    __classPrivateFieldGet(this, _SpDropdownAction_buttonElement, "f").addEventListener("click", __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_handleClickButton).bind(this));
+}, _SpDropdownAction_setupMenuElement = function _SpDropdownAction_setupMenuElement() {
+    __classPrivateFieldGet(this, _SpDropdownAction_menuElement, "f").classList.add("menu");
+    __classPrivateFieldGet(this, _SpDropdownAction_menuElement, "f").role = "menu";
+    __classPrivateFieldGet(this, _SpDropdownAction_menuElement, "f").appendChild(__classPrivateFieldGet(this, _SpDropdownAction_menuSlotElement, "f"));
+}, _SpDropdownAction_setupBaseElement = function _SpDropdownAction_setupBaseElement() {
+    __classPrivateFieldGet(this, _SpDropdownAction_baseElement, "f").appendChild(__classPrivateFieldGet(this, _SpDropdownAction_buttonElement, "f"));
+    __classPrivateFieldGet(this, _SpDropdownAction_baseElement, "f").appendChild(__classPrivateFieldGet(this, _SpDropdownAction_menuElement, "f"));
+    __classPrivateFieldGet(this, _SpDropdownAction_baseElement, "f").classList.add("base");
+}, _SpDropdownAction_setupEventListeners = function _SpDropdownAction_setupEventListeners() {
+    __classPrivateFieldGet(this, _SpDropdownAction_menuSlotElement, "f").addEventListener("slotchange", __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_handleSlotChange).bind(this));
+    window.addEventListener("click", __classPrivateFieldGet(this, _SpDropdownAction_clickOutsideHandler, "f"));
+}, _SpDropdownAction_setupAccessibilityAttributes = function _SpDropdownAction_setupAccessibilityAttributes() {
+    __classPrivateFieldGet(this, _SpDropdownAction_buttonElement, "f").setAriaHasPopup("true");
+    __classPrivateFieldGet(this, _SpDropdownAction_buttonElement, "f").setAriaControls(__classPrivateFieldGet(this, _SpDropdownAction_menuId, "f"));
+    __classPrivateFieldGet(this, _SpDropdownAction_menuElement, "f").setAttribute("id", __classPrivateFieldGet(this, _SpDropdownAction_menuId, "f"));
+    __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_updateAriaExpandedAttribute).call(this);
+}, _SpDropdownAction_syncMenuMinWidthWithButtonWidth = function _SpDropdownAction_syncMenuMinWidthWithButtonWidth() {
+    const buttonWidth = __classPrivateFieldGet(this, _SpDropdownAction_buttonElement, "f").offsetWidth;
+    __classPrivateFieldGet(this, _SpDropdownAction_menuElement, "f").style.minWidth = `${buttonWidth}px`;
+}, _SpDropdownAction_handleLabelAttribute = function _SpDropdownAction_handleLabelAttribute(value) {
+    this.label = value;
+}, _SpDropdownAction_handleOpenAttribute = function _SpDropdownAction_handleOpenAttribute(value) {
+    this.open = value === "true" || value === "";
+}, _SpDropdownAction_handleDisabledAttribute = function _SpDropdownAction_handleDisabledAttribute(value) {
+    this.disabled = value === "true" || value === "";
+}, _SpDropdownAction_handlePositionAttribute = function _SpDropdownAction_handlePositionAttribute(value) {
+    if (isValidPosition(value)) {
+        this.position = value;
+    }
+    else {
+        console.warn(`${value}は無効なposition属性です。`);
+        this.position = "left";
+    }
+}, _SpDropdownAction_handleClickButton = function _SpDropdownAction_handleClickButton(event) {
     event.stopPropagation();
     this.open = !this.open;
     __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_updateAriaExpandedAttribute).call(this);
@@ -156,16 +182,8 @@ _SpDropdownAction_baseElement = new WeakMap(), _SpDropdownAction_buttonElement =
 }, _SpDropdownAction_updateMenuDisplay = function _SpDropdownAction_updateMenuDisplay() {
     __classPrivateFieldGet(this, _SpDropdownAction_menuElement, "f").style.display =
         this.open && !this.disabled ? "block" : "none";
-}, _SpDropdownAction_setupAccessibilityAttributes = function _SpDropdownAction_setupAccessibilityAttributes() {
-    __classPrivateFieldGet(this, _SpDropdownAction_buttonElement, "f").setAriaHasPopup("true");
-    __classPrivateFieldGet(this, _SpDropdownAction_buttonElement, "f").setAriaControls(__classPrivateFieldGet(this, _SpDropdownAction_menuId, "f"));
-    __classPrivateFieldGet(this, _SpDropdownAction_menuElement, "f").setAttribute("id", __classPrivateFieldGet(this, _SpDropdownAction_menuId, "f"));
-    __classPrivateFieldGet(this, _SpDropdownAction_instances, "m", _SpDropdownAction_updateAriaExpandedAttribute).call(this);
 }, _SpDropdownAction_updateAriaExpandedAttribute = function _SpDropdownAction_updateAriaExpandedAttribute() {
     __classPrivateFieldGet(this, _SpDropdownAction_buttonElement, "f").setAriaExpanded(this.open ? "true" : "false");
-}, _SpDropdownAction_syncMenuMinWidthWithButtonWidth = function _SpDropdownAction_syncMenuMinWidthWithButtonWidth() {
-    const buttonWidth = __classPrivateFieldGet(this, _SpDropdownAction_buttonElement, "f").offsetWidth;
-    __classPrivateFieldGet(this, _SpDropdownAction_menuElement, "f").style.minWidth = `${buttonWidth}px`;
 };
 if (!customElements.get("sp-dropdown-action")) {
     customElements.define("sp-dropdown-action", SpDropdownAction);

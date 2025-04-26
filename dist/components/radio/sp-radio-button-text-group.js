@@ -6,12 +6,10 @@ styles.replaceSync(`${foundationStyle} ${radioButtonTextGroupStyle}`);
 export class SpRadioButtonTextGroup extends UbRadioButtonTextGroup {
     constructor() {
         super();
-        if (this.shadowRoot) {
-            this.shadowRoot.adoptedStyleSheets = [
-                ...this.shadowRoot.adoptedStyleSheets,
-                styles,
-            ];
-        }
+        this.shadowRoot.adoptedStyleSheets = [
+            ...this.shadowRoot.adoptedStyleSheets,
+            styles,
+        ];
     }
 }
 if (!customElements.get("sp-radio-button-text-group")) {

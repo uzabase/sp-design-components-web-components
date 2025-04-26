@@ -33,12 +33,10 @@ export class SpButton extends UbButton {
   constructor() {
     super();
 
-    if (this.shadowRoot) {
-      this.shadowRoot.adoptedStyleSheets = [
-        ...this.shadowRoot!.adoptedStyleSheets,
-        styles,
-      ];
-    }
+    this.shadowRoot!.adoptedStyleSheets = [
+      ...this.shadowRoot!.adoptedStyleSheets,
+      styles,
+    ];
 
     this.#iconElement.classList.add("base__icon");
     this.#iconElement.size = "small";

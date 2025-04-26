@@ -87,8 +87,11 @@ export class SpDropdownAction extends HTMLElement {
   constructor() {
     super();
 
-    const shadowRoot = this.attachShadow({ mode: "open" });
-    shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot!.adoptedStyleSheets = [
+      ...this.shadowRoot!.adoptedStyleSheets,
+      styles,
+    ];
 
     this.open = false;
     this.disabled = false;
@@ -96,32 +99,53 @@ export class SpDropdownAction extends HTMLElement {
   }
 
   connectedCallback() {
+    this.#setupButtonElement();
+    this.#setupMenuElement();
+    this.#setupBaseElement();
+    this.#setupEventListeners();
+    this.shadowRoot!.appendChild(this.#baseElement);
+    this.#setupAccessibilityAttributes();
+    this.#syncMenuMinWidthWithButtonWidth();
+  }
+
+  #setupButtonElement() {
     this.#buttonElement.setAttribute("part", "button");
     this.#buttonElement.addEventListener(
       "click",
       this.#handleClickButton.bind(this),
     );
+  }
 
-    this.#baseElement.appendChild(this.#buttonElement);
-
+  #setupMenuElement() {
     this.#menuElement.classList.add("menu");
     this.#menuElement.role = "menu";
     this.#menuElement.appendChild(this.#menuSlotElement);
+  }
 
+  #setupBaseElement() {
+    this.#baseElement.appendChild(this.#buttonElement);
+    this.#baseElement.appendChild(this.#menuElement);
+    this.#baseElement.classList.add("base");
+  }
+
+  #setupEventListeners() {
     this.#menuSlotElement.addEventListener(
       "slotchange",
       this.#handleSlotChange.bind(this),
     );
-
     window.addEventListener("click", this.#clickOutsideHandler);
+  }
 
-    this.#baseElement.appendChild(this.#menuElement);
-    this.#baseElement.classList.add("base");
+  #setupAccessibilityAttributes() {
+    this.#buttonElement.setAriaHasPopup("true");
+    this.#buttonElement.setAriaControls(this.#menuId);
+    this.#menuElement.setAttribute("id", this.#menuId);
+    this.#updateAriaExpandedAttribute();
+  }
 
-    this.shadowRoot?.appendChild(this.#baseElement);
-
-    this.#setupAccessibilityAttributes();
-    this.#syncMenuMinWidthWithButtonWidth();
+  #syncMenuMinWidthWithButtonWidth() {
+    const buttonWidth = this.#buttonElement.offsetWidth;
+    this.#menuElement.style.minWidth = `${buttonWidth}px`;
   }
 
   disconnectedCallback() {
@@ -142,23 +166,42 @@ export class SpDropdownAction extends HTMLElement {
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (oldValue === newValue) return;
-    switch (name) {
-      case "label":
-        this.label = newValue;
-        break;
-      case "open":
-        this.open = newValue === "true" || newValue === "";
-        break;
-      case "disabled":
-        this.disabled = newValue === "true" || newValue === "";
-        break;
-      case "position":
-        if (isValidPosition(newValue)) {
-          this.position = newValue;
-        } else {
-          console.warn(`${newValue}は無効なposition属性です。`);
-          this.position = "left";
-        }
+
+    if (name === "label") {
+      this.#handleLabelAttribute(newValue);
+    }
+
+    if (name === "open") {
+      this.#handleOpenAttribute(newValue);
+    }
+
+    if (name === "disabled") {
+      this.#handleDisabledAttribute(newValue);
+    }
+
+    if (name === "position") {
+      this.#handlePositionAttribute(newValue);
+    }
+  }
+
+  #handleLabelAttribute(value: string) {
+    this.label = value;
+  }
+
+  #handleOpenAttribute(value: string) {
+    this.open = value === "true" || value === "";
+  }
+
+  #handleDisabledAttribute(value: string) {
+    this.disabled = value === "true" || value === "";
+  }
+
+  #handlePositionAttribute(value: string) {
+    if (isValidPosition(value)) {
+      this.position = value;
+    } else {
+      console.warn(`${value}は無効なposition属性です。`);
+      this.position = "left";
     }
   }
 
@@ -200,20 +243,8 @@ export class SpDropdownAction extends HTMLElement {
       this.open && !this.disabled ? "block" : "none";
   }
 
-  #setupAccessibilityAttributes() {
-    this.#buttonElement.setAriaHasPopup("true");
-    this.#buttonElement.setAriaControls(this.#menuId);
-    this.#menuElement.setAttribute("id", this.#menuId);
-    this.#updateAriaExpandedAttribute();
-  }
-
   #updateAriaExpandedAttribute() {
     this.#buttonElement.setAriaExpanded(this.open ? "true" : "false");
-  }
-
-  #syncMenuMinWidthWithButtonWidth() {
-    const buttonWidth = this.#buttonElement.offsetWidth;
-    this.#menuElement.style.minWidth = `${buttonWidth}px`;
   }
 }
 

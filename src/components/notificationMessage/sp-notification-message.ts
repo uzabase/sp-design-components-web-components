@@ -64,44 +64,65 @@ export class SpNotificationMessage extends HTMLElement {
   constructor() {
     super();
 
-    const shadowRoot = this.attachShadow({ mode: "open" });
-    shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot!.adoptedStyleSheets = [
+      ...this.shadowRoot!.adoptedStyleSheets,
+      styles,
+    ];
 
     this.type = "information";
   }
 
   connectedCallback() {
-    this.#baseElement.classList.add("base");
+    this.#setupBaseElement();
+    this.#setupIconElement();
+    const content = this.#createContentElement();
+    this.#assembleElements(content);
+    this.shadowRoot!.appendChild(this.#baseElement);
+  }
 
+  #setupBaseElement() {
+    this.#baseElement.classList.add("base");
+  }
+
+  #setupIconElement() {
     this.#iconElement.setAttribute("role", "img");
     this.#iconElement.setAttribute("viewBox", "0 0 24 24");
     this.#iconElement.setAttribute("aria-hidden", "false");
     this.#iconElement.setAttribute("aria-label", iconAriaLabels[this.type]);
     this.#iconElement.classList.add("icon");
     this.#iconElement.innerHTML = iconPaths[this.type];
+  }
 
+  #createContentElement() {
     const content = document.createElement("div");
     content.classList.add("content");
 
     const slot = document.createElement("slot");
     content.appendChild(slot);
 
+    return content;
+  }
+
+  #assembleElements(content: HTMLElement) {
     this.#baseElement.appendChild(this.#iconElement);
     this.#baseElement.appendChild(content);
-
-    this.shadowRoot!.appendChild(this.#baseElement);
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (oldValue === newValue) return;
-    switch (name) {
-      case "type":
-        if (isValidType(newValue)) {
-          this.type = newValue;
-        } else {
-          console.warn(`${newValue}は無効なtype属性です。`);
-          this.type = "information";
-        }
+
+    if (name === "type") {
+      this.#handleTypeAttribute(newValue);
+    }
+  }
+
+  #handleTypeAttribute(value: string): void {
+    if (isValidType(value)) {
+      this.type = value;
+    } else {
+      console.warn(`${value}は無効なtype属性です。`);
+      this.type = "information";
     }
   }
 }
