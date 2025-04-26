@@ -19,11 +19,6 @@
   background-color: var(--color-semantic-surface-regular-4);
 }
 
-.button:focus {
-  outline: 2px solid var(--color-semantic-border-focus);
-  outline-offset: 2px;
-}
-
 :host([selected]) .button {
   font-weight: bold;
   color: var(--color-semantic-text-inverse);
