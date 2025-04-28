@@ -9,7 +9,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _SpNotificationMessage_type, _SpNotificationMessage_baseElement, _SpNotificationMessage_iconElement;
+var _SpNotificationMessage_instances, _SpNotificationMessage_type, _SpNotificationMessage_baseElement, _SpNotificationMessage_iconElement, _SpNotificationMessage_setupBaseElement, _SpNotificationMessage_setupIconElement, _SpNotificationMessage_createContentElement, _SpNotificationMessage_assembleElements, _SpNotificationMessage_handleTypeAttribute;
 import resetStyle from "@acab/reset.css?inline";
 import foundationStyle from "../foundation.css?inline";
 import notificationMessageStyle from "./notification-message.css?inline";
@@ -52,45 +52,59 @@ export class SpNotificationMessage extends HTMLElement {
     }
     constructor() {
         super();
+        _SpNotificationMessage_instances.add(this);
         _SpNotificationMessage_type.set(this, "information");
         _SpNotificationMessage_baseElement.set(this, document.createElement("div"));
         _SpNotificationMessage_iconElement.set(this, document.createElementNS("http://www.w3.org/2000/svg", "svg"));
-        const shadowRoot = this.attachShadow({ mode: "open" });
-        shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
+        this.attachShadow({ mode: "open" });
+        this.shadowRoot.adoptedStyleSheets = [
+            ...this.shadowRoot.adoptedStyleSheets,
+            styles,
+        ];
         this.type = "information";
     }
     connectedCallback() {
-        __classPrivateFieldGet(this, _SpNotificationMessage_baseElement, "f").classList.add("base");
-        __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").setAttribute("role", "img");
-        __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").setAttribute("viewBox", "0 0 24 24");
-        __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").setAttribute("aria-hidden", "false");
-        __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").setAttribute("aria-label", iconAriaLabels[this.type]);
-        __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").classList.add("icon");
-        __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").innerHTML = iconPaths[this.type];
-        const content = document.createElement("div");
-        content.classList.add("content");
-        const slot = document.createElement("slot");
-        content.appendChild(slot);
-        __classPrivateFieldGet(this, _SpNotificationMessage_baseElement, "f").appendChild(__classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f"));
-        __classPrivateFieldGet(this, _SpNotificationMessage_baseElement, "f").appendChild(content);
+        __classPrivateFieldGet(this, _SpNotificationMessage_instances, "m", _SpNotificationMessage_setupBaseElement).call(this);
+        __classPrivateFieldGet(this, _SpNotificationMessage_instances, "m", _SpNotificationMessage_setupIconElement).call(this);
+        const content = __classPrivateFieldGet(this, _SpNotificationMessage_instances, "m", _SpNotificationMessage_createContentElement).call(this);
+        __classPrivateFieldGet(this, _SpNotificationMessage_instances, "m", _SpNotificationMessage_assembleElements).call(this, content);
         this.shadowRoot.appendChild(__classPrivateFieldGet(this, _SpNotificationMessage_baseElement, "f"));
     }
     attributeChangedCallback(name, oldValue, newValue) {
         if (oldValue === newValue)
             return;
-        switch (name) {
-            case "type":
-                if (isValidType(newValue)) {
-                    this.type = newValue;
-                }
-                else {
-                    console.warn(`${newValue}は無効なtype属性です。`);
-                    this.type = "information";
-                }
+        if (name === "type") {
+            __classPrivateFieldGet(this, _SpNotificationMessage_instances, "m", _SpNotificationMessage_handleTypeAttribute).call(this, newValue);
         }
     }
 }
-_SpNotificationMessage_type = new WeakMap(), _SpNotificationMessage_baseElement = new WeakMap(), _SpNotificationMessage_iconElement = new WeakMap();
+_SpNotificationMessage_type = new WeakMap(), _SpNotificationMessage_baseElement = new WeakMap(), _SpNotificationMessage_iconElement = new WeakMap(), _SpNotificationMessage_instances = new WeakSet(), _SpNotificationMessage_setupBaseElement = function _SpNotificationMessage_setupBaseElement() {
+    __classPrivateFieldGet(this, _SpNotificationMessage_baseElement, "f").classList.add("base");
+}, _SpNotificationMessage_setupIconElement = function _SpNotificationMessage_setupIconElement() {
+    __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").setAttribute("role", "img");
+    __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").setAttribute("viewBox", "0 0 24 24");
+    __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").setAttribute("aria-hidden", "false");
+    __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").setAttribute("aria-label", iconAriaLabels[this.type]);
+    __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").classList.add("icon");
+    __classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f").innerHTML = iconPaths[this.type];
+}, _SpNotificationMessage_createContentElement = function _SpNotificationMessage_createContentElement() {
+    const content = document.createElement("div");
+    content.classList.add("content");
+    const slot = document.createElement("slot");
+    content.appendChild(slot);
+    return content;
+}, _SpNotificationMessage_assembleElements = function _SpNotificationMessage_assembleElements(content) {
+    __classPrivateFieldGet(this, _SpNotificationMessage_baseElement, "f").appendChild(__classPrivateFieldGet(this, _SpNotificationMessage_iconElement, "f"));
+    __classPrivateFieldGet(this, _SpNotificationMessage_baseElement, "f").appendChild(content);
+}, _SpNotificationMessage_handleTypeAttribute = function _SpNotificationMessage_handleTypeAttribute(value) {
+    if (isValidType(value)) {
+        this.type = value;
+    }
+    else {
+        console.warn(`${value}は無効なtype属性です。`);
+        this.type = "information";
+    }
+};
 if (!customElements.get("sp-notification-message")) {
     customElements.define("sp-notification-message", SpNotificationMessage);
 }

@@ -14,17 +14,18 @@ export class SpDropdownActionButton extends SpButton {
   constructor() {
     super();
 
-    if (this.shadowRoot) {
-      this.shadowRoot.adoptedStyleSheets = [
-        ...this.shadowRoot!.adoptedStyleSheets,
-        styles,
-      ];
-    }
+    this.shadowRoot!.adoptedStyleSheets = [
+      ...this.shadowRoot!.adoptedStyleSheets,
+      styles,
+    ];
   }
 
   connectedCallback(): void {
     super.connectedCallback();
+    this.#setupIcon();
+  }
 
+  #setupIcon() {
     this.icon = "arrow_down";
   }
 

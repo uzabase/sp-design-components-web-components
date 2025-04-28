@@ -78,8 +78,11 @@ export class SpDropdownDialog extends HTMLElement {
   constructor() {
     super();
 
-    const shadowRoot = this.attachShadow({ mode: "open" });
-    shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot!.adoptedStyleSheets = [
+      ...this.shadowRoot!.adoptedStyleSheets,
+      styles,
+    ];
 
     this.open = false;
     this.disabled = false;
@@ -104,7 +107,7 @@ export class SpDropdownDialog extends HTMLElement {
     this.#baseElement.appendChild(this.#dialogElement);
     this.#baseElement.classList.add("base");
 
-    this.shadowRoot?.appendChild(this.#baseElement);
+    this.shadowRoot!.appendChild(this.#baseElement);
   }
 
   disconnectedCallback() {

@@ -2,8 +2,8 @@ import pluginJs from "@eslint/js";
 import prettier from "eslint-config-prettier";
 import pluginImport from "eslint-plugin-import";
 import pluginSimpleImportSort from "eslint-plugin-simple-import-sort";
-import pluginStorybook from 'eslint-plugin-storybook'
-import pluginWc from "eslint-plugin-wc";
+import pluginStorybook from "eslint-plugin-storybook";
+import * as pluginWc from "eslint-plugin-wc";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
@@ -18,7 +18,7 @@ export default [
   ...tseslint.configs.recommended,
   pluginWc.configs["flat/best-practice"],
   pluginImport.flatConfigs.recommended,
-  ...pluginStorybook.configs['flat/recommended'],
+  ...pluginStorybook.configs["flat/recommended"],
   {
     plugins: {
       "simple-import-sort": pluginSimpleImportSort,

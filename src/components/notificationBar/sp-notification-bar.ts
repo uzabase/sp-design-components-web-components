@@ -65,41 +65,60 @@ export class SpNotificationBar extends HTMLElement {
   constructor() {
     super();
 
-    const shadowRoot = this.attachShadow({ mode: "open" });
-    shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot!.adoptedStyleSheets = [
+      ...this.shadowRoot!.adoptedStyleSheets,
+      styles,
+    ];
 
     this.type = "information";
   }
 
   connectedCallback() {
-    this.#baseElement.classList.add("base");
+    this.#setupBaseElement();
+    this.#setupBodyElement();
+    this.#setupIconElement();
+    const content = this.#createContentElement();
+    this.#setupBodyContent(content);
+    this.#setupEndElement();
+    this.#assembleElements();
+    this.shadowRoot!.appendChild(this.#baseElement);
+  }
 
-    // Create body element with role="alert"
+  #setupBaseElement() {
+    this.#baseElement.classList.add("base");
+  }
+
+  #setupBodyElement() {
     this.#bodyElement.classList.add("body");
     this.#bodyElement.setAttribute("role", "alert");
+  }
 
-    // Icon setup
+  #setupIconElement() {
     this.#iconElement.setAttribute("role", "img");
     this.#iconElement.setAttribute("viewBox", "0 0 24 24");
     this.#iconElement.setAttribute("aria-hidden", "false");
     this.#iconElement.setAttribute("aria-label", iconAriaLabels[this.type]);
     this.#iconElement.classList.add("icon");
     this.#iconElement.innerHTML = iconPaths[this.type];
+  }
 
-    // Content setup
+  #createContentElement() {
     const content = document.createElement("div");
     content.classList.add("content");
     const slot = document.createElement("slot");
     content.appendChild(slot);
+    return content;
+  }
 
-    // Add icon and content to body
+  #setupBodyContent(content: HTMLElement) {
     this.#bodyElement.appendChild(this.#iconElement);
     this.#bodyElement.appendChild(content);
+  }
 
-    // End element with close button
+  #setupEndElement() {
     this.#endElement.classList.add("action");
 
-    // Close button setup
     const closeIcon = new SpIcon();
     closeIcon.type = "close";
     closeIcon.setAttribute("aria-hidden", "true");
@@ -113,24 +132,27 @@ export class SpNotificationBar extends HTMLElement {
 
     closeButton.appendChild(closeIcon);
     this.#endElement.appendChild(closeButton);
+  }
 
-    // Add body and end to base
+  #assembleElements() {
     this.#baseElement.appendChild(this.#bodyElement);
     this.#baseElement.appendChild(this.#endElement);
-
-    this.shadowRoot!.appendChild(this.#baseElement);
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (oldValue === newValue) return;
-    switch (name) {
-      case "type":
-        if (isValidType(newValue)) {
-          this.type = newValue;
-        } else {
-          console.warn(`${newValue}は無効なtype属性です。`);
-          this.type = "information";
-        }
+
+    if (name === "type") {
+      this.#handleTypeAttribute(newValue);
+    }
+  }
+
+  #handleTypeAttribute(value: string): void {
+    if (isValidType(value)) {
+      this.type = value;
+    } else {
+      console.warn(`${value}は無効なtype属性です。`);
+      this.type = "information";
     }
   }
 }

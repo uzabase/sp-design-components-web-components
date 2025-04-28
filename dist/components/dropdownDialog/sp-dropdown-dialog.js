@@ -73,8 +73,11 @@ export class SpDropdownDialog extends HTMLElement {
         _SpDropdownDialog_disabled.set(this, false);
         _SpDropdownDialog_position.set(this, "left");
         _SpDropdownDialog_clickOutsideHandler.set(this, __classPrivateFieldGet(this, _SpDropdownDialog_instances, "m", _SpDropdownDialog_handleClickOutside).bind(this));
-        const shadowRoot = this.attachShadow({ mode: "open" });
-        shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
+        this.attachShadow({ mode: "open" });
+        this.shadowRoot.adoptedStyleSheets = [
+            ...this.shadowRoot.adoptedStyleSheets,
+            styles,
+        ];
         this.open = false;
         this.disabled = false;
         this.position = "left";
@@ -89,7 +92,7 @@ export class SpDropdownDialog extends HTMLElement {
         window.addEventListener("click", __classPrivateFieldGet(this, _SpDropdownDialog_clickOutsideHandler, "f"));
         __classPrivateFieldGet(this, _SpDropdownDialog_baseElement, "f").appendChild(__classPrivateFieldGet(this, _SpDropdownDialog_dialogElement, "f"));
         __classPrivateFieldGet(this, _SpDropdownDialog_baseElement, "f").classList.add("base");
-        this.shadowRoot?.appendChild(__classPrivateFieldGet(this, _SpDropdownDialog_baseElement, "f"));
+        this.shadowRoot.appendChild(__classPrivateFieldGet(this, _SpDropdownDialog_baseElement, "f"));
     }
     disconnectedCallback() {
         window.removeEventListener("click", __classPrivateFieldGet(this, _SpDropdownDialog_clickOutsideHandler, "f"));
