@@ -1,13 +1,14 @@
-// @ts-ignore
-import resetStyle from "@acab/reset.css?inline" assert { type: "css" };
-// @ts-ignore
-import foundationStyle from "../foundation.css?inline" assert { type: "css" };
-// @ts-ignore
-import tabStyle from "./tab.css?inline" assert { type: "css" };
+import resetStyle from "@acab/reset.css?inline";
 
+import foundationStyle from "../foundation.css?inline";
 import { SpIcon } from "../icon/sp-icon";
+import tabStyle from "./tab.css?inline";
 
 type TabType = "white" | "gray";
+const types: TabType[] = ["white", "gray"];
+function isValidTabType(value: string): value is TabType {
+  return types.some((type) => type === value);
+}
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${tabStyle} ${resetStyle}`);
@@ -21,22 +22,24 @@ export class SpTab extends HTMLElement {
   #textElement = document.createElement("span");
   #textSlotElement = document.createElement("slot");
 
-  set text(value: string) {
-    this.#textElement.innerText = value;
-  }
-
   set disabled(value: boolean) {
     this.#disabled = value;
     const tab = this.#tabElement;
-    value ? tab.classList.add("isDisable") : tab.classList.remove("isDisable");
+    if (value) {
+      tab.classList.add("isDisable");
+    } else {
+      tab.classList.remove("isDisable");
+    }
     this.#tabElement.disabled = this.#disabled;
   }
 
   set selected(value: boolean) {
     this.#selected = value;
-    value
-      ? this.#tabElement.classList.add("-selected")
-      : this.#tabElement.classList.remove("-selected");
+    if (value) {
+      this.#tabElement.classList.add("-selected");
+    } else {
+      this.#tabElement.classList.remove("-selected");
+    }
     this.#tabElement.setAttribute("aria-selected", this.#selected + "");
   }
 
@@ -58,9 +61,11 @@ export class SpTab extends HTMLElement {
   }
 
   set plusIcon(value: boolean) {
-    value
-      ? this.#plusIconElement.classList.add("-show")
-      : this.#plusIconElement.classList.remove("-show");
+    if (value) {
+      this.#plusIconElement.classList.add("-show");
+    } else {
+      this.#plusIconElement.classList.remove("-show");
+    }
   }
 
   static get observedAttributes() {
@@ -94,9 +99,6 @@ export class SpTab extends HTMLElement {
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (oldValue === newValue) return;
     switch (name) {
-      case "text":
-        this.text = newValue;
-        break;
       case "selected":
         this.selected = newValue === "true" || newValue === "";
         break;
@@ -104,7 +106,12 @@ export class SpTab extends HTMLElement {
         this.disabled = newValue === "true" || newValue === "";
         break;
       case "fill":
-        this.fill = newValue as TabType;
+        if (isValidTabType(newValue)) {
+          this.fill = newValue;
+        } else {
+          console.warn(`${newValue}は無効なfill属性です。`);
+          this.fill = "gray";
+        }
         break;
       case "plus-icon":
         this.plusIcon = newValue === "true" || newValue === "";
@@ -113,7 +120,9 @@ export class SpTab extends HTMLElement {
   }
 }
 
-customElements.get("sp-tab") || customElements.define("sp-tab", SpTab);
+if (!customElements.get("sp-tab")) {
+  customElements.define("sp-tab", SpTab);
+}
 
 declare global {
   interface HTMLElementTagNameMap {

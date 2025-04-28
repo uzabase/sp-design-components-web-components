@@ -1,9 +1,10 @@
 import "../../src/components/tab/sp-tab";
-import type { Meta, StoryObj } from "@storybook/web-components";
-import "@sp-design/token/lib/speeda-tokens.css";
+
 import { action } from "@storybook/addon-actions";
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
-import { SpTab } from "../../src/components/tab/sp-tab";
+
+import type { SpTab } from "../../src/components/tab/sp-tab";
 
 const meta = {
   component: "sp-tab",
@@ -45,48 +46,49 @@ export default meta;
 type Story = StoryObj<SpTab>;
 
 export const Basic: Story = {
+  tags: ["!dev-only"],
   args: {
-    text: "Basic",
+    slot: "Basic",
   },
 };
-export const typeGray: Story = {
+export const TypeGray: Story = {
   args: {
-    text: "typeGray",
+    slot: "typeGray",
     fill: "gray",
   },
 };
-export const typeWhite: Story = {
+export const TypeWhite: Story = {
   args: {
-    text: "typeWhite",
+    slot: "typeWhite",
     fill: "white",
   },
 };
-export const plusIcon: Story = {
+export const PlusIcon: Story = {
   args: {
-    text: "plus-icon",
+    slot: "plus-icon",
     plusIcon: true,
   },
 };
 
-export const list: Story = {
+export const List: Story = {
   render: (args) =>
     html`<div class="tabList">
       <sp-tab
-        text="tabList"
+        slot="tabList"
         fill=${args.fill}
         plus-icon=${args.plusIcon}
         selected=${args.selected}
         disabled=${args.disabled}
       ></sp-tab>
       <sp-tab
-        text="tabList"
+        slot="tabList"
         fill=${args.fill}
         plus-icon=${args.plusIcon}
         selected=${args.selected}
         disabled=${args.disabled}
       ></sp-tab>
       <sp-tab
-        text="tabList"
+        slot="tabList"
         fill=${args.fill}
         plus-icon=${args.plusIcon}
         selected=${args.selected}
@@ -102,7 +104,7 @@ export const All: Story = {
         <p class="sampleAll__title">type:Gray</p>
         <div class="sampleAll__contents">
           <sp-tab
-            text="Grayのタブだよ"
+            slot="Grayのタブだよ"
             fill="gray"
             plus-icon=${args.plusIcon}
             selected=${args.selected}
@@ -114,7 +116,7 @@ export const All: Story = {
         <p class="sampleAll__title">type:White</p>
         <div class="sampleAll__contents">
           <sp-tab
-            text="Whiteのタブだよ"
+            slot="Whiteのタブだよ"
             fill="white"
             plus-icon=${args.plusIcon}
             selected=${args.selected}
@@ -126,7 +128,7 @@ export const All: Story = {
         <p class="sampleAll__title">Create New Icon</p>
         <div class="sampleAll__contents">
           <sp-tab
-            text="新規作成アイコン付きだよ"
+            slot="新規作成アイコン付きだよ"
             fill=${args.fill}
             plus-icon="true"
             selected=${args.selected}
@@ -139,21 +141,21 @@ export const All: Story = {
         <div class="sampleAll__contents">
           <div class="tabList">
             <sp-tab
-              text="タブのリストだよ"
+              slot="タブのリストだよ"
               fill=${args.fill}
               plus-icon=${args.plusIcon}
               selected=${args.selected}
               disabled=${args.disabled}
             ></sp-tab>
             <sp-tab
-              text="タブのリストだよ"
+              slot="タブのリストだよ"
               fill=${args.fill}
               plus-icon=${args.plusIcon}
               selected=${args.selected}
               disabled=${args.disabled}
             ></sp-tab>
             <sp-tab
-              text="タブのリストだよ"
+              slot="タブのリストだよ"
               fill=${args.fill}
               plus-icon=${args.plusIcon}
               selected=${args.selected}
