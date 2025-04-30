@@ -31,7 +31,7 @@
   "dependencies": {
     "@acab/reset.css": "0.11.0",
     "@sp-design/token": "git+https://github.com/uzabase/sp-design-token.git#semver:^9.0.1",
-    "@ub-design/components-web-components": "git+https://github.com/uzabase/ub-design-components-web-components.git#semver:^1.0.0"
+    "@ub-design/components-web-components": "git+https://github.com/uzabase/ub-design-components-web-components.git#semver:^1.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
