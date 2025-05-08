@@ -1,6 +1,6 @@
 .base {
   position: relative;
-  display: inline;
+  display: inline-block;
 }
 
 .listbox {
