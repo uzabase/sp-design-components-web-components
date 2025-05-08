@@ -324,8 +324,15 @@ export class SpDropdown extends HTMLElement {
         break;
       case "Enter":
       case " ":
-        // フォーカスされているオプションを選択
-        this.#selectFocusedOption();
+        if (!this.expanded) {
+          // 閉じている場合はメニューを開く
+          this.expanded = true;
+          this.#focusNextOption();
+        } else {
+          // 開いている場合は選択して閉じる
+          this.#selectFocusedOption();
+          this.expanded = false;
+        }
         break;
       case "Escape":
         // ドロップダウンを閉じる
@@ -344,3 +351,4 @@ declare global {
 if (!customElements.get("sp-dropdown")) {
   customElements.define("sp-dropdown", SpDropdown);
 }
+

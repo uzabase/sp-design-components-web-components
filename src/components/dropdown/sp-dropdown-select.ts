@@ -63,6 +63,7 @@ class SpDropdownSelect extends HTMLElement {
     this.#inputElement.type = "text";
     this.#inputElement.readOnly = true;
     this.#inputElement.setAttribute("placeholder", this.placeholder);
+    this.#inputElement.tabIndex = -1;
 
     this.#iconElement.size = "small";
     this.#iconElement.type = "arrow_down";
@@ -73,6 +74,7 @@ class SpDropdownSelect extends HTMLElement {
     this.#iconWrapperElement.appendChild(this.#iconElement);
 
     this.#baseElement.classList.add("base");
+    this.#baseElement.tabIndex = 0;
     this.#baseElement.appendChild(this.#inputElement);
     this.#baseElement.appendChild(this.#iconWrapperElement);
 
