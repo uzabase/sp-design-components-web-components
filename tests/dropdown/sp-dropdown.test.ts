@@ -284,6 +284,24 @@ describe("sp-dropdown", () => {
       expect(activeElement2).toBe(getSpDropdownOptions()[1]);
     });
 
+    test("inputにフォーカスがある状態で、Enterキーを押すと、選択肢が表示される。また、最初の選択肢がフォーカスされる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown>
+          <sp-dropdown-option value="Value1" text="Value1"></sp-dropdown-option>
+        </sp-dropdown>
+      `;
+      const user = userEvent.setup();
+
+      const input = getInput();
+      input.focus();
+      await user.keyboard("{Enter}");
+
+      const listbox = queryListbox();
+      expect(listbox).not.toBe(null);
+      const activeElement = document.activeElement;
+      expect(activeElement).toBe(getSpDropdownOptions()[0]);
+    });
+
     test("選択肢にフォーカスがある状態で、Enterキーを押すと、その選択肢を選択できる。また、inputにフォーカスが移動する", async () => {
       document.body.innerHTML = `
         <sp-dropdown>
@@ -304,6 +322,24 @@ describe("sp-dropdown", () => {
       expect(getSpDropdown().value).toBe("Value1");
       const activeElement = document.activeElement;
       expect(activeElement).toBe(getSpDropdown());
+    });
+
+    test("inputにフォーカスがある状態で、Spaceキーを押すと、選択肢が表示される。また、最初の選択肢がフォーカスされる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown>
+          <sp-dropdown-option value="Value1" text="Value1"></sp-dropdown-option>
+        </sp-dropdown>
+      `;
+      const user = userEvent.setup();
+
+      const input = getInput();
+      input.focus();
+      await user.keyboard(" ");
+
+      const listbox = queryListbox();
+      expect(listbox).not.toBe(null);
+      const activeElement = document.activeElement;
+      expect(activeElement).toBe(getSpDropdownOptions()[0]);
     });
 
     test("選択肢にフォーカスがある状態で、Spaceキーを押すと、その選択肢を選択できる。また、inputにフォーカスが移動する", async () => {
