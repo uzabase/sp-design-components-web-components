@@ -36,6 +36,16 @@ export const LongText: Story = {
   `,
 };
 
+export const ShortText: Story = {
+  render: () => html`
+    <sp-dropdown placeholder="">
+      <sp-dropdown-option text="1" value="value1"></sp-dropdown-option>
+      <sp-dropdown-option text="2" value="value2"></sp-dropdown-option>
+      <sp-dropdown-option text="3" value="value3"></sp-dropdown-option>
+    </sp-dropdown>
+  `,
+};
+
 export const RightPosition: Story = {
   render: () => html`
     <div style="display: flex; justify-content: end">
