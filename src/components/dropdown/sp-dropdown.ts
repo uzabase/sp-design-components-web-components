@@ -60,7 +60,7 @@ export class SpDropdown extends HTMLElement {
 
   set selectWidth(val: number) {
     this.#selectWidth = val;
-    this.#listboxElement.style.minWidth = `${val}px`;
+    this.#listboxElement.style.width = `${val}px`;
     this.#selectElement.setAttribute("width", String(val));
   }
 
