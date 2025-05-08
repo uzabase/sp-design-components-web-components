@@ -123,6 +123,7 @@ export class SpDropdown extends HTMLElement {
 
   connectedCallback() {
     this.#selectElement.role = "combobox";
+    this.#selectElement.setAttribute("aria-haspopup", "listbox");
     this.#selectElement.setAttribute("aria-controls", LISTBOX_ARIA_CONTROLS);
     this.#selectElement.setAttribute("aria-expanded", String(this.expanded));
     this.#selectElement.setAttribute("placeholder", this.placeholder);
