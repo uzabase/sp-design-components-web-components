@@ -7,10 +7,28 @@ import buttonStyle from "./button.css?inline";
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${buttonStyle}`);
 
+/**
+ * SpButtonは、デザインシステム2.0におけるボタンコンポーネントです。
+ * UbButtonを継承し、アイコンの追加機能を提供します。
+ * デフォルトのサイズは「small」に設定されています。
+ *
+ * @element sp-button
+ * @summary ボタンコンポーネント
+ * @extends UbButton
+ *
+ * @slot - ボタンのテキストコンテンツ（デフォルトスロット）
+ */
 export class SpButton extends UbButton {
   #icon = "";
   #iconElement = new SpIcon();
 
+  /**
+   * ボタンに表示するアイコン名
+   * 指定しない場合はアイコンを表示しません
+   *
+   * @attribute
+   * @type {string}
+   */
   get icon() {
     return this.#icon;
   }
@@ -39,9 +57,9 @@ export class SpButton extends UbButton {
     ];
 
     this.#iconElement.classList.add("base__icon");
+
     this.#iconElement.size = "small";
   }
-
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (oldValue === newValue) return;
     super.attributeChangedCallback(name, oldValue, newValue);
