@@ -1,12 +1,9 @@
 import { UbButton } from "@ub-design/components-web-components";
 /**
  * SpButtonは、デザインシステム2.0におけるボタンコンポーネントです。
- * UbButtonを継承し、アイコンの追加機能を提供します。
- * デフォルトのサイズは「small」に設定されています。
  *
  * @element sp-button
  * @summary ボタンコンポーネント
- * @extends UbButton
  *
  * @slot - ボタンのテキストコンテンツ（デフォルトスロット）
  */

@@ -8,7 +8,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "SpButtonは、デザインシステム2.0におけるボタンコンポーネントです。\nUbButtonを継承し、アイコンの追加機能を提供します。\nデフォルトのサイズは「small」に設定されています。",
+          "description": "SpButtonは、デザインシステム2.0におけるボタンコンポーネントです。",
           "name": "SpButton",
           "slots": [
             {
@@ -212,6 +212,111 @@
           "declaration": {
             "name": "SpCheckbox",
             "module": "src/components/checkbox/sp-checkbox.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/definitionList/sp-definition-list-dd.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SpDefinitionListDd",
+          "members": [],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-definition-list-dd",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpDefinitionListDd",
+          "declaration": {
+            "name": "SpDefinitionListDd",
+            "module": "src/components/definitionList/sp-definition-list-dd.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-definition-list-dd",
+          "declaration": {
+            "name": "SpDefinitionListDd",
+            "module": "src/components/definitionList/sp-definition-list-dd.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/definitionList/sp-definition-list-dt.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SpDefinitionListDt",
+          "members": [],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-definition-list-dt",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpDefinitionListDt",
+          "declaration": {
+            "name": "SpDefinitionListDt",
+            "module": "src/components/definitionList/sp-definition-list-dt.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-definition-list-dt",
+          "declaration": {
+            "name": "SpDefinitionListDt",
+            "module": "src/components/definitionList/sp-definition-list-dt.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/definitionList/sp-definition-list.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SpDefinitionList",
+          "members": [],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-definition-list",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpDefinitionList",
+          "declaration": {
+            "name": "SpDefinitionList",
+            "module": "src/components/definitionList/sp-definition-list.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-definition-list",
+          "declaration": {
+            "name": "SpDefinitionList",
+            "module": "src/components/definitionList/sp-definition-list.ts"
           }
         }
       ]
@@ -482,105 +587,86 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/definitionList/sp-definition-list-dd.ts",
+      "path": "src/components/dropdownDialog/sp-dropdown-dialog.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "SpDefinitionListDd",
-          "members": [],
+          "name": "SpDropdownDialog",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "position",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"left\""
+            },
+            {
+              "kind": "field",
+              "name": "adoptedStyleSheets",
+              "type": {
+                "text": "array"
+              },
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label"
+            },
+            {
+              "name": "open"
+            },
+            {
+              "name": "disabled"
+            },
+            {
+              "name": "position"
+            }
+          ],
           "superclass": {
             "name": "HTMLElement"
           },
-          "tagName": "sp-definition-list-dd",
+          "tagName": "sp-dropdown-dialog",
           "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "SpDefinitionListDd",
+          "name": "SpDropdownDialog",
           "declaration": {
-            "name": "SpDefinitionListDd",
-            "module": "src/components/definitionList/sp-definition-list-dd.ts"
+            "name": "SpDropdownDialog",
+            "module": "src/components/dropdownDialog/sp-dropdown-dialog.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "sp-definition-list-dd",
+          "name": "sp-dropdown-dialog",
           "declaration": {
-            "name": "SpDefinitionListDd",
-            "module": "src/components/definitionList/sp-definition-list-dd.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/definitionList/sp-definition-list-dt.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SpDefinitionListDt",
-          "members": [],
-          "superclass": {
-            "name": "HTMLElement"
-          },
-          "tagName": "sp-definition-list-dt",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SpDefinitionListDt",
-          "declaration": {
-            "name": "SpDefinitionListDt",
-            "module": "src/components/definitionList/sp-definition-list-dt.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sp-definition-list-dt",
-          "declaration": {
-            "name": "SpDefinitionListDt",
-            "module": "src/components/definitionList/sp-definition-list-dt.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/definitionList/sp-definition-list.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SpDefinitionList",
-          "members": [],
-          "superclass": {
-            "name": "HTMLElement"
-          },
-          "tagName": "sp-definition-list",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SpDefinitionList",
-          "declaration": {
-            "name": "SpDefinitionList",
-            "module": "src/components/definitionList/sp-definition-list.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sp-definition-list",
-          "declaration": {
-            "name": "SpDefinitionList",
-            "module": "src/components/definitionList/sp-definition-list.ts"
+            "name": "SpDropdownDialog",
+            "module": "src/components/dropdownDialog/sp-dropdown-dialog.ts"
           }
         }
       ]
@@ -683,7 +769,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpIconは、デザインシステム2.0におけるアイコンコンポーネントです。\nデザインシステムで用意されているアイコンセットを提供します。",
           "name": "SpIcon",
           "members": [
             {
@@ -692,11 +778,17 @@
               "type": {
                 "text": "object"
               },
-              "default": "{ ...speedaIconPaths, \"\": \"\" }"
+              "default": "{ ...speedaIconPaths, \"\": \"\" }",
+              "description": "利用可能なアイコンパスのマップ\nデザインシステムのアイコンパスが含まれています"
             },
             {
               "kind": "field",
-              "name": "type"
+              "name": "type",
+              "description": "アイコンのタイプを設定します\nデザインシステムのアイコンタイプを指定した場合はそのタイプを設定し、それ以外を指定した場合は表示しません\n\n指定可能なアイコンタイプ：\n- arrow_down\n- arrow_down_link\n- arrow_left\n- arrow_left_link\n- arrow_right\n- arrow_right_link\n- arrow_up\n- arrow_up_link\n- bookmark\n- calendar\n- check\n- check_bold\n- clear\n- close\n- copy\n- create\n- delete\n- doublearrow_down\n- doublearrow_left\n- doublearrow_right\n- download\n- drag\n- edit\n- error\n- folder\n- help\n- kebab_menu\n- like\n- list\n- location\n- lock\n- mail\n- menu\n- my_speeda\n- notification\n- open_in_new\n- operator\n- opinion\n- people\n- person\n- pib\n- plus\n- search\n- settings\n- sort\n- sort_down\n- sort_up\n- toggle_arrow_down\n- toggle_arrow_right\n- zip",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "type"
             },
             {
               "kind": "field",
@@ -707,12 +799,23 @@
               "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
             }
           ],
+          "attributes": [
+            {
+              "name": "type",
+              "description": "アイコンのタイプを設定します\nデザインシステムのアイコンタイプを指定した場合はそのタイプを設定し、それ以外を指定した場合は表示しません\n\n指定可能なアイコンタイプ：\n- arrow_down\n- arrow_down_link\n- arrow_left\n- arrow_left_link\n- arrow_right\n- arrow_right_link\n- arrow_up\n- arrow_up_link\n- bookmark\n- calendar\n- check\n- check_bold\n- clear\n- close\n- copy\n- create\n- delete\n- doublearrow_down\n- doublearrow_left\n- doublearrow_right\n- download\n- drag\n- edit\n- error\n- folder\n- help\n- kebab_menu\n- like\n- list\n- location\n- lock\n- mail\n- menu\n- my_speeda\n- notification\n- open_in_new\n- operator\n- opinion\n- people\n- person\n- pib\n- plus\n- search\n- settings\n- sort\n- sort_down\n- sort_up\n- toggle_arrow_down\n- toggle_arrow_right\n- zip",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "type"
+            }
+          ],
           "superclass": {
             "name": "UbIcon",
             "package": "@ub-design/components-web-components/"
           },
           "tagName": "sp-icon",
-          "customElement": true
+          "customElement": true,
+          "summary": "アイコンコンポーネント"
         }
       ],
       "exports": [
@@ -730,92 +833,6 @@
           "declaration": {
             "name": "SpIcon",
             "module": "src/components/icon/sp-icon.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/dropdownDialog/sp-dropdown-dialog.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SpDropdownDialog",
-          "members": [
-            {
-              "kind": "field",
-              "name": "label"
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "position",
-              "type": {
-                "text": "string"
-              },
-              "default": "\"left\""
-            },
-            {
-              "kind": "field",
-              "name": "adoptedStyleSheets",
-              "type": {
-                "text": "array"
-              },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "label"
-            },
-            {
-              "name": "open"
-            },
-            {
-              "name": "disabled"
-            },
-            {
-              "name": "position"
-            }
-          ],
-          "superclass": {
-            "name": "HTMLElement"
-          },
-          "tagName": "sp-dropdown-dialog",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SpDropdownDialog",
-          "declaration": {
-            "name": "SpDropdownDialog",
-            "module": "src/components/dropdownDialog/sp-dropdown-dialog.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sp-dropdown-dialog",
-          "declaration": {
-            "name": "SpDropdownDialog",
-            "module": "src/components/dropdownDialog/sp-dropdown-dialog.ts"
           }
         }
       ]
