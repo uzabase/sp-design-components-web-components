@@ -79,6 +79,7 @@ export class SpTab extends HTMLElement {
       ...this.shadowRoot!.adoptedStyleSheets,
       styles,
     ];
+    this.fill = "gray";
   }
 
   connectedCallback() {
