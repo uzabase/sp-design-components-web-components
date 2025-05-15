@@ -15,6 +15,7 @@
     "build": "rimraf dist && run-s build:*",
     "build:ts": "tsc -p tsconfig-build.json",
     "build:css": "node tools/copy-css.js",
+    "build:vite": "vite build",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "format": "run-s \"format:* !format:prettier:check\"",
@@ -63,6 +64,8 @@
     "stylelint-config-standard": "^38.0.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.31.1",
+    "vite": "^6.3.5",
+    "vite-plugin-dts": "^4.5.4",
     "vitest": "^3.1.2"
   }
 }

@@ -1,4 +1,3 @@
-import "../button/sp-button";
 type Position = "left" | "right";
 export declare class SpDropdownDialog extends HTMLElement {
     #private;

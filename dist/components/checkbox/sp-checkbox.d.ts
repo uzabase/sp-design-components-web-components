@@ -1,4 +1,4 @@
-import { UbCheckbox } from "@ub-design/components-web-components/";
+import { UbCheckbox } from '@ub-design/components-web-components/';
 export declare class SpCheckbox extends UbCheckbox {
     constructor();
 }

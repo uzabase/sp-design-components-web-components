@@ -1,5 +1,3 @@
-import "./sp-dropdown-action-button";
-import "./sp-dropdown-action-item";
 type Position = "left" | "right";
 export declare class SpDropdownAction extends HTMLElement {
     #private;
