@@ -96,15 +96,9 @@ export class SpDropdown extends HTMLElement {
   }
 
   set position(val: Position) {
-    if (val === "left") {
-      this.#listboxElement.classList.add("position__left");
-      this.#listboxElement.classList.remove("position__right");
-    } else {
-      this.#listboxElement.classList.add("position__right");
-      this.#listboxElement.classList.remove("position__left");
-    }
-
     this.#position = val;
+    this.#listboxElement.classList.toggle("position__left", val === "left");
+    this.#listboxElement.classList.toggle("position__right", val === "right");
   }
 
   static get observedAttributes() {
@@ -122,6 +116,33 @@ export class SpDropdown extends HTMLElement {
   }
 
   connectedCallback() {
+    this.#initializeElements();
+    this.#setupEventListeners();
+    this.#updateOptions();
+    this.#calculateSelectWidth();
+    this.#adjustListboxPosition();
+  }
+
+  disconnectedCallback() {
+    this.#cleanupEventListeners();
+  }
+
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (oldValue === newValue) return;
+    switch (name) {
+      case "select-type":
+        this.selectType = isValidSelectType(newValue) ? newValue : "single";
+        break;
+      case "placeholder":
+        this.placeholder = newValue;
+        break;
+      case "value":
+        this.value = newValue;
+        break;
+    }
+  }
+
+  #initializeElements() {
     this.#selectElement.role = "combobox";
     this.#selectElement.setAttribute("aria-haspopup", "listbox");
     this.#selectElement.setAttribute("aria-controls", LISTBOX_ARIA_CONTROLS);
@@ -139,7 +160,9 @@ export class SpDropdown extends HTMLElement {
     this.#baseElement.appendChild(this.#listboxElement);
 
     this.shadowRoot?.appendChild(this.#baseElement);
+  }
 
+  #setupEventListeners() {
     this.#selectElement.addEventListener(
       "click",
       this.#toggleListbox.bind(this),
@@ -148,53 +171,32 @@ export class SpDropdown extends HTMLElement {
       "click",
       this.#hideListbox.bind(this),
     );
-
     this.#slotElement.addEventListener("slotchange", () => {
       this.#updateOptions();
       this.#calculateSelectWidth();
     });
-    this.#updateOptions();
-    this.#calculateSelectWidth();
-
     this.addEventListener("sp-dropdown-option-click", this.#handleClickOption);
-
     this.addEventListener("keydown", this.#handleKeyDown);
-
     window.addEventListener("click", this.#clickOutsideHandler);
     window.addEventListener("resize", this.#adjustListboxPositionHandler);
-    this.#adjustListboxPosition(); // 初期ロード時に位置を調整
   }
 
-  disconnectedCallback() {
-    this.#slotElement.removeEventListener(
+  #cleanupEventListeners() {
+    this.#selectElement.removeEventListener(
+      "click",
+      this.#toggleListbox.bind(this),
+    );
+    this.#listboxElement.removeEventListener(
       "click",
       this.#hideListbox.bind(this),
     );
-
     this.removeEventListener(
       "sp-dropdown-option-click",
       this.#handleClickOption,
     );
-
     this.removeEventListener("keydown", this.#handleKeyDown);
-
     window.removeEventListener("click", this.#clickOutsideHandler);
     window.removeEventListener("resize", this.#adjustListboxPositionHandler);
-  }
-
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    if (oldValue === newValue) return;
-    switch (name) {
-      case "select-type":
-        this.selectType = isValidSelectType(newValue) ? newValue : "single";
-        break;
-      case "placeholder":
-        this.placeholder = newValue;
-        break;
-      case "value":
-        this.value = newValue;
-        break;
-    }
   }
 
   #toggleListbox() {
@@ -214,31 +216,27 @@ export class SpDropdown extends HTMLElement {
     this.#hideListbox();
   }
 
-  #getOptions() {
+  #getOptions(): SpDropdownOption[] {
     return this.#slotElement
       .assignedElements()
-      .filter((element) => element instanceof SpDropdownOption);
+      .filter(
+        (element): element is SpDropdownOption =>
+          element instanceof SpDropdownOption,
+      );
   }
 
   /**
    * optionの各値とplaceholderをそれぞれselectに入れた時の幅を計算し、最も大きい幅をselectの幅として設定する
    */
   #calculateSelectWidth() {
-    let maxSelectWidth = 0;
     const options = this.#getOptions();
-
     const candidateValues = [
       this.#placeholder,
       ...options.map((option) => option.text),
     ];
-
-    candidateValues.forEach((value) => {
-      const selectWidth = calculateDropdownSelectWidth(value);
-      if (selectWidth > maxSelectWidth) {
-        maxSelectWidth = selectWidth;
-      }
-    });
-
+    const maxSelectWidth = Math.max(
+      ...candidateValues.map((value) => calculateDropdownSelectWidth(value)),
+    );
     this.selectWidth = maxSelectWidth;
   }
 
@@ -255,23 +253,18 @@ export class SpDropdown extends HTMLElement {
     });
   }
 
-  #handleClickOutside(event: MouseEvent) {
-    event.stopPropagation();
+  #handleClickOutside = (event: MouseEvent) => {
     if (!this.contains(event.target as Node)) {
       this.#hideListbox();
     }
-  }
+  };
   #clickOutsideHandler = this.#handleClickOutside.bind(this);
 
   #adjustListboxPosition() {
     const selectLeft = this.#selectElement.getBoundingClientRect().left;
     const listboxWidth = this.#listboxElement.offsetWidth;
     const listboxRight = selectLeft + listboxWidth;
-    if (listboxRight > window.innerWidth) {
-      this.position = "right";
-    } else {
-      this.position = "left";
-    }
+    this.position = listboxRight > window.innerWidth ? "right" : "left";
   }
   #adjustListboxPositionHandler = this.#adjustListboxPosition.bind(this);
 
@@ -281,8 +274,9 @@ export class SpDropdown extends HTMLElement {
     const focusedIndex = options.findIndex(
       (option) => option === activeElement,
     );
+
     if (focusedIndex === -1) {
-      options[0].focus();
+      options[0]?.focus();
     } else if (focusedIndex < options.length - 1) {
       options[focusedIndex + 1].focus();
     }
@@ -294,10 +288,11 @@ export class SpDropdown extends HTMLElement {
     const focusedIndex = options.findIndex(
       (option) => option === activeElement,
     );
+
     if (focusedIndex > 0) {
       options[focusedIndex - 1].focus();
     } else if (focusedIndex === -1) {
-      options[options.length - 1].focus();
+      options[options.length - 1]?.focus();
     }
   }
 
@@ -312,32 +307,37 @@ export class SpDropdown extends HTMLElement {
   }
 
   #handleKeyDown(event: KeyboardEvent) {
+    // VOキーが押されている場合は、デフォルトの動作を許可
+    if (event.ctrlKey && event.altKey) {
+      return;
+    }
+
     switch (event.key) {
       case "ArrowDown":
-        // 次のオプションにフォーカス
+        event.preventDefault();
         this.expanded = true;
         this.#focusNextOption();
         break;
       case "ArrowUp":
-        // 前のオプションにフォーカス
+        event.preventDefault();
         this.expanded = true;
         this.#focusPreviousOption();
         break;
       case "Enter":
       case " ":
+        event.preventDefault();
         if (!this.expanded) {
-          // 閉じている場合はメニューを開く
           this.expanded = true;
           this.#focusNextOption();
         } else {
-          // 開いている場合は選択して閉じる
           this.#selectFocusedOption();
           this.expanded = false;
         }
         break;
       case "Escape":
-        // ドロップダウンを閉じる
+        event.preventDefault();
         this.expanded = false;
+        this.#selectElement.focus();
         break;
     }
   }
@@ -352,4 +352,3 @@ declare global {
 if (!customElements.get("sp-dropdown")) {
   customElements.define("sp-dropdown", SpDropdown);
 }
-
