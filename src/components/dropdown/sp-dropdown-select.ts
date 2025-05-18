@@ -54,7 +54,10 @@ class SpDropdownSelect extends HTMLElement {
   constructor() {
     super();
 
-    const shadowRoot = this.attachShadow({ mode: "open", delegatesFocus: true });
+    const shadowRoot = this.attachShadow({
+      mode: "open",
+      delegatesFocus: true,
+    });
     shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
   }
 
@@ -64,6 +67,8 @@ class SpDropdownSelect extends HTMLElement {
     this.#inputElement.readOnly = true;
     this.#inputElement.setAttribute("placeholder", this.placeholder);
     this.#inputElement.tabIndex = -1;
+    this.#inputElement.setAttribute("aria-label", "ドロップダウン選択");
+    this.#inputElement.setAttribute("aria-readonly", "true");
 
     this.#iconElement.size = "small";
     this.#iconElement.type = "arrow_down";

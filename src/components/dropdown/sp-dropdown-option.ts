@@ -69,7 +69,10 @@ export class SpDropdownOption extends HTMLElement {
   constructor() {
     super();
 
-    const shadowRoot = this.attachShadow({ mode: "open", delegatesFocus: true });
+    const shadowRoot = this.attachShadow({
+      mode: "open",
+      delegatesFocus: true,
+    });
     shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
   }
 
@@ -78,14 +81,19 @@ export class SpDropdownOption extends HTMLElement {
     this.#iconElement.type = "check";
     this.#iconElement.text = "check";
     this.#iconElement.hidden = true;
+    this.#iconElement.setAttribute("aria-hidden", "true");
 
     this.#iconAreaElement.classList.add("icon-area");
     this.#iconAreaElement.appendChild(this.#iconElement);
+    this.#iconAreaElement.setAttribute("aria-hidden", "true");
 
     this.#textElement.classList.add("text");
+    this.#textElement.setAttribute("aria-hidden", "true");
 
     this.#baseElement.classList.add("base");
     this.#baseElement.role = "option";
+    this.#baseElement.setAttribute("aria-selected", "false");
+    this.#baseElement.setAttribute("aria-label", this.text);
     this.#baseElement.appendChild(this.#iconAreaElement);
     this.#baseElement.appendChild(this.#textElement);
     this.#baseElement.tabIndex = 0;
