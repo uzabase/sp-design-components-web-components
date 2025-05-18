@@ -67,8 +67,6 @@ class SpDropdownSelect extends HTMLElement {
 
     this.#iconElement.size = "small";
     this.#iconElement.type = "arrow_down";
-    this.#iconElement.text = "arrow_down";
-    this.#iconElement.setAttribute("aria-hidden", "true");
 
     this.#iconWrapperElement.classList.add("icon-wrapper");
     this.#iconWrapperElement.appendChild(this.#iconElement);
