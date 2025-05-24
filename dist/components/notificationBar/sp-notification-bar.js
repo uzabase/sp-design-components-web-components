@@ -9,7 +9,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _SpNotificationBar_type, _SpNotificationBar_baseElement, _SpNotificationBar_bodyElement, _SpNotificationBar_endElement, _SpNotificationBar_iconElement;
+var _SpNotificationBar_instances, _SpNotificationBar_type, _SpNotificationBar_baseElement, _SpNotificationBar_bodyElement, _SpNotificationBar_endElement, _SpNotificationBar_iconElement, _SpNotificationBar_setupBaseElement, _SpNotificationBar_setupBodyElement, _SpNotificationBar_setupIconElement, _SpNotificationBar_createContentElement, _SpNotificationBar_setupBodyContent, _SpNotificationBar_setupEndElement, _SpNotificationBar_assembleElements, _SpNotificationBar_handleTypeAttribute;
 import resetStyle from "@acab/reset.css?inline";
 import foundationStyle from "../foundation.css?inline";
 import { SpIcon } from "../icon/sp-icon";
@@ -53,6 +53,7 @@ export class SpNotificationBar extends HTMLElement {
     }
     constructor() {
         super();
+        _SpNotificationBar_instances.add(this);
         _SpNotificationBar_type.set(this, "information");
         _SpNotificationBar_baseElement.set(this, document.createElement("div"));
         _SpNotificationBar_bodyElement.set(this, document.createElement("div"));
@@ -66,60 +67,69 @@ export class SpNotificationBar extends HTMLElement {
         this.type = "information";
     }
     connectedCallback() {
-        __classPrivateFieldGet(this, _SpNotificationBar_baseElement, "f").classList.add("base");
-        // Create body element with role="alert"
-        __classPrivateFieldGet(this, _SpNotificationBar_bodyElement, "f").classList.add("body");
-        __classPrivateFieldGet(this, _SpNotificationBar_bodyElement, "f").setAttribute("role", "alert");
-        // Icon setup
-        __classPrivateFieldGet(this, _SpNotificationBar_iconElement, "f").setAttribute("role", "img");
-        __classPrivateFieldGet(this, _SpNotificationBar_iconElement, "f").setAttribute("viewBox", "0 0 24 24");
-        __classPrivateFieldGet(this, _SpNotificationBar_iconElement, "f").setAttribute("aria-hidden", "false");
-        __classPrivateFieldGet(this, _SpNotificationBar_iconElement, "f").setAttribute("aria-label", iconAriaLabels[this.type]);
-        __classPrivateFieldGet(this, _SpNotificationBar_iconElement, "f").classList.add("icon");
-        __classPrivateFieldGet(this, _SpNotificationBar_iconElement, "f").innerHTML = iconPaths[this.type];
-        // Content setup
-        const content = document.createElement("div");
-        content.classList.add("content");
-        const slot = document.createElement("slot");
-        content.appendChild(slot);
-        // Add icon and content to body
-        __classPrivateFieldGet(this, _SpNotificationBar_bodyElement, "f").appendChild(__classPrivateFieldGet(this, _SpNotificationBar_iconElement, "f"));
-        __classPrivateFieldGet(this, _SpNotificationBar_bodyElement, "f").appendChild(content);
-        // End element with close button
-        __classPrivateFieldGet(this, _SpNotificationBar_endElement, "f").classList.add("action");
-        // Close button setup
-        const closeIcon = new SpIcon();
-        closeIcon.type = "close";
-        closeIcon.setAttribute("aria-hidden", "true");
-        const closeButton = document.createElement("button");
-        closeButton.classList.add("close");
-        closeButton.setAttribute("aria-label", "閉じる");
-        closeButton.addEventListener("click", () => {
-            this.dispatchEvent(new CustomEvent("close"));
-        });
-        closeButton.appendChild(closeIcon);
-        __classPrivateFieldGet(this, _SpNotificationBar_endElement, "f").appendChild(closeButton);
-        // Add body and end to base
-        __classPrivateFieldGet(this, _SpNotificationBar_baseElement, "f").appendChild(__classPrivateFieldGet(this, _SpNotificationBar_bodyElement, "f"));
-        __classPrivateFieldGet(this, _SpNotificationBar_baseElement, "f").appendChild(__classPrivateFieldGet(this, _SpNotificationBar_endElement, "f"));
+        __classPrivateFieldGet(this, _SpNotificationBar_instances, "m", _SpNotificationBar_setupBaseElement).call(this);
+        __classPrivateFieldGet(this, _SpNotificationBar_instances, "m", _SpNotificationBar_setupBodyElement).call(this);
+        __classPrivateFieldGet(this, _SpNotificationBar_instances, "m", _SpNotificationBar_setupIconElement).call(this);
+        const content = __classPrivateFieldGet(this, _SpNotificationBar_instances, "m", _SpNotificationBar_createContentElement).call(this);
+        __classPrivateFieldGet(this, _SpNotificationBar_instances, "m", _SpNotificationBar_setupBodyContent).call(this, content);
+        __classPrivateFieldGet(this, _SpNotificationBar_instances, "m", _SpNotificationBar_setupEndElement).call(this);
+        __classPrivateFieldGet(this, _SpNotificationBar_instances, "m", _SpNotificationBar_assembleElements).call(this);
         this.shadowRoot.appendChild(__classPrivateFieldGet(this, _SpNotificationBar_baseElement, "f"));
     }
     attributeChangedCallback(name, oldValue, newValue) {
         if (oldValue === newValue)
             return;
-        switch (name) {
-            case "type":
-                if (isValidType(newValue)) {
-                    this.type = newValue;
-                }
-                else {
-                    console.warn(`${newValue}は無効なtype属性です。`);
-                    this.type = "information";
-                }
+        if (name === "type") {
+            __classPrivateFieldGet(this, _SpNotificationBar_instances, "m", _SpNotificationBar_handleTypeAttribute).call(this, newValue);
         }
     }
 }
-_SpNotificationBar_type = new WeakMap(), _SpNotificationBar_baseElement = new WeakMap(), _SpNotificationBar_bodyElement = new WeakMap(), _SpNotificationBar_endElement = new WeakMap(), _SpNotificationBar_iconElement = new WeakMap();
+_SpNotificationBar_type = new WeakMap(), _SpNotificationBar_baseElement = new WeakMap(), _SpNotificationBar_bodyElement = new WeakMap(), _SpNotificationBar_endElement = new WeakMap(), _SpNotificationBar_iconElement = new WeakMap(), _SpNotificationBar_instances = new WeakSet(), _SpNotificationBar_setupBaseElement = function _SpNotificationBar_setupBaseElement() {
+    __classPrivateFieldGet(this, _SpNotificationBar_baseElement, "f").classList.add("base");
+}, _SpNotificationBar_setupBodyElement = function _SpNotificationBar_setupBodyElement() {
+    __classPrivateFieldGet(this, _SpNotificationBar_bodyElement, "f").classList.add("body");
+    __classPrivateFieldGet(this, _SpNotificationBar_bodyElement, "f").setAttribute("role", "alert");
+}, _SpNotificationBar_setupIconElement = function _SpNotificationBar_setupIconElement() {
+    __classPrivateFieldGet(this, _SpNotificationBar_iconElement, "f").setAttribute("role", "img");
+    __classPrivateFieldGet(this, _SpNotificationBar_iconElement, "f").setAttribute("viewBox", "0 0 24 24");
+    __classPrivateFieldGet(this, _SpNotificationBar_iconElement, "f").setAttribute("aria-hidden", "false");
+    __classPrivateFieldGet(this, _SpNotificationBar_iconElement, "f").setAttribute("aria-label", iconAriaLabels[this.type]);
+    __classPrivateFieldGet(this, _SpNotificationBar_iconElement, "f").classList.add("icon");
+    __classPrivateFieldGet(this, _SpNotificationBar_iconElement, "f").innerHTML = iconPaths[this.type];
+}, _SpNotificationBar_createContentElement = function _SpNotificationBar_createContentElement() {
+    const content = document.createElement("div");
+    content.classList.add("content");
+    const slot = document.createElement("slot");
+    content.appendChild(slot);
+    return content;
+}, _SpNotificationBar_setupBodyContent = function _SpNotificationBar_setupBodyContent(content) {
+    __classPrivateFieldGet(this, _SpNotificationBar_bodyElement, "f").appendChild(__classPrivateFieldGet(this, _SpNotificationBar_iconElement, "f"));
+    __classPrivateFieldGet(this, _SpNotificationBar_bodyElement, "f").appendChild(content);
+}, _SpNotificationBar_setupEndElement = function _SpNotificationBar_setupEndElement() {
+    __classPrivateFieldGet(this, _SpNotificationBar_endElement, "f").classList.add("action");
+    const closeIcon = new SpIcon();
+    closeIcon.type = "close";
+    closeIcon.setAttribute("aria-hidden", "true");
+    const closeButton = document.createElement("button");
+    closeButton.classList.add("close");
+    closeButton.setAttribute("aria-label", "閉じる");
+    closeButton.addEventListener("click", () => {
+        this.dispatchEvent(new CustomEvent("close"));
+    });
+    closeButton.appendChild(closeIcon);
+    __classPrivateFieldGet(this, _SpNotificationBar_endElement, "f").appendChild(closeButton);
+}, _SpNotificationBar_assembleElements = function _SpNotificationBar_assembleElements() {
+    __classPrivateFieldGet(this, _SpNotificationBar_baseElement, "f").appendChild(__classPrivateFieldGet(this, _SpNotificationBar_bodyElement, "f"));
+    __classPrivateFieldGet(this, _SpNotificationBar_baseElement, "f").appendChild(__classPrivateFieldGet(this, _SpNotificationBar_endElement, "f"));
+}, _SpNotificationBar_handleTypeAttribute = function _SpNotificationBar_handleTypeAttribute(value) {
+    if (isValidType(value)) {
+        this.type = value;
+    }
+    else {
+        console.warn(`${value}は無効なtype属性です。`);
+        this.type = "information";
+    }
+};
 if (!customElements.get("sp-notification-bar")) {
     customElements.define("sp-notification-bar", SpNotificationBar);
 }

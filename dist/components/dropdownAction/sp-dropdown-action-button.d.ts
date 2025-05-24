@@ -1,6 +1,7 @@
 import "../icon/sp-icon";
 import { SpButton } from "../button/sp-button";
 export declare class SpDropdownActionButton extends SpButton {
+    #private;
     constructor();
     connectedCallback(): void;
     setAriaHasPopup(value: string): void;

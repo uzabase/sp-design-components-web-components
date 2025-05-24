@@ -1,4 +1,5 @@
 export declare class SpDropdownActionItem extends HTMLElement {
+    #private;
     constructor();
     connectedCallback(): void;
 }

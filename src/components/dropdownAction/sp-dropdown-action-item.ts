@@ -20,13 +20,31 @@ export class SpDropdownActionItem extends HTMLElement {
     const buttonElement = document.createElement("button");
     const slotElement = document.createElement("slot");
 
+    this.#setupRoleAttribute();
+    this.#setupElements(baseElement, buttonElement);
+    this.#assembleElements(baseElement, buttonElement, slotElement);
+    this.shadowRoot!.appendChild(baseElement);
+  }
+
+  #setupRoleAttribute() {
     this.role = "menuitem";
+  }
+
+  #setupElements(
+    baseElement: HTMLDivElement,
+    buttonElement: HTMLButtonElement,
+  ) {
     baseElement.classList.add("base");
     buttonElement.classList.add("action");
+  }
 
+  #assembleElements(
+    baseElement: HTMLDivElement,
+    buttonElement: HTMLButtonElement,
+    slotElement: HTMLSlotElement,
+  ) {
     buttonElement.appendChild(slotElement);
     baseElement.appendChild(buttonElement);
-    this.shadowRoot!.appendChild(baseElement);
   }
 }
 
