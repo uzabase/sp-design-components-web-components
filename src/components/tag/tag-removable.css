@@ -1,5 +1,6 @@
 .base {
   display: inline-flex;
+  vertical-align: top;
   align-items: center;
   font-size: 12px;
   border-radius: 2px;
