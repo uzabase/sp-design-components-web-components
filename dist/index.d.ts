@@ -16,4 +16,8 @@ export { SpPagination } from "./components/pagination/sp-pagination";
 export { SpRadioButtonTextGroup } from "./components/radio/sp-radio-button-text-group";
 export { SpSectionTitle } from "./components/sectionTitle/sp-section-title";
 export { SpSegmentedControl } from "./components/segmentedControl/sp-segmented-control";
+export { SpTagClickable } from "./components/tag/sp-tag-clickable";
+export { SpTagLink } from "./components/tag/sp-tag-link";
+export { SpTagLiquid } from "./components/tag/sp-tag-liquid";
+export { SpTagRemovable } from "./components/tag/sp-tag-removable";
 //# sourceMappingURL=index.d.ts.map

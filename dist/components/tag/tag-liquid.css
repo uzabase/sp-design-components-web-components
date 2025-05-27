@@ -1,0 +1,67 @@
+.base {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  border-radius: 2px;
+  line-height: 1.6;
+  padding-block: 0.5px;
+  padding-inline: 8px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  border: 1px solid;
+  justify-content: center;
+}
+
+.type__gray {
+  background-color: var(--color-semantic-surface-temp-tag-gray);
+  border-color: var(--color-semantic-border-temp-tag-gray);
+  color: var(--color-semantic-text-regular);
+}
+
+.type__green.light {
+  background-color: var(--color-semantic-surface-temp-tag-green);
+  border-color: var(--color-semantic-border-temp-tag-green);
+  color: var(--color-semantic-text-success);
+}
+
+.type__green:not(.light) {
+  background-color: var(--color-semantic-surface-temp-tag-darkgreen);
+  border-color: var(--color-semantic-border-temp-tag-darkgreen);
+  color: var(--color-semantic-text-inverse);
+}
+
+.type__red.light {
+  background-color: var(--color-semantic-surface-temp-tag-red);
+  border-color: var(--color-semantic-border-temp-tag-red);
+  color: var(--color-semantic-text-danger);
+}
+
+.type__red:not(.light) {
+  background-color: var(--color-semantic-surface-temp-tag-darkred);
+  border-color: var(--color-semantic-border-temp-tag-darkred);
+  color: var(--color-semantic-text-inverse);
+}
+
+.type__yellow.light {
+  background-color: var(--color-semantic-surface-temp-tag-yellow);
+  border-color: var(--color-semantic-border-temp-tag-yellow);
+  color: var(--color-semantic-text-warning);
+}
+
+.type__yellow:not(.light) {
+  background-color: var(--color-semantic-surface-temp-tag-darkyellow);
+  border-color: var(--color-semantic-border-temp-tag-darkyellow);
+  color: var(--color-semantic-text-inverse);
+}
+
+.type__blue.light {
+  background-color: var(--color-semantic-surface-temp-tag-marine);
+  border-color: var(--color-semantic-border-temp-tag-marine);
+  color: var(--color-semantic-text-marine);
+}
+
+.type__blue:not(.light) {
+  background-color: var(--color-semantic-surface-temp-tag-darkmarine);
+  border-color: var(--color-semantic-border-temp-tag-darkmarine);
+  color: var(--color-semantic-text-inverse);
+}
