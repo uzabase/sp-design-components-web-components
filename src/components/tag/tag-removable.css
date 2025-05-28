@@ -1,0 +1,68 @@
+.base {
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center;
+  font-size: 12px;
+  border-radius: 2px;
+  line-height: 1.6;
+  padding-block: 0.5px;
+  padding-inline: 8px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  border: 1px solid;
+  justify-content: center;
+  gap: 4px;
+  background-color: var(--color-semantic-surface-regular-2);
+  border-color: var(--color-semantic-border-regular);
+}
+
+.base:hover {
+  background-color: var(--color-semantic-surface-regular-4);
+}
+
+.label {
+  color: var(--color-semantic-text-regular);
+}
+
+.remove {
+  color: var(--color-primitive-neutral-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drag-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-semantic-text-regular);
+  cursor: grab;
+  margin-right: 2px;
+}
+
+.drag-icon:active {
+  cursor: grabbing;
+}
+
+.base.dragging {
+  opacity: 0.8;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
+}
+
+:host([disabled]) .base {
+  background-color: var(--color-semantic-surface-regular-2);
+  border-color: var(--color-semantic-border-regular);
+}
+
+:host([disabled]) .label {
+  color: var(--color-semantic-text-disabled);
+}
+
+:host([disabled]) .remove {
+  color: var(--color-semantic-text-disabled);
+}
+
+:host([disabled]) .drag-icon {
+  color: var(--color-semantic-text-disabled);
+  cursor: default;
+}
