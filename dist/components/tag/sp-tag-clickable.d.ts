@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * SpTagClickableは、デザインシステム2.0におけるクリック可能なタグコンポーネントです。
  * 選択状態を持ち、クリックイベントを発火するタグとして使用します。
@@ -29,25 +28,6 @@ export declare class SpTagClickable extends HTMLElement {
      * @default false
      */
     get disabled(): boolean;
-=======
-export declare class SpTagClickable extends HTMLElement {
-    #private;
-    /**
-     * Returns whether the tag is currently in selected state
-     */
-    get selected(): boolean;
-    /**
-     * Sets the selected state of the tag
-     */
-    set selected(value: boolean);
-    /**
-     * Returns whether the tag is currently disabled
-     */
-    get disabled(): boolean;
-    /**
-     * Sets the disabled state of the tag
-     */
->>>>>>> main
     set disabled(value: boolean);
     static get observedAttributes(): string[];
     constructor();

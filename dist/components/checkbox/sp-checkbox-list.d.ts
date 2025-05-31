@@ -1,5 +1,4 @@
 import { UbCheckboxText } from '@ub-design/components-web-components/';
-<<<<<<< HEAD
 /**
  * SpCheckboxListは、デザインシステム2.0におけるリスト形式のチェックボックスコンポーネントです。
  *
@@ -8,8 +7,6 @@ import { UbCheckboxText } from '@ub-design/components-web-components/';
  *
  * @slot - チェックボックスのラベルテキスト（デフォルトスロット）
  */
-=======
->>>>>>> main
 export declare class SpCheckboxList extends UbCheckboxText {
     constructor();
 }

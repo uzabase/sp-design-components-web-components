@@ -1,5 +1,4 @@
 import { SpButton } from '../button/sp-button';
-<<<<<<< HEAD
 /**
  * SpDropdownActionButtonは、デザインシステム2.0におけるドロップダウンアクション用ボタンコンポーネントです。
  * ドロップダウンメニューを開くためのボタンとして使用し、下向き矢印アイコンが自動的に追加されます。
@@ -7,8 +6,6 @@ import { SpButton } from '../button/sp-button';
  * @element sp-dropdown-action-button
  * @summary ドロップダウンアクション用ボタンコンポーネント
  */
-=======
->>>>>>> main
 export declare class SpDropdownActionButton extends SpButton {
     #private;
     constructor();

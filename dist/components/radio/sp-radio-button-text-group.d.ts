@@ -1,5 +1,4 @@
 import { UbRadioButtonTextGroup } from '@ub-design/components-web-components/';
-<<<<<<< HEAD
 /**
  * SpRadioButtonTextGroupは、デザインシステム2.0におけるテキスト付きラジオボタングループコンポーネントです。
  * 複数の選択肢から一つを選択するためのラジオボタンのグループを提供します。
@@ -9,8 +8,6 @@ import { UbRadioButtonTextGroup } from '@ub-design/components-web-components/';
  *
  * @slot - ラジオボタンの選択肢（デフォルトスロット）
  */
-=======
->>>>>>> main
 export declare class SpRadioButtonTextGroup extends UbRadioButtonTextGroup {
     constructor();
 }

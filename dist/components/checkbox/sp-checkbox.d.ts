@@ -1,13 +1,10 @@
 import { UbCheckbox } from '@ub-design/components-web-components/';
-<<<<<<< HEAD
 /**
  * SpCheckboxは、デザインシステム2.0におけるチェックボックスコンポーネントです。
  *
  * @element sp-checkbox
  * @summary チェックボックスコンポーネント
  */
-=======
->>>>>>> main
 export declare class SpCheckbox extends UbCheckbox {
     constructor();
 }
