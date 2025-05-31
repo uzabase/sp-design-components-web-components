@@ -1,4 +1,4 @@
-import { UbIcon } from "@ub-design/components-web-components/";
+import { UbIcon } from '@ub-design/components-web-components/';
 /**
  * SpIconは、デザインシステム2.0におけるアイコンコンポーネントです。
  * デザインシステムで用意されているアイコンセットを提供します。

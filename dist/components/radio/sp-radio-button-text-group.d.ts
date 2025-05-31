@@ -1,4 +1,4 @@
-import { UbRadioButtonTextGroup } from "@ub-design/components-web-components/";
+import { UbRadioButtonTextGroup } from '@ub-design/components-web-components/';
 export declare class SpRadioButtonTextGroup extends UbRadioButtonTextGroup {
     constructor();
 }

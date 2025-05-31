@@ -1,4 +1,4 @@
-import { UbButton } from "@ub-design/components-web-components";
+import { UbButton } from '@ub-design/components-web-components';
 /**
  * SpButtonは、デザインシステム2.0におけるボタンコンポーネントです。
  *

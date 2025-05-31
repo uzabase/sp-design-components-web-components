@@ -1,5 +1,4 @@
-import "../icon/sp-icon";
-import { SpButton } from "../button/sp-button";
+import { SpButton } from '../button/sp-button';
 export declare class SpDropdownActionButton extends SpButton {
     #private;
     constructor();

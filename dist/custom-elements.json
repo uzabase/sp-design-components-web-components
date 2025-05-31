@@ -218,111 +218,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/definitionList/sp-definition-list-dd.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SpDefinitionListDd",
-          "members": [],
-          "superclass": {
-            "name": "HTMLElement"
-          },
-          "tagName": "sp-definition-list-dd",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SpDefinitionListDd",
-          "declaration": {
-            "name": "SpDefinitionListDd",
-            "module": "src/components/definitionList/sp-definition-list-dd.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sp-definition-list-dd",
-          "declaration": {
-            "name": "SpDefinitionListDd",
-            "module": "src/components/definitionList/sp-definition-list-dd.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/definitionList/sp-definition-list-dt.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SpDefinitionListDt",
-          "members": [],
-          "superclass": {
-            "name": "HTMLElement"
-          },
-          "tagName": "sp-definition-list-dt",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SpDefinitionListDt",
-          "declaration": {
-            "name": "SpDefinitionListDt",
-            "module": "src/components/definitionList/sp-definition-list-dt.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sp-definition-list-dt",
-          "declaration": {
-            "name": "SpDefinitionListDt",
-            "module": "src/components/definitionList/sp-definition-list-dt.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/definitionList/sp-definition-list.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SpDefinitionList",
-          "members": [],
-          "superclass": {
-            "name": "HTMLElement"
-          },
-          "tagName": "sp-definition-list",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SpDefinitionList",
-          "declaration": {
-            "name": "SpDefinitionList",
-            "module": "src/components/definitionList/sp-definition-list.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sp-definition-list",
-          "declaration": {
-            "name": "SpDefinitionList",
-            "module": "src/components/definitionList/sp-definition-list.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/dropdownAction/sp-dropdown-action-button.ts",
       "declarations": [
         {
@@ -581,6 +476,111 @@
           "declaration": {
             "name": "SpDropdownAction",
             "module": "src/components/dropdownAction/sp-dropdown-action.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/definitionList/sp-definition-list-dd.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SpDefinitionListDd",
+          "members": [],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-definition-list-dd",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpDefinitionListDd",
+          "declaration": {
+            "name": "SpDefinitionListDd",
+            "module": "src/components/definitionList/sp-definition-list-dd.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-definition-list-dd",
+          "declaration": {
+            "name": "SpDefinitionListDd",
+            "module": "src/components/definitionList/sp-definition-list-dd.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/definitionList/sp-definition-list-dt.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SpDefinitionListDt",
+          "members": [],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-definition-list-dt",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpDefinitionListDt",
+          "declaration": {
+            "name": "SpDefinitionListDt",
+            "module": "src/components/definitionList/sp-definition-list-dt.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-definition-list-dt",
+          "declaration": {
+            "name": "SpDefinitionListDt",
+            "module": "src/components/definitionList/sp-definition-list-dt.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/definitionList/sp-definition-list.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SpDefinitionList",
+          "members": [],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-definition-list",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpDefinitionList",
+          "declaration": {
+            "name": "SpDefinitionList",
+            "module": "src/components/definitionList/sp-definition-list.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-definition-list",
+          "declaration": {
+            "name": "SpDefinitionList",
+            "module": "src/components/definitionList/sp-definition-list.ts"
           }
         }
       ]
@@ -1238,6 +1238,286 @@
           "declaration": {
             "name": "SpSegmentedControl",
             "module": "src/components/segmentedControl/sp-segmented-control.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/tag/sp-tag-clickable.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SpTagClickable",
+          "members": [
+            {
+              "kind": "field",
+              "name": "selected",
+              "description": "Sets the selected state of the tag",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "description": "Sets the disabled state of the tag",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "adoptedStyleSheets",
+              "type": {
+                "text": "array"
+              },
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+            }
+          ],
+          "events": [
+            {
+              "name": "click",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "selected"
+            },
+            {
+              "name": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-tag-clickable",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpTagClickable",
+          "declaration": {
+            "name": "SpTagClickable",
+            "module": "src/components/tag/sp-tag-clickable.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-tag-clickable",
+          "declaration": {
+            "name": "SpTagClickable",
+            "module": "src/components/tag/sp-tag-clickable.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/tag/sp-tag-link.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SpTagLink",
+          "members": [
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "adoptedStyleSheets",
+              "type": {
+                "text": "array"
+              },
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href"
+            },
+            {
+              "name": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-tag-link",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpTagLink",
+          "declaration": {
+            "name": "SpTagLink",
+            "module": "src/components/tag/sp-tag-link.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-tag-link",
+          "declaration": {
+            "name": "SpTagLink",
+            "module": "src/components/tag/sp-tag-link.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/tag/sp-tag-liquid.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SpTagLiquid",
+          "members": [
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "SpTagLiquidType"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "light",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "adoptedStyleSheets",
+              "type": {
+                "text": "array"
+              },
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "type"
+            },
+            {
+              "name": "light"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-tag-liquid",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpTagLiquid",
+          "declaration": {
+            "name": "SpTagLiquid",
+            "module": "src/components/tag/sp-tag-liquid.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-tag-liquid",
+          "declaration": {
+            "name": "SpTagLiquid",
+            "module": "src/components/tag/sp-tag-liquid.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/tag/sp-tag-removable.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SpTagRemovable",
+          "members": [
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "draggable"
+            },
+            {
+              "kind": "field",
+              "name": "adoptedStyleSheets",
+              "type": {
+                "text": "array"
+              },
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+            }
+          ],
+          "events": [
+            {
+              "name": "remove",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "disabled"
+            },
+            {
+              "name": "draggable"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-tag-removable",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpTagRemovable",
+          "declaration": {
+            "name": "SpTagRemovable",
+            "module": "src/components/tag/sp-tag-removable.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-tag-removable",
+          "declaration": {
+            "name": "SpTagRemovable",
+            "module": "src/components/tag/sp-tag-removable.ts"
           }
         }
       ]

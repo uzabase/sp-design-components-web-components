@@ -1,7 +1,7 @@
 {
   "name": "@sp-design/components-web-components",
   "private": true,
-  "version": "1.1.1",
+  "version": "1.2.1",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,8 +13,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "build": "rimraf dist && run-s build:*",
-    "build:ts": "tsc -p tsconfig-build.json",
-    "build:css": "node tools/copy-css.js",
+    "build:vite": "vite build",
     "build:analyze": "custom-elements-manifest analyze --config custom-elements-manifest.config.mjs",
     "extract-stories": "node tools/extract-stories.js",
     "lint": "eslint",
@@ -67,6 +66,8 @@
     "stylelint-config-standard": "^38.0.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.31.1",
+    "vite": "^6.3.5",
+    "vite-plugin-dts": "^4.5.4",
     "vitest": "^3.1.2"
   }
 }
