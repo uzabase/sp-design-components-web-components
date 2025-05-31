@@ -491,7 +491,7 @@ class Ht extends Bi {
     ];
   }
   /**
-   * アイコンのタイプを設定します
+   * アイコンのタイプ
    * デザインシステムのアイコンタイプを指定した場合はそのタイプを設定し、それ以外を指定した場合は表示しません
    * 
    * 指定可能なアイコンタイプ：
@@ -732,7 +732,7 @@ st = new WeakSet(), ro = function() {
 };
 customElements.get("sp-dropdown-action-button") || customElements.define("sp-dropdown-action-button", Ki);
 const es = ".action{display:block;width:100%;min-height:26px;padding-inline:8px;padding-block:3.5px;background:none;border:0;color:var(--color-semantic-text-regular);font-size:12px;text-align:left;line-height:1.6}.action:hover,.action:focus{background:var(--color-semantic-surface-regular-3)}.base{margin:0}", ao = new CSSStyleSheet();
-ao.replaceSync(`${h} ${es}`);
+ao.replaceSync(`${u} ${h} ${es}`);
 var J, no, co, lo;
 class ts extends HTMLElement {
   constructor() {
@@ -785,21 +785,50 @@ class as extends HTMLElement {
       ho
     ], this.open = !1, this.disabled = !1, this.position = "left";
   }
+  /**
+   * ドロップダウンボタンのラベルテキスト
+   *
+   * @attribute
+   * @type {string}
+   */
   set label(e) {
     t(this, x).textContent = e, a(this, l, mt).call(this);
   }
+  /**
+   * ドロップダウンメニューの開閉状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get open() {
     return t(this, Ze);
   }
   set open(e) {
     d(this, Ze, e), e ? t(this, x).setAttribute("selected", "") : t(this, x).removeAttribute("selected"), a(this, l, gt).call(this);
   }
+  /**
+   * ドロップダウンの無効状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get disabled() {
     return t(this, Re);
   }
   set disabled(e) {
     d(this, Re, e), t(this, x).disabled = e, a(this, l, gt).call(this);
   }
+  /**
+   * ドロップダウンメニューの表示位置（"left" または "right"）
+   * - "left": 左寄せ
+   * - "right": 右寄せ
+   *
+   * @attribute
+   * @type {"left"|"right"}
+   * @default "left"
+   */
   get position() {
     return t(this, Te);
   }
@@ -894,21 +923,50 @@ class ds extends HTMLElement {
       ko
     ], this.open = !1, this.disabled = !1, this.position = "left";
   }
+  /**
+   * ドロップダウンボタンのラベルテキスト
+   *
+   * @attribute
+   * @type {string}
+   */
   set label(e) {
     t(this, $).textContent = e;
   }
+  /**
+   * ドロップダウンダイアログの開閉状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get open() {
     return t(this, Be);
   }
   set open(e) {
     d(this, Be, e), e ? t(this, $).setAttribute("selected", "") : t(this, $).removeAttribute("selected"), a(this, F, vt).call(this);
   }
+  /**
+   * ドロップダウンの無効状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get disabled() {
     return t(this, $e);
   }
   set disabled(e) {
     d(this, $e, e), t(this, $).disabled = e, a(this, F, vt).call(this);
   }
+  /**
+   * ドロップダウンダイアログの表示位置（"left" または "right"）
+   * - "left": 左寄せ
+   * - "right": 右寄せ
+   *
+   * @attribute
+   * @type {"left"|"right"}
+   * @default "left"
+   */
   get position() {
     return t(this, Pe);
   }
@@ -1024,6 +1082,17 @@ class gs extends HTMLElement {
       Zo
     ], this.type = "information";
   }
+  /**
+   * 通知の種類（"error"、"warning"、"information"、または "success"）
+   * - "error": エラーメッセージ
+   * - "warning": 警告メッセージ
+   * - "information": 情報メッセージ
+   * - "success": 成功メッセージ
+   *
+   * @attribute
+   * @type {"error"|"warning"|"information"|"success"}
+   * @default "information"
+   */
   get type() {
     return t(this, me);
   }
@@ -1105,6 +1174,17 @@ class ys extends HTMLElement {
       Uo
     ], this.type = "information";
   }
+  /**
+   * 通知の種類（"error"、"warning"、"information"、または "success"）
+   * - "error": エラーメッセージ
+   * - "warning": 警告メッセージ
+   * - "information": 情報メッセージ
+   * - "success": 成功メッセージ
+   *
+   * @attribute
+   * @type {"error"|"warning"|"information"|"success"}
+   * @default "information"
+   */
   get type() {
     return t(this, fe);
   }
@@ -1156,12 +1236,26 @@ class Ss extends HTMLElement {
       Yo
     ];
   }
+  /**
+   * 総ページ数
+   *
+   * @attribute
+   * @type {number}
+   * @default 1
+   */
   get total() {
     return t(this, Ue);
   }
   set total(e) {
     d(this, Ue, e);
   }
+  /**
+   * 現在選択されているページ番号
+   *
+   * @attribute
+   * @type {number}
+   * @default 1
+   */
   get selected() {
     return t(this, Ge);
   }
@@ -1289,6 +1383,12 @@ class Vs extends HTMLElement {
     n(this, Le, document.createElement("slot"));
     this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [ci], t(this, ve).name = "text-links", t(this, Le).name = "buttons";
   }
+  /**
+   * セクションタイトルのテキスト
+   *
+   * @attribute
+   * @type {string}
+   */
   set text(e) {
     t(this, Fe).textContent = e;
   }
@@ -1347,26 +1447,28 @@ class Rs extends HTMLElement {
     ], this.selected = !1, this.disabled = !1;
   }
   /**
-   * Returns whether the tag is currently in selected state
+   * タグの選択状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
    */
   get selected() {
     return t(this, te);
   }
-  /**
-   * Sets the selected state of the tag
-   */
   set selected(e) {
     t(this, te) !== e && (d(this, te, e), e ? t(this, b).classList.add("isSelected") : t(this, b).classList.remove("isSelected"));
   }
   /**
-   * Returns whether the tag is currently disabled
+   * タグの無効状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
    */
   get disabled() {
     return t(this, Y);
   }
-  /**
-   * Sets the disabled state of the tag
-   */
   set disabled(e) {
     t(this, Y) !== e && (d(this, Y, e), e ? (this.setAttribute("aria-disabled", "true"), t(this, b).disabled = !0, t(this, b).classList.add("isDisabled")) : (this.removeAttribute("aria-disabled"), t(this, b).disabled = !1, t(this, b).classList.remove("isDisabled")));
   }
@@ -1412,6 +1514,13 @@ class zs extends HTMLElement {
       vi
     ];
   }
+  /**
+   * タグの無効状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get disabled() {
     return t(this, oe);
   }
@@ -1457,12 +1566,31 @@ class $s extends HTMLElement {
       xi
     ];
   }
+  /**
+   * タグの色の種類（"gray"、"green"、"red"、"yellow"、または "blue"）
+   * - "gray": グレー
+   * - "green": グリーン
+   * - "red": レッド
+   * - "yellow": イエロー
+   * - "blue": ブルー
+   *
+   * @attribute
+   * @type {"gray"|"green"|"red"|"yellow"|"blue"}
+   * @default "gray"
+   */
   get type() {
     return t(this, R);
   }
   set type(e) {
     t(this, R) !== e && (t(this, S).classList.remove(`type__${t(this, R)}`), a(this, T, wt).call(this, e) ? (d(this, R, e), t(this, S).classList.add(`type__${e}`), this.light = this.hasAttribute("light")) : (console.warn(`${e}は無効なtype属性です。`), d(this, R, "gray"), t(this, S).classList.add("type__gray")));
   }
+  /**
+   * ライトモードの有効状態（※grayカラーはライトモードのみ）
+   *
+   * @attribute
+   * @type {boolean}
+   * @default true
+   */
   get light() {
     return t(this, q);
   }
@@ -1555,12 +1683,26 @@ class Is extends HTMLElement {
       wi
     ], this.disabled = !1;
   }
+  /**
+   * タグの無効状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get disabled() {
     return t(this, G);
   }
   set disabled(e) {
     t(this, G) !== e && (d(this, G, e), t(this, P).disabled = e, a(this, ye, ot).call(this));
   }
+  /**
+   * タグのドラッグ可能状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get draggable() {
     return t(this, ie);
   }

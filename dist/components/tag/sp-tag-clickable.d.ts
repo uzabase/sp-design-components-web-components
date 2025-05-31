@@ -1,20 +1,33 @@
+/**
+ * SpTagClickableは、デザインシステム2.0におけるクリック可能なタグコンポーネントです。
+ * 選択状態を持ち、クリックイベントを発火するタグとして使用します。
+ *
+ * @element sp-tag-clickable
+ * @summary クリック可能なタグコンポーネント
+ *
+ * @slot - タグのテキストコンテンツ（デフォルトスロット）
+ *
+ * @fires click - タグがクリックされたときに発火するイベント。detail.originalEventに元のMouseEventが含まれます
+ */
 export declare class SpTagClickable extends HTMLElement {
     #private;
     /**
-     * Returns whether the tag is currently in selected state
+     * タグの選択状態
+     *
+     * @attribute
+     * @type {boolean}
+     * @default false
      */
     get selected(): boolean;
-    /**
-     * Sets the selected state of the tag
-     */
     set selected(value: boolean);
     /**
-     * Returns whether the tag is currently disabled
+     * タグの無効状態
+     *
+     * @attribute
+     * @type {boolean}
+     * @default false
      */
     get disabled(): boolean;
-    /**
-     * Sets the disabled state of the tag
-     */
     set disabled(value: boolean);
     static get observedAttributes(): string[];
     constructor();

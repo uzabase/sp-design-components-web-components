@@ -87,8 +87,14 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpCheckboxListは、デザインシステム2.0におけるリスト形式のチェックボックスコンポーネントです。",
           "name": "SpCheckboxList",
+          "slots": [
+            {
+              "description": "チェックボックスのラベルテキスト（デフォルトスロット）",
+              "name": ""
+            }
+          ],
           "members": [
             {
               "kind": "field",
@@ -104,7 +110,8 @@
             "package": "@ub-design/components-web-components/"
           },
           "tagName": "sp-checkbox-list",
-          "customElement": true
+          "customElement": true,
+          "summary": "リスト形式のチェックボックスコンポーネント"
         }
       ],
       "exports": [
@@ -132,8 +139,14 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpCheckboxTextは、デザインシステム2.0におけるテキスト付きチェックボックスコンポーネントです。",
           "name": "SpCheckboxText",
+          "slots": [
+            {
+              "description": "チェックボックスのラベルテキスト（デフォルトスロット）",
+              "name": ""
+            }
+          ],
           "members": [
             {
               "kind": "field",
@@ -149,7 +162,8 @@
             "package": "@ub-design/components-web-components/"
           },
           "tagName": "sp-checkbox-text",
-          "customElement": true
+          "customElement": true,
+          "summary": "テキスト付きチェックボックスコンポーネント"
         }
       ],
       "exports": [
@@ -177,7 +191,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpCheckboxは、デザインシステム2.0におけるチェックボックスコンポーネントです。",
           "name": "SpCheckbox",
           "members": [
             {
@@ -194,7 +208,8 @@
             "package": "@ub-design/components-web-components/"
           },
           "tagName": "sp-checkbox",
-          "customElement": true
+          "customElement": true,
+          "summary": "チェックボックスコンポーネント"
         }
       ],
       "exports": [
@@ -218,11 +233,138 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/dropdownDialog/sp-dropdown-dialog.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "SpDropdownDialogは、デザインシステム2.0におけるドロップダウンダイアログコンポーネントです。\nボタンをクリックすると表示されるダイアログコンテンツを提供します。",
+          "name": "SpDropdownDialog",
+          "slots": [
+            {
+              "description": "ドロップダウンダイアログのコンテンツ（デフォルトスロット）",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "description": "ドロップダウンボタンのラベルテキスト",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "description": "ドロップダウンダイアログの開閉状態",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "description": "ドロップダウンの無効状態",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "position",
+              "description": "ドロップダウンダイアログの表示位置（\"left\" または \"right\"）\n- \"left\": 左寄せ\n- \"right\": 右寄せ",
+              "type": {
+                "text": "\"left\"|\"right\""
+              },
+              "default": "\"left\"",
+              "attribute": "position"
+            },
+            {
+              "kind": "field",
+              "name": "adoptedStyleSheets",
+              "type": {
+                "text": "array"
+              },
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "description": "ドロップダウンボタンのラベルテキスト",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "label"
+            },
+            {
+              "name": "open",
+              "description": "ドロップダウンダイアログの開閉状態",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "open"
+            },
+            {
+              "name": "disabled",
+              "description": "ドロップダウンの無効状態",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "position",
+              "description": "ドロップダウンダイアログの表示位置（\"left\" または \"right\"）\n- \"left\": 左寄せ\n- \"right\": 右寄せ",
+              "type": {
+                "text": "\"left\"|\"right\""
+              },
+              "default": "\"left\"",
+              "fieldName": "position"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-dropdown-dialog",
+          "customElement": true,
+          "summary": "ドロップダウンダイアログコンポーネント"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpDropdownDialog",
+          "declaration": {
+            "name": "SpDropdownDialog",
+            "module": "src/components/dropdownDialog/sp-dropdown-dialog.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-dropdown-dialog",
+          "declaration": {
+            "name": "SpDropdownDialog",
+            "module": "src/components/dropdownDialog/sp-dropdown-dialog.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/dropdownAction/sp-dropdown-action-button.ts",
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpDropdownActionButtonは、デザインシステム2.0におけるドロップダウンアクション用ボタンコンポーネントです。\nドロップダウンメニューを開くためのボタンとして使用し、下向き矢印アイコンが自動的に追加されます。",
           "name": "SpDropdownActionButton",
           "members": [
             {
@@ -305,6 +447,7 @@
           },
           "tagName": "sp-dropdown-action-button",
           "customElement": true,
+          "summary": "ドロップダウンアクション用ボタンコンポーネント",
           "slots": [
             {
               "description": "ボタンのテキストコンテンツ（デフォルトスロット）",
@@ -356,8 +499,14 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpDropdownActionItemは、デザインシステム2.0におけるドロップダウンアクション項目コンポーネントです。\nドロップダウンメニュー内のアクション項目として使用します。",
           "name": "SpDropdownActionItem",
+          "slots": [
+            {
+              "description": "アクション項目のテキストコンテンツ（デフォルトスロット）",
+              "name": ""
+            }
+          ],
           "members": [
             {
               "kind": "field",
@@ -372,7 +521,8 @@
             "name": "HTMLElement"
           },
           "tagName": "sp-dropdown-action-item",
-          "customElement": true
+          "customElement": true,
+          "summary": "ドロップダウンアクション項目コンポーネント"
         }
       ],
       "exports": [
@@ -400,36 +550,53 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpDropdownActionは、デザインシステム2.0におけるドロップダウンアクションコンポーネントです。\nボタンをクリックすると表示されるアクションメニューを提供します。",
           "name": "SpDropdownAction",
+          "slots": [
+            {
+              "description": "ドロップダウンメニューのアクション項目（デフォルトスロット）",
+              "name": ""
+            }
+          ],
           "members": [
             {
               "kind": "field",
-              "name": "label"
+              "name": "label",
+              "description": "ドロップダウンボタンのラベルテキスト",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "label"
             },
             {
               "kind": "field",
               "name": "open",
+              "description": "ドロップダウンメニューの開閉状態",
               "type": {
                 "text": "boolean"
               },
-              "default": "false"
+              "default": "false",
+              "attribute": "open"
             },
             {
               "kind": "field",
               "name": "disabled",
+              "description": "ドロップダウンの無効状態",
               "type": {
                 "text": "boolean"
               },
-              "default": "false"
+              "default": "false",
+              "attribute": "disabled"
             },
             {
               "kind": "field",
               "name": "position",
+              "description": "ドロップダウンメニューの表示位置（\"left\" または \"right\"）\n- \"left\": 左寄せ\n- \"right\": 右寄せ",
               "type": {
-                "text": "string"
+                "text": "\"left\"|\"right\""
               },
-              "default": "\"left\""
+              "default": "\"left\"",
+              "attribute": "position"
             },
             {
               "kind": "field",
@@ -442,23 +609,47 @@
           ],
           "attributes": [
             {
-              "name": "label"
+              "name": "label",
+              "description": "ドロップダウンボタンのラベルテキスト",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "label"
             },
             {
-              "name": "open"
+              "name": "open",
+              "description": "ドロップダウンメニューの開閉状態",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "open"
             },
             {
-              "name": "disabled"
+              "name": "disabled",
+              "description": "ドロップダウンの無効状態",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
             },
             {
-              "name": "position"
+              "name": "position",
+              "description": "ドロップダウンメニューの表示位置（\"left\" または \"right\"）\n- \"left\": 左寄せ\n- \"right\": 右寄せ",
+              "type": {
+                "text": "\"left\"|\"right\""
+              },
+              "default": "\"left\"",
+              "fieldName": "position"
             }
           ],
           "superclass": {
             "name": "HTMLElement"
           },
           "tagName": "sp-dropdown-action",
-          "customElement": true
+          "customElement": true,
+          "summary": "ドロップダウンアクションコンポーネント"
         }
       ],
       "exports": [
@@ -486,14 +677,21 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpDefinitionListDdは、デザインシステム2.0における定義リストの説明項目コンポーネントです。\n定義リスト内で用語の説明を表示するために使用します。",
           "name": "SpDefinitionListDd",
+          "slots": [
+            {
+              "description": "説明のテキストコンテンツ（デフォルトスロット）",
+              "name": ""
+            }
+          ],
           "members": [],
           "superclass": {
             "name": "HTMLElement"
           },
           "tagName": "sp-definition-list-dd",
-          "customElement": true
+          "customElement": true,
+          "summary": "定義リストの説明項目コンポーネント"
         }
       ],
       "exports": [
@@ -521,14 +719,21 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpDefinitionListDtは、デザインシステム2.0における定義リストの用語項目コンポーネントです。\n定義リスト内で用語を表示するために使用します。",
           "name": "SpDefinitionListDt",
+          "slots": [
+            {
+              "description": "用語のテキストコンテンツ（デフォルトスロット）",
+              "name": ""
+            }
+          ],
           "members": [],
           "superclass": {
             "name": "HTMLElement"
           },
           "tagName": "sp-definition-list-dt",
-          "customElement": true
+          "customElement": true,
+          "summary": "定義リストの用語項目コンポーネント"
         }
       ],
       "exports": [
@@ -556,14 +761,21 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpDefinitionListは、デザインシステム2.0における定義リストコンポーネントです。\n用語とその定義をペアで表示するリストを提供します。",
           "name": "SpDefinitionList",
+          "slots": [
+            {
+              "description": "定義リストの項目（デフォルトスロット）",
+              "name": ""
+            }
+          ],
           "members": [],
           "superclass": {
             "name": "HTMLElement"
           },
           "tagName": "sp-definition-list",
-          "customElement": true
+          "customElement": true,
+          "summary": "定義リストコンポーネント"
         }
       ],
       "exports": [
@@ -587,98 +799,26 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/dropdownDialog/sp-dropdown-dialog.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SpDropdownDialog",
-          "members": [
-            {
-              "kind": "field",
-              "name": "label"
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "position",
-              "type": {
-                "text": "string"
-              },
-              "default": "\"left\""
-            },
-            {
-              "kind": "field",
-              "name": "adoptedStyleSheets",
-              "type": {
-                "text": "array"
-              },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "label"
-            },
-            {
-              "name": "open"
-            },
-            {
-              "name": "disabled"
-            },
-            {
-              "name": "position"
-            }
-          ],
-          "superclass": {
-            "name": "HTMLElement"
-          },
-          "tagName": "sp-dropdown-dialog",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SpDropdownDialog",
-          "declaration": {
-            "name": "SpDropdownDialog",
-            "module": "src/components/dropdownDialog/sp-dropdown-dialog.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sp-dropdown-dialog",
-          "declaration": {
-            "name": "SpDropdownDialog",
-            "module": "src/components/dropdownDialog/sp-dropdown-dialog.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/elementTitle/sp-element-title.ts",
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpElementTitleは、デザインシステム2.0におけるエレメントタイトルコンポーネントです。\nセクション内の要素のタイトルとして使用し、テキストリンクやボタンを配置できます。",
           "name": "SpElementTitle",
+          "slots": [
+            {
+              "description": "タイトルのテキストコンテンツ（デフォルトスロット）",
+              "name": ""
+            },
+            {
+              "description": "タイトル横に表示するテキストリンク",
+              "name": "text-links"
+            },
+            {
+              "description": "タイトル右側に表示するボタン",
+              "name": "buttons"
+            }
+          ],
           "members": [
             {
               "kind": "field",
@@ -701,7 +841,8 @@
             "name": "HTMLElement"
           },
           "tagName": "sp-element-title",
-          "customElement": true
+          "customElement": true,
+          "summary": "エレメントタイトルコンポーネント"
         }
       ],
       "exports": [
@@ -784,7 +925,7 @@
             {
               "kind": "field",
               "name": "type",
-              "description": "アイコンのタイプを設定します\nデザインシステムのアイコンタイプを指定した場合はそのタイプを設定し、それ以外を指定した場合は表示しません\n\n指定可能なアイコンタイプ：\n- arrow_down\n- arrow_down_link\n- arrow_left\n- arrow_left_link\n- arrow_right\n- arrow_right_link\n- arrow_up\n- arrow_up_link\n- bookmark\n- calendar\n- check\n- check_bold\n- clear\n- close\n- copy\n- create\n- delete\n- doublearrow_down\n- doublearrow_left\n- doublearrow_right\n- download\n- drag\n- edit\n- error\n- folder\n- help\n- kebab_menu\n- like\n- list\n- location\n- lock\n- mail\n- menu\n- my_speeda\n- notification\n- open_in_new\n- operator\n- opinion\n- people\n- person\n- pib\n- plus\n- search\n- settings\n- sort\n- sort_down\n- sort_up\n- toggle_arrow_down\n- toggle_arrow_right\n- zip",
+              "description": "アイコンのタイプ\nデザインシステムのアイコンタイプを指定した場合はそのタイプを設定し、それ以外を指定した場合は表示しません\n\n指定可能なアイコンタイプ：\n- arrow_down\n- arrow_down_link\n- arrow_left\n- arrow_left_link\n- arrow_right\n- arrow_right_link\n- arrow_up\n- arrow_up_link\n- bookmark\n- calendar\n- check\n- check_bold\n- clear\n- close\n- copy\n- create\n- delete\n- doublearrow_down\n- doublearrow_left\n- doublearrow_right\n- download\n- drag\n- edit\n- error\n- folder\n- help\n- kebab_menu\n- like\n- list\n- location\n- lock\n- mail\n- menu\n- my_speeda\n- notification\n- open_in_new\n- operator\n- opinion\n- people\n- person\n- pib\n- plus\n- search\n- settings\n- sort\n- sort_down\n- sort_up\n- toggle_arrow_down\n- toggle_arrow_right\n- zip",
               "type": {
                 "text": "string"
               },
@@ -802,7 +943,7 @@
           "attributes": [
             {
               "name": "type",
-              "description": "アイコンのタイプを設定します\nデザインシステムのアイコンタイプを指定した場合はそのタイプを設定し、それ以外を指定した場合は表示しません\n\n指定可能なアイコンタイプ：\n- arrow_down\n- arrow_down_link\n- arrow_left\n- arrow_left_link\n- arrow_right\n- arrow_right_link\n- arrow_up\n- arrow_up_link\n- bookmark\n- calendar\n- check\n- check_bold\n- clear\n- close\n- copy\n- create\n- delete\n- doublearrow_down\n- doublearrow_left\n- doublearrow_right\n- download\n- drag\n- edit\n- error\n- folder\n- help\n- kebab_menu\n- like\n- list\n- location\n- lock\n- mail\n- menu\n- my_speeda\n- notification\n- open_in_new\n- operator\n- opinion\n- people\n- person\n- pib\n- plus\n- search\n- settings\n- sort\n- sort_down\n- sort_up\n- toggle_arrow_down\n- toggle_arrow_right\n- zip",
+              "description": "アイコンのタイプ\nデザインシステムのアイコンタイプを指定した場合はそのタイプを設定し、それ以外を指定した場合は表示しません\n\n指定可能なアイコンタイプ：\n- arrow_down\n- arrow_down_link\n- arrow_left\n- arrow_left_link\n- arrow_right\n- arrow_right_link\n- arrow_up\n- arrow_up_link\n- bookmark\n- calendar\n- check\n- check_bold\n- clear\n- close\n- copy\n- create\n- delete\n- doublearrow_down\n- doublearrow_left\n- doublearrow_right\n- download\n- drag\n- edit\n- error\n- folder\n- help\n- kebab_menu\n- like\n- list\n- location\n- lock\n- mail\n- menu\n- my_speeda\n- notification\n- open_in_new\n- operator\n- opinion\n- people\n- person\n- pib\n- plus\n- search\n- settings\n- sort\n- sort_down\n- sort_up\n- toggle_arrow_down\n- toggle_arrow_right\n- zip",
               "type": {
                 "text": "string"
               },
@@ -859,16 +1000,24 @@
         },
         {
           "kind": "class",
-          "description": "",
+          "description": "SpNotificationBarは、デザインシステム2.0における通知バーコンポーネントです。\nユーザーに重要な情報やメッセージを表示するために使用します。",
           "name": "SpNotificationBar",
+          "slots": [
+            {
+              "description": "通知メッセージのコンテンツ（デフォルトスロット）",
+              "name": ""
+            }
+          ],
           "members": [
             {
               "kind": "field",
               "name": "type",
+              "description": "通知の種類（\"error\"、\"warning\"、\"information\"、または \"success\"）\n- \"error\": エラーメッセージ\n- \"warning\": 警告メッセージ\n- \"information\": 情報メッセージ\n- \"success\": 成功メッセージ",
               "type": {
-                "text": "string"
+                "text": "\"error\"|\"warning\"|\"information\"|\"success\""
               },
-              "default": "\"information\""
+              "default": "\"information\"",
+              "attribute": "type"
             },
             {
               "kind": "field",
@@ -884,19 +1033,27 @@
               "name": "close",
               "type": {
                 "text": "CustomEvent"
-              }
+              },
+              "description": "閉じるボタンがクリックされたときに発火するイベント"
             }
           ],
           "attributes": [
             {
-              "name": "type"
+              "name": "type",
+              "description": "通知の種類（\"error\"、\"warning\"、\"information\"、または \"success\"）\n- \"error\": エラーメッセージ\n- \"warning\": 警告メッセージ\n- \"information\": 情報メッセージ\n- \"success\": 成功メッセージ",
+              "type": {
+                "text": "\"error\"|\"warning\"|\"information\"|\"success\""
+              },
+              "default": "\"information\"",
+              "fieldName": "type"
             }
           ],
           "superclass": {
             "name": "HTMLElement"
           },
           "tagName": "sp-notification-bar",
-          "customElement": true
+          "customElement": true,
+          "summary": "通知バーコンポーネント"
         }
       ],
       "exports": [
@@ -956,16 +1113,24 @@
         },
         {
           "kind": "class",
-          "description": "",
+          "description": "SpNotificationMessageは、デザインシステム2.0における通知メッセージコンポーネントです。\nユーザーに情報、警告、エラー、成功メッセージを表示するために使用します。",
           "name": "SpNotificationMessage",
+          "slots": [
+            {
+              "description": "通知メッセージのコンテンツ（デフォルトスロット）",
+              "name": ""
+            }
+          ],
           "members": [
             {
               "kind": "field",
               "name": "type",
+              "description": "通知の種類（\"error\"、\"warning\"、\"information\"、または \"success\"）\n- \"error\": エラーメッセージ\n- \"warning\": 警告メッセージ\n- \"information\": 情報メッセージ\n- \"success\": 成功メッセージ",
               "type": {
-                "text": "string"
+                "text": "\"error\"|\"warning\"|\"information\"|\"success\""
               },
-              "default": "\"information\""
+              "default": "\"information\"",
+              "attribute": "type"
             },
             {
               "kind": "field",
@@ -978,14 +1143,21 @@
           ],
           "attributes": [
             {
-              "name": "type"
+              "name": "type",
+              "description": "通知の種類（\"error\"、\"warning\"、\"information\"、または \"success\"）\n- \"error\": エラーメッセージ\n- \"warning\": 警告メッセージ\n- \"information\": 情報メッセージ\n- \"success\": 成功メッセージ",
+              "type": {
+                "text": "\"error\"|\"warning\"|\"information\"|\"success\""
+              },
+              "default": "\"information\"",
+              "fieldName": "type"
             }
           ],
           "superclass": {
             "name": "HTMLElement"
           },
           "tagName": "sp-notification-message",
-          "customElement": true
+          "customElement": true,
+          "summary": "通知メッセージコンポーネント"
         }
       ],
       "exports": [
@@ -1029,16 +1201,28 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpPaginationは、デザインシステム2.0におけるページネーションコンポーネントです。\nページ分割されたコンテンツのナビゲーションを提供します。",
           "name": "SpPagination",
           "members": [
             {
               "kind": "field",
-              "name": "total"
+              "name": "total",
+              "description": "総ページ数",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "total"
             },
             {
               "kind": "field",
-              "name": "selected"
+              "name": "selected",
+              "description": "現在選択されているページ番号",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "attribute": "selected"
             },
             {
               "kind": "field",
@@ -1054,22 +1238,36 @@
               "name": "change",
               "type": {
                 "text": "CustomEvent"
-              }
+              },
+              "description": "ページが変更されたときに発火するイベント。detail.pageに新しいページ番号が含まれます"
             }
           ],
           "attributes": [
             {
-              "name": "total"
+              "name": "total",
+              "description": "総ページ数",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "fieldName": "total"
             },
             {
-              "name": "selected"
+              "name": "selected",
+              "description": "現在選択されているページ番号",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "fieldName": "selected"
             }
           ],
           "superclass": {
             "name": "HTMLElement"
           },
           "tagName": "sp-pagination",
-          "customElement": true
+          "customElement": true,
+          "summary": "ページネーションコンポーネント"
         }
       ],
       "exports": [
@@ -1097,8 +1295,14 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpRadioButtonTextGroupは、デザインシステム2.0におけるテキスト付きラジオボタングループコンポーネントです。\n複数の選択肢から一つを選択するためのラジオボタンのグループを提供します。",
           "name": "SpRadioButtonTextGroup",
+          "slots": [
+            {
+              "description": "ラジオボタンの選択肢（デフォルトスロット）",
+              "name": ""
+            }
+          ],
           "members": [
             {
               "kind": "field",
@@ -1114,7 +1318,8 @@
             "package": "@ub-design/components-web-components/"
           },
           "tagName": "sp-radio-button-text-group",
-          "customElement": true
+          "customElement": true,
+          "summary": "テキスト付きラジオボタングループコンポーネント"
         }
       ],
       "exports": [
@@ -1142,12 +1347,27 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpSectionTitleは、デザインシステム2.0におけるセクションタイトルコンポーネントです。\nセクションの見出しを表示するために使用します。",
           "name": "SpSectionTitle",
+          "slots": [
+            {
+              "description": "タイトル横に表示するテキストリンク",
+              "name": "text-links"
+            },
+            {
+              "description": "タイトル右側に表示するボタン",
+              "name": "buttons"
+            }
+          ],
           "members": [
             {
               "kind": "field",
-              "name": "text"
+              "name": "text",
+              "description": "セクションタイトルのテキスト",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "text"
             },
             {
               "kind": "field",
@@ -1168,14 +1388,20 @@
           ],
           "attributes": [
             {
-              "name": "text"
+              "name": "text",
+              "description": "セクションタイトルのテキスト",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "text"
             }
           ],
           "superclass": {
             "name": "HTMLElement"
           },
           "tagName": "sp-section-title",
-          "customElement": true
+          "customElement": true,
+          "summary": "セクションタイトルコンポーネント"
         }
       ],
       "exports": [
@@ -1203,8 +1429,14 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpSegmentedControlは、デザインシステム2.0におけるセグメント化コントロールコンポーネントです。\n関連する選択肢をセグメント化されたボタンとして表示し、一つを選択できます。",
           "name": "SpSegmentedControl",
+          "slots": [
+            {
+              "description": "セグメントの選択肢（デフォルトスロット）",
+              "name": ""
+            }
+          ],
           "members": [
             {
               "kind": "field",
@@ -1220,7 +1452,8 @@
             "package": "@ub-design/components-web-components/"
           },
           "tagName": "sp-segmented-control",
-          "customElement": true
+          "customElement": true,
+          "summary": "セグメント化コントロールコンポーネント"
         }
       ],
       "exports": [
@@ -1248,26 +1481,34 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpTagClickableは、デザインシステム2.0におけるクリック可能なタグコンポーネントです。\n選択状態を持ち、クリックイベントを発火するタグとして使用します。",
           "name": "SpTagClickable",
+          "slots": [
+            {
+              "description": "タグのテキストコンテンツ（デフォルトスロット）",
+              "name": ""
+            }
+          ],
           "members": [
             {
               "kind": "field",
               "name": "selected",
-              "description": "Sets the selected state of the tag",
+              "description": "タグの選択状態",
               "type": {
                 "text": "boolean"
               },
-              "default": "false"
+              "default": "false",
+              "attribute": "selected"
             },
             {
               "kind": "field",
               "name": "disabled",
-              "description": "Sets the disabled state of the tag",
+              "description": "タグの無効状態",
               "type": {
                 "text": "boolean"
               },
-              "default": "false"
+              "default": "false",
+              "attribute": "disabled"
             },
             {
               "kind": "field",
@@ -1283,22 +1524,36 @@
               "name": "click",
               "type": {
                 "text": "CustomEvent"
-              }
+              },
+              "description": "タグがクリックされたときに発火するイベント。detail.originalEventに元のMouseEventが含まれます"
             }
           ],
           "attributes": [
             {
-              "name": "selected"
+              "name": "selected",
+              "description": "タグの選択状態",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "selected"
             },
             {
-              "name": "disabled"
+              "name": "disabled",
+              "description": "タグの無効状態",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
             }
           ],
           "superclass": {
             "name": "HTMLElement"
           },
           "tagName": "sp-tag-clickable",
-          "customElement": true
+          "customElement": true,
+          "summary": "クリック可能なタグコンポーネント"
         }
       ],
       "exports": [
@@ -1326,8 +1581,14 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpTagLinkは、デザインシステム2.0におけるリンク機能付きタグコンポーネントです。\nクリック可能なリンクとして動作するタグを提供します。",
           "name": "SpTagLink",
+          "slots": [
+            {
+              "description": "タグのテキストコンテンツ（デフォルトスロット）",
+              "name": ""
+            }
+          ],
           "members": [
             {
               "kind": "field",
@@ -1335,11 +1596,19 @@
               "type": {
                 "text": "string"
               },
-              "default": "\"\""
+              "default": "\"\"",
+              "description": "リンク先のURL",
+              "attribute": "href"
             },
             {
               "kind": "field",
-              "name": "disabled"
+              "name": "disabled",
+              "description": "タグの無効状態",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled"
             },
             {
               "kind": "field",
@@ -1352,17 +1621,30 @@
           ],
           "attributes": [
             {
-              "name": "href"
+              "name": "href",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\"",
+              "description": "リンク先のURL",
+              "fieldName": "href"
             },
             {
-              "name": "disabled"
+              "name": "disabled",
+              "description": "タグの無効状態",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
             }
           ],
           "superclass": {
             "name": "HTMLElement"
           },
           "tagName": "sp-tag-link",
-          "customElement": true
+          "customElement": true,
+          "summary": "リンク機能付きタグコンポーネント"
         }
       ],
       "exports": [
@@ -1390,22 +1672,34 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpTagLiquidは、デザインシステム2.0における液体状のタグコンポーネントです。\n色とモード（明るい/暗い）を指定できるカラフルなタグを提供します。",
           "name": "SpTagLiquid",
+          "slots": [
+            {
+              "description": "タグのテキストコンテンツ（デフォルトスロット）",
+              "name": ""
+            }
+          ],
           "members": [
             {
               "kind": "field",
               "name": "type",
               "type": {
-                "text": "SpTagLiquidType"
-              }
+                "text": "\"gray\"|\"green\"|\"red\"|\"yellow\"|\"blue\""
+              },
+              "description": "タグの色の種類（\"gray\"、\"green\"、\"red\"、\"yellow\"、または \"blue\"）\n- \"gray\": グレー\n- \"green\": グリーン\n- \"red\": レッド\n- \"yellow\": イエロー\n- \"blue\": ブルー",
+              "default": "\"gray\"",
+              "attribute": "type"
             },
             {
               "kind": "field",
               "name": "light",
               "type": {
                 "text": "boolean"
-              }
+              },
+              "description": "ライトモードの有効状態（※grayカラーはライトモードのみ）",
+              "default": "true",
+              "attribute": "light"
             },
             {
               "kind": "field",
@@ -1418,17 +1712,30 @@
           ],
           "attributes": [
             {
-              "name": "type"
+              "name": "type",
+              "type": {
+                "text": "\"gray\"|\"green\"|\"red\"|\"yellow\"|\"blue\""
+              },
+              "description": "タグの色の種類（\"gray\"、\"green\"、\"red\"、\"yellow\"、または \"blue\"）\n- \"gray\": グレー\n- \"green\": グリーン\n- \"red\": レッド\n- \"yellow\": イエロー\n- \"blue\": ブルー",
+              "default": "\"gray\"",
+              "fieldName": "type"
             },
             {
-              "name": "light"
+              "name": "light",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "ライトモードの有効状態（※grayカラーはライトモードのみ）",
+              "default": "true",
+              "fieldName": "light"
             }
           ],
           "superclass": {
             "name": "HTMLElement"
           },
           "tagName": "sp-tag-liquid",
-          "customElement": true
+          "customElement": true,
+          "summary": "液体状のタグコンポーネント"
         }
       ],
       "exports": [
@@ -1456,20 +1763,34 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "",
+          "description": "SpTagRemovableは、デザインシステム2.0における削除可能なタグコンポーネントです。\n削除ボタンを持ち、オプションでドラッグ機能も提供します。",
           "name": "SpTagRemovable",
+          "slots": [
+            {
+              "description": "タグのテキストコンテンツ（デフォルトスロット）",
+              "name": ""
+            }
+          ],
           "members": [
             {
               "kind": "field",
               "name": "disabled",
+              "description": "タグの無効状態",
               "type": {
                 "text": "boolean"
               },
-              "default": "false"
+              "default": "false",
+              "attribute": "disabled"
             },
             {
               "kind": "field",
-              "name": "draggable"
+              "name": "draggable",
+              "description": "タグのドラッグ可能状態",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "draggable"
             },
             {
               "kind": "field",
@@ -1485,22 +1806,48 @@
               "name": "remove",
               "type": {
                 "text": "CustomEvent"
-              }
+              },
+              "description": "削除ボタンがクリックされたときに発火するイベント"
+            },
+            {
+              "description": "ドラッグが開始されたときに発火するイベント。detail.x、detail.yに座標が含まれます",
+              "name": "dragstart"
+            },
+            {
+              "description": "ドラッグ中に発火するイベント。detail.x、detail.y、detail.deltaX、detail.deltaYに座標と移動量が含まれます",
+              "name": "drag"
+            },
+            {
+              "description": "ドラッグが終了したときに発火するイベント。detail.x、detail.yに座標が含まれます",
+              "name": "dragend"
             }
           ],
           "attributes": [
             {
-              "name": "disabled"
+              "name": "disabled",
+              "description": "タグの無効状態",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
             },
             {
-              "name": "draggable"
+              "name": "draggable",
+              "description": "タグのドラッグ可能状態",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "draggable"
             }
           ],
           "superclass": {
             "name": "HTMLElement"
           },
           "tagName": "sp-tag-removable",
-          "customElement": true
+          "customElement": true,
+          "summary": "削除可能なタグコンポーネント"
         }
       ],
       "exports": [
