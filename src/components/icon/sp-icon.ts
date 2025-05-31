@@ -13,7 +13,7 @@ styles.replaceSync(iconStyle);
 /**
  * SpIconは、デザインシステム2.0におけるアイコンコンポーネントです。
  * デザインシステムで用意されているアイコンセットを提供します。
- * 
+ *
  * @element sp-icon
  * @summary アイコンコンポーネント
  */
@@ -36,7 +36,7 @@ export class SpIcon extends UbIcon {
   /**
    * アイコンのタイプ
    * デザインシステムのアイコンタイプを指定した場合はそのタイプを設定し、それ以外を指定した場合は表示しません
-   * 
+   *
    * 指定可能なアイコンタイプ：
    * - arrow_down
    * - arrow_down_link
@@ -88,7 +88,7 @@ export class SpIcon extends UbIcon {
    * - toggle_arrow_down
    * - toggle_arrow_right
    * - zip
-   * 
+   *
    * @attribute
    * @type {string}
    */

@@ -4,7 +4,9 @@ import foundationStyle from "../foundation.css?inline";
 import dropdownActionItemStyle from "./dropdown-action-item.css?inline";
 
 const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownActionItemStyle}`);
+styles.replaceSync(
+  `${resetStyle} ${foundationStyle} ${dropdownActionItemStyle}`,
+);
 
 /**
  * SpDropdownActionItemは、デザインシステム2.0におけるドロップダウンアクション項目コンポーネントです。
