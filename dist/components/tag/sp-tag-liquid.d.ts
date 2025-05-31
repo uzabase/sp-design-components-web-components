@@ -1,5 +1,6 @@
 export type SpTagLiquidType = "gray" | "green" | "red" | "yellow" | "blue";
 export type SpTagLiquidMode = "light" | "dark";
+<<<<<<< HEAD
 /**
  * SpTagLiquidは、デザインシステム2.0における液体状のタグコンポーネントです。
  * 色とモード（明るい/暗い）を指定できるカラフルなタグを提供します。
@@ -32,6 +33,12 @@ export declare class SpTagLiquid extends HTMLElement {
      * @type {boolean}
      * @default true
      */
+=======
+export declare class SpTagLiquid extends HTMLElement {
+    #private;
+    get type(): SpTagLiquidType;
+    set type(value: SpTagLiquidType);
+>>>>>>> main
     get light(): boolean;
     set light(value: boolean);
     static get observedAttributes(): string[];

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * SpTagRemovableは、デザインシステム2.0における削除可能なタグコンポーネントです。
  * 削除ボタンを持ち、オプションでドラッグ機能も提供します。
@@ -30,6 +31,12 @@ export declare class SpTagRemovable extends HTMLElement {
      * @type {boolean}
      * @default false
      */
+=======
+export declare class SpTagRemovable extends HTMLElement {
+    #private;
+    get disabled(): boolean;
+    set disabled(value: boolean);
+>>>>>>> main
     get draggable(): boolean;
     set draggable(value: boolean);
     static get observedAttributes(): string[];

@@ -1,4 +1,5 @@
 import { UbButton } from '@ub-design/components-web-components';
+<<<<<<< HEAD
 /**
  * SpButtonは、デザインシステム2.0におけるボタンコンポーネントです。
  *
@@ -7,6 +8,8 @@ import { UbButton } from '@ub-design/components-web-components';
  *
  * @slot - ボタンのテキストコンテンツ（デフォルトスロット）
  */
+=======
+>>>>>>> main
 export declare class SpButton extends UbButton {
     #private;
     /**

@@ -1,4 +1,5 @@
 import { UbRadioButtonTextGroup } from '@ub-design/components-web-components/';
+<<<<<<< HEAD
 /**
  * SpSegmentedControlは、デザインシステム2.0におけるセグメント化コントロールコンポーネントです。
  * 関連する選択肢をセグメント化されたボタンとして表示し、一つを選択できます。
@@ -8,6 +9,8 @@ import { UbRadioButtonTextGroup } from '@ub-design/components-web-components/';
  *
  * @slot - セグメントの選択肢（デフォルトスロット）
  */
+=======
+>>>>>>> main
 export declare class SpSegmentedControl extends UbRadioButtonTextGroup {
     constructor();
 }

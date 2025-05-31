@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * SpTagLinkは、デザインシステム2.0におけるリンク機能付きタグコンポーネントです。
  * クリック可能なリンクとして動作するタグを提供します。
@@ -24,6 +25,11 @@ export declare class SpTagLink extends HTMLElement {
      * @type {boolean}
      * @default false
      */
+=======
+export declare class SpTagLink extends HTMLElement {
+    #private;
+    href: string;
+>>>>>>> main
     get disabled(): boolean;
     set disabled(value: boolean);
     static get observedAttributes(): string[];
