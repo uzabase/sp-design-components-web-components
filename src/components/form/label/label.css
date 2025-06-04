@@ -1,0 +1,12 @@
+.base {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.6;
+  color: var(--color-semantic-text-regular);
+  padding-block: 5px 4px;
+}
+
+.required {
+  color: var(--color-semantic-text-required);
+  margin-left: 0.5px;
+}
