@@ -44,7 +44,7 @@ export class SpLabel extends HTMLElement {
     if (oldValue === newValue) return;
 
     if (name === "required") {
-      this.required = this.hasAttribute("required");
+      this.required = newValue === "" || newValue === "true";
     }
   }
 
@@ -54,7 +54,6 @@ export class SpLabel extends HTMLElement {
 
   #setupElements() {
     this.#labelElement.classList.add("base");
-
     this.#labelElement.appendChild(this.#slotElement);
 
     this.#requiredElement.classList.add("required");
@@ -66,7 +65,7 @@ export class SpLabel extends HTMLElement {
     if (this.#required) {
       this.#labelElement.appendChild(this.#requiredElement);
     } else {
-      this.#requiredElement.remove();
+      this.#labelElement.removeChild(this.#requiredElement);
     }
   }
 }
