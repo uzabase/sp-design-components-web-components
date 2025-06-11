@@ -1,4 +1,4 @@
-import { UbIcon } from "@ub-design/components-web-components/";
+import { UbIcon } from '@ub-design/components-web-components/';
 export declare class SpIcon extends UbIcon {
     paths: {
         "": string;

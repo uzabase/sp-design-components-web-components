@@ -27,16 +27,38 @@ const meta = {
     onchange: action("onchange"),
   },
   render: (args) => html`
-    <sp-checkbox-list
-      value=${args.value}
-      name=${args.name}
-      ?checked=${args.checked}
-      ?indeterminate=${args.indeterminate}
-      ?disabled=${args.disabled}
-      @change=${args.onchange}
-    >
-      ${args.slot}
-    </sp-checkbox-list>
+    <div style="display: flex; flex-direction: column;">
+      <sp-checkbox-list
+        value=${args.value}
+        name=${args.name}
+        ?checked=${args.checked}
+        ?indeterminate=${args.indeterminate}
+        ?disabled=${args.disabled}
+        @change=${args.onchange}
+      >
+        ${args.slot}
+      </sp-checkbox-list>
+      <sp-checkbox-list
+        value=${args.value}
+        name=${args.name}
+        ?checked=${args.checked}
+        ?indeterminate=${args.indeterminate}
+        ?disabled=${args.disabled}
+        @change=${args.onchange}
+      >
+        ${args.slot}
+      </sp-checkbox-list>
+      <sp-checkbox-list
+        value=${args.value}
+        name=${args.name}
+        ?checked=${args.checked}
+        ?indeterminate=${args.indeterminate}
+        ?disabled=${args.disabled}
+        @change=${args.onchange}
+      >
+        ${args.slot}
+      </sp-checkbox-list>
+    </div>
   `,
 } satisfies Meta<SpCheckboxList>;
 
