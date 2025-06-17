@@ -10,6 +10,13 @@ styles.replaceSync(
   `${foundationStyle} ${buttonStyle} ${dropdownActionButtonStyle}`,
 );
 
+/**
+ * SpDropdownActionButtonは、デザインシステム2.0におけるドロップダウンアクション用ボタンコンポーネントです。
+ * ドロップダウンメニューを開くためのボタンとして使用し、下向き矢印アイコンが自動的に追加されます。
+ *
+ * @element sp-dropdown-action-button
+ * @summary ドロップダウンアクション用ボタンコンポーネント
+ */
 export class SpDropdownActionButton extends SpButton {
   constructor() {
     super();

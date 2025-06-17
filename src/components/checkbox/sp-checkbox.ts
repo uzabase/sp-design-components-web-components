@@ -7,6 +7,12 @@ import checkmarkStyle from "./checkmark.css?inline";
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${checkmarkStyle} ${checkboxStyle}`);
 
+/**
+ * SpCheckboxは、デザインシステム2.0におけるチェックボックスコンポーネントです。
+ *
+ * @element sp-checkbox
+ * @summary チェックボックスコンポーネント
+ */
 export class SpCheckbox extends UbCheckbox {
   constructor() {
     super();

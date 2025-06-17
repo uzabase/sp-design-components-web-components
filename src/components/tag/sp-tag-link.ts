@@ -8,12 +8,35 @@ import tagLinkStyle from "./tag-link.css?inline";
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${tagLinkStyle}`);
 
+/**
+ * SpTagLinkは、デザインシステム2.0におけるリンク機能付きタグコンポーネントです。
+ * クリック可能なリンクとして動作するタグを提供します。
+ *
+ * @element sp-tag-link
+ * @summary リンク機能付きタグコンポーネント
+ *
+ * @slot - タグのテキストコンテンツ（デフォルトスロット）
+ */
 export class SpTagLink extends HTMLElement {
+  /**
+   * リンク先のURL
+   *
+   * @attribute
+   * @type {string}
+   * @default ""
+   */
   href = "";
   #disabled = false;
 
   #linkElement: HTMLAnchorElement = document.createElement("a");
 
+  /**
+   * タグの無効状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get disabled() {
     return this.#disabled;
   }
