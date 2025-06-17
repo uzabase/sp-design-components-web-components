@@ -17,6 +17,15 @@ interface NavigationButton {
 const MAX_VISIBLE_PAGES = 10; // 表示する最大ページ数
 const PAGES_BEFORE_SELECTED = 4; // 選択ページの前に表示するページ数
 
+/**
+ * SpPaginationは、デザインシステム2.0におけるページネーションコンポーネントです。
+ * ページ分割されたコンテンツのナビゲーションを提供します。
+ *
+ * @element sp-pagination
+ * @summary ページネーションコンポーネント
+ *
+ * @fires change - ページが変更されたときに発火するイベント。detail.pageに新しいページ番号が含まれます
+ */
 export class SpPagination extends HTMLElement {
   #total = 1;
   #selected = 1;
@@ -24,6 +33,13 @@ export class SpPagination extends HTMLElement {
   #pageGroupElement = document.createElement("ul");
   #buttonElements: HTMLButtonElement[] = [];
 
+  /**
+   * 総ページ数
+   *
+   * @attribute
+   * @type {number}
+   * @default 1
+   */
   get total() {
     return this.#total;
   }
@@ -31,6 +47,13 @@ export class SpPagination extends HTMLElement {
     this.#total = value;
   }
 
+  /**
+   * 現在選択されているページ番号
+   *
+   * @attribute
+   * @type {number}
+   * @default 1
+   */
   get selected() {
     return this.#selected;
   }

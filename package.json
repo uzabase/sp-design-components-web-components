@@ -12,7 +12,9 @@
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build": "rimraf dist && vite build",
+    "build": "rimraf dist && run-s build:*",
+    "build:vite": "vite build",
+    "build:analyze": "custom-elements-manifest analyze --config custom-elements-manifest.config.mjs",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "format": "run-s \"format:* !format:prettier:check\"",
@@ -29,9 +31,10 @@
   "dependencies": {
     "@acab/reset.css": "0.11.0",
     "@sp-design/token": "git+https://github.com/uzabase/sp-design-token.git#semver:^9.0.1",
-    "@ub-design/components-web-components": "git+https://github.com/uzabase/ub-design-components-web-components.git#semver:^1.0.1"
+    "@ub-design/components-web-components": "git+https://github.com/uzabase/ub-design-components-web-components.git#docs/jsdoc"
   },
   "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.10.4",
     "@eslint/js": "^9.25.1",
     "@storybook/addon-actions": "^8.6.12",
     "@storybook/addon-essentials": "^8.6.12",

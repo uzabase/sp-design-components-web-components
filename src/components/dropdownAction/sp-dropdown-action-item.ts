@@ -1,9 +1,22 @@
+import resetStyle from "@acab/reset.css?inline";
+
 import foundationStyle from "../foundation.css?inline";
 import dropdownActionItemStyle from "./dropdown-action-item.css?inline";
 
 const styles = new CSSStyleSheet();
-styles.replaceSync(`${foundationStyle} ${dropdownActionItemStyle}`);
+styles.replaceSync(
+  `${resetStyle} ${foundationStyle} ${dropdownActionItemStyle}`,
+);
 
+/**
+ * SpDropdownActionItemは、デザインシステム2.0におけるドロップダウンアクション項目コンポーネントです。
+ * ドロップダウンメニュー内のアクション項目として使用します。
+ *
+ * @element sp-dropdown-action-item
+ * @summary ドロップダウンアクション項目コンポーネント
+ *
+ * @slot - アクション項目のテキストコンテンツ（デフォルトスロット）
+ */
 export class SpDropdownActionItem extends HTMLElement {
   constructor() {
     super();

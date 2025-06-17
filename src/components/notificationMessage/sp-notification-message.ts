@@ -41,12 +41,32 @@ styles.replaceSync(
   `${resetStyle} ${foundationStyle} ${notificationMessageStyle}`,
 );
 
+/**
+ * SpNotificationMessageは、デザインシステム2.0における通知メッセージコンポーネントです。
+ * ユーザーに情報、警告、エラー、成功メッセージを表示するために使用します。
+ *
+ * @element sp-notification-message
+ * @summary 通知メッセージコンポーネント
+ *
+ * @slot - 通知メッセージのコンテンツ（デフォルトスロット）
+ */
 export class SpNotificationMessage extends HTMLElement {
   #type: Type = "information";
 
   #baseElement = document.createElement("div");
   #iconElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
+  /**
+   * 通知の種類（"error"、"warning"、"information"、または "success"）
+   * - "error": エラーメッセージ
+   * - "warning": 警告メッセージ
+   * - "information": 情報メッセージ
+   * - "success": 成功メッセージ
+   *
+   * @attribute
+   * @type {"error"|"warning"|"information"|"success"}
+   * @default "information"
+   */
   get type() {
     return this.#type;
   }
