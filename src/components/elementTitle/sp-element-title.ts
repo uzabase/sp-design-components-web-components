@@ -1,10 +1,5 @@
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import elementTitleStyle from "./element-title.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${elementTitleStyle}`);
 
 export class SpElementTitle extends HTMLElement {
   #headingElement = document.createElement("h3");
@@ -15,7 +10,10 @@ export class SpElementTitle extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
 
-    this.shadowRoot!.adoptedStyleSheets = [styles];
+    this.shadowRoot!.adoptedStyleSheets = [
+      ...this.shadowRoot!.adoptedStyleSheets,
+      makeStyleSheet(elementTitleStyle),
+    ];
 
     this.#textLinkSlotElement.name = "text-links";
     this.#buttonSlotElement.name = "buttons";

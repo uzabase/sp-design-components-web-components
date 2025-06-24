@@ -1,6 +1,4 @@
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import notificationMessageStyle from "./notification-message.css?inline";
 
 export type Type = "error" | "warning" | "information" | "success";
@@ -36,11 +34,6 @@ export const iconPaths: Record<Type, string> = {
     '<path fill-rule="evenodd" clip-rule="evenodd" d="M2.58 18.8574L11.3416 3.99902H12.6459L21.4075 18.8574L20.7554 19.999H3.23212L2.58 18.8574ZM11.2 9.5V14.5H12.8V9.5H11.2ZM11.2 16V17.5H12.8V16H11.2Z" fill="#EAB100"></path>',
 };
 
-const styles = new CSSStyleSheet();
-styles.replaceSync(
-  `${resetStyle} ${foundationStyle} ${notificationMessageStyle}`,
-);
-
 export class SpNotificationMessage extends HTMLElement {
   #type: Type = "information";
 
@@ -67,7 +60,7 @@ export class SpNotificationMessage extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(notificationMessageStyle),
     ];
 
     this.type = "information";

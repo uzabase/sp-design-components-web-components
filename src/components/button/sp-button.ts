@@ -1,11 +1,7 @@
-import { UbButton } from "@ub-design/components-web-components";
-
-import foundationStyle from "../foundation.css?inline";
-import { SpIcon } from "../icon/sp-icon";
+import { makeStyleSheet } from "../styles";
 import buttonStyle from "./button.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${foundationStyle} ${buttonStyle}`);
+import { UbButton } from "@ub-design/components-web-components";
+import { SpIcon } from "../icon/sp-icon";
 
 export class SpButton extends UbButton {
   #icon = "";
@@ -35,7 +31,7 @@ export class SpButton extends UbButton {
 
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(buttonStyle),
     ];
 
     this.#iconElement.classList.add("base__icon");

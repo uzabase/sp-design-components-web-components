@@ -1,10 +1,5 @@
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import paginationStyle from "./pagination.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${paginationStyle}`);
 
 type ButtonType = "first" | "previous" | "next" | "last" | "page";
 
@@ -48,7 +43,7 @@ export class SpPagination extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(paginationStyle),
     ];
   }
 

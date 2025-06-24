@@ -1,6 +1,4 @@
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import { SpIcon } from "../icon/sp-icon";
 import notificationBarStyle from "./notification-bar.css?inline";
 
@@ -37,9 +35,6 @@ export const iconAriaLabels: Record<Type, string> = {
   success: "成功",
 };
 
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${notificationBarStyle}`);
-
 export class SpNotificationBar extends HTMLElement {
   #type: Type = "information";
 
@@ -68,7 +63,7 @@ export class SpNotificationBar extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(notificationBarStyle),
     ];
 
     this.type = "information";

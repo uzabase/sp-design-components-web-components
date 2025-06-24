@@ -1,10 +1,7 @@
 import { UbRadioButtonTextGroup } from "@ub-design/components-web-components/";
 
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import radioButtonTextGroupStyle from "./radio-button-text-group.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${foundationStyle} ${radioButtonTextGroupStyle}`);
 
 export class SpRadioButtonTextGroup extends UbRadioButtonTextGroup {
   constructor() {
@@ -12,7 +9,7 @@ export class SpRadioButtonTextGroup extends UbRadioButtonTextGroup {
 
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(radioButtonTextGroupStyle),
     ];
   }
 }

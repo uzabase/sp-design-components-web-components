@@ -1,8 +1,5 @@
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import dropdownActionItemStyle from "./dropdown-action-item.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${foundationStyle} ${dropdownActionItemStyle}`);
 
 export class SpDropdownActionItem extends HTMLElement {
   constructor() {
@@ -11,7 +8,7 @@ export class SpDropdownActionItem extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(dropdownActionItemStyle),
     ];
   }
 

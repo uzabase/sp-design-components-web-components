@@ -1,12 +1,5 @@
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import spDefinitionListDtStyle from "./sp-definition-list-dt.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(
-  `${resetStyle} ${foundationStyle} ${spDefinitionListDtStyle}`,
-);
 
 export class SpDefinitionListDt extends HTMLElement {
   #dtElement = document.createElement("dt");
@@ -19,7 +12,7 @@ export class SpDefinitionListDt extends HTMLElement {
   connectedCallback() {
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(spDefinitionListDtStyle),
     ];
 
     this.#dtElement.classList.add("base");
