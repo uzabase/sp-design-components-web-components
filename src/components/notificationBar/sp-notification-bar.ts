@@ -1,5 +1,5 @@
-import { makeStyleSheet } from "../styles";
 import { SpIcon } from "../icon/sp-icon";
+import { makeStyleSheet } from "../styles";
 import notificationBarStyle from "./notification-bar.css?inline";
 
 export type Type = "error" | "warning" | "information" | "success";

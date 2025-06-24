@@ -1,7 +1,8 @@
+import { UbButton } from "@ub-design/components-web-components";
+
+import { SpIcon } from "../icon/sp-icon";
 import { makeStyleSheet } from "../styles";
 import buttonStyle from "./button.css?inline";
-import { UbButton } from "@ub-design/components-web-components";
-import { SpIcon } from "../icon/sp-icon";
 
 export class SpButton extends UbButton {
   #icon = "";
