@@ -3,7 +3,6 @@ import "../icon/sp-icon";
 import { makeStyleSheet } from "../styles";
 import tagLinkStyle from "./tag-link.css?inline";
 
-
 export class SpTagLink extends HTMLElement {
   href = "";
   #disabled = false;
