@@ -1,0 +1,122 @@
+import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import * as ButtonStories from "./sp-button.story";
+
+import { Title, Description, Primary, Stories } from '@storybook/blocks';
+
+<Meta of={ButtonStories} />
+
+# ボタンだよ
+
+ボタンコンポーネントは、ユーザーアクションのトリガーとして使用される重要なUIコンポーネントです。
+
+# ⭐️以下mdxテンプレ部分
+
+## 使用方法
+
+```html
+<sp-button>ボタンテキスト</sp-button>
+```
+
+## プロパティ
+
+<Controls />
+
+## サンプル
+
+<Canvas>
+  <Story of={ButtonStories.Basic} />
+</Canvas>
+
+## オーバーフロー時の動作
+
+<Canvas>
+  <Story of={ButtonStories.OverflowWrap} />
+</Canvas>
+
+# ⭐️AIに作ってみもらったドキュメント
+
+{/* 
+  Metaブロック: このドキュメントを対応するコンポーネントのストーリーと関連付けます。
+  'of'プロパティでインポートしたストーリーファイルを指定します。
+*/}
+
+{/* 
+  Doc Blocks: ストーリーファイルからタイトル、説明、プライマリストーリー、
+  Propsテーブル(Controls)、全ストーリー(Stories)を自動で埋め込みます。
+*/}
+<Title />
+<Description />
+<Primary />
+<Controls />
+
+## Anatomy（構成要素）
+- **ラベル（Label）**: ボタンの主目的を明示するテキスト要素です。
+- **アイコン（Icon, 任意）**: 装飾や機能の補助として、ラベルの前後に配置可能です。
+- **コンテナ**: ボタン全体を囲み、背景色や枠線、シャドウなどのビジュアルを制御します。
+- **ローディングインジケーター（任意）**: 非同期処理中に表示し、ユーザーに進行中であることを示します。
+
+## Variants（バリエーション）
+<Stories title="全バリエーション一覧" />
+
+## Operational Specs（操作の仕様）
+
+**サイズ可変**
+- **small**: Table内で使用します。
+- **medium**: 基本的に使用されるサイズです。
+- **large**: ユーザーに明示的に押させたい時に使用します。
+- **x-large**: ログイン画面で使用します(仮)。
+
+**サイズ固定**
+- **width-160**: 可変にするとボタンが小さく感じる場合や、レイアウトのズレが起きる時に使用します。
+- **width-80**: モーダル内のボタンで使用します。
+
+**タイプ**
+- **Fill**: CTAをより強調したい場合に使用します。（例：レポートのダウンロード）
+- **outline**: 基本のボタンです。役割レベルが並列の場合、ページ内、機能内で複数使用することが可能です。
+- **text**: サブ的なアクションのトリガーとして使用します。基本ボタンと比べ、役割レベルが低い場合に使用します。
+
+## Visual Specs（見た目の仕様）
+
+### 共通プロパティ（サイズに関する設定）
+
+|                    | small          | medium           | large          | x-large        |
+| ------------------ | -------------- | ---------------- | -------------- | -------------- |
+| **Width - Liquid** | `padding: 8px` | `padding: 16px`  | `padding: 24px`| `padding: 40px`|
+| **Width - Fixed**  | *設定なし*     | `80px`, `160px`  | *設定なし*     | *設定なし*     |
+| **Height**         | `24px`         | `28px`           | `32px`         | `40px`         |
+| **font-weight**    | `700`          | `700`            | `700`          | `700`          |
+| **font-size**      | `10px`         | `10px`           | `12px`         | `12px`         |
+| **border-radius**  | `5px`          | `5px`            | `5px`          | `5px`          |
+
+### タイプ別プロパティ
+
+**Fill**
+|                | default   | hover     | selected  | selected-hover | disabled  |
+| -------------- | --------- | --------- | --------- | -------------- | --------- |
+| **background** | `#191919` | `#363636` | `#404FBF` | `#5361C5`      | `#F8F8F8` |
+| **color**      | `#FFFFFF` | `#FFFFFF` | `#FFFFFF` | `#FFFFFF`      | `#CBCBCB` |
+| **border**     | `#191919` | `#363636` | `#404FBF` | `#5361C5`      | `#E5E5E5` |
+
+**Outline**
+|                | default                  | hover                    | selected  | selected-hover | disabled  |
+| -------------- | ------------------------ | ------------------------ | --------- | -------------- | --------- |
+| **background** | `rgba(25, 25, 25, 0.00)` | `rgba(25, 25, 25, 0.00)` | `#404FBF` | `#5361C5`      | `#F8F8F8` |
+| **color**      | `#191919`                | `#6F6F6F`                | `#FFFFFF` | `#FFFFFF`      | `#CBCBCB` |
+| **border**     | `#191919`                | `#6F6F6F`                | `#404FBF` | `#5361C5`      | `#E5E5E5` |
+
+**Text**
+|                | default                  | hover     | selected  | selected-hover | disabled  |
+| -------------- | ------------------------ | --------- | --------- | -------------- | --------- |
+| **background** | `rgba(25, 25, 25, 0.00)` | `#F5F5F5` | `#404FBF` | `#5361C5`      | `#F8F8F8` |
+| **color**      | `#191919`                | `#191919` | `#FFFFFF` | `#FFFFFF`      | `#CBCBCB` |
+| **border**     | `rgba(25, 25, 25, 0.00)` | `#F5F5F5` | `#404FBF` | `#5361C5`      | `#E5E5E5` |
+
+## Usage Guidelines（利用上のルール）
+
+**Do**
+- 主要なアクションには`fill`ボタンを1画面1つまで配置する
+- 基本的なアクションには`outline`ボタンを使用する
+- 目立たせなくて良い補助的なアクションには`text`ボタンを使用する
+- ボタンラベルはアクション内容を
+
+
