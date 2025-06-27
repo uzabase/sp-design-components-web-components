@@ -16,36 +16,20 @@
   outline: none;
 }
 
-.input {
+.label {
   flex-grow: 1;
   padding-inline: 8px;
   padding-block: 3.5px;
-  border: none;
-  background-color: inherit;
   font-size: 12px;
   font-weight: 400;
   line-height: 160%;
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
-  cursor: pointer;
 }
 
-.input::placeholder {
+.label.placeholder {
   color: var(--color-semantic-text-weak);
-}
-
-.input:focus {
-  border: none;
-  box-shadow: none;
-}
-
-/* disable focus-ring */
-.input:focus-visible {
-  outline: none;
-}
-
-.input:disabled {
-  border: 1px solid var(--color-semantic-border-regular);
-  background: var(--color-semantic-surface-regular-4);
 }
 
 .icon-wrapper {

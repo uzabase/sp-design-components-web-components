@@ -11,8 +11,8 @@ const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownSelectStyle}`);
 
 class SpDropdownSelect extends HTMLElement {
-  #baseElement = document.createElement("span");
-  #inputElement = document.createElement("input");
+  #baseElement = document.createElement("button");
+  #labelElement = document.createElement("span");
   #iconWrapperElement = document.createElement("div");
   #iconElement = document.createElement("sp-icon");
 
@@ -26,7 +26,13 @@ class SpDropdownSelect extends HTMLElement {
 
   set text(val: string) {
     this.#text = val;
-    this.#inputElement.value = val;
+    if (val) {
+      this.#labelElement.innerText = val;
+      this.#labelElement.classList.remove("placeholder");
+    } else {
+      this.#labelElement.innerText = this.placeholder;
+      this.#labelElement.classList.add("placeholder");
+    }
   }
 
   get width() {
@@ -44,7 +50,6 @@ class SpDropdownSelect extends HTMLElement {
 
   set placeholder(val: string) {
     this.#placeholder = val;
-    this.#inputElement.setAttribute("placeholder", val);
   }
 
   static get observedAttributes() {
@@ -62,13 +67,7 @@ class SpDropdownSelect extends HTMLElement {
   }
 
   connectedCallback() {
-    this.#inputElement.classList.add("input");
-    this.#inputElement.type = "text";
-    this.#inputElement.readOnly = true;
-    this.#inputElement.setAttribute("placeholder", this.placeholder);
-    this.#inputElement.tabIndex = -1;
-    this.#inputElement.setAttribute("aria-label", "ドロップダウン選択");
-    this.#inputElement.setAttribute("aria-readonly", "true");
+    this.#labelElement.classList.add("label");
 
     this.#iconElement.size = "small";
     this.#iconElement.type = "arrow_down";
@@ -78,7 +77,7 @@ class SpDropdownSelect extends HTMLElement {
 
     this.#baseElement.classList.add("base");
     this.#baseElement.tabIndex = 0;
-    this.#baseElement.appendChild(this.#inputElement);
+    this.#baseElement.appendChild(this.#labelElement);
     this.#baseElement.appendChild(this.#iconWrapperElement);
 
     this.shadowRoot?.appendChild(this.#baseElement);
