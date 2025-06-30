@@ -1,7 +1,7 @@
 import "@sp-design/token/lib/speeda-tokens.css";
 import "../../src/components/tag/sp-tag-clickable";
 
-import type { Meta, StoryObj } from "@storybook/web-components";
+import type { Meta, StoryObj } from "@storybook/web-components-vite";
 import { html } from "lit";
 
 import type { SpTagClickable } from "../../src/components/tag/sp-tag-clickable";

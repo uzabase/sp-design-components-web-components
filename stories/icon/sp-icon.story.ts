@@ -1,6 +1,6 @@
 import "../../src/components/icon/sp-icon";
 
-import type { Meta, StoryObj } from "@storybook/web-components";
+import type { Meta, StoryObj } from "@storybook/web-components-vite";
 import { html } from "lit";
 
 import { speedaIconTypes } from "../../src/components/icon/icons";
