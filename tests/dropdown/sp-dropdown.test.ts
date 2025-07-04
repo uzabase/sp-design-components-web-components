@@ -167,7 +167,7 @@ describe("sp-dropdown", () => {
       await user.click(select);
 
       const listbox = queryListbox();
-      expect(listbox).not.toBe(null);
+      expect(listbox).toBeVisible();
     });
 
     test("選択肢をクリックすると、選択肢が非表示になる", async () => {
@@ -186,7 +186,7 @@ describe("sp-dropdown", () => {
       await user.click(option);
 
       const listbox = queryListbox();
-      expect(listbox).toBe(null);
+      expect(listbox).not.toBeVisible();
     });
 
     test("選択肢の外側をクリックすると、選択肢が非表示になる", async () => {
@@ -204,7 +204,7 @@ describe("sp-dropdown", () => {
       await user.click(document.body);
 
       const listbox = queryListbox();
-      expect(listbox).toBe(null);
+      expect(listbox).not.toBeVisible();
     });
   });
 
@@ -222,7 +222,7 @@ describe("sp-dropdown", () => {
       await userEvent.keyboard("{ArrowUp}");
 
       const listbox = queryListbox();
-      expect(listbox).not.toBe(null);
+      expect(listbox).toBeVisible();
       const activeElement = document.activeElement;
       expect(activeElement).toBe(getSpDropdownOptions()[1]);
     });
@@ -240,7 +240,7 @@ describe("sp-dropdown", () => {
       await userEvent.keyboard("{ArrowDown}");
 
       const listbox = queryListbox();
-      expect(listbox).not.toBe(null);
+      expect(listbox).toBeVisible();
       const activeElement = document.activeElement;
       expect(activeElement).toBe(getSpDropdownOptions()[0]);
     });
@@ -297,7 +297,7 @@ describe("sp-dropdown", () => {
       await user.keyboard("{Enter}");
 
       const listbox = queryListbox();
-      expect(listbox).not.toBe(null);
+      expect(listbox).toBeVisible();
       const activeElement = document.activeElement;
       expect(activeElement).toBe(getSpDropdownOptions()[0]);
     });
@@ -318,7 +318,7 @@ describe("sp-dropdown", () => {
       await user.keyboard("{Enter}");
 
       const listbox = queryListbox();
-      expect(listbox).toBe(null);
+      expect(listbox).not.toBeVisible();
       expect(getSpDropdown().value).toBe("Value1");
       const activeElement = document.activeElement;
       expect(activeElement).toBe(getSpDropdown());
@@ -337,7 +337,7 @@ describe("sp-dropdown", () => {
       await user.keyboard(" ");
 
       const listbox = queryListbox();
-      expect(listbox).not.toBe(null);
+      expect(listbox).toBeVisible();
       const activeElement = document.activeElement;
       expect(activeElement).toBe(getSpDropdownOptions()[0]);
     });
@@ -358,7 +358,7 @@ describe("sp-dropdown", () => {
       await user.keyboard(" ");
 
       const listbox = queryListbox();
-      expect(listbox).toBe(null);
+      expect(listbox).not.toBeVisible();
       expect(getSpDropdown().value).toBe("Value1");
       const activeElement = document.activeElement;
       expect(activeElement).toBe(getSpDropdown());
@@ -379,7 +379,7 @@ describe("sp-dropdown", () => {
       await user.keyboard("{Escape}");
 
       const listbox = queryListbox();
-      expect(listbox).toBe(null);
+      expect(listbox).not.toBeVisible();
     });
   });
 });
