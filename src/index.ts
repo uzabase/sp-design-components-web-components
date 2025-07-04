@@ -20,3 +20,4 @@ export { SpTagClickable } from "./components/tag/sp-tag-clickable";
 export { SpTagLink } from "./components/tag/sp-tag-link";
 export { SpTagLiquid } from "./components/tag/sp-tag-liquid";
 export { SpTagRemovable } from "./components/tag/sp-tag-removable";
+export { SpTooltip } from "./components/tooltip/sp-tooltip";

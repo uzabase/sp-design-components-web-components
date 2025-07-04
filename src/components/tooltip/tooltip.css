@@ -1,0 +1,48 @@
+.tooltip__main {
+  padding: 8px;
+  background: #191919;
+  box-shadow: 0 3px 12px rgb(25 25 25 / 20%);
+  border-radius: 2px;
+  font-weight: 300;
+  font-size: 10px;
+  line-height: 160%;
+  color: #FFF;
+  z-index: 10;
+  max-width: 320px;
+}
+
+.tooltip__main.auto {
+  width: auto;
+}
+
+.tooltip__label {
+  font-size: 10px;
+}
+
+.tooltip__label .tooltip__arrow,
+.tooltip__arrow::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  z-index: -1;
+}
+
+.tooltip__arrow::before {
+  display: none;
+}
+
+.tooltip__main[data-popper-placement^="bottom"] > .tooltip__arrow {
+  top: -4px;
+}
+
+.tooltip__main[data-popper-placement^="top"] > .tooltip__arrow {
+  bottom: -4px;
+}
+
+.tooltip__main[data-popper-placement^="left"] > .tooltip__arrow {
+  right: -4px;
+}
+
+.tooltip__main[data-popper-placement^="right"] > .tooltip__arrow {
+  left: -4px;
+}
