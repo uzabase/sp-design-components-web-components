@@ -1,6 +1,6 @@
 import "../../src/components/tooltip/sp-tooltip";
 
-import { beforeEach,describe, expect, test } from "vitest";
+import { beforeEach, describe, expect, test } from "vitest";
 
 import type { SpTooltip } from "../../src/components/tooltip/sp-tooltip";
 
