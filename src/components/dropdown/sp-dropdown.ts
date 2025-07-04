@@ -1,7 +1,9 @@
+import "./sp-dropdown-listbox";
+
 import resetStyle from "@acab/reset.css?inline";
 
 import foundationStyle from "../foundation.css?inline";
-import dropdownActionStyle from "./sp-dropdown.css?inline";
+import dropdownStyle from "./sp-dropdown.css?inline";
 import { ClickEventDetail, SpDropdownOption } from "./sp-dropdown-option";
 import { calculateDropdownSelectWidth } from "./sp-dropdown-select";
 
@@ -14,10 +16,15 @@ export function isValidSelectType(value: string): value is SelectType {
   return selectTypes.some((type) => type === value);
 }
 
-const LISTBOX_ARIA_CONTROLS = "sp-dropdown-listbox";
+const LISTBOX_ARIA_CONTROLS = "sp-dropdown-listbox-id";
+const DEFAULT_SELECT_WIDTH = 160;
+
+const SELECT_MIN_WIDTH = 80;
+const SELECT_MAX_WIDTH = 320;
+const LISTBOX_MIN_WIDTH = 80;
 
 const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownActionStyle}`);
+styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownStyle}`);
 
 export class SpDropdown extends HTMLElement {
   // elements
@@ -33,7 +40,7 @@ export class SpDropdown extends HTMLElement {
 
   // states
   #text = "";
-  #selectWidth = 0;
+  #selectWidth = DEFAULT_SELECT_WIDTH;
   #expanded = false;
   #position: Position = "left";
 
@@ -60,8 +67,10 @@ export class SpDropdown extends HTMLElement {
 
   set selectWidth(val: number) {
     this.#selectWidth = val;
-    this.#selectElement.setAttribute("width", String(val));
-    this.#listboxElement.style.width = `${val}px`;
+    const selectWidth = Math.max(Math.min(val, SELECT_MAX_WIDTH), SELECT_MIN_WIDTH);
+    const listboxWidth = Math.max(val, LISTBOX_MIN_WIDTH);
+    this.#selectElement.style.width = `${selectWidth}px`;
+    this.#listboxElement.style.width = `${listboxWidth}px`;
   }
 
   get placeholder() {
@@ -143,16 +152,14 @@ export class SpDropdown extends HTMLElement {
   }
 
   #initializeElements() {
-    this.#selectElement.role = "combobox";
     this.#selectElement.setAttribute("aria-haspopup", "listbox");
     this.#selectElement.setAttribute("aria-controls", LISTBOX_ARIA_CONTROLS);
     this.#selectElement.setAttribute("aria-expanded", String(this.expanded));
     this.#selectElement.setAttribute("placeholder", this.placeholder);
     this.#selectElement.text = this.#text;
 
-    this.#listboxElement.id = LISTBOX_ARIA_CONTROLS;
+    this.#listboxElement.setAttribute("id", LISTBOX_ARIA_CONTROLS);
     this.#listboxElement.classList.add("listbox");
-    this.#listboxElement.role = "listbox";
     this.#listboxElement.appendChild(this.#slotElement);
 
     this.#baseElement.classList.add("base");

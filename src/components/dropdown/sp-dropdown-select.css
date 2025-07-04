@@ -1,8 +1,12 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
 .base {
+  width: 100%;
   display: inline-flex;
   align-items: center;
-  min-width: 80px;
-  max-width: 320px;
   color: var(--color-semantic-text-regular);
   border-radius: 2px;
   border: 1px solid var(--color-semantic-border-regular);

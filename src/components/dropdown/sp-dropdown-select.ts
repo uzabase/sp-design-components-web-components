@@ -17,7 +17,6 @@ class SpDropdownSelect extends HTMLElement {
   #iconElement = document.createElement("sp-icon");
 
   #text: string = "";
-  #width: number = DEFAULT_WIDTH;
   #placeholder: string = "";
 
   get text() {
@@ -34,16 +33,6 @@ class SpDropdownSelect extends HTMLElement {
       this.#labelElement.classList.add("placeholder");
     }
   }
-
-  get width() {
-    return this.#width;
-  }
-
-  set width(val: number) {
-    this.#width = val;
-    this.#baseElement.style.width = `${val}px`;
-  }
-
   get placeholder() {
     return this.#placeholder;
   }
@@ -53,7 +42,7 @@ class SpDropdownSelect extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["text", "width", "placeholder"];
+    return ["text", "placeholder"];
   }
 
   constructor() {
@@ -76,6 +65,7 @@ class SpDropdownSelect extends HTMLElement {
     this.#iconWrapperElement.appendChild(this.#iconElement);
 
     this.#baseElement.classList.add("base");
+    this.#baseElement.setAttribute("role", "combobox");
     this.#baseElement.tabIndex = 0;
     this.#baseElement.appendChild(this.#labelElement);
     this.#baseElement.appendChild(this.#iconWrapperElement);
@@ -88,9 +78,6 @@ class SpDropdownSelect extends HTMLElement {
     switch (name) {
       case "text":
         this.text = newValue;
-        break;
-      case "width":
-        this.width = Number(newValue) ? Number(newValue) : DEFAULT_WIDTH;
         break;
       case "placeholder":
         this.placeholder = newValue;
@@ -112,15 +99,20 @@ export type { SpDropdownSelect };
 
 // sp-dropdown-selectに特定のvalueを設定した際の幅を計算する関数
 export function calculateDropdownSelectWidth(value: string): number {
-  const paddingWidth = 42; // input要素の左右のpadding
-  const borderWidth = 2; // input要素の左右のborder
-  const fontSize = 12; // input要素のフォントサイズ
+  const iconAreaWidth = 26;
+  const labelPaddingInline = 8;
+  const borderWidth = 1;
+  const fontSize = 12;
   const spanElement = document.createElement("span");
   spanElement.innerText = value;
   spanElement.style.fontSize = `${fontSize}px`;
   spanElement.style.visibility = "hidden";
   document.body.appendChild(spanElement);
-  const width = spanElement.offsetWidth + paddingWidth + borderWidth;
+  const width =
+    spanElement.offsetWidth +
+    iconAreaWidth +
+    labelPaddingInline * 2 +
+    borderWidth * 2;
   document.body.removeChild(spanElement);
   return width;
 }

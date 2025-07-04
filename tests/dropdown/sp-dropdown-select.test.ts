@@ -40,29 +40,6 @@ describe("sp-dropdown-select", () => {
     });
   });
 
-  describe("width属性", () => {
-    test("width属性を設定できる", async () => {
-      document.body.innerHTML = `
-        <sp-dropdown-select width="320"></sp-dropdown-select>
-      `;
-
-      const spDropdownSelect = getSpDropdownSelect();
-      expect(spDropdownSelect.width).toBe(320);
-    });
-
-    test("width属性を変更できる", async () => {
-      document.body.innerHTML = `
-        <sp-dropdown-select width="320"></sp-dropdown-select>
-      `;
-
-      const spDropdownSelect = getSpDropdownSelect();
-      expect(spDropdownSelect.width).toBe(320);
-
-      spDropdownSelect.setAttribute("width", "80");
-      expect(spDropdownSelect.width).toBe(80);
-    });
-  });
-
   describe("placeholder属性", () => {
     test("placeholder属性を設定できる", async () => {
       document.body.innerHTML = `
