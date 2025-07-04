@@ -5,8 +5,8 @@ import dropdownActionStyle from "./sp-dropdown.css?inline";
 import { ClickEventDetail, SpDropdownOption } from "./sp-dropdown-option";
 import { calculateDropdownSelectWidth } from "./sp-dropdown-select";
 
-type SelectType = "single" | "multiple";
-const selectTypes: SelectType[] = ["single", "multiple"];
+const selectTypes = ["single", "multiple"] as const;
+type SelectType = (typeof selectTypes)[number];
 
 type Position = "left" | "right";
 
@@ -23,7 +23,7 @@ export class SpDropdown extends HTMLElement {
   // elements
   #baseElement = document.createElement("div");
   #selectElement = document.createElement("sp-dropdown-select");
-  #listboxElement = document.createElement("div");
+  #listboxElement = document.createElement("sp-dropdown-listbox");
   #slotElement = document.createElement("slot");
 
   // attributes
@@ -60,8 +60,8 @@ export class SpDropdown extends HTMLElement {
 
   set selectWidth(val: number) {
     this.#selectWidth = val;
-    this.#listboxElement.style.width = `${val}px`;
     this.#selectElement.setAttribute("width", String(val));
+    this.#listboxElement.style.width = `${val}px`;
   }
 
   get placeholder() {
