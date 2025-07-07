@@ -3,6 +3,8 @@ import resetStyle from "@acab/reset.css?inline";
 import foundationStyle from "../foundation.css?inline";
 import dropdownListboxStyle from "./sp-dropdown-listbox.css?inline";
 
+export const LISTBOX_ID = crypto.randomUUID();
+
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownListboxStyle}`);
 
@@ -22,6 +24,7 @@ class SpDropdownListbox extends HTMLElement {
 
   connectedCallback() {
     this.#baseElement.setAttribute("role", "listbox");
+    this.#baseElement.setAttribute("id", LISTBOX_ID);
     this.#baseElement.classList.add("base");
     this.#baseElement.appendChild(this.#slotElement);
 

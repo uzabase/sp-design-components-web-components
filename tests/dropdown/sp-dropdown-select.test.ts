@@ -70,4 +70,35 @@ describe("sp-dropdown-select", () => {
       expect(spDropdownSelect.placeholder).toBe("NewPlaceholder");
     });
   });
+
+  describe("expanded属性", () => {
+    test("expanded属性を設定できる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown-select expanded="true"></sp-dropdown-select>
+      `;
+
+      const spDropdownSelect = getSpDropdownSelect();
+      expect(spDropdownSelect.expanded).toBe(true);
+    });
+
+    test("expanded属性を設定しないと、falseが設定される", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown-select></sp-dropdown-select>
+      `;
+      const spDropdownSelect = getSpDropdownSelect();
+      expect(spDropdownSelect.expanded).toBe(false);
+    });
+
+    test("expanded属性を変更できる", async () => {
+      document.body.innerHTML = `
+        <sp-dropdown-select expanded="true"></sp-dropdown-select>
+      `;
+
+      const spDropdownSelect = getSpDropdownSelect();
+      expect(spDropdownSelect.expanded).toBe(true);
+
+      spDropdownSelect.setAttribute("expanded", "false");
+      expect(spDropdownSelect.expanded).toBe(false);
+    });
+  });
 });

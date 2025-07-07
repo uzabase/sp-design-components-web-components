@@ -4,6 +4,7 @@ import resetStyle from "@acab/reset.css?inline";
 
 import foundationStyle from "../foundation.css?inline";
 import dropdownSelectStyle from "./sp-dropdown-select.css?inline";
+import { LISTBOX_ID } from "./sp-dropdown-listbox";
 
 export const DEFAULT_WIDTH = 160;
 
@@ -18,6 +19,7 @@ class SpDropdownSelect extends HTMLElement {
 
   #text: string = "";
   #placeholder: string = "";
+  #expanded: boolean = false;
 
   get text() {
     return this.#text;
@@ -41,8 +43,16 @@ class SpDropdownSelect extends HTMLElement {
     this.#placeholder = val;
   }
 
+  get expanded() {
+    return this.#expanded;
+  }
+  set expanded(val: boolean) {
+    this.#expanded = val;
+    this.#baseElement.setAttribute("aria-expanded", String(val));
+  }
+
   static get observedAttributes() {
-    return ["text", "placeholder"];
+    return ["text", "placeholder", "expanded"];
   }
 
   constructor() {
@@ -66,6 +76,9 @@ class SpDropdownSelect extends HTMLElement {
 
     this.#baseElement.classList.add("base");
     this.#baseElement.setAttribute("role", "combobox");
+    this.#baseElement.setAttribute("aria-expanded", String(this.expanded));
+    this.#baseElement.setAttribute("aria-haspopup", "listbox");
+    this.#baseElement.setAttribute("aria-controls", LISTBOX_ID);
     this.#baseElement.tabIndex = 0;
     this.#baseElement.appendChild(this.#labelElement);
     this.#baseElement.appendChild(this.#iconWrapperElement);
@@ -81,6 +94,10 @@ class SpDropdownSelect extends HTMLElement {
         break;
       case "placeholder":
         this.placeholder = newValue;
+        break;
+      case "expanded":
+        this.expanded = newValue === "true";
+        break;
     }
   }
 }

@@ -115,7 +115,7 @@ describe("sp-dropdown-option", () => {
   describe("selected属性", () => {
     test("selected属性を設定できる", async () => {
       document.body.innerHTML = `
-        <sp-dropdown-option selected></sp-dropdown-option>
+        <sp-dropdown-option selected="true"></sp-dropdown-option>
       `;
 
       const spDropdownOption = getSpDropdownOption();
@@ -128,10 +128,10 @@ describe("sp-dropdown-option", () => {
       `;
 
       const spDropdownOption = getSpDropdownOption();
-      spDropdownOption.setAttribute("selected", "");
+      spDropdownOption.setAttribute("selected", "true");
       expect(spDropdownOption.selected).toBe(true);
 
-      spDropdownOption.removeAttribute("selected");
+      spDropdownOption.setAttribute("selected", "false");
       expect(spDropdownOption.selected).toBe(false);
     });
   });

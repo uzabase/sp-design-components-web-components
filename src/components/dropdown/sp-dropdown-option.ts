@@ -119,7 +119,7 @@ export class SpDropdownOption extends HTMLElement {
         this.selectType = isValidSelectType(newValue) ? newValue : "single";
         break;
       case "selected":
-        this.selected = newValue !== null;
+        this.selected = newValue === "true";
         break;
     }
   }

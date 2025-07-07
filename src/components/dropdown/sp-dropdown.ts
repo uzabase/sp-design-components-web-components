@@ -16,7 +16,6 @@ export function isValidSelectType(value: string): value is SelectType {
   return selectTypes.some((type) => type === value);
 }
 
-const LISTBOX_ARIA_CONTROLS = "sp-dropdown-listbox-id";
 const DEFAULT_SELECT_WIDTH = 160;
 
 const SELECT_MIN_WIDTH = 80;
@@ -67,7 +66,10 @@ export class SpDropdown extends HTMLElement {
 
   set selectWidth(val: number) {
     this.#selectWidth = val;
-    const selectWidth = Math.max(Math.min(val, SELECT_MAX_WIDTH), SELECT_MIN_WIDTH);
+    const selectWidth = Math.max(
+      Math.min(val, SELECT_MAX_WIDTH),
+      SELECT_MIN_WIDTH,
+    );
     const listboxWidth = Math.max(val, LISTBOX_MIN_WIDTH);
     this.#selectElement.style.width = `${selectWidth}px`;
     this.#listboxElement.style.width = `${listboxWidth}px`;
@@ -88,7 +90,7 @@ export class SpDropdown extends HTMLElement {
   set expanded(val: boolean) {
     this.#expanded = val;
     this.#listboxElement.hidden = !val;
-    this.#selectElement.setAttribute("aria-expanded", String(val));
+    this.#selectElement.expanded = val;
   }
 
   get value() {
@@ -152,13 +154,10 @@ export class SpDropdown extends HTMLElement {
   }
 
   #initializeElements() {
-    this.#selectElement.setAttribute("aria-haspopup", "listbox");
-    this.#selectElement.setAttribute("aria-controls", LISTBOX_ARIA_CONTROLS);
-    this.#selectElement.setAttribute("aria-expanded", String(this.expanded));
-    this.#selectElement.setAttribute("placeholder", this.placeholder);
+    this.#selectElement.expanded = this.expanded;
+    this.#selectElement.placeholder = this.placeholder;
     this.#selectElement.text = this.#text;
 
-    this.#listboxElement.setAttribute("id", LISTBOX_ARIA_CONTROLS);
     this.#listboxElement.classList.add("listbox");
     this.#listboxElement.appendChild(this.#slotElement);
 
@@ -208,6 +207,9 @@ export class SpDropdown extends HTMLElement {
 
   #toggleListbox() {
     this.expanded = !this.expanded;
+    if (this.expanded) {
+      this.#focusNextOption();
+    }
   }
 
   #hideListbox() {
@@ -249,14 +251,9 @@ export class SpDropdown extends HTMLElement {
 
   #updateOptions() {
     const options = this.#getOptions();
-
     options.forEach((option) => {
-      option.setAttribute("select-type", this.selectType);
-      if (option.value === this.#value) {
-        option.setAttribute("selected", "");
-      } else {
-        option.removeAttribute("selected");
-      }
+      option.selectType = this.selectType;
+      option.selected = option.value === this.#value;
     });
   }
 
@@ -275,12 +272,15 @@ export class SpDropdown extends HTMLElement {
   }
   #adjustListboxPositionHandler = this.#adjustListboxPosition.bind(this);
 
-  #focusNextOption() {
+  #getFocusedIndex() {
     const options = this.#getOptions();
     const activeElement = document.activeElement;
-    const focusedIndex = options.findIndex(
-      (option) => option === activeElement,
-    );
+    return options.findIndex((option) => option === activeElement);
+  }
+
+  #focusNextOption() {
+    const options = this.#getOptions();
+    const focusedIndex = this.#getFocusedIndex();
 
     if (focusedIndex === -1) {
       options[0]?.focus();
@@ -291,10 +291,7 @@ export class SpDropdown extends HTMLElement {
 
   #focusPreviousOption() {
     const options = this.#getOptions();
-    const activeElement = document.activeElement;
-    const focusedIndex = options.findIndex(
-      (option) => option === activeElement,
-    );
+    const focusedIndex = this.#getFocusedIndex();
 
     if (focusedIndex > 0) {
       options[focusedIndex - 1].focus();
@@ -305,8 +302,8 @@ export class SpDropdown extends HTMLElement {
 
   #selectFocusedOption() {
     const options = this.#getOptions();
-    const activeElement = document.activeElement;
-    const focusedOption = options.find((option) => option === activeElement);
+    const focusedIndex = this.#getFocusedIndex();
+    const focusedOption = options[focusedIndex];
     if (focusedOption) {
       focusedOption.click();
     }
