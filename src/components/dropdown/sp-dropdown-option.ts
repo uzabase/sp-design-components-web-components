@@ -90,7 +90,7 @@ export class SpDropdownOption extends HTMLElement {
     this.#textElement.classList.add("text");
 
     this.#baseElement.classList.add("base");
-    this.#baseElement.role = "option";
+    this.#baseElement.setAttribute("role", "option");
     this.#baseElement.setAttribute("aria-selected", "false");
     this.#baseElement.setAttribute("aria-label", this.text);
     this.#baseElement.appendChild(this.#iconAreaElement);

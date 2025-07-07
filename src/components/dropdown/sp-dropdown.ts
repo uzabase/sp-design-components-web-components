@@ -42,6 +42,7 @@ export class SpDropdown extends HTMLElement {
   #selectWidth = DEFAULT_SELECT_WIDTH;
   #expanded = false;
   #position: Position = "left";
+  #focusedIndex: number = -1;
 
   get selectType() {
     return this.#selectType;
@@ -96,6 +97,7 @@ export class SpDropdown extends HTMLElement {
       this.#focusNextOption();
     } else {
       this.#selectElement.focus();
+      this.#focusedIndex = -1;
     }
   }
 
@@ -275,38 +277,28 @@ export class SpDropdown extends HTMLElement {
   }
   #adjustListboxPositionHandler = this.#adjustListboxPosition.bind(this);
 
-  #getFocusedIndex() {
+  #focusOption(index: number) {
     const options = this.#getOptions();
-    const activeElement = document.activeElement;
-    return options.findIndex((option) => option === activeElement);
+    options[index]?.focus();
+    this.#focusedIndex = index;
   }
 
   #focusNextOption() {
     const options = this.#getOptions();
-    const focusedIndex = this.#getFocusedIndex();
-
-    if (focusedIndex === -1) {
-      options[0]?.focus();
-    } else if (focusedIndex < options.length - 1) {
-      options[focusedIndex + 1].focus();
-    }
+    const nextIndex = (this.#focusedIndex + 1) % options.length;
+    this.#focusOption(nextIndex);
   }
 
   #focusPreviousOption() {
     const options = this.#getOptions();
-    const focusedIndex = this.#getFocusedIndex();
-
-    if (focusedIndex > 0) {
-      options[focusedIndex - 1].focus();
-    } else if (focusedIndex === -1) {
-      options[options.length - 1]?.focus();
-    }
+    const previousIndex =
+      (this.#focusedIndex - 1 + options.length) % options.length;
+    this.#focusOption(previousIndex);
   }
 
   #selectFocusedOption() {
     const options = this.#getOptions();
-    const focusedIndex = this.#getFocusedIndex();
-    const focusedOption = options[focusedIndex];
+    const focusedOption = options[this.#focusedIndex];
     if (focusedOption) {
       focusedOption.click();
     }
