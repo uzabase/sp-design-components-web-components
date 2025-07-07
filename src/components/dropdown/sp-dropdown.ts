@@ -87,10 +87,16 @@ export class SpDropdown extends HTMLElement {
   get expanded() {
     return this.#expanded;
   }
+
   set expanded(val: boolean) {
     this.#expanded = val;
     this.#listboxElement.hidden = !val;
     this.#selectElement.expanded = val;
+    if (val) {
+      this.#focusNextOption();
+    } else {
+      this.#selectElement.focus();
+    }
   }
 
   get value() {
@@ -207,9 +213,6 @@ export class SpDropdown extends HTMLElement {
 
   #toggleListbox() {
     this.expanded = !this.expanded;
-    if (this.expanded) {
-      this.#focusNextOption();
-    }
   }
 
   #hideListbox() {
@@ -258,7 +261,7 @@ export class SpDropdown extends HTMLElement {
   }
 
   #handleClickOutside = (event: MouseEvent) => {
-    if (!this.contains(event.target as Node)) {
+    if (!this.contains(event.target as Node) && this.expanded) {
       this.#hideListbox();
     }
   };
@@ -307,7 +310,7 @@ export class SpDropdown extends HTMLElement {
     if (focusedOption) {
       focusedOption.click();
     }
-    this.#selectElement.focus();
+    this.expanded = false;
   }
 
   #handleKeyDown(event: KeyboardEvent) {
@@ -319,29 +322,28 @@ export class SpDropdown extends HTMLElement {
     switch (event.key) {
       case "ArrowDown":
         event.preventDefault();
-        this.expanded = true;
-        this.#focusNextOption();
+        if (this.expanded) {
+          this.#focusNextOption();
+        }
         break;
       case "ArrowUp":
         event.preventDefault();
-        this.expanded = true;
-        this.#focusPreviousOption();
+        if (this.expanded) {
+          this.#focusPreviousOption();
+        }
         break;
       case "Enter":
       case " ":
         event.preventDefault();
-        if (!this.expanded) {
-          this.expanded = true;
-          this.#focusNextOption();
-        } else {
+        if (this.expanded) {
           this.#selectFocusedOption();
-          this.expanded = false;
+        } else {
+          this.expanded = true;
         }
         break;
       case "Escape":
         event.preventDefault();
         this.expanded = false;
-        this.#selectElement.focus();
         break;
     }
   }

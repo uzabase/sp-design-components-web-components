@@ -3,8 +3,8 @@ import "../icon/sp-icon";
 import resetStyle from "@acab/reset.css?inline";
 
 import foundationStyle from "../foundation.css?inline";
-import dropdownSelectStyle from "./sp-dropdown-select.css?inline";
 import { LISTBOX_ID } from "./sp-dropdown-listbox";
+import dropdownSelectStyle from "./sp-dropdown-select.css?inline";
 
 export const DEFAULT_WIDTH = 160;
 
