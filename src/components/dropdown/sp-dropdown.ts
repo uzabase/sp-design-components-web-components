@@ -94,6 +94,7 @@ export class SpDropdown extends HTMLElement {
     this.#listboxElement.hidden = !val;
     this.#selectElement.expanded = val;
     if (val) {
+      this.#adjustListboxPosition();
       this.#focusNextOption();
     } else {
       this.#selectElement.focus();
@@ -139,7 +140,6 @@ export class SpDropdown extends HTMLElement {
     this.#setupEventListeners();
     this.#updateOptions();
     this.#calculateSelectWidth();
-    this.#adjustListboxPosition();
   }
 
   disconnectedCallback() {
@@ -167,6 +167,7 @@ export class SpDropdown extends HTMLElement {
     this.#selectElement.text = this.#text;
 
     this.#listboxElement.classList.add("listbox");
+    this.#listboxElement.hidden = !this.expanded;
     this.#listboxElement.appendChild(this.#slotElement);
 
     this.#baseElement.classList.add("base");
