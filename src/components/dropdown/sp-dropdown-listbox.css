@@ -3,10 +3,6 @@
   width: 100%;
 }
 
-:host([hidden]) {
-  display: none;
-}
-
 .base {
   width: 100%;
   max-height: 278px; /* optionの高さ(26.2px) * 10 + 上下の余白(16px) */
