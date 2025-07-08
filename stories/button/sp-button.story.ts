@@ -10,26 +10,42 @@ import { speedaIconTypes } from "../../src/components/icon/icons";
 const meta = {
   component: "sp-button",
   argTypes: {
-    slot: { type: "string" },
+    slot: { 
+      type: "string",
+      description:  "ボタンの主目的を明示するテキスト要素",
+    },
     icon: {
       control: { type: "select" },
       options: ["", ...speedaIconTypes],
+      description:  "装飾や機能の補助として、ラベルの前後に配置可能",
     },
     type: {
       control: { type: "select" },
       options: ["default", "destructive"],
+      description:  "タイプ",
     },
     appearance: {
       control: { type: "select" },
       options: ["outline", "fill", "text"],
+      description:  "ボタンの種類",
     },
     size: {
       control: { type: "select" },
       options: ["medium", "large", "xLarge", "width160", "width80"],
+      description:  "サイズ",
     },
-    loading: { type: "boolean" },
-    selected: { type: "boolean" },
-    disabled: { type: "boolean" },
+    loading: { 
+      type: "boolean" ,
+      description:  "非同期処理中に表示し、ユーザーに進行中であることを示す",
+    },
+    selected: { 
+      type: "boolean" ,
+      description:  "選択した状態が持続する",
+    },
+    disabled: { 
+      type: "boolean" ,
+      description:  "ボタンを無効化するかどうか",
+    },
     onclick: {
       action: "onclick",
     },
