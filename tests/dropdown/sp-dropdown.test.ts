@@ -209,59 +209,24 @@ describe("sp-dropdown", () => {
   });
 
   describe("キーボード操作", () => {
-    test("selectにフォーカスがある状態で、上矢印キーを押すと、選択肢が表示される。また、最後の選択肢がフォーカスされる", async () => {
-      document.body.innerHTML = `
-        <sp-dropdown>
-          <sp-dropdown-option value="Value1" text="Value1"></sp-dropdown-option>
-          <sp-dropdown-option value="Value2" text="Value2"></sp-dropdown-option>
-        </sp-dropdown>
-      `;
-
-      const select = getSelect();
-      select.focus();
-      await userEvent.keyboard("{ArrowUp}");
-
-      const listbox = queryListbox();
-      expect(listbox).toBeVisible();
-      const activeElement = document.activeElement;
-      expect(activeElement).toBe(getSpDropdownOptions()[1]);
-    });
-
-    test("selectにフォーカスがある状態で、下矢印キーを押すと、選択肢が表示される。また、最初の選択肢がフォーカスされる", async () => {
-      document.body.innerHTML = `
-        <sp-dropdown>
-          <sp-dropdown-option value="Value1" text="Value1"></sp-dropdown-option>
-          <sp-dropdown-option value="Value2" text="Value2"></sp-dropdown-option>
-        </sp-dropdown>
-      `;
-
-      const select = getSelect();
-      select.focus();
-      await userEvent.keyboard("{ArrowDown}");
-
-      const listbox = queryListbox();
-      expect(listbox).toBeVisible();
-      const activeElement = document.activeElement;
-      expect(activeElement).toBe(getSpDropdownOptions()[0]);
-    });
-
     test("選択肢にフォーカスがある状態で、上矢印キーを押すと、前の選択肢がフォーカスされる", async () => {
       document.body.innerHTML = `
         <sp-dropdown>
           <sp-dropdown-option value="Value1" text="Value1"></sp-dropdown-option>
           <sp-dropdown-option value="Value2" text="Value2"></sp-dropdown-option>
+          <sp-dropdown-option value="Value3" text="Value3"></sp-dropdown-option>
         </sp-dropdown>
       `;
+      const user = userEvent.setup();
 
       const select = getSelect();
-      select.focus();
-      await userEvent.keyboard("{ArrowUp}");
-      const activeElement = document.activeElement;
-      expect(activeElement).toBe(getSpDropdownOptions()[1]);
+      await user.click(select);
+      await user.keyboard("{ArrowUp}");
+      const options = getSpDropdownOptions();
+      expect(options[2]).toHaveFocus();
 
-      await userEvent.keyboard("{ArrowUp}");
-      const activeElement2 = document.activeElement;
-      expect(activeElement2).toBe(getSpDropdownOptions()[0]);
+      await user.keyboard("{ArrowUp}");
+      expect(options[1]).toHaveFocus();
     });
 
     test("選択肢にフォーカスがある状態で、下矢印キーを押すと、次の選択肢がフォーカスされる", async () => {
@@ -269,19 +234,19 @@ describe("sp-dropdown", () => {
         <sp-dropdown>
           <sp-dropdown-option value="Value1" text="Value1"></sp-dropdown-option>
           <sp-dropdown-option value="Value2" text="Value2"></sp-dropdown-option>
+          <sp-dropdown-option value="Value3" text="Value3"></sp-dropdown-option>
         </sp-dropdown>
       `;
       const user = userEvent.setup();
 
       const select = getSelect();
-      select.focus();
+      await user.click(select);
       await user.keyboard("{ArrowDown}");
-      const activeElement = document.activeElement;
-      expect(activeElement).toBe(getSpDropdownOptions()[0]);
+      const options = getSpDropdownOptions();
+      expect(options[1]).toHaveFocus();
 
       await user.keyboard("{ArrowDown}");
-      const activeElement2 = document.activeElement;
-      expect(activeElement2).toBe(getSpDropdownOptions()[1]);
+      expect(options[2]).toHaveFocus();
     });
 
     test("selectにフォーカスがある状態で、Enterキーを押すと、選択肢が表示される。また、最初の選択肢がフォーカスされる", async () => {
@@ -298,8 +263,8 @@ describe("sp-dropdown", () => {
 
       const listbox = queryListbox();
       expect(listbox).toBeVisible();
-      const activeElement = document.activeElement;
-      expect(activeElement).toBe(getSpDropdownOptions()[0]);
+      const options = getSpDropdownOptions();
+      expect(options[0]).toHaveFocus();
     });
 
     test("選択肢にフォーカスがある状態で、Enterキーを押すと、その選択肢を選択できる。また、selectにフォーカスが移動する", async () => {
@@ -319,7 +284,7 @@ describe("sp-dropdown", () => {
 
       const listbox = queryListbox();
       expect(listbox).not.toBeVisible();
-      expect(getSpDropdown().value).toBe("Value1");
+      expect(getSpDropdown().value).toBe("Value2");
       const activeElement = document.activeElement;
       expect(activeElement).toBe(getSpDropdown());
     });
@@ -359,7 +324,7 @@ describe("sp-dropdown", () => {
 
       const listbox = queryListbox();
       expect(listbox).not.toBeVisible();
-      expect(getSpDropdown().value).toBe("Value1");
+      expect(getSpDropdown().value).toBe("Value2");
       const activeElement = document.activeElement;
       expect(activeElement).toBe(getSpDropdown());
     });

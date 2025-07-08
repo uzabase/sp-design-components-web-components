@@ -2,7 +2,7 @@ import "../../src/components/dropdown/sp-dropdown";
 import "../../src/components/dropdown/sp-dropdown-option";
 import "@sp-design/token/lib/speeda-tokens.css";
 
-import type { Meta, StoryObj } from "@storybook/web-components";
+import type { Meta, StoryObj } from "@storybook/web-components-vite";
 import { html } from "lit";
 
 const meta: Meta = {
