@@ -7,14 +7,16 @@ const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${textFieldStyle}`);
 
 export class SpTextField extends HTMLElement {
-  #inputElement: HTMLInputElement;
+  static formAssociated = true;
+  #inputElement: HTMLInputElement = document.createElement("input");
+  #internals!: ElementInternals;
 
-  // 基本的なinput属性のサポート
   get value() {
     return this.#inputElement.value;
   }
   set value(val: string) {
     this.#inputElement.value = val;
+    this.#internals.setFormValue(val);
   }
 
   get placeholder() {
@@ -73,6 +75,19 @@ export class SpTextField extends HTMLElement {
     this.#inputElement.autofocus = val;
   }
 
+  get invalid() {
+    return this.hasAttribute("invalid");
+  }
+  set invalid(val: boolean) {
+    if (val) {
+      this.setAttribute("invalid", "");
+      this.#inputElement.setAttribute("aria-invalid", "true");
+    } else {
+      this.removeAttribute("invalid");
+      this.#inputElement.removeAttribute("aria-invalid");
+    }
+  }
+
   static get observedAttributes() {
     return [
       "value",
@@ -90,70 +105,60 @@ export class SpTextField extends HTMLElement {
 
   constructor() {
     super();
+    this.#setupShadowRoot();
+    this.#setupInputElement();
+    this.#setupInternals();
+    this.#setupEventForwarding();
+  }
 
-    const shadowRoot = this.attachShadow({ mode: "open" });
+  #setupShadowRoot() {
+    this.attachShadow({ mode: "open" });
 
-    // スタイルシートを適用
-    shadowRoot.adoptedStyleSheets = [styles];
+    this.shadowRoot!.adoptedStyleSheets = [
+      ...this.shadowRoot!.adoptedStyleSheets,
+      styles,
+    ];
+  }
 
-    // input要素を作成
-    this.#inputElement = document.createElement("input");
+  #setupInputElement() {
     this.#inputElement.classList.add("text-field");
-
-    // コンテナを作成
     const container = document.createElement("div");
     container.classList.add("container");
     container.appendChild(this.#inputElement);
+    this.shadowRoot!.appendChild(container);
+  }
 
-    shadowRoot.appendChild(container);
-
-    // イベントの転送
-    this.#setupEventForwarding();
+  #setupInternals() {
+    this.#internals = this.attachInternals();
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (oldValue === newValue) return;
 
-    switch (name) {
-      case "value":
-        this.value = newValue;
-        break;
-      case "placeholder":
-        this.placeholder = newValue;
-        break;
-      case "disabled":
-        this.disabled = newValue !== null;
-        break;
-      case "readonly":
-        this.readonly = newValue !== null;
-        break;
-      case "type":
-        this.type = newValue || "text";
-        break;
-      case "maxlength":
-        this.maxLength = parseInt(newValue) || -1;
-        break;
-      case "name":
-        this.name = newValue;
-        break;
-      case "required":
-        this.required = newValue !== null;
-        break;
-      case "autofocus":
-        this.autofocus = newValue !== null;
-        break;
-      case "invalid":
-        if (newValue !== null) {
-          this.#inputElement.setAttribute("aria-invalid", "true");
-        } else {
-          this.#inputElement.removeAttribute("aria-invalid");
-        }
-        break;
+    if (name === "value") {
+      this.value = newValue;
+    } else if (name === "placeholder") {
+      this.placeholder = newValue;
+    } else if (name === "disabled") {
+      this.disabled = newValue !== null;
+    } else if (name === "readonly") {
+      this.readonly = newValue !== null;
+    } else if (name === "type") {
+      this.type = newValue || "text";
+    } else if (name === "maxlength") {
+      this.maxLength = parseInt(newValue) || -1;
+    } else if (name === "name") {
+      this.name = newValue;
+    } else if (name === "required") {
+      this.required = newValue !== null;
+    } else if (name === "autofocus") {
+      this.autofocus = newValue !== null;
+    } else if (name === "invalid") {
+      this.invalid = newValue !== null;
     }
   }
 
   connectedCallback() {
-    // 既存の属性を初期化
     for (const attr of SpTextField.observedAttributes) {
       const value = this.getAttribute(attr);
       if (value !== null) {
@@ -162,7 +167,6 @@ export class SpTextField extends HTMLElement {
     }
   }
 
-  // フォーカス関連のメソッド
   focus() {
     this.#inputElement.focus();
   }
@@ -175,21 +179,7 @@ export class SpTextField extends HTMLElement {
     this.#inputElement.select();
   }
 
-  // バリデーション関連のメソッド
-  checkValidity() {
-    return this.#inputElement.checkValidity();
-  }
-
-  reportValidity() {
-    return this.#inputElement.reportValidity();
-  }
-
-  setCustomValidity(message: string) {
-    this.#inputElement.setCustomValidity(message);
-  }
-
   #setupEventForwarding() {
-    // 重要なイベントを転送
     const eventsToForward = [
       "input",
       "change",
@@ -202,13 +192,11 @@ export class SpTextField extends HTMLElement {
 
     eventsToForward.forEach((eventType) => {
       this.#inputElement.addEventListener(eventType, (event) => {
-        // 元のイベントと同じ種類の新しいイベントを作成
         const forwardedEvent = new Event(eventType, {
           bubbles: event.bubbles,
           cancelable: event.cancelable,
         });
 
-        // このコンポーネントからイベントを発火
         this.dispatchEvent(forwardedEvent);
       });
     });
