@@ -1,92 +1,36 @@
-:host {
-  display: inline-block;
-  width: 100%;
-  max-width: 100%;
-}
-
-.container {
-  position: relative;
-  width: 100%;
-}
-
 .text-field {
+  display: block;
   width: 100%;
-  box-sizing: border-box;
-  padding: 12px 16px;
-  border: 1px solid var(--color-semantic-border-form-field-default);
-  border-radius: 8px;
-  background-color: var(--color-semantic-surface-form-field-default);
-  color: var(--color-semantic-text-form-field-default);
-  font-family: inherit;
-  font-size: 14px;
-  line-height: 1.5;
-  transition: all 0.2s ease;
-  outline: none;
+  background-color: var(--color-semantic-surface-regular-1);
+  border: 1px solid var(--color-semantic-border-regular);
+  border-radius: 2px;
+  padding-inline: 8px;
+  padding-block-start: 5px;
+  padding-block-end: 4px;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.6;
 }
 
 .text-field::placeholder {
-  color: var(--color-semantic-text-form-field-placeholder);
-  opacity: 1;
+  color: var(--color-semantic-text-placeholder);
 }
 
-.text-field:hover:not(:disabled):not(:focus) {
-  border-color: var(--color-semantic-border-form-field-hover);
-}
-
-.text-field:focus {
-  border-color: var(--color-semantic-border-form-field-focus);
-  box-shadow: 0 0 0 2px var(--color-semantic-border-form-field-focus-ring);
+.text-field:focus-visible {
+  outline: none;
+  border-color: var(--color-semantic-border-focus);
+  box-shadow: 0 0 0 3px var(--color-semantic-highlight-focus-ring-default);
 }
 
 .text-field:disabled {
-  background-color: var(--color-semantic-surface-form-field-disabled);
-  border-color: var(--color-semantic-border-form-field-disabled);
-  color: var(--color-semantic-text-form-field-disabled);
-  cursor: not-allowed;
+  color: var(--color-semantic-text-disabled);
+  background: var(--color-semantic-surface-regular-4);
 }
 
-.text-field:read-only {
-  background-color: var(--color-semantic-surface-form-field-readonly);
-  border-color: var(--color-semantic-border-form-field-readonly);
-  cursor: default;
+.text-field[aria-invalid="true"] {
+  border-color: var(--color-semantic-border-error);
 }
 
-.text-field:invalid:not(:focus) {
-  border-color: var(--color-semantic-border-form-field-error);
+.text-field[aria-invalid="true"]:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-semantic-highlight-focus-ring-error);
 }
-
-.text-field:invalid:focus {
-  border-color: var(--color-semantic-border-form-field-error);
-  box-shadow: 0 0 0 2px var(--color-semantic-border-form-field-error-ring);
-}
-
-/* サイズバリエーション */
-:host([size="small"]) .text-field {
-  padding: 8px 12px;
-  font-size: 12px;
-}
-
-:host([size="large"]) .text-field {
-  padding: 16px 20px;
-  font-size: 16px;
-}
-
-/* テキストタイプ別のスタイル */
-.text-field[type="number"] {
-  -moz-appearance: textfield;
-}
-
-.text-field[type="number"]::-webkit-outer-spin-button,
-.text-field[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.text-field[type="search"] {
-  -webkit-appearance: none;
-}
-
-.text-field[type="search"]::-webkit-search-cancel-button,
-.text-field[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-} 
