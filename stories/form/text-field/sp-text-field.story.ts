@@ -83,3 +83,19 @@ export const InForm: Story = {
     </form>
   `,
 };
+
+export const Error: Story = {
+  render: () => html`
+    <sp-text-field invalid>
+      <span slot="error-message">エラーが発生しています</span>
+    </sp-text-field>
+  `,
+};
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    value: "入力不可",
+    placeholder: "disabled",
+  },
+};
