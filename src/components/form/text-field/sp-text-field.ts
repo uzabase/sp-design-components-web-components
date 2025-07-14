@@ -8,28 +8,36 @@ styles.replaceSync(`${resetStyle} ${foundationStyle} ${textFieldStyle}`);
 
 export class SpTextField extends HTMLElement {
   static formAssociated = true;
+  protected internals: ElementInternals;
+
   #inputElement: HTMLInputElement = document.createElement("input");
-  #internals!: ElementInternals;
 
   get value() {
     return this.#inputElement.value;
   }
   set value(val: string) {
+    this.setAttribute("value", val);
     this.#inputElement.value = val;
-    this.#internals.setFormValue(val);
+    this.internals.setFormValue(val);
   }
 
-  get placeholder() {
-    return this.#inputElement.placeholder;
+  get name() {
+    return this.#inputElement.name;
   }
-  set placeholder(val: string) {
-    this.#inputElement.placeholder = val;
+  set name(val: string) {
+    this.setAttribute("name", val);
+    this.#inputElement.name = val;
   }
 
   get disabled() {
     return this.#inputElement.disabled;
   }
   set disabled(val: boolean) {
+    if (val) {
+      this.setAttribute("disabled", "");
+    } else {
+      this.removeAttribute("disabled");
+    }
     this.#inputElement.disabled = val;
   }
 
@@ -37,41 +45,59 @@ export class SpTextField extends HTMLElement {
     return this.#inputElement.readOnly;
   }
   set readonly(val: boolean) {
+    if (val) {
+      this.setAttribute("readonly", "");
+    } else {
+      this.removeAttribute("readonly");
+    }
     this.#inputElement.readOnly = val;
-  }
-
-  get type() {
-    return this.#inputElement.type;
-  }
-  set type(val: string) {
-    this.#inputElement.type = val;
-  }
-
-  get maxLength() {
-    return this.#inputElement.maxLength;
-  }
-  set maxLength(val: number) {
-    this.#inputElement.maxLength = val;
-  }
-
-  get name() {
-    return this.#inputElement.name;
-  }
-  set name(val: string) {
-    this.#inputElement.name = val;
   }
 
   get required() {
     return this.#inputElement.required;
   }
   set required(val: boolean) {
+    if (val) {
+      this.setAttribute("required", "");
+    } else {
+      this.removeAttribute("required");
+    }
     this.#inputElement.required = val;
+  }
+
+  get maxlength() {
+    return this.#inputElement.maxLength;
+  }
+  set maxlength(val: number) {
+    this.setAttribute("maxlength", String(val));
+    this.#inputElement.maxLength = val;
+  }
+
+  get type() {
+    return this.#inputElement.type;
+  }
+  set type(val: string) {
+    this.setAttribute("type", val);
+    this.#inputElement.type = val;
+  }
+
+  get placeholder() {
+    return this.#inputElement.placeholder;
+  }
+  set placeholder(val: string) {
+    this.setAttribute("placeholder", val);
+    this.#inputElement.placeholder = val;
   }
 
   get autofocus() {
     return this.#inputElement.autofocus;
   }
   set autofocus(val: boolean) {
+    if (val) {
+      this.setAttribute("autofocus", "");
+    } else {
+      this.removeAttribute("autofocus");
+    }
     this.#inputElement.autofocus = val;
   }
 
@@ -105,19 +131,19 @@ export class SpTextField extends HTMLElement {
 
   constructor() {
     super();
-    this.#setupShadowRoot();
-    this.#setupInputElement();
-    this.#setupInternals();
-    this.#setupEventForwarding();
-  }
 
-  #setupShadowRoot() {
     this.attachShadow({ mode: "open" });
 
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
       styles,
     ];
+
+    this.internals = this.attachInternals();
+
+    this.#setupInputElement();
+
+    this.#setupEventForwarding();
   }
 
   #setupInputElement() {
@@ -128,33 +154,28 @@ export class SpTextField extends HTMLElement {
     this.shadowRoot!.appendChild(container);
   }
 
-  #setupInternals() {
-    this.#internals = this.attachInternals();
-  }
-
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (oldValue === newValue) return;
-
     if (name === "value") {
       this.value = newValue;
     } else if (name === "placeholder") {
       this.placeholder = newValue;
     } else if (name === "disabled") {
-      this.disabled = newValue !== null;
+      this.disabled = newValue === "" || newValue === "true";
     } else if (name === "readonly") {
-      this.readonly = newValue !== null;
+      this.readonly = newValue === "" || newValue === "true";
     } else if (name === "type") {
       this.type = newValue || "text";
     } else if (name === "maxlength") {
-      this.maxLength = parseInt(newValue) || -1;
+      this.maxlength = parseInt(newValue) || -1;
     } else if (name === "name") {
       this.name = newValue;
     } else if (name === "required") {
-      this.required = newValue !== null;
+      this.required = newValue === "" || newValue === "true";
     } else if (name === "autofocus") {
-      this.autofocus = newValue !== null;
+      this.autofocus = newValue === "" || newValue === "true";
     } else if (name === "invalid") {
-      this.invalid = newValue !== null;
+      this.invalid = newValue === "" || newValue === "true";
     }
   }
 
@@ -179,6 +200,10 @@ export class SpTextField extends HTMLElement {
     this.#inputElement.select();
   }
 
+  formResetCallback() {
+    this.value = "";
+  }
+
   #setupEventForwarding() {
     const eventsToForward = [
       "input",
@@ -196,9 +221,12 @@ export class SpTextField extends HTMLElement {
           bubbles: event.bubbles,
           cancelable: event.cancelable,
         });
-
         this.dispatchEvent(forwardedEvent);
       });
+    });
+
+    this.#inputElement.addEventListener("input", () => {
+      this.value = this.#inputElement.value;
     });
   }
 }

@@ -14,7 +14,7 @@ const meta = {
     disabled: { type: "boolean" },
     readonly: { type: "boolean" },
     type: { type: "string" },
-    maxLength: { type: "number" },
+    maxlength: { type: "number" },
     name: { type: "string" },
     required: { type: "boolean" },
     autofocus: { type: "boolean" },
@@ -26,7 +26,7 @@ const meta = {
       ?disabled=${args.disabled}
       ?readonly=${args.readonly}
       type=${args.type ?? "text"}
-      maxLength=${args.maxLength ?? 100}
+      maxlength=${args.maxlength ?? 100}
       name=${args.name ?? ""}
       ?required=${args.required}
       ?autofocus=${args.autofocus}
@@ -44,7 +44,7 @@ export const Basic: Story = {
     disabled: false,
     readonly: false,
     type: "text",
-    maxLength: 100,
+    maxlength: 100,
     name: "",
     required: false,
     autofocus: false,
