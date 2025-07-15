@@ -10,7 +10,7 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "npm run clean:cache && storybook dev -p 6006",
     "build-storybook": "storybook build",
     "build": "rimraf dist && run-s build:*",
     "build:vite": "vite build",
@@ -21,7 +21,8 @@
     "format:prettier": "prettier --write '(.storybook|src|stories|tests|tools)/**/*.ts'",
     "format:prettier:check": "prettier --check '(.storybook|src|stories|tests|tools)/**/*.ts'",
     "format:lint": "stylelint --fix 'src/**/*.css'",
-    "test": "vitest"
+    "test": "vitest",
+    "clean:cache": "rm -rf node_modules/.cache"
   },
   "files": [
     "dist"
