@@ -87,7 +87,7 @@ export const InForm: Story = {
 export const Error: Story = {
   render: () => html`
     <sp-text-field invalid>
-      <span slot="error-message">エラーが発生しています</span>
+      <sp-error-text slot="error-text">エラーが発生しています</sp-error-text>
     </sp-text-field>
   `,
 };

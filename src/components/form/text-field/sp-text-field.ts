@@ -1,7 +1,7 @@
 import resetStyle from "@acab/reset.css?inline";
-
 import foundationStyle from "../../foundation.css?inline";
 import textFieldStyle from "./text-field.css?inline";
+import "../error-text/sp-error-text";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${textFieldStyle}`);
@@ -11,6 +11,8 @@ export class SpTextField extends HTMLElement {
   protected internals: ElementInternals;
 
   #inputElement: HTMLInputElement = document.createElement("input");
+  #container: HTMLDivElement = document.createElement("div");
+  #errorSlot: HTMLSlotElement = document.createElement("slot");
 
   get value() {
     return this.#inputElement.value;
@@ -112,6 +114,7 @@ export class SpTextField extends HTMLElement {
       this.removeAttribute("invalid");
       this.#inputElement.removeAttribute("aria-invalid");
     }
+    this.#updateErrorTextVisibility();
   }
 
   static get observedAttributes() {
@@ -142,16 +145,38 @@ export class SpTextField extends HTMLElement {
     this.internals = this.attachInternals();
 
     this.#setupInputElement();
-
+    this.#setupErrorSlot();
     this.#setupEventForwarding();
   }
 
   #setupInputElement() {
     this.#inputElement.classList.add("text-field");
-    const container = document.createElement("div");
-    container.classList.add("container");
-    container.appendChild(this.#inputElement);
-    this.shadowRoot!.appendChild(container);
+    this.#container.classList.add("container");
+    this.#container.appendChild(this.#inputElement);
+    this.shadowRoot!.appendChild(this.#container);
+  }
+
+  #setupErrorSlot() {
+    this.#errorSlot.name = "error-text";
+    // sp-error-textでラップ
+    const errorText = document.createElement("sp-error-text");
+    errorText.appendChild(this.#errorSlot);
+    errorText.style.display = "none";
+    this.#container.appendChild(errorText);
+    this.#updateErrorTextVisibility();
+  }
+
+  #updateErrorTextVisibility() {
+    if (!this.#container) return;
+    const errorText = this.#container.querySelector(
+      "sp-error-text",
+    ) as HTMLElement;
+    if (!errorText) return;
+    if (this.invalid) {
+      errorText.style.display = "block";
+    } else {
+      errorText.style.display = "none";
+    }
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -176,6 +201,7 @@ export class SpTextField extends HTMLElement {
       this.autofocus = newValue === "" || newValue === "true";
     } else if (name === "invalid") {
       this.invalid = newValue === "" || newValue === "true";
+      this.#updateErrorTextVisibility();
     }
   }
 
@@ -186,6 +212,7 @@ export class SpTextField extends HTMLElement {
         this.attributeChangedCallback(attr, "", value);
       }
     }
+    this.#updateErrorTextVisibility();
   }
 
   focus() {
