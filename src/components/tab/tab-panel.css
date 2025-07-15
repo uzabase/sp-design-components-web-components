@@ -1,0 +1,11 @@
+:host {
+  display: none;
+}
+
+:host([active]) {
+  display: block; /* active属性がある時のみ表示 */
+}
+
+.panel {
+  width: 100%;
+} 

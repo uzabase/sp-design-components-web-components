@@ -5,11 +5,6 @@
   --icon-color: var(--color-semantic-text-button-outline-default);
 }
 
-.tabList{
-  display: flex;
-  gap: 8px
-}
-
 .spds__tab {
   outline: none;
   font: inherit;
@@ -128,9 +123,6 @@
     }
   }
 }
-
-
-
 
 
 

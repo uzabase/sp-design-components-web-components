@@ -10,13 +10,15 @@ function isValidTabType(value: string): value is TabType {
   return types.some((type) => type === value);
 }
 
+function isBooleanAttribute(value: string | null): boolean {
+  return value === "true" || value === "";
+}
+
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${tabStyle} ${resetStyle}`);
 
 export class SpTab extends HTMLElement {
-  #selected: boolean = false;
-  #disabled: boolean = false;
-  #fill: TabType = "gray";
+  #disabled!: boolean;
   #plusIconElement = new SpIcon();
   #tabElement = document.createElement("button");
   #textElement = document.createElement("span");
@@ -24,40 +26,36 @@ export class SpTab extends HTMLElement {
 
   set disabled(value: boolean) {
     this.#disabled = value;
-    const tab = this.#tabElement;
     if (value) {
-      tab.classList.add("isDisable");
+      this.#tabElement.classList.add("isDisable");
+      this.setAttribute("aria-disabled", "true");
+      if (!this.hasAttribute("disabled")) {
+        this.setAttribute("disabled", "");
+      }
     } else {
-      tab.classList.remove("isDisable");
+      this.#tabElement.classList.remove("isDisable");
+      this.setAttribute("aria-disabled", "false");
+      this.removeAttribute("disabled");
     }
     this.#tabElement.disabled = this.#disabled;
   }
 
   set selected(value: boolean) {
-    this.#selected = value;
     if (value) {
       this.#tabElement.classList.add("-selected");
+      this.setAttribute("aria-selected", "true");
     } else {
       this.#tabElement.classList.remove("-selected");
+      this.setAttribute("aria-selected", "false");
     }
-    this.#tabElement.setAttribute("aria-selected", this.#selected + "");
   }
 
   set fill(value: TabType) {
-    this.#fill = value;
-    const tab = this.#tabElement;
-
-    const fillClassList = {
-      white: "-white",
-      gray: "-gray",
-    };
-    if (value === "gray") {
-      tab.classList.remove("-white");
-      tab.classList.add(fillClassList[this.#fill]);
-    } else if (value === "white") {
-      tab.classList.remove("-gray");
-      tab.classList.add(fillClassList[this.#fill]);
-    }
+    // 既存のfillクラスを削除
+    this.#tabElement.classList.remove("-white", "-gray");
+    
+    // 新しいfillクラスを追加
+    this.#tabElement.classList.add(`-${value}`);
   }
 
   set plusIcon(value: boolean) {
@@ -69,16 +67,16 @@ export class SpTab extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["text", "selected", "plus-icon", "disabled", "fill"];
+    return ["selected", "plus-icon", "disabled", "fill"];
   }
 
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-    this.shadowRoot!.adoptedStyleSheets = [
-      ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
-    ];
+    this.shadowRoot!.adoptedStyleSheets = [styles];
+    
+    // プロパティの初期化
+    this.#disabled = false;
     this.fill = "gray";
   }
 
@@ -91,6 +89,12 @@ export class SpTab extends HTMLElement {
     this.#plusIconElement.size = "small";
     this.#plusIconElement.type = "plus";
     this.setAttribute("role", "tab");
+    this.setAttribute("aria-selected", "false");
+    
+    // disabled属性の初期値を確認して適切に設定
+    const isDisabled = this.hasAttribute("disabled");
+    this.setAttribute("aria-disabled", isDisabled ? "true" : "false");
+    
     this.#plusIconElement.setAttribute("aria-hidden", "true");
     this.#tabElement.appendChild(this.#plusIconElement);
     this.#tabElement.appendChild(this.#textElement);
@@ -101,10 +105,10 @@ export class SpTab extends HTMLElement {
     if (oldValue === newValue) return;
     switch (name) {
       case "selected":
-        this.selected = newValue === "true" || newValue === "";
+        this.selected = isBooleanAttribute(newValue);
         break;
       case "disabled":
-        this.disabled = newValue === "true" || newValue === "";
+        this.disabled = isBooleanAttribute(newValue);
         break;
       case "fill":
         if (isValidTabType(newValue)) {
@@ -115,7 +119,7 @@ export class SpTab extends HTMLElement {
         }
         break;
       case "plus-icon":
-        this.plusIcon = newValue === "true" || newValue === "";
+        this.plusIcon = isBooleanAttribute(newValue);
         break;
     }
   }

@@ -70,32 +70,6 @@ export const PlusIcon: Story = {
   },
 };
 
-export const List: Story = {
-  render: (args) =>
-    html`<div class="tabList">
-      <sp-tab
-        slot="tabList"
-        fill=${args.fill}
-        plus-icon=${args.plusIcon}
-        selected=${args.selected}
-        disabled=${args.disabled}
-      ></sp-tab>
-      <sp-tab
-        slot="tabList"
-        fill=${args.fill}
-        plus-icon=${args.plusIcon}
-        selected=${args.selected}
-        disabled=${args.disabled}
-      ></sp-tab>
-      <sp-tab
-        slot="tabList"
-        fill=${args.fill}
-        plus-icon=${args.plusIcon}
-        selected=${args.selected}
-        disabled=${args.disabled}
-      ></sp-tab>
-    </div>`,
-};
 
 export const All: Story = {
   render: (args) => html`
@@ -104,66 +78,36 @@ export const All: Story = {
         <p class="sampleAll__title">type:Gray</p>
         <div class="sampleAll__contents">
           <sp-tab
-            slot="Grayのタブだよ"
             fill="gray"
             plus-icon=${args.plusIcon}
             selected=${args.selected}
             disabled=${args.disabled}
-          ></sp-tab>
+          >Grayのタブだよ</sp-tab>
         </div>
       </div>
       <div class="sampleAll__item">
         <p class="sampleAll__title">type:White</p>
         <div class="sampleAll__contents">
           <sp-tab
-            slot="Whiteのタブだよ"
             fill="white"
             plus-icon=${args.plusIcon}
             selected=${args.selected}
             disabled=${args.disabled}
-          ></sp-tab>
+          >Whiteのタブだよ</sp-tab>
         </div>
       </div>
       <div class="sampleAll__item">
         <p class="sampleAll__title">Create New Icon</p>
         <div class="sampleAll__contents">
           <sp-tab
-            slot="新規作成アイコン付きだよ"
             fill=${args.fill}
             plus-icon="true"
             selected=${args.selected}
             disabled=${args.disabled}
-          ></sp-tab>
+          >新規作成アイコン付きだよ</sp-tab>
         </div>
       </div>
-      <div class="sampleAll__item">
-        <p class="sampleAll__title">List</p>
-        <div class="sampleAll__contents">
-          <div class="tabList">
-            <sp-tab
-              slot="タブのリストだよ"
-              fill=${args.fill}
-              plus-icon=${args.plusIcon}
-              selected=${args.selected}
-              disabled=${args.disabled}
-            ></sp-tab>
-            <sp-tab
-              slot="タブのリストだよ"
-              fill=${args.fill}
-              plus-icon=${args.plusIcon}
-              selected=${args.selected}
-              disabled=${args.disabled}
-            ></sp-tab>
-            <sp-tab
-              slot="タブのリストだよ"
-              fill=${args.fill}
-              plus-icon=${args.plusIcon}
-              selected=${args.selected}
-              disabled=${args.disabled}
-            ></sp-tab>
-          </div>
-        </div>
-      </div>
+      <p>※複数のタブを使用する場合は sp-tab-group を使用してください</p>
     </div>
   `,
 };

@@ -1,0 +1,8 @@
+.nav-wrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.panel-wrapper {
+  margin-top: 16px;
+} 
