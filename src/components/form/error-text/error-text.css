@@ -1,0 +1,7 @@
+.base {
+  margin-block-start: 4px;
+  color: var(--color-semantic-text-error);
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1.6;
+}
