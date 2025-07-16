@@ -70,7 +70,6 @@ export const PlusIcon: Story = {
   },
 };
 
-
 export const All: Story = {
   render: (args) => html`
     <div class="sampleAll">
@@ -82,7 +81,8 @@ export const All: Story = {
             plus-icon=${args.plusIcon}
             selected=${args.selected}
             disabled=${args.disabled}
-          >Grayのタブだよ</sp-tab>
+            >Grayのタブだよ</sp-tab
+          >
         </div>
       </div>
       <div class="sampleAll__item">
@@ -93,7 +93,8 @@ export const All: Story = {
             plus-icon=${args.plusIcon}
             selected=${args.selected}
             disabled=${args.disabled}
-          >Whiteのタブだよ</sp-tab>
+            >Whiteのタブだよ</sp-tab
+          >
         </div>
       </div>
       <div class="sampleAll__item">
@@ -104,7 +105,8 @@ export const All: Story = {
             plus-icon="true"
             selected=${args.selected}
             disabled=${args.disabled}
-          >新規作成アイコン付きだよ</sp-tab>
+            >新規作成アイコン付きだよ</sp-tab
+          >
         </div>
       </div>
       <p>※複数のタブを使用する場合は sp-tab-group を使用してください</p>

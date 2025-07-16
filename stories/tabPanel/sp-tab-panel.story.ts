@@ -11,7 +11,7 @@ const meta = {
   args: {},
   render: () => html`
     <sp-tab-panel active>
-     <p>パネルだよ</p>
+      <p>パネルだよ</p>
     </sp-tab-panel>
   `,
 } satisfies Meta<SpTabPanel>;
@@ -30,7 +30,7 @@ export const WithoutActive: Story = {
       <sp-tab-panel>
         <p>この内容は表示されません</p>
       </sp-tab-panel>
-      
+
       <h3>active属性あり（表示）</h3>
       <sp-tab-panel active>
         <p>この内容は表示されます</p>

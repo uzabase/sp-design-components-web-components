@@ -53,7 +53,7 @@ export class SpTab extends HTMLElement {
   set fill(value: TabType) {
     // 既存のfillクラスを削除
     this.#tabElement.classList.remove("-white", "-gray");
-    
+
     // 新しいfillクラスを追加
     this.#tabElement.classList.add(`-${value}`);
   }
@@ -74,7 +74,7 @@ export class SpTab extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
     this.shadowRoot!.adoptedStyleSheets = [styles];
-    
+
     // プロパティの初期化
     this.#disabled = false;
     this.fill = "gray";
@@ -90,11 +90,11 @@ export class SpTab extends HTMLElement {
     this.#plusIconElement.type = "plus";
     this.setAttribute("role", "tab");
     this.setAttribute("aria-selected", "false");
-    
+
     // disabled属性の初期値を確認して適切に設定
     const isDisabled = this.hasAttribute("disabled");
     this.setAttribute("aria-disabled", isDisabled ? "true" : "false");
-    
+
     this.#plusIconElement.setAttribute("aria-hidden", "true");
     this.#tabElement.appendChild(this.#plusIconElement);
     this.#tabElement.appendChild(this.#textElement);

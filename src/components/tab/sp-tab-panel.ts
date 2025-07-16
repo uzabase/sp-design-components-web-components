@@ -56,16 +56,20 @@ export class SpTabPanel extends HTMLElement {
     this.#contentWrapper.classList.add("panel");
     this.#contentWrapper.appendChild(this.#slotElement);
     this.shadowRoot!.appendChild(this.#contentWrapper);
-    
+
     // アクセシビリティ属性の設定
     this.setAttribute("role", "tabpanel");
-    
+
     // active属性の初期値を確認してaria-hidden属性を設定
     const isActive = this.hasAttribute("active");
     this.setAttribute("aria-hidden", isActive ? "false" : "true");
   }
 
-  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
+  attributeChangedCallback(
+    name: string,
+    oldValue: string | null,
+    newValue: string | null,
+  ) {
     if (oldValue === newValue) return;
 
     switch (name) {

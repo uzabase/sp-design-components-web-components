@@ -28,12 +28,16 @@ describe("sp-tab", () => {
   });
   test("plus-icon属性をtrueにすると、plusアイコンが表示される", async () => {
     document.body.innerHTML = "<sp-tab plus-icon='true'></sp-tab>";
-    const iconElement = document.querySelector("sp-tab")!.shadowRoot!.querySelector("sp-icon")!;
+    const iconElement = document
+      .querySelector("sp-tab")!
+      .shadowRoot!.querySelector("sp-icon")!;
     expect(iconElement.classList.contains("-show")).toBe(true);
   });
   test("plus-icon属性をfalseにすると、plusアイコンが表示されない", async () => {
     document.body.innerHTML = "<sp-tab plus-icon='false'></sp-tab>";
-    const iconElement = document.querySelector("sp-tab")!.shadowRoot!.querySelector("sp-icon")!;
+    const iconElement = document
+      .querySelector("sp-tab")!
+      .shadowRoot!.querySelector("sp-icon")!;
     expect(iconElement.classList.contains("-show")).toBe(false);
   });
 

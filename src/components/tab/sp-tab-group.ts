@@ -18,19 +18,25 @@ export class SpTabGroup extends HTMLElement {
   #defaultPanel: string | null = null;
 
   private isValidTabElement(target: EventTarget | null): target is SpTab {
-    return target instanceof HTMLElement && 
-           target.getAttribute('slot') === 'nav' && 
-           target.tagName === 'SP-TAB' && 
-           !target.hasAttribute('disabled')
+    return (
+      target instanceof HTMLElement &&
+      target.getAttribute("slot") === "nav" &&
+      target.tagName === "SP-TAB" &&
+      !target.hasAttribute("disabled")
+    );
   }
 
   private getInitialSelectedTab() {
-    const tabs = this.#navSlot.assignedElements().filter(e => this.isValidTabElement(e));
+    const tabs = this.#navSlot
+      .assignedElements()
+      .filter((e) => this.isValidTabElement(e));
 
     if (tabs.length === 0) return null;
 
     if (this.#defaultPanel) {
-      const defaultTab = tabs.find(tab => tab.getAttribute('panel') === this.#defaultPanel);
+      const defaultTab = tabs.find(
+        (tab) => tab.getAttribute("panel") === this.#defaultPanel,
+      );
       if (defaultTab) {
         return defaultTab;
       }
@@ -43,25 +49,24 @@ export class SpTabGroup extends HTMLElement {
   private updateDisplayPanel(tab: SpTab) {
     if (!this.isValidTabElement(tab)) return;
 
-    const target = tab.getAttribute('panel');
+    const target = tab.getAttribute("panel");
 
     // タブの選択状態を更新
     this.updateTabSelection(target);
 
     // パネルの表示状態を更新（重複チェック付き）
     this.updatePanelDisplay(target);
-
   }
 
   private updateTabSelection(targetPanel: string | null) {
     const assignedTabs = this.#navSlot.assignedElements();
-    assignedTabs.forEach(tab => {
-      if (tab.getAttribute('panel') === targetPanel) {
-        tab.setAttribute('selected', 'true');
-        tab.setAttribute('aria-selected', 'true');
+    assignedTabs.forEach((tab) => {
+      if (tab.getAttribute("panel") === targetPanel) {
+        tab.setAttribute("selected", "true");
+        tab.setAttribute("aria-selected", "true");
       } else {
-        tab.removeAttribute('selected');
-        tab.setAttribute('aria-selected', 'false');
+        tab.removeAttribute("selected");
+        tab.setAttribute("aria-selected", "false");
       }
     });
   }
@@ -73,16 +78,19 @@ export class SpTabGroup extends HTMLElement {
     const currentActivePanel = this.getActivePanel();
 
     // 既に正しいパネルがアクティブな場合は何もしない
-    if (currentActivePanel && currentActivePanel.getAttribute('name') === targetPanel) {
+    if (
+      currentActivePanel &&
+      currentActivePanel.getAttribute("name") === targetPanel
+    ) {
       return;
     }
 
     // 全てのパネルを非アクティブにしてから、対象パネルのみアクティブにする
-    assignedPanels.forEach(panel => {
-      if (panel.getAttribute('name') === targetPanel) {
-        panel.setAttribute('active', '');
+    assignedPanels.forEach((panel) => {
+      if (panel.getAttribute("name") === targetPanel) {
+        panel.setAttribute("active", "");
       } else {
-        panel.removeAttribute('active');
+        panel.removeAttribute("active");
       }
     });
 
@@ -92,19 +100,24 @@ export class SpTabGroup extends HTMLElement {
 
   private getActivePanel(): Element | null {
     const assignedPanels = this.#panelSlot.assignedElements();
-    return assignedPanels.find(panel => panel.hasAttribute('active')) || null;
+    return assignedPanels.find((panel) => panel.hasAttribute("active")) || null;
   }
 
   private validateSingleActivePanel(): void {
     const assignedPanels = this.#panelSlot.assignedElements();
-    const activePanels = assignedPanels.filter(panel => panel.hasAttribute('active'));
+    const activePanels = assignedPanels.filter((panel) =>
+      panel.hasAttribute("active"),
+    );
 
     if (activePanels.length > 1) {
-      console.warn('複数のsp-tab-panelがactiveになっています。最初のもの以外を非アクティブにします。', activePanels);
+      console.warn(
+        "複数のsp-tab-panelがactiveになっています。最初のもの以外を非アクティブにします。",
+        activePanels,
+      );
 
       // 最初のもの以外を非アクティブにする
-      activePanels.slice(1).forEach(panel => {
-        panel.removeAttribute('active');
+      activePanels.slice(1).forEach((panel) => {
+        panel.removeAttribute("active");
       });
     }
   }
@@ -119,13 +132,13 @@ export class SpTabGroup extends HTMLElement {
     if (!activePanel) {
       const initialTab = this.getInitialSelectedTab();
       if (initialTab) {
-        const targetPanel = initialTab.getAttribute('panel');
+        const targetPanel = initialTab.getAttribute("panel");
         this.updatePanelDisplay(targetPanel);
         this.updateTabSelection(targetPanel);
       }
     } else {
       // アクティブパネルがある場合、対応するタブも選択状態にする
-      const activePanelName = activePanel.getAttribute('name');
+      const activePanelName = activePanel.getAttribute("name");
       this.updateTabSelection(activePanelName);
     }
   }
@@ -145,7 +158,7 @@ export class SpTabGroup extends HTMLElement {
     this.#panelSlot.setAttribute("name", "panel");
     this.#navWrapper.classList.add("nav-wrapper");
     this.#navWrapper.appendChild(this.#navSlot);
-    
+
     this.#panelWrapper.classList.add("panel-wrapper");
     this.#panelWrapper.appendChild(this.#panelSlot);
 
@@ -167,7 +180,11 @@ export class SpTabGroup extends HTMLElement {
     this.shadowRoot!.append(this.#navWrapper, this.#panelWrapper);
   }
 
-  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
+  attributeChangedCallback(
+    name: string,
+    oldValue: string | null,
+    newValue: string | null,
+  ) {
     if (oldValue === newValue) return;
 
     if (name === "default-panel") {
