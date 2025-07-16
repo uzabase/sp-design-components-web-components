@@ -4,6 +4,14 @@ import { makeStyleSheet } from "../styles";
 import checkboxTextStyle from "./checkbox-text.css?inline";
 import checkmarkStyle from "./checkmark.css?inline";
 
+/**
+ * SpCheckboxTextは、デザインシステム2.0におけるテキスト付きチェックボックスコンポーネントです。
+ *
+ * @element sp-checkbox-text
+ * @summary テキスト付きチェックボックスコンポーネント
+ *
+ * @slot - チェックボックスのラベルテキスト（デフォルトスロット）
+ */
 export class SpCheckboxText extends UbCheckboxText {
   constructor() {
     super();

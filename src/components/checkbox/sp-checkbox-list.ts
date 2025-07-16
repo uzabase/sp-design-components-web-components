@@ -4,6 +4,14 @@ import { makeStyleSheet } from "../styles";
 import checkboxListStyle from "./checkbox-list.css?inline";
 import checkmarkStyle from "./checkmark.css?inline";
 
+/**
+ * SpCheckboxListは、デザインシステム2.0におけるリスト形式のチェックボックスコンポーネントです。
+ *
+ * @element sp-checkbox-list
+ * @summary リスト形式のチェックボックスコンポーネント
+ *
+ * @slot - チェックボックスのラベルテキスト（デフォルトスロット）
+ */
 export class SpCheckboxList extends UbCheckboxText {
   constructor() {
     super();

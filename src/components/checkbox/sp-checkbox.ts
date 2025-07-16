@@ -4,6 +4,12 @@ import { makeStyleSheet } from "../styles";
 import checkboxStyle from "./checkbox.css?inline";
 import checkmarkStyle from "./checkmark.css?inline";
 
+/**
+ * SpCheckboxは、デザインシステム2.0におけるチェックボックスコンポーネントです。
+ *
+ * @element sp-checkbox
+ * @summary チェックボックスコンポーネント
+ */
 export class SpCheckbox extends UbCheckbox {
   constructor() {
     super();
