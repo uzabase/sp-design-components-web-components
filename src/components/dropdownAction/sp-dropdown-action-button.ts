@@ -11,7 +11,7 @@ export class SpDropdownActionButton extends SpButton {
 
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      makeStyleSheet(buttonStyle,dropdownActionButtonStyle),
+      makeStyleSheet(buttonStyle, dropdownActionButtonStyle),
     ];
   }
 

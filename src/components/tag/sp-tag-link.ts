@@ -3,7 +3,6 @@ import "../icon/sp-icon";
 import { makeStyleSheet } from "../styles";
 import tagLinkStyle from "./tag-link.css?inline";
 
-
 /**
  * SpTagLinkは、デザインシステム2.0におけるリンク機能付きタグコンポーネントです。
  * クリック可能なリンクとして動作するタグを提供します。
