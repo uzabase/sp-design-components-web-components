@@ -1,189 +1,173 @@
-var Mt = (r) => {
-  throw TypeError(r);
-};
-var nt = (r, i, e) => i.has(r) || Mt("Cannot " + e);
-var t = (r, i, e) => (nt(r, i, "read from private field"), e ? e.call(r) : i.get(r)), n = (r, i, e) => i.has(r) ? Mt("Cannot add the same private member more than once") : i instanceof WeakSet ? i.add(r) : i.set(r, e), d = (r, i, e, o) => (nt(r, i, "write to private field"), o ? o.call(r, e) : i.set(r, e), e), a = (r, i, e) => (nt(r, i, "access private method"), e);
-const u = "*,*:before,*:after{margin:0;padding:0;box-sizing:border-box}:where([hidden]:not([hidden=until-found])){display:none!important}:where(html){-webkit-text-size-adjust:none;color-scheme:dark light;-moz-tab-size:2;tab-size:2;scrollbar-gutter:stable;interpolate-size:allow-keywords;line-height:1.5}:where(html:has(dialog:modal[open])){overflow:clip}@media (prefers-reduced-motion: no-preference){:where(html:focus-within){scroll-behavior:smooth}}:where(body){line-height:inherit;font-family:system-ui,sans-serif;-webkit-font-smoothing:antialiased}:where(button){all:unset}:where(input,button,textarea,select){font:inherit;color:inherit;letter-spacing:inherit;word-spacing:inherit;font-feature-settings:inherit;font-variation-settings:inherit}:where(textarea){resize:vertical;resize:block}:where(button,label,select,summary,[role=button],[role=option]){cursor:pointer}:where(:disabled,label:has(>:disabled,+disabled)){cursor:not-allowed}:where(a){color:inherit;text-underline-offset:.2ex}:where(ul,ol){list-style:none}:where(img,svg,video,canvas,audio,iframe,embed,object){display:block}:where(img,picture,svg,video){max-inline-size:100%;block-size:auto}:where(p,h1,h2,h3,h4,h5,h6){overflow-wrap:break-word}:where(h1,h2,h3){line-height:calc(1em + .5rem);text-wrap:balance}:where(hr){border:none;border-block-start:1px solid;color:inherit;block-size:0;overflow:visible}:where(dialog,[popover]){border:none;background:none;color:inherit;inset:unset;max-width:unset;max-height:unset;overflow:unset}:where(dialog:not([open],[popover]),[popover]:not(:popover-open)){display:none!important}:where(:focus-visible){outline:3px solid CanvasText;box-shadow:0 0 0 5px Canvas;outline-offset:1px}:where(:focus-visible,:target){scroll-margin-block:8vh}:where(.visually-hidden:not(:focus-within,:active)){clip-path:inset(50%)!important;height:1px!important;width:1px!important;overflow:hidden!important;position:absolute!important;white-space:nowrap!important;border:0!important;-webkit-user-select:none!important;user-select:none!important}";
-var M = function(r, i, e, o) {
-  if (e === "a" && !o) throw new TypeError("Private accessor was defined without a getter");
-  if (typeof i == "function" ? r !== i || !o : !i.has(r)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-  return e === "m" ? o : e === "a" ? o.call(r) : o ? o.value : i.get(r);
-}, re = function(r, i, e, o, s) {
-  if (o === "m") throw new TypeError("Private method is not writable");
-  if (o === "a" && !s) throw new TypeError("Private accessor was defined without a setter");
-  if (typeof i == "function" ? r !== i || !s : !i.has(r)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-  return o === "a" ? s.call(r, e) : s ? s.value = e : i.set(r, e), e;
-}, Ne, qe, Je, Qe, Se, Ee, He, lt;
-const Ei = ["default", "destructive"], Hi = ["outline", "fill", "text"], _i = ["medium", "large", "xLarge", "width160", "width80"];
-function Vi(r) {
-  return Ei.some((i) => i === r);
+var p = function(i, e, o, t) {
+  if (o === "a" && !t) throw new TypeError("Private accessor was defined without a getter");
+  if (typeof e == "function" ? i !== e || !t : !e.has(i)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+  return o === "m" ? t : o === "a" ? t.call(i) : t ? t.value : e.get(i);
+}, g = function(i, e, o, t, s) {
+  if (t === "m") throw new TypeError("Private method is not writable");
+  if (t === "a" && !s) throw new TypeError("Private accessor was defined without a setter");
+  if (typeof e == "function" ? i !== e || !s : !e.has(i)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+  return t === "a" ? s.call(i, o) : s ? s.value = o : e.set(i, o), o;
+}, H, S, _, V, C, y, k, z;
+const He = ["default", "destructive"], Se = ["outline", "fill", "text"], _e = ["medium", "large", "xLarge", "width160", "width80"];
+function Ve(i) {
+  return He.some((e) => e === i);
 }
-function Mi(r) {
-  return Hi.some((i) => i === r);
+function Me(i) {
+  return Se.some((e) => e === i);
 }
-function Ai(r) {
-  return _i.some((i) => i === r);
+function Ae(i) {
+  return _e.some((e) => e === i);
 }
-const $t = new CSSStyleSheet();
-$t.replaceSync(u);
-class Zi extends HTMLElement {
+class Ze extends HTMLElement {
   get loading() {
-    return M(this, qe, "f");
+    return p(this, S, "f");
   }
-  set loading(i) {
-    const e = this.buttonElement;
-    re(this, qe, i, "f"), i ? e.classList.add("isLoading") : e.classList.remove("isLoading"), M(this, Ne, "m", lt).call(this);
+  set loading(e) {
+    const o = this.buttonElement;
+    g(this, S, e, "f"), e ? o.classList.add("isLoading") : o.classList.remove("isLoading"), p(this, H, "m", z).call(this);
   }
   get selected() {
-    return M(this, Je, "f");
+    return p(this, _, "f");
   }
-  set selected(i) {
-    const e = this.buttonElement;
-    re(this, Je, i, "f"), i ? e.classList.add("isSelected") : e.classList.remove("isSelected");
+  set selected(e) {
+    const o = this.buttonElement;
+    g(this, _, e, "f"), e ? o.classList.add("isSelected") : o.classList.remove("isSelected");
   }
   get disabled() {
-    return M(this, Qe, "f");
+    return p(this, V, "f");
   }
-  set disabled(i) {
-    const e = this.buttonElement;
-    re(this, Qe, i, "f"), i ? e.classList.add("isDisable") : e.classList.remove("isDisable"), M(this, Ne, "m", lt).call(this);
+  set disabled(e) {
+    const o = this.buttonElement;
+    g(this, V, e, "f"), e ? o.classList.add("isDisable") : o.classList.remove("isDisable"), p(this, H, "m", z).call(this);
   }
   get type() {
-    return M(this, Se, "f");
+    return p(this, C, "f");
   }
-  set type(i) {
-    const e = this.buttonElement, o = {
+  set type(e) {
+    const o = this.buttonElement, t = {
       default: "type__default",
       destructive: "type__destructive"
     };
-    e.classList.remove(o[M(this, Se, "f")]), e.classList.add(o[i]), re(this, Se, i, "f");
+    o.classList.remove(t[p(this, C, "f")]), o.classList.add(t[e]), g(this, C, e, "f");
   }
   get appearance() {
-    return M(this, Ee, "f");
+    return p(this, y, "f");
   }
-  set appearance(i) {
-    const e = this.buttonElement, o = {
+  set appearance(e) {
+    const o = this.buttonElement, t = {
       outline: "appearance__outline",
       fill: "appearance__fill",
       text: "appearance__text"
     };
-    e.classList.remove(o[M(this, Ee, "f")]), e.classList.add(o[i]), re(this, Ee, i, "f");
+    o.classList.remove(t[p(this, y, "f")]), o.classList.add(t[e]), g(this, y, e, "f");
   }
   get size() {
-    return M(this, He, "f");
+    return p(this, k, "f");
   }
-  set size(i) {
-    const e = this.buttonElement, o = {
+  set size(e) {
+    const o = this.buttonElement, t = {
       medium: "size__medium",
       large: "size__large",
       xLarge: "size__xLarge",
       width160: "size__width160",
       width80: "size__width80"
     };
-    e.classList.remove(o[M(this, He, "f")]), e.classList.add(o[i]), re(this, He, i, "f");
+    o.classList.remove(t[p(this, k, "f")]), o.classList.add(t[e]), g(this, k, e, "f");
   }
   static get observedAttributes() {
     return ["loading", "selected", "disabled", "type", "appearance", "size"];
   }
   constructor() {
-    super(), Ne.add(this), qe.set(this, !1), Je.set(this, !1), Qe.set(this, !1), Se.set(this, "default"), Ee.set(this, "outline"), He.set(this, "medium"), this.buttonElement = document.createElement("button"), this.textElement = document.createElement("span"), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      $t
-    ], this.buttonElement.classList.add("base"), this.textElement.classList.add("base__text"), this.loading = !1, this.selected = !1, this.disabled = !1, this.type = "default", this.appearance = "outline", this.size = "medium";
+    super(), H.add(this), S.set(this, !1), _.set(this, !1), V.set(this, !1), C.set(this, "default"), y.set(this, "outline"), k.set(this, "medium"), this.buttonElement = document.createElement("button"), this.textElement = document.createElement("span"), this.attachShadow({ mode: "open" }), this.buttonElement.classList.add("base"), this.textElement.classList.add("base__text"), this.loading = !1, this.selected = !1, this.disabled = !1, this.type = "default", this.appearance = "outline", this.size = "medium";
   }
   connectedCallback() {
-    const i = document.createElement("slot");
-    this.textElement.appendChild(i), this.buttonElement.appendChild(this.textElement), this.shadowRoot.appendChild(this.buttonElement);
+    const e = document.createElement("slot");
+    this.textElement.appendChild(e), this.buttonElement.appendChild(this.textElement), this.shadowRoot.appendChild(this.buttonElement);
   }
-  attributeChangedCallback(i, e, o) {
-    if (e !== o)
-      switch (i) {
+  attributeChangedCallback(e, o, t) {
+    if (o !== t)
+      switch (e) {
         case "loading":
-          this.loading = o === "true" || o === "";
+          this.loading = t === "true" || t === "";
           break;
         case "selected":
-          this.selected = o === "true" || o === "";
+          this.selected = t === "true" || t === "";
           break;
         case "disabled":
-          this.disabled = o === "true" || o === "";
+          this.disabled = t === "true" || t === "";
           break;
         case "type":
-          Vi(o) ? this.type = o : (console.warn(`${o}は無効なtype属性です。`), this.type = "default");
+          Ve(t) ? this.type = t : (console.warn(`${t}は無効なtype属性です。`), this.type = "default");
           break;
         case "appearance":
-          Mi(o) ? this.appearance = o : (console.warn(`${o}は無効なappearance属性です。`), this.appearance = "outline");
+          Me(t) ? this.appearance = t : (console.warn(`${t}は無効なappearance属性です。`), this.appearance = "outline");
           break;
         case "size":
-          Ai(o) ? this.size = o : (console.warn(`${o}は無効なsize属性です。`), this.size = "medium");
+          Ae(t) ? this.size = t : (console.warn(`${t}は無効なsize属性です。`), this.size = "medium");
           break;
       }
   }
 }
-qe = /* @__PURE__ */ new WeakMap(), Je = /* @__PURE__ */ new WeakMap(), Qe = /* @__PURE__ */ new WeakMap(), Se = /* @__PURE__ */ new WeakMap(), Ee = /* @__PURE__ */ new WeakMap(), He = /* @__PURE__ */ new WeakMap(), Ne = /* @__PURE__ */ new WeakSet(), lt = function() {
+S = /* @__PURE__ */ new WeakMap(), _ = /* @__PURE__ */ new WeakMap(), V = /* @__PURE__ */ new WeakMap(), C = /* @__PURE__ */ new WeakMap(), y = /* @__PURE__ */ new WeakMap(), k = /* @__PURE__ */ new WeakMap(), H = /* @__PURE__ */ new WeakSet(), z = function() {
   this.buttonElement.disabled = this.disabled || this.loading;
 };
-var k = function(r, i, e, o) {
-  if (e === "a" && !o) throw new TypeError("Private accessor was defined without a getter");
-  if (typeof i == "function" ? r !== i || !o : !i.has(r)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-  return e === "m" ? o : e === "a" ? o.call(r) : o ? o.value : i.get(r);
-}, dt, v, Pt;
-const It = new CSSStyleSheet();
-It.replaceSync(u);
-class Dt extends HTMLElement {
+var d = function(i, e, o, t) {
+  if (o === "a" && !t) throw new TypeError("Private accessor was defined without a getter");
+  if (typeof e == "function" ? i !== e || !t : !e.has(i)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+  return o === "m" ? t : o === "a" ? t.call(i) : t ? t.value : e.get(i);
+}, B, c, Q;
+class q extends HTMLElement {
   get value() {
-    return k(this, v, "f").value;
+    return d(this, c, "f").value;
   }
-  set value(i) {
-    k(this, v, "f").value = i;
+  set value(e) {
+    d(this, c, "f").value = e;
   }
-  set name(i) {
-    this.setAttribute("name", i), k(this, v, "f").name = i;
+  set name(e) {
+    this.setAttribute("name", e), d(this, c, "f").name = e;
   }
   get checked() {
-    return k(this, v, "f").checked;
+    return d(this, c, "f").checked;
   }
-  set checked(i) {
-    i ? this.setAttribute("checked", "") : this.removeAttribute("checked"), k(this, v, "f").checked = i, this.internals.setFormValue(i ? this.value : null);
+  set checked(e) {
+    e ? this.setAttribute("checked", "") : this.removeAttribute("checked"), d(this, c, "f").checked = e, this.internals.setFormValue(e ? this.value : null);
   }
   get indeterminate() {
-    return k(this, v, "f").indeterminate;
+    return d(this, c, "f").indeterminate;
   }
-  set indeterminate(i) {
-    k(this, v, "f").indeterminate = i;
+  set indeterminate(e) {
+    d(this, c, "f").indeterminate = e;
   }
-  set disabled(i) {
-    k(this, v, "f").disabled = i;
+  set disabled(e) {
+    d(this, c, "f").disabled = e;
   }
   static get observedAttributes() {
     return ["value", "name", "checked", "indeterminate", "disabled"];
   }
   constructor() {
-    super(), dt.add(this), v.set(this, document.createElement("input")), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      It
-    ], this.internals = this.attachInternals();
+    super(), B.add(this), c.set(this, document.createElement("input")), this.attachShadow({ mode: "open" }), this.internals = this.attachInternals();
   }
   connectedCallback() {
-    const i = document.createElement("label"), e = document.createElement("span");
-    i.classList.add("base"), e.classList.add("checkmark"), k(this, v, "f").setAttribute("type", "checkbox"), k(this, v, "f").classList.add("input"), k(this, v, "f").addEventListener("change", () => k(this, dt, "m", Pt).call(this)), e.appendChild(k(this, v, "f")), i.appendChild(e), this.shadowRoot.appendChild(i);
+    const e = document.createElement("label"), o = document.createElement("span");
+    e.classList.add("base"), o.classList.add("checkmark"), d(this, c, "f").setAttribute("type", "checkbox"), d(this, c, "f").classList.add("input"), d(this, c, "f").addEventListener("change", () => d(this, B, "m", Q).call(this)), o.appendChild(d(this, c, "f")), e.appendChild(o), this.shadowRoot.appendChild(e);
   }
-  attributeChangedCallback(i, e, o) {
-    if (e !== o)
-      switch (i) {
+  attributeChangedCallback(e, o, t) {
+    if (o !== t)
+      switch (e) {
         case "value":
-          this.value = o;
+          this.value = t;
           break;
         case "name":
-          this.name = o;
+          this.name = t;
           break;
         case "checked":
-          this.checked = o === "true" || o === "";
+          this.checked = t === "true" || t === "";
           break;
         case "indeterminate":
-          this.indeterminate = o === "true" || o === "";
+          this.indeterminate = t === "true" || t === "";
           break;
         case "disabled":
-          this.disabled = o === "true" || o === "";
+          this.disabled = t === "true" || t === "";
           break;
       }
   }
@@ -191,7 +175,7 @@ class Dt extends HTMLElement {
     this.checked = !1;
   }
 }
-v = /* @__PURE__ */ new WeakMap(), dt = /* @__PURE__ */ new WeakSet(), Pt = function() {
+c = /* @__PURE__ */ new WeakMap(), B = /* @__PURE__ */ new WeakSet(), Q = function() {
   this.dispatchEvent(new CustomEvent("change", {
     bubbles: !0,
     composed: !0,
@@ -201,73 +185,68 @@ v = /* @__PURE__ */ new WeakMap(), dt = /* @__PURE__ */ new WeakSet(), Pt = func
     }
   }));
 };
-Dt.formAssociated = !0;
-var w = function(r, i, e, o) {
-  if (e === "a" && !o) throw new TypeError("Private accessor was defined without a getter");
-  if (typeof i == "function" ? r !== i || !o : !i.has(r)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-  return e === "m" ? o : e === "a" ? o.call(r) : o ? o.value : i.get(r);
-}, ht, L, Ut;
-const Gt = new CSSStyleSheet();
-Gt.replaceSync(u);
-class St extends HTMLElement {
+q.formAssociated = !0;
+var h = function(i, e, o, t) {
+  if (o === "a" && !t) throw new TypeError("Private accessor was defined without a getter");
+  if (typeof e == "function" ? i !== e || !t : !e.has(i)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+  return o === "m" ? t : o === "a" ? t.call(i) : t ? t.value : e.get(i);
+}, $, l, X;
+class I extends HTMLElement {
   get value() {
-    return w(this, L, "f").value;
+    return h(this, l, "f").value;
   }
-  set value(i) {
-    w(this, L, "f").value = i;
+  set value(e) {
+    h(this, l, "f").value = e;
   }
-  set name(i) {
-    this.setAttribute("name", i), w(this, L, "f").name = i;
+  set name(e) {
+    this.setAttribute("name", e), h(this, l, "f").name = e;
   }
   get checked() {
-    return w(this, L, "f").checked;
+    return h(this, l, "f").checked;
   }
-  set checked(i) {
-    i ? this.setAttribute("checked", "") : this.removeAttribute("checked"), w(this, L, "f").checked = i, this.internals.setFormValue(i ? this.value : null);
+  set checked(e) {
+    e ? this.setAttribute("checked", "") : this.removeAttribute("checked"), h(this, l, "f").checked = e, this.internals.setFormValue(e ? this.value : null);
   }
   get indeterminate() {
-    return w(this, L, "f").indeterminate;
+    return h(this, l, "f").indeterminate;
   }
-  set indeterminate(i) {
-    w(this, L, "f").indeterminate = i;
+  set indeterminate(e) {
+    h(this, l, "f").indeterminate = e;
   }
-  set disabled(i) {
-    w(this, L, "f").disabled = i;
+  set disabled(e) {
+    h(this, l, "f").disabled = e;
   }
   static get observedAttributes() {
     return ["value", "name", "checked", "indeterminate", "disabled"];
   }
   constructor() {
-    super(), ht.add(this), L.set(this, document.createElement("input")), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      Gt
-    ], this.internals = this.attachInternals();
+    super(), $.add(this), l.set(this, document.createElement("input")), this.attachShadow({ mode: "open" }), this.internals = this.attachInternals();
   }
   connectedCallback() {
-    const i = document.createElement("label"), e = document.createElement("span");
-    i.classList.add("base"), e.classList.add("checkmark"), w(this, L, "f").setAttribute("type", "checkbox"), w(this, L, "f").classList.add("input"), w(this, L, "f").addEventListener("change", () => w(this, ht, "m", Ut).call(this));
-    const o = document.createElement("div");
-    o.classList.add("text");
+    const e = document.createElement("label"), o = document.createElement("span");
+    e.classList.add("base"), o.classList.add("checkmark"), h(this, l, "f").setAttribute("type", "checkbox"), h(this, l, "f").classList.add("input"), h(this, l, "f").addEventListener("change", () => h(this, $, "m", X).call(this));
+    const t = document.createElement("div");
+    t.classList.add("text");
     const s = document.createElement("slot");
-    o.appendChild(s), e.appendChild(w(this, L, "f")), i.appendChild(e), i.appendChild(o), this.shadowRoot.appendChild(i);
+    t.appendChild(s), o.appendChild(h(this, l, "f")), e.appendChild(o), e.appendChild(t), this.shadowRoot.appendChild(e);
   }
-  attributeChangedCallback(i, e, o) {
-    if (e !== o)
-      switch (i) {
+  attributeChangedCallback(e, o, t) {
+    if (o !== t)
+      switch (e) {
         case "value":
-          this.value = o;
+          this.value = t;
           break;
         case "name":
-          this.name = o;
+          this.name = t;
           break;
         case "checked":
-          this.checked = o === "true" || o === "";
+          this.checked = t === "true" || t === "";
           break;
         case "indeterminate":
-          this.indeterminate = o === "true" || o === "";
+          this.indeterminate = t === "true" || t === "";
           break;
         case "disabled":
-          this.disabled = o === "true" || o === "";
+          this.disabled = t === "true" || t === "";
           break;
       }
   }
@@ -275,7 +254,7 @@ class St extends HTMLElement {
     this.checked = !1;
   }
 }
-L = /* @__PURE__ */ new WeakMap(), ht = /* @__PURE__ */ new WeakSet(), Ut = function() {
+l = /* @__PURE__ */ new WeakMap(), $ = /* @__PURE__ */ new WeakSet(), X = function() {
   this.dispatchEvent(new CustomEvent("change", {
     bubbles: !0,
     composed: !0,
@@ -285,148 +264,138 @@ L = /* @__PURE__ */ new WeakMap(), ht = /* @__PURE__ */ new WeakSet(), Ut = func
     }
   }));
 };
-St.formAssociated = !0;
-var z = function(r, i, e, o) {
-  if (e === "a" && !o) throw new TypeError("Private accessor was defined without a getter");
-  if (typeof i == "function" ? r !== i || !o : !i.has(r)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-  return e === "m" ? o : e === "a" ? o.call(r) : o ? o.value : i.get(r);
-}, Ri = function(r, i, e, o, s) {
-  if (o === "m") throw new TypeError("Private method is not writable");
-  if (o === "a" && !s) throw new TypeError("Private accessor was defined without a setter");
-  if (typeof i == "function" ? r !== i || !s : !i.has(r)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-  return o === "a" ? s.call(r, e) : s ? s.value = e : i.set(r, e), e;
-}, _e, B;
-const Wt = new CSSStyleSheet();
-Wt.replaceSync(u);
-const Ti = ["small", "medium"];
-function zi(r) {
-  return Ti.some((i) => i === r);
+I.formAssociated = !0;
+var m = function(i, e, o, t) {
+  if (o === "a" && !t) throw new TypeError("Private accessor was defined without a getter");
+  if (typeof e == "function" ? i !== e || !t : !e.has(i)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+  return o === "m" ? t : o === "a" ? t.call(i) : t ? t.value : e.get(i);
+}, Te = function(i, e, o, t, s) {
+  if (t === "m") throw new TypeError("Private method is not writable");
+  if (t === "a" && !s) throw new TypeError("Private accessor was defined without a setter");
+  if (typeof e == "function" ? i !== e || !s : !e.has(i)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+  return t === "a" ? s.call(i, o) : s ? s.value = o : e.set(i, o), o;
+}, w, b;
+const Re = ["small", "medium"];
+function ze(i) {
+  return Re.some((e) => e === i);
 }
-class Bi extends HTMLElement {
-  set type(i) {
-    z(this, B, "f").innerHTML = i in this.paths ? this.paths[i] : "";
+class Be extends HTMLElement {
+  set type(e) {
+    m(this, b, "f").innerHTML = e in this.paths ? this.paths[e] : "";
   }
-  set text(i) {
-    z(this, B, "f").setAttribute("aria-label", i);
+  set text(e) {
+    m(this, b, "f").setAttribute("aria-label", e);
   }
   get size() {
-    return z(this, _e, "f");
+    return m(this, w, "f");
   }
-  set size(i) {
-    const e = {
+  set size(e) {
+    const o = {
       small: "size__small",
       medium: "size__medium"
     };
-    z(this, B, "f").classList.remove(e[z(this, _e, "f")]), z(this, B, "f").classList.add(e[i]), Ri(this, _e, i, "f");
+    m(this, b, "f").classList.remove(o[m(this, w, "f")]), m(this, b, "f").classList.add(o[e]), Te(this, w, e, "f");
   }
   static get observedAttributes() {
     return ["type", "text", "size"];
   }
   constructor() {
-    super(), _e.set(this, "medium"), B.set(this, document.createElementNS("http://www.w3.org/2000/svg", "svg")), this.paths = {}, this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      Wt
-    ], this.size = "medium";
+    super(), w.set(this, "medium"), b.set(this, document.createElementNS("http://www.w3.org/2000/svg", "svg")), this.paths = {}, this.attachShadow({ mode: "open" }), this.size = "medium";
   }
   connectedCallback() {
-    z(this, B, "f").setAttribute("role", "img"), z(this, B, "f").setAttribute("viewBox", "0 0 24 24"), z(this, B, "f").classList.add("icon"), this.shadowRoot.appendChild(z(this, B, "f"));
+    m(this, b, "f").setAttribute("role", "img"), m(this, b, "f").setAttribute("viewBox", "0 0 24 24"), m(this, b, "f").classList.add("icon"), this.shadowRoot.appendChild(m(this, b, "f"));
   }
-  attributeChangedCallback(i, e, o) {
-    if (e !== o)
-      switch (i) {
+  attributeChangedCallback(e, o, t) {
+    if (o !== t)
+      switch (e) {
         case "type":
-          this.type = o;
+          this.type = t;
           break;
         case "text":
-          this.text = o;
+          this.text = t;
           break;
         case "size":
-          zi(o) ? this.size = o : (console.warn(`${o}は無効なsize属性です。`), this.size = "medium");
+          ze(t) ? this.size = t : (console.warn(`${t}は無効なsize属性です。`), this.size = "medium");
           break;
       }
   }
 }
-_e = /* @__PURE__ */ new WeakMap(), B = /* @__PURE__ */ new WeakMap();
-var f = function(r, i, e, o) {
-  if (e === "a" && !o) throw new TypeError("Private accessor was defined without a getter");
-  if (typeof i == "function" ? r !== i || !o : !i.has(r)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-  return e === "m" ? o : e === "a" ? o.call(r) : o ? o.value : i.get(r);
-}, Xe = function(r, i, e, o, s) {
-  if (o === "m") throw new TypeError("Private method is not writable");
-  if (o === "a" && !s) throw new TypeError("Private accessor was defined without a setter");
-  if (typeof i == "function" ? r !== i || !s : !i.has(r)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-  return o === "a" ? s.call(r, e) : s ? s.value = e : i.set(r, e), e;
-}, Me, Ke, et, tt, I, ae, ut, At;
-const Ft = new CSSStyleSheet();
-Ft.replaceSync(u);
-const $i = ["horizontal", "vertical"];
-function Pi(r) {
-  return $i.some((i) => i === r);
+w = /* @__PURE__ */ new WeakMap(), b = /* @__PURE__ */ new WeakMap();
+var a = function(i, e, o, t) {
+  if (o === "a" && !t) throw new TypeError("Private accessor was defined without a getter");
+  if (typeof e == "function" ? i !== e || !t : !e.has(i)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+  return o === "m" ? t : o === "a" ? t.call(i) : t ? t.value : e.get(i);
+}, M = function(i, e, o, t, s) {
+  if (t === "m") throw new TypeError("Private method is not writable");
+  if (t === "a" && !s) throw new TypeError("Private accessor was defined without a setter");
+  if (typeof e == "function" ? i !== e || !s : !e.has(i)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+  return t === "a" ? s.call(i, o) : s ? s.value = o : e.set(i, o), o;
+}, E, A, Z, T, f, v, P, F;
+const $e = ["horizontal", "vertical"];
+function Pe(i) {
+  return $e.some((e) => e === i);
 }
-class Et extends HTMLElement {
+class D extends HTMLElement {
   get name() {
-    return f(this, Ke, "f");
+    return a(this, A, "f");
   }
-  set name(i) {
-    f(this, ae, "f").map((e) => e.setAttribute("name", i)), this.setAttribute("name", i), Xe(this, Ke, i, "f");
+  set name(e) {
+    a(this, v, "f").map((o) => o.setAttribute("name", e)), this.setAttribute("name", e), M(this, A, e, "f");
   }
-  set direction(i) {
-    const e = i === "vertical" ? "vertical" : "horizontal";
-    f(this, I, "f").classList.remove(f(this, et, "f")), f(this, I, "f").classList.add(e), Xe(this, et, e, "f");
+  set direction(e) {
+    const o = e === "vertical" ? "vertical" : "horizontal";
+    a(this, f, "f").classList.remove(a(this, Z, "f")), a(this, f, "f").classList.add(o), M(this, Z, o, "f");
   }
   get data() {
-    return f(this, tt, "f");
+    return a(this, T, "f");
   }
-  set data(i) {
-    Xe(this, tt, i, "f"), f(this, Me, "m", ut).call(this);
+  set data(e) {
+    M(this, T, e, "f"), a(this, E, "m", P).call(this);
   }
   static get observedAttributes() {
     return ["name", "direction", "json-data"];
   }
   constructor() {
-    super(), Me.add(this), Ke.set(this, ""), et.set(this, "horizontal"), tt.set(this, []), I.set(this, document.createElement("ul")), ae.set(this, []), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      Ft
-    ], this.internals = this.attachInternals(), this.direction = "horizontal";
+    super(), E.add(this), A.set(this, ""), Z.set(this, "horizontal"), T.set(this, []), f.set(this, document.createElement("ul")), v.set(this, []), this.attachShadow({ mode: "open" }), this.internals = this.attachInternals(), this.direction = "horizontal";
   }
   connectedCallback() {
-    f(this, I, "f").classList.add("base"), f(this, I, "f").setAttribute("role", "radiogroup"), this.shadowRoot.appendChild(f(this, I, "f")), f(this, Me, "m", ut).call(this);
+    a(this, f, "f").classList.add("base"), a(this, f, "f").setAttribute("role", "radiogroup"), this.shadowRoot.appendChild(a(this, f, "f")), a(this, E, "m", P).call(this);
   }
-  attributeChangedCallback(i, e, o) {
-    if (e !== o)
-      switch (i) {
+  attributeChangedCallback(e, o, t) {
+    if (o !== t)
+      switch (e) {
         case "name":
-          this.name = o;
+          this.name = t;
           break;
         case "direction":
-          Pi(o) ? this.direction = o : this.direction = "horizontal";
+          Pe(t) ? this.direction = t : this.direction = "horizontal";
           break;
         case "json-data":
-          o === null ? this.data = [] : this.data = JSON.parse(o);
+          t === null ? this.data = [] : this.data = JSON.parse(t);
           break;
       }
   }
   formResetCallback() {
-    f(this, ae, "f").map((i) => i.checked = !1), this.internals.setFormValue(null);
+    a(this, v, "f").map((e) => e.checked = !1), this.internals.setFormValue(null);
   }
 }
-Ke = /* @__PURE__ */ new WeakMap(), et = /* @__PURE__ */ new WeakMap(), tt = /* @__PURE__ */ new WeakMap(), I = /* @__PURE__ */ new WeakMap(), ae = /* @__PURE__ */ new WeakMap(), Me = /* @__PURE__ */ new WeakSet(), ut = function() {
-  f(this, I, "f").innerHTML = "", Xe(this, ae, [], "f"), this.data.map((i, e) => {
-    const o = document.createElement("li"), s = document.createElement("input"), p = document.createElement("span"), y = document.createElement("label"), we = document.createElement("span"), Vt = i.value || "on";
-    o.classList.add("item"), s.setAttribute("type", "radio"), s.setAttribute("value", Vt), this.name !== "" && s.setAttribute("name", this.name), s.setAttribute("id", "radioButton" + e), s.checked = i.checked ?? !1, s.disabled = i.disabled ?? !1, i.checked && this.internals.setFormValue(Vt), s.classList.add("input"), s.addEventListener("change", (Si) => f(this, Me, "m", At).call(this, Si)), f(this, ae, "f").push(s), p.classList.add("radio"), y.classList.add("text"), y.setAttribute("for", "radioButton" + e), y.setAttribute("aria-labeledby", "radioButtonLabel" + e), we.setAttribute("aria-hidden", "true"), we.setAttribute("id", "radioButtonLabel" + e), we.classList.add("text-inner"), we.innerText = i.text, p.appendChild(s), o.appendChild(p), y.appendChild(we), o.appendChild(y), f(this, I, "f").appendChild(o);
+A = /* @__PURE__ */ new WeakMap(), Z = /* @__PURE__ */ new WeakMap(), T = /* @__PURE__ */ new WeakMap(), f = /* @__PURE__ */ new WeakMap(), v = /* @__PURE__ */ new WeakMap(), E = /* @__PURE__ */ new WeakSet(), P = function() {
+  a(this, f, "f").innerHTML = "", M(this, v, [], "f"), this.data.map((e, o) => {
+    const t = document.createElement("li"), s = document.createElement("input"), u = document.createElement("span"), L = document.createElement("label"), x = document.createElement("span"), W = e.value || "on";
+    t.classList.add("item"), s.setAttribute("type", "radio"), s.setAttribute("value", W), this.name !== "" && s.setAttribute("name", this.name), s.setAttribute("id", "radioButton" + o), s.checked = e.checked ?? !1, s.disabled = e.disabled ?? !1, e.checked && this.internals.setFormValue(W), s.classList.add("input"), s.addEventListener("change", (Ee) => a(this, E, "m", F).call(this, Ee)), a(this, v, "f").push(s), u.classList.add("radio"), L.classList.add("text"), L.setAttribute("for", "radioButton" + o), L.setAttribute("aria-labeledby", "radioButtonLabel" + o), x.setAttribute("aria-hidden", "true"), x.setAttribute("id", "radioButtonLabel" + o), x.classList.add("text-inner"), x.innerText = e.text, u.appendChild(s), t.appendChild(u), L.appendChild(x), t.appendChild(L), a(this, f, "f").appendChild(t);
   });
-}, At = function(i) {
-  const e = i.currentTarget.value;
-  this.internals.setFormValue(e), this.dispatchEvent(new CustomEvent("change", {
+}, F = function(e) {
+  const o = e.currentTarget.value;
+  this.internals.setFormValue(o), this.dispatchEvent(new CustomEvent("change", {
     bubbles: !0,
     composed: !0,
     detail: {
-      value: e
+      value: o
     }
   }));
 };
-Et.formAssociated = !0;
-const h = ':host{--font-family-zh: Arial, YakuHanJPs, "PingFang SC", "Microsoft YaHei", "PingFang TC", Microsoft JhengHei, sans-serif;--font-family-ja: Arial, YakuHanJPs, Hiragino Sans, Hiragino Kaku Gothic ProN, Meiryo, Noto Sans JP, sans-serif;--color-semantic-text-weak: #6f6f6f;--color-semantic-text-text-link: #404fbf;--color-semantic-text-semi-weak: #363636;--color-semantic-text-required: #ca3232;--color-semantic-text-regular: #191919;--color-semantic-text-placeholder: #6f6f6f;--color-semantic-text-inverse: #ffffff;--color-semantic-text-error: #ca3232;--color-semantic-text-disabled: #cbcbcb;--color-semantic-text-destructive: #ca3232;--color-semantic-text-current: #404fbf;--color-semantic-text-button-text-hover: #191919;--color-semantic-text-button-text-focus: #191919;--color-semantic-text-button-text-destructive-hover: #ca3232;--color-semantic-text-button-text-destructive-focus: #ca3232;--color-semantic-text-button-text-destructive-default: #ca3232;--color-semantic-text-button-text-default: #191919;--color-semantic-text-button-selected-hover: #ffffff;--color-semantic-text-button-selected: #ffffff;--color-semantic-text-button-outline-hover: #6f6f6f;--color-semantic-text-button-outline-focus: #6f6f6f;--color-semantic-text-button-outline-destructive-hover: #da7070;--color-semantic-text-button-outline-destructive-focus: #da7070;--color-semantic-text-button-outline-destructive-default: #ca3232;--color-semantic-text-button-outline-default: #191919;--color-semantic-text-button-loading: #cbcbcb;--color-semantic-text-button-fill-hover: #ffffff;--color-semantic-text-button-fill-focus: #ffffff;--color-semantic-text-button-fill-destructive-hover: #ffffff;--color-semantic-text-button-fill-destructive-focus: #ffffff;--color-semantic-text-button-fill-destructive-default: #ffffff;--color-semantic-text-button-fill-default: #ffffff;--color-semantic-text-button-disabled: #cbcbcb;--color-semantic-surface-warning-3: #f9e8b3;--color-semantic-surface-warning-1: #fdf7e6;--color-semantic-surface-success-3: #bad4c3;--color-semantic-surface-success-1: #e8f1eb;--color-semantic-surface-selected-hover: #5361c5;--color-semantic-surface-selected-focus: #404fbf;--color-semantic-surface-selected: #404fbf;--color-semantic-surface-regular-9: #191919;--color-semantic-surface-regular-8: #282828;--color-semantic-surface-regular-7: #363636;--color-semantic-surface-regular-6: #cbcbcb;--color-semantic-surface-regular-5: #e5e5e5;--color-semantic-surface-regular-4: #ededed;--color-semantic-surface-regular-3: #f5f5f5;--color-semantic-surface-regular-2: #f8f8f8;--color-semantic-surface-regular-1: #ffffff;--color-semantic-surface-information-3: #c4d7ec;--color-semantic-surface-information-1: #ebf2f9;--color-semantic-surface-error-3: #efc2c2;--color-semantic-surface-error-1: #faebeb;--color-semantic-surface-checked-hover: #d9dcf2;--color-semantic-surface-checked: #ecedf9;--color-semantic-surface-check-disabled: #ededed;--color-semantic-surface-button-text-hover: #f5f5f5;--color-semantic-surface-button-text-focus: #f5f5f5;--color-semantic-surface-button-text-destructive-hover: #f4d6d6;--color-semantic-surface-button-text-destructive-focus: #f4d6d6;--color-semantic-surface-button-text-destructive-default: rgba(202, 50, 50, 0);--color-semantic-surface-button-text-default: rgba(25, 25, 25, 0);--color-semantic-surface-button-selected-hover: #5361c5;--color-semantic-surface-button-selected: #404fbf;--color-semantic-surface-button-outline-hover: rgba(25, 25, 25, 0);--color-semantic-surface-button-outline-focus: rgba(25, 25, 25, 0);--color-semantic-surface-button-outline-destructive-hover: rgba(218, 112, 112, 0);--color-semantic-surface-button-outline-destructive-focus: rgba(218, 112, 112, 0);--color-semantic-surface-button-outline-destructive-default: rgba(202, 50, 50, 0);--color-semantic-surface-button-outline-default: rgba(25, 25, 25, 0);--color-semantic-surface-button-loading: #f8f8f8;--color-semantic-surface-button-fill-hover: #363636;--color-semantic-surface-button-fill-focus: #363636;--color-semantic-surface-button-fill-destructive-hover: #d55b5b;--color-semantic-surface-button-fill-destructive-focus: #d55b5b;--color-semantic-surface-button-fill-destructive-default: #ca3232;--color-semantic-surface-button-fill-default: #191919;--color-semantic-surface-button-disabled: #f8f8f8;--color-semantic-surface-temp-tag-yellow: #fdf7e6;--color-semantic-surface-temp-tag-red: #faebeb;--color-semantic-surface-temp-tag-marine: #ebf2f9;--color-semantic-surface-temp-tag-green: #e8f1eb;--color-semantic-surface-temp-tag-gray: #f8f8f8;--color-semantic-surface-temp-tag-darkyellow: #eab100;--color-semantic-surface-temp-tag-darkred: #ca3232;--color-semantic-surface-temp-tag-darkmarine: #3978bf;--color-semantic-surface-temp-tag-darkgreen: #1a7037;--color-semantic-highlight-text: #ffe7ec;--color-semantic-highlight-focus-ring-error: #f7e0e0;--color-semantic-highlight-focus-ring-default: #e2e5f5;--color-semantic-elevation-sort: rgba(25, 25, 25, .2);--color-semantic-elevation-regular: rgba(25, 25, 25, .2);--color-semantic-elevation-modal: rgba(25, 25, 25, .2);--color-semantic-chart-single-8: #d6e3ff;--color-semantic-chart-single-7: #c6d7ff;--color-semantic-chart-single-6: #b6ccff;--color-semantic-chart-single-5: #a5c0ff;--color-semantic-chart-single-4: #95b5ff;--color-semantic-chart-single-3: #85aaff;--color-semantic-chart-single-2: #749eff;--color-semantic-chart-single-1: #5c8dff;--color-semantic-chart-multi-line-9: #df8484;--color-semantic-chart-multi-line-8: #b3308a;--color-semantic-chart-multi-line-7: #404fbf;--color-semantic-chart-multi-line-6: #3978bf;--color-semantic-chart-multi-line-5: #248a6a;--color-semantic-chart-multi-line-4: #a9ad2f;--color-semantic-chart-multi-line-3: #eab100;--color-semantic-chart-multi-line-2: #b38732;--color-semantic-chart-multi-line-16: #d183b9;--color-semantic-chart-multi-line-15: #8c95d9;--color-semantic-chart-multi-line-14: #88aed9;--color-semantic-chart-multi-line-13: #7cb9a6;--color-semantic-chart-multi-line-12: #cbce82;--color-semantic-chart-multi-line-11: #f2d066;--color-semantic-chart-multi-line-10: #d1b784;--color-semantic-chart-multi-line-1: #ca3232;--color-semantic-chart-multi-fill-9: #cc9ee3;--color-semantic-chart-multi-fill-8: #e59999;--color-semantic-chart-multi-fill-7: #dead9c;--color-semantic-chart-multi-fill-6: #d9c399;--color-semantic-chart-multi-fill-5: #e6e197;--color-semantic-chart-multi-fill-4: #b0ce94;--color-semantic-chart-multi-fill-38: #d1c5e8;--color-semantic-chart-multi-fill-37: #e8c1dc;--color-semantic-chart-multi-fill-36: #edc6c1;--color-semantic-chart-multi-fill-35: #e5d4c0;--color-semantic-chart-multi-fill-34: #f9e8b3;--color-semantic-chart-multi-fill-33: #e5e6c1;--color-semantic-chart-multi-fill-32: #c3daba;--color-semantic-chart-multi-fill-31: #bddcd2;--color-semantic-chart-multi-fill-30: #bedbe2;--color-semantic-chart-multi-fill-3: #8db89b;--color-semantic-chart-multi-fill-29: #c6caec;--color-semantic-chart-multi-fill-28: #e0c5ee;--color-semantic-chart-multi-fill-27: #efc2c2;--color-semantic-chart-multi-fill-26: #ebcec4;--color-semantic-chart-multi-fill-25: #e8dbc2;--color-semantic-chart-multi-fill-24: #f0edc1;--color-semantic-chart-multi-fill-23: #cfe1bf;--color-semantic-chart-multi-fill-22: #bad4c3;--color-semantic-chart-multi-fill-21: #c0e5e3;--color-semantic-chart-multi-fill-20: #c4d7ec;--color-semantic-chart-multi-fill-2: #96d4d1;--color-semantic-chart-multi-fill-19: #b29ed9;--color-semantic-chart-multi-fill-18: #d998c5;--color-semantic-chart-multi-fill-17: #e1a098;--color-semantic-chart-multi-fill-16: #d4b797;--color-semantic-chart-multi-fill-15: #f5d880;--color-semantic-chart-multi-fill-14: #d4d697;--color-semantic-chart-multi-fill-13: #9bc28c;--color-semantic-chart-multi-fill-12: #92c5b5;--color-semantic-chart-multi-fill-11: #93c4cf;--color-semantic-chart-multi-fill-10: #a0a7df;--color-semantic-chart-multi-fill-1: #9cbcdf;--color-semantic-chart-heatmap-4: #dee8ff;--color-semantic-chart-heatmap-3: #bed1ff;--color-semantic-chart-heatmap-2: #9dbbff;--color-semantic-chart-heatmap-1: #7da4ff;--color-semantic-brand-default: #ff5e83;--color-semantic-border-warning: #eab100;--color-semantic-border-success: #1a7037;--color-semantic-border-strong: #191919;--color-semantic-border-semi-weak: #ededed;--color-semantic-border-semi-strong: #363636;--color-semantic-border-selected-hover: #5361c5;--color-semantic-border-selected: #404fbf;--color-semantic-border-regular: #e5e5e5;--color-semantic-border-inverse: #ffffff;--color-semantic-border-information: #3978bf;--color-semantic-border-focus: #404fbf;--color-semantic-border-error: #ca3232;--color-semantic-border-check-unchecked: #cbcbcb;--color-semantic-border-button-text-hover: #f5f5f5;--color-semantic-border-button-text-focus: #f5f5f5;--color-semantic-border-button-text-destructive-hover: #f4d6d6;--color-semantic-border-button-text-destructive-focus: #f4d6d6;--color-semantic-border-button-text-destructive-default: rgba(202, 50, 50, 0);--color-semantic-border-button-text-default: rgba(25, 25, 25, 0);--color-semantic-border-button-selected-hover: #5361c5;--color-semantic-border-button-selected: #404fbf;--color-semantic-border-button-outline-hover: #6f6f6f;--color-semantic-border-button-outline-focus: #6f6f6f;--color-semantic-border-button-outline-destructive-hover: #da7070;--color-semantic-border-button-outline-destructive-focus: #da7070;--color-semantic-border-button-outline-destructive-default: #ca3232;--color-semantic-border-button-outline-default: #191919;--color-semantic-border-button-loading: #e5e5e5;--color-semantic-border-button-fill-hover: #363636;--color-semantic-border-button-fill-focus: #363636;--color-semantic-border-button-fill-destructive-hover: #d55b5b;--color-semantic-border-button-fill-destructive-focus: #d55b5b;--color-semantic-border-button-fill-destructive-default: #ca3232;--color-semantic-border-button-fill-default: #191919;--color-semantic-border-button-disabled: #e5e5e5;--color-semantic-border-temp-tag-yellow: #f7e099;--color-semantic-border-temp-tag-red: #eaadad;--color-semantic-border-temp-tag-marine: #b0c9e5;--color-semantic-border-temp-tag-green: #a3c6af;--color-semantic-border-temp-tag-gray: #e5e5e5;--color-semantic-border-temp-tag-darkyellow: #a47c00;--color-semantic-border-temp-tag-darkred: #8d2323;--color-semantic-border-temp-tag-darkmarine: #285486;--color-semantic-border-temp-tag-darkgreen: #124e27;--color-semantic-background-default: #f8f8f8;--color-primitive-yellow-60: #f2d066;--color-primitive-yellow-50: #f5d880;--color-primitive-yellow-40: #f7e099;--color-primitive-yellow-30: #f9e8b3;--color-primitive-yellow-130: #a47c00;--color-primitive-yellow-100: #eab100;--color-primitive-yellow-10: #fdf7e6;--color-primitive-white: #ffffff;--color-primitive-viridian-60: #7cb9a6;--color-primitive-viridian-50: #92c5b5;--color-primitive-viridian-30: #bddcd2;--color-primitive-viridian-100: #248a6a;--color-primitive-violet-50: #b29ed9;--color-primitive-violet-30: #d1c5e8;--color-primitive-turquoise-50: #93c4cf;--color-primitive-turquoise-30: #bedbe2;--color-primitive-tomato-80: #d55b5b;--color-primitive-tomato-70: #da7070;--color-primitive-tomato-60: #df8484;--color-primitive-tomato-50: #e59999;--color-primitive-tomato-40: #eaadad;--color-primitive-tomato-30: #efc2c2;--color-primitive-tomato-20: #f4d6d6;--color-primitive-tomato-15: #f7e0e0;--color-primitive-tomato-130: #8d2323;--color-primitive-tomato-100: #ca3232;--color-primitive-tomato-10: #faebeb;--color-primitive-terracotta-50: #e1a098;--color-primitive-terracotta-30: #edc6c1;--color-primitive-sky-85: #749eff;--color-primitive-sky-80: #7da4ff;--color-primitive-sky-75: #85aaff;--color-primitive-sky-65: #95b5ff;--color-primitive-sky-60: #9dbbff;--color-primitive-sky-55: #a5c0ff;--color-primitive-sky-45: #b6ccff;--color-primitive-sky-40: #bed1ff;--color-primitive-sky-35: #c6d7ff;--color-primitive-sky-25: #d6e3ff;--color-primitive-sky-20: #dee8ff;--color-primitive-sky-100: #5c8dff;--color-primitive-purple-50: #cc9ee3;--color-primitive-purple-30: #e0c5ee;--color-primitive-plum-60: #d183b9;--color-primitive-plum-50: #d998c5;--color-primitive-plum-30: #e8c1dc;--color-primitive-plum-100: #b3308a;--color-primitive-pink-15: #ffe7ec;--color-primitive-pink-100: #ff5e83;--color-primitive-neutral-90: #282828;--color-primitive-neutral-80: #363636;--color-primitive-neutral-70: #6f6f6f;--color-primitive-neutral-50: #cbcbcb;--color-primitive-neutral-40: #e5e5e5;--color-primitive-neutral-30: #ededed;--color-primitive-neutral-20: #f5f5f5;--color-primitive-neutral-100: #191919;--color-primitive-neutral-10: #f8f8f8;--color-primitive-marine-60: #88aed9;--color-primitive-marine-50: #9cbcdf;--color-primitive-marine-40: #b0c9e5;--color-primitive-marine-30: #c4d7ec;--color-primitive-marine-130: #285486;--color-primitive-marine-100: #3978bf;--color-primitive-marine-10: #ebf2f9;--color-primitive-lime-60: #cbce82;--color-primitive-lime-50: #d4d697;--color-primitive-lime-30: #e5e6c1;--color-primitive-lime-100: #a9ad2f;--color-primitive-lemon-50: #e6e197;--color-primitive-lemon-30: #f0edc1;--color-primitive-leaf-50: #b0ce94;--color-primitive-leaf-30: #cfe1bf;--color-primitive-green-50: #8db89b;--color-primitive-green-40: #a3c6af;--color-primitive-green-30: #bad4c3;--color-primitive-green-130: #124e27;--color-primitive-green-100: #1a7037;--color-primitive-green-10: #e8f1eb;--color-primitive-emerald-50: #96d4d1;--color-primitive-emerald-30: #c0e5e3;--color-primitive-cork-60: #d1b784;--color-primitive-cork-50: #d9c399;--color-primitive-cork-30: #e8dbc2;--color-primitive-cork-100: #b38732;--color-primitive-brown-50: #dead9c;--color-primitive-brown-30: #ebcec4;--color-primitive-blue-90: #5361c5;--color-primitive-blue-60: #8c95d9;--color-primitive-blue-50: #a0a7df;--color-primitive-blue-30: #c6caec;--color-primitive-blue-20: #d9dcf2;--color-primitive-blue-15: #e2e5f5;--color-primitive-blue-100: #404fbf;--color-primitive-blue-10: #ecedf9;--color-primitive-bamboo-50: #9bc28c;--color-primitive-bamboo-30: #c3daba;--color-primitive-amber-50: #d4b797;--color-primitive-amber-30: #e5d4c0}:host,*{overflow-wrap:break-word;min-width:0}:host{font-family:var(--font-family-ja)}:host:lang(zh){font-family:var(--font-family-zh)}button{box-sizing:border-box}', Ii = ":host{flex-grow:0;flex-shrink:0;display:inline-block;line-height:0;vertical-align:middle}.icon{display:inline-block;fill:currentcolor}.size__small{width:16px;height:16px}.size__medium{width:24px;height:24px}", jt = {
+D.formAssociated = !0;
+const r = ':host{--font-family-zh: Arial, YakuHanJPs, "PingFang SC", "Microsoft YaHei", "PingFang TC", Microsoft JhengHei, sans-serif;--font-family-ja: Arial, YakuHanJPs, Hiragino Sans, Hiragino Kaku Gothic ProN, Meiryo, Noto Sans JP, sans-serif;--color-semantic-text-weak: #6f6f6f;--color-semantic-text-text-link: #404fbf;--color-semantic-text-semi-weak: #363636;--color-semantic-text-required: #ca3232;--color-semantic-text-regular: #191919;--color-semantic-text-placeholder: #6f6f6f;--color-semantic-text-inverse: #ffffff;--color-semantic-text-error: #ca3232;--color-semantic-text-disabled: #cbcbcb;--color-semantic-text-destructive: #ca3232;--color-semantic-text-current: #404fbf;--color-semantic-text-button-text-hover: #191919;--color-semantic-text-button-text-focus: #191919;--color-semantic-text-button-text-destructive-hover: #ca3232;--color-semantic-text-button-text-destructive-focus: #ca3232;--color-semantic-text-button-text-destructive-default: #ca3232;--color-semantic-text-button-text-default: #191919;--color-semantic-text-button-selected-hover: #ffffff;--color-semantic-text-button-selected: #ffffff;--color-semantic-text-button-outline-hover: #6f6f6f;--color-semantic-text-button-outline-focus: #6f6f6f;--color-semantic-text-button-outline-destructive-hover: #da7070;--color-semantic-text-button-outline-destructive-focus: #da7070;--color-semantic-text-button-outline-destructive-default: #ca3232;--color-semantic-text-button-outline-default: #191919;--color-semantic-text-button-loading: #cbcbcb;--color-semantic-text-button-fill-hover: #ffffff;--color-semantic-text-button-fill-focus: #ffffff;--color-semantic-text-button-fill-destructive-hover: #ffffff;--color-semantic-text-button-fill-destructive-focus: #ffffff;--color-semantic-text-button-fill-destructive-default: #ffffff;--color-semantic-text-button-fill-default: #ffffff;--color-semantic-text-button-disabled: #cbcbcb;--color-semantic-surface-warning-3: #f9e8b3;--color-semantic-surface-warning-1: #fdf7e6;--color-semantic-surface-success-3: #bad4c3;--color-semantic-surface-success-1: #e8f1eb;--color-semantic-surface-selected-hover: #5361c5;--color-semantic-surface-selected-focus: #404fbf;--color-semantic-surface-selected: #404fbf;--color-semantic-surface-regular-9: #191919;--color-semantic-surface-regular-8: #282828;--color-semantic-surface-regular-7: #363636;--color-semantic-surface-regular-6: #cbcbcb;--color-semantic-surface-regular-5: #e5e5e5;--color-semantic-surface-regular-4: #ededed;--color-semantic-surface-regular-3: #f5f5f5;--color-semantic-surface-regular-2: #f8f8f8;--color-semantic-surface-regular-1: #ffffff;--color-semantic-surface-information-3: #c4d7ec;--color-semantic-surface-information-1: #ebf2f9;--color-semantic-surface-error-3: #efc2c2;--color-semantic-surface-error-1: #faebeb;--color-semantic-surface-checked-hover: #d9dcf2;--color-semantic-surface-checked: #ecedf9;--color-semantic-surface-check-disabled: #ededed;--color-semantic-surface-button-text-hover: #f5f5f5;--color-semantic-surface-button-text-focus: #f5f5f5;--color-semantic-surface-button-text-destructive-hover: #f4d6d6;--color-semantic-surface-button-text-destructive-focus: #f4d6d6;--color-semantic-surface-button-text-destructive-default: rgba(202, 50, 50, 0);--color-semantic-surface-button-text-default: rgba(25, 25, 25, 0);--color-semantic-surface-button-selected-hover: #5361c5;--color-semantic-surface-button-selected: #404fbf;--color-semantic-surface-button-outline-hover: rgba(25, 25, 25, 0);--color-semantic-surface-button-outline-focus: rgba(25, 25, 25, 0);--color-semantic-surface-button-outline-destructive-hover: rgba(218, 112, 112, 0);--color-semantic-surface-button-outline-destructive-focus: rgba(218, 112, 112, 0);--color-semantic-surface-button-outline-destructive-default: rgba(202, 50, 50, 0);--color-semantic-surface-button-outline-default: rgba(25, 25, 25, 0);--color-semantic-surface-button-loading: #f8f8f8;--color-semantic-surface-button-fill-hover: #363636;--color-semantic-surface-button-fill-focus: #363636;--color-semantic-surface-button-fill-destructive-hover: #d55b5b;--color-semantic-surface-button-fill-destructive-focus: #d55b5b;--color-semantic-surface-button-fill-destructive-default: #ca3232;--color-semantic-surface-button-fill-default: #191919;--color-semantic-surface-button-disabled: #f8f8f8;--color-semantic-surface-temp-tag-yellow: #fdf7e6;--color-semantic-surface-temp-tag-red: #faebeb;--color-semantic-surface-temp-tag-marine: #ebf2f9;--color-semantic-surface-temp-tag-green: #e8f1eb;--color-semantic-surface-temp-tag-gray: #f8f8f8;--color-semantic-surface-temp-tag-darkyellow: #eab100;--color-semantic-surface-temp-tag-darkred: #ca3232;--color-semantic-surface-temp-tag-darkmarine: #3978bf;--color-semantic-surface-temp-tag-darkgreen: #1a7037;--color-semantic-highlight-text: #ffe7ec;--color-semantic-highlight-focus-ring-error: #f7e0e0;--color-semantic-highlight-focus-ring-default: #e2e5f5;--color-semantic-elevation-sort: rgba(25, 25, 25, .2);--color-semantic-elevation-regular: rgba(25, 25, 25, .2);--color-semantic-elevation-modal: rgba(25, 25, 25, .2);--color-semantic-chart-single-8: #d6e3ff;--color-semantic-chart-single-7: #c6d7ff;--color-semantic-chart-single-6: #b6ccff;--color-semantic-chart-single-5: #a5c0ff;--color-semantic-chart-single-4: #95b5ff;--color-semantic-chart-single-3: #85aaff;--color-semantic-chart-single-2: #749eff;--color-semantic-chart-single-1: #5c8dff;--color-semantic-chart-multi-line-9: #df8484;--color-semantic-chart-multi-line-8: #b3308a;--color-semantic-chart-multi-line-7: #404fbf;--color-semantic-chart-multi-line-6: #3978bf;--color-semantic-chart-multi-line-5: #248a6a;--color-semantic-chart-multi-line-4: #a9ad2f;--color-semantic-chart-multi-line-3: #eab100;--color-semantic-chart-multi-line-2: #b38732;--color-semantic-chart-multi-line-16: #d183b9;--color-semantic-chart-multi-line-15: #8c95d9;--color-semantic-chart-multi-line-14: #88aed9;--color-semantic-chart-multi-line-13: #7cb9a6;--color-semantic-chart-multi-line-12: #cbce82;--color-semantic-chart-multi-line-11: #f2d066;--color-semantic-chart-multi-line-10: #d1b784;--color-semantic-chart-multi-line-1: #ca3232;--color-semantic-chart-multi-fill-9: #cc9ee3;--color-semantic-chart-multi-fill-8: #e59999;--color-semantic-chart-multi-fill-7: #dead9c;--color-semantic-chart-multi-fill-6: #d9c399;--color-semantic-chart-multi-fill-5: #e6e197;--color-semantic-chart-multi-fill-4: #b0ce94;--color-semantic-chart-multi-fill-38: #d1c5e8;--color-semantic-chart-multi-fill-37: #e8c1dc;--color-semantic-chart-multi-fill-36: #edc6c1;--color-semantic-chart-multi-fill-35: #e5d4c0;--color-semantic-chart-multi-fill-34: #f9e8b3;--color-semantic-chart-multi-fill-33: #e5e6c1;--color-semantic-chart-multi-fill-32: #c3daba;--color-semantic-chart-multi-fill-31: #bddcd2;--color-semantic-chart-multi-fill-30: #bedbe2;--color-semantic-chart-multi-fill-3: #8db89b;--color-semantic-chart-multi-fill-29: #c6caec;--color-semantic-chart-multi-fill-28: #e0c5ee;--color-semantic-chart-multi-fill-27: #efc2c2;--color-semantic-chart-multi-fill-26: #ebcec4;--color-semantic-chart-multi-fill-25: #e8dbc2;--color-semantic-chart-multi-fill-24: #f0edc1;--color-semantic-chart-multi-fill-23: #cfe1bf;--color-semantic-chart-multi-fill-22: #bad4c3;--color-semantic-chart-multi-fill-21: #c0e5e3;--color-semantic-chart-multi-fill-20: #c4d7ec;--color-semantic-chart-multi-fill-2: #96d4d1;--color-semantic-chart-multi-fill-19: #b29ed9;--color-semantic-chart-multi-fill-18: #d998c5;--color-semantic-chart-multi-fill-17: #e1a098;--color-semantic-chart-multi-fill-16: #d4b797;--color-semantic-chart-multi-fill-15: #f5d880;--color-semantic-chart-multi-fill-14: #d4d697;--color-semantic-chart-multi-fill-13: #9bc28c;--color-semantic-chart-multi-fill-12: #92c5b5;--color-semantic-chart-multi-fill-11: #93c4cf;--color-semantic-chart-multi-fill-10: #a0a7df;--color-semantic-chart-multi-fill-1: #9cbcdf;--color-semantic-chart-heatmap-4: #dee8ff;--color-semantic-chart-heatmap-3: #bed1ff;--color-semantic-chart-heatmap-2: #9dbbff;--color-semantic-chart-heatmap-1: #7da4ff;--color-semantic-brand-default: #ff5e83;--color-semantic-border-warning: #eab100;--color-semantic-border-success: #1a7037;--color-semantic-border-strong: #191919;--color-semantic-border-semi-weak: #ededed;--color-semantic-border-semi-strong: #363636;--color-semantic-border-selected-hover: #5361c5;--color-semantic-border-selected: #404fbf;--color-semantic-border-regular: #e5e5e5;--color-semantic-border-inverse: #ffffff;--color-semantic-border-information: #3978bf;--color-semantic-border-focus: #404fbf;--color-semantic-border-error: #ca3232;--color-semantic-border-check-unchecked: #cbcbcb;--color-semantic-border-button-text-hover: #f5f5f5;--color-semantic-border-button-text-focus: #f5f5f5;--color-semantic-border-button-text-destructive-hover: #f4d6d6;--color-semantic-border-button-text-destructive-focus: #f4d6d6;--color-semantic-border-button-text-destructive-default: rgba(202, 50, 50, 0);--color-semantic-border-button-text-default: rgba(25, 25, 25, 0);--color-semantic-border-button-selected-hover: #5361c5;--color-semantic-border-button-selected: #404fbf;--color-semantic-border-button-outline-hover: #6f6f6f;--color-semantic-border-button-outline-focus: #6f6f6f;--color-semantic-border-button-outline-destructive-hover: #da7070;--color-semantic-border-button-outline-destructive-focus: #da7070;--color-semantic-border-button-outline-destructive-default: #ca3232;--color-semantic-border-button-outline-default: #191919;--color-semantic-border-button-loading: #e5e5e5;--color-semantic-border-button-fill-hover: #363636;--color-semantic-border-button-fill-focus: #363636;--color-semantic-border-button-fill-destructive-hover: #d55b5b;--color-semantic-border-button-fill-destructive-focus: #d55b5b;--color-semantic-border-button-fill-destructive-default: #ca3232;--color-semantic-border-button-fill-default: #191919;--color-semantic-border-button-disabled: #e5e5e5;--color-semantic-border-temp-tag-yellow: #f7e099;--color-semantic-border-temp-tag-red: #eaadad;--color-semantic-border-temp-tag-marine: #b0c9e5;--color-semantic-border-temp-tag-green: #a3c6af;--color-semantic-border-temp-tag-gray: #e5e5e5;--color-semantic-border-temp-tag-darkyellow: #a47c00;--color-semantic-border-temp-tag-darkred: #8d2323;--color-semantic-border-temp-tag-darkmarine: #285486;--color-semantic-border-temp-tag-darkgreen: #124e27;--color-semantic-background-default: #f8f8f8;--color-primitive-yellow-60: #f2d066;--color-primitive-yellow-50: #f5d880;--color-primitive-yellow-40: #f7e099;--color-primitive-yellow-30: #f9e8b3;--color-primitive-yellow-130: #a47c00;--color-primitive-yellow-100: #eab100;--color-primitive-yellow-10: #fdf7e6;--color-primitive-white: #ffffff;--color-primitive-viridian-60: #7cb9a6;--color-primitive-viridian-50: #92c5b5;--color-primitive-viridian-30: #bddcd2;--color-primitive-viridian-100: #248a6a;--color-primitive-violet-50: #b29ed9;--color-primitive-violet-30: #d1c5e8;--color-primitive-turquoise-50: #93c4cf;--color-primitive-turquoise-30: #bedbe2;--color-primitive-tomato-80: #d55b5b;--color-primitive-tomato-70: #da7070;--color-primitive-tomato-60: #df8484;--color-primitive-tomato-50: #e59999;--color-primitive-tomato-40: #eaadad;--color-primitive-tomato-30: #efc2c2;--color-primitive-tomato-20: #f4d6d6;--color-primitive-tomato-15: #f7e0e0;--color-primitive-tomato-130: #8d2323;--color-primitive-tomato-100: #ca3232;--color-primitive-tomato-10: #faebeb;--color-primitive-terracotta-50: #e1a098;--color-primitive-terracotta-30: #edc6c1;--color-primitive-sky-85: #749eff;--color-primitive-sky-80: #7da4ff;--color-primitive-sky-75: #85aaff;--color-primitive-sky-65: #95b5ff;--color-primitive-sky-60: #9dbbff;--color-primitive-sky-55: #a5c0ff;--color-primitive-sky-45: #b6ccff;--color-primitive-sky-40: #bed1ff;--color-primitive-sky-35: #c6d7ff;--color-primitive-sky-25: #d6e3ff;--color-primitive-sky-20: #dee8ff;--color-primitive-sky-100: #5c8dff;--color-primitive-purple-50: #cc9ee3;--color-primitive-purple-30: #e0c5ee;--color-primitive-plum-60: #d183b9;--color-primitive-plum-50: #d998c5;--color-primitive-plum-30: #e8c1dc;--color-primitive-plum-100: #b3308a;--color-primitive-pink-15: #ffe7ec;--color-primitive-pink-100: #ff5e83;--color-primitive-neutral-90: #282828;--color-primitive-neutral-80: #363636;--color-primitive-neutral-70: #6f6f6f;--color-primitive-neutral-50: #cbcbcb;--color-primitive-neutral-40: #e5e5e5;--color-primitive-neutral-30: #ededed;--color-primitive-neutral-20: #f5f5f5;--color-primitive-neutral-100: #191919;--color-primitive-neutral-10: #f8f8f8;--color-primitive-marine-60: #88aed9;--color-primitive-marine-50: #9cbcdf;--color-primitive-marine-40: #b0c9e5;--color-primitive-marine-30: #c4d7ec;--color-primitive-marine-130: #285486;--color-primitive-marine-100: #3978bf;--color-primitive-marine-10: #ebf2f9;--color-primitive-lime-60: #cbce82;--color-primitive-lime-50: #d4d697;--color-primitive-lime-30: #e5e6c1;--color-primitive-lime-100: #a9ad2f;--color-primitive-lemon-50: #e6e197;--color-primitive-lemon-30: #f0edc1;--color-primitive-leaf-50: #b0ce94;--color-primitive-leaf-30: #cfe1bf;--color-primitive-green-50: #8db89b;--color-primitive-green-40: #a3c6af;--color-primitive-green-30: #bad4c3;--color-primitive-green-130: #124e27;--color-primitive-green-100: #1a7037;--color-primitive-green-10: #e8f1eb;--color-primitive-emerald-50: #96d4d1;--color-primitive-emerald-30: #c0e5e3;--color-primitive-cork-60: #d1b784;--color-primitive-cork-50: #d9c399;--color-primitive-cork-30: #e8dbc2;--color-primitive-cork-100: #b38732;--color-primitive-brown-50: #dead9c;--color-primitive-brown-30: #ebcec4;--color-primitive-blue-90: #5361c5;--color-primitive-blue-60: #8c95d9;--color-primitive-blue-50: #a0a7df;--color-primitive-blue-30: #c6caec;--color-primitive-blue-20: #d9dcf2;--color-primitive-blue-15: #e2e5f5;--color-primitive-blue-100: #404fbf;--color-primitive-blue-10: #ecedf9;--color-primitive-bamboo-50: #9bc28c;--color-primitive-bamboo-30: #c3daba;--color-primitive-amber-50: #d4b797;--color-primitive-amber-30: #e5d4c0}:host,*{overflow-wrap:break-word;min-width:0}:host{font-family:var(--font-family-ja)}:host:lang(zh){font-family:var(--font-family-zh)}button{box-sizing:border-box}', Ie = ":host{flex-grow:0;flex-shrink:0;display:inline-block;line-height:0;vertical-align:middle}.icon{display:inline-block;fill:currentcolor}.size__small{width:16px;height:16px}.size__medium{width:24px;height:24px}", K = {
   arrow_down: '<path d="M12 16.99L4 8.98999L5.06 7.92999L12 14.87L18.94 7.92999L20 8.98999L12 16.99Z"/>',
   arrow_down_link: '<path d="M11.98 20.03L18.42 13.6L17.36 12.53L12.73 17.16V4.04001H11.23V17.16L6.59 12.53L5.59 13.6L11.98 20.03Z"/>',
   arrow_left: '<path d="M14.99 20L7 12L14.99 4L16.05 5.06L9.12 12L16.05 18.94L14.99 20Z"/>',
@@ -478,178 +447,234 @@ const h = ':host{--font-family-zh: Arial, YakuHanJPs, "PingFang SC", "Microsoft 
   toggle_arrow_right: '<path d="M15.3216 11.576C15.6349 11.7718 15.6349 12.2282 15.3216 12.424L8.765 16.5219C8.43198 16.73 8 16.4906 8 16.0979L8 7.90212C8 7.50941 8.43198 7.26998 8.765 7.47812L15.3216 11.576Z"/>',
   zip: '<path d="M21 18L20 19H4L3 18V6L4 5H10L11 7H20L21 8V14H19.5V8.50999H10.05L9.04999 6.50999H4.48999V17.51H19.49V15.51H21V18ZM9 11.5H7.5V12.5H9V11.5ZM10.5 12.5V13.5H9V12.5H10.5ZM9 13.5V14.5H7.5V13.5H9ZM10.5 14.5V15.5H9V14.5H10.5ZM9 15.5V16.5H7.5V15.5H9ZM10.5 16.5V17.5H9V16.5H10.5Z"/>'
 };
-function Zt(r) {
-  return Object.hasOwnProperty.call(jt, r);
+function j(i) {
+  return Object.hasOwnProperty.call(K, i);
 }
-const Ot = new CSSStyleSheet();
-Ot.replaceSync(Ii);
-class Ht extends Bi {
+const ee = new CSSStyleSheet();
+ee.replaceSync(Ie);
+class U extends Be {
   constructor() {
-    super(), this.paths = { ...jt, "": "" }, this.shadowRoot.adoptedStyleSheets = [
+    super(), this.paths = { ...K, "": "" }, this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      Ot
+      ee
     ];
   }
-  set type(i) {
-    super.type = Zt(i) ? i : "";
+  /**
+   * アイコンのタイプ
+   * デザインシステムのアイコンタイプを指定した場合はそのタイプを設定し、それ以外を指定した場合は表示しません
+   *
+   * 指定可能なアイコンタイプ：
+   * - arrow_down
+   * - arrow_down_link
+   * - arrow_left
+   * - arrow_left_link
+   * - arrow_right
+   * - arrow_right_link
+   * - arrow_up
+   * - arrow_up_link
+   * - bookmark
+   * - calendar
+   * - check
+   * - check_bold
+   * - clear
+   * - close
+   * - copy
+   * - create
+   * - delete
+   * - doublearrow_down
+   * - doublearrow_left
+   * - doublearrow_right
+   * - download
+   * - drag
+   * - edit
+   * - error
+   * - folder
+   * - help
+   * - kebab_menu
+   * - like
+   * - list
+   * - location
+   * - lock
+   * - mail
+   * - menu
+   * - my_speeda
+   * - notification
+   * - open_in_new
+   * - operator
+   * - opinion
+   * - people
+   * - person
+   * - pib
+   * - plus
+   * - search
+   * - settings
+   * - sort
+   * - sort_down
+   * - sort_up
+   * - toggle_arrow_down
+   * - toggle_arrow_right
+   * - zip
+   *
+   * @attribute
+   * @type {string}
+   */
+  set type(e) {
+    super.type = j(e) ? e : "";
   }
-  attributeChangedCallback(i, e, o) {
-    if (i === "type") {
-      const s = Zt(o) ? o : "";
-      super.attributeChangedCallback(i, e, s);
+  attributeChangedCallback(e, o, t) {
+    if (e === "type") {
+      const s = j(t) ? t : "";
+      super.attributeChangedCallback(e, o, s);
     } else
-      super.attributeChangedCallback(i, e, o);
+      super.attributeChangedCallback(e, o, t);
   }
 }
-customElements.get("sp-icon") || customElements.define("sp-icon", Ht);
-const Yt = ':host{--icon-color: var(--color-semantic-text-button-outline-default);--padding-inline: 16px;display:inline-block;max-width:100%}.base{display:inline-flex;align-items:center;justify-content:center;column-gap:4px;color:var(--color-semantic-text-button-outline-default);border-radius:5px;border:1px solid transparent;background-color:transparent;min-height:28px;max-width:100%;padding-inline:var(--padding-inline);position:relative;overflow:hidden;cursor:pointer}.base__text{font-size:10px;font-weight:700;line-height:1}.type__default.appearance__outline{border-color:var(--color-semantic-border-button-outline-default)}.type__default.appearance__outline:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-hover);border-color:var(--color-semantic-border-button-outline-hover);color:var(--color-semantic-text-button-outline-hover)}.type__default.appearance__outline:focus-visible:not(:is(:disabled,.isSelected)){--icon-color: var(--color-semantic-text-button-outline-focus);border-color:var(--color-semantic-border-button-outline-focus);color:var(--color-semantic-text-button-outline-focus)}.type__default.appearance__fill{--icon-color: var(--color-semantic-text-button-fill-default);border-color:var(--color-semantic-border-button-fill-default);background-color:var(--color-semantic-surface-button-fill-default);color:var(--color-semantic-text-button-fill-default)}.type__default.appearance__fill:hover:not(:disabled){border-color:var(--color-semantic-border-button-fill-hover);background-color:var(--color-semantic-surface-button-fill-hover)}.type__default.appearance__fill:focus-visible:not(:is(:disabled,.isSelected)){border-color:var(--color-semantic-border-button-fill-focus);background-color:var(--color-semantic-surface-button-fill-focus)}.type__default.appearance__text{border-color:var(--color-semantic-border-button-text-default);background-color:var(--color-semantic-surface-button-text-default)}.type__default.appearance__text:hover:not(:disabled){border-color:var(--color-semantic-border-button-text-hover);background-color:var(--color-semantic-surface-button-text-hover)}.type__default.appearance__text:focus-visible:not(:is(:disabled,.isSelected)){border-color:var(--color-semantic-border-button-text-focus);background-color:var(--color-semantic-surface-button-text-focus)}.type__default.isSelected{--icon-color: var(--color-semantic-text-button-selected);border-color:var(--color-semantic-border-button-selected);background-color:var(--color-semantic-surface-button-selected);color:var(--color-semantic-text-button-selected)}.type__default.isSelected:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-selected);border-color:var(--color-semantic-border-button-selected-hover);background-color:var(--color-semantic-surface-button-selected-hover);color:var(--color-semantic-text-button-selected)}.type__destructive.appearance__outline{--icon-color: var(--color-semantic-text-button-outline-destructive-default);border-color:var(--color-semantic-border-button-outline-destructive-default);color:var(--color-semantic-text-button-outline-destructive-default)}.type__destructive.appearance__outline:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-destructive-hover);border-color:var(--color-semantic-border-button-outline-destructive-hover);color:var(--color-semantic-text-button-outline-destructive-hover)}.type__destructive.appearance__outline:focus-visible:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-destructive-focus);border-color:var(--color-semantic-border-button-outline-destructive-focus);color:var(--color-semantic-text-button-outline-destructive-focus)}.type__destructive.appearance__fill{--icon-color: var(--color-semantic-text-button-fill-destructive-default);border-color:var(--color-semantic-border-button-fill-destructive-default);background-color:var( --color-semantic-surface-button-fill-destructive-default );color:var(--color-semantic-text-button-fill-destructive-default)}.type__destructive.appearance__fill:hover:not(:disabled){border-color:var(--color-semantic-border-button-fill-destructive-hover);background-color:var(--color-semantic-surface-button-fill-destructive-hover)}.type__destructive.appearance__fill:focus-visible:not(:disabled){border-color:var(--color-semantic-border-button-fill-destructive-focus);background-color:var(--color-semantic-surface-button-fill-destructive-focus)}.type__destructive.appearance__text{--icon-color: var(--color-semantic-text-button-text-destructive-default);border-color:transparent;background-color:transparent;color:var(--color-semantic-text-button-text-destructive-default)}.type__destructive.appearance__text:hover:not(:disabled){border-color:var(--color-semantic-border-button-text-destructive-hover);background-color:var(--color-semantic-surface-button-text-destructive-hover)}.type__destructive.appearance__text:focus-visible:not(:disabled){border-color:var(--color-semantic-border-button-text-destructive-focus);background-color:var(--color-semantic-surface-button-text-destructive-focus)}:is(.type__default,.type__destructive):disabled{--icon-color: var(--color-semantic-text-button-disabled);border-color:var(--color-semantic-border-button-disabled);background-color:var(--color-semantic-surface-button-disabled);color:var(--color-semantic-text-button-disabled);cursor:not-allowed}:is(.type__default,.type__destructive).isLoading{border-color:var(--color-semantic-border-button-loading);background-color:var(--color-semantic-surface-button-loading)}:is(.type__default,.type__destructive).isLoading:before{content:"";display:block;background:transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJcEhZcwAALEsAACxLAaU9lqkAAAMAUExURUdwTP///8jIyLi4uLGxsUdHR9LS0vHx8by8vKSkpNnZ2b6+vpSUlLe3t+Dg4N/f37Ozs/X19W5ubvj4+CMjI8/Pz+/v78bGxqampp+fnzIyMufn59HR0a+vr+Xl5dbW1tbW1sHBwezs7MLCwvDw8JCQkJubm6mpqZiYmO7u7rW1tdvb29/f32VlZfb29szMzPDw8Ovr65OTk/Dw8KGhoZ2dnYeHh/Ly8tfX19TU1Nzc3Pr6+qmpqcrKysnJyYqKioyMjIODg5KSkpeXl1tbW+bm5uvr66ysrL+/v46Ojvz8/CMjI8TExMjIyIODg4GBgYaGhisrK4+Pj6CgoDw8PM/Pz6enp+Li4hsbG0xMTK2trYmJiYSEhICAgI6OjoiIiJqamq+vrykpKa2trVRUVNPT04ODg2FhYcPDwxkZGVpaWlhYWCkpKTExMSYmJp2dnY2NjSUlJSMjIzs7O0xMTJubm3l5eb+/v6urqyMjI0RERCgoKKenp3Jycqmpqa6urnh4eG1tbUxMTHFxcWhoaMzMzEBAQEBAQLe3t1ZWVpiYmEpKSqqqqm1tbXR0dJWVlWVlZSEhIWFhYSMjI5iYmJCQkKysrIuLi4CAgGtrazk5OWtra3x8fHl5eVBQUFFRURwcHLm5uYWFhS8vL2ZmZlVVVVFRUaampszMzDg4OHd3dzU1NUZGRtfX13V1dYqKisnJyXh4eLm5uXJyckVFRZeXl3Jycp+fnzs7OzIyMh4eHkhISERERIODg8TExCkpKTY2NoqKioyMjJ2dnYiIiIWFhWNjY09baWKUV+SEe0xGWUVXdUpKSkRERFdXV3V1dU5OTkBAQFlZWWlpaXFxcWtrayEhIUxMTGVlZW1tbT4+Ph4eHi0tLS8vL3h4eGFhYV5eXisrK3p6ehoaGjc3NzU1NTMzMyYmJnx8fH5+flJSUlBQUDw8PEJCQjo6OmNjY3Nzc1xcXCkpKR8fHzk5ORwcHDExMVRUVCQkJGBgYCgoKGdnZ29vb1VVVXt7e1paWtg57TgAAADLdFJOUwABB4yc/lkEhrdLgdaQOUCYBx8JEGETcbLBIC9doTRUUX0lehzdyK7OIZVHPBAQZh4oDRm8xfEWTi1EC6pqaOrm+trR7zErpnTfDf52bvf+9G9tpN8ZFTf+EKXt9v7i7cpjjzw/IEtwEf6AUO/ffxjk/t+g4LavR2vvr0BSL5aNv19w399hf19rv1ofJN+AyN9Qj8Bz0KjoD5+Pj+BwzqDPLJfP7u+QQk1g7zBQJmA7PUA+nzBAYDBf7p+/wNhfUN+urauFxs/+0H/4BcBv2gAABJ1JREFUWMPtlWdck1cUxjESA0gihIjILkUNIywpDWAFSwpFbCvTCgqCQilQqXuvKo66V7F7t3bvvecnQIMiiBiCoCEGVAgyxGrPue9LBmRcPrcPP76c+3v+9znn3vvGxuZ/mZVoQ+r3ry1vfXIMz9nZhcMbrfvw0XVarfbm462tAIidHeJ6f4jLKOxL1/WnpJzTai8AYQgw3d/flUdpL1OplvWfMwS4IiAgwI8G8cvy7m4EIOHCTZyBCwDAHxbgFx7uF2Jt+4KWlm4gLIMWdADswB8DhCd6ePhbDOH+ZlNTExBuqVRsglYWMB0DJCZ6POTtwbHgf+riRQAAQdWPPZAZOAOA7QD98wTeHPP+3l4CaIEppPQfLTjsLrKxGQMZQmCEjN9bIAie52zOf+VKLxvhVtlSkeEaLzaMAQiCgydMEJjMIPr1MgAYQlnqyPXZfqQB8McECUxN8oW2y0AgGQpEpnbghLH+mCCH6JHL7/W0tSECMqSaG1Ims3+Qg4M0c8QAMnp6ekiG7zaYP6bYYOKXSn2lw5vY2XHtGhAA8YGli1Icg9v7+vr4DGvCvQMAhJBq+aoW4vbgH+drfBIrGjsYxAprbyWa2EHGETIaQYDIcLcG4EnR7unpOc4wwi65vJEgvrX+XD8i9okVEwsNius7O+WgxgyaD4YPsYeGnjSocTtRcvkuGkB0BdpDZ1boe1hSXV1NEHtpABx0PwDSX6ZnuNWozh/pvpknwfwISH8O67lcgthJB/gUzJNAa3SVH7iMPqQDFE4imvOzrrKyCtzw/yUdoHgOo5m6ShWr+XQAzr2sDAD18FdVT/vLcw8rXaGeFS1gPCtd4TQr2hbsUOPt9ICV6Nac1uylA2TaMXpYV3lFA7qq0ZTSAV4fS2S3W1d59SpR3zt0gDV8Ph8J+fqrjO6+f/r20AF2BwYGAoP/uf4x9YEdRTXFYienQBR/n640/21019TUltAAFtva2joBZKxBbU8NqrZWRgPY4mWLclprUCsl9rt3u56gCJCU7eWFjMUGRYkM3ODvkkms+bM2zyAEry1G5RJ0dymVyiPWAGunTZvxXFJ2tle+UVkiI/aBgWYrTWx0cwMCIJKyjBdKutA+0Nx8fYkl/z57e3sGsXHYikSmJPbrDW9tMu//ZlUkS9icNXytVMn4GxoGzXbx7H2TJ0dGIsHt3ZGrR4b8Z+qeF5qyRxxbNBUJkME+38S65G/Wf6aubv82E9sfTBBPBUIkZEiPMLWD8NCQ//zt29u/NkpxIu24o2OCGCJghvQs0y0KDw0ODqIfAGdvnNp6oGgT3KsTwqI/f4vPnfIgQ4AM6eXmhiTcwQQ4D/4bpxSKS+3t6sdmLYjKi4vPTQZCghgz/FFu/piEO5gGzkIABNxRqxfOWjA3J67y6WQmgnhRermliyJ5kW2ABbQvxARROZXQA0ZIEB+LsHLXt+1nAQqF4g60gAmi8iqZHhxXfWX9uQoPYAdkBJfa1SwgLh56mHIwLYLqmyf8YvtQB2oY4qNzo2AI8bnHKe1EH69+3xCQl5P8e9Eo7ESfvbx660sI+OmvN9I+Ga37P6V/ARSAhtS32QauAAAAAElFTkSuQmCC) no-repeat 50% 50%;background-size:16px 16px;animation:1s linear infinite loading;transform-origin:center center;width:100%;height:100%;z-index:2;position:absolute;left:0;top:0;border-radius:5px}@keyframes loading{0%{transform:rotate(0)}to{transform:rotate(360deg)}}:is(.type__default,.type__destructive).isLoading:hover{cursor:not-allowed;border-color:var(--color-semantic-border-button-loading)}:is(.type__default,.type__destructive).isLoading .base__text{visibility:hidden}:is(.type__default,.type__destructive).isLoading .base__icon{visibility:hidden}.type__default.size__large{--padding-inline: 24px;column-gap:8px;min-height:32px;font-size:12px}.type__default.size__xLarge{--padding-inline: 40px;column-gap:8px;min-height:40px;font-size:12px}.size__width80{--padding-inline: 4px;width:80px}.size__width160{--padding-inline: 4px;width:160px}', Nt = new CSSStyleSheet();
-Nt.replaceSync(`${h} ${Yt}`);
-var ne, j, W, Jt, Qt, pt;
-class qt extends Zi {
-  constructor() {
-    super();
-    n(this, W);
-    n(this, ne, "");
-    n(this, j, new Ht());
-    this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      Nt
-    ], t(this, j).classList.add("base__icon"), t(this, j).size = "small";
-  }
+customElements.get("sp-icon") || customElements.define("sp-icon", U);
+const te = ':host{--icon-color: var(--color-semantic-text-button-outline-default);--padding-inline: 16px;display:inline-block;max-width:100%}.base{display:inline-flex;align-items:center;justify-content:center;column-gap:4px;color:var(--color-semantic-text-button-outline-default);border-radius:5px;border:1px solid transparent;background-color:transparent;min-height:28px;max-width:100%;padding-inline:var(--padding-inline);position:relative;overflow:hidden;cursor:pointer}.base__text{font-size:10px;font-weight:700;line-height:1}.type__default.appearance__outline{border-color:var(--color-semantic-border-button-outline-default)}.type__default.appearance__outline:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-hover);border-color:var(--color-semantic-border-button-outline-hover);color:var(--color-semantic-text-button-outline-hover)}.type__default.appearance__outline:focus-visible:not(:is(:disabled,.isSelected)){--icon-color: var(--color-semantic-text-button-outline-focus);border-color:var(--color-semantic-border-button-outline-focus);color:var(--color-semantic-text-button-outline-focus)}.type__default.appearance__fill{--icon-color: var(--color-semantic-text-button-fill-default);border-color:var(--color-semantic-border-button-fill-default);background-color:var(--color-semantic-surface-button-fill-default);color:var(--color-semantic-text-button-fill-default)}.type__default.appearance__fill:hover:not(:disabled){border-color:var(--color-semantic-border-button-fill-hover);background-color:var(--color-semantic-surface-button-fill-hover)}.type__default.appearance__fill:focus-visible:not(:is(:disabled,.isSelected)){border-color:var(--color-semantic-border-button-fill-focus);background-color:var(--color-semantic-surface-button-fill-focus)}.type__default.appearance__text{border-color:var(--color-semantic-border-button-text-default);background-color:var(--color-semantic-surface-button-text-default)}.type__default.appearance__text:hover:not(:disabled){border-color:var(--color-semantic-border-button-text-hover);background-color:var(--color-semantic-surface-button-text-hover)}.type__default.appearance__text:focus-visible:not(:is(:disabled,.isSelected)){border-color:var(--color-semantic-border-button-text-focus);background-color:var(--color-semantic-surface-button-text-focus)}.type__default.isSelected{--icon-color: var(--color-semantic-text-button-selected);border-color:var(--color-semantic-border-button-selected);background-color:var(--color-semantic-surface-button-selected);color:var(--color-semantic-text-button-selected)}.type__default.isSelected:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-selected);border-color:var(--color-semantic-border-button-selected-hover);background-color:var(--color-semantic-surface-button-selected-hover);color:var(--color-semantic-text-button-selected)}.type__destructive.appearance__outline{--icon-color: var(--color-semantic-text-button-outline-destructive-default);border-color:var(--color-semantic-border-button-outline-destructive-default);color:var(--color-semantic-text-button-outline-destructive-default)}.type__destructive.appearance__outline:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-destructive-hover);border-color:var(--color-semantic-border-button-outline-destructive-hover);color:var(--color-semantic-text-button-outline-destructive-hover)}.type__destructive.appearance__outline:focus-visible:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-destructive-focus);border-color:var(--color-semantic-border-button-outline-destructive-focus);color:var(--color-semantic-text-button-outline-destructive-focus)}.type__destructive.appearance__fill{--icon-color: var(--color-semantic-text-button-fill-destructive-default);border-color:var(--color-semantic-border-button-fill-destructive-default);background-color:var( --color-semantic-surface-button-fill-destructive-default );color:var(--color-semantic-text-button-fill-destructive-default)}.type__destructive.appearance__fill:hover:not(:disabled){border-color:var(--color-semantic-border-button-fill-destructive-hover);background-color:var(--color-semantic-surface-button-fill-destructive-hover)}.type__destructive.appearance__fill:focus-visible:not(:disabled){border-color:var(--color-semantic-border-button-fill-destructive-focus);background-color:var(--color-semantic-surface-button-fill-destructive-focus)}.type__destructive.appearance__text{--icon-color: var(--color-semantic-text-button-text-destructive-default);border-color:transparent;background-color:transparent;color:var(--color-semantic-text-button-text-destructive-default)}.type__destructive.appearance__text:hover:not(:disabled){border-color:var(--color-semantic-border-button-text-destructive-hover);background-color:var(--color-semantic-surface-button-text-destructive-hover)}.type__destructive.appearance__text:focus-visible:not(:disabled){border-color:var(--color-semantic-border-button-text-destructive-focus);background-color:var(--color-semantic-surface-button-text-destructive-focus)}:is(.type__default,.type__destructive):disabled{--icon-color: var(--color-semantic-text-button-disabled);border-color:var(--color-semantic-border-button-disabled);background-color:var(--color-semantic-surface-button-disabled);color:var(--color-semantic-text-button-disabled);cursor:not-allowed}:is(.type__default,.type__destructive).isLoading{border-color:var(--color-semantic-border-button-loading);background-color:var(--color-semantic-surface-button-loading)}:is(.type__default,.type__destructive).isLoading:before{content:"";display:block;background:transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJcEhZcwAALEsAACxLAaU9lqkAAAMAUExURUdwTP///8jIyLi4uLGxsUdHR9LS0vHx8by8vKSkpNnZ2b6+vpSUlLe3t+Dg4N/f37Ozs/X19W5ubvj4+CMjI8/Pz+/v78bGxqampp+fnzIyMufn59HR0a+vr+Xl5dbW1tbW1sHBwezs7MLCwvDw8JCQkJubm6mpqZiYmO7u7rW1tdvb29/f32VlZfb29szMzPDw8Ovr65OTk/Dw8KGhoZ2dnYeHh/Ly8tfX19TU1Nzc3Pr6+qmpqcrKysnJyYqKioyMjIODg5KSkpeXl1tbW+bm5uvr66ysrL+/v46Ojvz8/CMjI8TExMjIyIODg4GBgYaGhisrK4+Pj6CgoDw8PM/Pz6enp+Li4hsbG0xMTK2trYmJiYSEhICAgI6OjoiIiJqamq+vrykpKa2trVRUVNPT04ODg2FhYcPDwxkZGVpaWlhYWCkpKTExMSYmJp2dnY2NjSUlJSMjIzs7O0xMTJubm3l5eb+/v6urqyMjI0RERCgoKKenp3Jycqmpqa6urnh4eG1tbUxMTHFxcWhoaMzMzEBAQEBAQLe3t1ZWVpiYmEpKSqqqqm1tbXR0dJWVlWVlZSEhIWFhYSMjI5iYmJCQkKysrIuLi4CAgGtrazk5OWtra3x8fHl5eVBQUFFRURwcHLm5uYWFhS8vL2ZmZlVVVVFRUaampszMzDg4OHd3dzU1NUZGRtfX13V1dYqKisnJyXh4eLm5uXJyckVFRZeXl3Jycp+fnzs7OzIyMh4eHkhISERERIODg8TExCkpKTY2NoqKioyMjJ2dnYiIiIWFhWNjY09baWKUV+SEe0xGWUVXdUpKSkRERFdXV3V1dU5OTkBAQFlZWWlpaXFxcWtrayEhIUxMTGVlZW1tbT4+Ph4eHi0tLS8vL3h4eGFhYV5eXisrK3p6ehoaGjc3NzU1NTMzMyYmJnx8fH5+flJSUlBQUDw8PEJCQjo6OmNjY3Nzc1xcXCkpKR8fHzk5ORwcHDExMVRUVCQkJGBgYCgoKGdnZ29vb1VVVXt7e1paWtg57TgAAADLdFJOUwABB4yc/lkEhrdLgdaQOUCYBx8JEGETcbLBIC9doTRUUX0lehzdyK7OIZVHPBAQZh4oDRm8xfEWTi1EC6pqaOrm+trR7zErpnTfDf52bvf+9G9tpN8ZFTf+EKXt9v7i7cpjjzw/IEtwEf6AUO/ffxjk/t+g4LavR2vvr0BSL5aNv19w399hf19rv1ofJN+AyN9Qj8Bz0KjoD5+Pj+BwzqDPLJfP7u+QQk1g7zBQJmA7PUA+nzBAYDBf7p+/wNhfUN+urauFxs/+0H/4BcBv2gAABJ1JREFUWMPtlWdck1cUxjESA0gihIjILkUNIywpDWAFSwpFbCvTCgqCQilQqXuvKo66V7F7t3bvvecnQIMiiBiCoCEGVAgyxGrPue9LBmRcPrcPP76c+3v+9znn3vvGxuZ/mZVoQ+r3ry1vfXIMz9nZhcMbrfvw0XVarfbm462tAIidHeJ6f4jLKOxL1/WnpJzTai8AYQgw3d/flUdpL1OplvWfMwS4IiAgwI8G8cvy7m4EIOHCTZyBCwDAHxbgFx7uF2Jt+4KWlm4gLIMWdADswB8DhCd6ePhbDOH+ZlNTExBuqVRsglYWMB0DJCZ6POTtwbHgf+riRQAAQdWPPZAZOAOA7QD98wTeHPP+3l4CaIEppPQfLTjsLrKxGQMZQmCEjN9bIAie52zOf+VKLxvhVtlSkeEaLzaMAQiCgydMEJjMIPr1MgAYQlnqyPXZfqQB8McECUxN8oW2y0AgGQpEpnbghLH+mCCH6JHL7/W0tSECMqSaG1Ims3+Qg4M0c8QAMnp6ekiG7zaYP6bYYOKXSn2lw5vY2XHtGhAA8YGli1Icg9v7+vr4DGvCvQMAhJBq+aoW4vbgH+drfBIrGjsYxAprbyWa2EHGETIaQYDIcLcG4EnR7unpOc4wwi65vJEgvrX+XD8i9okVEwsNius7O+WgxgyaD4YPsYeGnjSocTtRcvkuGkB0BdpDZ1boe1hSXV1NEHtpABx0PwDSX6ZnuNWozh/pvpknwfwISH8O67lcgthJB/gUzJNAa3SVH7iMPqQDFE4imvOzrrKyCtzw/yUdoHgOo5m6ShWr+XQAzr2sDAD18FdVT/vLcw8rXaGeFS1gPCtd4TQr2hbsUOPt9ICV6Nac1uylA2TaMXpYV3lFA7qq0ZTSAV4fS2S3W1d59SpR3zt0gDV8Ph8J+fqrjO6+f/r20AF2BwYGAoP/uf4x9YEdRTXFYienQBR/n640/21019TUltAAFtva2joBZKxBbU8NqrZWRgPY4mWLclprUCsl9rt3u56gCJCU7eWFjMUGRYkM3ODvkkms+bM2zyAEry1G5RJ0dymVyiPWAGunTZvxXFJ2tle+UVkiI/aBgWYrTWx0cwMCIJKyjBdKutA+0Nx8fYkl/z57e3sGsXHYikSmJPbrDW9tMu//ZlUkS9icNXytVMn4GxoGzXbx7H2TJ0dGIsHt3ZGrR4b8Z+qeF5qyRxxbNBUJkME+38S65G/Wf6aubv82E9sfTBBPBUIkZEiPMLWD8NCQ//zt29u/NkpxIu24o2OCGCJghvQs0y0KDw0ODqIfAGdvnNp6oGgT3KsTwqI/f4vPnfIgQ4AM6eXmhiTcwQQ4D/4bpxSKS+3t6sdmLYjKi4vPTQZCghgz/FFu/piEO5gGzkIABNxRqxfOWjA3J67y6WQmgnhRermliyJ5kW2ABbQvxARROZXQA0ZIEB+LsHLXt+1nAQqF4g60gAmi8iqZHhxXfWX9uQoPYAdkBJfa1SwgLh56mHIwLYLqmyf8YvtQB2oY4qNzo2AI8bnHKe1EH69+3xCQl5P8e9Eo7ESfvbx660sI+OmvN9I+Ga37P6V/ARSAhtS32QauAAAAAElFTkSuQmCC) no-repeat 50% 50%;background-size:16px 16px;animation:1s linear infinite loading;transform-origin:center center;width:100%;height:100%;z-index:2;position:absolute;left:0;top:0;border-radius:5px}@keyframes loading{0%{transform:rotate(0)}to{transform:rotate(360deg)}}:is(.type__default,.type__destructive).isLoading:hover{cursor:not-allowed;border-color:var(--color-semantic-border-button-loading)}:is(.type__default,.type__destructive).isLoading .base__text{visibility:hidden}:is(.type__default,.type__destructive).isLoading .base__icon{visibility:hidden}.type__default.size__large{--padding-inline: 24px;column-gap:8px;min-height:32px;font-size:12px}.type__default.size__xLarge{--padding-inline: 40px;column-gap:8px;min-height:40px;font-size:12px}.size__width80{--padding-inline: 4px;width:80px}.size__width160{--padding-inline: 4px;width:160px}', oe = new CSSStyleSheet();
+oe.replaceSync(`${r} ${te}`);
+class ie extends Ze {
+  #o = "";
+  #t = new U();
+  /**
+   * ボタンに表示するアイコン名
+   * 指定しない場合はアイコンを表示しません
+   *
+   * @attribute
+   * @type {string}
+   */
   get icon() {
-    return t(this, ne);
+    return this.#o;
   }
   set icon(e) {
-    !t(this, ne) && e ? (a(this, W, Jt).call(this), a(this, W, pt).call(this, e)) : e === "" ? a(this, W, Qt).call(this) : a(this, W, pt).call(this, e), d(this, ne, e);
+    !this.#o && e ? (this.#e(), this.#s(e)) : e === "" ? this.#i() : this.#s(e), this.#o = e;
   }
   static get observedAttributes() {
     return [...super.observedAttributes, "icon"];
   }
-  attributeChangedCallback(e, o, s) {
-    if (o !== s)
-      switch (super.attributeChangedCallback(e, o, s), e) {
+  constructor() {
+    super(), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      oe
+    ], this.#t.classList.add("base__icon"), this.#t.size = "small";
+  }
+  attributeChangedCallback(e, o, t) {
+    if (o !== t)
+      switch (super.attributeChangedCallback(e, o, t), e) {
         case "icon":
-          this.icon = s;
+          this.icon = t;
           break;
       }
   }
+  #e() {
+    this.buttonElement.prepend(this.#t);
+  }
+  #i() {
+    this.#t.remove();
+  }
+  #s(e) {
+    this.#t.type = e;
+  }
 }
-ne = new WeakMap(), j = new WeakMap(), W = new WeakSet(), Jt = function() {
-  this.buttonElement.prepend(t(this, j));
-}, Qt = function() {
-  t(this, j).remove();
-}, pt = function(e) {
-  t(this, j).type = e;
-};
-customElements.get("sp-button") || customElements.define("sp-button", qt);
-const Di = ":host{display:inline-block}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:hover .checkmark:has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-regular-3)}.base:hover .checkmark:has(:is(.input:checked,.input:indeterminate)):has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}", _t = '.checkmark{flex-grow:0;flex-shrink:0;display:inline-flex;padding-block:4px;padding-inline:4px;cursor:pointer}.checkmark:before{content:"";display:inline-block;width:16px;height:16px;background:var(--color-semantic-surface-regular-1) 50% 50% no-repeat;border:1px solid var(--color-semantic-border-check-unchecked);border-radius:2px}.checkmark:has(.input:focus-visible):before{border-color:var(--color-semantic-border-focus);box-shadow:0 0 0 3px var(--color-semantic-highlight-focus-ring-default)}.checkmark:has(:is(.input:checked,.input:indeterminate)):before{background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected)}.checkmark:has(.input:checked):before{background-image:url(data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%227%22%20fill%3D%22none%22%3E%3Cpath%20stroke%3D%22%23fff%22%20stroke-width%3D%221.5%22%20d%3D%22m1%203%202%202%204-4%22%2F%3E%3C%2Fsvg%3E)}.checkmark:has(.input:indeterminate):before{background-image:url(data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%222%22%20fill%3D%22none%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M0%200h8v2H0z%22%2F%3E%3C%2Fsvg%3E)}.checkmark:has(.input:disabled){cursor:not-allowed}.checkmark:has(:is(.input:disabled)):before{background-color:var(--color-semantic-surface-check-disabled);border-color:var(--color-semantic-border-regular)}.checkmark .input{position:absolute;z-index:-1;opacity:0}', Xt = new CSSStyleSheet();
-Xt.replaceSync(`${h} ${_t} ${Di}`);
-class Ui extends Dt {
+customElements.get("sp-button") || customElements.define("sp-button", ie);
+const De = ":host{display:inline-block}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:hover .checkmark:has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-regular-3)}.base:hover .checkmark:has(:is(.input:checked,.input:indeterminate)):has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}", G = '.checkmark{flex-grow:0;flex-shrink:0;display:inline-flex;padding-block:4px;padding-inline:4px;cursor:pointer}.checkmark:before{content:"";display:inline-block;width:16px;height:16px;background:var(--color-semantic-surface-regular-1) 50% 50% no-repeat;border:1px solid var(--color-semantic-border-check-unchecked);border-radius:2px}.checkmark:has(.input:focus-visible):before{border-color:var(--color-semantic-border-focus);box-shadow:0 0 0 3px var(--color-semantic-highlight-focus-ring-default)}.checkmark:has(:is(.input:checked,.input:indeterminate)):before{background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected)}.checkmark:has(.input:checked):before{background-image:url(data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%227%22%20fill%3D%22none%22%3E%3Cpath%20stroke%3D%22%23fff%22%20stroke-width%3D%221.5%22%20d%3D%22m1%203%202%202%204-4%22%2F%3E%3C%2Fsvg%3E)}.checkmark:has(.input:indeterminate):before{background-image:url(data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%222%22%20fill%3D%22none%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M0%200h8v2H0z%22%2F%3E%3C%2Fsvg%3E)}.checkmark:has(.input:disabled){cursor:not-allowed}.checkmark:has(:is(.input:disabled)):before{background-color:var(--color-semantic-surface-check-disabled);border-color:var(--color-semantic-border-regular)}.checkmark .input{position:absolute;z-index:-1;opacity:0}', se = new CSSStyleSheet();
+se.replaceSync(`${r} ${G} ${De}`);
+class Ue extends q {
   constructor() {
     super(), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      Xt
+      se
     ];
   }
 }
-customElements.get("sp-checkbox") || customElements.define("sp-checkbox", Ui);
-const Gi = ":host{display:block}.base{display:flex;align-items:flex-start;justify-content:flex-start;padding-block:1px;cursor:pointer}.base:has(input:disabled){cursor:not-allowed}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:has(input):not(:has(input:disabled)):hover{background:var(--color-semantic-surface-regular-3)}.base:has(input:checked):not(:has(input:disabled)){background:var(--color-semantic-surface-checked)}.base:has(input:checked):not(:has(input:disabled)):hover{background:var(--color-semantic-surface-checked-hover)}.text{padding-block-start:2.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.base:has(input:disabled) .text{color:var(--color-semantic-text-disabled)}", Kt = new CSSStyleSheet();
-Kt.replaceSync(`${h} ${_t} ${Gi}`);
-class Wi extends St {
+customElements.get("sp-checkbox") || customElements.define("sp-checkbox", Ue);
+const Ge = ":host{display:block}.base{display:flex;align-items:flex-start;justify-content:flex-start;padding-block:1px;cursor:pointer}.base:has(input:disabled){cursor:not-allowed}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:has(input):not(:has(input:disabled)):hover{background:var(--color-semantic-surface-regular-3)}.base:has(input:checked):not(:has(input:disabled)){background:var(--color-semantic-surface-checked)}.base:has(input:checked):not(:has(input:disabled)):hover{background:var(--color-semantic-surface-checked-hover)}.text{padding-block-start:2.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.base:has(input:disabled) .text{color:var(--color-semantic-text-disabled)}", re = new CSSStyleSheet();
+re.replaceSync(`${r} ${G} ${Ge}`);
+class We extends I {
   constructor() {
     super(), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      Kt
+      re
     ];
   }
 }
-customElements.get("sp-checkbox-list") || customElements.define("sp-checkbox-list", Wi);
-const Fi = ":host{display:inline-block;max-width:100%}.base{display:inline-flex;align-items:flex-start;justify-content:flex-start;max-width:100%;cursor:pointer}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:has(.input:disabled){cursor:not-allowed}.text{padding-block-start:2.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.base:has(.input:disabled) .text{color:var(--color-semantic-text-disabled)}.base:hover .checkmark:has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-regular-3)}.base:hover .checkmark:has(:is(.input:checked,.input:indeterminate)):has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}", eo = new CSSStyleSheet();
-eo.replaceSync(`${h} ${_t} ${Fi}`);
-class ji extends St {
+customElements.get("sp-checkbox-list") || customElements.define("sp-checkbox-list", We);
+const Fe = ":host{display:inline-block;max-width:100%}.base{display:inline-flex;align-items:flex-start;justify-content:flex-start;max-width:100%;cursor:pointer}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:has(.input:disabled){cursor:not-allowed}.text{padding-block-start:2.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.base:has(.input:disabled) .text{color:var(--color-semantic-text-disabled)}.base:hover .checkmark:has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-regular-3)}.base:hover .checkmark:has(:is(.input:checked,.input:indeterminate)):has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}", ae = new CSSStyleSheet();
+ae.replaceSync(`${r} ${G} ${Fe}`);
+class je extends I {
   constructor() {
     super(), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      eo
+      ae
     ];
   }
 }
-customElements.get("sp-checkbox-text") || customElements.define("sp-checkbox-text", ji);
-const Oi = ".base{display:grid;grid-template-columns:160px 1fr;gap:16px 8px}", to = new CSSStyleSheet();
-to.replaceSync(`${u} ${h} ${Oi}`);
-var ce, it;
-class Yi extends HTMLElement {
+customElements.get("sp-checkbox-text") || customElements.define("sp-checkbox-text", je);
+const n = "*,*:before,*:after{margin:0;padding:0;box-sizing:border-box}:where([hidden]:not([hidden=until-found])){display:none!important}:where(html){-webkit-text-size-adjust:none;color-scheme:dark light;tab-size:2;scrollbar-gutter:stable;interpolate-size:allow-keywords;line-height:1.5}:where(html:has(dialog:modal[open])){overflow:clip}@media (prefers-reduced-motion: no-preference){:where(html:focus-within){scroll-behavior:smooth}}:where(body){line-height:inherit;font-family:system-ui,sans-serif;-webkit-font-smoothing:antialiased}:where(button){all:unset}:where(input,button,textarea,select){font:inherit;color:inherit;letter-spacing:inherit;word-spacing:inherit;font-feature-settings:inherit;font-variation-settings:inherit}:where(textarea){resize:vertical;resize:block}:where(button,label,select,summary,[role=button],[role=option]){cursor:pointer}:where(:disabled,label:has(>:disabled,+disabled)){cursor:not-allowed}:where(a){color:inherit;text-underline-offset:.2ex}:where(ul,ol){list-style:none}:where(img,svg,video,canvas,audio,iframe,embed,object){display:block}:where(img,picture,svg,video){max-inline-size:100%;block-size:auto}:where(p,h1,h2,h3,h4,h5,h6){overflow-wrap:break-word}:where(h1,h2,h3){line-height:calc(1em + .5rem);text-wrap:balance}:where(hr){border:none;border-block-start:1px solid;color:inherit;block-size:0;overflow:visible}:where(dialog,[popover]){border:none;background:none;color:inherit;inset:unset;max-width:unset;max-height:unset;overflow:unset}:where(dialog:not([open],[popover]),[popover]:not(:popover-open)){display:none!important}:where(:focus-visible){outline:3px solid CanvasText;box-shadow:0 0 0 5px Canvas;outline-offset:1px}:where(:focus-visible,:target){scroll-margin-block:8vh}:where(.visually-hidden:not(:focus-within,:active)){clip-path:inset(50%)!important;height:1px!important;width:1px!important;overflow:hidden!important;position:absolute!important;white-space:nowrap!important;border:0!important;-webkit-user-select:none!important;user-select:none!important}", Oe = ".base{display:grid;grid-template-columns:160px 1fr;gap:16px 8px}", ne = new CSSStyleSheet();
+ne.replaceSync(`${n} ${r} ${Oe}`);
+class Ye extends HTMLElement {
+  #o = document.createElement("dl");
+  #t = document.createElement("slot");
   constructor() {
-    super();
-    n(this, ce, document.createElement("dl"));
-    n(this, it, document.createElement("slot"));
-    this.attachShadow({ mode: "open" });
+    super(), this.attachShadow({ mode: "open" });
   }
   connectedCallback() {
     this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      to
-    ], t(this, ce).classList.add("base"), t(this, ce).appendChild(t(this, it)), this.shadowRoot.appendChild(t(this, ce));
+      ne
+    ], this.#o.classList.add("base"), this.#o.appendChild(this.#t), this.shadowRoot.appendChild(this.#o);
   }
 }
-ce = new WeakMap(), it = new WeakMap();
-customElements.get("sp-definition-list") || customElements.define("sp-definition-list", Yi);
-const Ni = ".base{padding:4.5px 0;color:var(--color-semantic-text-body-regular);font-size:12px;font-weight:400;line-height:1.6}", oo = new CSSStyleSheet();
-oo.replaceSync(
-  `${u} ${h} ${Ni}`
+customElements.get("sp-definition-list") || customElements.define("sp-definition-list", Ye);
+const Ne = ".base{padding:4.5px 0;color:var(--color-semantic-text-body-regular);font-size:12px;font-weight:400;line-height:1.6}", ce = new CSSStyleSheet();
+ce.replaceSync(
+  `${n} ${r} ${Ne}`
 );
-var le;
-class qi extends HTMLElement {
+class Je extends HTMLElement {
+  #o = document.createElement("dd");
   constructor() {
-    super();
-    n(this, le, document.createElement("dd"));
-    this.attachShadow({ mode: "open" });
+    super(), this.attachShadow({ mode: "open" });
   }
   connectedCallback() {
     this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      oo
-    ], t(this, le).classList.add("base"), t(this, le).innerHTML = this.innerHTML, this.shadowRoot.appendChild(t(this, le));
+      ce
+    ], this.#o.classList.add("base"), this.#o.innerHTML = this.innerHTML, this.shadowRoot.appendChild(this.#o);
   }
 }
-le = new WeakMap();
-customElements.get("sp-definition-list-dd") || customElements.define("sp-definition-list-dd", qi);
-const Ji = ".base{padding:4.5px 0;color:var(--color-semantic-text-body-regular);font-size:12px;font-weight:700;line-height:1.6}", io = new CSSStyleSheet();
-io.replaceSync(
-  `${u} ${h} ${Ji}`
+customElements.get("sp-definition-list-dd") || customElements.define("sp-definition-list-dd", Je);
+const Qe = ".base{padding:4.5px 0;color:var(--color-semantic-text-body-regular);font-size:12px;font-weight:700;line-height:1.6}", le = new CSSStyleSheet();
+le.replaceSync(
+  `${n} ${r} ${Qe}`
 );
-var de;
-class Qi extends HTMLElement {
+class qe extends HTMLElement {
+  #o = document.createElement("dt");
   constructor() {
-    super();
-    n(this, de, document.createElement("dt"));
-    this.attachShadow({ mode: "open" });
+    super(), this.attachShadow({ mode: "open" });
   }
   connectedCallback() {
     this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      io
-    ], t(this, de).classList.add("base"), t(this, de).innerHTML = this.innerHTML, this.shadowRoot.appendChild(t(this, de));
+      le
+    ], this.#o.classList.add("base"), this.#o.innerHTML = this.innerHTML, this.shadowRoot.appendChild(this.#o);
   }
 }
-de = new WeakMap();
-customElements.get("sp-definition-list-dt") || customElements.define("sp-definition-list-dt", Qi);
-const Xi = ".base{min-width:80px;width:100%;flex-direction:row-reverse}", so = new CSSStyleSheet();
-so.replaceSync(
-  `${h} ${Yt} ${Xi}`
+customElements.get("sp-definition-list-dt") || customElements.define("sp-definition-list-dt", qe);
+const Xe = ".base{min-width:80px;width:100%;flex-direction:row-reverse}", de = new CSSStyleSheet();
+de.replaceSync(
+  `${r} ${te} ${Xe}`
 );
-var st, ro;
-class Ki extends qt {
+class Ke extends ie {
   constructor() {
-    super();
-    n(this, st);
-    this.shadowRoot.adoptedStyleSheets = [
+    super(), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      so
+      de
     ];
   }
   connectedCallback() {
-    super.connectedCallback(), a(this, st, ro).call(this);
+    super.connectedCallback(), this.#o();
+  }
+  #o() {
+    this.icon = "arrow_down";
   }
   setAriaHasPopup(e) {
     this.buttonElement.setAttribute("aria-haspopup", e);
@@ -661,903 +686,1063 @@ class Ki extends qt {
     this.buttonElement.setAttribute("aria-controls", e);
   }
 }
-st = new WeakSet(), ro = function() {
-  this.icon = "arrow_down";
-};
-customElements.get("sp-dropdown-action-button") || customElements.define("sp-dropdown-action-button", Ki);
-const es = ".action{display:block;width:100%;min-height:26px;padding-inline:8px;padding-block:3.5px;background:none;border:0;color:var(--color-semantic-text-regular);font-size:12px;text-align:left;line-height:1.6}.action:hover,.action:focus{background:var(--color-semantic-surface-regular-3)}.base{margin:0}", ao = new CSSStyleSheet();
-ao.replaceSync(`${h} ${es}`);
-var J, no, co, lo;
-class ts extends HTMLElement {
+customElements.get("sp-dropdown-action-button") || customElements.define("sp-dropdown-action-button", Ke);
+const et = ".action{display:block;width:100%;min-height:26px;padding-inline:8px;padding-block:3.5px;background:none;border:0;color:var(--color-semantic-text-regular);font-size:12px;text-align:left;line-height:1.6}.action:hover,.action:focus{background:var(--color-semantic-surface-regular-3)}.base{margin:0}", he = new CSSStyleSheet();
+he.replaceSync(
+  `${n} ${r} ${et}`
+);
+class tt extends HTMLElement {
   constructor() {
-    super();
-    n(this, J);
-    this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      ao
+      he
     ];
   }
   connectedCallback() {
-    const e = document.createElement("div"), o = document.createElement("button"), s = document.createElement("slot");
-    a(this, J, no).call(this), a(this, J, co).call(this, e, o), a(this, J, lo).call(this, e, o, s), this.shadowRoot.appendChild(e);
+    const e = document.createElement("div"), o = document.createElement("button"), t = document.createElement("slot");
+    this.#o(), this.#t(e, o), this.#e(e, o, t), this.shadowRoot.appendChild(e);
+  }
+  #o() {
+    this.role = "menuitem";
+  }
+  #t(e, o) {
+    e.classList.add("base"), o.classList.add("action");
+  }
+  #e(e, o, t) {
+    o.appendChild(t), e.appendChild(o);
   }
 }
-J = new WeakSet(), no = function() {
-  this.role = "menuitem";
-}, co = function(e, o) {
-  e.classList.add("base"), o.classList.add("action");
-}, lo = function(e, o, s) {
-  o.appendChild(s), e.appendChild(o);
-};
-customElements.get("sp-dropdown-action-item") || customElements.define("sp-dropdown-action-item", ts);
-const os = ".base{position:relative}.menu{position:absolute;top:100%;left:0;margin-block-start:8px;padding-block:8px;background:var(--color-semantic-surface-regular-1);border:1px solid var(--color-semantic-border-regular);border-radius:5px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular)}.menu.position__left{left:0;right:auto}.menu.position__right{left:auto;right:0}", is = ["left", "right"];
-function ss(r) {
-  return is.some((i) => i === r);
+customElements.get("sp-dropdown-action-item") || customElements.define("sp-dropdown-action-item", tt);
+const ot = ".base{position:relative}.menu{position:absolute;top:100%;left:0;margin-block-start:8px;padding-block:8px;background:var(--color-semantic-surface-regular-1);border:1px solid var(--color-semantic-border-regular);border-radius:5px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular)}.menu.position__left{left:0;right:auto}.menu.position__right{left:auto;right:0}", it = ["left", "right"];
+function st(i) {
+  return it.some((e) => e === i);
 }
-function rs() {
+function rt() {
   return `sp-dropdown-action-menu-${Math.random().toString(32).substring(2)}`;
 }
-const ho = new CSSStyleSheet();
-ho.replaceSync(`${u} ${h} ${os}`);
-var Q, x, C, X, he, Ae, Ze, Re, Te, ze, l, uo, po, mo, bo, fo, mt, go, vo, Lo, xo, Co, bt, ft, yo, gt, Ve;
-class as extends HTMLElement {
-  constructor() {
-    super();
-    n(this, l);
-    n(this, Q, document.createElement("div"));
-    n(this, x, document.createElement("sp-dropdown-action-button"));
-    n(this, C, document.createElement("div"));
-    n(this, X, document.createElement("slot"));
-    n(this, he, []);
-    n(this, Ae, rs());
-    n(this, Ze, !1);
-    n(this, Re, !1);
-    n(this, Te, "left");
-    n(this, ze, a(this, l, yo).bind(this));
-    this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      ho
-    ], this.open = !1, this.disabled = !1, this.position = "left";
-  }
+const ue = new CSSStyleSheet();
+ue.replaceSync(`${n} ${r} ${ot}`);
+class at extends HTMLElement {
+  #o = document.createElement("div");
+  #t = document.createElement("sp-dropdown-action-button");
+  #e = document.createElement("div");
+  #i = document.createElement("slot");
+  #s = [];
+  #a = rt();
+  #r = !1;
+  #n = !1;
+  #c = "left";
+  #l = this.#E.bind(this);
+  /**
+   * ドロップダウンボタンのラベルテキスト
+   *
+   * @attribute
+   * @type {string}
+   */
   set label(e) {
-    t(this, x).textContent = e, a(this, l, mt).call(this);
+    this.#t.textContent = e, this.#p();
   }
+  /**
+   * ドロップダウンメニューの開閉状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get open() {
-    return t(this, Ze);
+    return this.#r;
   }
   set open(e) {
-    d(this, Ze, e), e ? t(this, x).setAttribute("selected", "") : t(this, x).removeAttribute("selected"), a(this, l, gt).call(this);
+    this.#r = e, e ? this.#t.setAttribute("selected", "") : this.#t.removeAttribute("selected"), this.#w();
   }
+  /**
+   * ドロップダウンの無効状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get disabled() {
-    return t(this, Re);
+    return this.#n;
   }
   set disabled(e) {
-    d(this, Re, e), t(this, x).disabled = e, a(this, l, gt).call(this);
+    this.#n = e, this.#t.disabled = e, this.#w();
   }
+  /**
+   * ドロップダウンメニューの表示位置（"left" または "right"）
+   * - "left": 左寄せ
+   * - "right": 右寄せ
+   *
+   * @attribute
+   * @type {"left"|"right"}
+   * @default "left"
+   */
   get position() {
-    return t(this, Te);
+    return this.#c;
   }
   set position(e) {
-    e === "left" ? (t(this, C).classList.add("position__left"), t(this, C).classList.remove("position__right")) : (t(this, C).classList.add("position__right"), t(this, C).classList.remove("position__left")), d(this, Te, e);
+    e === "left" ? (this.#e.classList.add("position__left"), this.#e.classList.remove("position__right")) : (this.#e.classList.add("position__right"), this.#e.classList.remove("position__left")), this.#c = e;
   }
   static get observedAttributes() {
     return ["label", "open", "disabled", "position"];
   }
+  constructor() {
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      ue
+    ], this.open = !1, this.disabled = !1, this.position = "left";
+  }
   connectedCallback() {
-    a(this, l, uo).call(this), a(this, l, po).call(this), a(this, l, mo).call(this), a(this, l, bo).call(this), this.shadowRoot.appendChild(t(this, Q)), a(this, l, fo).call(this), a(this, l, mt).call(this);
+    this.#d(), this.#h(), this.#u(), this.#L(), this.shadowRoot.appendChild(this.#o), this.#x(), this.#p();
+  }
+  #d() {
+    this.#t.setAttribute("part", "button"), this.#t.addEventListener(
+      "click",
+      this.#b.bind(this)
+    );
+  }
+  #h() {
+    this.#e.classList.add("menu"), this.#e.role = "menu", this.#e.appendChild(this.#i);
+  }
+  #u() {
+    this.#o.appendChild(this.#t), this.#o.appendChild(this.#e), this.#o.classList.add("base");
+  }
+  #L() {
+    this.#i.addEventListener(
+      "slotchange",
+      this.#f.bind(this)
+    ), window.addEventListener("click", this.#l);
+  }
+  #x() {
+    this.#t.setAriaHasPopup("true"), this.#t.setAriaControls(this.#a), this.#e.setAttribute("id", this.#a), this.#v();
+  }
+  #p() {
+    const e = this.#t.offsetWidth;
+    this.#e.style.minWidth = `${e}px`;
   }
   disconnectedCallback() {
-    t(this, he).forEach((e) => {
+    this.#s.forEach((e) => {
       e.removeEventListener(
         "click",
-        a(this, l, ft).bind(this)
+        this.#g.bind(this)
       );
-    }), t(this, X).removeEventListener(
+    }), this.#i.removeEventListener(
       "slotchange",
-      a(this, l, bt).bind(this)
-    ), window.removeEventListener("click", t(this, ze));
+      this.#f.bind(this)
+    ), window.removeEventListener("click", this.#l);
   }
-  attributeChangedCallback(e, o, s) {
-    o !== s && (e === "label" && a(this, l, go).call(this, s), e === "open" && a(this, l, vo).call(this, s), e === "disabled" && a(this, l, Lo).call(this, s), e === "position" && a(this, l, xo).call(this, s));
+  attributeChangedCallback(e, o, t) {
+    o !== t && (e === "label" && this.#m(t), e === "open" && this.#C(t), e === "disabled" && this.#y(t), e === "position" && this.#k(t));
+  }
+  #m(e) {
+    this.label = e;
+  }
+  #C(e) {
+    this.open = e === "true" || e === "";
+  }
+  #y(e) {
+    this.disabled = e === "true" || e === "";
+  }
+  #k(e) {
+    st(e) ? this.position = e : (console.warn(`${e}は無効なposition属性です。`), this.position = "left");
+  }
+  #b(e) {
+    e.stopPropagation(), this.open = !this.open, this.#v();
+  }
+  #f() {
+    this.#s = this.#i.assignedElements().filter((e) => e instanceof HTMLElement), this.#s.forEach((e) => {
+      e.addEventListener("click", this.#g.bind(this));
+    });
+  }
+  #g(e) {
+    e.stopPropagation(), this.open = !1, this.#v();
+  }
+  #E(e) {
+    e.stopPropagation(), this.contains(e.target) || (this.open = !1, this.#v());
+  }
+  #w() {
+    this.#e.style.display = this.open && !this.disabled ? "block" : "none";
+  }
+  #v() {
+    this.#t.setAriaExpanded(this.open ? "true" : "false");
   }
 }
-Q = new WeakMap(), x = new WeakMap(), C = new WeakMap(), X = new WeakMap(), he = new WeakMap(), Ae = new WeakMap(), Ze = new WeakMap(), Re = new WeakMap(), Te = new WeakMap(), ze = new WeakMap(), l = new WeakSet(), uo = function() {
-  t(this, x).setAttribute("part", "button"), t(this, x).addEventListener(
-    "click",
-    a(this, l, Co).bind(this)
-  );
-}, po = function() {
-  t(this, C).classList.add("menu"), t(this, C).role = "menu", t(this, C).appendChild(t(this, X));
-}, mo = function() {
-  t(this, Q).appendChild(t(this, x)), t(this, Q).appendChild(t(this, C)), t(this, Q).classList.add("base");
-}, bo = function() {
-  t(this, X).addEventListener(
-    "slotchange",
-    a(this, l, bt).bind(this)
-  ), window.addEventListener("click", t(this, ze));
-}, fo = function() {
-  t(this, x).setAriaHasPopup("true"), t(this, x).setAriaControls(t(this, Ae)), t(this, C).setAttribute("id", t(this, Ae)), a(this, l, Ve).call(this);
-}, mt = function() {
-  const e = t(this, x).offsetWidth;
-  t(this, C).style.minWidth = `${e}px`;
-}, go = function(e) {
-  this.label = e;
-}, vo = function(e) {
-  this.open = e === "true" || e === "";
-}, Lo = function(e) {
-  this.disabled = e === "true" || e === "";
-}, xo = function(e) {
-  ss(e) ? this.position = e : (console.warn(`${e}は無効なposition属性です。`), this.position = "left");
-}, Co = function(e) {
-  e.stopPropagation(), this.open = !this.open, a(this, l, Ve).call(this);
-}, bt = function() {
-  d(this, he, t(this, X).assignedElements().filter((e) => e instanceof HTMLElement)), t(this, he).forEach((e) => {
-    e.addEventListener("click", a(this, l, ft).bind(this));
-  });
-}, ft = function(e) {
-  e.stopPropagation(), this.open = !1, a(this, l, Ve).call(this);
-}, yo = function(e) {
-  e.stopPropagation(), this.contains(e.target) || (this.open = !1, a(this, l, Ve).call(this));
-}, gt = function() {
-  t(this, C).style.display = this.open && !this.disabled ? "block" : "none";
-}, Ve = function() {
-  t(this, x).setAriaExpanded(this.open ? "true" : "false");
-};
-customElements.get("sp-dropdown-action") || customElements.define("sp-dropdown-action", as);
-const ns = ".base{position:relative}.dialog{position:absolute;z-index:1;min-width:560px;margin-block-start:8px;padding:24px;background:var(--color-semantic-surface-regular-1);border:1px solid var(--color-semantic-border-semi-weak);border-radius:5px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular);font-size:12px;line-height:1.6}.dialog.position__left{left:0;right:auto}.dialog.position__right{left:auto;right:0}", cs = ["left", "right"];
-function ls(r) {
-  return cs.some((i) => i === r);
+customElements.get("sp-dropdown-action") || customElements.define("sp-dropdown-action", at);
+const nt = ".base{position:relative}.dialog{position:absolute;z-index:1;min-width:560px;margin-block-start:8px;padding:24px;background:var(--color-semantic-surface-regular-1);border:1px solid var(--color-semantic-border-semi-weak);border-radius:5px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular);font-size:12px;line-height:1.6}.dialog.position__left{left:0;right:auto}.dialog.position__right{left:auto;right:0}", ct = ["left", "right"];
+function lt(i) {
+  return ct.some((e) => e === i);
 }
-const ko = new CSSStyleSheet();
-ko.replaceSync(`${u} ${h} ${ns}`);
-var K, $, E, rt, Be, $e, Pe, Ie, F, wo, So, vt;
-class ds extends HTMLElement {
-  constructor() {
-    super();
-    n(this, F);
-    n(this, K, document.createElement("div"));
-    n(this, $, document.createElement("sp-button"));
-    n(this, E, document.createElement("div"));
-    n(this, rt, document.createElement("slot"));
-    n(this, Be, !1);
-    n(this, $e, !1);
-    n(this, Pe, "left");
-    n(this, Ie, a(this, F, So).bind(this));
-    this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      ko
-    ], this.open = !1, this.disabled = !1, this.position = "left";
-  }
+const pe = new CSSStyleSheet();
+pe.replaceSync(`${n} ${r} ${nt}`);
+class dt extends HTMLElement {
+  #o = document.createElement("div");
+  #t = document.createElement("sp-button");
+  #e = document.createElement("div");
+  #i = document.createElement("slot");
+  #s = !1;
+  #a = !1;
+  #r = "left";
+  #n = this.#l.bind(this);
+  /**
+   * ドロップダウンボタンのラベルテキスト
+   *
+   * @attribute
+   * @type {string}
+   */
   set label(e) {
-    t(this, $).textContent = e;
+    this.#t.textContent = e;
   }
+  /**
+   * ドロップダウンダイアログの開閉状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get open() {
-    return t(this, Be);
+    return this.#s;
   }
   set open(e) {
-    d(this, Be, e), e ? t(this, $).setAttribute("selected", "") : t(this, $).removeAttribute("selected"), a(this, F, vt).call(this);
+    this.#s = e, e ? this.#t.setAttribute("selected", "") : this.#t.removeAttribute("selected"), this.#d();
   }
+  /**
+   * ドロップダウンの無効状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get disabled() {
-    return t(this, $e);
+    return this.#a;
   }
   set disabled(e) {
-    d(this, $e, e), t(this, $).disabled = e, a(this, F, vt).call(this);
+    this.#a = e, this.#t.disabled = e, this.#d();
   }
+  /**
+   * ドロップダウンダイアログの表示位置（"left" または "right"）
+   * - "left": 左寄せ
+   * - "right": 右寄せ
+   *
+   * @attribute
+   * @type {"left"|"right"}
+   * @default "left"
+   */
   get position() {
-    return t(this, Pe);
+    return this.#r;
   }
   set position(e) {
-    e === "left" ? (t(this, E).classList.add("position__left"), t(this, E).classList.remove("position__right")) : (t(this, E).classList.add("position__right"), t(this, E).classList.remove("position__left")), d(this, Pe, e);
+    e === "left" ? (this.#e.classList.add("position__left"), this.#e.classList.remove("position__right")) : (this.#e.classList.add("position__right"), this.#e.classList.remove("position__left")), this.#r = e;
   }
   static get observedAttributes() {
     return ["label", "open", "disabled", "position"];
   }
+  constructor() {
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      pe
+    ], this.open = !1, this.disabled = !1, this.position = "left";
+  }
   connectedCallback() {
-    t(this, $).setAttribute("part", "button"), t(this, $).addEventListener(
+    this.#t.setAttribute("part", "button"), this.#t.addEventListener(
       "click",
-      a(this, F, wo).bind(this)
-    ), t(this, K).appendChild(t(this, $)), t(this, E).classList.add("dialog"), t(this, E).role = "dialog", t(this, E).appendChild(t(this, rt)), window.addEventListener("click", t(this, Ie)), t(this, K).appendChild(t(this, E)), t(this, K).classList.add("base"), this.shadowRoot.appendChild(t(this, K));
+      this.#c.bind(this)
+    ), this.#o.appendChild(this.#t), this.#e.classList.add("dialog"), this.#e.role = "dialog", this.#e.appendChild(this.#i), window.addEventListener("click", this.#n), this.#o.appendChild(this.#e), this.#o.classList.add("base"), this.shadowRoot.appendChild(this.#o);
   }
   disconnectedCallback() {
-    window.removeEventListener("click", t(this, Ie));
+    window.removeEventListener("click", this.#n);
   }
-  attributeChangedCallback(e, o, s) {
-    if (o !== s)
+  attributeChangedCallback(e, o, t) {
+    if (o !== t)
       switch (e) {
         case "label":
-          this.label = s;
+          this.label = t;
           break;
         case "open":
-          this.open = s === "true" || s === "";
+          this.open = t === "true" || t === "";
           break;
         case "disabled":
-          this.disabled = s === "true" || s === "";
+          this.disabled = t === "true" || t === "";
           break;
         case "position":
-          ls(s) ? this.position = s : (console.warn(`${s}は無効なposition属性です。`), this.position = "left");
+          lt(t) ? this.position = t : (console.warn(`${t}は無効なposition属性です。`), this.position = "left");
       }
   }
+  #c(e) {
+    e.stopPropagation(), this.open = !this.open;
+  }
+  #l(e) {
+    e.stopPropagation(), this.contains(e.target) || (this.open = !1);
+  }
+  #d() {
+    this.#e.style.display = this.open && !this.disabled ? "block" : "none";
+  }
 }
-K = new WeakMap(), $ = new WeakMap(), E = new WeakMap(), rt = new WeakMap(), Be = new WeakMap(), $e = new WeakMap(), Pe = new WeakMap(), Ie = new WeakMap(), F = new WeakSet(), wo = function(e) {
-  e.stopPropagation(), this.open = !this.open;
-}, So = function(e) {
-  e.stopPropagation(), this.contains(e.target) || (this.open = !1);
-}, vt = function() {
-  t(this, E).style.display = this.open && !this.disabled ? "block" : "none";
-};
-customElements.get("sp-dropdown-dialog") || customElements.define("sp-dropdown-dialog", ds);
-const hs = ':host{display:block}.container{display:flex;justify-content:space-between;align-items:center;gap:16px}.main{display:flex;align-items:center;gap:16px}.heading{display:flex;align-items:center;gap:8px}.text-links{display:flex;flex-shrink:0;align-items:center;gap:16px}.buttons{display:flex;flex-shrink:0;align-items:center;gap:8px}h3{margin-block:3px;padding-inline-start:8px;font-size:14px;font-weight:700;line-height:1.6;position:relative}h3:before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:2px;height:calc(100% - 2.4px);background-color:var(--color-semantic-surface-regular-6)}', Eo = new CSSStyleSheet();
-Eo.replaceSync(`${u} ${h} ${hs}`);
-var De, ue, pe, H, Ho, _o, Vo, Mo, Ao;
-class us extends HTMLElement {
+customElements.get("sp-dropdown-dialog") || customElements.define("sp-dropdown-dialog", dt);
+const ht = ':host{display:block}.container{display:flex;justify-content:space-between;align-items:center;gap:16px}.main{display:flex;align-items:center;gap:16px}.heading{display:flex;align-items:center;gap:8px}.text-links{display:flex;flex-shrink:0;align-items:center;gap:16px}.buttons{display:flex;flex-shrink:0;align-items:center;gap:8px}h3{margin-block:3px;padding-inline-start:8px;font-size:14px;font-weight:700;line-height:1.6;position:relative}h3:before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:2px;height:calc(100% - 2.4px);background-color:var(--color-semantic-surface-regular-6)}', me = new CSSStyleSheet();
+me.replaceSync(`${n} ${r} ${ht}`);
+class ut extends HTMLElement {
+  #o = document.createElement("h3");
+  #t = document.createElement("slot");
+  #e = document.createElement("slot");
   constructor() {
-    super();
-    n(this, H);
-    n(this, De, document.createElement("h3"));
-    n(this, ue, document.createElement("slot"));
-    n(this, pe, document.createElement("slot"));
-    this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [Eo], t(this, ue).name = "text-links", t(this, pe).name = "buttons";
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [me], this.#t.name = "text-links", this.#e.name = "buttons";
   }
   connectedCallback() {
-    var e, o;
-    this.shadowRoot.appendChild(a(this, H, Ho).call(this)), t(this, ue).assignedElements().length === 0 && ((e = this.shadowRoot.querySelector(".text-links")) == null || e.remove()), t(this, pe).assignedElements().length === 0 && ((o = this.shadowRoot.querySelector(".buttons")) == null || o.remove());
+    this.shadowRoot.appendChild(this.#i()), this.#t.assignedElements().length === 0 && this.shadowRoot.querySelector(".text-links")?.remove(), this.#e.assignedElements().length === 0 && this.shadowRoot.querySelector(".buttons")?.remove();
+  }
+  #i() {
+    const e = document.createElement("div");
+    return e.classList.add("container"), e.appendChild(this.#s()), e.appendChild(this.#n()), e;
+  }
+  #s() {
+    const e = document.createElement("div");
+    return e.classList.add("main"), e.appendChild(this.#a()), e.appendChild(this.#r()), e;
+  }
+  #a() {
+    const e = document.createElement("slot");
+    this.#o.appendChild(e);
+    const o = document.createElement("div");
+    return o.classList.add("heading"), o.appendChild(this.#o), o;
+  }
+  #r() {
+    const e = document.createElement("div");
+    return e.classList.add("text-links"), e.appendChild(this.#t), e;
+  }
+  #n() {
+    const e = document.createElement("div");
+    return e.classList.add("buttons"), e.appendChild(this.#e), e;
   }
 }
-De = new WeakMap(), ue = new WeakMap(), pe = new WeakMap(), H = new WeakSet(), Ho = function() {
-  const e = document.createElement("div");
-  return e.classList.add("container"), e.appendChild(a(this, H, _o).call(this)), e.appendChild(a(this, H, Ao).call(this)), e;
-}, _o = function() {
-  const e = document.createElement("div");
-  return e.classList.add("main"), e.appendChild(a(this, H, Vo).call(this)), e.appendChild(a(this, H, Mo).call(this)), e;
-}, Vo = function() {
-  const e = document.createElement("slot");
-  t(this, De).appendChild(e);
-  const o = document.createElement("div");
-  return o.classList.add("heading"), o.appendChild(t(this, De)), o;
-}, Mo = function() {
-  const e = document.createElement("div");
-  return e.classList.add("text-links"), e.appendChild(t(this, ue)), e;
-}, Ao = function() {
-  const e = document.createElement("div");
-  return e.classList.add("buttons"), e.appendChild(t(this, pe)), e;
-};
-customElements.get("sp-element-title") || customElements.define("sp-element-title", us);
-const ps = ".base{display:flex;justify-content:space-between;border:1px solid;border-radius:5px;padding-block:8px;padding-inline:16px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular)}.body{display:flex}.icon{margin-inline-end:8px;display:inline-block;flex-shrink:0;width:24px;height:24px}.base.type__error{border-color:var(--color-semantic-border-error);background-color:var(--color-semantic-surface-error-1)}.base.type__information{border-color:var(--color-semantic-border-information);background-color:var(--color-semantic-surface-information-1)}.base.type__success{border-color:var(--color-semantic-border-success);background-color:var(--color-semantic-surface-success-1)}.base.type__warning{border-color:var(--color-semantic-border-warning);background-color:var(--color-semantic-surface-warning-1)}.content{font-size:12px;line-height:1.6;padding-block:2.5px;color:var(--color-semantic-text-regular)}.action{padding-inline-start:16px;margin-block:auto;flex-shrink:0}.close{border-radius:100%;display:flex;align-items:center;justify-content:center}.base.type__error .close:hover{background-color:var(--color-semantic-surface-error-3)}.base.type__information .close:hover{background-color:var(--color-semantic-surface-information-3)}.base.type__success .close:hover{background-color:var(--color-semantic-surface-success-3)}.base.type__warning .close:hover{background-color:var(--color-semantic-surface-warning-3)}", ms = ["error", "warning", "information", "success"];
-function bs(r) {
-  return ms.some((i) => i === r);
+customElements.get("sp-element-title") || customElements.define("sp-element-title", ut);
+const pt = ".base{display:flex;justify-content:space-between;border:1px solid;border-radius:5px;padding-block:8px;padding-inline:16px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular)}.body{display:flex}.icon{margin-inline-end:8px;display:inline-block;flex-shrink:0;width:24px;height:24px}.base.type__error{border-color:var(--color-semantic-border-error);background-color:var(--color-semantic-surface-error-1)}.base.type__information{border-color:var(--color-semantic-border-information);background-color:var(--color-semantic-surface-information-1)}.base.type__success{border-color:var(--color-semantic-border-success);background-color:var(--color-semantic-surface-success-1)}.base.type__warning{border-color:var(--color-semantic-border-warning);background-color:var(--color-semantic-surface-warning-1)}.content{font-size:12px;line-height:1.6;padding-block:2.5px;color:var(--color-semantic-text-regular)}.action{padding-inline-start:16px;margin-block:auto;flex-shrink:0}.close{border-radius:100%;display:flex;align-items:center;justify-content:center}.base.type__error .close:hover{background-color:var(--color-semantic-surface-error-3)}.base.type__information .close:hover{background-color:var(--color-semantic-surface-information-3)}.base.type__success .close:hover{background-color:var(--color-semantic-surface-success-3)}.base.type__warning .close:hover{background-color:var(--color-semantic-surface-warning-3)}", mt = ["error", "warning", "information", "success"];
+function bt(i) {
+  return mt.some((e) => e === i);
 }
-const Rt = {
+const O = {
   error: "type__error",
   warning: "type__warning",
   information: "type__information",
   success: "type__success"
-}, Tt = {
+}, Y = {
   error: '<path fill-rule="evenodd" clip-rule="evenodd" d="M2.58 18.8574L11.3416 3.99902H12.6459L21.4075 18.8574L20.7554 19.999H3.23212L2.58 18.8574ZM11.2 9.5V14.5H12.8V9.5H11.2ZM11.2 16V17.5H12.8V16H11.2Z" fill="#CA3232"></path>',
   information: '<path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM11.2 7.71997V9.49997H12.8V7.71997H11.2ZM10.5 16.2V16.72H13.5V16.2L12.8 16V11H10.5V11.8L11.2 12V16L10.5 16.2Z" fill="#3978BF"></path>',
   success: '<path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM15.5303 10.5303L14.4697 9.46967L11 12.9393L9.53033 11.4697L8.46967 12.5303L10.4697 14.5303L11 15.0607L11.5303 14.5303L15.5303 10.5303Z" fill="#1A7037"></path>',
   warning: '<path fill-rule="evenodd" clip-rule="evenodd" d="M2.58 18.8574L11.3416 3.99902H12.6459L21.4075 18.8574L20.7554 19.999H3.23212L2.58 18.8574ZM11.2 9.5V14.5H12.8V9.5H11.2ZM11.2 16V17.5H12.8V16H11.2Z" fill="#EAB100"></path>'
-}, fs = {
+}, ft = {
   error: "エラー",
   warning: "警告",
   information: "情報",
   success: "成功"
-}, Zo = new CSSStyleSheet();
-Zo.replaceSync(`${u} ${h} ${ps}`);
-var me, D, O, be, A, m, Ro, To, zo, Bo, $o, Po, Io, Do;
-class gs extends HTMLElement {
-  constructor() {
-    super();
-    n(this, m);
-    n(this, me, "information");
-    n(this, D, document.createElement("div"));
-    n(this, O, document.createElement("div"));
-    n(this, be, document.createElement("div"));
-    n(this, A, document.createElementNS("http://www.w3.org/2000/svg", "svg"));
-    this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      Zo
-    ], this.type = "information";
-  }
+}, be = new CSSStyleSheet();
+be.replaceSync(`${n} ${r} ${pt}`);
+class gt extends HTMLElement {
+  #o = "information";
+  #t = document.createElement("div");
+  #e = document.createElement("div");
+  #i = document.createElement("div");
+  #s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  /**
+   * 通知の種類（"error"、"warning"、"information"、または "success"）
+   * - "error": エラーメッセージ
+   * - "warning": 警告メッセージ
+   * - "information": 情報メッセージ
+   * - "success": 成功メッセージ
+   *
+   * @attribute
+   * @type {"error"|"warning"|"information"|"success"}
+   * @default "information"
+   */
   get type() {
-    return t(this, me);
+    return this.#o;
   }
   set type(e) {
-    t(this, D).classList.remove(Rt[t(this, me)]), t(this, D).classList.add(Rt[e]), t(this, A).innerHTML = Tt[e], d(this, me, e);
+    this.#t.classList.remove(O[this.#o]), this.#t.classList.add(O[e]), this.#s.innerHTML = Y[e], this.#o = e;
   }
   static get observedAttributes() {
     return ["type"];
   }
+  constructor() {
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      be
+    ], this.type = "information";
+  }
   connectedCallback() {
-    a(this, m, Ro).call(this), a(this, m, To).call(this), a(this, m, zo).call(this);
-    const e = a(this, m, Bo).call(this);
-    a(this, m, $o).call(this, e), a(this, m, Po).call(this), a(this, m, Io).call(this), this.shadowRoot.appendChild(t(this, D));
+    this.#a(), this.#r(), this.#n();
+    const e = this.#c();
+    this.#l(e), this.#d(), this.#h(), this.shadowRoot.appendChild(this.#t);
   }
-  attributeChangedCallback(e, o, s) {
-    o !== s && e === "type" && a(this, m, Do).call(this, s);
+  #a() {
+    this.#t.classList.add("base");
+  }
+  #r() {
+    this.#e.classList.add("body"), this.#e.setAttribute("role", "alert");
+  }
+  #n() {
+    this.#s.setAttribute("role", "img"), this.#s.setAttribute("viewBox", "0 0 24 24"), this.#s.setAttribute("aria-hidden", "false"), this.#s.setAttribute("aria-label", ft[this.type]), this.#s.classList.add("icon"), this.#s.innerHTML = Y[this.type];
+  }
+  #c() {
+    const e = document.createElement("div");
+    e.classList.add("content");
+    const o = document.createElement("slot");
+    return e.appendChild(o), e;
+  }
+  #l(e) {
+    this.#e.appendChild(this.#s), this.#e.appendChild(e);
+  }
+  #d() {
+    this.#i.classList.add("action");
+    const e = new U();
+    e.type = "close", e.setAttribute("aria-hidden", "true");
+    const o = document.createElement("button");
+    o.classList.add("close"), o.setAttribute("aria-label", "閉じる"), o.addEventListener("click", () => {
+      this.dispatchEvent(new CustomEvent("close"));
+    }), o.appendChild(e), this.#i.appendChild(o);
+  }
+  #h() {
+    this.#t.appendChild(this.#e), this.#t.appendChild(this.#i);
+  }
+  attributeChangedCallback(e, o, t) {
+    o !== t && e === "type" && this.#u(t);
+  }
+  #u(e) {
+    bt(e) ? this.type = e : (console.warn(`${e}は無効なtype属性です。`), this.type = "information");
   }
 }
-me = new WeakMap(), D = new WeakMap(), O = new WeakMap(), be = new WeakMap(), A = new WeakMap(), m = new WeakSet(), Ro = function() {
-  t(this, D).classList.add("base");
-}, To = function() {
-  t(this, O).classList.add("body"), t(this, O).setAttribute("role", "alert");
-}, zo = function() {
-  t(this, A).setAttribute("role", "img"), t(this, A).setAttribute("viewBox", "0 0 24 24"), t(this, A).setAttribute("aria-hidden", "false"), t(this, A).setAttribute("aria-label", fs[this.type]), t(this, A).classList.add("icon"), t(this, A).innerHTML = Tt[this.type];
-}, Bo = function() {
-  const e = document.createElement("div");
-  e.classList.add("content");
-  const o = document.createElement("slot");
-  return e.appendChild(o), e;
-}, $o = function(e) {
-  t(this, O).appendChild(t(this, A)), t(this, O).appendChild(e);
-}, Po = function() {
-  t(this, be).classList.add("action");
-  const e = new Ht();
-  e.type = "close", e.setAttribute("aria-hidden", "true");
-  const o = document.createElement("button");
-  o.classList.add("close"), o.setAttribute("aria-label", "閉じる"), o.addEventListener("click", () => {
-    this.dispatchEvent(new CustomEvent("close"));
-  }), o.appendChild(e), t(this, be).appendChild(o);
-}, Io = function() {
-  t(this, D).appendChild(t(this, O)), t(this, D).appendChild(t(this, be));
-}, Do = function(e) {
-  bs(e) ? this.type = e : (console.warn(`${e}は無効なtype属性です。`), this.type = "information");
-};
-customElements.get("sp-notification-bar") || customElements.define("sp-notification-bar", gs);
-const vs = ".base{display:flex;gap:8px;border:1px solid;border-radius:5px;padding-block:8px;padding-inline:16px}.icon{display:inline-block;flex-shrink:0;width:24px;height:24px}.base.type__error{border-color:var(--color-semantic-border-error);background-color:var(--color-semantic-surface-error-1)}.base.type__information{border-color:var(--color-semantic-border-information);background-color:var(--color-semantic-surface-information-1)}.base.type__success{border-color:var(--color-semantic-border-success);background-color:var(--color-semantic-surface-success-1)}.base.type__warning{border-color:var(--color-semantic-border-warning);background-color:var(--color-semantic-surface-warning-1)}.content{font-size:12px;line-height:1.6;padding-block:2.5px;color:var(--color-semantic-text-regular)}", Ls = ["error", "warning", "information", "success"];
-function xs(r) {
-  return Ls.some((i) => i === r);
+customElements.get("sp-notification-bar") || customElements.define("sp-notification-bar", gt);
+const vt = ".base{display:flex;gap:8px;border:1px solid;border-radius:5px;padding-block:8px;padding-inline:16px}.icon{display:inline-block;flex-shrink:0;width:24px;height:24px}.base.type__error{border-color:var(--color-semantic-border-error);background-color:var(--color-semantic-surface-error-1)}.base.type__information{border-color:var(--color-semantic-border-information);background-color:var(--color-semantic-surface-information-1)}.base.type__success{border-color:var(--color-semantic-border-success);background-color:var(--color-semantic-surface-success-1)}.base.type__warning{border-color:var(--color-semantic-border-warning);background-color:var(--color-semantic-surface-warning-1)}.content{font-size:12px;line-height:1.6;padding-block:2.5px;color:var(--color-semantic-text-regular)}", Lt = ["error", "warning", "information", "success"];
+function xt(i) {
+  return Lt.some((e) => e === i);
 }
-const Cs = {
+const Ct = {
   error: "エラー",
   warning: "警告",
   information: "情報",
   success: "成功"
-}, zt = {
+}, N = {
   error: "type__error",
   warning: "type__warning",
   information: "type__information",
   success: "type__success"
-}, Bt = {
+}, J = {
   error: '<path fill-rule="evenodd" clip-rule="evenodd" d="M2.58 18.8574L11.3416 3.99902H12.6459L21.4075 18.8574L20.7554 19.999H3.23212L2.58 18.8574ZM11.2 9.5V14.5H12.8V9.5H11.2ZM11.2 16V17.5H12.8V16H11.2Z" fill="#CA3232"></path>',
   information: '<path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM11.2 7.71997V9.49997H12.8V7.71997H11.2ZM10.5 16.2V16.72H13.5V16.2L12.8 16V11H10.5V11.8L11.2 12V16L10.5 16.2Z" fill="#3978BF"></path>',
   success: '<path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM15.5303 10.5303L14.4697 9.46967L11 12.9393L9.53033 11.4697L8.46967 12.5303L10.4697 14.5303L11 15.0607L11.5303 14.5303L15.5303 10.5303Z" fill="#1A7037"></path>',
   warning: '<path fill-rule="evenodd" clip-rule="evenodd" d="M2.58 18.8574L11.3416 3.99902H12.6459L21.4075 18.8574L20.7554 19.999H3.23212L2.58 18.8574ZM11.2 9.5V14.5H12.8V9.5H11.2ZM11.2 16V17.5H12.8V16H11.2Z" fill="#EAB100"></path>'
-}, Uo = new CSSStyleSheet();
-Uo.replaceSync(
-  `${u} ${h} ${vs}`
+}, fe = new CSSStyleSheet();
+fe.replaceSync(
+  `${n} ${r} ${vt}`
 );
-var fe, U, Z, _, Go, Wo, Fo, jo, Oo;
-class ys extends HTMLElement {
-  constructor() {
-    super();
-    n(this, _);
-    n(this, fe, "information");
-    n(this, U, document.createElement("div"));
-    n(this, Z, document.createElementNS("http://www.w3.org/2000/svg", "svg"));
-    this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      Uo
-    ], this.type = "information";
-  }
+class yt extends HTMLElement {
+  #o = "information";
+  #t = document.createElement("div");
+  #e = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  /**
+   * 通知の種類（"error"、"warning"、"information"、または "success"）
+   * - "error": エラーメッセージ
+   * - "warning": 警告メッセージ
+   * - "information": 情報メッセージ
+   * - "success": 成功メッセージ
+   *
+   * @attribute
+   * @type {"error"|"warning"|"information"|"success"}
+   * @default "information"
+   */
   get type() {
-    return t(this, fe);
+    return this.#o;
   }
   set type(e) {
-    t(this, U).classList.remove(zt[t(this, fe)]), t(this, U).classList.add(zt[e]), t(this, Z).innerHTML = Bt[e], d(this, fe, e);
+    this.#t.classList.remove(N[this.#o]), this.#t.classList.add(N[e]), this.#e.innerHTML = J[e], this.#o = e;
   }
   static get observedAttributes() {
     return ["type"];
   }
-  connectedCallback() {
-    a(this, _, Go).call(this), a(this, _, Wo).call(this);
-    const e = a(this, _, Fo).call(this);
-    a(this, _, jo).call(this, e), this.shadowRoot.appendChild(t(this, U));
+  constructor() {
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      fe
+    ], this.type = "information";
   }
-  attributeChangedCallback(e, o, s) {
-    o !== s && e === "type" && a(this, _, Oo).call(this, s);
+  connectedCallback() {
+    this.#i(), this.#s();
+    const e = this.#a();
+    this.#r(e), this.shadowRoot.appendChild(this.#t);
+  }
+  #i() {
+    this.#t.classList.add("base");
+  }
+  #s() {
+    this.#e.setAttribute("role", "img"), this.#e.setAttribute("viewBox", "0 0 24 24"), this.#e.setAttribute("aria-hidden", "false"), this.#e.setAttribute("aria-label", Ct[this.type]), this.#e.classList.add("icon"), this.#e.innerHTML = J[this.type];
+  }
+  #a() {
+    const e = document.createElement("div");
+    e.classList.add("content");
+    const o = document.createElement("slot");
+    return e.appendChild(o), e;
+  }
+  #r(e) {
+    this.#t.appendChild(this.#e), this.#t.appendChild(e);
+  }
+  attributeChangedCallback(e, o, t) {
+    o !== t && e === "type" && this.#n(t);
+  }
+  #n(e) {
+    xt(e) ? this.type = e : (console.warn(`${e}は無効なtype属性です。`), this.type = "information");
   }
 }
-fe = new WeakMap(), U = new WeakMap(), Z = new WeakMap(), _ = new WeakSet(), Go = function() {
-  t(this, U).classList.add("base");
-}, Wo = function() {
-  t(this, Z).setAttribute("role", "img"), t(this, Z).setAttribute("viewBox", "0 0 24 24"), t(this, Z).setAttribute("aria-hidden", "false"), t(this, Z).setAttribute("aria-label", Cs[this.type]), t(this, Z).classList.add("icon"), t(this, Z).innerHTML = Bt[this.type];
-}, Fo = function() {
-  const e = document.createElement("div");
-  e.classList.add("content");
-  const o = document.createElement("slot");
-  return e.appendChild(o), e;
-}, jo = function(e) {
-  t(this, U).appendChild(t(this, Z)), t(this, U).appendChild(e);
-}, Oo = function(e) {
-  xs(e) ? this.type = e : (console.warn(`${e}は無効なtype属性です。`), this.type = "information");
-};
-customElements.get("sp-notification-message") || customElements.define("sp-notification-message", ys);
-const ks = ".page-group{display:inline-flex}.page,.previous,.next,.first,.last{display:grid;place-content:center;border-radius:2px;padding-block:.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.page{padding-inline:6px}.previous,.next,.first,.last{padding-inline:8px}.previous:disabled,.next:disabled,.first:disabled,.last:disabled{color:var(--color-semantic-text-disabled)}.page:focus,.previous:focus,.next:focus,.first:focus,.last:focus{background-color:var(--color-semantic-surface-regular-3);outline:none}.page:hover:enabled,.previous:hover:enabled,.next:hover:enabled,.first:hover:enabled,.last:hover:enabled{background-color:var(--color-semantic-surface-regular-3)}.page.selected,.previous.selected,.next.selected,.first.selected,.last.selected{color:var(--color-semantic-text-current);background-color:var(--color-semantic-surface-regular-3);font-weight:700}", Yo = new CSSStyleSheet();
-Yo.replaceSync(`${u} ${h} ${ks}`);
-const ct = 10, ws = 4;
-var Ue, Ge, We, ee, ge, c, No, qo, Jo, Lt, xt, Qo, Xo, Ko, ei, ti, Ct, yt, oi, ii, si, kt, ri, ai;
-class Ss extends HTMLElement {
-  constructor() {
-    super();
-    n(this, c);
-    n(this, Ue, 1);
-    n(this, Ge, 1);
-    n(this, We, document.createElement("nav"));
-    n(this, ee, document.createElement("ul"));
-    n(this, ge, []);
-    this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      Yo
-    ];
-  }
+customElements.get("sp-notification-message") || customElements.define("sp-notification-message", yt);
+const kt = ".page-group{display:inline-flex}.page,.previous,.next,.first,.last{display:grid;place-content:center;border-radius:2px;padding-block:.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.page{padding-inline:6px}.previous,.next,.first,.last{padding-inline:8px}.previous:disabled,.next:disabled,.first:disabled,.last:disabled{color:var(--color-semantic-text-disabled)}.page:focus,.previous:focus,.next:focus,.first:focus,.last:focus{background-color:var(--color-semantic-surface-regular-3);outline:none}.page:hover:enabled,.previous:hover:enabled,.next:hover:enabled,.first:hover:enabled,.last:hover:enabled{background-color:var(--color-semantic-surface-regular-3)}.page.selected,.previous.selected,.next.selected,.first.selected,.last.selected{color:var(--color-semantic-text-current);background-color:var(--color-semantic-surface-regular-3);font-weight:700}", ge = new CSSStyleSheet();
+ge.replaceSync(`${n} ${r} ${kt}`);
+const R = 10, wt = 4;
+class Et extends HTMLElement {
+  #o = 1;
+  #t = 1;
+  #e = document.createElement("nav");
+  #i = document.createElement("ul");
+  #s = [];
+  /**
+   * 総ページ数
+   *
+   * @attribute
+   * @type {number}
+   * @default 1
+   */
   get total() {
-    return t(this, Ue);
+    return this.#o;
   }
   set total(e) {
-    d(this, Ue, e);
+    this.#o = e;
   }
+  /**
+   * 現在選択されているページ番号
+   *
+   * @attribute
+   * @type {number}
+   * @default 1
+   */
   get selected() {
-    return t(this, Ge);
+    return this.#t;
   }
   set selected(e) {
-    d(this, Ge, e);
+    this.#t = e;
   }
   static get observedAttributes() {
     return ["total", "selected"];
   }
-  connectedCallback() {
-    a(this, c, No).call(this), a(this, c, Lt).call(this);
+  constructor() {
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      ge
+    ];
   }
-  attributeChangedCallback(e, o, s) {
-    o !== s && (e === "total" && a(this, c, qo).call(this, s), e === "selected" && a(this, c, Jo).call(this, s));
+  connectedCallback() {
+    this.#a(), this.#c();
+  }
+  #a() {
+    this.#i.classList.add("page-group"), this.#e.appendChild(this.#i), this.shadowRoot.appendChild(this.#e);
+  }
+  attributeChangedCallback(e, o, t) {
+    o !== t && (e === "total" && this.#r(t), e === "selected" && this.#n(t));
+  }
+  #r(e) {
+    const o = Number(e);
+    !Number.isNaN(o) && Number.isInteger(o) && o > 0 ? this.total = o : (console.warn(`${e}は無効なtotal属性です。`), this.total = 1), this.#c();
+  }
+  #n(e) {
+    const o = Number(e);
+    !Number.isNaN(o) && Number.isInteger(o) && o > 0 && o <= this.total ? this.selected = o : (console.warn(`${e}は無効なselected属性です。`), this.selected = 1), this.#b();
+  }
+  #c() {
+    this.#i.innerHTML = "", this.#s = [], this.#l().map((o) => this.#u(o)).forEach((o) => this.#i.appendChild(o));
+  }
+  #l() {
+    return [
+      { type: "first", text: "最初へ", targetPage: 1 },
+      {
+        type: "previous",
+        text: "前へ",
+        targetPage: Math.max(1, this.selected - 1)
+      },
+      ...this.#d(),
+      {
+        type: "next",
+        text: "次へ",
+        targetPage: Math.min(this.total, this.selected + 1)
+      },
+      { type: "last", text: "最後へ", targetPage: this.total }
+    ];
+  }
+  #d() {
+    const { firstVisiblePage: e, lastVisiblePage: o } = this.#h();
+    return Array.from(
+      { length: o - e + 1 },
+      (t, s) => {
+        const u = e + s;
+        return {
+          type: "page",
+          text: String(u),
+          targetPage: u
+        };
+      }
+    );
+  }
+  #h() {
+    let e = Math.max(1, this.selected - wt);
+    e + R - 1 > this.total && (e = Math.max(1, this.total - R + 1));
+    const o = Math.min(
+      this.total,
+      e + R - 1
+    );
+    return { firstVisiblePage: e, lastVisiblePage: o };
+  }
+  #u({ type: e, text: o, targetPage: t }) {
+    const s = this.#L(e, o, t);
+    this.#s.push(s);
+    const u = document.createElement("li");
+    return u.appendChild(s), u;
+  }
+  #L(e, o, t) {
+    const s = document.createElement("button");
+    s.textContent = o, s.classList.add(e), e === "page" && this.#x(s, t);
+    const u = this.#p(e);
+    return s.disabled = u, s.onclick = () => this.#m(t), s;
+  }
+  #x(e, o) {
+    e.setAttribute("aria-label", `${o}ページ目へ`), o === this.selected && (e.classList.add("selected"), e.setAttribute("aria-current", "page"));
+  }
+  #p(e) {
+    return e === "first" || e === "previous" ? this.selected === 1 : e === "next" || e === "last" ? this.selected === this.total : !1;
+  }
+  #m(e) {
+    this.#C(e) || (this.#y(e), this.#k(e), this.#b());
+  }
+  #C(e) {
+    return e === this.selected || e < 1 || e > this.total;
+  }
+  #y(e) {
+    this.selected = e, this.setAttribute("selected", String(e));
+  }
+  #k(e) {
+    this.dispatchEvent(
+      new CustomEvent("change", {
+        detail: { page: e }
+      })
+    );
+  }
+  #b() {
+    const e = this.#l();
+    this.#s.forEach((o, t) => {
+      const s = e[t];
+      o.classList.contains("page") && this.#f(o, s), this.#g(o, s);
+    });
+  }
+  #f(e, o) {
+    e.textContent = o.text;
+    const t = o.targetPage === this.selected;
+    e.classList.toggle("selected", t), e.setAttribute("aria-label", `${o.targetPage}ページ目へ`), t ? e.setAttribute("aria-current", "page") : e.removeAttribute("aria-current");
+  }
+  #g(e, o) {
+    const t = this.#p(o.type);
+    e.disabled = t, e.onclick = () => this.#m(o.targetPage);
   }
 }
-Ue = new WeakMap(), Ge = new WeakMap(), We = new WeakMap(), ee = new WeakMap(), ge = new WeakMap(), c = new WeakSet(), No = function() {
-  t(this, ee).classList.add("page-group"), t(this, We).appendChild(t(this, ee)), this.shadowRoot.appendChild(t(this, We));
-}, qo = function(e) {
-  const o = Number(e);
-  !Number.isNaN(o) && Number.isInteger(o) && o > 0 ? this.total = o : (console.warn(`${e}は無効なtotal属性です。`), this.total = 1), a(this, c, Lt).call(this);
-}, Jo = function(e) {
-  const o = Number(e);
-  !Number.isNaN(o) && Number.isInteger(o) && o > 0 && o <= this.total ? this.selected = o : (console.warn(`${e}は無効なselected属性です。`), this.selected = 1), a(this, c, kt).call(this);
-}, Lt = function() {
-  t(this, ee).innerHTML = "", d(this, ge, []), a(this, c, xt).call(this).map((o) => a(this, c, Ko).call(this, o)).forEach((o) => t(this, ee).appendChild(o));
-}, xt = function() {
-  return [
-    { type: "first", text: "最初へ", targetPage: 1 },
-    {
-      type: "previous",
-      text: "前へ",
-      targetPage: Math.max(1, this.selected - 1)
-    },
-    ...a(this, c, Qo).call(this),
-    {
-      type: "next",
-      text: "次へ",
-      targetPage: Math.min(this.total, this.selected + 1)
-    },
-    { type: "last", text: "最後へ", targetPage: this.total }
-  ];
-}, Qo = function() {
-  const { firstVisiblePage: e, lastVisiblePage: o } = a(this, c, Xo).call(this);
-  return Array.from(
-    { length: o - e + 1 },
-    (s, p) => {
-      const y = e + p;
-      return {
-        type: "page",
-        text: String(y),
-        targetPage: y
-      };
-    }
-  );
-}, Xo = function() {
-  let e = Math.max(1, this.selected - ws);
-  e + ct - 1 > this.total && (e = Math.max(1, this.total - ct + 1));
-  const o = Math.min(
-    this.total,
-    e + ct - 1
-  );
-  return { firstVisiblePage: e, lastVisiblePage: o };
-}, Ko = function({ type: e, text: o, targetPage: s }) {
-  const p = a(this, c, ei).call(this, e, o, s);
-  t(this, ge).push(p);
-  const y = document.createElement("li");
-  return y.appendChild(p), y;
-}, ei = function(e, o, s) {
-  const p = document.createElement("button");
-  p.textContent = o, p.classList.add(e), e === "page" && a(this, c, ti).call(this, p, s);
-  const y = a(this, c, Ct).call(this, e);
-  return p.disabled = y, p.onclick = () => a(this, c, yt).call(this, s), p;
-}, ti = function(e, o) {
-  e.setAttribute("aria-label", `${o}ページ目へ`), o === this.selected && (e.classList.add("selected"), e.setAttribute("aria-current", "page"));
-}, Ct = function(e) {
-  return e === "first" || e === "previous" ? this.selected === 1 : e === "next" || e === "last" ? this.selected === this.total : !1;
-}, yt = function(e) {
-  a(this, c, oi).call(this, e) || (a(this, c, ii).call(this, e), a(this, c, si).call(this, e), a(this, c, kt).call(this));
-}, oi = function(e) {
-  return e === this.selected || e < 1 || e > this.total;
-}, ii = function(e) {
-  this.selected = e, this.setAttribute("selected", String(e));
-}, si = function(e) {
-  this.dispatchEvent(
-    new CustomEvent("change", {
-      detail: { page: e }
-    })
-  );
-}, kt = function() {
-  const e = a(this, c, xt).call(this);
-  t(this, ge).forEach((o, s) => {
-    const p = e[s];
-    o.classList.contains("page") && a(this, c, ri).call(this, o, p), a(this, c, ai).call(this, o, p);
-  });
-}, ri = function(e, o) {
-  e.textContent = o.text;
-  const s = o.targetPage === this.selected;
-  e.classList.toggle("selected", s), e.setAttribute("aria-label", `${o.targetPage}ページ目へ`), s ? e.setAttribute("aria-current", "page") : e.removeAttribute("aria-current");
-}, ai = function(e, o) {
-  const s = a(this, c, Ct).call(this, o.type);
-  e.disabled = s, e.onclick = () => a(this, c, yt).call(this, o.targetPage);
-};
-customElements.get("sp-pagination") || customElements.define("sp-pagination", Ss);
-const Es = ':host{display:inline-block;max-width:100%}.base{display:flex;flex-wrap:wrap;gap:8px}.base:has(:focus-visible){outline:auto}.base.horizontal{flex-direction:row}.base.vertical{flex-direction:column}.item{display:inline-flex;justify-content:flex-start;align-items:flex-start}.text{color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6;padding-block:2.5px;cursor:pointer}.input{position:absolute;left:0;top:0;opacity:0;width:100%;height:100%;cursor:pointer}.radio{position:relative;flex-grow:0;flex-shrink:0;display:inline-flex;padding-block:4px;padding-inline:4px}.radio:before{content:"";display:inline-block;width:16px;height:16px;background:var(--color-semantic-surface-regular-1) 50% 50% no-repeat;border:1px solid var(--color-semantic-border-check-unchecked);border-radius:50%}.radio:has(.input:focus-visible):before{outline:auto;outline-offset:4px;border-color:var(--color-semantic-border-focus);box-shadow:0 0 0 3px var(--color-semantic-highlight-focus-ring-default)}.radio:has(.input:checked):before{background-color:var(--color-semantic-surface-regular-1);border-width:4px}.radio:has(.input:checked:not(:disabled)):before{border-color:var(--color-semantic-border-selected)}.item:has(.input:disabled) :is(.input,.text){cursor:not-allowed}.item:has(.input:disabled) .text{color:var(--color-semantic-text-disabled)}.item .radio:has(.input:disabled):before{background-color:var(--color-semantic-surface-check-disabled);border-color:var(--color-semantic-border-regular)}.item .radio:has(.input:checked:disabled):before{background-color:var(--color-semantic-surface-regular-1)}.item:has(:is(.input:hover,.text:hover)):not(:has(:is(.input:checked,.input:disabled))) .radio:before{background-color:var(--color-semantic-surface-regular-3)}.item:has(.input:checked:hover:not(:disabled)) .radio:before,.item:has(.input:checked:not(:disabled)):has(.text:hover) .radio:before{border-color:var(--color-semantic-border-selected-hover)}', ni = new CSSStyleSheet();
-ni.replaceSync(`${h} ${Es}`);
-class Hs extends Et {
+customElements.get("sp-pagination") || customElements.define("sp-pagination", Et);
+const Ht = ':host{display:inline-block;max-width:100%}.base{display:flex;flex-wrap:wrap;gap:8px}.base:has(:focus-visible){outline:auto}.base.horizontal{flex-direction:row}.base.vertical{flex-direction:column}.item{display:inline-flex;justify-content:flex-start;align-items:flex-start}.text{color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6;padding-block:2.5px;cursor:pointer}.input{position:absolute;left:0;top:0;opacity:0;width:100%;height:100%;cursor:pointer}.radio{position:relative;flex-grow:0;flex-shrink:0;display:inline-flex;padding-block:4px;padding-inline:4px}.radio:before{content:"";display:inline-block;width:16px;height:16px;background:var(--color-semantic-surface-regular-1) 50% 50% no-repeat;border:1px solid var(--color-semantic-border-check-unchecked);border-radius:50%}.radio:has(.input:focus-visible):before{outline:auto;outline-offset:4px;border-color:var(--color-semantic-border-focus);box-shadow:0 0 0 3px var(--color-semantic-highlight-focus-ring-default)}.radio:has(.input:checked):before{background-color:var(--color-semantic-surface-regular-1);border-width:4px}.radio:has(.input:checked:not(:disabled)):before{border-color:var(--color-semantic-border-selected)}.item:has(.input:disabled) :is(.input,.text){cursor:not-allowed}.item:has(.input:disabled) .text{color:var(--color-semantic-text-disabled)}.item .radio:has(.input:disabled):before{background-color:var(--color-semantic-surface-check-disabled);border-color:var(--color-semantic-border-regular)}.item .radio:has(.input:checked:disabled):before{background-color:var(--color-semantic-surface-regular-1)}.item:has(:is(.input:hover,.text:hover)):not(:has(:is(.input:checked,.input:disabled))) .radio:before{background-color:var(--color-semantic-surface-regular-3)}.item:has(.input:checked:hover:not(:disabled)) .radio:before,.item:has(.input:checked:not(:disabled)):has(.text:hover) .radio:before{border-color:var(--color-semantic-border-selected-hover)}', ve = new CSSStyleSheet();
+ve.replaceSync(`${r} ${Ht}`);
+class St extends D {
   constructor() {
     super(), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      ni
+      ve
     ];
   }
 }
-customElements.get("sp-radio-button-text-group") || customElements.define("sp-radio-button-text-group", Hs);
-const _s = ":host{display:block}.container{display:flex;justify-content:space-between;align-items:center;gap:16px}.main{display:flex;align-items:center;gap:16px}.heading{display:flex;align-items:center;gap:8px}.text-links{display:flex;flex-shrink:0;align-items:center;gap:16px}.buttons{display:flex;flex-shrink:0;align-items:center;gap:8px}h2{margin-block:3px;font-size:14px;font-weight:700;line-height:1.6;position:relative}", ci = new CSSStyleSheet();
-ci.replaceSync(`${u} ${h} ${_s}`);
-var Fe, ve, Le, V, li, di, hi, ui, pi;
-class Vs extends HTMLElement {
-  constructor() {
-    super();
-    n(this, V);
-    n(this, Fe, document.createElement("h2"));
-    n(this, ve, document.createElement("slot"));
-    n(this, Le, document.createElement("slot"));
-    this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [ci], t(this, ve).name = "text-links", t(this, Le).name = "buttons";
-  }
+customElements.get("sp-radio-button-text-group") || customElements.define("sp-radio-button-text-group", St);
+const _t = ":host{display:block}.container{display:flex;justify-content:space-between;align-items:center;gap:16px}.main{display:flex;align-items:center;gap:16px}.heading{display:flex;align-items:center;gap:8px}.text-links{display:flex;flex-shrink:0;align-items:center;gap:16px}.buttons{display:flex;flex-shrink:0;align-items:center;gap:8px}h2{margin-block:3px;font-size:14px;font-weight:700;line-height:1.6;position:relative}", Le = new CSSStyleSheet();
+Le.replaceSync(`${n} ${r} ${_t}`);
+class Vt extends HTMLElement {
+  #o = document.createElement("h2");
+  #t = document.createElement("slot");
+  #e = document.createElement("slot");
+  /**
+   * セクションタイトルのテキスト
+   *
+   * @attribute
+   * @type {string}
+   */
   set text(e) {
-    t(this, Fe).textContent = e;
+    this.#o.textContent = e;
   }
   static get observedAttributes() {
     return ["text"];
   }
-  connectedCallback() {
-    var e, o;
-    this.shadowRoot.appendChild(a(this, V, li).call(this)), t(this, ve).assignedElements().length === 0 && ((e = this.shadowRoot.querySelector(".text-links")) == null || e.remove()), t(this, Le).assignedElements().length === 0 && ((o = this.shadowRoot.querySelector(".buttons")) == null || o.remove());
+  constructor() {
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [Le], this.#t.name = "text-links", this.#e.name = "buttons";
   }
-  attributeChangedCallback(e, o, s) {
-    e === "text" && o !== s && (this.text = s);
+  connectedCallback() {
+    this.shadowRoot.appendChild(this.#i()), this.#t.assignedElements().length === 0 && this.shadowRoot.querySelector(".text-links")?.remove(), this.#e.assignedElements().length === 0 && this.shadowRoot.querySelector(".buttons")?.remove();
+  }
+  attributeChangedCallback(e, o, t) {
+    e === "text" && o !== t && (this.text = t);
+  }
+  #i() {
+    const e = document.createElement("div");
+    return e.classList.add("container"), e.appendChild(this.#s()), e.appendChild(this.#n()), e;
+  }
+  #s() {
+    const e = document.createElement("div");
+    return e.classList.add("main"), e.appendChild(this.#a()), e.appendChild(this.#r()), e;
+  }
+  #a() {
+    const e = document.createElement("div");
+    return e.classList.add("heading"), e.appendChild(this.#o), e;
+  }
+  #r() {
+    const e = document.createElement("div");
+    return e.classList.add("text-links"), e.appendChild(this.#t), e;
+  }
+  #n() {
+    const e = document.createElement("div");
+    return e.classList.add("buttons"), e.appendChild(this.#e), e;
   }
 }
-Fe = new WeakMap(), ve = new WeakMap(), Le = new WeakMap(), V = new WeakSet(), li = function() {
-  const e = document.createElement("div");
-  return e.classList.add("container"), e.appendChild(a(this, V, di).call(this)), e.appendChild(a(this, V, pi).call(this)), e;
-}, di = function() {
-  const e = document.createElement("div");
-  return e.classList.add("main"), e.appendChild(a(this, V, hi).call(this)), e.appendChild(a(this, V, ui).call(this)), e;
-}, hi = function() {
-  const e = document.createElement("div");
-  return e.classList.add("heading"), e.appendChild(t(this, Fe)), e;
-}, ui = function() {
-  const e = document.createElement("div");
-  return e.classList.add("text-links"), e.appendChild(t(this, ve)), e;
-}, pi = function() {
-  const e = document.createElement("div");
-  return e.classList.add("buttons"), e.appendChild(t(this, Le)), e;
-};
-customElements.get("sp-section-title") || customElements.define("sp-section-title", Vs);
-const Ms = ":host{display:inline-block;max-width:100%;line-height:0;vertical-align:middle}.base{display:inline-flex;max-width:100%}.item{flex:1 0 80px;position:relative;display:flex;align-items:stretch;min-width:80px}.radio{position:absolute;z-index:-1;width:100%;height:100%}.input{width:100%;height:100%;opacity:0}.text{flex-grow:1;display:flex;align-items:center;justify-content:center;padding-block:8px;padding-inline:8px;background-color:var(--color-semantic-surface-regular-2);border:1px solid var(--color-semantic-border-regular);border-right:none;color:var(--color-semantic-text-weak);font-size:10px;line-height:1.6;text-align:center}.text:hover{background-color:var(--color-semantic-surface-regular-4)}.item:first-child .text{border-radius:5px 0 0 5px}.item:last-child .text{border-radius:0 5px 5px 0;border-right:1px solid var(--color-semantic-border-regular)}.item:has(.input:focus-visible) .text{outline:auto;outline-offset:-4px;background-color:var(--color-semantic-surface-regular-4)}.item:has(.input:checked) .text{background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected);color:var(--color-semantic-text-inverse);font-weight:700;cursor:default}.item:has(.input:disabled) .text{background-color:var(--color-semantic-surface-regular-2);color:var(--color-semantic-text-disabled);cursor:not-allowed}", mi = new CSSStyleSheet();
-mi.replaceSync(`${h} ${Ms}`);
-class As extends Et {
+customElements.get("sp-section-title") || customElements.define("sp-section-title", Vt);
+const Mt = ":host{display:inline-block;max-width:100%;line-height:0;vertical-align:middle}.base{display:inline-flex;max-width:100%}.item{flex:1 0 80px;position:relative;display:flex;align-items:stretch;min-width:80px}.radio{position:absolute;z-index:-1;width:100%;height:100%}.input{width:100%;height:100%;opacity:0}.text{flex-grow:1;display:flex;align-items:center;justify-content:center;padding-block:8px;padding-inline:8px;background-color:var(--color-semantic-surface-regular-2);border:1px solid var(--color-semantic-border-regular);border-right:none;color:var(--color-semantic-text-weak);font-size:10px;line-height:1.6;text-align:center}.text:hover{background-color:var(--color-semantic-surface-regular-4)}.item:first-child .text{border-radius:5px 0 0 5px}.item:last-child .text{border-radius:0 5px 5px 0;border-right:1px solid var(--color-semantic-border-regular)}.item:has(.input:focus-visible) .text{outline:auto;outline-offset:-4px;background-color:var(--color-semantic-surface-regular-4)}.item:has(.input:checked) .text{background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected);color:var(--color-semantic-text-inverse);font-weight:700;cursor:default}.item:has(.input:disabled) .text{background-color:var(--color-semantic-surface-regular-2);color:var(--color-semantic-text-disabled);cursor:not-allowed}", xe = new CSSStyleSheet();
+xe.replaceSync(`${r} ${Mt}`);
+class At extends D {
   constructor() {
     super(), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      mi
+      xe
     ];
   }
 }
-customElements.get("sp-segmented-control") || customElements.define("sp-segmented-control", As);
-const Zs = ".button{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-regular)}.button:hover{background-color:var(--color-semantic-surface-regular-4)}:host([selected]) .button{font-weight:700;color:var(--color-semantic-text-inverse);background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected)}:host([disabled]){pointer-events:none}:host([disabled]) .button{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-disabled);cursor:default}:host([selected]) .button:hover{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}", bi = new CSSStyleSheet();
-bi.replaceSync(`${u} ${h} ${Zs}`);
-var te, Y, b, ke, fi, gi;
-class Rs extends HTMLElement {
-  constructor() {
-    super();
-    n(this, ke);
-    n(this, te, !1);
-    n(this, Y, !1);
-    n(this, b, document.createElement("button"));
-    this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      bi
-    ], this.selected = !1, this.disabled = !1;
-  }
+customElements.get("sp-segmented-control") || customElements.define("sp-segmented-control", At);
+const Zt = ".button{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-regular)}.button:hover{background-color:var(--color-semantic-surface-regular-4)}:host([selected]) .button{font-weight:700;color:var(--color-semantic-text-inverse);background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected)}:host([disabled]){pointer-events:none}:host([disabled]) .button{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-disabled);cursor:default}:host([selected]) .button:hover{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}", Ce = new CSSStyleSheet();
+Ce.replaceSync(`${n} ${r} ${Zt}`);
+class Tt extends HTMLElement {
+  #o = !1;
+  #t = !1;
+  #e = document.createElement("button");
   /**
-   * Returns whether the tag is currently in selected state
+   * タグの選択状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
    */
   get selected() {
-    return t(this, te);
+    return this.#o;
   }
-  /**
-   * Sets the selected state of the tag
-   */
   set selected(e) {
-    t(this, te) !== e && (d(this, te, e), e ? t(this, b).classList.add("isSelected") : t(this, b).classList.remove("isSelected"));
+    this.#o !== e && (this.#o = e, e ? this.#e.classList.add("isSelected") : this.#e.classList.remove("isSelected"));
   }
   /**
-   * Returns whether the tag is currently disabled
+   * タグの無効状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
    */
   get disabled() {
-    return t(this, Y);
+    return this.#t;
   }
-  /**
-   * Sets the disabled state of the tag
-   */
   set disabled(e) {
-    t(this, Y) !== e && (d(this, Y, e), e ? (this.setAttribute("aria-disabled", "true"), t(this, b).disabled = !0, t(this, b).classList.add("isDisabled")) : (this.removeAttribute("aria-disabled"), t(this, b).disabled = !1, t(this, b).classList.remove("isDisabled")));
+    this.#t !== e && (this.#t = e, e ? (this.setAttribute("aria-disabled", "true"), this.#e.disabled = !0, this.#e.classList.add("isDisabled")) : (this.removeAttribute("aria-disabled"), this.#e.disabled = !1, this.#e.classList.remove("isDisabled")));
   }
   static get observedAttributes() {
     return ["selected", "disabled"];
   }
-  connectedCallback() {
-    d(this, te, this.hasAttribute("selected")), d(this, Y, this.hasAttribute("disabled")), t(this, b).classList.add("button"), t(this, b).setAttribute("type", "button"), t(this, b).addEventListener("click", a(this, ke, fi).bind(this)), a(this, ke, gi).call(this);
+  constructor() {
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      Ce
+    ], this.selected = !1, this.disabled = !1;
   }
-  attributeChangedCallback(e, o, s) {
-    if (o !== s)
+  connectedCallback() {
+    this.#o = this.hasAttribute("selected"), this.#t = this.hasAttribute("disabled"), this.#e.classList.add("button"), this.#e.setAttribute("type", "button"), this.#e.addEventListener("click", this.#i.bind(this)), this.#s();
+  }
+  attributeChangedCallback(e, o, t) {
+    if (o !== t)
       switch (e) {
         case "selected":
-          this.selected = s === "true" || s === "";
+          this.selected = t === "true" || t === "";
           break;
         case "disabled":
-          this.disabled = s === "true" || s === "";
+          this.disabled = t === "true" || t === "";
           break;
       }
   }
+  #i(e) {
+    this.disabled || this.dispatchEvent(
+      new CustomEvent("click", { detail: { originalEvent: e } })
+    );
+  }
+  #s() {
+    this.shadowRoot.textContent = "";
+    const e = document.createElement("slot");
+    this.#e.textContent = "", this.#e.appendChild(e), this.#t ? this.#e.disabled = !0 : this.#e.disabled = !1, this.shadowRoot.appendChild(this.#e);
+  }
 }
-te = new WeakMap(), Y = new WeakMap(), b = new WeakMap(), ke = new WeakSet(), fi = function(e) {
-  this.disabled || this.dispatchEvent(
-    new CustomEvent("click", { detail: { originalEvent: e } })
-  );
-}, gi = function() {
-  this.shadowRoot.textContent = "";
-  const e = document.createElement("slot");
-  t(this, b).textContent = "", t(this, b).appendChild(e), t(this, Y) ? t(this, b).disabled = !0 : t(this, b).disabled = !1, this.shadowRoot.appendChild(t(this, b));
-};
-customElements.get("sp-tag-clickable") || customElements.define("sp-tag-clickable", Rs);
-const Ts = ".link{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;text-decoration:none;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-text-link)}.link:hover{background-color:var(--color-semantic-surface-regular-4)}.link:focus{background-color:var(--color-semantic-surface-regular-4)}:host([disabled]){pointer-events:none}:host([disabled]) .link{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-disabled)}", vi = new CSSStyleSheet();
-vi.replaceSync(`${u} ${h} ${Ts}`);
-var oe, N, at, Li;
-class zs extends HTMLElement {
+customElements.get("sp-tag-clickable") || customElements.define("sp-tag-clickable", Tt);
+const Rt = ".link{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;text-decoration:none;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-text-link)}.link:hover{background-color:var(--color-semantic-surface-regular-4)}.link:focus{background-color:var(--color-semantic-surface-regular-4)}:host([disabled]){pointer-events:none}:host([disabled]) .link{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-disabled)}", ye = new CSSStyleSheet();
+ye.replaceSync(`${n} ${r} ${Rt}`);
+class zt extends HTMLElement {
   constructor() {
-    super();
-    n(this, at);
-    n(this, oe);
-    n(this, N);
-    this.href = "", d(this, oe, !1), d(this, N, document.createElement("a")), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+    super(), this.href = "", this.#o = !1, this.#t = document.createElement("a"), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      vi
+      ye
     ];
   }
+  #o;
+  #t;
+  /**
+   * タグの無効状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get disabled() {
-    return t(this, oe);
+    return this.#o;
   }
   set disabled(e) {
-    t(this, oe) !== e && (d(this, oe, e), e ? (this.setAttribute("aria-disabled", "true"), this.setAttribute("tabindex", "-1")) : (this.removeAttribute("aria-disabled"), this.removeAttribute("tabindex")));
+    this.#o !== e && (this.#o = e, e ? (this.setAttribute("aria-disabled", "true"), this.setAttribute("tabindex", "-1")) : (this.removeAttribute("aria-disabled"), this.removeAttribute("tabindex")));
   }
   static get observedAttributes() {
     return ["href", "disabled"];
   }
   connectedCallback() {
-    a(this, at, Li).call(this);
+    this.#e();
   }
-  attributeChangedCallback(e, o, s) {
-    if (o !== s)
+  attributeChangedCallback(e, o, t) {
+    if (o !== t)
       switch (e) {
         case "href":
-          t(this, N).setAttribute("href", s);
+          this.#t.setAttribute("href", t);
           break;
         case "disabled":
-          this.disabled = s === "true" || s === "";
+          this.disabled = t === "true" || t === "";
           break;
       }
   }
-}
-oe = new WeakMap(), N = new WeakMap(), at = new WeakSet(), Li = function() {
-  this.shadowRoot.textContent = "", t(this, N).classList.add("link");
-  const e = document.createElement("slot");
-  t(this, N).appendChild(e), this.shadowRoot.appendChild(t(this, N));
-};
-customElements.get("sp-tag-link") || customElements.define("sp-tag-link", zs);
-const Bs = ".base{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center}.type__gray{background-color:var(--color-semantic-surface-temp-tag-gray);border-color:var(--color-semantic-border-temp-tag-gray);color:var(--color-semantic-text-regular)}.type__green.light{background-color:var(--color-semantic-surface-temp-tag-green);border-color:var(--color-semantic-border-temp-tag-green);color:var(--color-semantic-text-success)}.type__green:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkgreen);border-color:var(--color-semantic-border-temp-tag-darkgreen);color:var(--color-semantic-text-inverse)}.type__red.light{background-color:var(--color-semantic-surface-temp-tag-red);border-color:var(--color-semantic-border-temp-tag-red);color:var(--color-semantic-text-danger)}.type__red:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkred);border-color:var(--color-semantic-border-temp-tag-darkred);color:var(--color-semantic-text-inverse)}.type__yellow.light{background-color:var(--color-semantic-surface-temp-tag-yellow);border-color:var(--color-semantic-border-temp-tag-yellow);color:var(--color-semantic-text-warning)}.type__yellow:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkyellow);border-color:var(--color-semantic-border-temp-tag-darkyellow);color:var(--color-semantic-text-inverse)}.type__blue.light{background-color:var(--color-semantic-surface-temp-tag-marine);border-color:var(--color-semantic-border-temp-tag-marine);color:var(--color-semantic-text-marine)}.type__blue:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkmarine);border-color:var(--color-semantic-border-temp-tag-darkmarine);color:var(--color-semantic-text-inverse)}", xi = new CSSStyleSheet();
-xi.replaceSync(`${u} ${h} ${Bs}`);
-var R, q, S, T, Ci, yi, wt, ki;
-class $s extends HTMLElement {
-  constructor() {
-    super();
-    n(this, T);
-    n(this, R, "gray");
-    n(this, q, !0);
-    n(this, S, document.createElement("div"));
-    this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      xi
-    ];
+  #e() {
+    this.shadowRoot.textContent = "", this.#t.classList.add("link");
+    const e = document.createElement("slot");
+    this.#t.appendChild(e), this.shadowRoot.appendChild(this.#t);
   }
+}
+customElements.get("sp-tag-link") || customElements.define("sp-tag-link", zt);
+const Bt = ".base{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center}.type__gray{background-color:var(--color-semantic-surface-temp-tag-gray);border-color:var(--color-semantic-border-temp-tag-gray);color:var(--color-semantic-text-regular)}.type__green.light{background-color:var(--color-semantic-surface-temp-tag-green);border-color:var(--color-semantic-border-temp-tag-green);color:var(--color-semantic-text-success)}.type__green:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkgreen);border-color:var(--color-semantic-border-temp-tag-darkgreen);color:var(--color-semantic-text-inverse)}.type__red.light{background-color:var(--color-semantic-surface-temp-tag-red);border-color:var(--color-semantic-border-temp-tag-red);color:var(--color-semantic-text-danger)}.type__red:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkred);border-color:var(--color-semantic-border-temp-tag-darkred);color:var(--color-semantic-text-inverse)}.type__yellow.light{background-color:var(--color-semantic-surface-temp-tag-yellow);border-color:var(--color-semantic-border-temp-tag-yellow);color:var(--color-semantic-text-warning)}.type__yellow:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkyellow);border-color:var(--color-semantic-border-temp-tag-darkyellow);color:var(--color-semantic-text-inverse)}.type__blue.light{background-color:var(--color-semantic-surface-temp-tag-marine);border-color:var(--color-semantic-border-temp-tag-marine);color:var(--color-semantic-text-marine)}.type__blue:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkmarine);border-color:var(--color-semantic-border-temp-tag-darkmarine);color:var(--color-semantic-text-inverse)}", ke = new CSSStyleSheet();
+ke.replaceSync(`${n} ${r} ${Bt}`);
+class $t extends HTMLElement {
+  #o = "gray";
+  #t = !0;
+  #e = document.createElement("div");
+  /**
+   * タグの色の種類（"gray"、"green"、"red"、"yellow"、または "blue"）
+   * - "gray": グレー
+   * - "green": グリーン
+   * - "red": レッド
+   * - "yellow": イエロー
+   * - "blue": ブルー
+   *
+   * @attribute
+   * @type {"gray"|"green"|"red"|"yellow"|"blue"}
+   * @default "gray"
+   */
   get type() {
-    return t(this, R);
+    return this.#o;
   }
   set type(e) {
-    t(this, R) !== e && (t(this, S).classList.remove(`type__${t(this, R)}`), a(this, T, wt).call(this, e) ? (d(this, R, e), t(this, S).classList.add(`type__${e}`), this.light = this.hasAttribute("light")) : (console.warn(`${e}は無効なtype属性です。`), d(this, R, "gray"), t(this, S).classList.add("type__gray")));
+    this.#o !== e && (this.#e.classList.remove(`type__${this.#o}`), this.#a(e) ? (this.#o = e, this.#e.classList.add(`type__${e}`), this.light = this.hasAttribute("light")) : (console.warn(`${e}は無効なtype属性です。`), this.#o = "gray", this.#e.classList.add("type__gray")));
   }
+  /**
+   * ライトモードの有効状態（※grayカラーはライトモードのみ）
+   *
+   * @attribute
+   * @type {boolean}
+   * @default true
+   */
   get light() {
-    return t(this, q);
+    return this.#t;
   }
   set light(e) {
-    t(this, q) !== e && (e ? t(this, S).classList.add("light") : t(this, S).classList.remove("light"), d(this, q, e), e ? this.setAttribute("light", "") : this.removeAttribute("light"));
+    this.#t !== e && (e ? this.#e.classList.add("light") : this.#e.classList.remove("light"), this.#t = e, e ? this.setAttribute("light", "") : this.removeAttribute("light"));
   }
   static get observedAttributes() {
     return ["type", "light"];
   }
-  connectedCallback() {
-    d(this, R, a(this, T, Ci).call(this)), d(this, q, a(this, T, yi).call(this)), a(this, T, ki).call(this);
+  constructor() {
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      ke
+    ];
   }
-  attributeChangedCallback(e, o, s) {
-    if (o !== s)
+  connectedCallback() {
+    this.#o = this.#i(), this.#t = this.#s(), this.#r();
+  }
+  attributeChangedCallback(e, o, t) {
+    if (o !== t)
       switch (e) {
         case "type":
-          this.type = s;
+          this.type = t;
           break;
         case "light":
-          this.light = s === "true" || s === "";
+          this.light = t === "true" || t === "";
           break;
       }
   }
-}
-R = new WeakMap(), q = new WeakMap(), S = new WeakMap(), T = new WeakSet(), Ci = function() {
-  const e = this.getAttribute("type");
-  return a(this, T, wt).call(this, e) ? e : "gray";
-}, yi = function() {
-  return t(this, R) === "gray" ? !0 : this.hasAttribute("light");
-}, wt = function(e) {
-  return e === "gray" || e === "green" || e === "red" || e === "yellow" || e === "blue";
-}, ki = function() {
-  this.shadowRoot.textContent = "", t(this, S).classList.add("base"), t(this, S).classList.add(`type__${t(this, R)}`), t(this, q) && t(this, S).classList.add("light");
-  const e = document.createElement("slot");
-  t(this, S).appendChild(e), this.shadowRoot.appendChild(t(this, S));
-};
-customElements.get("sp-tag-liquid") || customElements.define("sp-tag-liquid", $s);
-const Ps = ".base{display:inline-flex;vertical-align:middle;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;gap:4px;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular)}.base:hover{background-color:var(--color-semantic-surface-regular-4)}.label{color:var(--color-semantic-text-regular)}.remove{color:var(--color-primitive-neutral-100);display:flex;align-items:center;justify-content:center}.drag-icon{display:flex;align-items:center;justify-content:center;color:var(--color-semantic-text-regular);cursor:grab;margin-right:2px}.drag-icon:active{cursor:grabbing}.base.dragging{opacity:.8;box-shadow:0 2px 4px #0003}:host([disabled]) .base{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular)}:host([disabled]) .label{color:var(--color-semantic-text-disabled)}:host([disabled]) .remove{color:var(--color-semantic-text-disabled)}:host([disabled]) .drag-icon{color:var(--color-semantic-text-disabled);cursor:default}", wi = new CSSStyleSheet();
-wi.replaceSync(`${u} ${h} ${Ps}`);
-var G, ie, P, g, je, Oe, se, Ye, xe, Ce, ye, ot;
-class Is extends HTMLElement {
-  constructor() {
-    super();
-    n(this, ye);
-    n(this, G, !1);
-    n(this, ie, !1);
-    n(this, P, document.createElement("button"));
-    n(this, g, null);
-    n(this, je, 0);
-    n(this, Oe, 0);
-    n(this, se, !1);
-    n(this, Ye, (e) => {
-      var s;
-      if (t(this, G)) return;
-      d(this, se, !0), d(this, je, e.clientX), d(this, Oe, e.clientY);
-      const o = (s = this.shadowRoot) == null ? void 0 : s.querySelector(".base");
-      o && o.classList.add("dragging"), this.dispatchEvent(
-        new CustomEvent("dragstart", {
-          detail: { x: e.clientX, y: e.clientY }
-        })
-      ), document.addEventListener("mousemove", t(this, xe)), document.addEventListener("mouseup", t(this, Ce)), e.preventDefault();
-    });
-    n(this, xe, (e) => {
-      if (!t(this, se)) return;
-      const o = e.clientX - t(this, je), s = e.clientY - t(this, Oe);
-      this.dispatchEvent(
-        new CustomEvent("drag", {
-          detail: {
-            x: e.clientX,
-            y: e.clientY,
-            deltaX: o,
-            deltaY: s
-          }
-        })
-      );
-    });
-    n(this, Ce, (e) => {
-      var s;
-      if (!t(this, se)) return;
-      d(this, se, !1);
-      const o = (s = this.shadowRoot) == null ? void 0 : s.querySelector(".base");
-      o && o.classList.remove("dragging"), this.dispatchEvent(
-        new CustomEvent("dragend", {
-          detail: { x: e.clientX, y: e.clientY }
-        })
-      ), document.removeEventListener("mousemove", t(this, xe)), document.removeEventListener("mouseup", t(this, Ce));
-    });
-    this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      wi
-    ], this.disabled = !1;
+  #i() {
+    const e = this.getAttribute("type");
+    return this.#a(e) ? e : "gray";
   }
+  #s() {
+    return this.#o === "gray" ? !0 : this.hasAttribute("light");
+  }
+  #a(e) {
+    return e === "gray" || e === "green" || e === "red" || e === "yellow" || e === "blue";
+  }
+  #r() {
+    this.shadowRoot.textContent = "", this.#e.classList.add("base"), this.#e.classList.add(`type__${this.#o}`), this.#t && this.#e.classList.add("light");
+    const e = document.createElement("slot");
+    this.#e.appendChild(e), this.shadowRoot.appendChild(this.#e);
+  }
+}
+customElements.get("sp-tag-liquid") || customElements.define("sp-tag-liquid", $t);
+const Pt = ".base{display:inline-flex;vertical-align:middle;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;gap:4px;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular)}.base:hover{background-color:var(--color-semantic-surface-regular-4)}.label{color:var(--color-semantic-text-regular)}.remove{color:var(--color-primitive-neutral-100);display:flex;align-items:center;justify-content:center}.drag-icon{display:flex;align-items:center;justify-content:center;color:var(--color-semantic-text-regular);cursor:grab;margin-right:2px}.drag-icon:active{cursor:grabbing}.base.dragging{opacity:.8;box-shadow:0 2px 4px #0003}:host([disabled]) .base{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular)}:host([disabled]) .label{color:var(--color-semantic-text-disabled)}:host([disabled]) .remove{color:var(--color-semantic-text-disabled)}:host([disabled]) .drag-icon{color:var(--color-semantic-text-disabled);cursor:default}", we = new CSSStyleSheet();
+we.replaceSync(`${n} ${r} ${Pt}`);
+class It extends HTMLElement {
+  #o = !1;
+  #t = !1;
+  #e = document.createElement("button");
+  #i = null;
+  #s = 0;
+  #a = 0;
+  #r = !1;
+  /**
+   * タグの無効状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get disabled() {
-    return t(this, G);
+    return this.#o;
   }
   set disabled(e) {
-    t(this, G) !== e && (d(this, G, e), t(this, P).disabled = e, a(this, ye, ot).call(this));
+    this.#o !== e && (this.#o = e, this.#e.disabled = e, this.#d());
   }
+  /**
+   * タグのドラッグ可能状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get draggable() {
-    return t(this, ie);
+    return this.#t;
   }
   set draggable(e) {
-    t(this, ie) !== e && (d(this, ie, e), a(this, ye, ot).call(this));
+    this.#t !== e && (this.#t = e, this.#d());
   }
   static get observedAttributes() {
     return ["disabled", "draggable"];
   }
+  constructor() {
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      we
+    ], this.disabled = !1;
+  }
   connectedCallback() {
-    t(this, P).classList.add("remove"), t(this, P).setAttribute("aria-label", "削除"), t(this, P).setAttribute("type", "button");
+    this.#e.classList.add("remove"), this.#e.setAttribute("aria-label", "削除"), this.#e.setAttribute("type", "button");
     const e = document.createElement("sp-icon");
-    e.size = "small", e.type = "close", e.setAttribute("aria-hidden", "true"), t(this, P).appendChild(e), t(this, P).addEventListener(
+    e.size = "small", e.type = "close", e.setAttribute("aria-hidden", "true"), this.#e.appendChild(e), this.#e.addEventListener(
       "click",
       () => this.dispatchEvent(new CustomEvent("remove"))
-    ), a(this, ye, ot).call(this);
+    ), this.#d();
   }
-  attributeChangedCallback(e, o, s) {
-    if (o !== s)
+  attributeChangedCallback(e, o, t) {
+    if (o !== t)
       switch (e) {
         case "disabled":
-          this.disabled = s === "true" || s === "";
+          this.disabled = t === "true" || t === "";
           break;
         case "draggable":
-          this.draggable = s === "true" || s === "";
+          this.draggable = t === "true" || t === "";
           break;
       }
   }
+  #n = (e) => {
+    if (this.#o) return;
+    this.#r = !0, this.#s = e.clientX, this.#a = e.clientY;
+    const o = this.shadowRoot?.querySelector(".base");
+    o && o.classList.add("dragging"), this.dispatchEvent(
+      new CustomEvent("dragstart", {
+        detail: { x: e.clientX, y: e.clientY }
+      })
+    ), document.addEventListener("mousemove", this.#c), document.addEventListener("mouseup", this.#l), e.preventDefault();
+  };
+  #c = (e) => {
+    if (!this.#r) return;
+    const o = e.clientX - this.#s, t = e.clientY - this.#a;
+    this.dispatchEvent(
+      new CustomEvent("drag", {
+        detail: {
+          x: e.clientX,
+          y: e.clientY,
+          deltaX: o,
+          deltaY: t
+        }
+      })
+    );
+  };
+  #l = (e) => {
+    if (!this.#r) return;
+    this.#r = !1;
+    const o = this.shadowRoot?.querySelector(".base");
+    o && o.classList.remove("dragging"), this.dispatchEvent(
+      new CustomEvent("dragend", {
+        detail: { x: e.clientX, y: e.clientY }
+      })
+    ), document.removeEventListener("mousemove", this.#c), document.removeEventListener("mouseup", this.#l);
+  };
   disconnectedCallback() {
-    t(this, g) && t(this, g).removeEventListener("mousedown", t(this, Ye)), document.removeEventListener("mousemove", t(this, xe)), document.removeEventListener("mouseup", t(this, Ce));
+    this.#i && this.#i.removeEventListener("mousedown", this.#n), document.removeEventListener("mousemove", this.#c), document.removeEventListener("mouseup", this.#l);
+  }
+  #d() {
+    this.shadowRoot.textContent = "";
+    const e = document.createElement("div");
+    e.classList.add("base"), e.setAttribute("role", "tag"), this.#t && (this.#i = document.createElement("sp-icon"), this.#i.setAttribute("type", "drag"), this.#i.setAttribute("size", "small"), this.#i.setAttribute("aria-hidden", "true"), this.#i.classList.add("drag-icon"), this.#i.style.cursor = this.#o ? "default" : "grab", this.#i.setAttribute("role", "button"), this.#i.setAttribute("aria-label", "ドラッグハンドル"), this.#o || this.#i.addEventListener("mousedown", this.#n), e.appendChild(this.#i));
+    const o = document.createElement("span");
+    o.classList.add("label");
+    const t = document.createElement("slot");
+    o.appendChild(t), e.appendChild(o), e.appendChild(this.#e), this.shadowRoot.appendChild(e);
   }
 }
-G = new WeakMap(), ie = new WeakMap(), P = new WeakMap(), g = new WeakMap(), je = new WeakMap(), Oe = new WeakMap(), se = new WeakMap(), Ye = new WeakMap(), xe = new WeakMap(), Ce = new WeakMap(), ye = new WeakSet(), ot = function() {
-  this.shadowRoot.textContent = "";
-  const e = document.createElement("div");
-  e.classList.add("base"), e.setAttribute("role", "tag"), t(this, ie) && (d(this, g, document.createElement("sp-icon")), t(this, g).setAttribute("type", "drag"), t(this, g).setAttribute("size", "small"), t(this, g).setAttribute("aria-hidden", "true"), t(this, g).classList.add("drag-icon"), t(this, g).style.cursor = t(this, G) ? "default" : "grab", t(this, g).setAttribute("role", "button"), t(this, g).setAttribute("aria-label", "ドラッグハンドル"), t(this, G) || t(this, g).addEventListener("mousedown", t(this, Ye)), e.appendChild(t(this, g)));
-  const o = document.createElement("span");
-  o.classList.add("label");
-  const s = document.createElement("slot");
-  o.appendChild(s), e.appendChild(o), e.appendChild(t(this, P)), this.shadowRoot.appendChild(e);
-};
-customElements.get("sp-tag-removable") || customElements.define("sp-tag-removable", Is);
+customElements.get("sp-tag-removable") || customElements.define("sp-tag-removable", It);
 export {
-  qt as SpButton,
-  Ui as SpCheckbox,
-  Wi as SpCheckboxList,
-  ji as SpCheckboxText,
-  Yi as SpDefinitionList,
-  qi as SpDefinitionListDd,
-  Qi as SpDefinitionListDt,
-  as as SpDropdownAction,
-  ts as SpDropdownActionItem,
-  ds as SpDropdownDialog,
-  us as SpElementTitle,
-  Ht as SpIcon,
-  gs as SpNotificationBar,
-  ys as SpNotificationMessage,
-  Ss as SpPagination,
-  Hs as SpRadioButtonTextGroup,
-  Vs as SpSectionTitle,
-  As as SpSegmentedControl,
-  Rs as SpTagClickable,
-  zs as SpTagLink,
-  $s as SpTagLiquid,
-  Is as SpTagRemovable
+  ie as SpButton,
+  Ue as SpCheckbox,
+  We as SpCheckboxList,
+  je as SpCheckboxText,
+  Ye as SpDefinitionList,
+  Je as SpDefinitionListDd,
+  qe as SpDefinitionListDt,
+  at as SpDropdownAction,
+  tt as SpDropdownActionItem,
+  dt as SpDropdownDialog,
+  ut as SpElementTitle,
+  U as SpIcon,
+  gt as SpNotificationBar,
+  yt as SpNotificationMessage,
+  Et as SpPagination,
+  St as SpRadioButtonTextGroup,
+  Vt as SpSectionTitle,
+  At as SpSegmentedControl,
+  Tt as SpTagClickable,
+  zt as SpTagLink,
+  $t as SpTagLiquid,
+  It as SpTagRemovable
 };

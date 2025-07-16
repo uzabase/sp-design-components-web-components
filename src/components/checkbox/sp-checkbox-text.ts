@@ -7,6 +7,14 @@ import checkmarkStyle from "./checkmark.css?inline";
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${checkmarkStyle} ${checkboxTextStyle}`);
 
+/**
+ * SpCheckboxTextは、デザインシステム2.0におけるテキスト付きチェックボックスコンポーネントです。
+ *
+ * @element sp-checkbox-text
+ * @summary テキスト付きチェックボックスコンポーネント
+ *
+ * @slot - チェックボックスのラベルテキスト（デフォルトスロット）
+ */
 export class SpCheckboxText extends UbCheckboxText {
   constructor() {
     super();

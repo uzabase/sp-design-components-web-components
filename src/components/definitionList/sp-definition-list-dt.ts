@@ -8,6 +8,15 @@ styles.replaceSync(
   `${resetStyle} ${foundationStyle} ${spDefinitionListDtStyle}`,
 );
 
+/**
+ * SpDefinitionListDtは、デザインシステム2.0における定義リストの用語項目コンポーネントです。
+ * 定義リスト内で用語を表示するために使用します。
+ *
+ * @element sp-definition-list-dt
+ * @summary 定義リストの用語項目コンポーネント
+ *
+ * @slot - 用語のテキストコンテンツ（デフォルトスロット）
+ */
 export class SpDefinitionListDt extends HTMLElement {
   #dtElement = document.createElement("dt");
 
