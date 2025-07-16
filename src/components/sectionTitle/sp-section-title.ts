@@ -1,11 +1,27 @@
 import { makeStyleSheet } from "../styles";
 import sectionTitleStyle from "./section-title.css?inline";
 
+/**
+ * SpSectionTitleは、デザインシステム2.0におけるセクションタイトルコンポーネントです。
+ * セクションの見出しを表示するために使用します。
+ *
+ * @element sp-section-title
+ * @summary セクションタイトルコンポーネント
+ *
+ * @slot text-links - タイトル横に表示するテキストリンク
+ * @slot buttons - タイトル右側に表示するボタン
+ */
 export class SpSectionTitle extends HTMLElement {
   #headingElement = document.createElement("h2");
   #textLinkSlotElement = document.createElement("slot");
   #buttonSlotElement = document.createElement("slot");
 
+  /**
+   * セクションタイトルのテキスト
+   *
+   * @attribute
+   * @type {string}
+   */
   set text(value: string) {
     this.#headingElement.textContent = value;
   }

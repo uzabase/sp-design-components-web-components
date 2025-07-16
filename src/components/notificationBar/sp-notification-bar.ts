@@ -35,6 +35,15 @@ export const iconAriaLabels: Record<Type, string> = {
   success: "成功",
 };
 
+/**
+ * SpNotificationBarは、デザインシステム2.0における通知バーコンポーネントです。
+ * ユーザーに重要な情報やメッセージを表示するために使用します。
+ *
+ * @element sp-notification-bar
+ * @summary 通知バーコンポーネント
+ *
+ * @slot - 通知メッセージのコンテンツ（デフォルトスロット）
+ */
 export class SpNotificationBar extends HTMLElement {
   #type: Type = "information";
 

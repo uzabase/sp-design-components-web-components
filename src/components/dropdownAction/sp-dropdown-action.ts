@@ -16,6 +16,15 @@ function createMenuId() {
   return `sp-dropdown-action-menu-${Math.random().toString(32).substring(2)}`;
 }
 
+/**
+ * SpDropdownActionは、デザインシステム2.0におけるドロップダウンアクションコンポーネントです。
+ * ボタンをクリックすると表示されるアクションメニューを提供します。
+ *
+ * @element sp-dropdown-action
+ * @summary ドロップダウンアクションコンポーネント
+ *
+ * @slot - ドロップダウンメニューのアクション項目（デフォルトスロット）
+ */
 export class SpDropdownAction extends HTMLElement {
   #baseElement = document.createElement("div");
   #buttonElement = document.createElement("sp-dropdown-action-button");
@@ -31,11 +40,24 @@ export class SpDropdownAction extends HTMLElement {
 
   #clickOutsideHandler = this.#handleClickOutside.bind(this);
 
+  /**
+   * ドロップダウンボタンのラベルテキスト
+   *
+   * @attribute
+   * @type {string}
+   */
   set label(value: string) {
     this.#buttonElement.textContent = value;
     this.#syncMenuMinWidthWithButtonWidth();
   }
 
+  /**
+   * ドロップダウンメニューの開閉状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get open() {
     return this.#open;
   }
@@ -51,6 +73,13 @@ export class SpDropdownAction extends HTMLElement {
     this.#updateMenuDisplay();
   }
 
+  /**
+   * ドロップダウンの無効状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get disabled() {
     return this.#disabled;
   }
@@ -60,6 +89,15 @@ export class SpDropdownAction extends HTMLElement {
     this.#updateMenuDisplay();
   }
 
+  /**
+   * ドロップダウンメニューの表示位置（"left" または "right"）
+   * - "left": 左寄せ
+   * - "right": 右寄せ
+   *
+   * @attribute
+   * @type {"left"|"right"}
+   * @default "left"
+   */
   get position() {
     return this.#position;
   }

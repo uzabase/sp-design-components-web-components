@@ -34,6 +34,15 @@ export const iconPaths: Record<Type, string> = {
     '<path fill-rule="evenodd" clip-rule="evenodd" d="M2.58 18.8574L11.3416 3.99902H12.6459L21.4075 18.8574L20.7554 19.999H3.23212L2.58 18.8574ZM11.2 9.5V14.5H12.8V9.5H11.2ZM11.2 16V17.5H12.8V16H11.2Z" fill="#EAB100"></path>',
 };
 
+/**
+ * SpNotificationMessageは、デザインシステム2.0における通知メッセージコンポーネントです。
+ * ユーザーに情報、警告、エラー、成功メッセージを表示するために使用します。
+ *
+ * @element sp-notification-message
+ * @summary 通知メッセージコンポーネント
+ *
+ * @slot - 通知メッセージのコンテンツ（デフォルトスロット）
+ */
 export class SpNotificationMessage extends HTMLElement {
   #type: Type = "information";
 

@@ -1,6 +1,15 @@
 import { makeStyleSheet } from "../styles";
 import spDefinitionListDdStyle from "./sp-definition-list-dd.css?inline";
 
+/**
+ * SpDefinitionListDdは、デザインシステム2.0における定義リストの説明項目コンポーネントです。
+ * 定義リスト内で用語の説明を表示するために使用します。
+ *
+ * @element sp-definition-list-dd
+ * @summary 定義リストの説明項目コンポーネント
+ *
+ * @slot - 説明のテキストコンテンツ（デフォルトスロット）
+ */
 export class SpDefinitionListDd extends HTMLElement {
   #ddElement = document.createElement("dd");
 

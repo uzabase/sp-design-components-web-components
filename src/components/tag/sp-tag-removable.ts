@@ -3,6 +3,17 @@ import "../icon/sp-icon";
 import { makeStyleSheet } from "../styles";
 import tagRemovableStyle from "./tag-removable.css?inline";
 
+/**
+ * SpTagRemovableは、デザインシステム2.0における削除可能なタグコンポーネントです。
+ * 削除ボタンを持ち、オプションでドラッグ機能も提供します。
+ *
+ * @element sp-tag-removable
+ * @summary 削除可能なタグコンポーネント
+ *
+ * @slot - タグのテキストコンテンツ（デフォルトスロット）
+ *
+ * @fires remove - 削除ボタンがクリックされたときに発火するイベント
+ */
 export class SpTagRemovable extends HTMLElement {
   #disabled = false;
   #draggable = false;

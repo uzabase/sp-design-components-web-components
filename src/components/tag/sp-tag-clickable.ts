@@ -3,6 +3,17 @@ import "../icon/sp-icon";
 import { makeStyleSheet } from "../styles";
 import tagClickableStyle from "./tag-clickable.css?inline";
 
+/**
+ * SpTagClickableは、デザインシステム2.0におけるクリック可能なタグコンポーネントです。
+ * 選択状態を持ち、クリックイベントを発火するタグとして使用します。
+ *
+ * @element sp-tag-clickable
+ * @summary クリック可能なタグコンポーネント
+ *
+ * @slot - タグのテキストコンテンツ（デフォルトスロット）
+ *
+ * @fires click - タグがクリックされたときに発火するイベント。detail.originalEventに元のMouseEventが含まれます
+ */
 export class SpTagClickable extends HTMLElement {
   #selected = false;
   #disabled = false;

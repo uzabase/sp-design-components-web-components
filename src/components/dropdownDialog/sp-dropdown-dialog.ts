@@ -11,6 +11,15 @@ function isValidPosition(value: string): value is Position {
   return positions.some((position) => position === value);
 }
 
+/**
+ * SpDropdownDialogは、デザインシステム2.0におけるドロップダウンダイアログコンポーネントです。
+ * ボタンをクリックすると表示されるダイアログコンテンツを提供します。
+ *
+ * @element sp-dropdown-dialog
+ * @summary ドロップダウンダイアログコンポーネント
+ *
+ * @slot - ドロップダウンダイアログのコンテンツ（デフォルトスロット）
+ */
 export class SpDropdownDialog extends HTMLElement {
   #baseElement = document.createElement("div");
   #buttonElement = document.createElement("sp-button");
@@ -23,10 +32,23 @@ export class SpDropdownDialog extends HTMLElement {
 
   #clickOutsideHandler = this.#handleClickOutside.bind(this);
 
+  /**
+   * ドロップダウンボタンのラベルテキスト
+   *
+   * @attribute
+   * @type {string}
+   */
   set label(value: string) {
     this.#buttonElement.textContent = value;
   }
 
+  /**
+   * ドロップダウンダイアログの開閉状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get open() {
     return this.#open;
   }
@@ -42,6 +64,13 @@ export class SpDropdownDialog extends HTMLElement {
     this.#updateDialogDisplay();
   }
 
+  /**
+   * ドロップダウンの無効状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get disabled() {
     return this.#disabled;
   }
@@ -51,6 +80,15 @@ export class SpDropdownDialog extends HTMLElement {
     this.#updateDialogDisplay();
   }
 
+  /**
+   * ドロップダウンダイアログの表示位置（"left" または "right"）
+   * - "left": 左寄せ
+   * - "right": 右寄せ
+   *
+   * @attribute
+   * @type {"left"|"right"}
+   * @default "left"
+   */
   get position() {
     return this.#position;
   }
