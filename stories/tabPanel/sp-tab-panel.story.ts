@@ -1,9 +1,6 @@
 import "../../src/components/tab/sp-tab-panel";
 
-import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
-
-import type { SpTabPanel } from "../../src/components/tab/sp-tab-panel";
 
 const meta = {
   component: "sp-tab-panel",
@@ -14,16 +11,14 @@ const meta = {
       <p>パネルだよ</p>
     </sp-tab-panel>
   `,
-} satisfies Meta<SpTabPanel>;
+};
 export default meta;
 
-type Story = StoryObj<SpTabPanel>;
-
-export const Basic: Story = {
+export const Basic = {
   tags: ["!dev-only"],
 };
 
-export const WithoutActive: Story = {
+export const WithoutActive = {
   render: () => html`
     <div>
       <h3>active属性なし（非表示）</h3>
@@ -39,7 +34,7 @@ export const WithoutActive: Story = {
   `,
 };
 
-export const WithName: Story = {
+export const WithName = {
   render: () => html`
     <sp-tab-panel name="test-panel" active>
       <h3>名前付きパネル</h3>

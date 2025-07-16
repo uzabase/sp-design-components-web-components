@@ -1,6 +1,6 @@
 import "../../src/components/dropdownAction/sp-dropdown-action";
 
-import type { Meta, StoryObj } from "@storybook/web-components-vite";
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
 import type { SpDropdownAction } from "../../src/components/dropdownAction/sp-dropdown-action";

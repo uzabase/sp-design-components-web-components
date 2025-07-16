@@ -1,7 +1,7 @@
 import "../../src/components/button/sp-button";
 import "../../src/components/elementTitle/sp-element-title";
 
-import type { Meta, StoryObj } from "@storybook/web-components-vite";
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
 import type { SpElementTitle } from "../../src/components/elementTitle/sp-element-title";

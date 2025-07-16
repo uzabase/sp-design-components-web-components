@@ -1,8 +1,8 @@
 import "../../src/components/button/sp-button";
 
-import type { Meta, StoryObj } from "@storybook/web-components-vite";
+import { action } from "@storybook/addon-actions";
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
-import { action } from "storybook/actions";
 
 import type { SpButton } from "../../src/components/button/sp-button";
 import { speedaIconTypes } from "../../src/components/icon/icons";

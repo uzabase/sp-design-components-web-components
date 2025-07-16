@@ -1,7 +1,7 @@
 import "../../src/components/button/sp-button";
 import "../../src/components/notificationMessage/sp-notification-message";
 
-import type { Meta, StoryObj } from "@storybook/web-components-vite";
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
 import type { SpNotificationMessage } from "../../src/components/notificationMessage/sp-notification-message";

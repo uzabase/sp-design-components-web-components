@@ -1,6 +1,6 @@
 import "../../src/components/definitionList/sp-definition-list-dt";
 
-import type { Meta, StoryObj } from "@storybook/web-components-vite";
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
 import type { SpDefinitionListDt } from "../../src/components/definitionList/sp-definition-list-dt";

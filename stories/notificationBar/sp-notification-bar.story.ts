@@ -1,7 +1,7 @@
 import "@sp-design/token/lib/speeda-tokens.css";
 import "../../src/components/notificationBar/sp-notification-bar";
 
-import type { Meta, StoryObj } from "@storybook/web-components-vite";
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 

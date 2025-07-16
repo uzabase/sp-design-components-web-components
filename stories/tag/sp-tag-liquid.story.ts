@@ -1,6 +1,6 @@
 import "../../src/components/tag/sp-tag-liquid";
 
-import type { Meta, StoryObj } from "@storybook/web-components-vite";
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
 const meta: Meta = {

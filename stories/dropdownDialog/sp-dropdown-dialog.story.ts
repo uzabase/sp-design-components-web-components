@@ -1,6 +1,6 @@
 import "../../src/components/dropdownDialog/sp-dropdown-dialog";
 
-import type { Meta, StoryObj } from "@storybook/web-components-vite";
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
 import type { SpDropdownDialog } from "../../src/components/dropdownDialog/sp-dropdown-dialog";

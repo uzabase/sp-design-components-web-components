@@ -1,6 +1,6 @@
 import "../../src/components/pagination/sp-pagination";
 
-import type { Meta, StoryObj } from "@storybook/web-components-vite";
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
 import type { SpPagination } from "../../src/components/pagination/sp-pagination";

@@ -2,7 +2,7 @@ import "../../src/components/definitionList/sp-definition-list-dt";
 import "../../src/components/definitionList/sp-definition-list-dd";
 import "../../src/components/definitionList/sp-definition-list";
 
-import type { Meta, StoryObj } from "@storybook/web-components-vite";
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 
 import type { SpDefinitionList } from "../../src/components/definitionList/sp-definition-list";

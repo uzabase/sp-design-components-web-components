@@ -1,9 +1,6 @@
 import "../../src/components/tab/sp-tab-group";
 
-import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
-
-import type { SpTabGroup } from "../../src/components/tab/sp-tab-group";
 
 const meta = {
   component: "sp-tab-group",
@@ -33,12 +30,10 @@ const meta = {
       </sp-tab-panel>
     </sp-tab-group>
   `,
-} satisfies Meta<SpTabGroup>;
+};
 
 export default meta;
 
-type Story = StoryObj<SpTabGroup>;
-
-export const Basic: Story = {
+export const Basic = {
   tags: ["!dev-only"],
 };

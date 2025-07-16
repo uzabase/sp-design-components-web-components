@@ -1,8 +1,8 @@
 import "../../src/components/checkbox/sp-checkbox-text";
 
-import type { Meta, StoryObj } from "@storybook/web-components-vite";
+import { action } from "@storybook/addon-actions";
+import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
-import { action } from "storybook/actions";
 
 import type { SpCheckboxText } from "../../src/components/checkbox/sp-checkbox-text";
 
