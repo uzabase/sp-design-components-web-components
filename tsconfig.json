@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2021",
-    "module": "es2015",
+    "module": "es2020",
     "moduleResolution": "node",
     "lib": ["es2021", "dom"],
     "declaration": true,
@@ -15,5 +15,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
+  "include": ["src/**/*"],
   "exclude": ["example", "dist"]
 }
