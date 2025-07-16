@@ -3,10 +3,25 @@ import buttonStyle from "./button.css?inline";
 import { UbButton } from "@ub-design/components-web-components";
 import { SpIcon } from "../icon/sp-icon";
 
+/**
+ * SpButtonは、デザインシステム2.0におけるボタンコンポーネントです。
+ *
+ * @element sp-button
+ * @summary ボタンコンポーネント
+ *
+ * @slot - ボタンのテキストコンテンツ（デフォルトスロット）
+ */
 export class SpButton extends UbButton {
   #icon = "";
   #iconElement = new SpIcon();
 
+  /**
+   * ボタンに表示するアイコン名
+   * 指定しない場合はアイコンを表示しません
+   *
+   * @attribute
+   * @type {string}
+   */
   get icon() {
     return this.#icon;
   }
@@ -35,9 +50,9 @@ export class SpButton extends UbButton {
     ];
 
     this.#iconElement.classList.add("base__icon");
+
     this.#iconElement.size = "small";
   }
-
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (oldValue === newValue) return;
     super.attributeChangedCallback(name, oldValue, newValue);

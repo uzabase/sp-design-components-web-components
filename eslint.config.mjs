@@ -10,7 +10,7 @@ import tseslint from "typescript-eslint";
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
-    ignores: ["dist", "tools", "!.storybook"],
+    ignores: ["dist", "tools", "!.storybook", "storybook-static"],
   },
   { files: ["**/*.{js,mjs,cjs,ts}"] },
   { languageOptions: { globals: globals.browser } },
