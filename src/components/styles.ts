@@ -5,7 +5,7 @@ import foundationStyle from "./foundation.css?inline";
 export function makeStyleSheet(...styles: string[]) {
   const cssStyleSheet = new CSSStyleSheet();
   cssStyleSheet.replaceSync(
-    `${styles.join(" ")} ${resetStyle} ${foundationStyle}`,
+    `${resetStyle} ${foundationStyle} ${styles.join(" ")}`,
   );
   return cssStyleSheet;
 }
