@@ -1,10 +1,11 @@
+import "./sp-tab";
+import "./sp-tab-panel";
+
 import resetStyle from "@acab/reset.css?inline";
 
 import foundationStyle from "../foundation.css?inline";
-import tabGroupStyle from "./tab-group.css?inline";
 import type { SpTab } from "./sp-tab";
-import "./sp-tab";
-import "./sp-tab-panel";
+import tabGroupStyle from "./tab-group.css?inline";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${foundationStyle} ${tabGroupStyle} ${resetStyle}`);
