@@ -20,15 +20,16 @@ export class SpTagClickable extends HTMLElement {
   #buttonElement = document.createElement("button");
 
   /**
-   * Returns whether the tag is currently in selected state
+   * タグの選択状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
    */
   get selected() {
     return this.#selected;
   }
 
-  /**
-   * Sets the selected state of the tag
-   */
   set selected(value: boolean) {
     if (this.#selected === value) return;
 
@@ -41,15 +42,16 @@ export class SpTagClickable extends HTMLElement {
   }
 
   /**
-   * Returns whether the tag is currently disabled
+   * タグの無効状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
    */
   get disabled() {
     return this.#disabled;
   }
 
-  /**
-   * Sets the disabled state of the tag
-   */
   set disabled(value: boolean) {
     if (this.#disabled === value) return;
 

@@ -13,6 +13,9 @@ import tagRemovableStyle from "./tag-removable.css?inline";
  * @slot - タグのテキストコンテンツ（デフォルトスロット）
  *
  * @fires remove - 削除ボタンがクリックされたときに発火するイベント
+ * @fires dragstart - ドラッグが開始されたときに発火するイベント。detail.x、detail.yに座標が含まれます
+ * @fires drag - ドラッグ中に発火するイベント。detail.x、detail.y、detail.deltaX、detail.deltaYに座標と移動量が含まれます
+ * @fires dragend - ドラッグが終了したときに発火するイベント。detail.x、detail.yに座標が含まれます
  */
 export class SpTagRemovable extends HTMLElement {
   #disabled = false;
@@ -23,6 +26,13 @@ export class SpTagRemovable extends HTMLElement {
   #dragStartY = 0;
   #isDragging = false;
 
+  /**
+   * タグの無効状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get disabled() {
     return this.#disabled;
   }
@@ -35,6 +45,13 @@ export class SpTagRemovable extends HTMLElement {
     this.#render();
   }
 
+  /**
+   * タグのドラッグ可能状態
+   *
+   * @attribute
+   * @type {boolean}
+   * @default false
+   */
   get draggable() {
     return this.#draggable;
   }

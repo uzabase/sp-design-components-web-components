@@ -49,6 +49,17 @@ export class SpNotificationMessage extends HTMLElement {
   #baseElement = document.createElement("div");
   #iconElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
+  /**
+   * 通知の種類（"error"、"warning"、"information"、または "success"）
+   * - "error": エラーメッセージ
+   * - "warning": 警告メッセージ
+   * - "information": 情報メッセージ
+   * - "success": 成功メッセージ
+   *
+   * @attribute
+   * @type {"error"|"warning"|"information"|"success"}
+   * @default "information"
+   */
   get type() {
     return this.#type;
   }
