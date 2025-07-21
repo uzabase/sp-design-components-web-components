@@ -9,5 +9,5 @@
 
 .required {
   color: var(--color-semantic-text-required);
-  margin-left: 0.5px;
+  margin-left: 4px;
 }

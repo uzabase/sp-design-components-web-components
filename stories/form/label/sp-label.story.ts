@@ -12,7 +12,7 @@ const meta = {
     required: { type: "boolean" },
   },
   render: (args) => html`
-    <sp-label ?required=${args.required}> ${args.slot} </sp-label>
+    <sp-label ?required=${args.required}>${args.slot}</sp-label>
   `,
 } satisfies Meta<SpLabel>;
 

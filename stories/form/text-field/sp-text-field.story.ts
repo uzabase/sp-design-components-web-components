@@ -99,3 +99,54 @@ export const Disabled: Story = {
     placeholder: "disabled",
   },
 };
+
+export const VerticalLabel: Story = {
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div>
+        <sp-label for="vertical-field-1" required>ラベル</sp-label>
+        <sp-text-field
+          id="vertical-field-1"
+          placeholder="テキスト"
+        ></sp-text-field>
+      </div>
+      <div>
+        <sp-label for="vertical-field-2">ラベル</sp-label>
+        <sp-text-field
+          id="vertical-field-2"
+          placeholder="テキスト"
+        ></sp-text-field>
+      </div>
+    </div>
+  `,
+};
+
+export const HorizontalLabel: Story = {
+  render: () => html`
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <sp-label
+          for="horizontal-field-1"
+          required
+          style="width: 160px; flex-shrink: 0;"
+          >ラベル</sp-label
+        >
+        <sp-text-field
+          id="horizontal-field-1"
+          placeholder="テキスト"
+          style="flex: 1;"
+        ></sp-text-field>
+      </div>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <sp-label for="horizontal-field-2" style="width: 160px; flex-shrink: 0;"
+          >ラベル</sp-label
+        >
+        <sp-text-field
+          id="horizontal-field-2"
+          placeholder="テキスト"
+          style="flex: 1;"
+        ></sp-text-field>
+      </div>
+    </div>
+  `,
+};
