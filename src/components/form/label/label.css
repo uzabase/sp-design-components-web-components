@@ -1,4 +1,5 @@
-.base {
+.label {
+  display: block;
   font-size: 12px;
   font-weight: bold;
   line-height: 1.6;
