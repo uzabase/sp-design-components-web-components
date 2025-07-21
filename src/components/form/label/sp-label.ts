@@ -37,7 +37,7 @@ export class SpLabel extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["required"];
+    return ["required", "for"];
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -45,6 +45,8 @@ export class SpLabel extends HTMLElement {
 
     if (name === "required") {
       this.required = newValue === "" || newValue === "true";
+    } else if (name === "for") {
+      this.#labelElement.setAttribute("for", newValue);
     }
   }
 
@@ -53,8 +55,13 @@ export class SpLabel extends HTMLElement {
   }
 
   #setupElements() {
-    this.#labelElement.classList.add("base");
+    this.#labelElement.classList.add("label");
     this.#labelElement.appendChild(this.#slotElement);
+
+    const forAttribute = this.getAttribute("for");
+    if (forAttribute) {
+      this.#labelElement.setAttribute("for", forAttribute);
+    }
 
     this.#requiredElement.classList.add("required");
     this.#requiredElement.textContent = "*";
