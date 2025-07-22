@@ -1,10 +1,5 @@
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../../foundation.css?inline";
+import { makeStyleSheet } from "../../styles";
 import labelStyle from "./label.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${labelStyle}`);
 
 export class SpLabel extends HTMLElement {
   #labelElement = document.createElement("label");
@@ -30,7 +25,7 @@ export class SpLabel extends HTMLElement {
 
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(labelStyle),
     ];
 
     this.#setupElements();

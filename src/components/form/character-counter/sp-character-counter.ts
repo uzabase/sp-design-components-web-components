@@ -1,10 +1,5 @@
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../../foundation.css?inline";
+import { makeStyleSheet } from "../../styles";
 import characterCounterStyle from "./character-counter.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${characterCounterStyle}`);
 
 export class SpCharacterCounter extends HTMLElement {
   #baseElement: HTMLDivElement = document.createElement("div");
@@ -35,7 +30,7 @@ export class SpCharacterCounter extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(characterCounterStyle),
     ];
 
     this.#setupElements();

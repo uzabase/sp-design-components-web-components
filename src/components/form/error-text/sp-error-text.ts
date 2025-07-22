@@ -1,10 +1,5 @@
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../../foundation.css?inline";
+import { makeStyleSheet } from "../../styles";
 import errorTextStyle from "./error-text.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${errorTextStyle}`);
 
 /**
  * SpErrorTextは、デザインシステム2.0におけるエラーテキストコンポーネントです。
@@ -26,7 +21,7 @@ export class SpErrorText extends HTMLElement {
 
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(errorTextStyle),
     ];
 
     this.#setupElements();

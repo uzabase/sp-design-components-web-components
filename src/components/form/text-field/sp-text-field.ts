@@ -1,13 +1,8 @@
 import "../error-text/sp-error-text";
 import "../character-counter/sp-character-counter";
 
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../../foundation.css?inline";
+import { makeStyleSheet } from "../../styles";
 import textFieldStyle from "./text-field.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${textFieldStyle}`);
 
 export class SpTextField extends HTMLElement {
   static formAssociated = true;
@@ -169,7 +164,7 @@ export class SpTextField extends HTMLElement {
 
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(textFieldStyle),
     ];
 
     this.internals = this.attachInternals();
