@@ -1,57 +1,57 @@
-var p = function(i, e, o, t) {
+var u = function(i, e, o, t) {
   if (o === "a" && !t) throw new TypeError("Private accessor was defined without a getter");
   if (typeof e == "function" ? i !== e || !t : !e.has(i)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
   return o === "m" ? t : o === "a" ? t.call(i) : t ? t.value : e.get(i);
-}, g = function(i, e, o, t, s) {
+}, f = function(i, e, o, t, s) {
   if (t === "m") throw new TypeError("Private method is not writable");
   if (t === "a" && !s) throw new TypeError("Private accessor was defined without a setter");
   if (typeof e == "function" ? i !== e || !s : !e.has(i)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
   return t === "a" ? s.call(i, o) : s ? s.value = o : e.set(i, o), o;
-}, H, S, _, V, C, y, k, z;
-const He = ["default", "destructive"], Se = ["outline", "fill", "text"], _e = ["medium", "large", "xLarge", "width160", "width80"];
-function Ve(i) {
-  return He.some((e) => e === i);
+}, E, H, _, V, x, C, k, T;
+const ie = ["default", "destructive"], se = ["outline", "fill", "text"], re = ["medium", "large", "xLarge", "width160", "width80"];
+function ae(i) {
+  return ie.some((e) => e === i);
 }
-function Me(i) {
-  return Se.some((e) => e === i);
+function ne(i) {
+  return se.some((e) => e === i);
 }
-function Ae(i) {
-  return _e.some((e) => e === i);
+function ce(i) {
+  return re.some((e) => e === i);
 }
-class Ze extends HTMLElement {
+class le extends HTMLElement {
   get loading() {
-    return p(this, S, "f");
+    return u(this, H, "f");
   }
   set loading(e) {
     const o = this.buttonElement;
-    g(this, S, e, "f"), e ? o.classList.add("isLoading") : o.classList.remove("isLoading"), p(this, H, "m", z).call(this);
+    f(this, H, e, "f"), e ? o.classList.add("isLoading") : o.classList.remove("isLoading"), u(this, E, "m", T).call(this);
   }
   get selected() {
-    return p(this, _, "f");
+    return u(this, _, "f");
   }
   set selected(e) {
     const o = this.buttonElement;
-    g(this, _, e, "f"), e ? o.classList.add("isSelected") : o.classList.remove("isSelected");
+    f(this, _, e, "f"), e ? o.classList.add("isSelected") : o.classList.remove("isSelected");
   }
   get disabled() {
-    return p(this, V, "f");
+    return u(this, V, "f");
   }
   set disabled(e) {
     const o = this.buttonElement;
-    g(this, V, e, "f"), e ? o.classList.add("isDisable") : o.classList.remove("isDisable"), p(this, H, "m", z).call(this);
+    f(this, V, e, "f"), e ? o.classList.add("isDisable") : o.classList.remove("isDisable"), u(this, E, "m", T).call(this);
   }
   get type() {
-    return p(this, C, "f");
+    return u(this, x, "f");
   }
   set type(e) {
     const o = this.buttonElement, t = {
       default: "type__default",
       destructive: "type__destructive"
     };
-    o.classList.remove(t[p(this, C, "f")]), o.classList.add(t[e]), g(this, C, e, "f");
+    o.classList.remove(t[u(this, x, "f")]), o.classList.add(t[e]), f(this, x, e, "f");
   }
   get appearance() {
-    return p(this, y, "f");
+    return u(this, C, "f");
   }
   set appearance(e) {
     const o = this.buttonElement, t = {
@@ -59,10 +59,10 @@ class Ze extends HTMLElement {
       fill: "appearance__fill",
       text: "appearance__text"
     };
-    o.classList.remove(t[p(this, y, "f")]), o.classList.add(t[e]), g(this, y, e, "f");
+    o.classList.remove(t[u(this, C, "f")]), o.classList.add(t[e]), f(this, C, e, "f");
   }
   get size() {
-    return p(this, k, "f");
+    return u(this, k, "f");
   }
   set size(e) {
     const o = this.buttonElement, t = {
@@ -72,13 +72,13 @@ class Ze extends HTMLElement {
       width160: "size__width160",
       width80: "size__width80"
     };
-    o.classList.remove(t[p(this, k, "f")]), o.classList.add(t[e]), g(this, k, e, "f");
+    o.classList.remove(t[u(this, k, "f")]), o.classList.add(t[e]), f(this, k, e, "f");
   }
   static get observedAttributes() {
     return ["loading", "selected", "disabled", "type", "appearance", "size"];
   }
   constructor() {
-    super(), H.add(this), S.set(this, !1), _.set(this, !1), V.set(this, !1), C.set(this, "default"), y.set(this, "outline"), k.set(this, "medium"), this.buttonElement = document.createElement("button"), this.textElement = document.createElement("span"), this.attachShadow({ mode: "open" }), this.buttonElement.classList.add("base"), this.textElement.classList.add("base__text"), this.loading = !1, this.selected = !1, this.disabled = !1, this.type = "default", this.appearance = "outline", this.size = "medium";
+    super(), E.add(this), H.set(this, !1), _.set(this, !1), V.set(this, !1), x.set(this, "default"), C.set(this, "outline"), k.set(this, "medium"), this.buttonElement = document.createElement("button"), this.textElement = document.createElement("span"), this.attachShadow({ mode: "open" }), this.buttonElement.classList.add("base"), this.textElement.classList.add("base__text"), this.loading = !1, this.selected = !1, this.disabled = !1, this.type = "default", this.appearance = "outline", this.size = "medium";
   }
   connectedCallback() {
     const e = document.createElement("slot");
@@ -97,26 +97,101 @@ class Ze extends HTMLElement {
           this.disabled = t === "true" || t === "";
           break;
         case "type":
-          Ve(t) ? this.type = t : (console.warn(`${t}は無効なtype属性です。`), this.type = "default");
+          ae(t) ? this.type = t : (console.warn(`${t}は無効なtype属性です。`), this.type = "default");
           break;
         case "appearance":
-          Me(t) ? this.appearance = t : (console.warn(`${t}は無効なappearance属性です。`), this.appearance = "outline");
+          ne(t) ? this.appearance = t : (console.warn(`${t}は無効なappearance属性です。`), this.appearance = "outline");
           break;
         case "size":
-          Ae(t) ? this.size = t : (console.warn(`${t}は無効なsize属性です。`), this.size = "medium");
+          ce(t) ? this.size = t : (console.warn(`${t}は無効なsize属性です。`), this.size = "medium");
           break;
       }
   }
 }
-S = /* @__PURE__ */ new WeakMap(), _ = /* @__PURE__ */ new WeakMap(), V = /* @__PURE__ */ new WeakMap(), C = /* @__PURE__ */ new WeakMap(), y = /* @__PURE__ */ new WeakMap(), k = /* @__PURE__ */ new WeakMap(), H = /* @__PURE__ */ new WeakSet(), z = function() {
+H = /* @__PURE__ */ new WeakMap(), _ = /* @__PURE__ */ new WeakMap(), V = /* @__PURE__ */ new WeakMap(), x = /* @__PURE__ */ new WeakMap(), C = /* @__PURE__ */ new WeakMap(), k = /* @__PURE__ */ new WeakMap(), E = /* @__PURE__ */ new WeakSet(), T = function() {
   this.buttonElement.disabled = this.disabled || this.loading;
 };
+var l = function(i, e, o, t) {
+  if (o === "a" && !t) throw new TypeError("Private accessor was defined without a getter");
+  if (typeof e == "function" ? i !== e || !t : !e.has(i)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+  return o === "m" ? t : o === "a" ? t.call(i) : t ? t.value : e.get(i);
+}, z, n, J;
+class Q extends HTMLElement {
+  get value() {
+    return l(this, n, "f").value;
+  }
+  set value(e) {
+    l(this, n, "f").value = e;
+  }
+  set name(e) {
+    this.setAttribute("name", e), l(this, n, "f").name = e;
+  }
+  get checked() {
+    return l(this, n, "f").checked;
+  }
+  set checked(e) {
+    e ? this.setAttribute("checked", "") : this.removeAttribute("checked"), l(this, n, "f").checked = e, this.internals.setFormValue(e ? this.value : null);
+  }
+  get indeterminate() {
+    return l(this, n, "f").indeterminate;
+  }
+  set indeterminate(e) {
+    l(this, n, "f").indeterminate = e;
+  }
+  set disabled(e) {
+    l(this, n, "f").disabled = e;
+  }
+  static get observedAttributes() {
+    return ["value", "name", "checked", "indeterminate", "disabled"];
+  }
+  constructor() {
+    super(), z.add(this), n.set(this, document.createElement("input")), this.attachShadow({ mode: "open" }), this.internals = this.attachInternals();
+  }
+  connectedCallback() {
+    const e = document.createElement("label"), o = document.createElement("span");
+    e.classList.add("base"), o.classList.add("checkmark"), l(this, n, "f").setAttribute("type", "checkbox"), l(this, n, "f").classList.add("input"), l(this, n, "f").addEventListener("change", () => l(this, z, "m", J).call(this)), o.appendChild(l(this, n, "f")), e.appendChild(o), this.shadowRoot.appendChild(e);
+  }
+  attributeChangedCallback(e, o, t) {
+    if (o !== t)
+      switch (e) {
+        case "value":
+          this.value = t;
+          break;
+        case "name":
+          this.name = t;
+          break;
+        case "checked":
+          this.checked = t === "true" || t === "";
+          break;
+        case "indeterminate":
+          this.indeterminate = t === "true" || t === "";
+          break;
+        case "disabled":
+          this.disabled = t === "true" || t === "";
+          break;
+      }
+  }
+  formResetCallback() {
+    this.checked = !1;
+  }
+}
+n = /* @__PURE__ */ new WeakMap(), z = /* @__PURE__ */ new WeakSet(), J = function() {
+  this.dispatchEvent(new CustomEvent("change", {
+    bubbles: !0,
+    composed: !0,
+    detail: {
+      checked: this.checked,
+      indeterminate: this.indeterminate
+    }
+  }));
+};
+Q.formAssociated = !0;
 var d = function(i, e, o, t) {
   if (o === "a" && !t) throw new TypeError("Private accessor was defined without a getter");
   if (typeof e == "function" ? i !== e || !t : !e.has(i)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
   return o === "m" ? t : o === "a" ? t.call(i) : t ? t.value : e.get(i);
-}, B, c, Q;
-class q extends HTMLElement {
+}, B, c, X;
+class I extends HTMLElement {
   get value() {
     return d(this, c, "f").value;
   }
@@ -149,86 +224,11 @@ class q extends HTMLElement {
   }
   connectedCallback() {
     const e = document.createElement("label"), o = document.createElement("span");
-    e.classList.add("base"), o.classList.add("checkmark"), d(this, c, "f").setAttribute("type", "checkbox"), d(this, c, "f").classList.add("input"), d(this, c, "f").addEventListener("change", () => d(this, B, "m", Q).call(this)), o.appendChild(d(this, c, "f")), e.appendChild(o), this.shadowRoot.appendChild(e);
-  }
-  attributeChangedCallback(e, o, t) {
-    if (o !== t)
-      switch (e) {
-        case "value":
-          this.value = t;
-          break;
-        case "name":
-          this.name = t;
-          break;
-        case "checked":
-          this.checked = t === "true" || t === "";
-          break;
-        case "indeterminate":
-          this.indeterminate = t === "true" || t === "";
-          break;
-        case "disabled":
-          this.disabled = t === "true" || t === "";
-          break;
-      }
-  }
-  formResetCallback() {
-    this.checked = !1;
-  }
-}
-c = /* @__PURE__ */ new WeakMap(), B = /* @__PURE__ */ new WeakSet(), Q = function() {
-  this.dispatchEvent(new CustomEvent("change", {
-    bubbles: !0,
-    composed: !0,
-    detail: {
-      checked: this.checked,
-      indeterminate: this.indeterminate
-    }
-  }));
-};
-q.formAssociated = !0;
-var h = function(i, e, o, t) {
-  if (o === "a" && !t) throw new TypeError("Private accessor was defined without a getter");
-  if (typeof e == "function" ? i !== e || !t : !e.has(i)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-  return o === "m" ? t : o === "a" ? t.call(i) : t ? t.value : e.get(i);
-}, $, l, X;
-class I extends HTMLElement {
-  get value() {
-    return h(this, l, "f").value;
-  }
-  set value(e) {
-    h(this, l, "f").value = e;
-  }
-  set name(e) {
-    this.setAttribute("name", e), h(this, l, "f").name = e;
-  }
-  get checked() {
-    return h(this, l, "f").checked;
-  }
-  set checked(e) {
-    e ? this.setAttribute("checked", "") : this.removeAttribute("checked"), h(this, l, "f").checked = e, this.internals.setFormValue(e ? this.value : null);
-  }
-  get indeterminate() {
-    return h(this, l, "f").indeterminate;
-  }
-  set indeterminate(e) {
-    h(this, l, "f").indeterminate = e;
-  }
-  set disabled(e) {
-    h(this, l, "f").disabled = e;
-  }
-  static get observedAttributes() {
-    return ["value", "name", "checked", "indeterminate", "disabled"];
-  }
-  constructor() {
-    super(), $.add(this), l.set(this, document.createElement("input")), this.attachShadow({ mode: "open" }), this.internals = this.attachInternals();
-  }
-  connectedCallback() {
-    const e = document.createElement("label"), o = document.createElement("span");
-    e.classList.add("base"), o.classList.add("checkmark"), h(this, l, "f").setAttribute("type", "checkbox"), h(this, l, "f").classList.add("input"), h(this, l, "f").addEventListener("change", () => h(this, $, "m", X).call(this));
+    e.classList.add("base"), o.classList.add("checkmark"), d(this, c, "f").setAttribute("type", "checkbox"), d(this, c, "f").classList.add("input"), d(this, c, "f").addEventListener("change", () => d(this, B, "m", X).call(this));
     const t = document.createElement("div");
     t.classList.add("text");
     const s = document.createElement("slot");
-    t.appendChild(s), o.appendChild(h(this, l, "f")), e.appendChild(o), e.appendChild(t), this.shadowRoot.appendChild(e);
+    t.appendChild(s), o.appendChild(d(this, c, "f")), e.appendChild(o), e.appendChild(t), this.shadowRoot.appendChild(e);
   }
   attributeChangedCallback(e, o, t) {
     if (o !== t)
@@ -254,7 +254,7 @@ class I extends HTMLElement {
     this.checked = !1;
   }
 }
-l = /* @__PURE__ */ new WeakMap(), $ = /* @__PURE__ */ new WeakSet(), X = function() {
+c = /* @__PURE__ */ new WeakMap(), B = /* @__PURE__ */ new WeakSet(), X = function() {
   this.dispatchEvent(new CustomEvent("change", {
     bubbles: !0,
     composed: !0,
@@ -269,41 +269,41 @@ var m = function(i, e, o, t) {
   if (o === "a" && !t) throw new TypeError("Private accessor was defined without a getter");
   if (typeof e == "function" ? i !== e || !t : !e.has(i)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
   return o === "m" ? t : o === "a" ? t.call(i) : t ? t.value : e.get(i);
-}, Te = function(i, e, o, t, s) {
+}, de = function(i, e, o, t, s) {
   if (t === "m") throw new TypeError("Private method is not writable");
   if (t === "a" && !s) throw new TypeError("Private accessor was defined without a setter");
   if (typeof e == "function" ? i !== e || !s : !e.has(i)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
   return t === "a" ? s.call(i, o) : s ? s.value = o : e.set(i, o), o;
-}, w, b;
-const Re = ["small", "medium"];
-function ze(i) {
-  return Re.some((e) => e === i);
+}, y, p;
+const he = ["small", "medium"];
+function ue(i) {
+  return he.some((e) => e === i);
 }
-class Be extends HTMLElement {
+class me extends HTMLElement {
   set type(e) {
-    m(this, b, "f").innerHTML = e in this.paths ? this.paths[e] : "";
+    m(this, p, "f").innerHTML = e in this.paths ? this.paths[e] : "";
   }
   set text(e) {
-    m(this, b, "f").setAttribute("aria-label", e);
+    m(this, p, "f").setAttribute("aria-label", e);
   }
   get size() {
-    return m(this, w, "f");
+    return m(this, y, "f");
   }
   set size(e) {
     const o = {
       small: "size__small",
       medium: "size__medium"
     };
-    m(this, b, "f").classList.remove(o[m(this, w, "f")]), m(this, b, "f").classList.add(o[e]), Te(this, w, e, "f");
+    m(this, p, "f").classList.remove(o[m(this, y, "f")]), m(this, p, "f").classList.add(o[e]), de(this, y, e, "f");
   }
   static get observedAttributes() {
     return ["type", "text", "size"];
   }
   constructor() {
-    super(), w.set(this, "medium"), b.set(this, document.createElementNS("http://www.w3.org/2000/svg", "svg")), this.paths = {}, this.attachShadow({ mode: "open" }), this.size = "medium";
+    super(), y.set(this, "medium"), p.set(this, document.createElementNS("http://www.w3.org/2000/svg", "svg")), this.paths = {}, this.attachShadow({ mode: "open" }), this.size = "medium";
   }
   connectedCallback() {
-    m(this, b, "f").setAttribute("role", "img"), m(this, b, "f").setAttribute("viewBox", "0 0 24 24"), m(this, b, "f").classList.add("icon"), this.shadowRoot.appendChild(m(this, b, "f"));
+    m(this, p, "f").setAttribute("role", "img"), m(this, p, "f").setAttribute("viewBox", "0 0 24 24"), m(this, p, "f").classList.add("icon"), this.shadowRoot.appendChild(m(this, p, "f"));
   }
   attributeChangedCallback(e, o, t) {
     if (o !== t)
@@ -315,51 +315,51 @@ class Be extends HTMLElement {
           this.text = t;
           break;
         case "size":
-          ze(t) ? this.size = t : (console.warn(`${t}は無効なsize属性です。`), this.size = "medium");
+          ue(t) ? this.size = t : (console.warn(`${t}は無効なsize属性です。`), this.size = "medium");
           break;
       }
   }
 }
-w = /* @__PURE__ */ new WeakMap(), b = /* @__PURE__ */ new WeakMap();
+y = /* @__PURE__ */ new WeakMap(), p = /* @__PURE__ */ new WeakMap();
 var a = function(i, e, o, t) {
   if (o === "a" && !t) throw new TypeError("Private accessor was defined without a getter");
   if (typeof e == "function" ? i !== e || !t : !e.has(i)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
   return o === "m" ? t : o === "a" ? t.call(i) : t ? t.value : e.get(i);
-}, M = function(i, e, o, t, s) {
+}, S = function(i, e, o, t, s) {
   if (t === "m") throw new TypeError("Private method is not writable");
   if (t === "a" && !s) throw new TypeError("Private accessor was defined without a setter");
   if (typeof e == "function" ? i !== e || !s : !e.has(i)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
   return t === "a" ? s.call(i, o) : s ? s.value = o : e.set(i, o), o;
-}, E, A, Z, T, f, v, P, F;
-const $e = ["horizontal", "vertical"];
-function Pe(i) {
-  return $e.some((e) => e === i);
+}, w, M, A, Z, b, g, P, F;
+const pe = ["horizontal", "vertical"];
+function be(i) {
+  return pe.some((e) => e === i);
 }
 class D extends HTMLElement {
   get name() {
-    return a(this, A, "f");
+    return a(this, M, "f");
   }
   set name(e) {
-    a(this, v, "f").map((o) => o.setAttribute("name", e)), this.setAttribute("name", e), M(this, A, e, "f");
+    a(this, g, "f").map((o) => o.setAttribute("name", e)), this.setAttribute("name", e), S(this, M, e, "f");
   }
   set direction(e) {
     const o = e === "vertical" ? "vertical" : "horizontal";
-    a(this, f, "f").classList.remove(a(this, Z, "f")), a(this, f, "f").classList.add(o), M(this, Z, o, "f");
+    a(this, b, "f").classList.remove(a(this, A, "f")), a(this, b, "f").classList.add(o), S(this, A, o, "f");
   }
   get data() {
-    return a(this, T, "f");
+    return a(this, Z, "f");
   }
   set data(e) {
-    M(this, T, e, "f"), a(this, E, "m", P).call(this);
+    S(this, Z, e, "f"), a(this, w, "m", P).call(this);
   }
   static get observedAttributes() {
     return ["name", "direction", "json-data"];
   }
   constructor() {
-    super(), E.add(this), A.set(this, ""), Z.set(this, "horizontal"), T.set(this, []), f.set(this, document.createElement("ul")), v.set(this, []), this.attachShadow({ mode: "open" }), this.internals = this.attachInternals(), this.direction = "horizontal";
+    super(), w.add(this), M.set(this, ""), A.set(this, "horizontal"), Z.set(this, []), b.set(this, document.createElement("ul")), g.set(this, []), this.attachShadow({ mode: "open" }), this.internals = this.attachInternals(), this.direction = "horizontal";
   }
   connectedCallback() {
-    a(this, f, "f").classList.add("base"), a(this, f, "f").setAttribute("role", "radiogroup"), this.shadowRoot.appendChild(a(this, f, "f")), a(this, E, "m", P).call(this);
+    a(this, b, "f").classList.add("base"), a(this, b, "f").setAttribute("role", "radiogroup"), this.shadowRoot.appendChild(a(this, b, "f")), a(this, w, "m", P).call(this);
   }
   attributeChangedCallback(e, o, t) {
     if (o !== t)
@@ -368,7 +368,7 @@ class D extends HTMLElement {
           this.name = t;
           break;
         case "direction":
-          Pe(t) ? this.direction = t : this.direction = "horizontal";
+          be(t) ? this.direction = t : this.direction = "horizontal";
           break;
         case "json-data":
           t === null ? this.data = [] : this.data = JSON.parse(t);
@@ -376,13 +376,13 @@ class D extends HTMLElement {
       }
   }
   formResetCallback() {
-    a(this, v, "f").map((e) => e.checked = !1), this.internals.setFormValue(null);
+    a(this, g, "f").map((e) => e.checked = !1), this.internals.setFormValue(null);
   }
 }
-A = /* @__PURE__ */ new WeakMap(), Z = /* @__PURE__ */ new WeakMap(), T = /* @__PURE__ */ new WeakMap(), f = /* @__PURE__ */ new WeakMap(), v = /* @__PURE__ */ new WeakMap(), E = /* @__PURE__ */ new WeakSet(), P = function() {
-  a(this, f, "f").innerHTML = "", M(this, v, [], "f"), this.data.map((e, o) => {
-    const t = document.createElement("li"), s = document.createElement("input"), u = document.createElement("span"), L = document.createElement("label"), x = document.createElement("span"), W = e.value || "on";
-    t.classList.add("item"), s.setAttribute("type", "radio"), s.setAttribute("value", W), this.name !== "" && s.setAttribute("name", this.name), s.setAttribute("id", "radioButton" + o), s.checked = e.checked ?? !1, s.disabled = e.disabled ?? !1, e.checked && this.internals.setFormValue(W), s.classList.add("input"), s.addEventListener("change", (Ee) => a(this, E, "m", F).call(this, Ee)), a(this, v, "f").push(s), u.classList.add("radio"), L.classList.add("text"), L.setAttribute("for", "radioButton" + o), L.setAttribute("aria-labeledby", "radioButtonLabel" + o), x.setAttribute("aria-hidden", "true"), x.setAttribute("id", "radioButtonLabel" + o), x.classList.add("text-inner"), x.innerText = e.text, u.appendChild(s), t.appendChild(u), L.appendChild(x), t.appendChild(L), a(this, f, "f").appendChild(t);
+M = /* @__PURE__ */ new WeakMap(), A = /* @__PURE__ */ new WeakMap(), Z = /* @__PURE__ */ new WeakMap(), b = /* @__PURE__ */ new WeakMap(), g = /* @__PURE__ */ new WeakMap(), w = /* @__PURE__ */ new WeakSet(), P = function() {
+  a(this, b, "f").innerHTML = "", S(this, g, [], "f"), this.data.map((e, o) => {
+    const t = document.createElement("li"), s = document.createElement("input"), h = document.createElement("span"), v = document.createElement("label"), L = document.createElement("span"), W = e.value || "on";
+    t.classList.add("item"), s.setAttribute("type", "radio"), s.setAttribute("value", W), this.name !== "" && s.setAttribute("name", this.name), s.setAttribute("id", "radioButton" + o), s.checked = e.checked ?? !1, s.disabled = e.disabled ?? !1, e.checked && this.internals.setFormValue(W), s.classList.add("input"), s.addEventListener("change", (oe) => a(this, w, "m", F).call(this, oe)), a(this, g, "f").push(s), h.classList.add("radio"), v.classList.add("text"), v.setAttribute("for", "radioButton" + o), v.setAttribute("aria-labeledby", "radioButtonLabel" + o), L.setAttribute("aria-hidden", "true"), L.setAttribute("id", "radioButtonLabel" + o), L.classList.add("text-inner"), L.innerText = e.text, h.appendChild(s), t.appendChild(h), v.appendChild(L), t.appendChild(v), a(this, b, "f").appendChild(t);
   });
 }, F = function(e) {
   const o = e.currentTarget.value;
@@ -395,7 +395,7 @@ A = /* @__PURE__ */ new WeakMap(), Z = /* @__PURE__ */ new WeakMap(), T = /* @__
   }));
 };
 D.formAssociated = !0;
-const r = ':host{--font-family-zh: Arial, YakuHanJPs, "PingFang SC", "Microsoft YaHei", "PingFang TC", Microsoft JhengHei, sans-serif;--font-family-ja: Arial, YakuHanJPs, Hiragino Sans, Hiragino Kaku Gothic ProN, Meiryo, Noto Sans JP, sans-serif;--color-semantic-text-weak: #6f6f6f;--color-semantic-text-text-link: #404fbf;--color-semantic-text-semi-weak: #363636;--color-semantic-text-required: #ca3232;--color-semantic-text-regular: #191919;--color-semantic-text-placeholder: #6f6f6f;--color-semantic-text-inverse: #ffffff;--color-semantic-text-error: #ca3232;--color-semantic-text-disabled: #cbcbcb;--color-semantic-text-destructive: #ca3232;--color-semantic-text-current: #404fbf;--color-semantic-text-button-text-hover: #191919;--color-semantic-text-button-text-focus: #191919;--color-semantic-text-button-text-destructive-hover: #ca3232;--color-semantic-text-button-text-destructive-focus: #ca3232;--color-semantic-text-button-text-destructive-default: #ca3232;--color-semantic-text-button-text-default: #191919;--color-semantic-text-button-selected-hover: #ffffff;--color-semantic-text-button-selected: #ffffff;--color-semantic-text-button-outline-hover: #6f6f6f;--color-semantic-text-button-outline-focus: #6f6f6f;--color-semantic-text-button-outline-destructive-hover: #da7070;--color-semantic-text-button-outline-destructive-focus: #da7070;--color-semantic-text-button-outline-destructive-default: #ca3232;--color-semantic-text-button-outline-default: #191919;--color-semantic-text-button-loading: #cbcbcb;--color-semantic-text-button-fill-hover: #ffffff;--color-semantic-text-button-fill-focus: #ffffff;--color-semantic-text-button-fill-destructive-hover: #ffffff;--color-semantic-text-button-fill-destructive-focus: #ffffff;--color-semantic-text-button-fill-destructive-default: #ffffff;--color-semantic-text-button-fill-default: #ffffff;--color-semantic-text-button-disabled: #cbcbcb;--color-semantic-surface-warning-3: #f9e8b3;--color-semantic-surface-warning-1: #fdf7e6;--color-semantic-surface-success-3: #bad4c3;--color-semantic-surface-success-1: #e8f1eb;--color-semantic-surface-selected-hover: #5361c5;--color-semantic-surface-selected-focus: #404fbf;--color-semantic-surface-selected: #404fbf;--color-semantic-surface-regular-9: #191919;--color-semantic-surface-regular-8: #282828;--color-semantic-surface-regular-7: #363636;--color-semantic-surface-regular-6: #cbcbcb;--color-semantic-surface-regular-5: #e5e5e5;--color-semantic-surface-regular-4: #ededed;--color-semantic-surface-regular-3: #f5f5f5;--color-semantic-surface-regular-2: #f8f8f8;--color-semantic-surface-regular-1: #ffffff;--color-semantic-surface-information-3: #c4d7ec;--color-semantic-surface-information-1: #ebf2f9;--color-semantic-surface-error-3: #efc2c2;--color-semantic-surface-error-1: #faebeb;--color-semantic-surface-checked-hover: #d9dcf2;--color-semantic-surface-checked: #ecedf9;--color-semantic-surface-check-disabled: #ededed;--color-semantic-surface-button-text-hover: #f5f5f5;--color-semantic-surface-button-text-focus: #f5f5f5;--color-semantic-surface-button-text-destructive-hover: #f4d6d6;--color-semantic-surface-button-text-destructive-focus: #f4d6d6;--color-semantic-surface-button-text-destructive-default: rgba(202, 50, 50, 0);--color-semantic-surface-button-text-default: rgba(25, 25, 25, 0);--color-semantic-surface-button-selected-hover: #5361c5;--color-semantic-surface-button-selected: #404fbf;--color-semantic-surface-button-outline-hover: rgba(25, 25, 25, 0);--color-semantic-surface-button-outline-focus: rgba(25, 25, 25, 0);--color-semantic-surface-button-outline-destructive-hover: rgba(218, 112, 112, 0);--color-semantic-surface-button-outline-destructive-focus: rgba(218, 112, 112, 0);--color-semantic-surface-button-outline-destructive-default: rgba(202, 50, 50, 0);--color-semantic-surface-button-outline-default: rgba(25, 25, 25, 0);--color-semantic-surface-button-loading: #f8f8f8;--color-semantic-surface-button-fill-hover: #363636;--color-semantic-surface-button-fill-focus: #363636;--color-semantic-surface-button-fill-destructive-hover: #d55b5b;--color-semantic-surface-button-fill-destructive-focus: #d55b5b;--color-semantic-surface-button-fill-destructive-default: #ca3232;--color-semantic-surface-button-fill-default: #191919;--color-semantic-surface-button-disabled: #f8f8f8;--color-semantic-surface-temp-tag-yellow: #fdf7e6;--color-semantic-surface-temp-tag-red: #faebeb;--color-semantic-surface-temp-tag-marine: #ebf2f9;--color-semantic-surface-temp-tag-green: #e8f1eb;--color-semantic-surface-temp-tag-gray: #f8f8f8;--color-semantic-surface-temp-tag-darkyellow: #eab100;--color-semantic-surface-temp-tag-darkred: #ca3232;--color-semantic-surface-temp-tag-darkmarine: #3978bf;--color-semantic-surface-temp-tag-darkgreen: #1a7037;--color-semantic-highlight-text: #ffe7ec;--color-semantic-highlight-focus-ring-error: #f7e0e0;--color-semantic-highlight-focus-ring-default: #e2e5f5;--color-semantic-elevation-sort: rgba(25, 25, 25, .2);--color-semantic-elevation-regular: rgba(25, 25, 25, .2);--color-semantic-elevation-modal: rgba(25, 25, 25, .2);--color-semantic-chart-single-8: #d6e3ff;--color-semantic-chart-single-7: #c6d7ff;--color-semantic-chart-single-6: #b6ccff;--color-semantic-chart-single-5: #a5c0ff;--color-semantic-chart-single-4: #95b5ff;--color-semantic-chart-single-3: #85aaff;--color-semantic-chart-single-2: #749eff;--color-semantic-chart-single-1: #5c8dff;--color-semantic-chart-multi-line-9: #df8484;--color-semantic-chart-multi-line-8: #b3308a;--color-semantic-chart-multi-line-7: #404fbf;--color-semantic-chart-multi-line-6: #3978bf;--color-semantic-chart-multi-line-5: #248a6a;--color-semantic-chart-multi-line-4: #a9ad2f;--color-semantic-chart-multi-line-3: #eab100;--color-semantic-chart-multi-line-2: #b38732;--color-semantic-chart-multi-line-16: #d183b9;--color-semantic-chart-multi-line-15: #8c95d9;--color-semantic-chart-multi-line-14: #88aed9;--color-semantic-chart-multi-line-13: #7cb9a6;--color-semantic-chart-multi-line-12: #cbce82;--color-semantic-chart-multi-line-11: #f2d066;--color-semantic-chart-multi-line-10: #d1b784;--color-semantic-chart-multi-line-1: #ca3232;--color-semantic-chart-multi-fill-9: #cc9ee3;--color-semantic-chart-multi-fill-8: #e59999;--color-semantic-chart-multi-fill-7: #dead9c;--color-semantic-chart-multi-fill-6: #d9c399;--color-semantic-chart-multi-fill-5: #e6e197;--color-semantic-chart-multi-fill-4: #b0ce94;--color-semantic-chart-multi-fill-38: #d1c5e8;--color-semantic-chart-multi-fill-37: #e8c1dc;--color-semantic-chart-multi-fill-36: #edc6c1;--color-semantic-chart-multi-fill-35: #e5d4c0;--color-semantic-chart-multi-fill-34: #f9e8b3;--color-semantic-chart-multi-fill-33: #e5e6c1;--color-semantic-chart-multi-fill-32: #c3daba;--color-semantic-chart-multi-fill-31: #bddcd2;--color-semantic-chart-multi-fill-30: #bedbe2;--color-semantic-chart-multi-fill-3: #8db89b;--color-semantic-chart-multi-fill-29: #c6caec;--color-semantic-chart-multi-fill-28: #e0c5ee;--color-semantic-chart-multi-fill-27: #efc2c2;--color-semantic-chart-multi-fill-26: #ebcec4;--color-semantic-chart-multi-fill-25: #e8dbc2;--color-semantic-chart-multi-fill-24: #f0edc1;--color-semantic-chart-multi-fill-23: #cfe1bf;--color-semantic-chart-multi-fill-22: #bad4c3;--color-semantic-chart-multi-fill-21: #c0e5e3;--color-semantic-chart-multi-fill-20: #c4d7ec;--color-semantic-chart-multi-fill-2: #96d4d1;--color-semantic-chart-multi-fill-19: #b29ed9;--color-semantic-chart-multi-fill-18: #d998c5;--color-semantic-chart-multi-fill-17: #e1a098;--color-semantic-chart-multi-fill-16: #d4b797;--color-semantic-chart-multi-fill-15: #f5d880;--color-semantic-chart-multi-fill-14: #d4d697;--color-semantic-chart-multi-fill-13: #9bc28c;--color-semantic-chart-multi-fill-12: #92c5b5;--color-semantic-chart-multi-fill-11: #93c4cf;--color-semantic-chart-multi-fill-10: #a0a7df;--color-semantic-chart-multi-fill-1: #9cbcdf;--color-semantic-chart-heatmap-4: #dee8ff;--color-semantic-chart-heatmap-3: #bed1ff;--color-semantic-chart-heatmap-2: #9dbbff;--color-semantic-chart-heatmap-1: #7da4ff;--color-semantic-brand-default: #ff5e83;--color-semantic-border-warning: #eab100;--color-semantic-border-success: #1a7037;--color-semantic-border-strong: #191919;--color-semantic-border-semi-weak: #ededed;--color-semantic-border-semi-strong: #363636;--color-semantic-border-selected-hover: #5361c5;--color-semantic-border-selected: #404fbf;--color-semantic-border-regular: #e5e5e5;--color-semantic-border-inverse: #ffffff;--color-semantic-border-information: #3978bf;--color-semantic-border-focus: #404fbf;--color-semantic-border-error: #ca3232;--color-semantic-border-check-unchecked: #cbcbcb;--color-semantic-border-button-text-hover: #f5f5f5;--color-semantic-border-button-text-focus: #f5f5f5;--color-semantic-border-button-text-destructive-hover: #f4d6d6;--color-semantic-border-button-text-destructive-focus: #f4d6d6;--color-semantic-border-button-text-destructive-default: rgba(202, 50, 50, 0);--color-semantic-border-button-text-default: rgba(25, 25, 25, 0);--color-semantic-border-button-selected-hover: #5361c5;--color-semantic-border-button-selected: #404fbf;--color-semantic-border-button-outline-hover: #6f6f6f;--color-semantic-border-button-outline-focus: #6f6f6f;--color-semantic-border-button-outline-destructive-hover: #da7070;--color-semantic-border-button-outline-destructive-focus: #da7070;--color-semantic-border-button-outline-destructive-default: #ca3232;--color-semantic-border-button-outline-default: #191919;--color-semantic-border-button-loading: #e5e5e5;--color-semantic-border-button-fill-hover: #363636;--color-semantic-border-button-fill-focus: #363636;--color-semantic-border-button-fill-destructive-hover: #d55b5b;--color-semantic-border-button-fill-destructive-focus: #d55b5b;--color-semantic-border-button-fill-destructive-default: #ca3232;--color-semantic-border-button-fill-default: #191919;--color-semantic-border-button-disabled: #e5e5e5;--color-semantic-border-temp-tag-yellow: #f7e099;--color-semantic-border-temp-tag-red: #eaadad;--color-semantic-border-temp-tag-marine: #b0c9e5;--color-semantic-border-temp-tag-green: #a3c6af;--color-semantic-border-temp-tag-gray: #e5e5e5;--color-semantic-border-temp-tag-darkyellow: #a47c00;--color-semantic-border-temp-tag-darkred: #8d2323;--color-semantic-border-temp-tag-darkmarine: #285486;--color-semantic-border-temp-tag-darkgreen: #124e27;--color-semantic-background-default: #f8f8f8;--color-primitive-yellow-60: #f2d066;--color-primitive-yellow-50: #f5d880;--color-primitive-yellow-40: #f7e099;--color-primitive-yellow-30: #f9e8b3;--color-primitive-yellow-130: #a47c00;--color-primitive-yellow-100: #eab100;--color-primitive-yellow-10: #fdf7e6;--color-primitive-white: #ffffff;--color-primitive-viridian-60: #7cb9a6;--color-primitive-viridian-50: #92c5b5;--color-primitive-viridian-30: #bddcd2;--color-primitive-viridian-100: #248a6a;--color-primitive-violet-50: #b29ed9;--color-primitive-violet-30: #d1c5e8;--color-primitive-turquoise-50: #93c4cf;--color-primitive-turquoise-30: #bedbe2;--color-primitive-tomato-80: #d55b5b;--color-primitive-tomato-70: #da7070;--color-primitive-tomato-60: #df8484;--color-primitive-tomato-50: #e59999;--color-primitive-tomato-40: #eaadad;--color-primitive-tomato-30: #efc2c2;--color-primitive-tomato-20: #f4d6d6;--color-primitive-tomato-15: #f7e0e0;--color-primitive-tomato-130: #8d2323;--color-primitive-tomato-100: #ca3232;--color-primitive-tomato-10: #faebeb;--color-primitive-terracotta-50: #e1a098;--color-primitive-terracotta-30: #edc6c1;--color-primitive-sky-85: #749eff;--color-primitive-sky-80: #7da4ff;--color-primitive-sky-75: #85aaff;--color-primitive-sky-65: #95b5ff;--color-primitive-sky-60: #9dbbff;--color-primitive-sky-55: #a5c0ff;--color-primitive-sky-45: #b6ccff;--color-primitive-sky-40: #bed1ff;--color-primitive-sky-35: #c6d7ff;--color-primitive-sky-25: #d6e3ff;--color-primitive-sky-20: #dee8ff;--color-primitive-sky-100: #5c8dff;--color-primitive-purple-50: #cc9ee3;--color-primitive-purple-30: #e0c5ee;--color-primitive-plum-60: #d183b9;--color-primitive-plum-50: #d998c5;--color-primitive-plum-30: #e8c1dc;--color-primitive-plum-100: #b3308a;--color-primitive-pink-15: #ffe7ec;--color-primitive-pink-100: #ff5e83;--color-primitive-neutral-90: #282828;--color-primitive-neutral-80: #363636;--color-primitive-neutral-70: #6f6f6f;--color-primitive-neutral-50: #cbcbcb;--color-primitive-neutral-40: #e5e5e5;--color-primitive-neutral-30: #ededed;--color-primitive-neutral-20: #f5f5f5;--color-primitive-neutral-100: #191919;--color-primitive-neutral-10: #f8f8f8;--color-primitive-marine-60: #88aed9;--color-primitive-marine-50: #9cbcdf;--color-primitive-marine-40: #b0c9e5;--color-primitive-marine-30: #c4d7ec;--color-primitive-marine-130: #285486;--color-primitive-marine-100: #3978bf;--color-primitive-marine-10: #ebf2f9;--color-primitive-lime-60: #cbce82;--color-primitive-lime-50: #d4d697;--color-primitive-lime-30: #e5e6c1;--color-primitive-lime-100: #a9ad2f;--color-primitive-lemon-50: #e6e197;--color-primitive-lemon-30: #f0edc1;--color-primitive-leaf-50: #b0ce94;--color-primitive-leaf-30: #cfe1bf;--color-primitive-green-50: #8db89b;--color-primitive-green-40: #a3c6af;--color-primitive-green-30: #bad4c3;--color-primitive-green-130: #124e27;--color-primitive-green-100: #1a7037;--color-primitive-green-10: #e8f1eb;--color-primitive-emerald-50: #96d4d1;--color-primitive-emerald-30: #c0e5e3;--color-primitive-cork-60: #d1b784;--color-primitive-cork-50: #d9c399;--color-primitive-cork-30: #e8dbc2;--color-primitive-cork-100: #b38732;--color-primitive-brown-50: #dead9c;--color-primitive-brown-30: #ebcec4;--color-primitive-blue-90: #5361c5;--color-primitive-blue-60: #8c95d9;--color-primitive-blue-50: #a0a7df;--color-primitive-blue-30: #c6caec;--color-primitive-blue-20: #d9dcf2;--color-primitive-blue-15: #e2e5f5;--color-primitive-blue-100: #404fbf;--color-primitive-blue-10: #ecedf9;--color-primitive-bamboo-50: #9bc28c;--color-primitive-bamboo-30: #c3daba;--color-primitive-amber-50: #d4b797;--color-primitive-amber-30: #e5d4c0}:host,*{overflow-wrap:break-word;min-width:0}:host{font-family:var(--font-family-ja)}:host:lang(zh){font-family:var(--font-family-zh)}button{box-sizing:border-box}', Ie = ":host{flex-grow:0;flex-shrink:0;display:inline-block;line-height:0;vertical-align:middle}.icon{display:inline-block;fill:currentcolor}.size__small{width:16px;height:16px}.size__medium{width:24px;height:24px}", K = {
+const fe = ":host{flex-grow:0;flex-shrink:0;display:inline-block;line-height:0;vertical-align:middle}.icon{display:inline-block;fill:currentcolor}.size__small{width:16px;height:16px}.size__medium{width:24px;height:24px}", K = {
   arrow_down: '<path d="M12 16.99L4 8.98999L5.06 7.92999L12 14.87L18.94 7.92999L20 8.98999L12 16.99Z"/>',
   arrow_down_link: '<path d="M11.98 20.03L18.42 13.6L17.36 12.53L12.73 17.16V4.04001H11.23V17.16L6.59 12.53L5.59 13.6L11.98 20.03Z"/>',
   arrow_left: '<path d="M14.99 20L7 12L14.99 4L16.05 5.06L9.12 12L16.05 18.94L14.99 20Z"/>',
@@ -450,13 +450,13 @@ const r = ':host{--font-family-zh: Arial, YakuHanJPs, "PingFang SC", "Microsoft 
 function j(i) {
   return Object.hasOwnProperty.call(K, i);
 }
-const ee = new CSSStyleSheet();
-ee.replaceSync(Ie);
-class U extends Be {
+const $ = new CSSStyleSheet();
+$.replaceSync(fe);
+class U extends me {
   constructor() {
     super(), this.paths = { ...K, "": "" }, this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      ee
+      $
     ];
   }
   /**
@@ -530,9 +530,15 @@ class U extends Be {
   }
 }
 customElements.get("sp-icon") || customElements.define("sp-icon", U);
-const te = ':host{--icon-color: var(--color-semantic-text-button-outline-default);--padding-inline: 16px;display:inline-block;max-width:100%}.base{display:inline-flex;align-items:center;justify-content:center;column-gap:4px;color:var(--color-semantic-text-button-outline-default);border-radius:5px;border:1px solid transparent;background-color:transparent;min-height:28px;max-width:100%;padding-inline:var(--padding-inline);position:relative;overflow:hidden;cursor:pointer}.base__text{font-size:10px;font-weight:700;line-height:1}.type__default.appearance__outline{border-color:var(--color-semantic-border-button-outline-default)}.type__default.appearance__outline:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-hover);border-color:var(--color-semantic-border-button-outline-hover);color:var(--color-semantic-text-button-outline-hover)}.type__default.appearance__outline:focus-visible:not(:is(:disabled,.isSelected)){--icon-color: var(--color-semantic-text-button-outline-focus);border-color:var(--color-semantic-border-button-outline-focus);color:var(--color-semantic-text-button-outline-focus)}.type__default.appearance__fill{--icon-color: var(--color-semantic-text-button-fill-default);border-color:var(--color-semantic-border-button-fill-default);background-color:var(--color-semantic-surface-button-fill-default);color:var(--color-semantic-text-button-fill-default)}.type__default.appearance__fill:hover:not(:disabled){border-color:var(--color-semantic-border-button-fill-hover);background-color:var(--color-semantic-surface-button-fill-hover)}.type__default.appearance__fill:focus-visible:not(:is(:disabled,.isSelected)){border-color:var(--color-semantic-border-button-fill-focus);background-color:var(--color-semantic-surface-button-fill-focus)}.type__default.appearance__text{border-color:var(--color-semantic-border-button-text-default);background-color:var(--color-semantic-surface-button-text-default)}.type__default.appearance__text:hover:not(:disabled){border-color:var(--color-semantic-border-button-text-hover);background-color:var(--color-semantic-surface-button-text-hover)}.type__default.appearance__text:focus-visible:not(:is(:disabled,.isSelected)){border-color:var(--color-semantic-border-button-text-focus);background-color:var(--color-semantic-surface-button-text-focus)}.type__default.isSelected{--icon-color: var(--color-semantic-text-button-selected);border-color:var(--color-semantic-border-button-selected);background-color:var(--color-semantic-surface-button-selected);color:var(--color-semantic-text-button-selected)}.type__default.isSelected:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-selected);border-color:var(--color-semantic-border-button-selected-hover);background-color:var(--color-semantic-surface-button-selected-hover);color:var(--color-semantic-text-button-selected)}.type__destructive.appearance__outline{--icon-color: var(--color-semantic-text-button-outline-destructive-default);border-color:var(--color-semantic-border-button-outline-destructive-default);color:var(--color-semantic-text-button-outline-destructive-default)}.type__destructive.appearance__outline:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-destructive-hover);border-color:var(--color-semantic-border-button-outline-destructive-hover);color:var(--color-semantic-text-button-outline-destructive-hover)}.type__destructive.appearance__outline:focus-visible:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-destructive-focus);border-color:var(--color-semantic-border-button-outline-destructive-focus);color:var(--color-semantic-text-button-outline-destructive-focus)}.type__destructive.appearance__fill{--icon-color: var(--color-semantic-text-button-fill-destructive-default);border-color:var(--color-semantic-border-button-fill-destructive-default);background-color:var( --color-semantic-surface-button-fill-destructive-default );color:var(--color-semantic-text-button-fill-destructive-default)}.type__destructive.appearance__fill:hover:not(:disabled){border-color:var(--color-semantic-border-button-fill-destructive-hover);background-color:var(--color-semantic-surface-button-fill-destructive-hover)}.type__destructive.appearance__fill:focus-visible:not(:disabled){border-color:var(--color-semantic-border-button-fill-destructive-focus);background-color:var(--color-semantic-surface-button-fill-destructive-focus)}.type__destructive.appearance__text{--icon-color: var(--color-semantic-text-button-text-destructive-default);border-color:transparent;background-color:transparent;color:var(--color-semantic-text-button-text-destructive-default)}.type__destructive.appearance__text:hover:not(:disabled){border-color:var(--color-semantic-border-button-text-destructive-hover);background-color:var(--color-semantic-surface-button-text-destructive-hover)}.type__destructive.appearance__text:focus-visible:not(:disabled){border-color:var(--color-semantic-border-button-text-destructive-focus);background-color:var(--color-semantic-surface-button-text-destructive-focus)}:is(.type__default,.type__destructive):disabled{--icon-color: var(--color-semantic-text-button-disabled);border-color:var(--color-semantic-border-button-disabled);background-color:var(--color-semantic-surface-button-disabled);color:var(--color-semantic-text-button-disabled);cursor:not-allowed}:is(.type__default,.type__destructive).isLoading{border-color:var(--color-semantic-border-button-loading);background-color:var(--color-semantic-surface-button-loading)}:is(.type__default,.type__destructive).isLoading:before{content:"";display:block;background:transparent url(data:image/png;base64,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) no-repeat 50% 50%;background-size:16px 16px;animation:1s linear infinite loading;transform-origin:center center;width:100%;height:100%;z-index:2;position:absolute;left:0;top:0;border-radius:5px}@keyframes loading{0%{transform:rotate(0)}to{transform:rotate(360deg)}}:is(.type__default,.type__destructive).isLoading:hover{cursor:not-allowed;border-color:var(--color-semantic-border-button-loading)}:is(.type__default,.type__destructive).isLoading .base__text{visibility:hidden}:is(.type__default,.type__destructive).isLoading .base__icon{visibility:hidden}.type__default.size__large{--padding-inline: 24px;column-gap:8px;min-height:32px;font-size:12px}.type__default.size__xLarge{--padding-inline: 40px;column-gap:8px;min-height:40px;font-size:12px}.size__width80{--padding-inline: 4px;width:80px}.size__width160{--padding-inline: 4px;width:160px}', oe = new CSSStyleSheet();
-oe.replaceSync(`${r} ${te}`);
-class ie extends Ze {
+const ge = '*,*:before,*:after{box-sizing:border-box}html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body,article,p,span,div,li,td,th,dt,dd,h1,h2,h3,h4,h5,h6{overflow-wrap:anywhere;line-break:strict}body{line-height:1;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}li{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:"";content:none}table{border-collapse:collapse;border-spacing:0}a{text-decoration:none;color:inherit}button{all:unset;box-sizing:border-box}button,label,select,summary,[role=button],[role=option]{cursor:pointer}button,input,select,textarea{margin:0;font-family:inherit;font-size:100%}button,input{overflow:visible}button,select{text-transform:none}button,[type=button],[type=reset],[type=submit]{-webkit-appearance:button}button::-moz-focus-inner,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{border-style:none;padding:0}@media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}input[type=text],input[type=email],input[type=password],input[type=search],input[type=tel],input[type=url],input[type=number],textarea{-webkit-appearance:none}a,button,input,select,textarea{touch-action:manipulation}:focus{outline:auto;outline-offset:2px}:focus:not(:focus-visible){outline:0}:focus-visible{outline:auto;outline-offset:2px}img{max-width:100%;height:auto}', ve = ':host{--font-family-zh: Arial, YakuHanJPs, "PingFang SC", "Microsoft YaHei", "PingFang TC", Microsoft JhengHei, sans-serif;--font-family-ja: Arial, YakuHanJPs, Hiragino Sans, Hiragino Kaku Gothic ProN, Meiryo, Noto Sans JP, sans-serif;--color-semantic-text-weak: #6f6f6f;--color-semantic-text-text-link: #404fbf;--color-semantic-text-semi-weak: #363636;--color-semantic-text-required: #ca3232;--color-semantic-text-regular: #191919;--color-semantic-text-placeholder: #6f6f6f;--color-semantic-text-inverse: #ffffff;--color-semantic-text-error: #ca3232;--color-semantic-text-disabled: #cbcbcb;--color-semantic-text-destructive: #ca3232;--color-semantic-text-current: #404fbf;--color-semantic-text-button-text-hover: #191919;--color-semantic-text-button-text-focus: #191919;--color-semantic-text-button-text-destructive-hover: #ca3232;--color-semantic-text-button-text-destructive-focus: #ca3232;--color-semantic-text-button-text-destructive-default: #ca3232;--color-semantic-text-button-text-default: #191919;--color-semantic-text-button-selected-hover: #ffffff;--color-semantic-text-button-selected: #ffffff;--color-semantic-text-button-outline-hover: #6f6f6f;--color-semantic-text-button-outline-focus: #6f6f6f;--color-semantic-text-button-outline-destructive-hover: #da7070;--color-semantic-text-button-outline-destructive-focus: #da7070;--color-semantic-text-button-outline-destructive-default: #ca3232;--color-semantic-text-button-outline-default: #191919;--color-semantic-text-button-loading: #cbcbcb;--color-semantic-text-button-fill-hover: #ffffff;--color-semantic-text-button-fill-focus: #ffffff;--color-semantic-text-button-fill-destructive-hover: #ffffff;--color-semantic-text-button-fill-destructive-focus: #ffffff;--color-semantic-text-button-fill-destructive-default: #ffffff;--color-semantic-text-button-fill-default: #ffffff;--color-semantic-text-button-disabled: #cbcbcb;--color-semantic-surface-warning-3: #f9e8b3;--color-semantic-surface-warning-1: #fdf7e6;--color-semantic-surface-success-3: #bad4c3;--color-semantic-surface-success-1: #e8f1eb;--color-semantic-surface-selected-hover: #5361c5;--color-semantic-surface-selected-focus: #404fbf;--color-semantic-surface-selected: #404fbf;--color-semantic-surface-regular-9: #191919;--color-semantic-surface-regular-8: #282828;--color-semantic-surface-regular-7: #363636;--color-semantic-surface-regular-6: #cbcbcb;--color-semantic-surface-regular-5: #e5e5e5;--color-semantic-surface-regular-4: #ededed;--color-semantic-surface-regular-3: #f5f5f5;--color-semantic-surface-regular-2: #f8f8f8;--color-semantic-surface-regular-1: #ffffff;--color-semantic-surface-information-3: #c4d7ec;--color-semantic-surface-information-1: #ebf2f9;--color-semantic-surface-error-3: #efc2c2;--color-semantic-surface-error-1: #faebeb;--color-semantic-surface-checked-hover: #d9dcf2;--color-semantic-surface-checked: #ecedf9;--color-semantic-surface-check-disabled: #ededed;--color-semantic-surface-button-text-hover: #f5f5f5;--color-semantic-surface-button-text-focus: #f5f5f5;--color-semantic-surface-button-text-destructive-hover: #f4d6d6;--color-semantic-surface-button-text-destructive-focus: #f4d6d6;--color-semantic-surface-button-text-destructive-default: rgba(202, 50, 50, 0);--color-semantic-surface-button-text-default: rgba(25, 25, 25, 0);--color-semantic-surface-button-selected-hover: #5361c5;--color-semantic-surface-button-selected: #404fbf;--color-semantic-surface-button-outline-hover: rgba(25, 25, 25, 0);--color-semantic-surface-button-outline-focus: rgba(25, 25, 25, 0);--color-semantic-surface-button-outline-destructive-hover: rgba(218, 112, 112, 0);--color-semantic-surface-button-outline-destructive-focus: rgba(218, 112, 112, 0);--color-semantic-surface-button-outline-destructive-default: rgba(202, 50, 50, 0);--color-semantic-surface-button-outline-default: rgba(25, 25, 25, 0);--color-semantic-surface-button-loading: #f8f8f8;--color-semantic-surface-button-fill-hover: #363636;--color-semantic-surface-button-fill-focus: #363636;--color-semantic-surface-button-fill-destructive-hover: #d55b5b;--color-semantic-surface-button-fill-destructive-focus: #d55b5b;--color-semantic-surface-button-fill-destructive-default: #ca3232;--color-semantic-surface-button-fill-default: #191919;--color-semantic-surface-button-disabled: #f8f8f8;--color-semantic-surface-temp-tag-yellow: #fdf7e6;--color-semantic-surface-temp-tag-red: #faebeb;--color-semantic-surface-temp-tag-marine: #ebf2f9;--color-semantic-surface-temp-tag-green: #e8f1eb;--color-semantic-surface-temp-tag-gray: #f8f8f8;--color-semantic-surface-temp-tag-darkyellow: #eab100;--color-semantic-surface-temp-tag-darkred: #ca3232;--color-semantic-surface-temp-tag-darkmarine: #3978bf;--color-semantic-surface-temp-tag-darkgreen: #1a7037;--color-semantic-highlight-text: #ffe7ec;--color-semantic-highlight-focus-ring-error: #f7e0e0;--color-semantic-highlight-focus-ring-default: #e2e5f5;--color-semantic-elevation-sort: rgba(25, 25, 25, .2);--color-semantic-elevation-regular: rgba(25, 25, 25, .2);--color-semantic-elevation-modal: rgba(25, 25, 25, .2);--color-semantic-chart-single-8: #d6e3ff;--color-semantic-chart-single-7: #c6d7ff;--color-semantic-chart-single-6: #b6ccff;--color-semantic-chart-single-5: #a5c0ff;--color-semantic-chart-single-4: #95b5ff;--color-semantic-chart-single-3: #85aaff;--color-semantic-chart-single-2: #749eff;--color-semantic-chart-single-1: #5c8dff;--color-semantic-chart-multi-line-9: #df8484;--color-semantic-chart-multi-line-8: #b3308a;--color-semantic-chart-multi-line-7: #404fbf;--color-semantic-chart-multi-line-6: #3978bf;--color-semantic-chart-multi-line-5: #248a6a;--color-semantic-chart-multi-line-4: #a9ad2f;--color-semantic-chart-multi-line-3: #eab100;--color-semantic-chart-multi-line-2: #b38732;--color-semantic-chart-multi-line-16: #d183b9;--color-semantic-chart-multi-line-15: #8c95d9;--color-semantic-chart-multi-line-14: #88aed9;--color-semantic-chart-multi-line-13: #7cb9a6;--color-semantic-chart-multi-line-12: #cbce82;--color-semantic-chart-multi-line-11: #f2d066;--color-semantic-chart-multi-line-10: #d1b784;--color-semantic-chart-multi-line-1: #ca3232;--color-semantic-chart-multi-fill-9: #cc9ee3;--color-semantic-chart-multi-fill-8: #e59999;--color-semantic-chart-multi-fill-7: #dead9c;--color-semantic-chart-multi-fill-6: #d9c399;--color-semantic-chart-multi-fill-5: #e6e197;--color-semantic-chart-multi-fill-4: #b0ce94;--color-semantic-chart-multi-fill-38: #d1c5e8;--color-semantic-chart-multi-fill-37: #e8c1dc;--color-semantic-chart-multi-fill-36: #edc6c1;--color-semantic-chart-multi-fill-35: #e5d4c0;--color-semantic-chart-multi-fill-34: #f9e8b3;--color-semantic-chart-multi-fill-33: #e5e6c1;--color-semantic-chart-multi-fill-32: #c3daba;--color-semantic-chart-multi-fill-31: #bddcd2;--color-semantic-chart-multi-fill-30: #bedbe2;--color-semantic-chart-multi-fill-3: #8db89b;--color-semantic-chart-multi-fill-29: #c6caec;--color-semantic-chart-multi-fill-28: #e0c5ee;--color-semantic-chart-multi-fill-27: #efc2c2;--color-semantic-chart-multi-fill-26: #ebcec4;--color-semantic-chart-multi-fill-25: #e8dbc2;--color-semantic-chart-multi-fill-24: #f0edc1;--color-semantic-chart-multi-fill-23: #cfe1bf;--color-semantic-chart-multi-fill-22: #bad4c3;--color-semantic-chart-multi-fill-21: #c0e5e3;--color-semantic-chart-multi-fill-20: #c4d7ec;--color-semantic-chart-multi-fill-2: #96d4d1;--color-semantic-chart-multi-fill-19: #b29ed9;--color-semantic-chart-multi-fill-18: #d998c5;--color-semantic-chart-multi-fill-17: #e1a098;--color-semantic-chart-multi-fill-16: #d4b797;--color-semantic-chart-multi-fill-15: #f5d880;--color-semantic-chart-multi-fill-14: #d4d697;--color-semantic-chart-multi-fill-13: #9bc28c;--color-semantic-chart-multi-fill-12: #92c5b5;--color-semantic-chart-multi-fill-11: #93c4cf;--color-semantic-chart-multi-fill-10: #a0a7df;--color-semantic-chart-multi-fill-1: #9cbcdf;--color-semantic-chart-heatmap-4: #dee8ff;--color-semantic-chart-heatmap-3: #bed1ff;--color-semantic-chart-heatmap-2: #9dbbff;--color-semantic-chart-heatmap-1: #7da4ff;--color-semantic-brand-default: #ff5e83;--color-semantic-border-warning: #eab100;--color-semantic-border-success: #1a7037;--color-semantic-border-strong: #191919;--color-semantic-border-semi-weak: #ededed;--color-semantic-border-semi-strong: #363636;--color-semantic-border-selected-hover: #5361c5;--color-semantic-border-selected: #404fbf;--color-semantic-border-regular: #e5e5e5;--color-semantic-border-inverse: #ffffff;--color-semantic-border-information: #3978bf;--color-semantic-border-focus: #404fbf;--color-semantic-border-error: #ca3232;--color-semantic-border-check-unchecked: #cbcbcb;--color-semantic-border-button-text-hover: #f5f5f5;--color-semantic-border-button-text-focus: #f5f5f5;--color-semantic-border-button-text-destructive-hover: #f4d6d6;--color-semantic-border-button-text-destructive-focus: #f4d6d6;--color-semantic-border-button-text-destructive-default: rgba(202, 50, 50, 0);--color-semantic-border-button-text-default: rgba(25, 25, 25, 0);--color-semantic-border-button-selected-hover: #5361c5;--color-semantic-border-button-selected: #404fbf;--color-semantic-border-button-outline-hover: #6f6f6f;--color-semantic-border-button-outline-focus: #6f6f6f;--color-semantic-border-button-outline-destructive-hover: #da7070;--color-semantic-border-button-outline-destructive-focus: #da7070;--color-semantic-border-button-outline-destructive-default: #ca3232;--color-semantic-border-button-outline-default: #191919;--color-semantic-border-button-loading: #e5e5e5;--color-semantic-border-button-fill-hover: #363636;--color-semantic-border-button-fill-focus: #363636;--color-semantic-border-button-fill-destructive-hover: #d55b5b;--color-semantic-border-button-fill-destructive-focus: #d55b5b;--color-semantic-border-button-fill-destructive-default: #ca3232;--color-semantic-border-button-fill-default: #191919;--color-semantic-border-button-disabled: #e5e5e5;--color-semantic-border-temp-tag-yellow: #f7e099;--color-semantic-border-temp-tag-red: #eaadad;--color-semantic-border-temp-tag-marine: #b0c9e5;--color-semantic-border-temp-tag-green: #a3c6af;--color-semantic-border-temp-tag-gray: #e5e5e5;--color-semantic-border-temp-tag-darkyellow: #a47c00;--color-semantic-border-temp-tag-darkred: #8d2323;--color-semantic-border-temp-tag-darkmarine: #285486;--color-semantic-border-temp-tag-darkgreen: #124e27;--color-semantic-background-default: #f8f8f8;--color-primitive-yellow-60: #f2d066;--color-primitive-yellow-50: #f5d880;--color-primitive-yellow-40: #f7e099;--color-primitive-yellow-30: #f9e8b3;--color-primitive-yellow-130: #a47c00;--color-primitive-yellow-100: #eab100;--color-primitive-yellow-10: #fdf7e6;--color-primitive-white: #ffffff;--color-primitive-viridian-60: #7cb9a6;--color-primitive-viridian-50: #92c5b5;--color-primitive-viridian-30: #bddcd2;--color-primitive-viridian-100: #248a6a;--color-primitive-violet-50: #b29ed9;--color-primitive-violet-30: #d1c5e8;--color-primitive-turquoise-50: #93c4cf;--color-primitive-turquoise-30: #bedbe2;--color-primitive-tomato-80: #d55b5b;--color-primitive-tomato-70: #da7070;--color-primitive-tomato-60: #df8484;--color-primitive-tomato-50: #e59999;--color-primitive-tomato-40: #eaadad;--color-primitive-tomato-30: #efc2c2;--color-primitive-tomato-20: #f4d6d6;--color-primitive-tomato-15: #f7e0e0;--color-primitive-tomato-130: #8d2323;--color-primitive-tomato-100: #ca3232;--color-primitive-tomato-10: #faebeb;--color-primitive-terracotta-50: #e1a098;--color-primitive-terracotta-30: #edc6c1;--color-primitive-sky-85: #749eff;--color-primitive-sky-80: #7da4ff;--color-primitive-sky-75: #85aaff;--color-primitive-sky-65: #95b5ff;--color-primitive-sky-60: #9dbbff;--color-primitive-sky-55: #a5c0ff;--color-primitive-sky-45: #b6ccff;--color-primitive-sky-40: #bed1ff;--color-primitive-sky-35: #c6d7ff;--color-primitive-sky-25: #d6e3ff;--color-primitive-sky-20: #dee8ff;--color-primitive-sky-100: #5c8dff;--color-primitive-purple-50: #cc9ee3;--color-primitive-purple-30: #e0c5ee;--color-primitive-plum-60: #d183b9;--color-primitive-plum-50: #d998c5;--color-primitive-plum-30: #e8c1dc;--color-primitive-plum-100: #b3308a;--color-primitive-pink-15: #ffe7ec;--color-primitive-pink-100: #ff5e83;--color-primitive-neutral-90: #282828;--color-primitive-neutral-80: #363636;--color-primitive-neutral-70: #6f6f6f;--color-primitive-neutral-50: #cbcbcb;--color-primitive-neutral-40: #e5e5e5;--color-primitive-neutral-30: #ededed;--color-primitive-neutral-20: #f5f5f5;--color-primitive-neutral-100: #191919;--color-primitive-neutral-10: #f8f8f8;--color-primitive-marine-60: #88aed9;--color-primitive-marine-50: #9cbcdf;--color-primitive-marine-40: #b0c9e5;--color-primitive-marine-30: #c4d7ec;--color-primitive-marine-130: #285486;--color-primitive-marine-100: #3978bf;--color-primitive-marine-10: #ebf2f9;--color-primitive-lime-60: #cbce82;--color-primitive-lime-50: #d4d697;--color-primitive-lime-30: #e5e6c1;--color-primitive-lime-100: #a9ad2f;--color-primitive-lemon-50: #e6e197;--color-primitive-lemon-30: #f0edc1;--color-primitive-leaf-50: #b0ce94;--color-primitive-leaf-30: #cfe1bf;--color-primitive-green-50: #8db89b;--color-primitive-green-40: #a3c6af;--color-primitive-green-30: #bad4c3;--color-primitive-green-130: #124e27;--color-primitive-green-100: #1a7037;--color-primitive-green-10: #e8f1eb;--color-primitive-emerald-50: #96d4d1;--color-primitive-emerald-30: #c0e5e3;--color-primitive-cork-60: #d1b784;--color-primitive-cork-50: #d9c399;--color-primitive-cork-30: #e8dbc2;--color-primitive-cork-100: #b38732;--color-primitive-brown-50: #dead9c;--color-primitive-brown-30: #ebcec4;--color-primitive-blue-90: #5361c5;--color-primitive-blue-60: #8c95d9;--color-primitive-blue-50: #a0a7df;--color-primitive-blue-30: #c6caec;--color-primitive-blue-20: #d9dcf2;--color-primitive-blue-15: #e2e5f5;--color-primitive-blue-100: #404fbf;--color-primitive-blue-10: #ecedf9;--color-primitive-bamboo-50: #9bc28c;--color-primitive-bamboo-30: #c3daba;--color-primitive-amber-50: #d4b797;--color-primitive-amber-30: #e5d4c0}:host,*{overflow-wrap:break-word;min-width:0}:host{font-family:var(--font-family-ja)}:host:lang(zh){font-family:var(--font-family-zh)}button{box-sizing:border-box}';
+function r(...i) {
+  const e = new CSSStyleSheet();
+  return e.replaceSync(
+    `${ge} ${ve} ${i.join(" ")}`
+  ), e;
+}
+const ee = ':host{--icon-color: var(--color-semantic-text-button-outline-default);--padding-inline: 16px;display:inline-block;max-width:100%}.base{display:inline-flex;align-items:center;justify-content:center;column-gap:4px;color:var(--color-semantic-text-button-outline-default);border-radius:5px;border:1px solid transparent;background-color:transparent;min-height:28px;max-width:100%;padding-inline:var(--padding-inline);position:relative;overflow:hidden;cursor:pointer}.base__text{font-size:10px;font-weight:700;line-height:1}.type__default.appearance__outline{border-color:var(--color-semantic-border-button-outline-default)}.type__default.appearance__outline:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-hover);border-color:var(--color-semantic-border-button-outline-hover);color:var(--color-semantic-text-button-outline-hover)}.type__default.appearance__outline:focus-visible:not(:is(:disabled,.isSelected)){--icon-color: var(--color-semantic-text-button-outline-focus);border-color:var(--color-semantic-border-button-outline-focus);color:var(--color-semantic-text-button-outline-focus)}.type__default.appearance__fill{--icon-color: var(--color-semantic-text-button-fill-default);border-color:var(--color-semantic-border-button-fill-default);background-color:var(--color-semantic-surface-button-fill-default);color:var(--color-semantic-text-button-fill-default)}.type__default.appearance__fill:hover:not(:disabled){border-color:var(--color-semantic-border-button-fill-hover);background-color:var(--color-semantic-surface-button-fill-hover)}.type__default.appearance__fill:focus-visible:not(:is(:disabled,.isSelected)){border-color:var(--color-semantic-border-button-fill-focus);background-color:var(--color-semantic-surface-button-fill-focus)}.type__default.appearance__text{border-color:var(--color-semantic-border-button-text-default);background-color:var(--color-semantic-surface-button-text-default)}.type__default.appearance__text:hover:not(:disabled){border-color:var(--color-semantic-border-button-text-hover);background-color:var(--color-semantic-surface-button-text-hover)}.type__default.appearance__text:focus-visible:not(:is(:disabled,.isSelected)){border-color:var(--color-semantic-border-button-text-focus);background-color:var(--color-semantic-surface-button-text-focus)}.type__default.isSelected{--icon-color: var(--color-semantic-text-button-selected);border-color:var(--color-semantic-border-button-selected);background-color:var(--color-semantic-surface-button-selected);color:var(--color-semantic-text-button-selected)}.type__default.isSelected:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-selected);border-color:var(--color-semantic-border-button-selected-hover);background-color:var(--color-semantic-surface-button-selected-hover);color:var(--color-semantic-text-button-selected)}.type__destructive.appearance__outline{--icon-color: var(--color-semantic-text-button-outline-destructive-default);border-color:var(--color-semantic-border-button-outline-destructive-default);color:var(--color-semantic-text-button-outline-destructive-default)}.type__destructive.appearance__outline:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-destructive-hover);border-color:var(--color-semantic-border-button-outline-destructive-hover);color:var(--color-semantic-text-button-outline-destructive-hover)}.type__destructive.appearance__outline:focus-visible:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-destructive-focus);border-color:var(--color-semantic-border-button-outline-destructive-focus);color:var(--color-semantic-text-button-outline-destructive-focus)}.type__destructive.appearance__fill{--icon-color: var(--color-semantic-text-button-fill-destructive-default);border-color:var(--color-semantic-border-button-fill-destructive-default);background-color:var( --color-semantic-surface-button-fill-destructive-default );color:var(--color-semantic-text-button-fill-destructive-default)}.type__destructive.appearance__fill:hover:not(:disabled){border-color:var(--color-semantic-border-button-fill-destructive-hover);background-color:var(--color-semantic-surface-button-fill-destructive-hover)}.type__destructive.appearance__fill:focus-visible:not(:disabled){border-color:var(--color-semantic-border-button-fill-destructive-focus);background-color:var(--color-semantic-surface-button-fill-destructive-focus)}.type__destructive.appearance__text{--icon-color: var(--color-semantic-text-button-text-destructive-default);border-color:transparent;background-color:transparent;color:var(--color-semantic-text-button-text-destructive-default)}.type__destructive.appearance__text:hover:not(:disabled){border-color:var(--color-semantic-border-button-text-destructive-hover);background-color:var(--color-semantic-surface-button-text-destructive-hover)}.type__destructive.appearance__text:focus-visible:not(:disabled){border-color:var(--color-semantic-border-button-text-destructive-focus);background-color:var(--color-semantic-surface-button-text-destructive-focus)}:is(.type__default,.type__destructive):disabled{--icon-color: var(--color-semantic-text-button-disabled);border-color:var(--color-semantic-border-button-disabled);background-color:var(--color-semantic-surface-button-disabled);color:var(--color-semantic-text-button-disabled);cursor:not-allowed}:is(.type__default,.type__destructive).isLoading{border-color:var(--color-semantic-border-button-loading);background-color:var(--color-semantic-surface-button-loading)}:is(.type__default,.type__destructive).isLoading:before{content:"";display:block;background:transparent url(data:image/png;base64,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) no-repeat 50% 50%;background-size:16px 16px;animation:1s linear infinite loading;transform-origin:center center;width:100%;height:100%;z-index:2;position:absolute;left:0;top:0;border-radius:5px}@keyframes loading{0%{transform:rotate(0)}to{transform:rotate(360deg)}}:is(.type__default,.type__destructive).isLoading:hover{cursor:not-allowed;border-color:var(--color-semantic-border-button-loading)}:is(.type__default,.type__destructive).isLoading .base__text{visibility:hidden}:is(.type__default,.type__destructive).isLoading .base__icon{visibility:hidden}.type__default.size__large{--padding-inline: 24px;column-gap:8px;min-height:32px;font-size:12px}.type__default.size__xLarge{--padding-inline: 40px;column-gap:8px;min-height:40px;font-size:12px}.size__width80{--padding-inline: 4px;width:80px}.size__width160{--padding-inline: 4px;width:160px}';
+class te extends le {
   #o = "";
   #t = new U();
   /**
@@ -554,7 +560,7 @@ class ie extends Ze {
   constructor() {
     super(), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      oe
+      r(ee)
     ], this.#t.classList.add("base__icon"), this.#t.size = "small";
   }
   attributeChangedCallback(e, o, t) {
@@ -575,43 +581,39 @@ class ie extends Ze {
     this.#t.type = e;
   }
 }
-customElements.get("sp-button") || customElements.define("sp-button", ie);
-const De = ":host{display:inline-block}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:hover .checkmark:has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-regular-3)}.base:hover .checkmark:has(:is(.input:checked,.input:indeterminate)):has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}", G = '.checkmark{flex-grow:0;flex-shrink:0;display:inline-flex;padding-block:4px;padding-inline:4px;cursor:pointer}.checkmark:before{content:"";display:inline-block;width:16px;height:16px;background:var(--color-semantic-surface-regular-1) 50% 50% no-repeat;border:1px solid var(--color-semantic-border-check-unchecked);border-radius:2px}.checkmark:has(.input:focus-visible):before{border-color:var(--color-semantic-border-focus);box-shadow:0 0 0 3px var(--color-semantic-highlight-focus-ring-default)}.checkmark:has(:is(.input:checked,.input:indeterminate)):before{background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected)}.checkmark:has(.input:checked):before{background-image:url(data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%227%22%20fill%3D%22none%22%3E%3Cpath%20stroke%3D%22%23fff%22%20stroke-width%3D%221.5%22%20d%3D%22m1%203%202%202%204-4%22%2F%3E%3C%2Fsvg%3E)}.checkmark:has(.input:indeterminate):before{background-image:url(data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%222%22%20fill%3D%22none%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M0%200h8v2H0z%22%2F%3E%3C%2Fsvg%3E)}.checkmark:has(.input:disabled){cursor:not-allowed}.checkmark:has(:is(.input:disabled)):before{background-color:var(--color-semantic-surface-check-disabled);border-color:var(--color-semantic-border-regular)}.checkmark .input{position:absolute;z-index:-1;opacity:0}', se = new CSSStyleSheet();
-se.replaceSync(`${r} ${G} ${De}`);
-class Ue extends q {
+customElements.get("sp-button") || customElements.define("sp-button", te);
+const Le = ":host{display:inline-block}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:hover .checkmark:has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-regular-3)}.base:hover .checkmark:has(:is(.input:checked,.input:indeterminate)):has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}", G = '.checkmark{flex-grow:0;flex-shrink:0;display:inline-flex;padding-block:4px;padding-inline:4px;cursor:pointer}.checkmark:before{content:"";display:inline-block;width:16px;height:16px;background:var(--color-semantic-surface-regular-1) 50% 50% no-repeat;border:1px solid var(--color-semantic-border-check-unchecked);border-radius:2px}.checkmark:has(.input:focus-visible):before{border-color:var(--color-semantic-border-focus);box-shadow:0 0 0 3px var(--color-semantic-highlight-focus-ring-default)}.checkmark:has(:is(.input:checked,.input:indeterminate)):before{background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected)}.checkmark:has(.input:checked):before{background-image:url(data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%227%22%20fill%3D%22none%22%3E%3Cpath%20stroke%3D%22%23fff%22%20stroke-width%3D%221.5%22%20d%3D%22m1%203%202%202%204-4%22%2F%3E%3C%2Fsvg%3E)}.checkmark:has(.input:indeterminate):before{background-image:url(data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%222%22%20fill%3D%22none%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M0%200h8v2H0z%22%2F%3E%3C%2Fsvg%3E)}.checkmark:has(.input:disabled){cursor:not-allowed}.checkmark:has(:is(.input:disabled)):before{background-color:var(--color-semantic-surface-check-disabled);border-color:var(--color-semantic-border-regular)}.checkmark .input{position:absolute;z-index:-1;opacity:0}';
+class xe extends Q {
   constructor() {
     super(), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      se
+      r(G, Le)
     ];
   }
 }
-customElements.get("sp-checkbox") || customElements.define("sp-checkbox", Ue);
-const Ge = ":host{display:block}.base{display:flex;align-items:flex-start;justify-content:flex-start;padding-block:1px;cursor:pointer}.base:has(input:disabled){cursor:not-allowed}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:has(input):not(:has(input:disabled)):hover{background:var(--color-semantic-surface-regular-3)}.base:has(input:checked):not(:has(input:disabled)){background:var(--color-semantic-surface-checked)}.base:has(input:checked):not(:has(input:disabled)):hover{background:var(--color-semantic-surface-checked-hover)}.text{padding-block-start:2.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.base:has(input:disabled) .text{color:var(--color-semantic-text-disabled)}", re = new CSSStyleSheet();
-re.replaceSync(`${r} ${G} ${Ge}`);
-class We extends I {
+customElements.get("sp-checkbox") || customElements.define("sp-checkbox", xe);
+const Ce = ":host{display:block}.base{display:flex;align-items:flex-start;justify-content:flex-start;padding-block:1px;cursor:pointer}.base:has(input:disabled){cursor:not-allowed}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:has(input):not(:has(input:disabled)):hover{background:var(--color-semantic-surface-regular-3)}.base:has(input:checked):not(:has(input:disabled)){background:var(--color-semantic-surface-checked)}.base:has(input:checked):not(:has(input:disabled)):hover{background:var(--color-semantic-surface-checked-hover)}.text{padding-block-start:2.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.base:has(input:disabled) .text{color:var(--color-semantic-text-disabled)}";
+class ke extends I {
   constructor() {
     super(), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      re
+      r(G, Ce)
     ];
   }
 }
-customElements.get("sp-checkbox-list") || customElements.define("sp-checkbox-list", We);
-const Fe = ":host{display:inline-block;max-width:100%}.base{display:inline-flex;align-items:flex-start;justify-content:flex-start;max-width:100%;cursor:pointer}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:has(.input:disabled){cursor:not-allowed}.text{padding-block-start:2.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.base:has(.input:disabled) .text{color:var(--color-semantic-text-disabled)}.base:hover .checkmark:has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-regular-3)}.base:hover .checkmark:has(:is(.input:checked,.input:indeterminate)):has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}", ae = new CSSStyleSheet();
-ae.replaceSync(`${r} ${G} ${Fe}`);
-class je extends I {
+customElements.get("sp-checkbox-list") || customElements.define("sp-checkbox-list", ke);
+const ye = ":host{display:inline-block;max-width:100%}.base{display:inline-flex;align-items:flex-start;justify-content:flex-start;max-width:100%;cursor:pointer}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:has(.input:disabled){cursor:not-allowed}.text{padding-block-start:2.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.base:has(.input:disabled) .text{color:var(--color-semantic-text-disabled)}.base:hover .checkmark:has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-regular-3)}.base:hover .checkmark:has(:is(.input:checked,.input:indeterminate)):has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}";
+class we extends I {
   constructor() {
     super(), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      ae
+      r(G, ye)
     ];
   }
 }
-customElements.get("sp-checkbox-text") || customElements.define("sp-checkbox-text", je);
-const n = "*,*:before,*:after{margin:0;padding:0;box-sizing:border-box}:where([hidden]:not([hidden=until-found])){display:none!important}:where(html){-webkit-text-size-adjust:none;color-scheme:dark light;tab-size:2;scrollbar-gutter:stable;interpolate-size:allow-keywords;line-height:1.5}:where(html:has(dialog:modal[open])){overflow:clip}@media (prefers-reduced-motion: no-preference){:where(html:focus-within){scroll-behavior:smooth}}:where(body){line-height:inherit;font-family:system-ui,sans-serif;-webkit-font-smoothing:antialiased}:where(button){all:unset}:where(input,button,textarea,select){font:inherit;color:inherit;letter-spacing:inherit;word-spacing:inherit;font-feature-settings:inherit;font-variation-settings:inherit}:where(textarea){resize:vertical;resize:block}:where(button,label,select,summary,[role=button],[role=option]){cursor:pointer}:where(:disabled,label:has(>:disabled,+disabled)){cursor:not-allowed}:where(a){color:inherit;text-underline-offset:.2ex}:where(ul,ol){list-style:none}:where(img,svg,video,canvas,audio,iframe,embed,object){display:block}:where(img,picture,svg,video){max-inline-size:100%;block-size:auto}:where(p,h1,h2,h3,h4,h5,h6){overflow-wrap:break-word}:where(h1,h2,h3){line-height:calc(1em + .5rem);text-wrap:balance}:where(hr){border:none;border-block-start:1px solid;color:inherit;block-size:0;overflow:visible}:where(dialog,[popover]){border:none;background:none;color:inherit;inset:unset;max-width:unset;max-height:unset;overflow:unset}:where(dialog:not([open],[popover]),[popover]:not(:popover-open)){display:none!important}:where(:focus-visible){outline:3px solid CanvasText;box-shadow:0 0 0 5px Canvas;outline-offset:1px}:where(:focus-visible,:target){scroll-margin-block:8vh}:where(.visually-hidden:not(:focus-within,:active)){clip-path:inset(50%)!important;height:1px!important;width:1px!important;overflow:hidden!important;position:absolute!important;white-space:nowrap!important;border:0!important;-webkit-user-select:none!important;user-select:none!important}", Oe = ".base{display:grid;grid-template-columns:160px 1fr;gap:16px 8px}", ne = new CSSStyleSheet();
-ne.replaceSync(`${n} ${r} ${Oe}`);
-class Ye extends HTMLElement {
+customElements.get("sp-checkbox-text") || customElements.define("sp-checkbox-text", we);
+const Ee = ".base{display:grid;grid-template-columns:160px 1fr;gap:16px 8px}";
+class He extends HTMLElement {
   #o = document.createElement("dl");
   #t = document.createElement("slot");
   constructor() {
@@ -620,16 +622,13 @@ class Ye extends HTMLElement {
   connectedCallback() {
     this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      ne
+      r(Ee)
     ], this.#o.classList.add("base"), this.#o.appendChild(this.#t), this.shadowRoot.appendChild(this.#o);
   }
 }
-customElements.get("sp-definition-list") || customElements.define("sp-definition-list", Ye);
-const Ne = ".base{padding:4.5px 0;color:var(--color-semantic-text-body-regular);font-size:12px;font-weight:400;line-height:1.6}", ce = new CSSStyleSheet();
-ce.replaceSync(
-  `${n} ${r} ${Ne}`
-);
-class Je extends HTMLElement {
+customElements.get("sp-definition-list") || customElements.define("sp-definition-list", He);
+const _e = ".base{padding:4.5px 0;color:var(--color-semantic-text-body-regular);font-size:12px;font-weight:400;line-height:1.6}";
+class Ve extends HTMLElement {
   #o = document.createElement("dd");
   constructor() {
     super(), this.attachShadow({ mode: "open" });
@@ -637,16 +636,13 @@ class Je extends HTMLElement {
   connectedCallback() {
     this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      ce
+      r(_e)
     ], this.#o.classList.add("base"), this.#o.innerHTML = this.innerHTML, this.shadowRoot.appendChild(this.#o);
   }
 }
-customElements.get("sp-definition-list-dd") || customElements.define("sp-definition-list-dd", Je);
-const Qe = ".base{padding:4.5px 0;color:var(--color-semantic-text-body-regular);font-size:12px;font-weight:700;line-height:1.6}", le = new CSSStyleSheet();
-le.replaceSync(
-  `${n} ${r} ${Qe}`
-);
-class qe extends HTMLElement {
+customElements.get("sp-definition-list-dd") || customElements.define("sp-definition-list-dd", Ve);
+const Se = ".base{padding:4.5px 0;color:var(--color-semantic-text-body-regular);font-size:12px;font-weight:700;line-height:1.6}";
+class Me extends HTMLElement {
   #o = document.createElement("dt");
   constructor() {
     super(), this.attachShadow({ mode: "open" });
@@ -654,20 +650,17 @@ class qe extends HTMLElement {
   connectedCallback() {
     this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      le
+      r(Se)
     ], this.#o.classList.add("base"), this.#o.innerHTML = this.innerHTML, this.shadowRoot.appendChild(this.#o);
   }
 }
-customElements.get("sp-definition-list-dt") || customElements.define("sp-definition-list-dt", qe);
-const Xe = ".base{min-width:80px;width:100%;flex-direction:row-reverse}", de = new CSSStyleSheet();
-de.replaceSync(
-  `${r} ${te} ${Xe}`
-);
-class Ke extends ie {
+customElements.get("sp-definition-list-dt") || customElements.define("sp-definition-list-dt", Me);
+const Ae = ".base{min-width:80px;width:100%;flex-direction:row-reverse}";
+class Ze extends te {
   constructor() {
     super(), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      de
+      r(ee, Ae)
     ];
   }
   connectedCallback() {
@@ -686,16 +679,13 @@ class Ke extends ie {
     this.buttonElement.setAttribute("aria-controls", e);
   }
 }
-customElements.get("sp-dropdown-action-button") || customElements.define("sp-dropdown-action-button", Ke);
-const et = ".action{display:block;width:100%;min-height:26px;padding-inline:8px;padding-block:3.5px;background:none;border:0;color:var(--color-semantic-text-regular);font-size:12px;text-align:left;line-height:1.6}.action:hover,.action:focus{background:var(--color-semantic-surface-regular-3)}.base{margin:0}", he = new CSSStyleSheet();
-he.replaceSync(
-  `${n} ${r} ${et}`
-);
-class tt extends HTMLElement {
+customElements.get("sp-dropdown-action-button") || customElements.define("sp-dropdown-action-button", Ze);
+const Re = ".action{display:block;width:100%;min-height:26px;padding-inline:8px;padding-block:3.5px;background:none;border:0;color:var(--color-semantic-text-regular);font-size:12px;text-align:left;line-height:1.6}.action:hover,.action:focus{background:var(--color-semantic-surface-regular-3)}.base{margin:0}";
+class Te extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      he
+      r(Re)
     ];
   }
   connectedCallback() {
@@ -712,23 +702,21 @@ class tt extends HTMLElement {
     o.appendChild(t), e.appendChild(o);
   }
 }
-customElements.get("sp-dropdown-action-item") || customElements.define("sp-dropdown-action-item", tt);
-const ot = ".base{position:relative}.menu{position:absolute;top:100%;left:0;margin-block-start:8px;padding-block:8px;background:var(--color-semantic-surface-regular-1);border:1px solid var(--color-semantic-border-regular);border-radius:5px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular)}.menu.position__left{left:0;right:auto}.menu.position__right{left:auto;right:0}", it = ["left", "right"];
-function st(i) {
-  return it.some((e) => e === i);
+customElements.get("sp-dropdown-action-item") || customElements.define("sp-dropdown-action-item", Te);
+const ze = ".base{position:relative}.menu{position:absolute;top:100%;left:0;margin-block-start:8px;padding-block:8px;background:var(--color-semantic-surface-regular-1);border:1px solid var(--color-semantic-border-regular);border-radius:5px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular)}.menu.position__left{left:0;right:auto}.menu.position__right{left:auto;right:0}", Be = ["left", "right"];
+function Pe(i) {
+  return Be.some((e) => e === i);
 }
-function rt() {
+function Ie() {
   return `sp-dropdown-action-menu-${Math.random().toString(32).substring(2)}`;
 }
-const ue = new CSSStyleSheet();
-ue.replaceSync(`${n} ${r} ${ot}`);
-class at extends HTMLElement {
+class De extends HTMLElement {
   #o = document.createElement("div");
   #t = document.createElement("sp-dropdown-action-button");
   #e = document.createElement("div");
   #i = document.createElement("slot");
   #s = [];
-  #a = rt();
+  #a = Ie();
   #r = !1;
   #n = !1;
   #c = "left";
@@ -740,7 +728,7 @@ class at extends HTMLElement {
    * @type {string}
    */
   set label(e) {
-    this.#t.textContent = e, this.#p();
+    this.#t.textContent = e, this.#m();
   }
   /**
    * ドロップダウンメニューの開閉状態
@@ -789,11 +777,11 @@ class at extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      ue
+      r(ze)
     ], this.open = !1, this.disabled = !1, this.position = "left";
   }
   connectedCallback() {
-    this.#d(), this.#h(), this.#u(), this.#L(), this.shadowRoot.appendChild(this.#o), this.#x(), this.#p();
+    this.#d(), this.#h(), this.#u(), this.#L(), this.shadowRoot.appendChild(this.#o), this.#x(), this.#m();
   }
   #d() {
     this.#t.setAttribute("part", "button"), this.#t.addEventListener(
@@ -816,7 +804,7 @@ class at extends HTMLElement {
   #x() {
     this.#t.setAriaHasPopup("true"), this.#t.setAriaControls(this.#a), this.#e.setAttribute("id", this.#a), this.#v();
   }
-  #p() {
+  #m() {
     const e = this.#t.offsetWidth;
     this.#e.style.minWidth = `${e}px`;
   }
@@ -832,19 +820,19 @@ class at extends HTMLElement {
     ), window.removeEventListener("click", this.#l);
   }
   attributeChangedCallback(e, o, t) {
-    o !== t && (e === "label" && this.#m(t), e === "open" && this.#C(t), e === "disabled" && this.#y(t), e === "position" && this.#k(t));
+    o !== t && (e === "label" && this.#p(t), e === "open" && this.#C(t), e === "disabled" && this.#k(t), e === "position" && this.#y(t));
   }
-  #m(e) {
+  #p(e) {
     this.label = e;
   }
   #C(e) {
     this.open = e === "true" || e === "";
   }
-  #y(e) {
+  #k(e) {
     this.disabled = e === "true" || e === "";
   }
-  #k(e) {
-    st(e) ? this.position = e : (console.warn(`${e}は無効なposition属性です。`), this.position = "left");
+  #y(e) {
+    Pe(e) ? this.position = e : (console.warn(`${e}は無効なposition属性です。`), this.position = "left");
   }
   #b(e) {
     e.stopPropagation(), this.open = !this.open, this.#v();
@@ -867,14 +855,12 @@ class at extends HTMLElement {
     this.#t.setAriaExpanded(this.open ? "true" : "false");
   }
 }
-customElements.get("sp-dropdown-action") || customElements.define("sp-dropdown-action", at);
-const nt = ".base{position:relative}.dialog{position:absolute;z-index:1;min-width:560px;margin-block-start:8px;padding:24px;background:var(--color-semantic-surface-regular-1);border:1px solid var(--color-semantic-border-semi-weak);border-radius:5px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular);font-size:12px;line-height:1.6}.dialog.position__left{left:0;right:auto}.dialog.position__right{left:auto;right:0}", ct = ["left", "right"];
-function lt(i) {
-  return ct.some((e) => e === i);
+customElements.get("sp-dropdown-action") || customElements.define("sp-dropdown-action", De);
+const Ue = ".base{position:relative}.dialog{position:absolute;z-index:1;min-width:560px;margin-block-start:8px;padding:24px;background:var(--color-semantic-surface-regular-1);border:1px solid var(--color-semantic-border-semi-weak);border-radius:5px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular);font-size:12px;line-height:1.6}.dialog.position__left{left:0;right:auto}.dialog.position__right{left:auto;right:0}", Ge = ["left", "right"];
+function We(i) {
+  return Ge.some((e) => e === i);
 }
-const pe = new CSSStyleSheet();
-pe.replaceSync(`${n} ${r} ${nt}`);
-class dt extends HTMLElement {
+class Fe extends HTMLElement {
   #o = document.createElement("div");
   #t = document.createElement("sp-button");
   #e = document.createElement("div");
@@ -939,7 +925,7 @@ class dt extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      pe
+      r(Ue)
     ], this.open = !1, this.disabled = !1, this.position = "left";
   }
   connectedCallback() {
@@ -964,7 +950,7 @@ class dt extends HTMLElement {
           this.disabled = t === "true" || t === "";
           break;
         case "position":
-          lt(t) ? this.position = t : (console.warn(`${t}は無効なposition属性です。`), this.position = "left");
+          We(t) ? this.position = t : (console.warn(`${t}は無効なposition属性です。`), this.position = "left");
       }
   }
   #c(e) {
@@ -977,15 +963,17 @@ class dt extends HTMLElement {
     this.#e.style.display = this.open && !this.disabled ? "block" : "none";
   }
 }
-customElements.get("sp-dropdown-dialog") || customElements.define("sp-dropdown-dialog", dt);
-const ht = ':host{display:block}.container{display:flex;justify-content:space-between;align-items:center;gap:16px}.main{display:flex;align-items:center;gap:16px}.heading{display:flex;align-items:center;gap:8px}.text-links{display:flex;flex-shrink:0;align-items:center;gap:16px}.buttons{display:flex;flex-shrink:0;align-items:center;gap:8px}h3{margin-block:3px;padding-inline-start:8px;font-size:14px;font-weight:700;line-height:1.6;position:relative}h3:before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:2px;height:calc(100% - 2.4px);background-color:var(--color-semantic-surface-regular-6)}', me = new CSSStyleSheet();
-me.replaceSync(`${n} ${r} ${ht}`);
-class ut extends HTMLElement {
+customElements.get("sp-dropdown-dialog") || customElements.define("sp-dropdown-dialog", Fe);
+const je = ':host{display:block}.container{display:flex;justify-content:space-between;align-items:center;gap:16px}.main{display:flex;align-items:center;gap:16px}.heading{display:flex;align-items:center;gap:8px}.text-links{display:flex;flex-shrink:0;align-items:center;gap:16px}.buttons{display:flex;flex-shrink:0;align-items:center;gap:8px}h3{margin-block:3px;padding-inline-start:8px;font-size:14px;font-weight:700;line-height:1.6;position:relative}h3:before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:2px;height:calc(100% - 2.4px);background-color:var(--color-semantic-surface-regular-6)}';
+class Oe extends HTMLElement {
   #o = document.createElement("h3");
   #t = document.createElement("slot");
   #e = document.createElement("slot");
   constructor() {
-    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [me], this.#t.name = "text-links", this.#e.name = "buttons";
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      r(je)
+    ], this.#t.name = "text-links", this.#e.name = "buttons";
   }
   connectedCallback() {
     this.shadowRoot.appendChild(this.#i()), this.#t.assignedElements().length === 0 && this.shadowRoot.querySelector(".text-links")?.remove(), this.#e.assignedElements().length === 0 && this.shadowRoot.querySelector(".buttons")?.remove();
@@ -1013,29 +1001,28 @@ class ut extends HTMLElement {
     return e.classList.add("buttons"), e.appendChild(this.#e), e;
   }
 }
-customElements.get("sp-element-title") || customElements.define("sp-element-title", ut);
-const pt = ".base{display:flex;justify-content:space-between;border:1px solid;border-radius:5px;padding-block:8px;padding-inline:16px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular)}.body{display:flex}.icon{margin-inline-end:8px;display:inline-block;flex-shrink:0;width:24px;height:24px}.base.type__error{border-color:var(--color-semantic-border-error);background-color:var(--color-semantic-surface-error-1)}.base.type__information{border-color:var(--color-semantic-border-information);background-color:var(--color-semantic-surface-information-1)}.base.type__success{border-color:var(--color-semantic-border-success);background-color:var(--color-semantic-surface-success-1)}.base.type__warning{border-color:var(--color-semantic-border-warning);background-color:var(--color-semantic-surface-warning-1)}.content{font-size:12px;line-height:1.6;padding-block:2.5px;color:var(--color-semantic-text-regular)}.action{padding-inline-start:16px;margin-block:auto;flex-shrink:0}.close{border-radius:100%;display:flex;align-items:center;justify-content:center}.base.type__error .close:hover{background-color:var(--color-semantic-surface-error-3)}.base.type__information .close:hover{background-color:var(--color-semantic-surface-information-3)}.base.type__success .close:hover{background-color:var(--color-semantic-surface-success-3)}.base.type__warning .close:hover{background-color:var(--color-semantic-surface-warning-3)}", mt = ["error", "warning", "information", "success"];
-function bt(i) {
-  return mt.some((e) => e === i);
+customElements.get("sp-element-title") || customElements.define("sp-element-title", Oe);
+const qe = ".base{display:flex;justify-content:space-between;border:1px solid;border-radius:5px;padding-block:8px;padding-inline:16px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular)}.body{display:flex}.icon{margin-inline-end:8px;display:inline-block;flex-shrink:0;width:24px;height:24px}.base.type__error{border-color:var(--color-semantic-border-error);background-color:var(--color-semantic-surface-error-1)}.base.type__information{border-color:var(--color-semantic-border-information);background-color:var(--color-semantic-surface-information-1)}.base.type__success{border-color:var(--color-semantic-border-success);background-color:var(--color-semantic-surface-success-1)}.base.type__warning{border-color:var(--color-semantic-border-warning);background-color:var(--color-semantic-surface-warning-1)}.content{font-size:12px;line-height:1.6;padding-block:2.5px;color:var(--color-semantic-text-regular)}.action{padding-inline-start:16px;margin-block:auto;flex-shrink:0}.close{border-radius:100%;display:flex;align-items:center;justify-content:center}.base.type__error .close:hover{background-color:var(--color-semantic-surface-error-3)}.base.type__information .close:hover{background-color:var(--color-semantic-surface-information-3)}.base.type__success .close:hover{background-color:var(--color-semantic-surface-success-3)}.base.type__warning .close:hover{background-color:var(--color-semantic-surface-warning-3)}", Ye = ["error", "warning", "information", "success"];
+function Ne(i) {
+  return Ye.some((e) => e === i);
 }
 const O = {
   error: "type__error",
   warning: "type__warning",
   information: "type__information",
   success: "type__success"
-}, Y = {
+}, q = {
   error: '<path fill-rule="evenodd" clip-rule="evenodd" d="M2.58 18.8574L11.3416 3.99902H12.6459L21.4075 18.8574L20.7554 19.999H3.23212L2.58 18.8574ZM11.2 9.5V14.5H12.8V9.5H11.2ZM11.2 16V17.5H12.8V16H11.2Z" fill="#CA3232"></path>',
   information: '<path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM11.2 7.71997V9.49997H12.8V7.71997H11.2ZM10.5 16.2V16.72H13.5V16.2L12.8 16V11H10.5V11.8L11.2 12V16L10.5 16.2Z" fill="#3978BF"></path>',
   success: '<path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM15.5303 10.5303L14.4697 9.46967L11 12.9393L9.53033 11.4697L8.46967 12.5303L10.4697 14.5303L11 15.0607L11.5303 14.5303L15.5303 10.5303Z" fill="#1A7037"></path>',
   warning: '<path fill-rule="evenodd" clip-rule="evenodd" d="M2.58 18.8574L11.3416 3.99902H12.6459L21.4075 18.8574L20.7554 19.999H3.23212L2.58 18.8574ZM11.2 9.5V14.5H12.8V9.5H11.2ZM11.2 16V17.5H12.8V16H11.2Z" fill="#EAB100"></path>'
-}, ft = {
+}, Je = {
   error: "エラー",
   warning: "警告",
   information: "情報",
   success: "成功"
-}, be = new CSSStyleSheet();
-be.replaceSync(`${n} ${r} ${pt}`);
-class gt extends HTMLElement {
+};
+class Qe extends HTMLElement {
   #o = "information";
   #t = document.createElement("div");
   #e = document.createElement("div");
@@ -1056,7 +1043,7 @@ class gt extends HTMLElement {
     return this.#o;
   }
   set type(e) {
-    this.#t.classList.remove(O[this.#o]), this.#t.classList.add(O[e]), this.#s.innerHTML = Y[e], this.#o = e;
+    this.#t.classList.remove(O[this.#o]), this.#t.classList.add(O[e]), this.#s.innerHTML = q[e], this.#o = e;
   }
   static get observedAttributes() {
     return ["type"];
@@ -1064,7 +1051,7 @@ class gt extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      be
+      r(qe)
     ], this.type = "information";
   }
   connectedCallback() {
@@ -1079,7 +1066,7 @@ class gt extends HTMLElement {
     this.#e.classList.add("body"), this.#e.setAttribute("role", "alert");
   }
   #n() {
-    this.#s.setAttribute("role", "img"), this.#s.setAttribute("viewBox", "0 0 24 24"), this.#s.setAttribute("aria-hidden", "false"), this.#s.setAttribute("aria-label", ft[this.type]), this.#s.classList.add("icon"), this.#s.innerHTML = Y[this.type];
+    this.#s.setAttribute("role", "img"), this.#s.setAttribute("viewBox", "0 0 24 24"), this.#s.setAttribute("aria-hidden", "false"), this.#s.setAttribute("aria-label", Je[this.type]), this.#s.classList.add("icon"), this.#s.innerHTML = q[this.type];
   }
   #c() {
     const e = document.createElement("div");
@@ -1106,34 +1093,31 @@ class gt extends HTMLElement {
     o !== t && e === "type" && this.#u(t);
   }
   #u(e) {
-    bt(e) ? this.type = e : (console.warn(`${e}は無効なtype属性です。`), this.type = "information");
+    Ne(e) ? this.type = e : (console.warn(`${e}は無効なtype属性です。`), this.type = "information");
   }
 }
-customElements.get("sp-notification-bar") || customElements.define("sp-notification-bar", gt);
-const vt = ".base{display:flex;gap:8px;border:1px solid;border-radius:5px;padding-block:8px;padding-inline:16px}.icon{display:inline-block;flex-shrink:0;width:24px;height:24px}.base.type__error{border-color:var(--color-semantic-border-error);background-color:var(--color-semantic-surface-error-1)}.base.type__information{border-color:var(--color-semantic-border-information);background-color:var(--color-semantic-surface-information-1)}.base.type__success{border-color:var(--color-semantic-border-success);background-color:var(--color-semantic-surface-success-1)}.base.type__warning{border-color:var(--color-semantic-border-warning);background-color:var(--color-semantic-surface-warning-1)}.content{font-size:12px;line-height:1.6;padding-block:2.5px;color:var(--color-semantic-text-regular)}", Lt = ["error", "warning", "information", "success"];
-function xt(i) {
-  return Lt.some((e) => e === i);
+customElements.get("sp-notification-bar") || customElements.define("sp-notification-bar", Qe);
+const Xe = ".base{display:flex;gap:8px;border:1px solid;border-radius:5px;padding-block:8px;padding-inline:16px}.icon{display:inline-block;flex-shrink:0;width:24px;height:24px}.base.type__error{border-color:var(--color-semantic-border-error);background-color:var(--color-semantic-surface-error-1)}.base.type__information{border-color:var(--color-semantic-border-information);background-color:var(--color-semantic-surface-information-1)}.base.type__success{border-color:var(--color-semantic-border-success);background-color:var(--color-semantic-surface-success-1)}.base.type__warning{border-color:var(--color-semantic-border-warning);background-color:var(--color-semantic-surface-warning-1)}.content{font-size:12px;line-height:1.6;padding-block:2.5px;color:var(--color-semantic-text-regular)}", Ke = ["error", "warning", "information", "success"];
+function $e(i) {
+  return Ke.some((e) => e === i);
 }
-const Ct = {
+const et = {
   error: "エラー",
   warning: "警告",
   information: "情報",
   success: "成功"
-}, N = {
+}, Y = {
   error: "type__error",
   warning: "type__warning",
   information: "type__information",
   success: "type__success"
-}, J = {
+}, N = {
   error: '<path fill-rule="evenodd" clip-rule="evenodd" d="M2.58 18.8574L11.3416 3.99902H12.6459L21.4075 18.8574L20.7554 19.999H3.23212L2.58 18.8574ZM11.2 9.5V14.5H12.8V9.5H11.2ZM11.2 16V17.5H12.8V16H11.2Z" fill="#CA3232"></path>',
   information: '<path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM11.2 7.71997V9.49997H12.8V7.71997H11.2ZM10.5 16.2V16.72H13.5V16.2L12.8 16V11H10.5V11.8L11.2 12V16L10.5 16.2Z" fill="#3978BF"></path>',
   success: '<path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM15.5303 10.5303L14.4697 9.46967L11 12.9393L9.53033 11.4697L8.46967 12.5303L10.4697 14.5303L11 15.0607L11.5303 14.5303L15.5303 10.5303Z" fill="#1A7037"></path>',
   warning: '<path fill-rule="evenodd" clip-rule="evenodd" d="M2.58 18.8574L11.3416 3.99902H12.6459L21.4075 18.8574L20.7554 19.999H3.23212L2.58 18.8574ZM11.2 9.5V14.5H12.8V9.5H11.2ZM11.2 16V17.5H12.8V16H11.2Z" fill="#EAB100"></path>'
-}, fe = new CSSStyleSheet();
-fe.replaceSync(
-  `${n} ${r} ${vt}`
-);
-class yt extends HTMLElement {
+};
+class tt extends HTMLElement {
   #o = "information";
   #t = document.createElement("div");
   #e = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -1152,7 +1136,7 @@ class yt extends HTMLElement {
     return this.#o;
   }
   set type(e) {
-    this.#t.classList.remove(N[this.#o]), this.#t.classList.add(N[e]), this.#e.innerHTML = J[e], this.#o = e;
+    this.#t.classList.remove(Y[this.#o]), this.#t.classList.add(Y[e]), this.#e.innerHTML = N[e], this.#o = e;
   }
   static get observedAttributes() {
     return ["type"];
@@ -1160,7 +1144,7 @@ class yt extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      fe
+      r(Xe)
     ], this.type = "information";
   }
   connectedCallback() {
@@ -1172,7 +1156,7 @@ class yt extends HTMLElement {
     this.#t.classList.add("base");
   }
   #s() {
-    this.#e.setAttribute("role", "img"), this.#e.setAttribute("viewBox", "0 0 24 24"), this.#e.setAttribute("aria-hidden", "false"), this.#e.setAttribute("aria-label", Ct[this.type]), this.#e.classList.add("icon"), this.#e.innerHTML = J[this.type];
+    this.#e.setAttribute("role", "img"), this.#e.setAttribute("viewBox", "0 0 24 24"), this.#e.setAttribute("aria-hidden", "false"), this.#e.setAttribute("aria-label", et[this.type]), this.#e.classList.add("icon"), this.#e.innerHTML = N[this.type];
   }
   #a() {
     const e = document.createElement("div");
@@ -1187,14 +1171,12 @@ class yt extends HTMLElement {
     o !== t && e === "type" && this.#n(t);
   }
   #n(e) {
-    xt(e) ? this.type = e : (console.warn(`${e}は無効なtype属性です。`), this.type = "information");
+    $e(e) ? this.type = e : (console.warn(`${e}は無効なtype属性です。`), this.type = "information");
   }
 }
-customElements.get("sp-notification-message") || customElements.define("sp-notification-message", yt);
-const kt = ".page-group{display:inline-flex}.page,.previous,.next,.first,.last{display:grid;place-content:center;border-radius:2px;padding-block:.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.page{padding-inline:6px}.previous,.next,.first,.last{padding-inline:8px}.previous:disabled,.next:disabled,.first:disabled,.last:disabled{color:var(--color-semantic-text-disabled)}.page:focus,.previous:focus,.next:focus,.first:focus,.last:focus{background-color:var(--color-semantic-surface-regular-3);outline:none}.page:hover:enabled,.previous:hover:enabled,.next:hover:enabled,.first:hover:enabled,.last:hover:enabled{background-color:var(--color-semantic-surface-regular-3)}.page.selected,.previous.selected,.next.selected,.first.selected,.last.selected{color:var(--color-semantic-text-current);background-color:var(--color-semantic-surface-regular-3);font-weight:700}", ge = new CSSStyleSheet();
-ge.replaceSync(`${n} ${r} ${kt}`);
-const R = 10, wt = 4;
-class Et extends HTMLElement {
+customElements.get("sp-notification-message") || customElements.define("sp-notification-message", tt);
+const ot = ".page-group{display:inline-flex}.page,.previous,.next,.first,.last{display:grid;place-content:center;border-radius:2px;padding-block:.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.page{padding-inline:6px}.previous,.next,.first,.last{padding-inline:8px}.previous:disabled,.next:disabled,.first:disabled,.last:disabled{color:var(--color-semantic-text-disabled)}.page:focus,.previous:focus,.next:focus,.first:focus,.last:focus{background-color:var(--color-semantic-surface-regular-3);outline:none}.page:hover:enabled,.previous:hover:enabled,.next:hover:enabled,.first:hover:enabled,.last:hover:enabled{background-color:var(--color-semantic-surface-regular-3)}.page.selected,.previous.selected,.next.selected,.first.selected,.last.selected{color:var(--color-semantic-text-current);background-color:var(--color-semantic-surface-regular-3);font-weight:700}", R = 10, it = 4;
+class st extends HTMLElement {
   #o = 1;
   #t = 1;
   #e = document.createElement("nav");
@@ -1232,7 +1214,7 @@ class Et extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      ge
+      r(ot)
     ];
   }
   connectedCallback() {
@@ -1277,17 +1259,17 @@ class Et extends HTMLElement {
     return Array.from(
       { length: o - e + 1 },
       (t, s) => {
-        const u = e + s;
+        const h = e + s;
         return {
           type: "page",
-          text: String(u),
-          targetPage: u
+          text: String(h),
+          targetPage: h
         };
       }
     );
   }
   #h() {
-    let e = Math.max(1, this.selected - wt);
+    let e = Math.max(1, this.selected - it);
     e + R - 1 > this.total && (e = Math.max(1, this.total - R + 1));
     const o = Math.min(
       this.total,
@@ -1298,31 +1280,31 @@ class Et extends HTMLElement {
   #u({ type: e, text: o, targetPage: t }) {
     const s = this.#L(e, o, t);
     this.#s.push(s);
-    const u = document.createElement("li");
-    return u.appendChild(s), u;
+    const h = document.createElement("li");
+    return h.appendChild(s), h;
   }
   #L(e, o, t) {
     const s = document.createElement("button");
     s.textContent = o, s.classList.add(e), e === "page" && this.#x(s, t);
-    const u = this.#p(e);
-    return s.disabled = u, s.onclick = () => this.#m(t), s;
+    const h = this.#m(e);
+    return s.disabled = h, s.onclick = () => this.#p(t), s;
   }
   #x(e, o) {
     e.setAttribute("aria-label", `${o}ページ目へ`), o === this.selected && (e.classList.add("selected"), e.setAttribute("aria-current", "page"));
   }
-  #p(e) {
+  #m(e) {
     return e === "first" || e === "previous" ? this.selected === 1 : e === "next" || e === "last" ? this.selected === this.total : !1;
   }
-  #m(e) {
-    this.#C(e) || (this.#y(e), this.#k(e), this.#b());
+  #p(e) {
+    this.#C(e) || (this.#k(e), this.#y(e), this.#b());
   }
   #C(e) {
     return e === this.selected || e < 1 || e > this.total;
   }
-  #y(e) {
+  #k(e) {
     this.selected = e, this.setAttribute("selected", String(e));
   }
-  #k(e) {
+  #y(e) {
     this.dispatchEvent(
       new CustomEvent("change", {
         detail: { page: e }
@@ -1342,25 +1324,23 @@ class Et extends HTMLElement {
     e.classList.toggle("selected", t), e.setAttribute("aria-label", `${o.targetPage}ページ目へ`), t ? e.setAttribute("aria-current", "page") : e.removeAttribute("aria-current");
   }
   #g(e, o) {
-    const t = this.#p(o.type);
-    e.disabled = t, e.onclick = () => this.#m(o.targetPage);
+    const t = this.#m(o.type);
+    e.disabled = t, e.onclick = () => this.#p(o.targetPage);
   }
 }
-customElements.get("sp-pagination") || customElements.define("sp-pagination", Et);
-const Ht = ':host{display:inline-block;max-width:100%}.base{display:flex;flex-wrap:wrap;gap:8px}.base:has(:focus-visible){outline:auto}.base.horizontal{flex-direction:row}.base.vertical{flex-direction:column}.item{display:inline-flex;justify-content:flex-start;align-items:flex-start}.text{color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6;padding-block:2.5px;cursor:pointer}.input{position:absolute;left:0;top:0;opacity:0;width:100%;height:100%;cursor:pointer}.radio{position:relative;flex-grow:0;flex-shrink:0;display:inline-flex;padding-block:4px;padding-inline:4px}.radio:before{content:"";display:inline-block;width:16px;height:16px;background:var(--color-semantic-surface-regular-1) 50% 50% no-repeat;border:1px solid var(--color-semantic-border-check-unchecked);border-radius:50%}.radio:has(.input:focus-visible):before{outline:auto;outline-offset:4px;border-color:var(--color-semantic-border-focus);box-shadow:0 0 0 3px var(--color-semantic-highlight-focus-ring-default)}.radio:has(.input:checked):before{background-color:var(--color-semantic-surface-regular-1);border-width:4px}.radio:has(.input:checked:not(:disabled)):before{border-color:var(--color-semantic-border-selected)}.item:has(.input:disabled) :is(.input,.text){cursor:not-allowed}.item:has(.input:disabled) .text{color:var(--color-semantic-text-disabled)}.item .radio:has(.input:disabled):before{background-color:var(--color-semantic-surface-check-disabled);border-color:var(--color-semantic-border-regular)}.item .radio:has(.input:checked:disabled):before{background-color:var(--color-semantic-surface-regular-1)}.item:has(:is(.input:hover,.text:hover)):not(:has(:is(.input:checked,.input:disabled))) .radio:before{background-color:var(--color-semantic-surface-regular-3)}.item:has(.input:checked:hover:not(:disabled)) .radio:before,.item:has(.input:checked:not(:disabled)):has(.text:hover) .radio:before{border-color:var(--color-semantic-border-selected-hover)}', ve = new CSSStyleSheet();
-ve.replaceSync(`${r} ${Ht}`);
-class St extends D {
+customElements.get("sp-pagination") || customElements.define("sp-pagination", st);
+const rt = ':host{display:inline-block;max-width:100%}.base{display:flex;flex-wrap:wrap;gap:8px}.base:has(:focus-visible){outline:auto}.base.horizontal{flex-direction:row}.base.vertical{flex-direction:column}.item{display:inline-flex;justify-content:flex-start;align-items:flex-start}.text{color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6;padding-block:2.5px;cursor:pointer}.input{position:absolute;left:0;top:0;opacity:0;width:100%;height:100%;cursor:pointer}.radio{position:relative;flex-grow:0;flex-shrink:0;display:inline-flex;padding-block:4px;padding-inline:4px}.radio:before{content:"";display:inline-block;width:16px;height:16px;background:var(--color-semantic-surface-regular-1) 50% 50% no-repeat;border:1px solid var(--color-semantic-border-check-unchecked);border-radius:50%}.radio:has(.input:focus-visible):before{outline:auto;outline-offset:4px;border-color:var(--color-semantic-border-focus);box-shadow:0 0 0 3px var(--color-semantic-highlight-focus-ring-default)}.radio:has(.input:checked):before{background-color:var(--color-semantic-surface-regular-1);border-width:4px}.radio:has(.input:checked:not(:disabled)):before{border-color:var(--color-semantic-border-selected)}.item:has(.input:disabled) :is(.input,.text){cursor:not-allowed}.item:has(.input:disabled) .text{color:var(--color-semantic-text-disabled)}.item .radio:has(.input:disabled):before{background-color:var(--color-semantic-surface-check-disabled);border-color:var(--color-semantic-border-regular)}.item .radio:has(.input:checked:disabled):before{background-color:var(--color-semantic-surface-regular-1)}.item:has(:is(.input:hover,.text:hover)):not(:has(:is(.input:checked,.input:disabled))) .radio:before{background-color:var(--color-semantic-surface-regular-3)}.item:has(.input:checked:hover:not(:disabled)) .radio:before,.item:has(.input:checked:not(:disabled)):has(.text:hover) .radio:before{border-color:var(--color-semantic-border-selected-hover)}';
+class at extends D {
   constructor() {
     super(), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      ve
+      r(rt)
     ];
   }
 }
-customElements.get("sp-radio-button-text-group") || customElements.define("sp-radio-button-text-group", St);
-const _t = ":host{display:block}.container{display:flex;justify-content:space-between;align-items:center;gap:16px}.main{display:flex;align-items:center;gap:16px}.heading{display:flex;align-items:center;gap:8px}.text-links{display:flex;flex-shrink:0;align-items:center;gap:16px}.buttons{display:flex;flex-shrink:0;align-items:center;gap:8px}h2{margin-block:3px;font-size:14px;font-weight:700;line-height:1.6;position:relative}", Le = new CSSStyleSheet();
-Le.replaceSync(`${n} ${r} ${_t}`);
-class Vt extends HTMLElement {
+customElements.get("sp-radio-button-text-group") || customElements.define("sp-radio-button-text-group", at);
+const nt = ":host{display:block}.container{display:flex;justify-content:space-between;align-items:center;gap:16px}.main{display:flex;align-items:center;gap:16px}.heading{display:flex;align-items:center;gap:8px}.text-links{display:flex;flex-shrink:0;align-items:center;gap:16px}.buttons{display:flex;flex-shrink:0;align-items:center;gap:8px}h2{margin-block:3px;font-size:14px;font-weight:700;line-height:1.6;position:relative}";
+class ct extends HTMLElement {
   #o = document.createElement("h2");
   #t = document.createElement("slot");
   #e = document.createElement("slot");
@@ -1377,7 +1357,10 @@ class Vt extends HTMLElement {
     return ["text"];
   }
   constructor() {
-    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [Le], this.#t.name = "text-links", this.#e.name = "buttons";
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      r(nt)
+    ], this.#t.name = "text-links", this.#e.name = "buttons";
   }
   connectedCallback() {
     this.shadowRoot.appendChild(this.#i()), this.#t.assignedElements().length === 0 && this.shadowRoot.querySelector(".text-links")?.remove(), this.#e.assignedElements().length === 0 && this.shadowRoot.querySelector(".buttons")?.remove();
@@ -1406,21 +1389,19 @@ class Vt extends HTMLElement {
     return e.classList.add("buttons"), e.appendChild(this.#e), e;
   }
 }
-customElements.get("sp-section-title") || customElements.define("sp-section-title", Vt);
-const Mt = ":host{display:inline-block;max-width:100%;line-height:0;vertical-align:middle}.base{display:inline-flex;max-width:100%}.item{flex:1 0 80px;position:relative;display:flex;align-items:stretch;min-width:80px}.radio{position:absolute;z-index:-1;width:100%;height:100%}.input{width:100%;height:100%;opacity:0}.text{flex-grow:1;display:flex;align-items:center;justify-content:center;padding-block:8px;padding-inline:8px;background-color:var(--color-semantic-surface-regular-2);border:1px solid var(--color-semantic-border-regular);border-right:none;color:var(--color-semantic-text-weak);font-size:10px;line-height:1.6;text-align:center}.text:hover{background-color:var(--color-semantic-surface-regular-4)}.item:first-child .text{border-radius:5px 0 0 5px}.item:last-child .text{border-radius:0 5px 5px 0;border-right:1px solid var(--color-semantic-border-regular)}.item:has(.input:focus-visible) .text{outline:auto;outline-offset:-4px;background-color:var(--color-semantic-surface-regular-4)}.item:has(.input:checked) .text{background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected);color:var(--color-semantic-text-inverse);font-weight:700;cursor:default}.item:has(.input:disabled) .text{background-color:var(--color-semantic-surface-regular-2);color:var(--color-semantic-text-disabled);cursor:not-allowed}", xe = new CSSStyleSheet();
-xe.replaceSync(`${r} ${Mt}`);
-class At extends D {
+customElements.get("sp-section-title") || customElements.define("sp-section-title", ct);
+const lt = ":host{display:inline-block;max-width:100%;line-height:0;vertical-align:middle}.base{display:inline-flex;max-width:100%}.item{flex:1 0 80px;position:relative;display:flex;align-items:stretch;min-width:80px}.radio{position:absolute;z-index:-1;width:100%;height:100%}.input{width:100%;height:100%;opacity:0}.text{flex-grow:1;display:flex;align-items:center;justify-content:center;padding-block:8px;padding-inline:8px;background-color:var(--color-semantic-surface-regular-2);border:1px solid var(--color-semantic-border-regular);border-right:none;color:var(--color-semantic-text-weak);font-size:10px;line-height:1.6;text-align:center}.text:hover{background-color:var(--color-semantic-surface-regular-4)}.item:first-child .text{border-radius:5px 0 0 5px}.item:last-child .text{border-radius:0 5px 5px 0;border-right:1px solid var(--color-semantic-border-regular)}.item:has(.input:focus-visible) .text{outline:auto;outline-offset:-4px;background-color:var(--color-semantic-surface-regular-4)}.item:has(.input:checked) .text{background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected);color:var(--color-semantic-text-inverse);font-weight:700;cursor:default}.item:has(.input:disabled) .text{background-color:var(--color-semantic-surface-regular-2);color:var(--color-semantic-text-disabled);cursor:not-allowed}";
+class dt extends D {
   constructor() {
     super(), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      xe
+      r(lt)
     ];
   }
 }
-customElements.get("sp-segmented-control") || customElements.define("sp-segmented-control", At);
-const Zt = ".button{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-regular)}.button:hover{background-color:var(--color-semantic-surface-regular-4)}:host([selected]) .button{font-weight:700;color:var(--color-semantic-text-inverse);background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected)}:host([disabled]){pointer-events:none}:host([disabled]) .button{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-disabled);cursor:default}:host([selected]) .button:hover{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}", Ce = new CSSStyleSheet();
-Ce.replaceSync(`${n} ${r} ${Zt}`);
-class Tt extends HTMLElement {
+customElements.get("sp-segmented-control") || customElements.define("sp-segmented-control", dt);
+const ht = ".button{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-regular)}.button:hover{background-color:var(--color-semantic-surface-regular-4)}:host([selected]) .button{font-weight:700;color:var(--color-semantic-text-inverse);background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected)}:host([disabled]){pointer-events:none}:host([disabled]) .button{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-disabled);cursor:default}:host([selected]) .button:hover{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}";
+class ut extends HTMLElement {
   #o = !1;
   #t = !1;
   #e = document.createElement("button");
@@ -1456,7 +1437,7 @@ class Tt extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      Ce
+      r(ht)
     ], this.selected = !1, this.disabled = !1;
   }
   connectedCallback() {
@@ -1484,14 +1465,13 @@ class Tt extends HTMLElement {
     this.#e.textContent = "", this.#e.appendChild(e), this.#t ? this.#e.disabled = !0 : this.#e.disabled = !1, this.shadowRoot.appendChild(this.#e);
   }
 }
-customElements.get("sp-tag-clickable") || customElements.define("sp-tag-clickable", Tt);
-const Rt = ".link{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;text-decoration:none;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-text-link)}.link:hover{background-color:var(--color-semantic-surface-regular-4)}.link:focus{background-color:var(--color-semantic-surface-regular-4)}:host([disabled]){pointer-events:none}:host([disabled]) .link{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-disabled)}", ye = new CSSStyleSheet();
-ye.replaceSync(`${n} ${r} ${Rt}`);
-class zt extends HTMLElement {
+customElements.get("sp-tag-clickable") || customElements.define("sp-tag-clickable", ut);
+const mt = ".link{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;text-decoration:none;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-text-link)}.link:hover{background-color:var(--color-semantic-surface-regular-4)}.link:focus{background-color:var(--color-semantic-surface-regular-4)}:host([disabled]){pointer-events:none}:host([disabled]) .link{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-disabled)}";
+class pt extends HTMLElement {
   constructor() {
     super(), this.href = "", this.#o = !1, this.#t = document.createElement("a"), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      ye
+      r(mt)
     ];
   }
   #o;
@@ -1532,10 +1512,9 @@ class zt extends HTMLElement {
     this.#t.appendChild(e), this.shadowRoot.appendChild(this.#t);
   }
 }
-customElements.get("sp-tag-link") || customElements.define("sp-tag-link", zt);
-const Bt = ".base{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center}.type__gray{background-color:var(--color-semantic-surface-temp-tag-gray);border-color:var(--color-semantic-border-temp-tag-gray);color:var(--color-semantic-text-regular)}.type__green.light{background-color:var(--color-semantic-surface-temp-tag-green);border-color:var(--color-semantic-border-temp-tag-green);color:var(--color-semantic-text-success)}.type__green:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkgreen);border-color:var(--color-semantic-border-temp-tag-darkgreen);color:var(--color-semantic-text-inverse)}.type__red.light{background-color:var(--color-semantic-surface-temp-tag-red);border-color:var(--color-semantic-border-temp-tag-red);color:var(--color-semantic-text-danger)}.type__red:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkred);border-color:var(--color-semantic-border-temp-tag-darkred);color:var(--color-semantic-text-inverse)}.type__yellow.light{background-color:var(--color-semantic-surface-temp-tag-yellow);border-color:var(--color-semantic-border-temp-tag-yellow);color:var(--color-semantic-text-warning)}.type__yellow:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkyellow);border-color:var(--color-semantic-border-temp-tag-darkyellow);color:var(--color-semantic-text-inverse)}.type__blue.light{background-color:var(--color-semantic-surface-temp-tag-marine);border-color:var(--color-semantic-border-temp-tag-marine);color:var(--color-semantic-text-marine)}.type__blue:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkmarine);border-color:var(--color-semantic-border-temp-tag-darkmarine);color:var(--color-semantic-text-inverse)}", ke = new CSSStyleSheet();
-ke.replaceSync(`${n} ${r} ${Bt}`);
-class $t extends HTMLElement {
+customElements.get("sp-tag-link") || customElements.define("sp-tag-link", pt);
+const bt = ".base{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center}.type__gray{background-color:var(--color-semantic-surface-temp-tag-gray);border-color:var(--color-semantic-border-temp-tag-gray);color:var(--color-semantic-text-regular)}.type__green.light{background-color:var(--color-semantic-surface-temp-tag-green);border-color:var(--color-semantic-border-temp-tag-green);color:var(--color-semantic-text-success)}.type__green:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkgreen);border-color:var(--color-semantic-border-temp-tag-darkgreen);color:var(--color-semantic-text-inverse)}.type__red.light{background-color:var(--color-semantic-surface-temp-tag-red);border-color:var(--color-semantic-border-temp-tag-red);color:var(--color-semantic-text-danger)}.type__red:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkred);border-color:var(--color-semantic-border-temp-tag-darkred);color:var(--color-semantic-text-inverse)}.type__yellow.light{background-color:var(--color-semantic-surface-temp-tag-yellow);border-color:var(--color-semantic-border-temp-tag-yellow);color:var(--color-semantic-text-warning)}.type__yellow:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkyellow);border-color:var(--color-semantic-border-temp-tag-darkyellow);color:var(--color-semantic-text-inverse)}.type__blue.light{background-color:var(--color-semantic-surface-temp-tag-marine);border-color:var(--color-semantic-border-temp-tag-marine);color:var(--color-semantic-text-marine)}.type__blue:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkmarine);border-color:var(--color-semantic-border-temp-tag-darkmarine);color:var(--color-semantic-text-inverse)}";
+class ft extends HTMLElement {
   #o = "gray";
   #t = !0;
   #e = document.createElement("div");
@@ -1576,7 +1555,7 @@ class $t extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      ke
+      r(bt)
     ];
   }
   connectedCallback() {
@@ -1609,10 +1588,9 @@ class $t extends HTMLElement {
     this.#e.appendChild(e), this.shadowRoot.appendChild(this.#e);
   }
 }
-customElements.get("sp-tag-liquid") || customElements.define("sp-tag-liquid", $t);
-const Pt = ".base{display:inline-flex;vertical-align:middle;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;gap:4px;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular)}.base:hover{background-color:var(--color-semantic-surface-regular-4)}.label{color:var(--color-semantic-text-regular)}.remove{color:var(--color-primitive-neutral-100);display:flex;align-items:center;justify-content:center}.drag-icon{display:flex;align-items:center;justify-content:center;color:var(--color-semantic-text-regular);cursor:grab;margin-right:2px}.drag-icon:active{cursor:grabbing}.base.dragging{opacity:.8;box-shadow:0 2px 4px #0003}:host([disabled]) .base{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular)}:host([disabled]) .label{color:var(--color-semantic-text-disabled)}:host([disabled]) .remove{color:var(--color-semantic-text-disabled)}:host([disabled]) .drag-icon{color:var(--color-semantic-text-disabled);cursor:default}", we = new CSSStyleSheet();
-we.replaceSync(`${n} ${r} ${Pt}`);
-class It extends HTMLElement {
+customElements.get("sp-tag-liquid") || customElements.define("sp-tag-liquid", ft);
+const gt = ".base{display:inline-flex;vertical-align:middle;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;gap:4px;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular)}.base:hover{background-color:var(--color-semantic-surface-regular-4)}.label{color:var(--color-semantic-text-regular)}.remove{color:var(--color-primitive-neutral-100);display:flex;align-items:center;justify-content:center}.drag-icon{display:flex;align-items:center;justify-content:center;color:var(--color-semantic-text-regular);cursor:grab;margin-right:2px}.drag-icon:active{cursor:grabbing}.base.dragging{opacity:.8;box-shadow:0 2px 4px #0003}:host([disabled]) .base{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular)}:host([disabled]) .label{color:var(--color-semantic-text-disabled)}:host([disabled]) .remove{color:var(--color-semantic-text-disabled)}:host([disabled]) .drag-icon{color:var(--color-semantic-text-disabled);cursor:default}";
+class vt extends HTMLElement {
   #o = !1;
   #t = !1;
   #e = document.createElement("button");
@@ -1652,7 +1630,7 @@ class It extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      we
+      r(gt)
     ], this.disabled = !1;
   }
   connectedCallback() {
@@ -1721,28 +1699,28 @@ class It extends HTMLElement {
     o.appendChild(t), e.appendChild(o), e.appendChild(this.#e), this.shadowRoot.appendChild(e);
   }
 }
-customElements.get("sp-tag-removable") || customElements.define("sp-tag-removable", It);
+customElements.get("sp-tag-removable") || customElements.define("sp-tag-removable", vt);
 export {
-  ie as SpButton,
-  Ue as SpCheckbox,
-  We as SpCheckboxList,
-  je as SpCheckboxText,
-  Ye as SpDefinitionList,
-  Je as SpDefinitionListDd,
-  qe as SpDefinitionListDt,
-  at as SpDropdownAction,
-  tt as SpDropdownActionItem,
-  dt as SpDropdownDialog,
-  ut as SpElementTitle,
+  te as SpButton,
+  xe as SpCheckbox,
+  ke as SpCheckboxList,
+  we as SpCheckboxText,
+  He as SpDefinitionList,
+  Ve as SpDefinitionListDd,
+  Me as SpDefinitionListDt,
+  De as SpDropdownAction,
+  Te as SpDropdownActionItem,
+  Fe as SpDropdownDialog,
+  Oe as SpElementTitle,
   U as SpIcon,
-  gt as SpNotificationBar,
-  yt as SpNotificationMessage,
-  Et as SpPagination,
-  St as SpRadioButtonTextGroup,
-  Vt as SpSectionTitle,
-  At as SpSegmentedControl,
-  Tt as SpTagClickable,
-  zt as SpTagLink,
-  $t as SpTagLiquid,
-  It as SpTagRemovable
+  Qe as SpNotificationBar,
+  tt as SpNotificationMessage,
+  st as SpPagination,
+  at as SpRadioButtonTextGroup,
+  ct as SpSectionTitle,
+  dt as SpSegmentedControl,
+  ut as SpTagClickable,
+  pt as SpTagLink,
+  ft as SpTagLiquid,
+  vt as SpTagRemovable
 };

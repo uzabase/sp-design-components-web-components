@@ -4,6 +4,34 @@
   "modules": [
     {
       "kind": "javascript-module",
+      "path": "src/components/styles.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "makeStyleSheet",
+          "parameters": [
+            {
+              "name": "styles",
+              "type": {
+                "text": "string[]"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "makeStyleSheet",
+          "declaration": {
+            "name": "makeStyleSheet",
+            "module": "src/components/styles.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/button/sp-button.ts",
       "declarations": [
         {
@@ -32,7 +60,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(buttonStyle), ]"
             },
             {
               "kind": "field",
@@ -102,7 +130,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(checkmarkStyle, checkboxListStyle), ]"
             }
           ],
           "superclass": {
@@ -154,7 +182,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(checkmarkStyle, checkboxTextStyle), ]"
             }
           ],
           "superclass": {
@@ -200,7 +228,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(checkmarkStyle, checkboxStyle), ]"
             }
           ],
           "superclass": {
@@ -408,7 +436,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]",
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(buttonStyle, dropdownActionButtonStyle), ]",
               "inheritedFrom": {
                 "name": "SpButton",
                 "module": "src/components/button/sp-button.ts"
@@ -513,7 +541,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(dropdownActionItemStyle), ]"
             }
           ],
           "superclass": {
@@ -603,7 +631,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(dropdownActionStyle), ]"
             }
           ],
           "attributes": [
@@ -730,7 +758,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(dropdownDialogStyle), ]"
             }
           ],
           "attributes": [
@@ -826,7 +854,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[styles]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(elementTitleStyle), ]"
             },
             {
               "kind": "field",
@@ -1025,7 +1053,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(notificationBarStyle), ]"
             }
           ],
           "events": [
@@ -1138,7 +1166,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(notificationMessageStyle), ]"
             }
           ],
           "attributes": [
@@ -1230,7 +1258,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(paginationStyle), ]"
             }
           ],
           "events": [
@@ -1310,7 +1338,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(radioButtonTextGroupStyle), ]"
             }
           ],
           "superclass": {
@@ -1375,7 +1403,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[styles]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(sectionTitleStyle), ]"
             },
             {
               "kind": "field",
@@ -1444,7 +1472,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(segmentedControlStyle), ]"
             }
           ],
           "superclass": {
@@ -1516,7 +1544,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(tagClickableStyle), ]"
             }
           ],
           "events": [
@@ -1616,7 +1644,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(tagLinkStyle), ]"
             }
           ],
           "attributes": [
@@ -1707,7 +1735,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(tagLiquidStyle), ]"
             }
           ],
           "attributes": [
@@ -1798,7 +1826,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(tagRemovableStyle), ]"
             }
           ],
           "events": [
