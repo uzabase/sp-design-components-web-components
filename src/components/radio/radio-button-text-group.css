@@ -55,7 +55,7 @@
 }
 
 .radio::before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -97,7 +97,10 @@
   background-color: var(--color-semantic-surface-regular-1);
 }
 
-.item:has(:is(.input:hover, .text:hover)):not(:has(:is(.input:checked, .input:disabled))) .radio::before {
+.item:has(:is(.input:hover, .text:hover)):not(
+    :has(:is(.input:checked, .input:disabled))
+  )
+  .radio::before {
   background-color: var(--color-semantic-surface-regular-3);
 }
 

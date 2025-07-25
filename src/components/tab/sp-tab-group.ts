@@ -179,7 +179,7 @@ export class SpTabGroup extends HTMLElement {
         tab.setAttribute("aria-controls", correspondingPanel.id);
         // パネルのaria-labelledbyをタブのIDに設定（推奨だが必須ではない）
         correspondingPanel.setAttribute("aria-labelledby", tab.id);
-        
+
         // パネルのtabindex属性を設定
         const isActive = correspondingPanel.hasAttribute("active");
         correspondingPanel.setAttribute("tabindex", isActive ? "0" : "-1");
