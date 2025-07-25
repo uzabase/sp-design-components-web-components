@@ -20,42 +20,39 @@ styles.replaceSync(`${foundationStyle} ${tabStyle} ${resetStyle}`);
 export class SpTab extends HTMLElement {
   #disabled!: boolean;
   #plusIconElement = new SpIcon();
-  #tabElement = document.createElement("button");
+  #tabElement = document.createElement("span");
   #textElement = document.createElement("span");
   #textSlotElement = document.createElement("slot");
 
   set disabled(value: boolean) {
     this.#disabled = value;
     if (value) {
-      this.#tabElement.classList.add("isDisable");
       this.setAttribute("aria-disabled", "true");
       if (!this.hasAttribute("disabled")) {
         this.setAttribute("disabled", "");
       }
     } else {
-      this.#tabElement.classList.remove("isDisable");
       this.setAttribute("aria-disabled", "false");
       this.removeAttribute("disabled");
     }
-    this.#tabElement.disabled = this.#disabled;
   }
 
   set selected(value: boolean) {
     if (value) {
-      this.#tabElement.classList.add("-selected");
+      this.classList.add("-selected");
       this.setAttribute("aria-selected", "true");
     } else {
-      this.#tabElement.classList.remove("-selected");
+      this.classList.remove("-selected");
       this.setAttribute("aria-selected", "false");
     }
   }
 
   set fill(value: TabType) {
     // 既存のfillクラスを削除
-    this.#tabElement.classList.remove("-white", "-gray");
+    this.classList.remove("-white", "-gray");
 
     // 新しいfillクラスを追加
-    this.#tabElement.classList.add(`-${value}`);
+    this.classList.add(`-${value}`);
   }
 
   set plusIcon(value: boolean) {
@@ -81,7 +78,7 @@ export class SpTab extends HTMLElement {
   }
 
   connectedCallback() {
-    this.#tabElement.classList.add("spds__tab");
+    this.classList.add("spds__tab");
     this.#textElement.classList.add("spds__tabText");
     this.#textElement.appendChild(this.#textSlotElement);
 
@@ -95,10 +92,24 @@ export class SpTab extends HTMLElement {
     const isDisabled = this.hasAttribute("disabled");
     this.setAttribute("aria-disabled", isDisabled ? "true" : "false");
 
+    // sp-tab要素自体にクリックイベントリスナーを追加
+    this.addEventListener("click", (e) => {
+      this.#handleClick(e);
+    });
+
     this.#plusIconElement.setAttribute("aria-hidden", "true");
     this.#tabElement.appendChild(this.#plusIconElement);
     this.#tabElement.appendChild(this.#textElement);
     this.shadowRoot!.appendChild(this.#tabElement);
+  }
+
+  #handleClick(originalEvent: MouseEvent) {
+    // disabledの場合はイベントを無効化
+    if (this.#disabled) {
+      originalEvent.preventDefault();
+      originalEvent.stopPropagation();
+      return;
+    }
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {

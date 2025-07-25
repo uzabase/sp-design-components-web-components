@@ -64,9 +64,11 @@ export class SpTabGroup extends HTMLElement {
       if (tab.getAttribute("panel") === targetPanel) {
         tab.setAttribute("selected", "true");
         tab.setAttribute("aria-selected", "true");
+        tab.setAttribute("tabindex", "0");
       } else {
         tab.removeAttribute("selected");
         tab.setAttribute("aria-selected", "false");
+        tab.setAttribute("tabindex", "-1");
       }
     });
   }
@@ -89,8 +91,12 @@ export class SpTabGroup extends HTMLElement {
     assignedPanels.forEach((panel) => {
       if (panel.getAttribute("name") === targetPanel) {
         panel.setAttribute("active", "");
+        // アクティブなパネルをフォーカス可能にする
+        panel.setAttribute("tabindex", "0");
       } else {
         panel.removeAttribute("active");
+        // 非アクティブなパネルはフォーカス不可にする
+        panel.setAttribute("tabindex", "-1");
       }
     });
 
@@ -126,6 +132,9 @@ export class SpTabGroup extends HTMLElement {
     // 初期化時やslotchange時に呼び出される
     this.validateSingleActivePanel();
 
+    // タブとパネルの属性を更新
+    this.updateTabsAndPanelsAttributes();
+
     // アクティブパネルがない場合、デフォルトパネルまたは最初のパネルをアクティブにする
     const activePanel = this.getActivePanel();
 
@@ -143,6 +152,41 @@ export class SpTabGroup extends HTMLElement {
     }
   }
 
+  private updateTabsAndPanelsAttributes(): void {
+    const assignedTabs = this.#navSlot.assignedElements();
+    const assignedPanels = this.#panelSlot.assignedElements();
+
+    // 各タブにIDとaria-controlsを設定
+    assignedTabs.forEach((tab) => {
+      const panelName = tab.getAttribute("panel");
+      if (!panelName) return;
+
+      // タブのIDを設定（存在しない場合のみ）
+      if (!tab.id) {
+        tab.id = `tab-${panelName}`;
+      }
+
+      // 対応するパネルを見つけてaria-controlsを設定
+      const correspondingPanel = assignedPanels.find(
+        (panel) => panel.getAttribute("name") === panelName,
+      );
+      if (correspondingPanel) {
+        // パネルのIDを設定（存在しない場合のみ）
+        if (!correspondingPanel.id) {
+          correspondingPanel.id = `panel-${panelName}`;
+        }
+        // タブのaria-controlsをパネルのIDに設定
+        tab.setAttribute("aria-controls", correspondingPanel.id);
+        // パネルのaria-labelledbyをタブのIDに設定（推奨だが必須ではない）
+        correspondingPanel.setAttribute("aria-labelledby", tab.id);
+        
+        // パネルのtabindex属性を設定
+        const isActive = correspondingPanel.hasAttribute("active");
+        correspondingPanel.setAttribute("tabindex", isActive ? "0" : "-1");
+      }
+    });
+  }
+
   static get observedAttributes() {
     return ["default-panel"];
   }
@@ -157,6 +201,7 @@ export class SpTabGroup extends HTMLElement {
     this.#navSlot.setAttribute("name", "nav");
     this.#panelSlot.setAttribute("name", "panel");
     this.#navWrapper.classList.add("nav-wrapper");
+    this.#navWrapper.setAttribute("role", "tablist");
     this.#navWrapper.appendChild(this.#navSlot);
 
     this.#panelWrapper.classList.add("panel-wrapper");
