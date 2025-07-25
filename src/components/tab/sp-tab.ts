@@ -23,6 +23,7 @@ export class SpTab extends HTMLElement {
   #tabElement = document.createElement("span");
   #textElement = document.createElement("span");
   #textSlotElement = document.createElement("slot");
+  #handleClickBound = this.#handleClick.bind(this);
 
   set disabled(value: boolean) {
     this.#disabled = value;
@@ -39,20 +40,18 @@ export class SpTab extends HTMLElement {
 
   set selected(value: boolean) {
     if (value) {
-      this.classList.add("-selected");
+      this.setAttribute("selected", "");
       this.setAttribute("aria-selected", "true");
     } else {
-      this.classList.remove("-selected");
+      this.removeAttribute("selected");
       this.setAttribute("aria-selected", "false");
     }
   }
 
   set fill(value: TabType) {
-    // 既存のfillクラスを削除
-    this.classList.remove("-white", "-gray");
-
-    // 新しいfillクラスを追加
-    this.classList.add(`-${value}`);
+    // 既存のfill属性を削除してから新しい値を設定
+    this.removeAttribute("fill");
+    this.setAttribute("fill", value);
   }
 
   set plusIcon(value: boolean) {
@@ -78,7 +77,6 @@ export class SpTab extends HTMLElement {
   }
 
   connectedCallback() {
-    this.classList.add("spds__tab");
     this.#textElement.classList.add("spds__tabText");
     this.#textElement.appendChild(this.#textSlotElement);
 
@@ -93,14 +91,17 @@ export class SpTab extends HTMLElement {
     this.setAttribute("aria-disabled", isDisabled ? "true" : "false");
 
     // sp-tab要素自体にクリックイベントリスナーを追加
-    this.addEventListener("click", (e) => {
-      this.#handleClick(e);
-    });
+    this.addEventListener("click", this.#handleClickBound);
 
     this.#plusIconElement.setAttribute("aria-hidden", "true");
     this.#tabElement.appendChild(this.#plusIconElement);
     this.#tabElement.appendChild(this.#textElement);
     this.shadowRoot!.appendChild(this.#tabElement);
+  }
+
+  disconnectedCallback() {
+    // イベントリスナーをクリーンアップ
+    this.removeEventListener("click", this.#handleClickBound);
   }
 
   #handleClick(originalEvent: MouseEvent) {
@@ -110,6 +111,8 @@ export class SpTab extends HTMLElement {
       originalEvent.stopPropagation();
       return;
     }
+
+    // イベントはそのまま親に伝播される（sp-tab-groupで処理される）
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {

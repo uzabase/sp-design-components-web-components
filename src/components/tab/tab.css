@@ -1,15 +1,9 @@
 :host {
-  display: inline-block;
+  display: inline-flex;
   max-width: 100%;
-  box-sizing: border-box;
-  --icon-color: var(--color-semantic-text-button-outline-default);
-}
-
-:host(.spds__tab) {
   outline: none;
   font: inherit;
   background: none;
-  display: inline-flex;
   min-width: 80px;
   padding-block: 2px;
   padding-inline: 16px;
@@ -21,22 +15,25 @@
   min-height: 28px;
   column-gap: 4px;
   line-height: 160%;
+  box-sizing: border-box;
+
+  --icon-color: var(--color-semantic-text-button-outline-default);
 }
 
-:host(.spds__tab:hover) {
+:host(:hover) {
   cursor: pointer;
 }
 
-:host(.spds__tab.-gray) {
+:host([fill="gray"]) {
   border: 1px solid var(--color-semantic-border-regular);
   background-color: var(--color-semantic-surface-regular-2);
 }
 
-:host(.spds__tab.-gray:hover) {
+:host([fill="gray"]:hover) {
   background-color: var(--color-semantic-surface-regular-4);
 }
 
-:host(.spds__tab.-gray.-selected) {
+:host([fill="gray"][selected]) {
   border-color: var(--color-semantic-border-selected);
   background-color: var(--color-semantic-surface-selected);
   color: var(--color-semantic-text-inverse);
@@ -44,12 +41,12 @@
   --icon-color: var(--color-semantic-text-button-selected);
 }
 
-:host(.spds__tab.-gray.-selected:hover) {
+:host([fill="gray"][selected]:hover) {
   border-color: var(--color-semantic-surface-selected-hover);
   background-color: var(--color-semantic-surface-selected-hover);
 }
 
-:host(.spds__tab.-gray.-selected[disabled]) {
+:host([fill="gray"][selected][disabled]) {
   border-color: var(--color-semantic-border-regular);
   background-color: var(--color-semantic-surface-regular-2);
   color: var(--color-semantic-text-disabled);
@@ -58,7 +55,7 @@
   --icon-color: var(--color-semantic-text-button-disabled);
 }
 
-:host(.spds__tab.-gray[disabled]) {
+:host([fill="gray"][disabled]) {
   border-color: var(--color-semantic-border-regular);
   background-color: var(--color-semantic-surface-regular-2);
   color: var(--color-semantic-text-disabled);
@@ -66,16 +63,16 @@
   --icon-color: var(--color-semantic-text-button-disabled);
 }
 
-:host(.spds__tab.-white) {
+:host([fill="white"]) {
   border: 1px solid var(--color-semantic-border-regular);
   background-color: var(--color-semantic-surface-regular-1);
 }
 
-:host(.spds__tab.-white:hover) {
+:host([fill="white"]:hover) {
   background-color: var(--color-semantic-surface-regular-3);
 }
 
-:host(.spds__tab.-white.-selected) {
+:host([fill="white"][selected]) {
   border-color: var(--color-semantic-border-selected);
   background-color: var(--color-semantic-surface-selected);
   color: var(--color-semantic-text-inverse);
@@ -83,12 +80,12 @@
   --icon-color: var(--color-semantic-text-button-selected);
 }
 
-:host(.spds__tab.-white.-selected:hover) {
+:host([fill="white"][selected]:hover) {
   border-color: var(--color-semantic-surface-selected-hover);
   background-color: var(--color-semantic-surface-selected-hover);
 }
 
-:host(.spds__tab.-white.-selected[disabled]) {
+:host([fill="white"][selected][disabled]) {
   border-color: var(--color-semantic-border-regular);
   background-color: var(--color-semantic-surface-regular-2);
   color: var(--color-semantic-text-disabled);
@@ -97,31 +94,47 @@
   --icon-color: var(--color-semantic-text-button-disabled);
 }
 
-:host(.spds__tab.-white[disabled]) {
+:host([fill="white"][disabled]) {
   border-color: var(--color-semantic-border-regular);
   background-color: var(--color-semantic-surface-regular-2);
   color: var(--color-semantic-text-disabled);
   cursor: not-allowed;
 }
 
-:host(.spds__tab[disabled]) {
+:host([disabled]) {
   border-color: var(--color-semantic-border-regular);
   background-color: var(--color-semantic-surface-regular-2);
   color: var(--color-semantic-text-disabled);
   cursor: not-allowed;
+  opacity: 0.5;
 }
 
-:host(.spds__tab:focus-visible) {
+:host(:focus-visible) {
   outline: canvastext solid 3px;
   box-shadow: canvas 0 0 0 5px;
   outline-offset: 1px;
   background-color: var(--color-semantic-surface-regular-4);
 }
 
-:host(.spds__tab) .spds__tabIcon {
+.spds__tabIcon {
   display: none;
 }
 
-:host(.spds__tab) .spds__tabIcon.-show {
+.spds__tabIcon.-show {
   display: block;
+}
+
+/* 外部からのスタイリング */
+sp-tab[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.spds__tabText {
+  color: inherit;
+}
+
+:host([disabled]) .spds__tabText {
+  color: var(--color-semantic-text-disabled);
 }

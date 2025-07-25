@@ -62,7 +62,7 @@ export class SpTabGroup extends HTMLElement {
     const assignedTabs = this.#navSlot.assignedElements();
     assignedTabs.forEach((tab) => {
       if (tab.getAttribute("panel") === targetPanel) {
-        tab.setAttribute("selected", "true");
+        tab.setAttribute("selected", "");
         tab.setAttribute("aria-selected", "true");
         tab.setAttribute("tabindex", "0");
       } else {
