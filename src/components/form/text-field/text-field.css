@@ -43,7 +43,7 @@
 
 .error-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-end;
   margin-block-start: 4px;
   min-height: 20px;
