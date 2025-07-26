@@ -150,3 +150,121 @@ export const HorizontalLabel: Story = {
     </div>
   `,
 };
+
+export const WithCharacterCounter: Story = {
+  render: () => html`
+    <div
+      style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;"
+    >
+      <div>
+        <sp-label for="counter-field-1" required>ラベル</sp-label>
+        <sp-text-field
+          id="counter-field-1"
+          placeholder="テキスト"
+          character-limit="20"
+          show-character-counter
+        ></sp-text-field>
+      </div>
+      <div>
+        <sp-label for="counter-field-2">ラベル</sp-label>
+        <sp-text-field
+          id="counter-field-2"
+          placeholder="テキスト"
+          character-limit="50"
+          show-character-counter
+        ></sp-text-field>
+      </div>
+    </div>
+  `,
+};
+
+export const CharacterLimitStates: Story = {
+  render: () => html`
+    <div
+      style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;"
+    >
+      <div>
+        <sp-label for="normal-state">通常状態</sp-label>
+        <sp-text-field
+          id="normal-state"
+          placeholder="5文字以内で入力"
+          character-limit="5"
+          show-character-counter
+          value="abc"
+        ></sp-text-field>
+      </div>
+      <div>
+        <sp-label for="limit-reached">上限ぴったり</sp-label>
+        <sp-text-field
+          id="limit-reached"
+          placeholder="5文字以内で入力"
+          character-limit="5"
+          show-character-counter
+          value="abcde"
+        ></sp-text-field>
+      </div>
+      <div>
+        <sp-label for="limit-exceeded">文字数オーバー</sp-label>
+        <sp-text-field
+          id="limit-exceeded"
+          placeholder="5文字以内で入力"
+          character-limit="5"
+          show-character-counter
+          value="abcdefgh"
+        ></sp-text-field>
+      </div>
+    </div>
+  `,
+};
+
+export const ErrorWithCharacterCounter: Story = {
+  render: () => html`
+    <div
+      style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;"
+    >
+      <div>
+        <sp-label for="error-normal">エラー + 通常カウンター</sp-label>
+        <sp-text-field
+          id="error-normal"
+          placeholder="20文字以内で入力"
+          character-limit="20"
+          show-character-counter
+          invalid
+          value="abc"
+        >
+          <sp-error-text slot="error-text"
+            >エラーが発生しています</sp-error-text
+          >
+        </sp-text-field>
+      </div>
+      <div>
+        <sp-label for="error-limit-reached">エラー + 上限ぴったり</sp-label>
+        <sp-text-field
+          id="error-limit-reached"
+          placeholder="20文字以内で入力"
+          character-limit="20"
+          show-character-counter
+          invalid
+          value="12345678901234567890"
+        >
+          <sp-error-text slot="error-text">この入力は必須です</sp-error-text>
+        </sp-text-field>
+      </div>
+      <div>
+        <sp-label for="error-limit-exceeded">エラー + 文字数オーバー</sp-label>
+        <sp-text-field
+          id="error-limit-exceeded"
+          placeholder="20文字以内で入力"
+          character-limit="20"
+          show-character-counter
+          invalid
+          value="123456789012345678901234567890"
+        >
+          <sp-error-text slot="error-text"
+            >入力形式が正しくありません</sp-error-text
+          >
+        </sp-text-field>
+      </div>
+    </div>
+  `,
+};
