@@ -1,9 +1,10 @@
 import resetStyle from "@acab/reset.css?inline";
 
+import { getId } from "../../utils/get-id";
 import foundationStyle from "../foundation.css?inline";
 import dropdownListboxStyle from "./sp-dropdown-listbox.css?inline";
 
-export const LISTBOX_ID = crypto.randomUUID();
+export const LISTBOX_ID = getId();
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownListboxStyle}`);
