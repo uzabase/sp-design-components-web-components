@@ -34,3 +34,26 @@
 .text-field[aria-invalid="true"]:focus-visible {
   box-shadow: 0 0 0 3px var(--color-semantic-highlight-focus-ring-error);
 }
+
+.container {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.error-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-block-start: 4px;
+  min-height: 20px;
+}
+
+.error-container sp-error-text {
+  flex: 1;
+  margin-inline-end: 8px;
+}
+
+.error-container .character-counter {
+  margin-inline-start: auto;
+}

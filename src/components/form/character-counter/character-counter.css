@@ -1,0 +1,17 @@
+:host {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.6;
+  color: var(--color-semantic-text-weak);
+}
+
+.current-count.limit-reached {
+  color: var(--color-semantic-text-regular);
+  font-weight: bold;
+}
+
+.current-count.limit-exceeded {
+  color: var(--color-semantic-text-error);
+  font-weight: bold;
+}
