@@ -5,8 +5,7 @@
   border: 1px solid var(--color-semantic-border-regular);
   border-radius: 2px;
   padding-inline: 8px;
-  padding-block-start: 4px;
-  padding-block-end: 3px;
+  padding-block: 4px 3px;
   font-size: 12px;
   font-weight: normal;
   line-height: 1.6;

@@ -1,8 +1,10 @@
-import resetStyle from "@acab/reset.css?inline";
-import foundationStyle from "../../foundation.css?inline";
-import textFieldStyle from "./text-field.css?inline";
 import "../error-text/sp-error-text";
 import "../character-counter/sp-character-counter";
+
+import resetStyle from "@acab/reset.css?inline";
+
+import foundationStyle from "../../foundation.css?inline";
+import textFieldStyle from "./text-field.css?inline";
 
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${textFieldStyle}`);
@@ -14,7 +16,9 @@ export class SpTextField extends HTMLElement {
   #inputElement: HTMLInputElement = document.createElement("input");
   #container: HTMLDivElement = document.createElement("div");
   #errorSlot: HTMLSlotElement = document.createElement("slot");
-  #characterCounter: HTMLElement = document.createElement("sp-character-counter");
+  #characterCounter: HTMLElement = document.createElement(
+    "sp-character-counter",
+  );
 
   get value() {
     return this.#inputElement.value;
@@ -189,29 +193,29 @@ export class SpTextField extends HTMLElement {
     const errorText = document.createElement("sp-error-text");
     errorText.appendChild(this.#errorSlot);
     errorText.style.display = "none";
-    
+
     // エラーテキストと文字数カウンターを同列に配置するためのコンテナ
     const errorContainer = document.createElement("div");
     errorContainer.classList.add("error-container");
-    
+
     // エラーテキストをコンテナに追加
     errorContainer.appendChild(errorText);
-    
+
     // 新しいコンテナを追加
     this.#container.appendChild(errorContainer);
-    
+
     this.#updateErrorTextVisibility();
   }
 
   #setupCharacterCounter() {
     this.#characterCounter.classList.add("character-counter");
-    
+
     // 既存のエラーコンテナに文字数カウンターを追加
     const errorContainer = this.#container.querySelector(".error-container");
     if (errorContainer) {
       errorContainer.appendChild(this.#characterCounter);
     }
-    
+
     this.#updateCharacterCounterVisibility();
   }
 
@@ -223,17 +227,18 @@ export class SpTextField extends HTMLElement {
     const errorContainer = this.#container.querySelector(
       ".error-container",
     ) as HTMLElement;
-    
+
     if (!errorText || !errorContainer) return;
-    
+
     if (this.invalid) {
       errorText.style.display = "block";
     } else {
       errorText.style.display = "none";
     }
-    
+
     // 文字数カウンターが表示される場合は、エラーコンテナを常に表示
-    const hasCharacterCounter = this.showCharacterCounter && this.characterLimit > 0;
+    const hasCharacterCounter =
+      this.showCharacterCounter && this.characterLimit > 0;
     if (this.invalid || hasCharacterCounter) {
       errorContainer.style.display = "flex";
     } else {
@@ -243,24 +248,29 @@ export class SpTextField extends HTMLElement {
 
   #updateCharacterCounterVisibility() {
     if (!this.#characterCounter) return;
-    
+
     if (this.showCharacterCounter && this.characterLimit > 0) {
       this.#characterCounter.style.display = "inline-block";
       this.#updateCharacterCounter();
     } else {
       this.#characterCounter.style.display = "none";
     }
-    
+
     // エラーテキストの表示制御も更新
     this.#updateErrorTextVisibility();
   }
 
   #updateCharacterCounter() {
-    if (!this.#characterCounter || !this.showCharacterCounter || this.characterLimit <= 0) return;
-    
+    if (
+      !this.#characterCounter ||
+      !this.showCharacterCounter ||
+      this.characterLimit <= 0
+    )
+      return;
+
     const currentLength = this.value.length;
     const maxLength = this.characterLimit;
-    
+
     // sp-character-counterの属性を更新
     this.#characterCounter.setAttribute("current", String(currentLength));
     this.#characterCounter.setAttribute("max", String(maxLength));
