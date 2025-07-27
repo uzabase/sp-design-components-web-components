@@ -6,12 +6,12 @@ import characterCounterStyle from "./character-counter.css?inline";
 const styles = new CSSStyleSheet();
 styles.replaceSync(`${resetStyle} ${foundationStyle} ${characterCounterStyle}`);
 
-const template = document.createElement("template");
-template.innerHTML = `
-  <span class="current-count"></span><span class="separator">/</span><span class="max-count"></span>
-`;
-
 export class SpCharacterCounter extends HTMLElement {
+  #baseElement: HTMLDivElement = document.createElement("div");
+  #currentCount: HTMLSpanElement = document.createElement("span");
+  #separator: HTMLSpanElement = document.createElement("span");
+  #maxCount: HTMLSpanElement = document.createElement("span");
+
   static get observedAttributes() {
     return ["current", "max"];
   }
@@ -37,35 +37,59 @@ export class SpCharacterCounter extends HTMLElement {
       ...this.shadowRoot!.adoptedStyleSheets,
       styles,
     ];
-    this.shadowRoot!.appendChild(template.content.cloneNode(true));
+
+    this.#setupElements();
+  }
+
+  #setupElements() {
+    this.#baseElement.classList.add("base");
+
+    this.#currentCount.classList.add("current-count");
+
+    this.#separator.classList.add("separator");
+    this.#separator.textContent = "/";
+
+    this.#maxCount.classList.add("max-count");
+
+    this.#baseElement.appendChild(this.#currentCount);
+    this.#baseElement.appendChild(this.#separator);
+    this.#baseElement.appendChild(this.#maxCount);
+
+    this.shadowRoot!.appendChild(this.#baseElement);
   }
 
   connectedCallback() {
-    this.update();
+    this.#updateCurrentCount();
+    this.#updateMaxCount();
+    this.#updateLimitStatus();
   }
 
-  attributeChangedCallback() {
-    this.update();
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (oldValue === newValue) return;
+
+    if (name === "current") {
+      this.#updateCurrentCount();
+      this.#updateLimitStatus();
+    } else if (name === "max") {
+      this.#updateMaxCount();
+      this.#updateLimitStatus();
+    }
   }
 
-  update() {
-    const current = this.current;
-    const max = this.max;
-    const currentCount = this.shadowRoot!.querySelector(
-      ".current-count",
-    ) as HTMLElement;
-    const maxCount = this.shadowRoot!.querySelector(
-      ".max-count",
-    ) as HTMLElement;
-    if (currentCount)
-      currentCount.textContent = String(current).padStart(2, "0");
-    if (maxCount) maxCount.textContent = String(max).padStart(2, "0");
+  #updateCurrentCount() {
+    this.#currentCount.textContent = String(this.current).padStart(2, "0");
+  }
 
-    currentCount.classList.remove("limit-reached", "limit-exceeded");
-    if (current === max) {
-      currentCount.classList.add("limit-reached");
-    } else if (current > max) {
-      currentCount.classList.add("limit-exceeded");
+  #updateMaxCount() {
+    this.#maxCount.textContent = String(this.max).padStart(2, "0");
+  }
+
+  #updateLimitStatus() {
+    this.#currentCount.classList.remove("limit-reached", "limit-exceeded");
+    if (this.current === this.max) {
+      this.#currentCount.classList.add("limit-reached");
+    } else if (this.current > this.max) {
+      this.#currentCount.classList.add("limit-exceeded");
     }
   }
 }
