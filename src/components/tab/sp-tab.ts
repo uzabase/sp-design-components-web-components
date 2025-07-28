@@ -6,8 +6,8 @@ import tabStyle from "./tab.css?inline";
 
 type TabType = "white" | "gray";
 const types: TabType[] = ["white", "gray"];
-function isValidTabType(value: string): value is TabType {
-  return types.some((type) => type === value);
+function isValidTabType(value: string | null): value is TabType {
+  return value !== null && types.some((type) => type === value);
 }
 
 function isBooleanAttribute(value: string | null): boolean {
