@@ -38,6 +38,7 @@
   background-color: var(--color-semantic-surface-selected);
   color: var(--color-semantic-text-inverse);
   font-weight: bold;
+
   --icon-color: var(--color-semantic-text-button-selected);
 }
 
@@ -52,6 +53,7 @@
   color: var(--color-semantic-text-disabled);
   cursor: not-allowed;
   font-weight: normal;
+
   --icon-color: var(--color-semantic-text-button-disabled);
 }
 
@@ -60,6 +62,7 @@
   background-color: var(--color-semantic-surface-regular-2);
   color: var(--color-semantic-text-disabled);
   cursor: not-allowed;
+
   --icon-color: var(--color-semantic-text-button-disabled);
 }
 
@@ -77,6 +80,7 @@
   background-color: var(--color-semantic-surface-selected);
   color: var(--color-semantic-text-inverse);
   font-weight: bold;
+
   --icon-color: var(--color-semantic-text-button-selected);
 }
 
@@ -91,6 +95,7 @@
   color: var(--color-semantic-text-disabled);
   cursor: not-allowed;
   font-weight: normal;
+
   --icon-color: var(--color-semantic-text-button-disabled);
 }
 

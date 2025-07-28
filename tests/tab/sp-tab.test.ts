@@ -60,22 +60,21 @@ describe("sp-tab", () => {
     test("disabled属性をtrueにすると、クリックイベントが無効化される", async () => {
       document.body.innerHTML = `<sp-tab disabled=""></sp-tab>`;
       const tabElement = document.querySelector("sp-tab")!;
-      
+
       // 要素が完全に接続されるまで待機
-      await new Promise(resolve => setTimeout(resolve, 0));
-      
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
       // aria属性と視覚的な状態をチェックして、要素が
       // 無効化状態で適切に動作するかをテストする
       expect(tabElement.getAttribute("aria-disabled")).toBe("true");
       expect(tabElement.hasAttribute("disabled")).toBe(true);
-      
     });
   });
 
   test("sp-tabのShadow DOM直下にspan要素が存在する", () => {
     document.body.innerHTML = `<sp-tab></sp-tab>`;
     const tabElement = document.querySelector("sp-tab")!;
-    
+
     // Shadow DOM直下のspan要素を確認
     const spanElement = tabElement.shadowRoot!.querySelector("span");
     expect(spanElement).not.toBeNull();
