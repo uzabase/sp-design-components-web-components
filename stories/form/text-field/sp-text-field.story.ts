@@ -12,24 +12,16 @@ const meta = {
     value: { type: "string" },
     placeholder: { type: "string" },
     disabled: { type: "boolean" },
-    readonly: { type: "boolean" },
-    type: { type: "string" },
-    maxlength: { type: "number" },
     name: { type: "string" },
     required: { type: "boolean" },
-    autofocus: { type: "boolean" },
   },
   render: (args) => html`
     <sp-text-field
       .value=${args.value ?? ""}
       placeholder=${args.placeholder ?? ""}
       ?disabled=${args.disabled}
-      ?readonly=${args.readonly}
-      type=${args.type ?? "text"}
-      maxlength=${args.maxlength ?? 100}
       name=${args.name ?? ""}
       ?required=${args.required}
-      ?autofocus=${args.autofocus}
     ></sp-text-field>
   `,
 } satisfies Meta<SpTextField>;
@@ -42,12 +34,8 @@ export const Basic: Story = {
     value: "",
     placeholder: "テキストを入力",
     disabled: false,
-    readonly: false,
-    type: "text",
-    maxlength: 100,
     name: "",
     required: false,
-    autofocus: false,
   },
   tags: ["!dev-only"],
 };
@@ -100,9 +88,11 @@ export const Disabled: Story = {
   },
 };
 
-export const VerticalLabel: Story = {
+export const VerticalLabelLayout: Story = {
   render: () => html`
-    <div style="display: flex; flex-direction: column; gap: 16px;">
+    <div
+      style="display: flex; flex-direction: column; gap: 16px; max-width: 400px;"
+    >
       <div>
         <sp-label for="vertical-field-1" required>ラベル</sp-label>
         <sp-text-field
@@ -162,7 +152,6 @@ export const WithCharacterCounter: Story = {
           id="counter-field-1"
           placeholder="テキスト"
           character-limit="20"
-          show-character-counter
         ></sp-text-field>
       </div>
       <div>
@@ -171,7 +160,6 @@ export const WithCharacterCounter: Story = {
           id="counter-field-2"
           placeholder="テキスト"
           character-limit="50"
-          show-character-counter
         ></sp-text-field>
       </div>
     </div>
@@ -189,7 +177,6 @@ export const CharacterLimitStates: Story = {
           id="normal-state"
           placeholder="5文字以内で入力"
           character-limit="5"
-          show-character-counter
           value="abc"
         ></sp-text-field>
       </div>
@@ -199,7 +186,6 @@ export const CharacterLimitStates: Story = {
           id="limit-reached"
           placeholder="5文字以内で入力"
           character-limit="5"
-          show-character-counter
           value="abcde"
         ></sp-text-field>
       </div>
@@ -209,7 +195,6 @@ export const CharacterLimitStates: Story = {
           id="limit-exceeded"
           placeholder="5文字以内で入力"
           character-limit="5"
-          show-character-counter
           value="abcdefgh"
         ></sp-text-field>
       </div>
@@ -228,7 +213,6 @@ export const ErrorWithCharacterCounter: Story = {
           id="error-normal"
           placeholder="20文字以内で入力"
           character-limit="20"
-          show-character-counter
           invalid
           value="abc"
         >
@@ -243,7 +227,6 @@ export const ErrorWithCharacterCounter: Story = {
           id="error-limit-reached"
           placeholder="20文字以内で入力"
           character-limit="20"
-          show-character-counter
           invalid
           value="12345678901234567890"
         >
@@ -256,7 +239,6 @@ export const ErrorWithCharacterCounter: Story = {
           id="error-limit-exceeded"
           placeholder="20文字以内で入力"
           character-limit="20"
-          show-character-counter
           invalid
           value="123456789012345678901234567890"
         >

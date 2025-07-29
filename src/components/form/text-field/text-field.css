@@ -40,19 +40,18 @@
   width: 100%;
 }
 
-.error-container {
+.info {
   display: flex;
   align-items: flex-start;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-block-start: 4px;
-  min-height: 20px;
 }
 
-.error-container sp-error-text {
+.info sp-error-text {
   flex: 1;
   margin-inline-end: 8px;
 }
 
-.error-container .character-counter {
+.info .character-counter {
   margin-inline-start: auto;
 }

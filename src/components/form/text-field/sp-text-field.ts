@@ -14,6 +14,7 @@ export class SpTextField extends HTMLElement {
   #characterCounter: HTMLElement = document.createElement(
     "sp-character-counter",
   );
+  #characterLimit: number | undefined = undefined;
 
   get value() {
     return this.#inputElement.value;
@@ -45,18 +46,6 @@ export class SpTextField extends HTMLElement {
     this.#inputElement.disabled = val;
   }
 
-  get readonly() {
-    return this.#inputElement.readOnly;
-  }
-  set readonly(val: boolean) {
-    if (val) {
-      this.setAttribute("readonly", "");
-    } else {
-      this.removeAttribute("readonly");
-    }
-    this.#inputElement.readOnly = val;
-  }
-
   get required() {
     return this.#inputElement.required;
   }
@@ -69,29 +58,18 @@ export class SpTextField extends HTMLElement {
     this.#inputElement.required = val;
   }
 
-  get maxlength() {
-    return this.#inputElement.maxLength;
-  }
-  set maxlength(val: number) {
-    this.setAttribute("maxlength", String(val));
-    this.#inputElement.maxLength = -1;
-    this.#updateCharacterCounter();
-  }
-
   get characterLimit() {
-    return parseInt(this.getAttribute("character-limit") || "0");
+    return this.#characterLimit;
   }
-  set characterLimit(val: number) {
-    this.setAttribute("character-limit", String(val));
+  set characterLimit(val: number | undefined) {
+    this.#characterLimit = val;
+    if (val === undefined) {
+      this.removeAttribute("character-limit");
+    } else {
+      this.setAttribute("character-limit", String(val));
+    }
     this.#updateCharacterCounter();
-  }
-
-  get type() {
-    return this.#inputElement.type;
-  }
-  set type(val: string) {
-    this.setAttribute("type", val);
-    this.#inputElement.type = val;
+    this.#updateCharacterCounterVisibility();
   }
 
   get placeholder() {
@@ -100,18 +78,6 @@ export class SpTextField extends HTMLElement {
   set placeholder(val: string) {
     this.setAttribute("placeholder", val);
     this.#inputElement.placeholder = val;
-  }
-
-  get autofocus() {
-    return this.#inputElement.autofocus;
-  }
-  set autofocus(val: boolean) {
-    if (val) {
-      this.setAttribute("autofocus", "");
-    } else {
-      this.removeAttribute("autofocus");
-    }
-    this.#inputElement.autofocus = val;
   }
 
   get invalid() {
@@ -128,32 +94,15 @@ export class SpTextField extends HTMLElement {
     this.#updateErrorTextVisibility();
   }
 
-  get showCharacterCounter() {
-    return this.hasAttribute("show-character-counter");
-  }
-  set showCharacterCounter(val: boolean) {
-    if (val) {
-      this.setAttribute("show-character-counter", "");
-    } else {
-      this.removeAttribute("show-character-counter");
-    }
-    this.#updateCharacterCounterVisibility();
-  }
-
   static get observedAttributes() {
     return [
       "value",
       "placeholder",
       "disabled",
-      "readonly",
-      "type",
-      "maxlength",
       "character-limit",
       "name",
       "required",
-      "autofocus",
       "invalid",
-      "show-character-counter",
     ];
   }
 
@@ -177,6 +126,7 @@ export class SpTextField extends HTMLElement {
 
   #setupInputElement() {
     this.#inputElement.classList.add("text-field");
+    this.#inputElement.type = "text";
     this.#container.classList.add("container");
     this.#container.appendChild(this.#inputElement);
     this.shadowRoot!.appendChild(this.#container);
@@ -189,26 +139,21 @@ export class SpTextField extends HTMLElement {
     errorText.appendChild(this.#errorSlot);
     errorText.style.display = "none";
 
-    // エラーテキストと文字数カウンターを同列に配置するためのコンテナ
-    const errorContainer = document.createElement("div");
-    errorContainer.classList.add("error-container");
+    // エラーとカウンターを同じ行に表示するためのコンテナ（常に表示）
+    const infoContainer = document.createElement("div");
+    infoContainer.classList.add("info");
 
-    // エラーテキストをコンテナに追加
-    errorContainer.appendChild(errorText);
+    infoContainer.appendChild(errorText);
 
-    // 新しいコンテナを追加
-    this.#container.appendChild(errorContainer);
-
-    this.#updateErrorTextVisibility();
+    this.#container.appendChild(infoContainer);
   }
 
   #setupCharacterCounter() {
     this.#characterCounter.classList.add("character-counter");
 
-    // 既存のエラーコンテナに文字数カウンターを追加
-    const errorContainer = this.#container.querySelector(".error-container");
-    if (errorContainer) {
-      errorContainer.appendChild(this.#characterCounter);
+    const infoContainer = this.#container.querySelector(".info");
+    if (infoContainer) {
+      infoContainer.appendChild(this.#characterCounter);
     }
 
     this.#updateCharacterCounterVisibility();
@@ -219,54 +164,40 @@ export class SpTextField extends HTMLElement {
     const errorText = this.#container.querySelector(
       "sp-error-text",
     ) as HTMLElement;
-    const errorContainer = this.#container.querySelector(
-      ".error-container",
-    ) as HTMLElement;
 
-    if (!errorText || !errorContainer) return;
+    if (!errorText) return;
 
     if (this.invalid) {
       errorText.style.display = "block";
     } else {
       errorText.style.display = "none";
     }
-
-    // 文字数カウンターが表示される場合は、エラーコンテナを常に表示
-    const hasCharacterCounter =
-      this.showCharacterCounter && this.characterLimit > 0;
-    if (this.invalid || hasCharacterCounter) {
-      errorContainer.style.display = "flex";
-    } else {
-      errorContainer.style.display = "none";
-    }
   }
 
   #updateCharacterCounterVisibility() {
     if (!this.#characterCounter) return;
 
-    if (this.showCharacterCounter && this.characterLimit > 0) {
+    const hasCharacterCounter =
+      this.#characterLimit !== undefined && this.#characterLimit > 0;
+    if (hasCharacterCounter) {
       this.#characterCounter.style.display = "inline-block";
       this.#updateCharacterCounter();
     } else {
       this.#characterCounter.style.display = "none";
     }
-
-    // エラーテキストの表示制御も更新
-    this.#updateErrorTextVisibility();
   }
 
   #updateCharacterCounter() {
     if (
       !this.#characterCounter ||
-      !this.showCharacterCounter ||
-      this.characterLimit <= 0
+      this.#characterLimit === undefined ||
+      this.#characterLimit <= 0
     )
       return;
 
     const currentLength = this.value.length;
-    const maxLength = this.characterLimit;
+    const maxLength = this.#characterLimit;
 
-    // sp-character-counterの属性を更新
     this.#characterCounter.setAttribute("current", String(currentLength));
     this.#characterCounter.setAttribute("max", String(maxLength));
   }
@@ -279,26 +210,28 @@ export class SpTextField extends HTMLElement {
       this.placeholder = newValue;
     } else if (name === "disabled") {
       this.disabled = newValue === "" || newValue === "true";
-    } else if (name === "readonly") {
-      this.readonly = newValue === "" || newValue === "true";
-    } else if (name === "type") {
-      this.type = newValue || "text";
-    } else if (name === "maxlength") {
-      this.maxlength = parseInt(newValue) || -1;
     } else if (name === "character-limit") {
-      this.characterLimit = parseInt(newValue) || 0;
+      if (!newValue) {
+        this.#characterLimit = undefined;
+      } else {
+        const parsed = parseInt(newValue);
+        if (parsed <= 0) {
+          console.error(
+            `Invalid character-limit: ${parsed}. Must be greater than 0.`,
+          );
+          return;
+        }
+        this.#characterLimit = parsed;
+      }
+      this.#updateCharacterCounter();
+      this.#updateCharacterCounterVisibility();
     } else if (name === "name") {
       this.name = newValue;
     } else if (name === "required") {
       this.required = newValue === "" || newValue === "true";
-    } else if (name === "autofocus") {
-      this.autofocus = newValue === "" || newValue === "true";
     } else if (name === "invalid") {
       this.invalid = newValue === "" || newValue === "true";
       this.#updateErrorTextVisibility();
-    } else if (name === "show-character-counter") {
-      this.showCharacterCounter = newValue === "" || newValue === "true";
-      this.#updateCharacterCounterVisibility();
     }
   }
 
@@ -323,10 +256,6 @@ export class SpTextField extends HTMLElement {
 
   select() {
     this.#inputElement.select();
-  }
-
-  formResetCallback() {
-    this.value = "";
   }
 
   #setupEventForwarding() {
