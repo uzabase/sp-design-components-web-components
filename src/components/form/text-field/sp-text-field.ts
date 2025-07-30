@@ -246,37 +246,13 @@ export class SpTextField extends HTMLElement {
     this.#updateCharacterCounterVisibility();
   }
 
-  focus() {
-    this.#inputElement.focus();
-  }
-
-  blur() {
-    this.#inputElement.blur();
-  }
-
-  select() {
-    this.#inputElement.select();
-  }
-
   #setupEventForwarding() {
-    const eventsToForward = [
-      "input",
-      "change",
-      "focus",
-      "blur",
-      "keydown",
-      "keyup",
-      "keypress",
-    ];
-
-    eventsToForward.forEach((eventType) => {
-      this.#inputElement.addEventListener(eventType, (event) => {
-        const forwardedEvent = new Event(eventType, {
-          bubbles: event.bubbles,
-          cancelable: event.cancelable,
-        });
-        this.dispatchEvent(forwardedEvent);
+    this.#inputElement.addEventListener("input", (event) => {
+      const forwardedEvent = new Event("input", {
+        bubbles: event.bubbles,
+        cancelable: event.cancelable,
       });
+      this.dispatchEvent(forwardedEvent);
     });
 
     this.#inputElement.addEventListener("input", () => {
