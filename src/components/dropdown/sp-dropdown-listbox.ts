@@ -1,13 +1,8 @@
-import resetStyle from "@acab/reset.css?inline";
-
 import { getId } from "../../utils/get-id";
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import dropdownListboxStyle from "./sp-dropdown-listbox.css?inline";
 
 export const LISTBOX_ID = getId();
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownListboxStyle}`);
 
 class SpDropdownListbox extends HTMLElement {
   #baseElement = document.createElement("div");
@@ -16,14 +11,17 @@ class SpDropdownListbox extends HTMLElement {
   constructor() {
     super();
 
-    const shadowRoot = this.attachShadow({
+    this.attachShadow({
       mode: "open",
       delegatesFocus: true,
     });
-    shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
   }
 
   connectedCallback() {
+    this.shadowRoot!.adoptedStyleSheets = [
+      ...this.shadowRoot!.adoptedStyleSheets,
+      makeStyleSheet(dropdownListboxStyle),
+    ];
     this.#baseElement.setAttribute("role", "listbox");
     this.#baseElement.setAttribute("id", LISTBOX_ID);
     this.#baseElement.classList.add("base");

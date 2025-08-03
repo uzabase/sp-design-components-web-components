@@ -1,13 +1,8 @@
 import "../icon/sp-icon";
 
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import { isValidSelectType } from "./sp-dropdown";
 import dropdownOptionStyle from "./sp-dropdown-option.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownOptionStyle}`);
 
 export type ClickEventDetail = { value: string; text: string };
 
@@ -69,14 +64,17 @@ export class SpDropdownOption extends HTMLElement {
   constructor() {
     super();
 
-    const shadowRoot = this.attachShadow({
+    this.attachShadow({
       mode: "open",
       delegatesFocus: true,
     });
-    shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
   }
 
   connectedCallback() {
+    this.shadowRoot!.adoptedStyleSheets = [
+      ...this.shadowRoot!.adoptedStyleSheets,
+      makeStyleSheet(dropdownOptionStyle),
+    ];
     this.#iconElement.size = "small";
     this.#iconElement.type = "check";
     this.#iconElement.text = "check";

@@ -1,15 +1,10 @@
 import "../icon/sp-icon";
 
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import { LISTBOX_ID } from "./sp-dropdown-listbox";
 import dropdownSelectStyle from "./sp-dropdown-select.css?inline";
 
 export const DEFAULT_WIDTH = 160;
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownSelectStyle}`);
 
 class SpDropdownSelect extends HTMLElement {
   #baseElement = document.createElement("button");
@@ -58,14 +53,17 @@ class SpDropdownSelect extends HTMLElement {
   constructor() {
     super();
 
-    const shadowRoot = this.attachShadow({
+    this.attachShadow({
       mode: "open",
       delegatesFocus: true,
     });
-    shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
   }
 
   connectedCallback() {
+    this.shadowRoot!.adoptedStyleSheets = [
+      ...this.shadowRoot!.adoptedStyleSheets,
+      makeStyleSheet(dropdownSelectStyle),
+    ];
     this.#labelElement.classList.add("label");
 
     this.#iconElement.size = "small";

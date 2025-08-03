@@ -3,6 +3,10 @@
   width: 100%;
 }
 
+:host([hidden]) {
+  display: none;
+}
+
 .base {
   width: 100%;
   display: inline-flex;

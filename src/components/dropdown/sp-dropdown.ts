@@ -1,8 +1,6 @@
 import "./sp-dropdown-listbox";
 
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import dropdownStyle from "./sp-dropdown.css?inline";
 import { ClickEventDetail, SpDropdownOption } from "./sp-dropdown-option";
 import { calculateDropdownSelectWidth } from "./sp-dropdown-select";
@@ -21,9 +19,6 @@ const DEFAULT_SELECT_WIDTH = 160;
 const SELECT_MIN_WIDTH = 80;
 const SELECT_MAX_WIDTH = 320;
 const LISTBOX_MIN_WIDTH = 80;
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownStyle}`);
 
 export class SpDropdown extends HTMLElement {
   // elements
@@ -128,11 +123,10 @@ export class SpDropdown extends HTMLElement {
   constructor() {
     super();
 
-    const shadowRoot = this.attachShadow({
+    this.attachShadow({
       mode: "open",
       delegatesFocus: true,
     });
-    shadowRoot.adoptedStyleSheets = [...shadowRoot.adoptedStyleSheets, styles];
   }
 
   connectedCallback() {
@@ -162,6 +156,10 @@ export class SpDropdown extends HTMLElement {
   }
 
   #initializeElements() {
+    this.shadowRoot!.adoptedStyleSheets = [
+      ...this.shadowRoot!.adoptedStyleSheets,
+      makeStyleSheet(dropdownStyle),
+    ];
     this.#selectElement.expanded = this.expanded;
     this.#selectElement.placeholder = this.placeholder;
     this.#selectElement.text = this.#text;
@@ -228,7 +226,7 @@ export class SpDropdown extends HTMLElement {
     const { value, text } = customEvent.detail;
     this.value = value;
     this.text = text;
-    this.#hideListbox();
+    // this.#hideListbox();
   }
 
   #getOptions(): SpDropdownOption[] {
@@ -259,7 +257,7 @@ export class SpDropdown extends HTMLElement {
     const options = this.#getOptions();
     options.forEach((option) => {
       option.selectType = this.selectType;
-      option.selected = option.value === this.#value;
+      option.selected = option.value === this.value;
     });
   }
 
