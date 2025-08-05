@@ -5,15 +5,16 @@ export class SpLabel extends HTMLElement {
   #labelElement = document.createElement("label");
   #slotElement = document.createElement("slot");
   #requiredElement = document.createElement("span");
+  #requiredLabelElement = document.createElement("span");
 
   #required = false;
 
   get required() {
     return this.#required;
   }
-  set required(val: boolean) {
-    if (val !== this.#required) {
-      this.#required = val;
+  set required(value: boolean) {
+    if (value !== this.#required) {
+      this.#required = value;
       this.#updateRequiredState();
     }
   }
@@ -32,7 +33,7 @@ export class SpLabel extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["required", "for"];
+    return ["required"];
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -40,8 +41,6 @@ export class SpLabel extends HTMLElement {
 
     if (name === "required") {
       this.required = newValue === "" || newValue === "true";
-    } else if (name === "for") {
-      this.#labelElement.setAttribute("for", newValue);
     }
   }
 
@@ -53,21 +52,21 @@ export class SpLabel extends HTMLElement {
     this.#labelElement.classList.add("label");
     this.#labelElement.appendChild(this.#slotElement);
 
-    const forAttribute = this.getAttribute("for");
-    if (forAttribute) {
-      this.#labelElement.setAttribute("for", forAttribute);
-    }
-
     this.#requiredElement.classList.add("required");
     this.#requiredElement.textContent = "*";
     this.#requiredElement.setAttribute("aria-hidden", "true");
+
+    this.#requiredLabelElement.classList.add("sr-only");
+    this.#requiredLabelElement.textContent = " 必須";
   }
 
   #updateRequiredState() {
     if (this.#required) {
       this.#labelElement.appendChild(this.#requiredElement);
+      this.#labelElement.appendChild(this.#requiredLabelElement);
     } else {
-      this.#labelElement.removeChild(this.#requiredElement);
+      this.#requiredElement.remove();
+      this.#requiredLabelElement.remove();
     }
   }
 }
