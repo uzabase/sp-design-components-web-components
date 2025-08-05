@@ -1,18 +1,13 @@
 import { makeStyleSheet } from "../../styles";
 import errorTextStyle from "./error-text.css?inline";
 
-/**
- * SpErrorTextは、デザインシステム2.0におけるエラーテキストコンポーネントです。
- * フォームフィールドのエラーメッセージを表示するために使用します。
- *
- * @element sp-error-text
- * @summary エラーテキストコンポーネント
- *
- * @slot - エラーメッセージのテキストコンテンツ（デフォルトスロット）
- */
 export class SpErrorText extends HTMLElement {
   #errorElement = document.createElement("div");
   #slotElement = document.createElement("slot");
+
+  static get observedAttributes() {
+    return ["id"];
+  }
 
   constructor() {
     super();
@@ -27,13 +22,34 @@ export class SpErrorText extends HTMLElement {
     this.#setupElements();
   }
 
+  #setupElements() {
+    this.#errorElement.classList.add("base");
+    this.#errorElement.setAttribute("role", "alert");
+    this.#errorElement.appendChild(this.#slotElement);
+  }
+
   connectedCallback() {
     this.shadowRoot!.appendChild(this.#errorElement);
   }
 
-  #setupElements() {
-    this.#errorElement.classList.add("base");
-    this.#errorElement.appendChild(this.#slotElement);
+  attributeChangedCallback(
+    name: string,
+    oldValue: string | null,
+    newValue: string | null,
+  ) {
+    if (oldValue === newValue) return;
+
+    if (name === "id") {
+      this.#updateIdAttribute(newValue);
+    }
+  }
+
+  #updateIdAttribute(value: string | null) {
+    if (value) {
+      this.#errorElement.setAttribute("id", value);
+    } else {
+      this.#errorElement.removeAttribute("id");
+    }
   }
 }
 

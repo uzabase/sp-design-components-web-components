@@ -59,7 +59,11 @@ export class SpCharacterCounter extends HTMLElement {
     this.#updateLimitStatus();
   }
 
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+  attributeChangedCallback(
+    name: string,
+    oldValue: string | null,
+    newValue: string | null,
+  ) {
     if (oldValue === newValue) return;
 
     if (name === "current") {
@@ -91,4 +95,10 @@ export class SpCharacterCounter extends HTMLElement {
 
 if (!customElements.get("sp-character-counter")) {
   customElements.define("sp-character-counter", SpCharacterCounter);
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    "sp-character-counter": SpCharacterCounter;
+  }
 }

@@ -9,6 +9,10 @@ export class SpLabel extends HTMLElement {
 
   #required = false;
 
+  static get observedAttributes() {
+    return ["required"];
+  }
+
   get required() {
     return this.#required;
   }
@@ -32,22 +36,6 @@ export class SpLabel extends HTMLElement {
     this.#setupElements();
   }
 
-  static get observedAttributes() {
-    return ["required"];
-  }
-
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    if (oldValue === newValue) return;
-
-    if (name === "required") {
-      this.required = newValue === "" || newValue === "true";
-    }
-  }
-
-  connectedCallback() {
-    this.shadowRoot!.appendChild(this.#labelElement);
-  }
-
   #setupElements() {
     this.#labelElement.classList.add("label");
     this.#labelElement.appendChild(this.#slotElement);
@@ -58,6 +46,22 @@ export class SpLabel extends HTMLElement {
 
     this.#requiredLabelElement.classList.add("sr-only");
     this.#requiredLabelElement.textContent = " 必須";
+  }
+
+  connectedCallback() {
+    this.shadowRoot!.appendChild(this.#labelElement);
+  }
+
+  attributeChangedCallback(
+    name: string,
+    oldValue: string | null,
+    newValue: string | null,
+  ) {
+    if (oldValue === newValue) return;
+
+    if (name === "required") {
+      this.required = newValue === "" || newValue === "true";
+    }
   }
 
   #updateRequiredState() {

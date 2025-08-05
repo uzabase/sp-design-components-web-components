@@ -134,12 +134,17 @@ export class SpTextField extends HTMLElement {
 
   #setupErrorSlot() {
     this.#errorSlot.name = "error-text";
-    // sp-error-textでラップ
     const errorText = document.createElement("sp-error-text");
+
+    const fieldName = this.getAttribute("name") || "field";
+    const errorId = `${fieldName}-error`;
+    errorText.id = errorId;
+
+    this.#inputElement.setAttribute("aria-errormessage", errorId);
+
     errorText.appendChild(this.#errorSlot);
     errorText.style.display = "none";
 
-    // エラーとカウンターを同じ行に表示するためのコンテナ（常に表示）
     const infoContainer = document.createElement("div");
     infoContainer.classList.add("info");
 
@@ -174,6 +179,21 @@ export class SpTextField extends HTMLElement {
     }
   }
 
+  #updateErrorTextId() {
+    if (!this.#container) return;
+    const errorText = this.#container.querySelector(
+      "sp-error-text",
+    ) as HTMLElement;
+
+    if (!errorText) return;
+
+    const fieldName = this.getAttribute("name") || "field";
+    const errorId = `${fieldName}-error`;
+
+    errorText.id = errorId;
+    this.#inputElement.setAttribute("aria-errormessage", errorId);
+  }
+
   #updateCharacterCounterVisibility() {
     if (!this.#characterCounter) return;
 
@@ -202,12 +222,17 @@ export class SpTextField extends HTMLElement {
     this.#characterCounter.setAttribute("max", String(maxLength));
   }
 
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+  attributeChangedCallback(
+    name: string,
+    oldValue: string | null,
+    newValue: string | null,
+  ) {
     if (oldValue === newValue) return;
+
     if (name === "value") {
-      this.value = newValue;
+      this.value = newValue || "";
     } else if (name === "placeholder") {
-      this.placeholder = newValue;
+      this.placeholder = newValue || "";
     } else if (name === "disabled") {
       this.disabled = newValue === "" || newValue === "true";
     } else if (name === "character-limit") {
@@ -226,7 +251,8 @@ export class SpTextField extends HTMLElement {
       this.#updateCharacterCounter();
       this.#updateCharacterCounterVisibility();
     } else if (name === "name") {
-      this.name = newValue;
+      this.name = newValue || "";
+      this.#updateErrorTextId();
     } else if (name === "required") {
       this.required = newValue === "" || newValue === "true";
     } else if (name === "invalid") {
