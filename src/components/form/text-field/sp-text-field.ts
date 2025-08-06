@@ -19,54 +19,53 @@ export class SpTextField extends HTMLElement {
   get value() {
     return this.#inputElement.value;
   }
-  set value(val: string) {
-    this.setAttribute("value", val);
-    this.#inputElement.value = val;
-    this.internals.setFormValue(val);
+  set value(value: string) {
+    this.#inputElement.value = value;
+    this.internals.setFormValue(value);
     this.#updateCharacterCounter();
   }
 
   get name() {
     return this.#inputElement.name;
   }
-  set name(val: string) {
-    this.setAttribute("name", val);
-    this.#inputElement.name = val;
+  set name(value: string) {
+    this.setAttribute("name", value);
+    this.#inputElement.name = value;
   }
 
   get disabled() {
     return this.#inputElement.disabled;
   }
-  set disabled(val: boolean) {
-    if (val) {
+  set disabled(value: boolean) {
+    if (value) {
       this.setAttribute("disabled", "");
     } else {
       this.removeAttribute("disabled");
     }
-    this.#inputElement.disabled = val;
+    this.#inputElement.disabled = value;
   }
 
   get required() {
     return this.#inputElement.required;
   }
-  set required(val: boolean) {
-    if (val) {
+  set required(value: boolean) {
+    if (value) {
       this.setAttribute("required", "");
     } else {
       this.removeAttribute("required");
     }
-    this.#inputElement.required = val;
+    this.#inputElement.required = value;
   }
 
   get characterLimit() {
     return this.#characterLimit;
   }
-  set characterLimit(val: number | undefined) {
-    this.#characterLimit = val;
-    if (val === undefined) {
+  set characterLimit(value: number | undefined) {
+    this.#characterLimit = value;
+    if (value === undefined) {
       this.removeAttribute("character-limit");
     } else {
-      this.setAttribute("character-limit", String(val));
+      this.setAttribute("character-limit", String(value));
     }
     this.#updateCharacterCounter();
     this.#updateCharacterCounterVisibility();
@@ -75,9 +74,26 @@ export class SpTextField extends HTMLElement {
   get placeholder() {
     return this.#inputElement.placeholder;
   }
-  set placeholder(val: string) {
-    this.setAttribute("placeholder", val);
-    this.#inputElement.placeholder = val;
+  set placeholder(value: string) {
+    this.setAttribute("placeholder", value);
+    this.#inputElement.placeholder = value;
+  }
+
+  get type() {
+    return this.#inputElement.type;
+  }
+  set type(value: string) {
+    this.setAttribute("type", value);
+    this.#inputElement.type = value;
+  }
+
+  get autocomplete() {
+    return this.#inputElement.autocomplete;
+  }
+  set autocomplete(value: string) {
+    this.setAttribute("autocomplete", value);
+    // 無効な値を設定した場合もブラウザに判断を委ねるために、プロパティではなく属性を設定
+    this.#inputElement.setAttribute("autocomplete", value);
   }
 
   get invalid() {
@@ -103,6 +119,8 @@ export class SpTextField extends HTMLElement {
       "name",
       "required",
       "invalid",
+      "type",
+      "autocomplete",
     ];
   }
 
@@ -258,6 +276,10 @@ export class SpTextField extends HTMLElement {
     } else if (name === "invalid") {
       this.invalid = newValue === "" || newValue === "true";
       this.#updateErrorTextVisibility();
+    } else if (name === "type") {
+      this.type = newValue || "text";
+    } else if (name === "autocomplete") {
+      this.autocomplete = newValue || "";
     }
   }
 

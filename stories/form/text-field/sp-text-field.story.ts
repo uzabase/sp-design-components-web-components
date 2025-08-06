@@ -14,6 +14,12 @@ const meta = {
     disabled: { type: "boolean" },
     name: { type: "string" },
     required: { type: "boolean" },
+    type: {
+      type: "string",
+      control: "select",
+      options: ["text", "email", "password", "tel", "url", "search"],
+    },
+    autocomplete: { type: "string" },
   },
   render: (args) => html`
     <sp-text-field
@@ -22,6 +28,8 @@ const meta = {
       ?disabled=${args.disabled}
       name=${args.name ?? ""}
       ?required=${args.required}
+      type=${args.type ?? "text"}
+      autocomplete=${args.autocomplete ?? ""}
     ></sp-text-field>
   `,
 } satisfies Meta<SpTextField>;
@@ -246,6 +254,118 @@ export const ErrorWithCharacterCounter: Story = {
             >入力形式が正しくありません</sp-error-text
           >
         </sp-text-field>
+      </div>
+    </div>
+  `,
+};
+
+export const DifferentInputTypes: Story = {
+  render: () => html`
+    <div
+      style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;"
+    >
+      <div>
+        <sp-label for="email-field">メールアドレス</sp-label>
+        <sp-text-field
+          id="email-field"
+          type="email"
+          placeholder="example@domain.com"
+          autocomplete="email"
+          name="email"
+        ></sp-text-field>
+      </div>
+      <div>
+        <sp-label for="password-field">パスワード</sp-label>
+        <sp-text-field
+          id="password-field"
+          type="password"
+          placeholder="パスワードを入力"
+          autocomplete="current-password"
+          name="password"
+        ></sp-text-field>
+      </div>
+      <div>
+        <sp-label for="tel-field">電話番号</sp-label>
+        <sp-text-field
+          id="tel-field"
+          type="tel"
+          placeholder="090-1234-5678"
+          autocomplete="tel"
+          name="phone"
+        ></sp-text-field>
+      </div>
+      <div>
+        <sp-label for="url-field">ウェブサイト</sp-label>
+        <sp-text-field
+          id="url-field"
+          type="url"
+          placeholder="https://example.com"
+          autocomplete="url"
+          name="website"
+        ></sp-text-field>
+      </div>
+      <div>
+        <sp-label for="search-field">検索</sp-label>
+        <sp-text-field
+          id="search-field"
+          type="search"
+          placeholder="検索キーワード"
+          name="search"
+        ></sp-text-field>
+      </div>
+    </div>
+  `,
+};
+
+export const AutocompleteExamples: Story = {
+  render: () => html`
+    <div
+      style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;"
+    >
+      <div>
+        <sp-label for="name-field">氏名</sp-label>
+        <sp-text-field
+          id="name-field"
+          placeholder="山田太郎"
+          autocomplete="name"
+          name="fullname"
+        ></sp-text-field>
+      </div>
+      <div>
+        <sp-label for="given-name-field">名</sp-label>
+        <sp-text-field
+          id="given-name-field"
+          placeholder="太郎"
+          autocomplete="given-name"
+          name="firstname"
+        ></sp-text-field>
+      </div>
+      <div>
+        <sp-label for="family-name-field">姓</sp-label>
+        <sp-text-field
+          id="family-name-field"
+          placeholder="山田"
+          autocomplete="family-name"
+          name="lastname"
+        ></sp-text-field>
+      </div>
+      <div>
+        <sp-label for="organization-field">会社名</sp-label>
+        <sp-text-field
+          id="organization-field"
+          placeholder="株式会社サンプル"
+          autocomplete="organization"
+          name="company"
+        ></sp-text-field>
+      </div>
+      <div>
+        <sp-label for="street-address-field">住所</sp-label>
+        <sp-text-field
+          id="street-address-field"
+          placeholder="東京都渋谷区..."
+          autocomplete="street-address"
+          name="address"
+        ></sp-text-field>
       </div>
     </div>
   `,
