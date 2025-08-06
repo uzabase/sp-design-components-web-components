@@ -1,44 +1,44 @@
 :host {
-    display: block;
+  display: block;
 }
 
 .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
 }
 
 .main {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .heading {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .text-links {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    gap: 16px;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 16px;
 }
 
 .buttons {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
 }
 
 h2 {
-    margin-block: 3px;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 1.6;
-    position: relative;
+  margin-block: 3px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.6;
+  position: relative;
 }
