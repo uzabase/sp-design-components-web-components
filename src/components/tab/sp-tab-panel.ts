@@ -77,8 +77,7 @@ export class SpTabPanel extends HTMLElement {
         this.#name = newValue;
         break;
       case "active":
-        this.#active = newValue !== null;
-        this.setAttribute("aria-hidden", newValue !== null ? "false" : "true");
+        this.active = newValue !== null;
         break;
     }
   }

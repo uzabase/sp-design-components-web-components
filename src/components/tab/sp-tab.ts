@@ -25,6 +25,10 @@ export class SpTab extends HTMLElement {
   #textSlotElement = document.createElement("slot");
   #handleClickBound = this.#handleClick.bind(this);
 
+  get disabled() {
+    return this.#disabled;
+  }
+
   set disabled(value: boolean) {
     this.#disabled = value;
     if (value) {
@@ -128,7 +132,10 @@ export class SpTab extends HTMLElement {
         if (isValidTabType(newValue)) {
           this.fill = newValue;
         } else {
-          console.warn(`${newValue}は無効なfill属性です。`);
+          // null値は正常な初期状態なので、無効な文字列値のみ警告
+          if (newValue !== null) {
+            console.warn(`'${newValue}' は無効なfill属性です。有効な値: ${types.join(', ')}`);
+          }
           this.fill = "gray";
         }
         break;

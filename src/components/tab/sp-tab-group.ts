@@ -195,6 +195,12 @@ export class SpTabGroup extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
     this.shadowRoot!.adoptedStyleSheets = [styles];
+    
+    // イベントリスナーをコンストラクタで登録
+    this.#navSlot.addEventListener("click", (e) => {
+      if (!this.isValidTabElement(e.target)) return;
+      this.updateDisplayPanel(e.target);
+    });
   }
 
   connectedCallback() {
@@ -206,11 +212,6 @@ export class SpTabGroup extends HTMLElement {
 
     this.#panelWrapper.classList.add("panel-wrapper");
     this.#panelWrapper.appendChild(this.#panelSlot);
-
-    this.#navSlot.addEventListener("click", (e) => {
-      if (!this.isValidTabElement(e.target)) return;
-      this.updateDisplayPanel(e.target);
-    });
 
     // slotchangeイベント(nav slotを監視する)
     this.#navSlot.addEventListener("slotchange", () => {
