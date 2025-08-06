@@ -195,7 +195,7 @@ export class SpTabGroup extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
     this.shadowRoot!.adoptedStyleSheets = [styles];
-    
+
     // イベントリスナーをコンストラクタで登録
     this.#navSlot.addEventListener("click", (e) => {
       if (!this.isValidTabElement(e.target)) return;

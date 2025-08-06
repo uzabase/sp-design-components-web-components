@@ -134,7 +134,9 @@ export class SpTab extends HTMLElement {
         } else {
           // null値は正常な初期状態なので、無効な文字列値のみ警告
           if (newValue !== null) {
-            console.warn(`'${newValue}' は無効なfill属性です。有効な値: ${types.join(', ')}`);
+            console.warn(
+              `'${newValue}' は無効なfill属性です。有効な値: ${types.join(", ")}`,
+            );
           }
           this.fill = "gray";
         }
