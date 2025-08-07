@@ -54,9 +54,25 @@ export class SpCharacterCounter extends HTMLElement {
   }
 
   connectedCallback() {
+    this.#validateAndSetDefaultValue("current");
+    this.#validateAndSetDefaultValue("max");
+
     this.#updateCurrentCount();
     this.#updateMaxCount();
     this.#updateLimitStatus();
+  }
+
+  #validateAndSetDefaultValue(name: string) {
+    const value = this.getAttribute(name);
+    if (!this.#isValidNumericValue(value)) {
+      this.setAttribute(name, "0");
+    }
+  }
+
+  #isValidNumericValue(value: string | null): boolean {
+    if (value === null) return true;
+    const numValue = Number(value);
+    return !isNaN(numValue) && numValue >= 0;
   }
 
   attributeChangedCallback(
@@ -67,9 +83,11 @@ export class SpCharacterCounter extends HTMLElement {
     if (oldValue === newValue) return;
 
     if (name === "current") {
+      if (!this.#isValidNumericValue(newValue)) return;
       this.#updateCurrentCount();
       this.#updateLimitStatus();
     } else if (name === "max") {
+      if (!this.#isValidNumericValue(newValue)) return;
       this.#updateMaxCount();
       this.#updateLimitStatus();
     }
