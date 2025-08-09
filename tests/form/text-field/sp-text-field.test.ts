@@ -20,10 +20,10 @@ function getCharacterCounter() {
     .shadowRoot!.querySelector("sp-character-counter") as HTMLElement;
 }
 
-function getErrorText() {
+function getErrorContainer() {
   return document
     .querySelector("sp-text-field")!
-    .shadowRoot!.querySelector("sp-error-text") as HTMLElement;
+    .shadowRoot!.querySelector(".error-container") as HTMLElement;
 }
 
 describe("sp-text-field", () => {
@@ -223,24 +223,24 @@ describe("sp-text-field", () => {
         </sp-text-field>
       `;
 
-      const errorText = getErrorText();
+      const errorContainer = getErrorContainer();
 
-      expect(errorText.style.display).toBe("block");
+      expect(errorContainer.style.display).toBe("flex");
     });
 
     test("エラースロットにコンテンツがない場合、エラーテキストが非表示になる", () => {
       document.body.innerHTML = `<sp-text-field></sp-text-field>`;
 
-      const errorText = getErrorText();
+      const errorContainer = getErrorContainer();
 
-      expect(errorText.style.display).toBe("none");
+      expect(errorContainer.style.display).toBe("none");
     });
 
     test("エラースロットにコンテンツを動的に追加すると、エラーテキストが表示される", async () => {
       document.body.innerHTML = `<sp-text-field></sp-text-field>`;
 
       const spTextField = getSpTextField();
-      const errorText = getErrorText();
+      const errorContainer = getErrorContainer();
 
       const errorElement = document.createElement("sp-error-text");
       errorElement.setAttribute("slot", "error-text");
@@ -249,7 +249,7 @@ describe("sp-text-field", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
-      expect(errorText.style.display).toBe("block");
+      expect(errorContainer.style.display).toBe("flex");
     });
 
     test("エラースロットのコンテンツを動的に削除すると、エラーテキストが非表示になる", async () => {
@@ -260,14 +260,14 @@ describe("sp-text-field", () => {
       `;
 
       const spTextField = getSpTextField();
-      const errorText = getErrorText();
+      const errorContainer = getErrorContainer();
       const errorSlotElement = spTextField.querySelector('[slot="error-text"]');
 
       errorSlotElement?.remove();
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
-      expect(errorText.style.display).toBe("none");
+      expect(errorContainer.style.display).toBe("none");
     });
   });
 

@@ -147,12 +147,14 @@ export class SpTextField extends HTMLElement {
     this.#inputElement.setAttribute("aria-errormessage", errorId);
 
     errorText.appendChild(this.#errorSlot);
-    errorText.style.display = "none";
+
+    const errorContainer = document.createElement("div");
+    errorContainer.classList.add("error-container");
+    errorContainer.appendChild(errorText);
 
     const infoContainer = document.createElement("div");
     infoContainer.classList.add("info");
-
-    infoContainer.appendChild(errorText);
+    infoContainer.appendChild(errorContainer);
 
     this.#container.appendChild(infoContainer);
   }
@@ -298,21 +300,21 @@ export class SpTextField extends HTMLElement {
 
   #showErrorText() {
     if (!this.#container) return;
-    const errorText = this.#container.querySelector(
-      "sp-error-text",
+    const errorContainer = this.#container.querySelector(
+      ".error-container",
     ) as HTMLElement;
-    if (errorText) {
-      errorText.style.display = "block";
+    if (errorContainer) {
+      errorContainer.style.display = "flex";
     }
   }
 
   #hideErrorText() {
     if (!this.#container) return;
-    const errorText = this.#container.querySelector(
-      "sp-error-text",
+    const errorContainer = this.#container.querySelector(
+      ".error-container",
     ) as HTMLElement;
-    if (errorText) {
-      errorText.style.display = "none";
+    if (errorContainer) {
+      errorContainer.style.display = "none";
     }
   }
 }

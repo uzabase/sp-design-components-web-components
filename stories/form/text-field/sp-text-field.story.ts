@@ -82,7 +82,7 @@ export const InForm: Story = {
 
 export const Error: Story = {
   render: () => html`
-    <sp-text-field invalid>
+    <sp-text-field>
       <sp-error-text slot="error-text">エラーが発生しています</sp-error-text>
     </sp-text-field>
   `,
@@ -221,7 +221,6 @@ export const ErrorWithCharacterCounter: Story = {
           id="error-normal"
           placeholder="20文字以内で入力"
           character-limit="20"
-          invalid
           value="abc"
         >
           <sp-error-text slot="error-text"
@@ -235,7 +234,6 @@ export const ErrorWithCharacterCounter: Story = {
           id="error-limit-reached"
           placeholder="20文字以内で入力"
           character-limit="20"
-          invalid
           value="12345678901234567890"
         >
           <sp-error-text slot="error-text">この入力は必須です</sp-error-text>
@@ -247,7 +245,6 @@ export const ErrorWithCharacterCounter: Story = {
           id="error-limit-exceeded"
           placeholder="20文字以内で入力"
           character-limit="20"
-          invalid
           value="123456789012345678901234567890"
         >
           <sp-error-text slot="error-text"
@@ -312,6 +309,148 @@ export const DifferentInputTypes: Story = {
           placeholder="検索キーワード"
           name="search"
         ></sp-text-field>
+      </div>
+    </div>
+  `,
+};
+
+export const MultipleErrorMessages: Story = {
+  render: () => html`
+    <div
+      style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;"
+    >
+      <div>
+        <sp-label for="single-error-field">単一エラー</sp-label>
+        <sp-text-field
+          id="single-error-field"
+          placeholder="メールアドレスを入力"
+          type="email"
+          value="invalid-email"
+        >
+          <sp-error-text slot="error-text"
+            >メールアドレスの形式が正しくありません</sp-error-text
+          >
+        </sp-text-field>
+      </div>
+      <div>
+        <sp-label for="multiple-error-field">複数エラー</sp-label>
+        <sp-text-field
+          id="multiple-error-field"
+          placeholder="パスワードを入力"
+          type="password"
+          character-limit="20"
+          value="123"
+        >
+          <sp-error-text slot="error-text"
+            >パスワードは8文字以上で入力してください</sp-error-text
+          >
+          <sp-error-text slot="error-text"
+            >大文字・小文字・数字を含めてください</sp-error-text
+          >
+          <sp-error-text slot="error-text"
+            >特殊文字(@, #, $など)を含めてください</sp-error-text
+          >
+        </sp-text-field>
+      </div>
+      <div>
+        <sp-label for="validation-error-field">バリデーション結果</sp-label>
+        <sp-text-field
+          id="validation-error-field"
+          placeholder="ユーザー名を入力"
+          value="ab"
+          character-limit="50"
+        >
+          <sp-error-text slot="error-text"
+            >ユーザー名は3文字以上で入力してください</sp-error-text
+          >
+          <sp-error-text slot="error-text"
+            >このユーザー名は既に使用されています</sp-error-text
+          >
+        </sp-text-field>
+      </div>
+    </div>
+  `,
+};
+
+export const DynamicErrorManagement: Story = {
+  render: () => html`
+    <div
+      style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;"
+    >
+      <div>
+        <sp-label for="dynamic-field">動的エラー管理</sp-label>
+        <sp-text-field
+          id="dynamic-field"
+          placeholder="入力してエラーを確認"
+          @input=${(e: Event) => {
+            const field = e.target as any;
+            const value = field.value;
+
+            // 既存のエラーをクリア
+            const existingErrors = field.querySelectorAll(
+              'sp-error-text[slot="error-text"]',
+            );
+            existingErrors.forEach((error: HTMLElement) => error.remove());
+
+            // バリデーション
+            const errors = [];
+            if (value.length < 3) {
+              errors.push("3文字以上で入力してください");
+            }
+            if (!/^[a-zA-Z0-9]+$/.test(value) && value.length > 0) {
+              errors.push("英数字のみで入力してください");
+            }
+            if (value.toLowerCase().includes("admin")) {
+              errors.push("この名前は使用できません");
+            }
+
+            // エラーを動的に追加
+            errors.forEach((errorText) => {
+              const errorElement = document.createElement("sp-error-text");
+              errorElement.setAttribute("slot", "error-text");
+              errorElement.textContent = errorText;
+              field.appendChild(errorElement);
+            });
+          }}
+        >
+        </sp-text-field>
+        <p style="font-size: 12px; color: #666; margin-top: 8px;">
+          入力するとリアルタイムでバリデーションが実行されます
+        </p>
+      </div>
+      <div>
+        <sp-label for="toggle-field">エラー切り替え</sp-label>
+        <sp-text-field id="toggle-field" placeholder="ボタンでエラーを切り替え">
+        </sp-text-field>
+        <div style="margin-top: 8px; display: flex; gap: 8px;">
+          <button
+            @click=${(e: Event) => {
+              const field = document.getElementById("toggle-field");
+              const existingErrors = field?.querySelectorAll(
+                'sp-error-text[slot="error-text"]',
+              );
+              existingErrors?.forEach((error: HTMLElement) => error.remove());
+
+              const errorElement = document.createElement("sp-error-text");
+              errorElement.setAttribute("slot", "error-text");
+              errorElement.textContent = "この項目は必須です";
+              field?.appendChild(errorElement);
+            }}
+          >
+            エラー表示
+          </button>
+          <button
+            @click=${(e: Event) => {
+              const field = document.getElementById("toggle-field");
+              const existingErrors = field?.querySelectorAll(
+                'sp-error-text[slot="error-text"]',
+              );
+              existingErrors?.forEach((error: HTMLElement) => error.remove());
+            }}
+          >
+            エラークリア
+          </button>
+        </div>
       </div>
     </div>
   `,

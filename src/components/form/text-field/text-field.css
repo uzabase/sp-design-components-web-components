@@ -45,11 +45,21 @@
   align-items: flex-start;
   justify-content: space-between;
   margin-block-start: 4px;
+  gap: 8px;
 }
 
 .info sp-error-text {
+  display: block;
+}
+
+.info sp-error-text:not(:last-of-type) {
+  margin-block-end: 2px;
+}
+
+.info .error-container {
   flex: 1;
-  margin-inline-end: 8px;
+  display: none;
+  flex-direction: column;
 }
 
 .info .character-counter {
