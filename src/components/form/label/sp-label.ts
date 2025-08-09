@@ -45,7 +45,7 @@ export class SpLabel extends HTMLElement {
     this.#requiredElement.setAttribute("aria-hidden", "true");
 
     this.#requiredLabelElement.classList.add("sr-only");
-    this.#requiredLabelElement.textContent = " 必須";
+    this.#requiredLabelElement.textContent = "（必須）";
   }
 
   connectedCallback() {
