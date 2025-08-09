@@ -285,7 +285,7 @@ export class SpTextField extends HTMLElement {
   }
 
   #generateRandomId(): string {
-    return `error-${Math.random().toString(36).substr(2, 9)}`;
+    return `error-${Math.random().toString(36).substring(2, 11)}`;
   }
 
   #getErrorElements(elements: Element[]): Element[] {
