@@ -284,6 +284,28 @@ export class SpTextField extends HTMLElement {
     this.#updateErrorState();
   }
 
+  #generateRandomId(): string {
+    return `error-${Math.random().toString(36).substr(2, 9)}`;
+  }
+
+  #getErrorElements(elements: Element[]): Element[] {
+    return elements.filter(
+      (element) => element.tagName.toLowerCase() === "sp-error-text",
+    );
+  }
+
+  #assignRandomIdsToErrorElements(elements: Element[]) {
+    this.#getErrorElements(elements).forEach((element) => {
+      element.id = this.#generateRandomId();
+    });
+  }
+
+  #collectErrorIds(elements: Element[]): string {
+    return this.#getErrorElements(elements)
+      .map((element) => element.id)
+      .join(" ");
+  }
+
   #updateErrorState() {
     const assignedElements = this.#errorSlot.assignedElements();
     const hasErrorContent = assignedElements.length > 0;
@@ -291,12 +313,9 @@ export class SpTextField extends HTMLElement {
     if (hasErrorContent) {
       this.#inputElement.setAttribute("aria-invalid", "true");
 
-      const errorIds = Array.from(assignedElements)
-        .filter((element) => element.tagName.toLowerCase() === "sp-error-text")
-        .map((element) => element.id)
-        .filter((id) => id)
-        .join(" ");
+      this.#assignRandomIdsToErrorElements(Array.from(assignedElements));
 
+      const errorIds = this.#collectErrorIds(Array.from(assignedElements));
       if (errorIds) {
         this.#inputElement.setAttribute("aria-errormessage", errorIds);
       }

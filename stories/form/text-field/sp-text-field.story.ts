@@ -129,7 +129,7 @@ export const ErrorStates: Story = {
           type="email"
           value="invalid-email"
         >
-          <sp-error-text id="email-format-error" slot="error-text"
+          <sp-error-text slot="error-text"
             >メールアドレスの形式が正しくありません</sp-error-text
           >
         </sp-text-field>
@@ -146,13 +146,13 @@ export const ErrorStates: Story = {
           character-limit="20"
           value="123"
         >
-          <sp-error-text id="password-length-error" slot="error-text"
+          <sp-error-text slot="error-text"
             >パスワードは8文字以上で入力してください</sp-error-text
           >
-          <sp-error-text id="password-chars-error" slot="error-text"
+          <sp-error-text slot="error-text"
             >大文字・小文字・数字を含めてください</sp-error-text
           >
-          <sp-error-text id="password-special-error" slot="error-text"
+          <sp-error-text slot="error-text"
             >特殊文字(@, #, $など)を含めてください</sp-error-text
           >
         </sp-text-field>

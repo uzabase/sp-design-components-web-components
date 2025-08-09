@@ -288,97 +288,127 @@ describe("sp-text-field", () => {
   });
 
   describe("アクセシビリティ", () => {
-    test("単一のエラーメッセージがある場合、aria-errormessageにそのIDが設定される", () => {
+    test("単一のエラーメッセージがある場合、aria-errormessageに自動生成されたIDが設定される", () => {
       document.body.innerHTML = `
         <sp-text-field>
-          <sp-error-text id="error-1" slot="error-text">エラーメッセージ1</sp-error-text>
+          <sp-error-text slot="error-text">エラーメッセージ1</sp-error-text>
         </sp-text-field>
       `;
 
       const inputElement = getInputElement();
+      const errorElement = document.querySelector("sp-error-text");
 
-      expect(inputElement.getAttribute("aria-errormessage")).toBe("error-1");
+      // IDが自動生成されている
+      expect(errorElement?.id).toMatch(/^error-[a-z0-9]{9}$/);
+      // aria-errormessageにそのIDが設定されている
+      expect(inputElement.getAttribute("aria-errormessage")).toBe(
+        errorElement?.id,
+      );
     });
 
-    test("複数のエラーメッセージがある場合、aria-errormessageにスペース区切りでIDが設定される", async () => {
+    test("複数のエラーメッセージがある場合、aria-errormessageにスペース区切りで自動生成IDが設定される", async () => {
       document.body.innerHTML = `
         <sp-text-field>
-          <sp-error-text id="error-1" slot="error-text">エラーメッセージ1</sp-error-text>
-          <sp-error-text id="error-2" slot="error-text">エラーメッセージ2</sp-error-text>
-          <sp-error-text id="error-3" slot="error-text">エラーメッセージ3</sp-error-text>
+          <sp-error-text slot="error-text">エラーメッセージ1</sp-error-text>
+          <sp-error-text slot="error-text">エラーメッセージ2</sp-error-text>
+          <sp-error-text slot="error-text">エラーメッセージ3</sp-error-text>
         </sp-text-field>
       `;
 
       const inputElement = getInputElement();
+      const errorElements = document.querySelectorAll("sp-error-text");
 
-      expect(inputElement.getAttribute("aria-errormessage")).toBe(
-        "error-1 error-2 error-3",
-      );
+      // すべてのエラー要素にIDが自動生成されている
+      errorElements.forEach((element) => {
+        expect(element.id).toMatch(/^error-[a-z0-9]{9}$/);
+      });
+
+      // aria-errormessageにすべてのIDがスペース区切りで設定されている
+      const expectedIds = Array.from(errorElements)
+        .map((el) => el.id)
+        .join(" ");
+      expect(inputElement.getAttribute("aria-errormessage")).toBe(expectedIds);
     });
 
     test("エラーメッセージを動的に追加すると、aria-errormessageが更新される", async () => {
       document.body.innerHTML = `
         <sp-text-field>
-          <sp-error-text id="error-1" slot="error-text">エラーメッセージ1</sp-error-text>
+          <sp-error-text slot="error-text">エラーメッセージ1</sp-error-text>
         </sp-text-field>
       `;
 
       const spTextField = getSpTextField();
       const inputElement = getInputElement();
+      const firstError = document.querySelector("sp-error-text");
 
-      // 最初は1つのエラー
-      expect(inputElement.getAttribute("aria-errormessage")).toBe("error-1");
+      // 最初のエラーのIDが自動生成されている
+      expect(firstError?.id).toMatch(/^error-[a-z0-9]{9}$/);
+      expect(inputElement.getAttribute("aria-errormessage")).toBe(
+        firstError?.id,
+      );
 
       // 2つ目のエラーを追加
       const errorElement2 = document.createElement("sp-error-text");
-      errorElement2.id = "error-2";
       errorElement2.setAttribute("slot", "error-text");
       errorElement2.textContent = "エラーメッセージ2";
       spTextField.appendChild(errorElement2);
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
-      expect(inputElement.getAttribute("aria-errormessage")).toBe(
-        "error-1 error-2",
-      );
+      // 2つ目のエラーにもIDが自動生成されている
+      expect(errorElement2.id).toMatch(/^error-[a-z0-9]{9}$/);
+
+      const expectedIds = `${firstError?.id} ${errorElement2.id}`;
+      expect(inputElement.getAttribute("aria-errormessage")).toBe(expectedIds);
     });
 
     test("エラーメッセージを動的に削除すると、aria-errormessageが更新される", async () => {
       document.body.innerHTML = `
         <sp-text-field>
-          <sp-error-text id="error-1" slot="error-text">エラーメッセージ1</sp-error-text>
-          <sp-error-text id="error-2" slot="error-text">エラーメッセージ2</sp-error-text>
+          <sp-error-text slot="error-text">エラーメッセージ1</sp-error-text>
+          <sp-error-text slot="error-text">エラーメッセージ2</sp-error-text>
         </sp-text-field>
       `;
 
       const inputElement = getInputElement();
-      const errorElement1 = document.querySelector("#error-1") as HTMLElement;
+      const errorElements = document.querySelectorAll("sp-error-text");
+      const errorElement1 = errorElements[0] as HTMLElement;
+      const errorElement2 = errorElements[1] as HTMLElement;
 
-      // 最初は2つのエラー
-      expect(inputElement.getAttribute("aria-errormessage")).toBe(
-        "error-1 error-2",
-      );
+      // 最初は2つのエラーでIDが自動生成されている
+      expect(errorElement1.id).toMatch(/^error-[a-z0-9]{9}$/);
+      expect(errorElement2.id).toMatch(/^error-[a-z0-9]{9}$/);
+
+      const initialIds = `${errorElement1.id} ${errorElement2.id}`;
+      expect(inputElement.getAttribute("aria-errormessage")).toBe(initialIds);
 
       // 1つ目のエラーを削除
       errorElement1.remove();
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
-      expect(inputElement.getAttribute("aria-errormessage")).toBe("error-2");
+      expect(inputElement.getAttribute("aria-errormessage")).toBe(
+        errorElement2.id,
+      );
     });
 
     test("すべてのエラーメッセージが削除されると、aria-errormessageが削除される", async () => {
       document.body.innerHTML = `
         <sp-text-field>
-          <sp-error-text id="error-1" slot="error-text">エラーメッセージ1</sp-error-text>
+          <sp-error-text slot="error-text">エラーメッセージ1</sp-error-text>
         </sp-text-field>
       `;
 
       const inputElement = getInputElement();
-      const errorElement1 = document.querySelector("#error-1") as HTMLElement;
+      const errorElement1 = document.querySelector(
+        "sp-error-text",
+      ) as HTMLElement;
 
-      // 最初はエラーがある
-      expect(inputElement.getAttribute("aria-errormessage")).toBe("error-1");
+      // 最初はエラーがあり、IDが自動生成されている
+      expect(errorElement1.id).toMatch(/^error-[a-z0-9]{9}$/);
+      expect(inputElement.getAttribute("aria-errormessage")).toBe(
+        errorElement1.id,
+      );
 
       // エラーを削除
       errorElement1.remove();
@@ -388,20 +418,28 @@ describe("sp-text-field", () => {
       expect(inputElement.hasAttribute("aria-errormessage")).toBe(false);
     });
 
-    test("IDが設定されていないエラーメッセージは、aria-errormessageに含まれない", () => {
+    test("すべてのエラーメッセージに自動でIDが生成される", () => {
       document.body.innerHTML = `
         <sp-text-field>
-          <sp-error-text id="error-1" slot="error-text">エラーメッセージ1</sp-error-text>
-          <sp-error-text slot="error-text">IDなしエラー</sp-error-text>
-          <sp-error-text id="error-3" slot="error-text">エラーメッセージ3</sp-error-text>
+          <sp-error-text slot="error-text">エラーメッセージ1</sp-error-text>
+          <sp-error-text slot="error-text">エラーメッセージ2</sp-error-text>
+          <sp-error-text slot="error-text">エラーメッセージ3</sp-error-text>
         </sp-text-field>
       `;
 
       const inputElement = getInputElement();
+      const errorElements = document.querySelectorAll("sp-error-text");
 
-      expect(inputElement.getAttribute("aria-errormessage")).toBe(
-        "error-1 error-3",
-      );
+      // すべてのエラー要素にIDが自動生成されている
+      errorElements.forEach((element) => {
+        expect(element.id).toMatch(/^error-[a-z0-9]{9}$/);
+      });
+
+      // aria-errormessageにすべてのIDが含まれている
+      const allIds = Array.from(errorElements)
+        .map((el) => el.id)
+        .join(" ");
+      expect(inputElement.getAttribute("aria-errormessage")).toBe(allIds);
     });
   });
 });
