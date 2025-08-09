@@ -144,8 +144,6 @@ export class SpTextField extends HTMLElement {
     const errorId = `${fieldName}-error`;
     errorText.id = errorId;
 
-    this.#inputElement.setAttribute("aria-errormessage", errorId);
-
     errorText.appendChild(this.#errorSlot);
 
     const errorContainer = document.createElement("div");
@@ -287,13 +285,26 @@ export class SpTextField extends HTMLElement {
   }
 
   #updateErrorState() {
-    const hasErrorContent = this.#errorSlot.assignedElements().length > 0;
+    const assignedElements = this.#errorSlot.assignedElements();
+    const hasErrorContent = assignedElements.length > 0;
 
     if (hasErrorContent) {
       this.#inputElement.setAttribute("aria-invalid", "true");
+
+      const errorIds = Array.from(assignedElements)
+        .filter((element) => element.tagName.toLowerCase() === "sp-error-text")
+        .map((element) => element.id)
+        .filter((id) => id)
+        .join(" ");
+
+      if (errorIds) {
+        this.#inputElement.setAttribute("aria-errormessage", errorIds);
+      }
+
       this.#showErrorText();
     } else {
       this.#inputElement.removeAttribute("aria-invalid");
+      this.#inputElement.removeAttribute("aria-errormessage");
       this.#hideErrorText();
     }
   }

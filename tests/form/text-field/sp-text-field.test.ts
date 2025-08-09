@@ -286,4 +286,122 @@ describe("sp-text-field", () => {
       expect(mockHandler).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe("アクセシビリティ", () => {
+    test("単一のエラーメッセージがある場合、aria-errormessageにそのIDが設定される", () => {
+      document.body.innerHTML = `
+        <sp-text-field>
+          <sp-error-text id="error-1" slot="error-text">エラーメッセージ1</sp-error-text>
+        </sp-text-field>
+      `;
+
+      const inputElement = getInputElement();
+
+      expect(inputElement.getAttribute("aria-errormessage")).toBe("error-1");
+    });
+
+    test("複数のエラーメッセージがある場合、aria-errormessageにスペース区切りでIDが設定される", async () => {
+      document.body.innerHTML = `
+        <sp-text-field>
+          <sp-error-text id="error-1" slot="error-text">エラーメッセージ1</sp-error-text>
+          <sp-error-text id="error-2" slot="error-text">エラーメッセージ2</sp-error-text>
+          <sp-error-text id="error-3" slot="error-text">エラーメッセージ3</sp-error-text>
+        </sp-text-field>
+      `;
+
+      const inputElement = getInputElement();
+
+      expect(inputElement.getAttribute("aria-errormessage")).toBe(
+        "error-1 error-2 error-3",
+      );
+    });
+
+    test("エラーメッセージを動的に追加すると、aria-errormessageが更新される", async () => {
+      document.body.innerHTML = `
+        <sp-text-field>
+          <sp-error-text id="error-1" slot="error-text">エラーメッセージ1</sp-error-text>
+        </sp-text-field>
+      `;
+
+      const spTextField = getSpTextField();
+      const inputElement = getInputElement();
+
+      // 最初は1つのエラー
+      expect(inputElement.getAttribute("aria-errormessage")).toBe("error-1");
+
+      // 2つ目のエラーを追加
+      const errorElement2 = document.createElement("sp-error-text");
+      errorElement2.id = "error-2";
+      errorElement2.setAttribute("slot", "error-text");
+      errorElement2.textContent = "エラーメッセージ2";
+      spTextField.appendChild(errorElement2);
+
+      await new Promise((resolve) => setTimeout(resolve, 10));
+
+      expect(inputElement.getAttribute("aria-errormessage")).toBe(
+        "error-1 error-2",
+      );
+    });
+
+    test("エラーメッセージを動的に削除すると、aria-errormessageが更新される", async () => {
+      document.body.innerHTML = `
+        <sp-text-field>
+          <sp-error-text id="error-1" slot="error-text">エラーメッセージ1</sp-error-text>
+          <sp-error-text id="error-2" slot="error-text">エラーメッセージ2</sp-error-text>
+        </sp-text-field>
+      `;
+
+      const inputElement = getInputElement();
+      const errorElement1 = document.querySelector("#error-1") as HTMLElement;
+
+      // 最初は2つのエラー
+      expect(inputElement.getAttribute("aria-errormessage")).toBe(
+        "error-1 error-2",
+      );
+
+      // 1つ目のエラーを削除
+      errorElement1.remove();
+
+      await new Promise((resolve) => setTimeout(resolve, 10));
+
+      expect(inputElement.getAttribute("aria-errormessage")).toBe("error-2");
+    });
+
+    test("すべてのエラーメッセージが削除されると、aria-errormessageが削除される", async () => {
+      document.body.innerHTML = `
+        <sp-text-field>
+          <sp-error-text id="error-1" slot="error-text">エラーメッセージ1</sp-error-text>
+        </sp-text-field>
+      `;
+
+      const inputElement = getInputElement();
+      const errorElement1 = document.querySelector("#error-1") as HTMLElement;
+
+      // 最初はエラーがある
+      expect(inputElement.getAttribute("aria-errormessage")).toBe("error-1");
+
+      // エラーを削除
+      errorElement1.remove();
+
+      await new Promise((resolve) => setTimeout(resolve, 10));
+
+      expect(inputElement.hasAttribute("aria-errormessage")).toBe(false);
+    });
+
+    test("IDが設定されていないエラーメッセージは、aria-errormessageに含まれない", () => {
+      document.body.innerHTML = `
+        <sp-text-field>
+          <sp-error-text id="error-1" slot="error-text">エラーメッセージ1</sp-error-text>
+          <sp-error-text slot="error-text">IDなしエラー</sp-error-text>
+          <sp-error-text id="error-3" slot="error-text">エラーメッセージ3</sp-error-text>
+        </sp-text-field>
+      `;
+
+      const inputElement = getInputElement();
+
+      expect(inputElement.getAttribute("aria-errormessage")).toBe(
+        "error-1 error-3",
+      );
+    });
+  });
 });
