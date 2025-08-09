@@ -68,7 +68,7 @@ describe("sp-text-field", () => {
       expect(inputElement.placeholder).toBe("入力してください");
     });
 
-    test("placeholder属性を設定しない場合、プレースホルダーは空", () => {
+    test("placeholder属性を設定しない場合、プレースホルダーが空になる", () => {
       document.body.innerHTML = "<sp-text-field></sp-text-field>";
 
       const inputElement = getInputElement();
@@ -99,7 +99,7 @@ describe("sp-text-field", () => {
       expect(inputElement.type).toBe("password");
     });
 
-    test("type属性を設定しない場合、デフォルトは'text'", () => {
+    test("type属性を設定しない場合、デフォルトで'text'になる", () => {
       document.body.innerHTML = "<sp-text-field></sp-text-field>";
 
       const inputElement = getInputElement();
@@ -117,7 +117,7 @@ describe("sp-text-field", () => {
       expect(inputElement.disabled).toBe(true);
     });
 
-    test("disabled属性を設定しない場合、入力要素は有効", () => {
+    test("disabled属性を設定しない場合、入力要素が有効になる", () => {
       document.body.innerHTML = "<sp-text-field></sp-text-field>";
 
       const inputElement = getInputElement();
@@ -125,7 +125,7 @@ describe("sp-text-field", () => {
       expect(inputElement.disabled).toBe(false);
     });
 
-    test("disabled='false'を設定すると、入力要素は有効", () => {
+    test("disabled='false'を設定すると、入力要素が有効になる", () => {
       document.body.innerHTML =
         "<sp-text-field disabled='false'></sp-text-field>";
 
@@ -144,7 +144,7 @@ describe("sp-text-field", () => {
       expect(inputElement.required).toBe(true);
     });
 
-    test("required属性を設定しない場合、入力要素は任意", () => {
+    test("required属性を設定しない場合、入力要素が任意になる", () => {
       document.body.innerHTML = "<sp-text-field></sp-text-field>";
 
       const inputElement = getInputElement();
@@ -163,7 +163,7 @@ describe("sp-text-field", () => {
       expect(inputElement.name).toBe("username");
     });
 
-    test("name属性を設定しない場合、入力要素のnameは空", () => {
+    test("name属性を設定しない場合、入力要素のnameが空になる", () => {
       document.body.innerHTML = "<sp-text-field></sp-text-field>";
 
       const inputElement = getInputElement();
@@ -196,7 +196,7 @@ describe("sp-text-field", () => {
       expect(characterCounter.getAttribute("current")).toBe("0");
     });
 
-    test("character-limit属性を設定しない場合、文字数カウンターは非表示", () => {
+    test("character-limit属性を設定しない場合、文字数カウンターが非表示になる", () => {
       document.body.innerHTML = "<sp-text-field></sp-text-field>";
 
       const characterCounter = getCharacterCounter();
@@ -215,22 +215,8 @@ describe("sp-text-field", () => {
     });
   });
 
-  describe("invalid属性", () => {
-    test("invalid属性を設定すると、エラーテキストが表示される", () => {
-      document.body.innerHTML = `
-        <sp-text-field invalid>
-          <sp-error-text slot="error-text">エラーメッセージ</sp-error-text>
-        </sp-text-field>
-      `;
-
-      const errorText = getErrorText();
-      const inputElement = getInputElement();
-
-      expect(errorText.style.display).toBe("block");
-      expect(inputElement.getAttribute("aria-invalid")).toBe("true");
-    });
-
-    test("invalid属性を設定しない場合、エラーテキストは非表示", () => {
+  describe("エラースロット", () => {
+    test("エラースロットにコンテンツがある場合、エラーテキストが表示される", () => {
       document.body.innerHTML = `
         <sp-text-field>
           <sp-error-text slot="error-text">エラーメッセージ</sp-error-text>
@@ -238,13 +224,35 @@ describe("sp-text-field", () => {
       `;
 
       const errorText = getErrorText();
-      const inputElement = getInputElement();
 
-      expect(errorText.style.display).toBe("none");
-      expect(inputElement.hasAttribute("aria-invalid")).toBe(false);
+      expect(errorText.style.display).toBe("block");
     });
 
-    test("invalid属性を更新すると、エラーテキストの表示が更新される", () => {
+    test("エラースロットにコンテンツがない場合、エラーテキストが非表示になる", () => {
+      document.body.innerHTML = `<sp-text-field></sp-text-field>`;
+
+      const errorText = getErrorText();
+
+      expect(errorText.style.display).toBe("none");
+    });
+
+    test("エラースロットにコンテンツを動的に追加すると、エラーテキストが表示される", async () => {
+      document.body.innerHTML = `<sp-text-field></sp-text-field>`;
+
+      const spTextField = getSpTextField();
+      const errorText = getErrorText();
+
+      const errorElement = document.createElement("sp-error-text");
+      errorElement.setAttribute("slot", "error-text");
+      errorElement.textContent = "動的エラーメッセージ";
+      spTextField.appendChild(errorElement);
+
+      await new Promise((resolve) => setTimeout(resolve, 10));
+
+      expect(errorText.style.display).toBe("block");
+    });
+
+    test("エラースロットのコンテンツを動的に削除すると、エラーテキストが非表示になる", async () => {
       document.body.innerHTML = `
         <sp-text-field>
           <sp-error-text slot="error-text">エラーメッセージ</sp-error-text>
@@ -253,9 +261,13 @@ describe("sp-text-field", () => {
 
       const spTextField = getSpTextField();
       const errorText = getErrorText();
+      const errorSlotElement = spTextField.querySelector('[slot="error-text"]');
 
-      spTextField.setAttribute("invalid", "");
-      expect(errorText.style.display).toBe("block");
+      errorSlotElement?.remove();
+
+      await new Promise((resolve) => setTimeout(resolve, 10));
+
+      expect(errorText.style.display).toBe("none");
     });
   });
 

@@ -96,20 +96,6 @@ export class SpTextField extends HTMLElement {
     this.#inputElement.setAttribute("autocomplete", value);
   }
 
-  get invalid() {
-    return this.hasAttribute("invalid");
-  }
-  set invalid(val: boolean) {
-    if (val) {
-      this.setAttribute("invalid", "");
-      this.#inputElement.setAttribute("aria-invalid", "true");
-    } else {
-      this.removeAttribute("invalid");
-      this.#inputElement.removeAttribute("aria-invalid");
-    }
-    this.#updateErrorTextVisibility();
-  }
-
   static get observedAttributes() {
     return [
       "value",
@@ -118,7 +104,6 @@ export class SpTextField extends HTMLElement {
       "character-limit",
       "name",
       "required",
-      "invalid",
       "type",
       "autocomplete",
     ];
@@ -140,6 +125,7 @@ export class SpTextField extends HTMLElement {
     this.#setupErrorSlot();
     this.#setupCharacterCounter();
     this.#setupEventForwarding();
+    this.#setupErrorSlotObserver();
   }
 
   #setupInputElement() {
@@ -180,21 +166,6 @@ export class SpTextField extends HTMLElement {
     }
 
     this.#updateCharacterCounterVisibility();
-  }
-
-  #updateErrorTextVisibility() {
-    if (!this.#container) return;
-    const errorText = this.#container.querySelector(
-      "sp-error-text",
-    ) as HTMLElement;
-
-    if (!errorText) return;
-
-    if (this.invalid) {
-      errorText.style.display = "block";
-    } else {
-      errorText.style.display = "none";
-    }
   }
 
   #updateErrorTextId() {
@@ -273,9 +244,6 @@ export class SpTextField extends HTMLElement {
       this.#updateErrorTextId();
     } else if (name === "required") {
       this.required = newValue === "" || newValue === "true";
-    } else if (name === "invalid") {
-      this.invalid = newValue === "" || newValue === "true";
-      this.#updateErrorTextVisibility();
     } else if (name === "type") {
       this.type = newValue || "text";
     } else if (name === "autocomplete") {
@@ -290,7 +258,6 @@ export class SpTextField extends HTMLElement {
         this.attributeChangedCallback(attr, "", value);
       }
     }
-    this.#updateErrorTextVisibility();
     this.#updateCharacterCounterVisibility();
   }
 
@@ -307,6 +274,46 @@ export class SpTextField extends HTMLElement {
       this.value = this.#inputElement.value;
       this.#updateCharacterCounter();
     });
+  }
+
+  #setupErrorSlotObserver() {
+    this.#errorSlot.addEventListener("slotchange", () => {
+      this.#updateErrorState();
+    });
+
+    this.#updateErrorState();
+  }
+
+  #updateErrorState() {
+    const hasErrorContent = this.#errorSlot.assignedElements().length > 0;
+
+    if (hasErrorContent) {
+      this.#inputElement.setAttribute("aria-invalid", "true");
+      this.#showErrorText();
+    } else {
+      this.#inputElement.removeAttribute("aria-invalid");
+      this.#hideErrorText();
+    }
+  }
+
+  #showErrorText() {
+    if (!this.#container) return;
+    const errorText = this.#container.querySelector(
+      "sp-error-text",
+    ) as HTMLElement;
+    if (errorText) {
+      errorText.style.display = "block";
+    }
+  }
+
+  #hideErrorText() {
+    if (!this.#container) return;
+    const errorText = this.#container.querySelector(
+      "sp-error-text",
+    ) as HTMLElement;
+    if (errorText) {
+      errorText.style.display = "none";
+    }
   }
 }
 
