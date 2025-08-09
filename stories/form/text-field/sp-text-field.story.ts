@@ -42,7 +42,7 @@ export const Basic: Story = {
     value: "",
     placeholder: "テキストを入力",
     disabled: false,
-    name: "",
+    name: "basicField",
     required: false,
   },
   tags: ["!dev-only"],
@@ -78,6 +78,7 @@ export const Disabled: Story = {
     disabled: true,
     value: "入力不可",
     placeholder: "disabled",
+    name: "disabledField",
   },
 };
 
@@ -90,6 +91,7 @@ export const WithCharacterCounter: Story = {
         <sp-label for="comment-field">コメント</sp-label>
         <sp-text-field
           id="comment-field"
+          name="comment"
           placeholder="50文字以内でコメントを入力"
           character-limit="50"
           value="文字数カウンター付きのテキストフィールドです"
@@ -99,6 +101,7 @@ export const WithCharacterCounter: Story = {
         <sp-label for="limit-exceeded">文字数オーバー例</sp-label>
         <sp-text-field
           id="limit-exceeded"
+          name="shortText"
           placeholder="10文字以内で入力"
           character-limit="10"
           value="この文章は10文字を超えています"
@@ -116,6 +119,7 @@ export const ErrorStates: Story = {
         <sp-label for="single-error-field">単一エラー</sp-label>
         <sp-text-field
           id="single-error-field"
+          name="email"
           placeholder="メールアドレスを入力"
           type="email"
           value="invalid-email"
@@ -131,6 +135,7 @@ export const ErrorStates: Story = {
         >
         <sp-text-field
           id="multiple-error-field"
+          name="password"
           placeholder="パスワードを入力"
           type="password"
           character-limit="20"
@@ -159,6 +164,7 @@ export const InputTypes: Story = {
         <sp-label for="email-field">メールアドレス</sp-label>
         <sp-text-field
           id="email-field"
+          name="email"
           type="email"
           placeholder="example@domain.com"
           autocomplete="email"
@@ -168,6 +174,7 @@ export const InputTypes: Story = {
         <sp-label for="password-field">パスワード</sp-label>
         <sp-text-field
           id="password-field"
+          name="password"
           type="password"
           placeholder="パスワードを入力"
           autocomplete="current-password"
@@ -177,6 +184,7 @@ export const InputTypes: Story = {
         <sp-label for="tel-field">電話番号</sp-label>
         <sp-text-field
           id="tel-field"
+          name="phone"
           type="tel"
           placeholder="090-1234-5678"
           autocomplete="tel"
