@@ -44,6 +44,7 @@ export const Basic: Story = {
     disabled: false,
     name: "basicField",
     required: false,
+    autocomplete: "off",
   },
   tags: ["!dev-only"],
 };
@@ -66,6 +67,7 @@ export const WithLabelAndForm: Story = {
           name="formText"
           required
           placeholder="山田太郎"
+          autocomplete="name"
         ></sp-text-field>
       </div>
       <button type="submit">送信</button>
@@ -79,6 +81,7 @@ export const Disabled: Story = {
     value: "入力不可",
     placeholder: "disabled",
     name: "disabledField",
+    autocomplete: "off",
   },
 };
 
@@ -95,6 +98,7 @@ export const WithCharacterCounter: Story = {
           placeholder="50文字以内でコメントを入力"
           character-limit="50"
           value="文字数カウンター付きのテキストフィールドです"
+          autocomplete="off"
         ></sp-text-field>
       </div>
       <div>
@@ -105,6 +109,7 @@ export const WithCharacterCounter: Story = {
           placeholder="10文字以内で入力"
           character-limit="10"
           value="この文章は10文字を超えています"
+          autocomplete="off"
         ></sp-text-field>
       </div>
     </div>
