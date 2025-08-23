@@ -32,6 +32,85 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/button/sp-button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "SpButtonは、デザインシステム2.0におけるボタンコンポーネントです。",
+          "name": "SpButton",
+          "slots": [
+            {
+              "description": "ボタンのテキストコンテンツ（デフォルトスロット）",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "icon",
+              "description": "ボタンに表示するアイコン名\n指定しない場合はアイコンを表示しません",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "icon"
+            },
+            {
+              "kind": "field",
+              "name": "adoptedStyleSheets",
+              "type": {
+                "text": "array"
+              },
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(buttonStyle), ]"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"small\""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "icon",
+              "description": "ボタンに表示するアイコン名\n指定しない場合はアイコンを表示しません",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "icon"
+            }
+          ],
+          "superclass": {
+            "name": "UbButton",
+            "package": "@ub-design/components-web-components"
+          },
+          "tagName": "sp-button",
+          "customElement": true,
+          "summary": "ボタンコンポーネント"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpButton",
+          "declaration": {
+            "name": "SpButton",
+            "module": "src/components/button/sp-button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-button",
+          "declaration": {
+            "name": "SpButton",
+            "module": "src/components/button/sp-button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/checkbox/sp-checkbox-list.ts",
       "declarations": [
         {
@@ -176,85 +255,6 @@
           "declaration": {
             "name": "SpCheckbox",
             "module": "src/components/checkbox/sp-checkbox.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/button/sp-button.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "SpButtonは、デザインシステム2.0におけるボタンコンポーネントです。",
-          "name": "SpButton",
-          "slots": [
-            {
-              "description": "ボタンのテキストコンテンツ（デフォルトスロット）",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "icon",
-              "description": "ボタンに表示するアイコン名\n指定しない場合はアイコンを表示しません",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "icon"
-            },
-            {
-              "kind": "field",
-              "name": "adoptedStyleSheets",
-              "type": {
-                "text": "array"
-              },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(buttonStyle), ]"
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "string"
-              },
-              "default": "\"small\""
-            }
-          ],
-          "attributes": [
-            {
-              "name": "icon",
-              "description": "ボタンに表示するアイコン名\n指定しない場合はアイコンを表示しません",
-              "type": {
-                "text": "string"
-              },
-              "fieldName": "icon"
-            }
-          ],
-          "superclass": {
-            "name": "UbButton",
-            "package": "@ub-design/components-web-components"
-          },
-          "tagName": "sp-button",
-          "customElement": true,
-          "summary": "ボタンコンポーネント"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SpButton",
-          "declaration": {
-            "name": "SpButton",
-            "module": "src/components/button/sp-button.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sp-button",
-          "declaration": {
-            "name": "SpButton",
-            "module": "src/components/button/sp-button.ts"
           }
         }
       ]
