@@ -12,6 +12,7 @@ export class SpTextField extends HTMLElement {
   #inputElement: HTMLInputElement = document.createElement("input");
   #container: HTMLDivElement = document.createElement("div");
   #errorSlot: HTMLSlotElement = document.createElement("slot");
+  #errorContainer: HTMLDivElement = document.createElement("div");
   #characterCounter: HTMLElement = document.createElement(
     "sp-character-counter",
   );
@@ -136,8 +137,8 @@ export class SpTextField extends HTMLElement {
 
     this.internals = this.attachInternals();
 
-    this.#setupInputElement();
     this.#setupErrorSlot();
+    this.#setupInputElement();
     this.#setupCharacterCounter();
     this.#setupEventForwarding();
     this.#setupErrorSlotObserver();
@@ -147,6 +148,10 @@ export class SpTextField extends HTMLElement {
   #setupInputElement() {
     this.#inputElement.classList.add("text-field");
     this.#inputElement.type = "text";
+    this.#inputElement.setAttribute(
+      "aria-describedby",
+      this.#errorContainer.id,
+    );
     this.#container.classList.add("container");
     this.#container.appendChild(this.#inputElement);
     this.shadowRoot!.appendChild(this.#container);
@@ -154,32 +159,24 @@ export class SpTextField extends HTMLElement {
 
   #setupErrorSlot() {
     this.#errorSlot.name = "error-text";
-    const errorText = document.createElement("sp-error-text");
 
-    const fieldName = this.getAttribute("name") || "field";
-    const errorId = `${fieldName}-error`;
-    errorText.id = errorId;
-
-    errorText.appendChild(this.#errorSlot);
-
-    const errorContainer = document.createElement("div");
-    errorContainer.classList.add("error-container");
-    errorContainer.appendChild(errorText);
-
-    const infoContainer = document.createElement("div");
-    infoContainer.classList.add("info");
-    infoContainer.appendChild(errorContainer);
-
-    this.#container.appendChild(infoContainer);
+    this.#errorContainer.classList.add("error-container");
+    this.#errorContainer.setAttribute("role", "alert");
+    this.#errorContainer.setAttribute("aria-live", "polite");
+    this.#errorContainer.id = this.#generateRandomId();
+    this.#errorContainer.appendChild(this.#errorSlot);
   }
 
   #setupCharacterCounter() {
     this.#characterCounter.classList.add("character-counter");
 
-    const infoContainer = this.#container.querySelector(".info");
-    if (infoContainer) {
-      infoContainer.appendChild(this.#characterCounter);
-    }
+    // infoContainerを作成し、inputの後に配置
+    const infoContainer = document.createElement("div");
+    infoContainer.classList.add("info");
+    infoContainer.appendChild(this.#errorContainer);
+    infoContainer.appendChild(this.#characterCounter);
+
+    this.#container.appendChild(infoContainer);
 
     this.#updateCharacterCounterVisibility();
   }
@@ -291,42 +288,15 @@ export class SpTextField extends HTMLElement {
     return `error-${Math.random().toString(36).substring(2, 11)}`;
   }
 
-  #getErrorElements(elements: Element[]): Element[] {
-    return elements.filter(
-      (element) => element.tagName.toLowerCase() === "sp-error-text",
-    );
-  }
-
-  #assignRandomIdsToErrorElements(elements: Element[]) {
-    this.#getErrorElements(elements).forEach((element) => {
-      element.id = this.#generateRandomId();
-    });
-  }
-
-  #collectErrorIds(elements: Element[]): string {
-    return this.#getErrorElements(elements)
-      .map((element) => element.id)
-      .join(" ");
-  }
-
   #updateErrorState() {
     const assignedElements = this.#errorSlot.assignedElements();
     const hasErrorContent = assignedElements.length > 0;
 
     if (hasErrorContent) {
       this.#inputElement.setAttribute("aria-invalid", "true");
-
-      this.#assignRandomIdsToErrorElements(Array.from(assignedElements));
-
-      const errorIds = this.#collectErrorIds(Array.from(assignedElements));
-      if (errorIds) {
-        this.#inputElement.setAttribute("aria-describedby", errorIds);
-      }
-
       this.#showErrorText();
     } else {
       this.#inputElement.removeAttribute("aria-invalid");
-      this.#inputElement.removeAttribute("aria-describedby");
       this.#hideErrorText();
     }
   }

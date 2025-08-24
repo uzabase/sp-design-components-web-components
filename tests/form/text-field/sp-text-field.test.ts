@@ -296,17 +296,20 @@ describe("sp-text-field", () => {
       `;
 
       const inputElement = getInputElement();
-      const errorElement = document.querySelector("sp-error-text");
+      const textField = document.querySelector("sp-text-field");
+      const errorContainer = textField?.shadowRoot?.querySelector(
+        ".error-container",
+      ) as HTMLElement;
 
-      // IDが自動生成されている
-      expect(errorElement?.id).toMatch(/^error-[a-z0-9]{9}$/);
+      // error-containerにIDが自動生成されている
+      expect(errorContainer?.id).toMatch(/^error-[a-z0-9]{9}$/);
       // aria-describedbyにそのIDが設定されている
       expect(inputElement.getAttribute("aria-describedby")).toBe(
-        errorElement?.id,
+        errorContainer?.id,
       );
     });
 
-    test("複数のエラーメッセージがある場合、aria-describedbyにスペース区切りで自動生成IDが設定される", async () => {
+    test("複数のエラーメッセージがある場合、aria-describedbyに自動生成されたIDが設定される", async () => {
       document.body.innerHTML = `
         <sp-text-field>
           <sp-error-text slot="error-text">エラーメッセージ1</sp-error-text>
@@ -316,18 +319,17 @@ describe("sp-text-field", () => {
       `;
 
       const inputElement = getInputElement();
-      const errorElements = document.querySelectorAll("sp-error-text");
+      const textField = document.querySelector("sp-text-field");
+      const errorContainer = textField?.shadowRoot?.querySelector(
+        ".error-container",
+      ) as HTMLElement;
 
-      // すべてのエラー要素にIDが自動生成されている
-      errorElements.forEach((element) => {
-        expect(element.id).toMatch(/^error-[a-z0-9]{9}$/);
-      });
-
-      // aria-describedbyにすべてのIDがスペース区切りで設定されている
-      const expectedIds = Array.from(errorElements)
-        .map((el) => el.id)
-        .join(" ");
-      expect(inputElement.getAttribute("aria-describedby")).toBe(expectedIds);
+      // error-containerにIDが自動生成されている
+      expect(errorContainer?.id).toMatch(/^error-[a-z0-9]{9}$/);
+      // aria-describedbyにそのIDが設定されている
+      expect(inputElement.getAttribute("aria-describedby")).toBe(
+        errorContainer?.id,
+      );
     });
 
     test("エラーメッセージを動的に追加すると、aria-describedbyが更新される", async () => {
@@ -341,10 +343,14 @@ describe("sp-text-field", () => {
       const inputElement = getInputElement();
       const firstError = document.querySelector("sp-error-text");
 
-      // 最初のエラーのIDが自動生成されている
-      expect(firstError?.id).toMatch(/^error-[a-z0-9]{9}$/);
+      // error-containerにIDが自動生成されている
+      const textField = document.querySelector("sp-text-field");
+      const errorContainer = textField?.shadowRoot?.querySelector(
+        ".error-container",
+      ) as HTMLElement;
+      expect(errorContainer?.id).toMatch(/^error-[a-z0-9]{9}$/);
       expect(inputElement.getAttribute("aria-describedby")).toBe(
-        firstError?.id,
+        errorContainer?.id,
       );
 
       // 2つ目のエラーを追加
@@ -355,11 +361,10 @@ describe("sp-text-field", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
-      // 2つ目のエラーにもIDが自動生成されている
-      expect(errorElement2.id).toMatch(/^error-[a-z0-9]{9}$/);
-
-      const expectedIds = `${firstError?.id} ${errorElement2.id}`;
-      expect(inputElement.getAttribute("aria-describedby")).toBe(expectedIds);
+      // aria-describedbyは同じerror-containerのIDのまま
+      expect(inputElement.getAttribute("aria-describedby")).toBe(
+        errorContainer?.id,
+      );
     });
 
     test("エラーメッセージを動的に削除すると、aria-describedbyが更新される", async () => {
@@ -371,24 +376,27 @@ describe("sp-text-field", () => {
       `;
 
       const inputElement = getInputElement();
+      const textField = document.querySelector("sp-text-field");
+      const errorContainer = textField?.shadowRoot?.querySelector(
+        ".error-container",
+      ) as HTMLElement;
       const errorElements = document.querySelectorAll("sp-error-text");
       const errorElement1 = errorElements[0] as HTMLElement;
-      const errorElement2 = errorElements[1] as HTMLElement;
 
-      // 最初は2つのエラーでIDが自動生成されている
-      expect(errorElement1.id).toMatch(/^error-[a-z0-9]{9}$/);
-      expect(errorElement2.id).toMatch(/^error-[a-z0-9]{9}$/);
-
-      const initialIds = `${errorElement1.id} ${errorElement2.id}`;
-      expect(inputElement.getAttribute("aria-describedby")).toBe(initialIds);
+      // error-containerにIDが自動生成されている
+      expect(errorContainer?.id).toMatch(/^error-[a-z0-9]{9}$/);
+      expect(inputElement.getAttribute("aria-describedby")).toBe(
+        errorContainer?.id,
+      );
 
       // 1つ目のエラーを削除
       errorElement1.remove();
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
+      // まだエラーが残っているので、aria-describedbyは同じIDのまま
       expect(inputElement.getAttribute("aria-describedby")).toBe(
-        errorElement2.id,
+        errorContainer?.id,
       );
     });
 
@@ -400,14 +408,18 @@ describe("sp-text-field", () => {
       `;
 
       const inputElement = getInputElement();
+      const textField = document.querySelector("sp-text-field");
+      const errorContainer = textField?.shadowRoot?.querySelector(
+        ".error-container",
+      ) as HTMLElement;
       const errorElement1 = document.querySelector(
         "sp-error-text",
       ) as HTMLElement;
 
-      // 最初はエラーがあり、IDが自動生成されている
-      expect(errorElement1.id).toMatch(/^error-[a-z0-9]{9}$/);
+      // error-containerにIDが自動生成されている
+      expect(errorContainer?.id).toMatch(/^error-[a-z0-9]{9}$/);
       expect(inputElement.getAttribute("aria-describedby")).toBe(
-        errorElement1.id,
+        errorContainer?.id,
       );
 
       // エラーを削除
@@ -415,7 +427,8 @@ describe("sp-text-field", () => {
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
-      expect(inputElement.hasAttribute("aria-describedby")).toBe(false);
+      // エラーが削除されても、aria-describedbyは残る（常に設定される）
+      expect(inputElement.hasAttribute("aria-describedby")).toBe(true);
     });
 
     test("すべてのエラーメッセージに自動でIDが生成される", () => {
@@ -428,18 +441,17 @@ describe("sp-text-field", () => {
       `;
 
       const inputElement = getInputElement();
-      const errorElements = document.querySelectorAll("sp-error-text");
+      const textField = document.querySelector("sp-text-field");
+      const errorContainer = textField?.shadowRoot?.querySelector(
+        ".error-container",
+      ) as HTMLElement;
 
-      // すべてのエラー要素にIDが自動生成されている
-      errorElements.forEach((element) => {
-        expect(element.id).toMatch(/^error-[a-z0-9]{9}$/);
-      });
-
-      // aria-describedbyにすべてのIDが含まれている
-      const allIds = Array.from(errorElements)
-        .map((el) => el.id)
-        .join(" ");
-      expect(inputElement.getAttribute("aria-describedby")).toBe(allIds);
+      // error-containerにIDが自動生成されている
+      expect(errorContainer?.id).toMatch(/^error-[a-z0-9]{9}$/);
+      // aria-describedbyにerror-containerのIDが設定されている
+      expect(inputElement.getAttribute("aria-describedby")).toBe(
+        errorContainer?.id,
+      );
     });
   });
 
