@@ -184,21 +184,6 @@ export class SpTextField extends HTMLElement {
     this.#updateCharacterCounterVisibility();
   }
 
-  #updateErrorTextId() {
-    if (!this.#container) return;
-    const errorText = this.#container.querySelector(
-      "sp-error-text",
-    ) as HTMLElement;
-
-    if (!errorText) return;
-
-    const fieldName = this.getAttribute("name") || "field";
-    const errorId = `${fieldName}-error`;
-
-    errorText.id = errorId;
-    this.#inputElement.setAttribute("aria-errormessage", errorId);
-  }
-
   #updateCharacterCounterVisibility() {
     if (!this.#characterCounter) return;
 
@@ -257,7 +242,6 @@ export class SpTextField extends HTMLElement {
       this.#updateCharacterCounterVisibility();
     } else if (name === "name") {
       this.name = newValue || "";
-      this.#updateErrorTextId();
     } else if (name === "required") {
       this.required = newValue === "" || newValue === "true";
       this.#updateLabel();
