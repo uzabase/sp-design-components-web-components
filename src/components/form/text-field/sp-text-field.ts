@@ -317,13 +317,13 @@ export class SpTextField extends HTMLElement {
 
       const errorIds = this.#collectErrorIds(Array.from(assignedElements));
       if (errorIds) {
-        this.#inputElement.setAttribute("aria-errormessage", errorIds);
+        this.#inputElement.setAttribute("aria-describedby", errorIds);
       }
 
       this.#showErrorText();
     } else {
       this.#inputElement.removeAttribute("aria-invalid");
-      this.#inputElement.removeAttribute("aria-errormessage");
+      this.#inputElement.removeAttribute("aria-describedby");
       this.#hideErrorText();
     }
   }
