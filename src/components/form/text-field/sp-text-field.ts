@@ -367,6 +367,10 @@ export class SpTextField extends HTMLElement {
 
       this.#labelElement.textContent = labelText;
 
+      const requiredText = this.required ? "（必須）" : "";
+      const fullLabel = `${labelText}${requiredText}`;
+      this.#inputElement.setAttribute("aria-label", fullLabel);
+
       if (this.required) {
         this.#labelElement.setAttribute("required", "");
       } else {
@@ -374,6 +378,7 @@ export class SpTextField extends HTMLElement {
       }
     } else {
       if (this.#labelElement) {
+        this.#inputElement.removeAttribute("aria-label");
         this.#labelElement.remove();
         this.#labelElement = null;
       }

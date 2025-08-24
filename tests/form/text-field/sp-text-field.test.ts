@@ -501,5 +501,38 @@ describe("sp-text-field", () => {
       // input要素にフォーカスされる
       expect(focusSpy).toHaveBeenCalled();
     });
+
+    test("ラベルが設定されると、input要素にaria-labelが設定される", () => {
+      document.body.innerHTML = `<sp-text-field label="お名前"></sp-text-field>`;
+
+      const inputElement = getInputElement();
+
+      expect(inputElement.getAttribute("aria-label")).toBe("お名前");
+    });
+
+    test("必須フィールドの場合、aria-labelに必須情報が含まれる", () => {
+      document.body.innerHTML = `<sp-text-field label="お名前" required></sp-text-field>`;
+
+      const inputElement = getInputElement();
+
+      expect(inputElement.getAttribute("aria-label")).toBe("お名前（必須）");
+    });
+
+    test("ラベルが削除されると、input要素のaria-labelも削除される", () => {
+      document.body.innerHTML = `<sp-text-field label="お名前"></sp-text-field>`;
+
+      const spTextField = getSpTextField();
+      const inputElement = getInputElement();
+
+      // 最初はaria-labelが設定されている
+      expect(inputElement.getAttribute("aria-label")).toBe("お名前");
+
+      // ラベルを削除
+      spTextField.removeAttribute("label");
+
+      // aria-labelも削除される
+      expect(inputElement.getAttribute("aria-label")).toBeNull();
+      expect(spTextField.shadowRoot?.querySelector("sp-label")).toBeNull();
+    });
   });
 });
