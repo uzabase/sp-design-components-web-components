@@ -341,7 +341,6 @@ describe("sp-text-field", () => {
 
       const spTextField = getSpTextField();
       const inputElement = getInputElement();
-      const firstError = document.querySelector("sp-error-text");
 
       // error-containerにIDが自動生成されている
       const textField = document.querySelector("sp-text-field");
