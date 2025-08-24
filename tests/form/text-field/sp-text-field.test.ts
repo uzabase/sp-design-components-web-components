@@ -521,12 +521,12 @@ describe("sp-text-field", () => {
       expect(inputElement.getAttribute("aria-label")).toBe("お名前");
     });
 
-    test("必須フィールドの場合、aria-labelに必須情報が含まれる", () => {
+    test("必須フィールドの場合でも、aria-labelはラベルテキストのみ", () => {
       document.body.innerHTML = `<sp-text-field label="お名前" required></sp-text-field>`;
 
       const inputElement = getInputElement();
 
-      expect(inputElement.getAttribute("aria-label")).toBe("お名前（必須）");
+      expect(inputElement.getAttribute("aria-label")).toBe("お名前");
     });
 
     test("ラベルが削除されると、input要素のaria-labelも削除される", () => {

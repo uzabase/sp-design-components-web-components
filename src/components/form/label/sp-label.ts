@@ -5,7 +5,6 @@ export class SpLabel extends HTMLElement {
   #labelElement = document.createElement("label");
   #slotElement = document.createElement("slot");
   #requiredElement = document.createElement("span");
-  #requiredLabelElement = document.createElement("span");
 
   #required = false;
 
@@ -43,9 +42,6 @@ export class SpLabel extends HTMLElement {
     this.#requiredElement.classList.add("required");
     this.#requiredElement.textContent = "*";
     this.#requiredElement.setAttribute("aria-hidden", "true");
-
-    this.#requiredLabelElement.classList.add("sr-only");
-    this.#requiredLabelElement.textContent = "（必須）";
   }
 
   connectedCallback() {
@@ -67,10 +63,8 @@ export class SpLabel extends HTMLElement {
   #updateRequiredState() {
     if (this.#required) {
       this.#labelElement.appendChild(this.#requiredElement);
-      this.#labelElement.appendChild(this.#requiredLabelElement);
     } else {
       this.#requiredElement.remove();
-      this.#requiredLabelElement.remove();
     }
   }
 }

@@ -337,9 +337,7 @@ export class SpTextField extends HTMLElement {
 
       this.#labelElement.textContent = labelText;
 
-      const requiredText = this.required ? "（必須）" : "";
-      const fullLabel = `${labelText}${requiredText}`;
-      this.#inputElement.setAttribute("aria-label", fullLabel);
+      this.#inputElement.setAttribute("aria-label", labelText);
 
       if (this.required) {
         this.#labelElement.setAttribute("required", "");
