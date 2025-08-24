@@ -442,4 +442,64 @@ describe("sp-text-field", () => {
       expect(inputElement.getAttribute("aria-describedby")).toBe(allIds);
     });
   });
+
+  describe("label属性", () => {
+    test("デフォルト値が空文字列になる", () => {
+      document.body.innerHTML = `<sp-text-field></sp-text-field>`;
+
+      const spTextField = getSpTextField();
+      expect(spTextField.label).toBe("");
+    });
+
+    test("label属性を設定すると、内部にsp-label要素が作成される", () => {
+      document.body.innerHTML = `<sp-text-field label="お名前"></sp-text-field>`;
+
+      const spTextField = getSpTextField();
+      const labelElement = spTextField.shadowRoot?.querySelector("sp-label");
+
+      expect(labelElement).not.toBeNull();
+      expect(labelElement?.textContent).toBe("お名前");
+    });
+
+    test("required属性と連動してsp-labelのrequired属性が設定される", () => {
+      document.body.innerHTML = `<sp-text-field label="メールアドレス" required></sp-text-field>`;
+
+      const spTextField = getSpTextField();
+      const labelElement = spTextField.shadowRoot?.querySelector("sp-label");
+
+      expect(labelElement?.hasAttribute("required")).toBe(true);
+    });
+
+    test("label属性を削除すると、sp-label要素も削除される", () => {
+      document.body.innerHTML = `<sp-text-field label="お名前"></sp-text-field>`;
+
+      const spTextField = getSpTextField();
+
+      // 最初はラベルが存在
+      expect(spTextField.shadowRoot?.querySelector("sp-label")).not.toBeNull();
+
+      // label属性を削除
+      spTextField.removeAttribute("label");
+
+      // ラベルが削除される
+      expect(spTextField.shadowRoot?.querySelector("sp-label")).toBeNull();
+    });
+
+    test("ラベルをクリックすると、内部のinput要素にフォーカスされる", () => {
+      document.body.innerHTML = `<sp-text-field label="お名前"></sp-text-field>`;
+
+      const spTextField = getSpTextField();
+      const labelElement = spTextField.shadowRoot?.querySelector("sp-label");
+      const inputElement = getInputElement();
+
+      // フォーカスのスパイを設定
+      const focusSpy = vi.spyOn(inputElement, "focus");
+
+      // ラベルをクリック
+      labelElement?.click();
+
+      // input要素にフォーカスされる
+      expect(focusSpy).toHaveBeenCalled();
+    });
+  });
 });

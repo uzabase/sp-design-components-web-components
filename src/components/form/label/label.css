@@ -1,5 +1,6 @@
 .label {
   display: block;
+  cursor: default;
   font-size: 12px;
   font-weight: bold;
   line-height: 1.6;

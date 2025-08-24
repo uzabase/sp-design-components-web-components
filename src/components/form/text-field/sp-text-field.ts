@@ -1,5 +1,6 @@
 import "../error-text/sp-error-text";
 import "../character-counter/sp-character-counter";
+import "../label/sp-label";
 
 import { makeStyleSheet } from "../../styles";
 import textFieldStyle from "./text-field.css?inline";
@@ -14,6 +15,7 @@ export class SpTextField extends HTMLElement {
   #characterCounter: HTMLElement = document.createElement(
     "sp-character-counter",
   );
+  #labelElement: HTMLElement | null = null;
   #characterLimit: number | undefined = undefined;
 
   get value() {
@@ -96,6 +98,18 @@ export class SpTextField extends HTMLElement {
     this.#inputElement.setAttribute("autocomplete", value);
   }
 
+  get label() {
+    return this.getAttribute("label") || "";
+  }
+  set label(value: string) {
+    if (value) {
+      this.setAttribute("label", value);
+    } else {
+      this.removeAttribute("label");
+    }
+    this.#updateLabel();
+  }
+
   static get observedAttributes() {
     return [
       "value",
@@ -106,6 +120,7 @@ export class SpTextField extends HTMLElement {
       "required",
       "type",
       "autocomplete",
+      "label",
     ];
   }
 
@@ -126,6 +141,7 @@ export class SpTextField extends HTMLElement {
     this.#setupCharacterCounter();
     this.#setupEventForwarding();
     this.#setupErrorSlotObserver();
+    this.#updateLabel();
   }
 
   #setupInputElement() {
@@ -244,10 +260,13 @@ export class SpTextField extends HTMLElement {
       this.#updateErrorTextId();
     } else if (name === "required") {
       this.required = newValue === "" || newValue === "true";
+      this.#updateLabel();
     } else if (name === "type") {
       this.type = newValue || "text";
     } else if (name === "autocomplete") {
       this.autocomplete = newValue || "";
+    } else if (name === "label") {
+      this.#updateLabel();
     }
   }
 
@@ -346,6 +365,45 @@ export class SpTextField extends HTMLElement {
     if (errorContainer) {
       errorContainer.style.display = "none";
     }
+  }
+
+  #updateLabel() {
+    const labelText = this.getAttribute("label");
+
+    if (labelText) {
+      if (!this.#labelElement) {
+        this.#labelElement = document.createElement("sp-label");
+
+        if (this.shadowRoot && this.#container) {
+          this.shadowRoot.insertBefore(this.#labelElement, this.#container);
+        }
+
+        this.#setupLabelClickHandler();
+      }
+
+      this.#labelElement.textContent = labelText;
+
+      if (this.required) {
+        this.#labelElement.setAttribute("required", "");
+      } else {
+        this.#labelElement.removeAttribute("required");
+      }
+    } else {
+      if (this.#labelElement) {
+        this.#labelElement.remove();
+        this.#labelElement = null;
+      }
+    }
+  }
+
+  #setupLabelClickHandler() {
+    if (!this.#labelElement) return;
+
+    this.#labelElement.addEventListener("click", (event: Event) => {
+      if (this.disabled || event.defaultPrevented) return;
+
+      this.#inputElement.focus();
+    });
   }
 }
 
