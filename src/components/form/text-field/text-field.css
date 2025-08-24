@@ -34,8 +34,21 @@
   box-shadow: 0 0 0 3px var(--color-semantic-highlight-focus-ring-error);
 }
 
-sp-label {
-  margin-block-end: 4px;
+.wrapper {
+  display: flex;
+}
+
+.wrapper[data-orientation="vertical"] {
+  flex-direction: column;
+}
+
+.wrapper[data-orientation="horizontal"] {
+  gap: 8px;
+}
+
+.wrapper[data-orientation="horizontal"] sp-label {
+  flex-shrink: 0;
+  min-width: 160px;
 }
 
 .container {

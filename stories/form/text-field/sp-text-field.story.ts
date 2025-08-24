@@ -20,6 +20,11 @@ const meta = {
     },
     autocomplete: { type: "string" },
     label: { type: "string" },
+    orientation: {
+      type: "string",
+      control: "select",
+      options: ["vertical", "horizontal"],
+    },
   },
   render: (args) => html`
     <sp-text-field
@@ -31,6 +36,7 @@ const meta = {
       type=${args.type ?? "text"}
       autocomplete=${args.autocomplete ?? ""}
       label=${args.label ?? ""}
+      orientation=${args.orientation ?? "vertical"}
     ></sp-text-field>
   `,
 } satisfies Meta<SpTextField>;
@@ -195,4 +201,24 @@ export const InputTypes: Story = {
       ></sp-text-field>
     </div>
   `,
+};
+
+export const OrientationVertical: Story = {
+  args: {
+    label: "お名前",
+    placeholder: "山田太郎",
+    name: "nameVertical",
+    orientation: "vertical",
+    autocomplete: "name",
+  },
+};
+
+export const OrientationHorizontal: Story = {
+  args: {
+    label: "お名前",
+    placeholder: "山田太郎",
+    name: "nameHorizontal",
+    orientation: "horizontal",
+    autocomplete: "name",
+  },
 };

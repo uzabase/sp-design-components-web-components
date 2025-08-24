@@ -9,6 +9,7 @@ export class SpTextField extends HTMLElement {
   static formAssociated = true;
   protected internals: ElementInternals;
 
+  #wrapper: HTMLDivElement = document.createElement("div");
   #inputElement: HTMLInputElement = document.createElement("input");
   #container: HTMLDivElement = document.createElement("div");
   #errorSlot: HTMLSlotElement = document.createElement("slot");
@@ -111,6 +112,19 @@ export class SpTextField extends HTMLElement {
     this.#updateLabel();
   }
 
+  get orientation() {
+    const value = this.getAttribute("orientation");
+    return value === "horizontal" ? "horizontal" : "vertical";
+  }
+  set orientation(value: string) {
+    if (value === "horizontal" || value === "vertical") {
+      this.setAttribute("orientation", value);
+    } else {
+      this.removeAttribute("orientation");
+    }
+    this.#updateOrientation();
+  }
+
   static get observedAttributes() {
     return [
       "value",
@@ -122,6 +136,7 @@ export class SpTextField extends HTMLElement {
       "type",
       "autocomplete",
       "label",
+      "orientation",
     ];
   }
 
@@ -143,6 +158,7 @@ export class SpTextField extends HTMLElement {
     this.#setupEventForwarding();
     this.#setupErrorSlotObserver();
     this.#updateLabel();
+    this.#updateOrientation();
   }
 
   #setupInputElement() {
@@ -152,9 +168,11 @@ export class SpTextField extends HTMLElement {
       "aria-describedby",
       this.#errorContainer.id,
     );
+    this.#wrapper.classList.add("wrapper");
     this.#container.classList.add("container");
     this.#container.appendChild(this.#inputElement);
-    this.shadowRoot!.appendChild(this.#container);
+    this.#wrapper.appendChild(this.#container);
+    this.shadowRoot!.appendChild(this.#wrapper);
   }
 
   #setupErrorSlot() {
@@ -176,7 +194,7 @@ export class SpTextField extends HTMLElement {
     infoContainer.appendChild(this.#errorContainer);
     infoContainer.appendChild(this.#characterCounter);
 
-    this.#container.appendChild(infoContainer);
+    this.#wrapper.appendChild(infoContainer);
 
     this.#updateCharacterCounterVisibility();
   }
@@ -248,6 +266,8 @@ export class SpTextField extends HTMLElement {
       this.autocomplete = newValue || "";
     } else if (name === "label") {
       this.#updateLabel();
+    } else if (name === "orientation") {
+      this.#updateOrientation();
     }
   }
 
@@ -302,22 +322,14 @@ export class SpTextField extends HTMLElement {
   }
 
   #showErrorText() {
-    if (!this.#container) return;
-    const errorContainer = this.#container.querySelector(
-      ".error-container",
-    ) as HTMLElement;
-    if (errorContainer) {
-      errorContainer.style.display = "flex";
+    if (this.#errorContainer) {
+      this.#errorContainer.style.display = "flex";
     }
   }
 
   #hideErrorText() {
-    if (!this.#container) return;
-    const errorContainer = this.#container.querySelector(
-      ".error-container",
-    ) as HTMLElement;
-    if (errorContainer) {
-      errorContainer.style.display = "none";
+    if (this.#errorContainer) {
+      this.#errorContainer.style.display = "none";
     }
   }
 
@@ -328,8 +340,8 @@ export class SpTextField extends HTMLElement {
       if (!this.#labelElement) {
         this.#labelElement = document.createElement("sp-label");
 
-        if (this.shadowRoot && this.#container) {
-          this.shadowRoot.insertBefore(this.#labelElement, this.#container);
+        if (this.#wrapper && this.#container) {
+          this.#wrapper.insertBefore(this.#labelElement, this.#container);
         }
 
         this.#setupLabelClickHandler();
@@ -361,6 +373,11 @@ export class SpTextField extends HTMLElement {
 
       this.#inputElement.focus();
     });
+  }
+
+  #updateOrientation() {
+    const orientation = this.orientation;
+    this.#wrapper.setAttribute("data-orientation", orientation);
   }
 }
 

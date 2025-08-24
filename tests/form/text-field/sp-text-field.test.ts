@@ -546,4 +546,52 @@ describe("sp-text-field", () => {
       expect(spTextField.shadowRoot?.querySelector("sp-label")).toBeNull();
     });
   });
+
+  describe("orientation属性", () => {
+    test("デフォルト値がverticalになる", () => {
+      document.body.innerHTML = `<sp-text-field></sp-text-field>`;
+
+      const textField = getSpTextField();
+      const wrapper = textField.shadowRoot?.querySelector(
+        ".wrapper",
+      ) as HTMLElement;
+
+      expect(textField.orientation).toBe("vertical");
+      expect(wrapper.getAttribute("data-orientation")).toBe("vertical");
+    });
+
+    test("orientation属性を設定すると、wrapperにdata-orientation属性が設定される", () => {
+      document.body.innerHTML = `<sp-text-field orientation="horizontal"></sp-text-field>`;
+
+      const textField = getSpTextField();
+      const wrapper = textField.shadowRoot?.querySelector(
+        ".wrapper",
+      ) as HTMLElement;
+
+      expect(wrapper.getAttribute("data-orientation")).toBe("horizontal");
+    });
+
+    test("orientation属性を削除すると、wrapperのdata-orientationがverticalになる", () => {
+      document.body.innerHTML = `<sp-text-field orientation="horizontal"></sp-text-field>`;
+
+      const textField = getSpTextField();
+      const wrapper = textField.shadowRoot?.querySelector(
+        ".wrapper",
+      ) as HTMLElement;
+
+      expect(wrapper.getAttribute("data-orientation")).toBe("horizontal");
+
+      textField.removeAttribute("orientation");
+
+      expect(wrapper.getAttribute("data-orientation")).toBe("vertical");
+    });
+
+    test("無効な値を設定すると、デフォルト値になる", () => {
+      document.body.innerHTML = `<sp-text-field orientation="invalid"></sp-text-field>`;
+
+      const textField = getSpTextField();
+
+      expect(textField.orientation).toBe("vertical");
+    });
+  });
 });
