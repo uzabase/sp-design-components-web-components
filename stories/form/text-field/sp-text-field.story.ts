@@ -204,21 +204,49 @@ export const InputTypes: Story = {
 };
 
 export const OrientationVertical: Story = {
-  args: {
-    label: "お名前",
-    placeholder: "山田太郎",
-    name: "nameVertical",
-    orientation: "vertical",
-    autocomplete: "name",
-  },
+  render: () => html`
+    <div
+      style="display: flex; flex-direction: column; gap: 24px; max-width: 400px;"
+    >
+      <sp-text-field
+        label="お名前"
+        placeholder="山田太郎"
+        name="nameVerticalShort"
+        orientation="vertical"
+        autocomplete="name"
+      ></sp-text-field>
+
+      <sp-text-field
+        label="とても長いラベルテキストの例です。このラベルは複数行にわたって表示される可能性があり、レイアウトがどのように調整されるかを確認するためのものです。"
+        placeholder="長いラベルのテスト"
+        name="nameVerticalLong"
+        orientation="vertical"
+        autocomplete="off"
+      ></sp-text-field>
+    </div>
+  `,
 };
 
 export const OrientationHorizontal: Story = {
-  args: {
-    label: "お名前",
-    placeholder: "山田太郎",
-    name: "nameHorizontal",
-    orientation: "horizontal",
-    autocomplete: "name",
-  },
+  render: () => html`
+    <div
+      style="display: flex; flex-direction: column; gap: 24px; max-width: 600px;"
+    >
+      <sp-text-field
+        label="お名前"
+        placeholder="山田太郎"
+        name="nameHorizontalShort"
+        orientation="horizontal"
+        autocomplete="name"
+      ></sp-text-field>
+
+      <sp-text-field
+        label="とても長いラベルテキストの例です。このラベルは複数行にわたって表示される可能性があり、レイアウトがどのように調整されるかを確認するためのものです。横レイアウトでの改行挙動をテストします。"
+        placeholder="長いラベルのテスト"
+        name="nameHorizontalLong"
+        orientation="horizontal"
+        autocomplete="off"
+      ></sp-text-field>
+    </div>
+  `,
 };

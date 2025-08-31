@@ -48,7 +48,7 @@
 
 .wrapper[data-orientation="horizontal"] sp-label {
   flex-shrink: 0;
-  min-width: 160px;
+  width: 160px;
 }
 
 .container {
