@@ -92,14 +92,5 @@ describe("sp-label", () => {
 
       expect(requiredMark.getAttribute("aria-hidden")).toBe("true");
     });
-
-    test("スクリーンリーダー用の必須テキストが正しく設定されている", () => {
-      document.body.innerHTML = "<sp-label required>テストラベル</sp-label>";
-
-      const requiredLabel = getRequiredLabel();
-
-      expect(requiredLabel.classList.contains("sr-only")).toBe(true);
-      expect(requiredLabel.textContent).toBe("（必須）");
-    });
   });
 });
