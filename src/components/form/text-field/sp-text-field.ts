@@ -159,6 +159,7 @@ export class SpTextField extends HTMLElement {
     this.#setupErrorSlotObserver();
     this.#updateLabel();
     this.#updateOrientation();
+    this.#updateAriaLabel();
   }
 
   #setupInputElement() {
@@ -272,6 +273,8 @@ export class SpTextField extends HTMLElement {
   }
 
   connectedCallback() {
+    this.setAttribute("role", "group");
+
     for (const attr of SpTextField.observedAttributes) {
       const value = this.getAttribute(attr);
       if (value !== null) {
@@ -363,6 +366,9 @@ export class SpTextField extends HTMLElement {
         this.#labelElement = null;
       }
     }
+
+    // ラベルが変更されたときにaria-labelも更新
+    this.#updateAriaLabel();
   }
 
   #setupLabelClickHandler() {
@@ -378,6 +384,18 @@ export class SpTextField extends HTMLElement {
   #updateOrientation() {
     const orientation = this.orientation;
     this.#wrapper.setAttribute("data-orientation", orientation);
+  }
+
+  #updateAriaLabel() {
+    const currentLabel = this.label;
+
+    if (currentLabel) {
+      // labelがある場合は自動設定
+      this.setAttribute("aria-label", currentLabel);
+    } else {
+      // labelがない場合はaria-labelを削除
+      this.removeAttribute("aria-label");
+    }
   }
 }
 

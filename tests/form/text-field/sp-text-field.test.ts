@@ -452,6 +452,46 @@ describe("sp-text-field", () => {
         errorContainer?.id,
       );
     });
+
+    test("role='group'が自動で設定される", () => {
+      document.body.innerHTML = `<sp-text-field></sp-text-field>`;
+
+      const textField = getSpTextField();
+
+      expect(textField.getAttribute("role")).toBe("group");
+    });
+
+    test("label属性の値が自動でaria-labelに設定される", () => {
+      document.body.innerHTML = `<sp-text-field label="お名前"></sp-text-field>`;
+
+      const textField = getSpTextField();
+
+      expect(textField.getAttribute("aria-label")).toBe("お名前");
+    });
+
+    test("label属性を変更すると、aria-labelも自動更新される", () => {
+      document.body.innerHTML = `<sp-text-field label="お名前"></sp-text-field>`;
+
+      const textField = getSpTextField();
+
+      expect(textField.getAttribute("aria-label")).toBe("お名前");
+
+      textField.setAttribute("label", "メールアドレス");
+
+      expect(textField.getAttribute("aria-label")).toBe("メールアドレス");
+    });
+
+    test("labelがない場合、aria-labelは削除される", () => {
+      document.body.innerHTML = `<sp-text-field label="お名前"></sp-text-field>`;
+
+      const textField = getSpTextField();
+
+      expect(textField.getAttribute("aria-label")).toBe("お名前");
+
+      textField.removeAttribute("label");
+
+      expect(textField.hasAttribute("aria-label")).toBe(false);
+    });
   });
 
   describe("label属性", () => {
