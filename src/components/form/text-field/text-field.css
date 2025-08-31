@@ -61,8 +61,11 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-block-start: 4px;
   gap: 8px;
+}
+
+.info > * {
+  margin-block-start: 4px;
 }
 
 .info sp-error-text {

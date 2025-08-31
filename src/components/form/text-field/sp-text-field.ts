@@ -390,10 +390,8 @@ export class SpTextField extends HTMLElement {
     const currentLabel = this.label;
 
     if (currentLabel) {
-      // labelがある場合は自動設定
       this.setAttribute("aria-label", currentLabel);
     } else {
-      // labelがない場合はaria-labelを削除
       this.removeAttribute("aria-label");
     }
   }
