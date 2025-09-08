@@ -18,6 +18,7 @@ export class SpTextField extends HTMLElement {
     "sp-character-counter",
   );
   #labelElement: HTMLElement | null = null;
+  #labelWrapper: HTMLDivElement | null = null;
   #characterLimit: number | undefined = undefined;
 
   get value() {
@@ -341,10 +342,14 @@ export class SpTextField extends HTMLElement {
 
     if (labelText) {
       if (!this.#labelElement) {
+        this.#labelWrapper = document.createElement("div");
+        this.#labelWrapper.classList.add("label-wrapper");
+
         this.#labelElement = document.createElement("sp-label");
+        this.#labelWrapper.appendChild(this.#labelElement);
 
         if (this.#wrapper && this.#container) {
-          this.#wrapper.insertBefore(this.#labelElement, this.#container);
+          this.#wrapper.insertBefore(this.#labelWrapper, this.#container);
         }
 
         this.#setupLabelClickHandler();
@@ -360,9 +365,10 @@ export class SpTextField extends HTMLElement {
         this.#labelElement.removeAttribute("required");
       }
     } else {
-      if (this.#labelElement) {
+      if (this.#labelWrapper) {
         this.#inputElement.removeAttribute("aria-label");
-        this.#labelElement.remove();
+        this.#labelWrapper.remove();
+        this.#labelWrapper = null;
         this.#labelElement = null;
       }
     }

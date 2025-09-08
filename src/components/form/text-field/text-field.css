@@ -46,7 +46,7 @@
   gap: 8px;
 }
 
-.wrapper[data-orientation="horizontal"] sp-label {
+.wrapper[data-orientation="horizontal"] .label-wrapper {
   flex-shrink: 0;
   width: 160px;
 }

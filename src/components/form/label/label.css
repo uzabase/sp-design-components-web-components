@@ -1,5 +1,5 @@
 .label {
-  display: block;
+  display: inline-block;
   cursor: default;
   font-size: 12px;
   font-weight: bold;
