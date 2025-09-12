@@ -60,7 +60,7 @@ export class SpTab extends HTMLElement {
   set fill(value: TabType) {
     // 現在の値と同じ場合は何もしない（不要なDOM操作を避ける）
     if (this.getAttribute("fill") === value) return;
-    
+
     // 既存のfill属性を削除してから新しい値を設定
     this.removeAttribute("fill");
     this.setAttribute("fill", value);
@@ -114,7 +114,7 @@ export class SpTab extends HTMLElement {
     this.#textObserver.observe(this, {
       childList: true,
       subtree: true,
-      characterData: true
+      characterData: true,
     });
 
     this.#plusIconElement.setAttribute("aria-hidden", "true");
@@ -129,7 +129,7 @@ export class SpTab extends HTMLElement {
   disconnectedCallback() {
     // イベントリスナーをクリーンアップ
     this.removeEventListener("click", this.#handleClickBound);
-    
+
     // MutationObserverをクリーンアップ
     if (this.#textObserver) {
       this.#textObserver.disconnect();
@@ -150,7 +150,7 @@ export class SpTab extends HTMLElement {
 
   #updateAriaLabel() {
     const textContent = this.textContent?.trim() || "";
-    
+
     if (this.#disabled && textContent) {
       // disabledタブの場合は「ラベル名 + 無効」として読み上げられるように設定
       this.setAttribute("aria-label", `${textContent} 無効`);
