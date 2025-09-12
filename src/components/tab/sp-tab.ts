@@ -24,6 +24,7 @@ export class SpTab extends HTMLElement {
   #textElement = document.createElement("span");
   #textSlotElement = document.createElement("slot");
   #handleClickBound = this.#handleClick.bind(this);
+  #textObserver: MutationObserver | null = null;
 
   get disabled() {
     return this.#disabled;
@@ -33,12 +34,16 @@ export class SpTab extends HTMLElement {
     this.#disabled = value;
     if (value) {
       this.setAttribute("aria-disabled", "true");
+      this.setAttribute("tabindex", "-1");
       if (!this.hasAttribute("disabled")) {
         this.setAttribute("disabled", "");
       }
+      this.#updateAriaLabel();
     } else {
       this.setAttribute("aria-disabled", "false");
+      this.setAttribute("tabindex", "0");
       this.removeAttribute("disabled");
+      this.#updateAriaLabel();
     }
   }
 
@@ -53,6 +58,9 @@ export class SpTab extends HTMLElement {
   }
 
   set fill(value: TabType) {
+    // 現在の値と同じ場合は何もしない（不要なDOM操作を避ける）
+    if (this.getAttribute("fill") === value) return;
+    
     // 既存のfill属性を削除してから新しい値を設定
     this.removeAttribute("fill");
     this.setAttribute("fill", value);
@@ -93,19 +101,40 @@ export class SpTab extends HTMLElement {
     // disabled属性の初期値を確認して適切に設定
     const isDisabled = this.hasAttribute("disabled");
     this.setAttribute("aria-disabled", isDisabled ? "true" : "false");
+    // tabindex の初期設定
+    this.setAttribute("tabindex", isDisabled ? "-1" : "0");
 
     // sp-tab要素自体にクリックイベントリスナーを追加
     this.addEventListener("click", this.#handleClickBound);
+
+    // テキストコンテンツの変更を監視してaria-labelを更新
+    this.#textObserver = new MutationObserver(() => {
+      this.#updateAriaLabel();
+    });
+    this.#textObserver.observe(this, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
 
     this.#plusIconElement.setAttribute("aria-hidden", "true");
     this.#tabElement.appendChild(this.#plusIconElement);
     this.#tabElement.appendChild(this.#textElement);
     this.shadowRoot!.appendChild(this.#tabElement);
+
+    // 初期のaria-labelを設定
+    this.#updateAriaLabel();
   }
 
   disconnectedCallback() {
     // イベントリスナーをクリーンアップ
     this.removeEventListener("click", this.#handleClickBound);
+    
+    // MutationObserverをクリーンアップ
+    if (this.#textObserver) {
+      this.#textObserver.disconnect();
+      this.#textObserver = null;
+    }
   }
 
   #handleClick(originalEvent: MouseEvent) {
@@ -117,6 +146,18 @@ export class SpTab extends HTMLElement {
     }
 
     // イベントはそのまま親に伝播される（sp-tab-groupで処理される）
+  }
+
+  #updateAriaLabel() {
+    const textContent = this.textContent?.trim() || "";
+    
+    if (this.#disabled && textContent) {
+      // disabledタブの場合は「ラベル名 + 無効」として読み上げられるように設定
+      this.setAttribute("aria-label", `${textContent} 無効`);
+    } else {
+      // 有効なタブの場合はaria-labelを削除（textContentが自然に読み上げられる）
+      this.removeAttribute("aria-label");
+    }
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {

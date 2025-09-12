@@ -16,6 +16,7 @@ export class SpTabGroup extends HTMLElement {
   #navWrapper = document.createElement("div");
   #panelWrapper = document.createElement("div");
   #defaultPanel: string | null = null;
+  #handleKeyDownBound = this.#handleKeyDown.bind(this);
 
   private isValidTabElement(target: EventTarget | null): target is SpTab {
     return (
@@ -24,6 +25,48 @@ export class SpTabGroup extends HTMLElement {
       target.tagName === "SP-TAB" &&
       !target.hasAttribute("disabled")
     );
+  }
+
+  private getAllTabs(): SpTab[] {
+    return this.#navSlot
+      .assignedElements()
+      .filter((e): e is SpTab => 
+        e instanceof HTMLElement &&
+        e.getAttribute("slot") === "nav" &&
+        e.tagName === "SP-TAB"
+      );
+  }
+
+  private getEnabledTabs(): SpTab[] {
+    return this.getAllTabs().filter(tab => !tab.hasAttribute("disabled"));
+  }
+
+  private getNavigableTabs(): SpTab[] {
+    // スクリーンリーダーの矢印キーナビゲーションでは、disabledタブも含める
+    return this.getAllTabs();
+  }
+
+  private getCurrentFocusedTab(): SpTab | null {
+    const tabs = this.getAllTabs();
+    return tabs.find(tab => document.activeElement === tab) || null;
+  }
+
+  private isNavigationKey(event: KeyboardEvent): boolean {
+    const key = event.key;
+    const keyCode = event.keyCode;
+    
+    // 現代的なevent.keyをチェック
+    if (key === "ArrowRight" || key === "Right" ||
+        key === "ArrowLeft" || key === "Left" ||
+        key === "Home" || key === "End" ||
+        key === "Enter" || key === " " || key === "Spacebar") {
+      return true;
+    }
+    
+    // フォールバック: keyCodeをチェック（古いブラウザ対応）
+    return keyCode === 37 || keyCode === 39 || // Arrow keys
+           keyCode === 36 || keyCode === 35 || // Home/End
+           keyCode === 13 || keyCode === 32;   // Enter/Space
   }
 
   private getInitialSelectedTab() {
@@ -60,17 +103,43 @@ export class SpTabGroup extends HTMLElement {
 
   private updateTabSelection(targetPanel: string | null) {
     const assignedTabs = this.#navSlot.assignedElements();
+    let activeTabSet = false;
+    
     assignedTabs.forEach((tab) => {
-      if (tab.getAttribute("panel") === targetPanel) {
+      const isDisabled = tab.hasAttribute("disabled");
+      const isTargetTab = tab.getAttribute("panel") === targetPanel;
+      
+      if (isTargetTab) {
         tab.setAttribute("selected", "");
         tab.setAttribute("aria-selected", "true");
-        tab.setAttribute("tabindex", "0");
+        // roving tabindex: 選択されたタブのみtabindex="0"（disabledでない場合）
+        if (!isDisabled && !activeTabSet) {
+          tab.setAttribute("tabindex", "0");
+          activeTabSet = true;
+        } else {
+          tab.setAttribute("tabindex", "-1");
+        }
       } else {
         tab.removeAttribute("selected");
         tab.setAttribute("aria-selected", "false");
         tab.setAttribute("tabindex", "-1");
       }
     });
+
+    // 選択されたタブがdisabledの場合、最初の有効なタブにtabindex="0"を設定
+    // ただし、有効なタブがない場合は最初のタブ（disabledでも）にtabindex="0"を設定
+    if (!activeTabSet) {
+      const enabledTabs = this.getEnabledTabs();
+      if (enabledTabs.length > 0) {
+        enabledTabs[0].setAttribute("tabindex", "0");
+      } else {
+        // 全てのタブがdisabledの場合、最初のタブにtabindex="0"を設定
+        const allTabs = this.getAllTabs();
+        if (allTabs.length > 0) {
+          allTabs[0].setAttribute("tabindex", "0");
+        }
+      }
+    }
   }
 
   private updatePanelDisplay(targetPanel: string | null) {
@@ -152,6 +221,114 @@ export class SpTabGroup extends HTMLElement {
     }
   }
 
+  #handleKeyDown(event: KeyboardEvent): void {
+    // ナビゲーションキーでない場合は早期リターン
+    if (!this.isNavigationKey(event)) return;
+    
+    const currentTab = this.getCurrentFocusedTab();
+    if (!currentTab) return;
+
+    // 矢印キーナビゲーションでは全てのタブ（disabledも含む）を対象とする
+    const navigableTabs = this.getNavigableTabs();
+    const currentIndex = navigableTabs.indexOf(currentTab);
+    
+    if (currentIndex === -1) return;
+
+    let targetTab: SpTab | null = null;
+
+    // Windows/Mac/Linuxでの互換性を確保するため、event.keyとkeyCodeの両方をチェック
+    const key = event.key;
+    const keyCode = event.keyCode;
+
+    switch (key) {
+      case "ArrowRight":
+      case "Right": // IE/Edge対応
+        event.preventDefault();
+        // 次のタブへ移動（最後の場合は最初に戻る）
+        targetTab = navigableTabs[(currentIndex + 1) % navigableTabs.length];
+        break;
+      
+      case "ArrowLeft":
+      case "Left": // IE/Edge対応
+        event.preventDefault();
+        // 前のタブへ移動（最初の場合は最後に戻る）
+        targetTab = navigableTabs[(currentIndex - 1 + navigableTabs.length) % navigableTabs.length];
+        break;
+      
+      case "Home":
+        event.preventDefault();
+        // 最初のタブへ移動（disabledも含む）
+        targetTab = navigableTabs[0];
+        break;
+      
+      case "End":
+        event.preventDefault();
+        // 最後のタブへ移動（disabledも含む）
+        targetTab = navigableTabs[navigableTabs.length - 1];
+        break;
+      
+      case "Enter":
+      case " ": // Space key
+      case "Spacebar": // IE対応
+        event.preventDefault();
+        // 現在フォーカスされているタブを活性化（有効なタブのみ）
+        if (this.isValidTabElement(currentTab)) {
+          this.updateDisplayPanel(currentTab);
+        }
+        // disabledタブの場合は何もしない（フォーカスは維持）
+        break;
+      
+      default:
+        // keyCodeでのフォールバック（古いブラウザ対応）
+        switch (keyCode) {
+          case 39: // ArrowRight
+            event.preventDefault();
+            targetTab = navigableTabs[(currentIndex + 1) % navigableTabs.length];
+            break;
+          case 37: // ArrowLeft
+            event.preventDefault();
+            targetTab = navigableTabs[(currentIndex - 1 + navigableTabs.length) % navigableTabs.length];
+            break;
+          case 36: // Home
+            event.preventDefault();
+            targetTab = navigableTabs[0];
+            break;
+          case 35: // End
+            event.preventDefault();
+            targetTab = navigableTabs[navigableTabs.length - 1];
+            break;
+          case 13: // Enter
+          case 32: // Space
+            event.preventDefault();
+            if (this.isValidTabElement(currentTab)) {
+              this.updateDisplayPanel(currentTab);
+            }
+            break;
+          default:
+            return; // 他のキーは処理しない
+        }
+        break;
+    }
+
+    // フォーカスを移動
+    if (targetTab && targetTab !== currentTab) {
+      this.moveFocusToTab(targetTab);
+    }
+  }
+
+  private moveFocusToTab(tab: SpTab): void {
+    // 現在フォーカスされているタブのtabindexを-1に設定
+    const currentFocused = this.getCurrentFocusedTab();
+    if (currentFocused && currentFocused !== tab) {
+      currentFocused.setAttribute("tabindex", "-1");
+    }
+
+    // 新しいタブにフォーカスを移動してtabindexを0に設定
+    // disabledタブでもフォーカスは可能にする（スクリーンリーダー対応）
+    tab.setAttribute("tabindex", "0");
+    tab.focus();
+  }
+
   private updateTabsAndPanelsAttributes(): void {
     const assignedTabs = this.#navSlot.assignedElements();
     const assignedPanels = this.#panelSlot.assignedElements();
@@ -213,6 +390,9 @@ export class SpTabGroup extends HTMLElement {
     this.#panelWrapper.classList.add("panel-wrapper");
     this.#panelWrapper.appendChild(this.#panelSlot);
 
+    // キーボードイベントリスナーを追加
+    this.addEventListener("keydown", this.#handleKeyDownBound);
+
     // slotchangeイベント(nav slotを監視する)
     this.#navSlot.addEventListener("slotchange", () => {
       this.ensureSingleActivePanel();
@@ -224,6 +404,11 @@ export class SpTabGroup extends HTMLElement {
     });
 
     this.shadowRoot!.append(this.#navWrapper, this.#panelWrapper);
+  }
+
+  disconnectedCallback() {
+    // イベントリスナーをクリーンアップ
+    this.removeEventListener("keydown", this.#handleKeyDownBound);
   }
 
   attributeChangedCallback(
