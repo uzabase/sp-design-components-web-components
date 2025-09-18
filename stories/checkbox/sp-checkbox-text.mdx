@@ -1,0 +1,18 @@
+import { Meta, Canvas, Controls } from "@storybook/blocks";
+import * as CheckboxTextStories from "./sp-checkbox-text.story";
+
+<Meta of={CheckboxTextStories} />
+
+# Checkbox Text
+複数の選択肢から任意の項目を複数選択させたい時に使用します
+チェックボックスとラベルとなるテキストをセットで表示します
+
+# Usage
+- 基本的にはテキストを改行せずに表示します
+    - 十分に横幅が確保されるケースではチェックボックステキストを段落ちさせてテキストが改行されるのを防ぎます
+    - 領域が狭く、テキストを改行せざるを得ない時は改行を許容します。(例：モーダル)
+- チェックボックスのオンオフを行う際にクリック領域はラベルのテキストも含みます
+
+# Example
+<Canvas of={CheckboxTextStories.Basic} />
+<Controls />

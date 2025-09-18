@@ -1,0 +1,32 @@
+import { Meta, Canvas, Controls } from "@storybook/blocks";
+import * as ElementTitleStories from "./sp-element-title.story";
+
+<Meta of={ElementTitleStories} />
+
+# Element Title
+セクションコンテンツ内のタイトルで使用します
+
+# Usage
+- タイトルの関係はPage Title > Section Title > Element Title
+- 1セクションの中でエレメントタイトルは複数配置することができます
+- エレメントタイトルにはボタンやテキストリンク、Helpアイコンを含みます
+    - 全てを使う必要はありません。必要に応じて必要なコンポーネントを表示させて使用します
+
+# Example
+
+<Canvas of={ElementTitleStories.Basic} />
+<Controls />
+
+# Variation
+
+## Basic
+<Canvas of={ElementTitleStories.Basic} />
+
+## With Text Links
+<Canvas of={ElementTitleStories.WithTextLinks} />
+
+## With Buttons
+<Canvas of={ElementTitleStories.WithButtons} />
+
+## With Full Contents
+<Canvas of={ElementTitleStories.WithFullContents} />

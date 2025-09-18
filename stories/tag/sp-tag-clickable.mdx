@@ -1,0 +1,74 @@
+import { Meta, Canvas, Controls } from "@storybook/blocks";
+import * as tagClickableStories from "./sp-tag-clickable.story.ts";
+
+<Meta of={tagClickableStories} />
+
+# Tag Clickable
+情報や項目にラベルで分類し、認知不可を下げるために使用します
+フィルターで使用するクリック可能なタグとして使用します
+
+# Example
+<Canvas of={tagClickableStories.Basic} />
+<Controls /> 
+
+# Usage
+- クリック可能なタグは将来的に複数オブジェクトで流用が可能なデータに使用します
+    - ※現在は単一オブジェクトで使用
+    - 例：FO・トレンドフィルタ
+
+# Variation
+## Basic
+<Canvas of={tagClickableStories.Basic} />
+## Selected
+<Canvas of={tagClickableStories.Selected} />
+## Disabled
+<Canvas of={tagClickableStories.Disabled} />
+## Toggle Example
+<Canvas of={tagClickableStories.ToggleExample} />
+
+# Accessibility
+
+<div style={{ overflowX: 'auto' }}>
+  <table style={{ borderCollapse: 'collapse', width: '100%', border: '1px solid #ddd' }}>
+    <thead>
+      <tr>
+        <th style={{ border: '1px solid #ddd', padding: '12px', textAlign: 'left', backgroundColor: '#f5f5f5' }}>チェック項目</th>
+        <th style={{ border: '1px solid #ddd', padding: '12px', textAlign: 'left', backgroundColor: '#f5f5f5' }}>対応方法</th>
+        <th style={{ border: '1px solid #ddd', padding: '12px', textAlign: 'left', backgroundColor: '#f5f5f5' }}>WCAG 2.2 成功基準</th>
+        <th style={{ border: '1px solid #ddd', padding: '12px', textAlign: 'left', backgroundColor: '#f5f5f5' }}>公式参照</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style={{ border: '1px solid #ddd', padding: '12px' }}>選択状態を支援技術に伝える</td>
+        <td style={{ border: '1px solid #ddd', padding: '12px' }}>
+          <code>aria-pressed="true/false"</code> または <code>aria-selected="true/false"</code> を使用
+        </td>
+        <td style={{ border: '1px solid #ddd', padding: '12px' }}>4.1.2 名前、役割、値</td>
+        <td style={{ border: '1px solid #ddd', padding: '12px' }}>
+          <a href="https://waic.jp/translations/WCAG22/Understanding/name-role-value.html" target="_blank" rel="noopener noreferrer">4.1.2</a>
+        </td>
+      </tr>
+      <tr style={{ backgroundColor: 'transparent' }}>
+        <td style={{ border: '1px solid #ddd', padding: '12px' }}>操作可能なタグであることを明示</td>
+        <td style={{ border: '1px solid #ddd', padding: '12px' }}>
+          <code>role="button"</code> またはボタン要素を使用し、フォーカス可能にする
+        </td>
+        <td style={{ border: '1px solid #ddd', padding: '12px' }}>2.1.1 キーボード</td>
+        <td style={{ border: '1px solid #ddd', padding: '12px' }}>
+          <a href="https://waic.jp/translations/WCAG22/Understanding/keyboard.html" target="_blank" rel="noopener noreferrer">2.1.1</a>
+        </td>
+      </tr>
+      <tr>
+        <td style={{ border: '1px solid #ddd', padding: '12px' }}>ラベルと目的が明確</td>
+        <td style={{ border: '1px solid #ddd', padding: '12px' }}>
+          タグのテキストだけで目的がわかるようにし、必要に応じて <code>aria-label</code> で補足
+        </td>
+        <td style={{ border: '1px solid #ddd', padding: '12px' }}>2.4.4 リンクの目的（文脈内）</td>
+        <td style={{ border: '1px solid #ddd', padding: '12px' }}>
+          <a href="https://waic.jp/translations/WCAG22/Understanding/link-purpose-in-context.html" target="_blank" rel="noopener noreferrer">2.4.4</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

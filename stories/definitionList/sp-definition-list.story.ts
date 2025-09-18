@@ -13,6 +13,19 @@ type StoryArgs = SpDefinitionList & {
 };
 
 const meta = {
+  component: "sp-definition-list",
+  argTypes: {
+    termText: {
+      control: { type: "text" },
+      description: "用語のテキスト",
+      defaultValue: "Term",
+    },
+    definitionText: {
+      control: { type: "text" },
+      description: "説明のテキスト",
+      defaultValue: "Definition",
+    },
+  },
   args: {
     termText: "Term",
     definitionText: "Definition",

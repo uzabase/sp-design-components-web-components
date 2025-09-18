@@ -1,0 +1,29 @@
+import { Meta, Canvas, Controls } from "@storybook/blocks";
+import * as DefinitionListStories from "./sp-definition-list.story";
+
+<Meta of={DefinitionListStories} />
+
+# Definitions List
+用語とその説明のリストを表します
+
+# Usage
+- Definition List / DtとDefinition List / Ddはセットで使用します
+- Definition List / Dtは160px固定で使用します
+    - 長い文章の場合は160px以上の時には改行します
+- フォームの送信前の確認画面などで使用します
+
+# Example
+
+<Canvas of={DefinitionListStories.Basic} />
+<Controls />
+
+# Variation
+
+## Basic
+<Canvas of={DefinitionListStories.Basic} />
+
+## Overflow Wrap
+<Canvas of={DefinitionListStories.OverflowWrap} />
+
+## Break
+<Canvas of={DefinitionListStories.Break} />

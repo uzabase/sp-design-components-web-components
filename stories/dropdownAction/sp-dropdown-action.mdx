@@ -1,0 +1,32 @@
+import { Meta, Canvas, Controls } from "@storybook/blocks";
+import * as DropdownActionStories from "./sp-dropdown-action.story";
+
+<Meta of={DropdownActionStories} />
+
+# Dropdown Action
+アクションを選択する際に使用します
+
+# Example
+<Canvas of={DropdownActionStories.Basic} />
+<Controls />
+
+# Usage
+- dropdown actionをクリックしてもアイコンの向きは変わりません
+- Itemを開いてる時はSelected状態になり、再度dropdown actionをクリックするか他の場所をクリックすると閉じます
+- min-widthは80pxです
+
+# Variation
+## Basic
+<Canvas of={DropdownActionStories.Basic} />
+
+## LongText
+<Canvas of={DropdownActionStories.LongText} />
+
+## RightPosition
+<Canvas of={DropdownActionStories.RightPosition} />
+
+## FullWidth
+<Canvas of={DropdownActionStories.FullWidth} />
+
+## Disabled
+<Canvas of={DropdownActionStories.Disabled} /> 

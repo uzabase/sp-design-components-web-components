@@ -8,26 +8,44 @@ import type { SpNotificationMessage } from "../../src/components/notificationMes
 
 const meta = {
   component: "sp-notification-message",
+  argTypes: {
+    type: {
+      control: { type: "select" },
+      options: ["error", "warning", "information", "success"],
+      description: "通知の種類",
+      defaultValue: "information",
+    },
+    slot: {
+      control: { type: "text" },
+      description: "通知メッセージのコンテンツ",
+      defaultValue: "Hello World",
+    },
+  },
+  args: {
+    type: "information",
+    slot: "Hello World",
+  },
+  render: (args) => html`
+    <sp-notification-message type=${args.type}>
+      ${args.slot}
+    </sp-notification-message>
+  `,
 } satisfies Meta<SpNotificationMessage>;
 
 export default meta;
 type Story = StoryObj<SpNotificationMessage>;
 
 export const Basic: Story = {
+  tags: ["!dev-only"],
+};
+
+export const AllTypes: Story = {
   render: () => html`
     <div style="display: flex; flex-direction: column; gap: 16px;">
-      <sp-notification-message type="error"
-        >Hello World</sp-notification-message
-      >
-      <sp-notification-message type="information"
-        >Hello World</sp-notification-message
-      >
-      <sp-notification-message type="success"
-        >Hello World</sp-notification-message
-      >
-      <sp-notification-message type="warning"
-        >Hello World</sp-notification-message
-      >
+      <sp-notification-message type="error">Hello World</sp-notification-message>
+      <sp-notification-message type="information">Hello World</sp-notification-message>
+      <sp-notification-message type="success">Hello World</sp-notification-message>
+      <sp-notification-message type="warning">Hello World</sp-notification-message>
     </div>
   `,
 };

@@ -1,0 +1,71 @@
+import { Meta, Canvas, Controls } from "@storybook/blocks";
+import * as NotificationMessageStories from "./sp-notification-message.story";
+
+<Meta of={NotificationMessageStories} />
+
+# Notification Message
+ユーザーに重要な情報やフィードバック（成功・エラー・警告・情報）を伝えます
+
+# Usage
+- Notification  Messageは表示内容の情報属性ごとに異なるフィードバックを伝えます
+- Notification  Messageはプロダクト都合の変更などにより適切な表示ができていない場合などに表示されます
+- Notification barと異なり、その場で閉じることはできません
+
+# Example
+
+<Canvas of={NotificationMessageStories.Basic} />
+<Controls />
+
+## error
+**使用ケース**
+- すでに起こっている問題のことを伝える
+- 緊急のタスク(対処しないと重大な影響を受ける)、即時対応が必要な場合
+
+**メッセージの書き方**
+- 問題の理由、誰がどう行動すべきか、行動しなかった時場合に何が起こるか記載する
+- 何かが起こった理由と問題が再び発生するかどうかを含めることもできる(必須じゃない)
+- ユーザーを責めない
+- 謝罪を含めない
+
+## warning
+**使用ケース**
+- すぐに対処しないと問題が発生しそうなことを伝える
+- ユーザーがアクションを行う前に表示する
+- すでに起こった問題については記載しない
+- ユーザーは警告を見てアクションが必要な場合とそうでない場合を意識する
+
+**メッセージの書き方**
+警告の理由、ユーザーが取るべき行動、行動しなかった場合に何が起きるかを明確に記載する
+
+## success
+**使用ケース**
+- ユーザーが行ったアクションが正常に完了したことを伝える
+- 自動的にトリガーされるアクションの完了(自動保存など)
+- ユーザーの開始したプロセスの完了(ダウンロードなど)
+
+**メッセージの書き方**
+- 成功の理由を伝える
+- 行ったアクションに次のステップがある場合は記載する
+
+## information
+**使用ケース**
+- 状態の変化や体験、機能に関する重要な情報を伝えるために使用
+- ユーザーの作業を中断させない？
+- システムが利用できないことを伝える(システムメンテナンスなど)
+
+**メッセージの書き方**
+- 情報が重要な理由を明確に伝える
+
+# Variation
+
+## Basic
+<Canvas of={NotificationMessageStories.Basic} />
+
+## All Types
+<Canvas of={NotificationMessageStories.AllTypes} />
+
+## Long Text
+<Canvas of={NotificationMessageStories.LongText} />
+
+## Multiple Paragraphs
+<Canvas of={NotificationMessageStories.MultipleParagraphs} />

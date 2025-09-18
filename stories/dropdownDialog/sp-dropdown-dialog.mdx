@@ -1,0 +1,25 @@
+import { Meta, Canvas, Controls } from "@storybook/blocks";
+import * as DropdownDialogStories from "./sp-dropdown-dialog.story";
+
+<Meta of={DropdownDialogStories} />
+
+# Dropdown Dialog
+ダイアログを表示します
+
+# Example
+<Canvas of={DropdownDialogStories.Basic} />
+<Controls />
+
+# Usage
+- ダイアログにはアクションは含めずコンテンツを表示します
+- Dialogを開いてる時はボタンSelected状態になり、再度dropdown actionをクリックするか他の場所をクリックすると閉じます
+
+# Variation
+## Basic
+<Canvas of={DropdownDialogStories.Basic} />
+## LongText
+<Canvas of={DropdownDialogStories.LongText} />
+## RightPosition
+<Canvas of={DropdownDialogStories.RightPosition} />
+## Disabled
+<Canvas of={DropdownDialogStories.Disabled} />

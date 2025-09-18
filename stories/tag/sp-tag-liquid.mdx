@@ -1,0 +1,33 @@
+import { Meta, Canvas, Controls } from "@storybook/blocks";
+import * as tagLiquidStories from "./sp-tag-liquid.story.ts";
+
+<Meta of={tagLiquidStories} />
+
+# Tag Liquid
+情報や項目にラベルで分類し、認知不可を下げるために使用します
+装飾的に使用します
+
+# Usage
+- ステータスを表示する
+    - システム(プロダクト)側がユーザーの利便性を高めるために明示するステータス
+    - 例：エキスパート
+- グルーピングする
+    - 情報のグルーピングができるデータをラベル表現にして認知負荷を下げる
+        - 例：開示資料の種類
+- 認知不可を下げる
+    - 例：お知らせ
+    - 例：管理者権限
+
+# Example
+<Canvas of={tagLiquidStories.Basic} />
+<Controls />
+
+# Variation
+## Basic
+<Canvas of={tagLiquidStories.Basic} />
+## Light Theme Colors
+<Canvas of={tagLiquidStories.LightThemeColors} />
+## Dark Theme Colors
+<Canvas of={tagLiquidStories.DarkThemeColors} />
+## All Variants
+<Canvas of={tagLiquidStories.AllVariants} />

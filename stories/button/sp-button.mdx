@@ -1,29 +1,12 @@
-import { Meta, Story, Canvas, Controls } from "@storybook/blocks";
+import { Meta, Canvas, Controls } from "@storybook/blocks";
 import * as ButtonStories from "./sp-button.story";
-
-import { Title, Description, Primary, Stories } from '@storybook/blocks';
 
 <Meta of={ButtonStories} />
 
 # Button
-
 ボタンコンポーネントは、ユーザーアクションのトリガーとして使用される重要なUIコンポーネントです。
 
-## Example
-
-{/* 
-  Metaブロック: このドキュメントを対応するコンポーネントのストーリーと関連付けます。
-  'of'プロパティでインポートしたストーリーファイルを指定します。
-*/}
-
-{/* 
-  Doc Blocks: ストーリーファイルからタイトル、説明、プライマリストーリー、
-  Propsテーブル(Controls)、全ストーリー(Stories)を自動で埋め込みます。
-*/}
-<Description />
-<Primary />
-<Controls />
-
+# Usage
 ## Appearance
 `Appearance`は、画面内での情報のヒエラルキーを表現するために使用します。情報の優先度を踏まえ、強弱がつくように設計してください。すべてを強調すると、すべてが同じに見えます。
 - `Fill`
@@ -46,13 +29,61 @@ import { Title, Description, Primary, Stories } from '@storybook/blocks';
 - **x-large**: ログイン画面で使用します(仮)。
 
 **サイズ固定**
+**サイズ可変**
+- **small**: Table内で使用します。
+- **medium**: 基本的に使用されるサイズです。
+- **large**: ユーザーに明示的に押させたい時に使用します。
+- **x-large**: ログイン画面で使用します(仮)。
+
+**サイズ固定**
+- **width-160**: 可変にするとボタンが小さく感じる場合や、レイアウトのズレが起きる時に使用します。
+- **width-80**: モーダル内のボタンで使用します。
 - **width-160**: 可変にするとボタンが小さく感じる場合や、レイアウトのズレが起きる時に使用します。
 - **width-80**: モーダル内のボタンで使用します。
 
-## Variants（バリエーション）
-<Stories title="全バリエーション一覧" />
+# Example
 
-## Accessibility
+<Canvas of={ButtonStories.Basic} />
+<Controls />
+
+
+# Variants
+
+## Basic
+<Canvas of={ButtonStories.Basic} />
+
+## Overflow Wrap
+<Canvas of={ButtonStories.OverflowWrap} />
+
+## ALL
+<Canvas of={ButtonStories.ALL} />
+
+# Accessibility
 `<Button>`や`<LinkButton>`を利用することで、適切な要素がマークアップされます。その場合、ネイティブの要素が持つ機能を継承することができます。
+
+<table style={{width: '100%', borderCollapse: 'collapse', border: '1px solid #ccc'}}>
+  <thead>
+    <tr style={{backgroundColor: '#f5f5f5'}}>
+      <th style={{border: '1px solid #ccc', padding: '8px', textAlign: 'left'}}>チェック項目</th>
+      <th style={{border: '1px solid #ccc', padding: '8px', textAlign: 'left'}}>対応方法</th>
+      <th style={{border: '1px solid #ccc', padding: '8px', textAlign: 'left'}}>WCAG 2.2 成功基準</th>
+      <th style={{border: '1px solid #ccc', padding: '8px', textAlign: 'left'}}>公式参照</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{border: '1px solid #ccc', padding: '8px', backgroundColor: 'transparent'}}>名前と役割が明示されている</td>
+      <td style={{border: '1px solid #ccc', padding: '8px', backgroundColor: 'transparent'}}>&lt;button&gt; 要素を使う、または role="button" とラベルを併用</td>
+      <td style={{border: '1px solid #ccc', padding: '8px', backgroundColor: 'transparent'}}>4.1.2 名前、役割、値</td>
+      <td style={{border: '1px solid #ccc', padding: '8px', backgroundColor: 'transparent'}}><a href="https://waic.jp/translations/WCAG22/Understanding/name-role-value.html" target="_blank" rel="noopener noreferrer">4.1.2</a></td>
+    </tr>
+    <tr>
+      <td style={{border: '1px solid #ccc', padding: '8px', backgroundColor: 'transparent'}}>キーボード操作可能</td>
+      <td style={{border: '1px solid #ccc', padding: '8px', backgroundColor: 'transparent'}}>Enter / Space キーで操作できること</td>
+      <td style={{border: '1px solid #ccc', padding: '8px', backgroundColor: 'transparent'}}>2.1.1 キーボード</td>
+      <td style={{border: '1px solid #ccc', padding: '8px', backgroundColor: 'transparent'}}><a href="https://waic.jp/translations/WCAG22/Understanding/keyboard.html" target="_blank" rel="noopener noreferrer">2.1.1</a></td>
+    </tr>
+  </tbody>
+</table>
 
 

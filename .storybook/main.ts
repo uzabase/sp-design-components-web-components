@@ -20,10 +20,16 @@ const config: StorybookConfig = {
 
     const repo = process.env.REPOSITORY_NAME;
     const basePath = process.env.STORYBOOK_BASE_PATH;
-    const base = basePath ? `/${repo}/${basePath}/` : `/${repo}/`;
+    
+    // 開発環境では base パスを設定しない
+    const base = isProduction && repo && basePath ? `/${repo}/${basePath}/` : undefined;
 
     return mergeConfig(config, {
-      base,
+      ...(base && { base }),
+      optimizeDeps: {
+        exclude: ["@storybook/blocks"],
+        include: ["@storybook/web-components"],
+      },
     });
   },
 };
