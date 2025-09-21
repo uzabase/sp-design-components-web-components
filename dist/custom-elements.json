@@ -111,6 +111,132 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/definitionList/sp-definition-list-dd.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "SpDefinitionListDdは、デザインシステム2.0における定義リストの説明項目コンポーネントです。\n定義リスト内で用語の説明を表示するために使用します。",
+          "name": "SpDefinitionListDd",
+          "slots": [
+            {
+              "description": "説明のテキストコンテンツ（デフォルトスロット）",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-definition-list-dd",
+          "customElement": true,
+          "summary": "定義リストの説明項目コンポーネント"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpDefinitionListDd",
+          "declaration": {
+            "name": "SpDefinitionListDd",
+            "module": "src/components/definitionList/sp-definition-list-dd.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-definition-list-dd",
+          "declaration": {
+            "name": "SpDefinitionListDd",
+            "module": "src/components/definitionList/sp-definition-list-dd.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/definitionList/sp-definition-list-dt.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "SpDefinitionListDtは、デザインシステム2.0における定義リストの用語項目コンポーネントです。\n定義リスト内で用語を表示するために使用します。",
+          "name": "SpDefinitionListDt",
+          "slots": [
+            {
+              "description": "用語のテキストコンテンツ（デフォルトスロット）",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-definition-list-dt",
+          "customElement": true,
+          "summary": "定義リストの用語項目コンポーネント"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpDefinitionListDt",
+          "declaration": {
+            "name": "SpDefinitionListDt",
+            "module": "src/components/definitionList/sp-definition-list-dt.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-definition-list-dt",
+          "declaration": {
+            "name": "SpDefinitionListDt",
+            "module": "src/components/definitionList/sp-definition-list-dt.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/definitionList/sp-definition-list.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "SpDefinitionListは、デザインシステム2.0における定義リストコンポーネントです。\n用語とその定義をペアで表示するリストを提供します。",
+          "name": "SpDefinitionList",
+          "slots": [
+            {
+              "description": "定義リストの項目（デフォルトスロット）",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-definition-list",
+          "customElement": true,
+          "summary": "定義リストコンポーネント"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpDefinitionList",
+          "declaration": {
+            "name": "SpDefinitionList",
+            "module": "src/components/definitionList/sp-definition-list.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-definition-list",
+          "declaration": {
+            "name": "SpDefinitionList",
+            "module": "src/components/definitionList/sp-definition-list.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/checkbox/sp-checkbox-list.ts",
       "declarations": [
         {
@@ -255,132 +381,6 @@
           "declaration": {
             "name": "SpCheckbox",
             "module": "src/components/checkbox/sp-checkbox.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/definitionList/sp-definition-list-dd.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "SpDefinitionListDdは、デザインシステム2.0における定義リストの説明項目コンポーネントです。\n定義リスト内で用語の説明を表示するために使用します。",
-          "name": "SpDefinitionListDd",
-          "slots": [
-            {
-              "description": "説明のテキストコンテンツ（デフォルトスロット）",
-              "name": ""
-            }
-          ],
-          "members": [],
-          "superclass": {
-            "name": "HTMLElement"
-          },
-          "tagName": "sp-definition-list-dd",
-          "customElement": true,
-          "summary": "定義リストの説明項目コンポーネント"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SpDefinitionListDd",
-          "declaration": {
-            "name": "SpDefinitionListDd",
-            "module": "src/components/definitionList/sp-definition-list-dd.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sp-definition-list-dd",
-          "declaration": {
-            "name": "SpDefinitionListDd",
-            "module": "src/components/definitionList/sp-definition-list-dd.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/definitionList/sp-definition-list-dt.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "SpDefinitionListDtは、デザインシステム2.0における定義リストの用語項目コンポーネントです。\n定義リスト内で用語を表示するために使用します。",
-          "name": "SpDefinitionListDt",
-          "slots": [
-            {
-              "description": "用語のテキストコンテンツ（デフォルトスロット）",
-              "name": ""
-            }
-          ],
-          "members": [],
-          "superclass": {
-            "name": "HTMLElement"
-          },
-          "tagName": "sp-definition-list-dt",
-          "customElement": true,
-          "summary": "定義リストの用語項目コンポーネント"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SpDefinitionListDt",
-          "declaration": {
-            "name": "SpDefinitionListDt",
-            "module": "src/components/definitionList/sp-definition-list-dt.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sp-definition-list-dt",
-          "declaration": {
-            "name": "SpDefinitionListDt",
-            "module": "src/components/definitionList/sp-definition-list-dt.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/definitionList/sp-definition-list.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "SpDefinitionListは、デザインシステム2.0における定義リストコンポーネントです。\n用語とその定義をペアで表示するリストを提供します。",
-          "name": "SpDefinitionList",
-          "slots": [
-            {
-              "description": "定義リストの項目（デフォルトスロット）",
-              "name": ""
-            }
-          ],
-          "members": [],
-          "superclass": {
-            "name": "HTMLElement"
-          },
-          "tagName": "sp-definition-list",
-          "customElement": true,
-          "summary": "定義リストコンポーネント"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SpDefinitionList",
-          "declaration": {
-            "name": "SpDefinitionList",
-            "module": "src/components/definitionList/sp-definition-list.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sp-definition-list",
-          "declaration": {
-            "name": "SpDefinitionList",
-            "module": "src/components/definitionList/sp-definition-list.ts"
           }
         }
       ]
