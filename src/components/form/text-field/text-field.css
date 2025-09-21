@@ -1,0 +1,87 @@
+.text-field {
+  display: block;
+  width: 100%;
+  background-color: var(--color-semantic-surface-regular-1);
+  border: 1px solid var(--color-semantic-border-regular);
+  border-radius: 2px;
+  padding-inline: 8px;
+  padding-block: 4px 3px;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.6;
+}
+
+.text-field::placeholder {
+  color: var(--color-semantic-text-placeholder);
+}
+
+.text-field:focus-visible {
+  outline: none;
+  border-color: var(--color-semantic-border-focus);
+  box-shadow: 0 0 0 3px var(--color-semantic-highlight-focus-ring-default);
+}
+
+.text-field:disabled {
+  color: var(--color-semantic-text-disabled);
+  background: var(--color-semantic-surface-regular-4);
+}
+
+.text-field[aria-invalid="true"] {
+  border-color: var(--color-semantic-border-error);
+}
+
+.text-field[aria-invalid="true"]:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-semantic-highlight-focus-ring-error);
+}
+
+.wrapper {
+  display: flex;
+}
+
+.wrapper[data-orientation="vertical"] {
+  flex-direction: column;
+}
+
+.wrapper[data-orientation="horizontal"] {
+  gap: 8px;
+}
+
+.wrapper[data-orientation="horizontal"] .label-wrapper {
+  flex-shrink: 0;
+  width: 160px;
+}
+
+.container {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.info > * {
+  margin-block-start: 4px;
+}
+
+.info sp-error-text {
+  display: block;
+}
+
+.info sp-error-text:not(:last-of-type) {
+  margin-block-end: 2px;
+}
+
+.info .error-container {
+  flex: 1;
+  display: none;
+  flex-direction: column;
+}
+
+.info .character-counter {
+  margin-inline-start: auto;
+}

@@ -1,0 +1,14 @@
+.label {
+  display: inline-block;
+  cursor: default;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.6;
+  color: var(--color-semantic-text-regular);
+  padding-block: 5px 4px;
+}
+
+.required {
+  color: var(--color-semantic-text-required);
+  margin-inline-start: 4px;
+}

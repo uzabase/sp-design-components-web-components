@@ -1,0 +1,6 @@
+.base {
+  color: var(--color-semantic-text-error);
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.6;
+}
