@@ -83,11 +83,17 @@ export class SpCharacterCounter extends HTMLElement {
     if (oldValue === newValue) return;
 
     if (name === "current") {
-      if (!this.#isValidNumericValue(newValue)) return;
+      if (!this.#isValidNumericValue(newValue)) {
+        return;
+      }
+
       this.#updateCurrentCount();
       this.#updateLimitStatus();
     } else if (name === "max") {
-      if (!this.#isValidNumericValue(newValue)) return;
+      if (!this.#isValidNumericValue(newValue)) {
+        return;
+      }
+
       this.#updateMaxCount();
       this.#updateLimitStatus();
     }

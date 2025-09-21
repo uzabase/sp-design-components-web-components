@@ -97,7 +97,6 @@ export class SpTextField extends HTMLElement {
   }
   set autocomplete(value: string) {
     this.setAttribute("autocomplete", value);
-    // 無効な値を設定した場合もブラウザに判断を委ねるために、プロパティではなく属性を設定
     this.#inputElement.setAttribute("autocomplete", value);
   }
 
@@ -163,6 +162,16 @@ export class SpTextField extends HTMLElement {
     this.#updateAriaLabel();
   }
 
+  #setupErrorSlot() {
+    this.#errorSlot.name = "error-text";
+
+    this.#errorContainer.classList.add("error-container");
+    this.#errorContainer.setAttribute("role", "alert");
+    this.#errorContainer.setAttribute("aria-live", "polite");
+    this.#errorContainer.id = this.#generateRandomId();
+    this.#errorContainer.appendChild(this.#errorSlot);
+  }
+
   #setupInputElement() {
     this.#inputElement.classList.add("text-field");
     this.#inputElement.type = "text";
@@ -177,20 +186,9 @@ export class SpTextField extends HTMLElement {
     this.shadowRoot!.appendChild(this.#wrapper);
   }
 
-  #setupErrorSlot() {
-    this.#errorSlot.name = "error-text";
-
-    this.#errorContainer.classList.add("error-container");
-    this.#errorContainer.setAttribute("role", "alert");
-    this.#errorContainer.setAttribute("aria-live", "polite");
-    this.#errorContainer.id = this.#generateRandomId();
-    this.#errorContainer.appendChild(this.#errorSlot);
-  }
-
   #setupCharacterCounter() {
     this.#characterCounter.classList.add("character-counter");
 
-    // infoContainerを作成し、inputの後に配置
     const infoContainer = document.createElement("div");
     infoContainer.classList.add("info");
     infoContainer.appendChild(this.#errorContainer);
@@ -373,7 +371,6 @@ export class SpTextField extends HTMLElement {
       }
     }
 
-    // ラベルが変更されたときにaria-labelも更新
     this.#updateAriaLabel();
   }
 
