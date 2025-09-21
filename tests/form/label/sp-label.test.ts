@@ -20,12 +20,6 @@ function getRequiredMark() {
     .shadowRoot!.querySelector(".required") as HTMLSpanElement;
 }
 
-function getRequiredLabel() {
-  return document
-    .querySelector("sp-label")!
-    .shadowRoot!.querySelector(".sr-only") as HTMLSpanElement;
-}
-
 describe("sp-label", () => {
   describe("スロット", () => {
     test("スロットに渡されたテキストが正しく表示される", () => {
