@@ -1,0 +1,17 @@
+.base {
+  position: relative;
+  display: inline-block;
+}
+
+.listbox {
+  position: absolute;
+  top: calc(100% + 8px);
+}
+
+.position__left {
+  left: 0;
+}
+
+.position__right {
+  right: 0;
+}

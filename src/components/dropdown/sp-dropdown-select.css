@@ -1,0 +1,47 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+:host([hidden]) {
+  display: none;
+}
+
+.base {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-semantic-text-regular);
+  border-radius: 2px;
+  border: 1px solid var(--color-semantic-border-regular);
+  background: var(--color-semantic-surface-regular-1);
+  cursor: pointer;
+}
+
+.base:focus-within {
+  border: 1px solid var(--color-semantic-border-focus);
+  box-shadow: 0 0 0 3px #e2e5f5;
+  outline: none;
+}
+
+.label {
+  flex-grow: 1;
+  padding-inline: 8px;
+  padding-block: 3.5px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 160%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.label.placeholder {
+  color: var(--color-semantic-text-weak);
+}
+
+.icon-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  padding: 5px;
+}
