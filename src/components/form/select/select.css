@@ -6,21 +6,25 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
   width: 100%;
   background-color: var(--color-semantic-surface-regular-1);
   border: 1px solid var(--color-semantic-border-regular);
   border-radius: 2px;
-  padding-inline: 8px;
-  padding-block: 4px 3px;
   font-size: 12px;
   font-weight: normal;
   line-height: 1.6;
   text-align: left;
 }
 
+.select .label {
+  flex: 1;
+  padding-inline: 8px;
+  padding-block: 3.5px;
+}
+
 .select .icon {
   flex-shrink: 0;
+  padding: 5px;
 }
 
 .select:active {

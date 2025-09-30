@@ -8,6 +8,7 @@ export class SpSelect extends HTMLElement {
 
   #container: HTMLDivElement = document.createElement("div");
   #button: HTMLButtonElement = document.createElement("button");
+  #buttonLabel: HTMLSpanElement = document.createElement("span");
   #menu: HTMLDivElement = document.createElement("div");
   #menuItems: HTMLDivElement[] = [];
   #isOpen: boolean = false;
@@ -82,6 +83,10 @@ export class SpSelect extends HTMLElement {
     this.#button.classList.add("select");
     this.#button.type = "button";
     this.#button.addEventListener("click", this.#handleButtonClick.bind(this));
+
+    // Add label
+    this.#buttonLabel.classList.add("label");
+    this.#button.appendChild(this.#buttonLabel);
 
     // Add arrow icon
     const arrowIcon = new SpIcon();
@@ -188,23 +193,8 @@ export class SpSelect extends HTMLElement {
     );
     const buttonText = selectedOption ? selectedOption.textContent || "" : "";
 
-    // Remove existing text nodes but keep the icon
-    const icon = this.#button.querySelector("sp-icon");
-    Array.from(this.#button.childNodes).forEach((node) => {
-      if (node !== icon) {
-        node.remove();
-      }
-    });
-
-    // Add text before the icon
-    if (buttonText) {
-      const textNode = document.createTextNode(buttonText);
-      if (icon) {
-        this.#button.insertBefore(textNode, icon);
-      } else {
-        this.#button.appendChild(textNode);
-      }
-    }
+    // Update label text
+    this.#buttonLabel.textContent = buttonText;
   }
 
   #handleButtonClick(event: MouseEvent) {
