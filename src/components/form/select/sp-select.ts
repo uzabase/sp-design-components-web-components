@@ -1,6 +1,4 @@
-import "../error-text/sp-error-text";
-import "../label/sp-label";
-
+import { SpIcon } from "../../icon/sp-icon";
 import { makeStyleSheet } from "../../styles";
 import selectStyle from "./select.css?inline";
 
@@ -8,35 +6,39 @@ export class SpSelect extends HTMLElement {
   static formAssociated = true;
   protected internals: ElementInternals;
 
-  #wrapper: HTMLDivElement = document.createElement("div");
-  #selectElement: HTMLSelectElement = document.createElement("select");
   #container: HTMLDivElement = document.createElement("div");
-  #errorSlot: HTMLSlotElement = document.createElement("slot");
-  #errorContainer: HTMLDivElement = document.createElement("div");
-  #helpSlot: HTMLSlotElement = document.createElement("slot");
-  #helpContainer: HTMLDivElement = document.createElement("div");
-  #labelElement: HTMLElement | null = null;
-  #labelWrapper: HTMLDivElement | null = null;
-  #mutationObserver: MutationObserver | null = null;
+  #button: HTMLButtonElement = document.createElement("button");
+  #menu: HTMLDivElement = document.createElement("div");
+  #menuItems: HTMLDivElement[] = [];
+  #isOpen: boolean = false;
+  #menuId: string = "";
+  #clickOutsideHandler = this.#handleClickOutside.bind(this);
+
+  // Form state
+  #value: string = "";
+  #disabled: boolean = false;
+  #name: string = "";
 
   get value() {
-    return this.#selectElement.value;
+    return this.#value;
   }
   set value(value: string) {
-    this.#selectElement.value = value;
+    this.#value = value;
     this.internals.setFormValue(value);
+    this.#updateButtonText();
+    this.#updateMenuItems();
   }
 
   get name() {
-    return this.#selectElement.name;
+    return this.#name;
   }
   set name(value: string) {
     this.setAttribute("name", value);
-    this.#selectElement.name = value;
+    this.#name = value;
   }
 
   get disabled() {
-    return this.#selectElement.disabled;
+    return this.#disabled;
   }
   set disabled(value: boolean) {
     if (value) {
@@ -44,48 +46,17 @@ export class SpSelect extends HTMLElement {
     } else {
       this.removeAttribute("disabled");
     }
-    this.#selectElement.disabled = value;
-  }
+    this.#disabled = value;
+    this.#button.disabled = value;
 
-  get required() {
-    return this.#selectElement.required;
-  }
-  set required(value: boolean) {
-    if (value) {
-      this.setAttribute("required", "");
-    } else {
-      this.removeAttribute("required");
+    if (value && this.#isOpen) {
+      this.#isOpen = false;
+      this.#updateMenuDisplay();
     }
-    this.#selectElement.required = value;
-  }
-
-  get label() {
-    return this.getAttribute("label") || "";
-  }
-  set label(value: string) {
-    if (value) {
-      this.setAttribute("label", value);
-    } else {
-      this.removeAttribute("label");
-    }
-    this.#updateLabel();
-  }
-
-  get orientation() {
-    const value = this.getAttribute("orientation");
-    return value === "horizontal" ? "horizontal" : "vertical";
-  }
-  set orientation(value: string) {
-    if (value === "horizontal" || value === "vertical") {
-      this.setAttribute("orientation", value);
-    } else {
-      this.removeAttribute("orientation");
-    }
-    this.#updateOrientation();
   }
 
   static get observedAttributes() {
-    return ["value", "disabled", "name", "required", "label", "orientation"];
+    return ["value", "disabled", "name"];
   }
 
   constructor() {
@@ -100,198 +71,48 @@ export class SpSelect extends HTMLElement {
 
     this.internals = this.attachInternals();
 
-    this.#setupErrorSlot();
-    this.#setupHelpSlot();
-    this.#setupSelectElement();
-    this.#setupEventForwarding();
-    this.#setupSlotObservers();
-    this.#setupMutationObserver();
-    this.#moveOptionsToSelect();
-    this.#updateLabel();
-    this.#updateOrientation();
-    this.#updateAriaLabel();
+    this.#setupUI();
+    this.#menuId = this.#generateRandomId("menu");
   }
 
-  #setupErrorSlot() {
-    this.#errorSlot.name = "error-text";
-
-    this.#errorContainer.classList.add("error-container");
-    this.#errorContainer.setAttribute("role", "alert");
-    this.#errorContainer.setAttribute("aria-live", "polite");
-    this.#errorContainer.id = this.#generateRandomId("error");
-    this.#errorContainer.appendChild(this.#errorSlot);
-  }
-
-  #setupHelpSlot() {
-    this.#helpSlot.name = "help-text";
-
-    this.#helpContainer.classList.add("help-container");
-    this.#helpContainer.id = this.#generateRandomId("help");
-    this.#helpContainer.appendChild(this.#helpSlot);
-  }
-
-  #setupSelectElement() {
-    this.#selectElement.classList.add("select");
-    this.#updateAriaDescribedBy();
-
-    this.#wrapper.classList.add("wrapper");
+  #setupUI() {
     this.#container.classList.add("container");
-    this.#container.appendChild(this.#selectElement);
-    this.#wrapper.appendChild(this.#container);
 
-    this.shadowRoot!.appendChild(this.#wrapper);
-  }
+    // Setup button
+    this.#button.classList.add("select");
+    this.#button.type = "button";
+    this.#button.addEventListener("click", this.#handleButtonClick.bind(this));
 
-  #setupEventForwarding() {
-    this.#selectElement.addEventListener("change", (event) => {
-      const forwardedEvent = new Event("change", {
-        bubbles: event.bubbles,
-        cancelable: event.cancelable,
-      });
-      this.dispatchEvent(forwardedEvent);
-    });
+    // Add arrow icon
+    const arrowIcon = new SpIcon();
+    arrowIcon.type = "arrow_down";
+    arrowIcon.size = "small";
+    arrowIcon.classList.add("icon");
+    this.#button.appendChild(arrowIcon);
 
-    this.#selectElement.addEventListener("change", () => {
-      this.value = this.#selectElement.value;
-    });
-  }
+    // Setup menu
+    this.#menu.classList.add("menu");
+    this.#menu.setAttribute("role", "menu");
+    this.#menu.setAttribute("id", this.#menuId);
+    this.#menu.style.display = "none";
 
-  #setupSlotObservers() {
-    this.#errorSlot.addEventListener("slotchange", () => {
-      this.#updateErrorState();
-    });
+    // Setup accessibility
+    this.#button.setAttribute("aria-haspopup", "true");
+    this.#button.setAttribute("aria-expanded", "false");
+    this.#button.setAttribute("aria-controls", this.#menuId);
 
-    this.#helpSlot.addEventListener("slotchange", () => {
-      this.#updateHelpState();
-    });
+    // Add to container
+    this.#container.appendChild(this.#button);
+    this.#container.appendChild(this.#menu);
 
-    this.#updateErrorState();
-    this.#updateHelpState();
-  }
+    this.shadowRoot!.appendChild(this.#container);
 
-  #setupMutationObserver() {
-    this.#mutationObserver = new MutationObserver((mutations) => {
-      let shouldMoveOptions = false;
-
-      mutations.forEach((mutation) => {
-        if (mutation.type === "childList") {
-          // option または optgroup が追加/削除された場合
-          const hasOptionChanges =
-            Array.from(mutation.addedNodes).some(
-              (node) =>
-                node.nodeName === "OPTION" || node.nodeName === "OPTGROUP",
-            ) ||
-            Array.from(mutation.removedNodes).some(
-              (node) =>
-                node.nodeName === "OPTION" || node.nodeName === "OPTGROUP",
-            );
-
-          if (hasOptionChanges) {
-            shouldMoveOptions = true;
-          }
-        }
-      });
-
-      if (shouldMoveOptions) {
-        this.#moveOptionsToSelect();
-      }
-    });
-  }
-
-  #moveOptionsToSelect() {
-    // Light DOMからoption要素を取得してselectに移動
-    const options = Array.from(this.querySelectorAll("option"));
-    const optgroups = Array.from(this.querySelectorAll("optgroup"));
-
-    // optionとoptgroupをselectに移動
-    [...options, ...optgroups].forEach((element) => {
-      this.#selectElement.appendChild(element);
-    });
+    // Setup click outside listener
+    window.addEventListener("click", this.#clickOutsideHandler);
   }
 
   #generateRandomId(prefix: string): string {
     return `${prefix}-${Math.random().toString(36).substring(2, 11)}`;
-  }
-
-  #updateErrorState() {
-    const assignedElements = this.#errorSlot.assignedElements();
-    const hasErrorContent = assignedElements.length > 0;
-
-    if (hasErrorContent) {
-      this.#selectElement.setAttribute("aria-invalid", "true");
-      this.#showErrorText();
-    } else {
-      this.#selectElement.removeAttribute("aria-invalid");
-      this.#hideErrorText();
-    }
-    this.#updateAriaDescribedBy();
-  }
-
-  #updateHelpState() {
-    const assignedElements = this.#helpSlot.assignedElements();
-    const hasHelpContent = assignedElements.length > 0;
-
-    if (hasHelpContent) {
-      this.#showHelpText();
-    } else {
-      this.#hideHelpText();
-    }
-    this.#updateAriaDescribedBy();
-  }
-
-  #showErrorText() {
-    if (this.#errorContainer) {
-      this.#errorContainer.style.display = "flex";
-      if (!this.#wrapper.contains(this.#errorContainer)) {
-        this.#wrapper.appendChild(this.#errorContainer);
-      }
-    }
-  }
-
-  #hideErrorText() {
-    if (this.#errorContainer) {
-      this.#errorContainer.style.display = "none";
-    }
-  }
-
-  #showHelpText() {
-    if (this.#helpContainer) {
-      this.#helpContainer.style.display = "flex";
-      if (!this.#wrapper.contains(this.#helpContainer)) {
-        this.#wrapper.appendChild(this.#helpContainer);
-      }
-    }
-  }
-
-  #hideHelpText() {
-    if (this.#helpContainer) {
-      this.#helpContainer.style.display = "none";
-    }
-  }
-
-  #updateAriaDescribedBy() {
-    const describedByIds: string[] = [];
-
-    // Check if help text is visible
-    const hasHelpContent = this.#helpSlot.assignedElements().length > 0;
-    if (hasHelpContent) {
-      describedByIds.push(this.#helpContainer.id);
-    }
-
-    // Check if error text is visible
-    const hasErrorContent = this.#errorSlot.assignedElements().length > 0;
-    if (hasErrorContent) {
-      describedByIds.push(this.#errorContainer.id);
-    }
-
-    if (describedByIds.length > 0) {
-      this.#selectElement.setAttribute(
-        "aria-describedby",
-        describedByIds.join(" "),
-      );
-    } else {
-      this.#selectElement.removeAttribute("aria-describedby");
-    }
   }
 
   attributeChangedCallback(
@@ -307,29 +128,12 @@ export class SpSelect extends HTMLElement {
       this.disabled = newValue === "" || newValue === "true";
     } else if (name === "name") {
       this.name = newValue || "";
-    } else if (name === "required") {
-      this.required = newValue === "" || newValue === "true";
-      this.#updateLabel();
-    } else if (name === "label") {
-      this.#updateLabel();
-    } else if (name === "orientation") {
-      this.#updateOrientation();
     }
   }
 
   connectedCallback() {
-    this.setAttribute("role", "group");
-
-    // optionが後から追加される場合に備えて再度移動
-    this.#moveOptionsToSelect();
-
-    // MutationObserverを開始
-    if (this.#mutationObserver) {
-      this.#mutationObserver.observe(this, {
-        childList: true,
-        subtree: true,
-      });
-    }
+    // 静的なoptionからメニューを生成
+    this.#updateMenuItems();
 
     for (const attr of SpSelect.observedAttributes) {
       const value = this.getAttribute(attr);
@@ -340,73 +144,107 @@ export class SpSelect extends HTMLElement {
   }
 
   disconnectedCallback() {
-    // MutationObserverを停止
-    if (this.#mutationObserver) {
-      this.#mutationObserver.disconnect();
-    }
+    // イベントリスナーを削除
+    window.removeEventListener("click", this.#clickOutsideHandler);
   }
 
-  #updateLabel() {
-    const labelText = this.getAttribute("label");
+  #updateMenuItems() {
+    // Clear existing items
+    this.#menu.innerHTML = "";
+    this.#menuItems = [];
 
-    if (labelText) {
-      if (!this.#labelElement) {
-        this.#labelWrapper = document.createElement("div");
-        this.#labelWrapper.classList.add("label-wrapper");
+    // Create menu items from options
+    const options = Array.from(this.querySelectorAll("option"));
+    options.forEach((option) => {
+      const menuItem = document.createElement("div");
+      menuItem.classList.add("menu-item");
+      menuItem.setAttribute("role", "menuitem");
+      menuItem.textContent = option.textContent || "";
+      menuItem.dataset.value = option.value;
 
-        this.#labelElement = document.createElement("sp-label");
-        this.#labelWrapper.appendChild(this.#labelElement);
-
-        if (this.#wrapper && this.#container) {
-          this.#wrapper.insertBefore(this.#labelWrapper, this.#container);
-        }
-
-        this.#setupLabelClickHandler();
-      }
-
-      this.#labelElement.textContent = labelText;
-
-      this.#selectElement.setAttribute("aria-label", labelText);
-
-      if (this.required) {
-        this.#labelElement.setAttribute("required", "");
+      if (option.disabled) {
+        menuItem.classList.add("disabled");
+        menuItem.setAttribute("aria-disabled", "true");
       } else {
-        this.#labelElement.removeAttribute("required");
+        menuItem.addEventListener("click", () => {
+          this.#handleMenuItemClick(option.value);
+        });
       }
-    } else {
-      if (this.#labelWrapper) {
-        this.#selectElement.removeAttribute("aria-label");
-        this.#labelWrapper.remove();
-        this.#labelWrapper = null;
-        this.#labelElement = null;
+
+      if (option.value === this.#value) {
+        menuItem.classList.add("selected");
+        menuItem.setAttribute("aria-selected", "true");
       }
-    }
 
-    this.#updateAriaLabel();
-  }
-
-  #setupLabelClickHandler() {
-    if (!this.#labelElement) return;
-
-    this.#labelElement.addEventListener("click", (event: Event) => {
-      if (this.disabled || event.defaultPrevented) return;
-
-      this.#selectElement.focus();
+      this.#menu.appendChild(menuItem);
+      this.#menuItems.push(menuItem);
     });
   }
 
-  #updateOrientation() {
-    const orientation = this.orientation;
-    this.#wrapper.setAttribute("data-orientation", orientation);
+  #updateButtonText() {
+    const options = Array.from(this.querySelectorAll("option"));
+    const selectedOption = options.find(
+      (option) => option.value === this.#value,
+    );
+    const buttonText = selectedOption ? selectedOption.textContent || "" : "";
+
+    // Remove existing text nodes but keep the icon
+    const icon = this.#button.querySelector("sp-icon");
+    Array.from(this.#button.childNodes).forEach((node) => {
+      if (node !== icon) {
+        node.remove();
+      }
+    });
+
+    // Add text before the icon
+    if (buttonText) {
+      const textNode = document.createTextNode(buttonText);
+      if (icon) {
+        this.#button.insertBefore(textNode, icon);
+      } else {
+        this.#button.appendChild(textNode);
+      }
+    }
   }
 
-  #updateAriaLabel() {
-    const currentLabel = this.label;
+  #handleButtonClick(event: MouseEvent) {
+    event.stopPropagation();
+    if (this.disabled) return;
 
-    if (currentLabel) {
-      this.setAttribute("aria-label", currentLabel);
+    this.#isOpen = !this.#isOpen;
+    this.#updateMenuDisplay();
+  }
+
+  #handleMenuItemClick(value: string) {
+    this.value = value;
+    this.#isOpen = false;
+    this.#updateMenuDisplay();
+
+    // Dispatch change event
+    const changeEvent = new Event("change", {
+      bubbles: true,
+      cancelable: true,
+    });
+    this.dispatchEvent(changeEvent);
+  }
+
+  #handleClickOutside(event: MouseEvent) {
+    if (!this.#isOpen) return;
+    if (this.contains(event.target as Node)) return;
+
+    this.#isOpen = false;
+    this.#updateMenuDisplay();
+  }
+
+  #updateMenuDisplay() {
+    if (this.#isOpen && !this.disabled) {
+      this.#menu.style.display = "block";
+      this.#button.setAttribute("aria-expanded", "true");
+      this.#button.classList.add("open");
     } else {
-      this.removeAttribute("aria-label");
+      this.#menu.style.display = "none";
+      this.#button.setAttribute("aria-expanded", "false");
+      this.#button.classList.remove("open");
     }
   }
 }
