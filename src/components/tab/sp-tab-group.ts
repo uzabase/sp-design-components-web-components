@@ -43,8 +43,8 @@ export class SpTabGroup extends HTMLElement {
   }
 
   private getNavigableTabs(): SpTab[] {
-    // スクリーンリーダーの矢印キーナビゲーションでは、disabledタブも含める
-    return this.getAllTabs();
+    // 矢印キーナビゲーションでは有効なタブのみを対象とする
+    return this.getEnabledTabs();
   }
 
   private getCurrentFocusedTab(): SpTab | null {
@@ -241,7 +241,7 @@ export class SpTabGroup extends HTMLElement {
     const currentTab = this.getCurrentFocusedTab();
     if (!currentTab) return;
 
-    // 矢印キーナビゲーションでは全てのタブ（disabledも含む）を対象とする
+    // 矢印キーナビゲーションでは有効なタブのみを対象とする
     const navigableTabs = this.getNavigableTabs();
     const currentIndex = navigableTabs.indexOf(currentTab);
 
@@ -273,13 +273,13 @@ export class SpTabGroup extends HTMLElement {
 
       case "Home":
         event.preventDefault();
-        // 最初のタブへ移動（disabledも含む）
+        // 最初の有効なタブへ移動
         targetTab = navigableTabs[0];
         break;
 
       case "End":
         event.preventDefault();
-        // 最後のタブへ移動（disabledも含む）
+        // 最後の有効なタブへ移動
         targetTab = navigableTabs[navigableTabs.length - 1];
         break;
 
