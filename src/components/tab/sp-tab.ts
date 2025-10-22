@@ -89,6 +89,7 @@ export class SpTab extends HTMLElement {
   }
 
   connectedCallback() {
+    this.#tabElement.classList.add("spds__tabInner");
     this.#textElement.classList.add("spds__tabText");
     this.#textElement.appendChild(this.#textSlotElement);
 

@@ -120,6 +120,12 @@
   background-color: var(--color-semantic-surface-regular-4);
 }
 
+.spds__tabInner{
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+}
+
 .spds__tabIcon {
   display: none;
 }
