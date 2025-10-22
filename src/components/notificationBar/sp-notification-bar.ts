@@ -1,7 +1,5 @@
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
 import { SpIcon } from "../icon/sp-icon";
+import { makeStyleSheet } from "../styles";
 import notificationBarStyle from "./notification-bar.css?inline";
 
 export type Type = "error" | "warning" | "information" | "success";
@@ -36,9 +34,6 @@ export const iconAriaLabels: Record<Type, string> = {
   information: "情報",
   success: "成功",
 };
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${notificationBarStyle}`);
 
 /**
  * SpNotificationBarは、デザインシステム2.0における通知バーコンポーネントです。
@@ -90,7 +85,7 @@ export class SpNotificationBar extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(notificationBarStyle),
     ];
 
     this.type = "information";

@@ -1,10 +1,7 @@
 import { UbRadioButtonTextGroup } from "@ub-design/components-web-components/";
 
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import segmentedControlStyle from "./segmented-control.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${foundationStyle} ${segmentedControlStyle}`);
 
 /**
  * SpSegmentedControlは、デザインシステム2.0におけるセグメント化コントロールコンポーネントです。
@@ -21,7 +18,7 @@ export class SpSegmentedControl extends UbRadioButtonTextGroup {
 
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(segmentedControlStyle),
     ];
   }
 }

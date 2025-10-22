@@ -1,10 +1,5 @@
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import spDefinitionListStyle from "./sp-definition-list.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${spDefinitionListStyle}`);
 
 /**
  * SpDefinitionListは、デザインシステム2.0における定義リストコンポーネントです。
@@ -27,7 +22,7 @@ export class SpDefinitionList extends HTMLElement {
   connectedCallback() {
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(spDefinitionListStyle),
     ];
 
     this.#dlElement.classList.add("base");

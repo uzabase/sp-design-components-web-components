@@ -1,12 +1,5 @@
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import spDefinitionListDdStyle from "./sp-definition-list-dd.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(
-  `${resetStyle} ${foundationStyle} ${spDefinitionListDdStyle}`,
-);
 
 /**
  * SpDefinitionListDdは、デザインシステム2.0における定義リストの説明項目コンポーネントです。
@@ -28,7 +21,7 @@ export class SpDefinitionListDd extends HTMLElement {
   connectedCallback() {
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(spDefinitionListDdStyle),
     ];
 
     this.#ddElement.classList.add("base");

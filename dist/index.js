@@ -1,173 +1,178 @@
-var p = function(i, e, o, t) {
-  if (o === "a" && !t) throw new TypeError("Private accessor was defined without a getter");
-  if (typeof e == "function" ? i !== e || !t : !e.has(i)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-  return o === "m" ? t : o === "a" ? t.call(i) : t ? t.value : e.get(i);
-}, g = function(i, e, o, t, s) {
-  if (t === "m") throw new TypeError("Private method is not writable");
-  if (t === "a" && !s) throw new TypeError("Private accessor was defined without a setter");
-  if (typeof e == "function" ? i !== e || !s : !e.has(i)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-  return t === "a" ? s.call(i, o) : s ? s.value = o : e.set(i, o), o;
-}, H, S, _, V, C, y, k, z;
-const He = ["default", "destructive"], Se = ["outline", "fill", "text"], _e = ["medium", "large", "xLarge", "width160", "width80"];
-function Ve(i) {
-  return He.some((e) => e === i);
+var ut = (o) => {
+  throw TypeError(o);
+};
+var K = (o, t, e) => t.has(o) || ut("Cannot " + e);
+var s = (o, t, e) => (K(o, t, "read from private field"), e ? e.call(o) : t.get(o)), x = (o, t, e) => t.has(o) ? ut("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(o) : t.set(o, e), _ = (o, t, e, i) => (K(o, t, "write to private field"), i ? i.call(o, e) : t.set(o, e), e), n = (o, t, e) => (K(o, t, "access private method"), e);
+var L = function(o, t, e, i) {
+  if (e === "a" && !i) throw new TypeError("Private accessor was defined without a getter");
+  if (typeof t == "function" ? o !== t || !i : !t.has(o)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+  return e === "m" ? i : e === "a" ? i.call(o) : i ? i.value : t.get(o);
+}, V = function(o, t, e, i, r) {
+  if (i === "m") throw new TypeError("Private method is not writable");
+  if (i === "a" && !r) throw new TypeError("Private accessor was defined without a setter");
+  if (typeof t == "function" ? o !== t || !r : !t.has(o)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+  return i === "a" ? r.call(o, e) : r ? r.value = e : t.set(o, e), e;
+}, G, W, F, j, T, B, P, tt;
+const Bt = ["default", "destructive"], Pt = ["outline", "fill", "text"], It = ["medium", "large", "xLarge", "width160", "width80"];
+function Dt(o) {
+  return Bt.some((t) => t === o);
 }
-function Me(i) {
-  return Se.some((e) => e === i);
+function Ut(o) {
+  return Pt.some((t) => t === o);
 }
-function Ae(i) {
-  return _e.some((e) => e === i);
+function qt(o) {
+  return It.some((t) => t === o);
 }
-class Ze extends HTMLElement {
+class Gt extends HTMLElement {
   get loading() {
-    return p(this, S, "f");
+    return L(this, W, "f");
   }
-  set loading(e) {
-    const o = this.buttonElement;
-    g(this, S, e, "f"), e ? o.classList.add("isLoading") : o.classList.remove("isLoading"), p(this, H, "m", z).call(this);
+  set loading(t) {
+    const e = this.buttonElement;
+    V(this, W, t, "f"), t ? e.classList.add("isLoading") : e.classList.remove("isLoading"), L(this, G, "m", tt).call(this);
   }
   get selected() {
-    return p(this, _, "f");
+    return L(this, F, "f");
   }
-  set selected(e) {
-    const o = this.buttonElement;
-    g(this, _, e, "f"), e ? o.classList.add("isSelected") : o.classList.remove("isSelected");
+  set selected(t) {
+    const e = this.buttonElement;
+    V(this, F, t, "f"), t ? e.classList.add("isSelected") : e.classList.remove("isSelected");
   }
   get disabled() {
-    return p(this, V, "f");
+    return L(this, j, "f");
   }
-  set disabled(e) {
-    const o = this.buttonElement;
-    g(this, V, e, "f"), e ? o.classList.add("isDisable") : o.classList.remove("isDisable"), p(this, H, "m", z).call(this);
+  set disabled(t) {
+    const e = this.buttonElement;
+    V(this, j, t, "f"), t ? e.classList.add("isDisable") : e.classList.remove("isDisable"), L(this, G, "m", tt).call(this);
   }
   get type() {
-    return p(this, C, "f");
+    return L(this, T, "f");
   }
-  set type(e) {
-    const o = this.buttonElement, t = {
+  set type(t) {
+    const e = this.buttonElement, i = {
       default: "type__default",
       destructive: "type__destructive"
     };
-    o.classList.remove(t[p(this, C, "f")]), o.classList.add(t[e]), g(this, C, e, "f");
+    e.classList.remove(i[L(this, T, "f")]), e.classList.add(i[t]), V(this, T, t, "f");
   }
   get appearance() {
-    return p(this, y, "f");
+    return L(this, B, "f");
   }
-  set appearance(e) {
-    const o = this.buttonElement, t = {
+  set appearance(t) {
+    const e = this.buttonElement, i = {
       outline: "appearance__outline",
       fill: "appearance__fill",
       text: "appearance__text"
     };
-    o.classList.remove(t[p(this, y, "f")]), o.classList.add(t[e]), g(this, y, e, "f");
+    e.classList.remove(i[L(this, B, "f")]), e.classList.add(i[t]), V(this, B, t, "f");
   }
   get size() {
-    return p(this, k, "f");
+    return L(this, P, "f");
   }
-  set size(e) {
-    const o = this.buttonElement, t = {
+  set size(t) {
+    const e = this.buttonElement, i = {
       medium: "size__medium",
       large: "size__large",
       xLarge: "size__xLarge",
       width160: "size__width160",
       width80: "size__width80"
     };
-    o.classList.remove(t[p(this, k, "f")]), o.classList.add(t[e]), g(this, k, e, "f");
+    e.classList.remove(i[L(this, P, "f")]), e.classList.add(i[t]), V(this, P, t, "f");
   }
   static get observedAttributes() {
     return ["loading", "selected", "disabled", "type", "appearance", "size"];
   }
   constructor() {
-    super(), H.add(this), S.set(this, !1), _.set(this, !1), V.set(this, !1), C.set(this, "default"), y.set(this, "outline"), k.set(this, "medium"), this.buttonElement = document.createElement("button"), this.textElement = document.createElement("span"), this.attachShadow({ mode: "open" }), this.buttonElement.classList.add("base"), this.textElement.classList.add("base__text"), this.loading = !1, this.selected = !1, this.disabled = !1, this.type = "default", this.appearance = "outline", this.size = "medium";
+    super(), G.add(this), W.set(this, !1), F.set(this, !1), j.set(this, !1), T.set(this, "default"), B.set(this, "outline"), P.set(this, "medium"), this.buttonElement = document.createElement("button"), this.textElement = document.createElement("span"), this.attachShadow({ mode: "open" }), this.buttonElement.classList.add("base"), this.textElement.classList.add("base__text"), this.loading = !1, this.selected = !1, this.disabled = !1, this.type = "default", this.appearance = "outline", this.size = "medium";
   }
   connectedCallback() {
-    const e = document.createElement("slot");
-    this.textElement.appendChild(e), this.buttonElement.appendChild(this.textElement), this.shadowRoot.appendChild(this.buttonElement);
+    const t = document.createElement("slot");
+    this.textElement.appendChild(t), this.buttonElement.appendChild(this.textElement), this.shadowRoot.appendChild(this.buttonElement);
   }
-  attributeChangedCallback(e, o, t) {
-    if (o !== t)
-      switch (e) {
+  attributeChangedCallback(t, e, i) {
+    if (e !== i)
+      switch (t) {
         case "loading":
-          this.loading = t === "true" || t === "";
+          this.loading = i === "true" || i === "";
           break;
         case "selected":
-          this.selected = t === "true" || t === "";
+          this.selected = i === "true" || i === "";
           break;
         case "disabled":
-          this.disabled = t === "true" || t === "";
+          this.disabled = i === "true" || i === "";
           break;
         case "type":
-          Ve(t) ? this.type = t : (console.warn(`${t}は無効なtype属性です。`), this.type = "default");
+          Dt(i) ? this.type = i : (console.warn(`${i}は無効なtype属性です。`), this.type = "default");
           break;
         case "appearance":
-          Me(t) ? this.appearance = t : (console.warn(`${t}は無効なappearance属性です。`), this.appearance = "outline");
+          Ut(i) ? this.appearance = i : (console.warn(`${i}は無効なappearance属性です。`), this.appearance = "outline");
           break;
         case "size":
-          Ae(t) ? this.size = t : (console.warn(`${t}は無効なsize属性です。`), this.size = "medium");
+          qt(i) ? this.size = i : (console.warn(`${i}は無効なsize属性です。`), this.size = "medium");
           break;
       }
   }
 }
-S = /* @__PURE__ */ new WeakMap(), _ = /* @__PURE__ */ new WeakMap(), V = /* @__PURE__ */ new WeakMap(), C = /* @__PURE__ */ new WeakMap(), y = /* @__PURE__ */ new WeakMap(), k = /* @__PURE__ */ new WeakMap(), H = /* @__PURE__ */ new WeakSet(), z = function() {
+W = /* @__PURE__ */ new WeakMap(), F = /* @__PURE__ */ new WeakMap(), j = /* @__PURE__ */ new WeakMap(), T = /* @__PURE__ */ new WeakMap(), B = /* @__PURE__ */ new WeakMap(), P = /* @__PURE__ */ new WeakMap(), G = /* @__PURE__ */ new WeakSet(), tt = function() {
   this.buttonElement.disabled = this.disabled || this.loading;
 };
-var d = function(i, e, o, t) {
-  if (o === "a" && !t) throw new TypeError("Private accessor was defined without a getter");
-  if (typeof e == "function" ? i !== e || !t : !e.has(i)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-  return o === "m" ? t : o === "a" ? t.call(i) : t ? t.value : e.get(i);
-}, B, c, Q;
-class q extends HTMLElement {
+var b = function(o, t, e, i) {
+  if (e === "a" && !i) throw new TypeError("Private accessor was defined without a getter");
+  if (typeof t == "function" ? o !== t || !i : !t.has(o)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+  return e === "m" ? i : e === "a" ? i.call(o) : i ? i.value : t.get(o);
+}, et, u, xt;
+class Lt extends HTMLElement {
   get value() {
-    return d(this, c, "f").value;
+    return b(this, u, "f").value;
   }
-  set value(e) {
-    d(this, c, "f").value = e;
+  set value(t) {
+    b(this, u, "f").value = t;
   }
-  set name(e) {
-    this.setAttribute("name", e), d(this, c, "f").name = e;
+  set name(t) {
+    this.setAttribute("name", t), b(this, u, "f").name = t;
   }
   get checked() {
-    return d(this, c, "f").checked;
+    return b(this, u, "f").checked;
   }
-  set checked(e) {
-    e ? this.setAttribute("checked", "") : this.removeAttribute("checked"), d(this, c, "f").checked = e, this.internals.setFormValue(e ? this.value : null);
+  set checked(t) {
+    t ? this.setAttribute("checked", "") : this.removeAttribute("checked"), b(this, u, "f").checked = t, this.internals.setFormValue(t ? this.value : null);
   }
   get indeterminate() {
-    return d(this, c, "f").indeterminate;
+    return b(this, u, "f").indeterminate;
   }
-  set indeterminate(e) {
-    d(this, c, "f").indeterminate = e;
+  set indeterminate(t) {
+    b(this, u, "f").indeterminate = t;
   }
-  set disabled(e) {
-    d(this, c, "f").disabled = e;
+  set disabled(t) {
+    b(this, u, "f").disabled = t;
   }
   static get observedAttributes() {
     return ["value", "name", "checked", "indeterminate", "disabled"];
   }
   constructor() {
-    super(), B.add(this), c.set(this, document.createElement("input")), this.attachShadow({ mode: "open" }), this.internals = this.attachInternals();
+    super(), et.add(this), u.set(this, document.createElement("input")), this.attachShadow({ mode: "open" }), this.internals = this.attachInternals();
   }
   connectedCallback() {
-    const e = document.createElement("label"), o = document.createElement("span");
-    e.classList.add("base"), o.classList.add("checkmark"), d(this, c, "f").setAttribute("type", "checkbox"), d(this, c, "f").classList.add("input"), d(this, c, "f").addEventListener("change", () => d(this, B, "m", Q).call(this)), o.appendChild(d(this, c, "f")), e.appendChild(o), this.shadowRoot.appendChild(e);
+    const t = document.createElement("label"), e = document.createElement("span");
+    t.classList.add("base"), e.classList.add("checkmark"), b(this, u, "f").setAttribute("type", "checkbox"), b(this, u, "f").classList.add("input"), b(this, u, "f").addEventListener("change", () => b(this, et, "m", xt).call(this)), e.appendChild(b(this, u, "f")), t.appendChild(e), this.shadowRoot.appendChild(t);
   }
-  attributeChangedCallback(e, o, t) {
-    if (o !== t)
-      switch (e) {
+  attributeChangedCallback(t, e, i) {
+    if (e !== i)
+      switch (t) {
         case "value":
-          this.value = t;
+          this.value = i;
           break;
         case "name":
-          this.name = t;
+          this.name = i;
           break;
         case "checked":
-          this.checked = t === "true" || t === "";
+          this.checked = i === "true" || i === "";
           break;
         case "indeterminate":
-          this.indeterminate = t === "true" || t === "";
+          this.indeterminate = i === "true" || i === "";
           break;
         case "disabled":
-          this.disabled = t === "true" || t === "";
+          this.disabled = i === "true" || i === "";
           break;
       }
   }
@@ -175,7 +180,7 @@ class q extends HTMLElement {
     this.checked = !1;
   }
 }
-c = /* @__PURE__ */ new WeakMap(), B = /* @__PURE__ */ new WeakSet(), Q = function() {
+u = /* @__PURE__ */ new WeakMap(), et = /* @__PURE__ */ new WeakSet(), xt = function() {
   this.dispatchEvent(new CustomEvent("change", {
     bubbles: !0,
     composed: !0,
@@ -185,68 +190,68 @@ c = /* @__PURE__ */ new WeakMap(), B = /* @__PURE__ */ new WeakSet(), Q = functi
     }
   }));
 };
-q.formAssociated = !0;
-var h = function(i, e, o, t) {
-  if (o === "a" && !t) throw new TypeError("Private accessor was defined without a getter");
-  if (typeof e == "function" ? i !== e || !t : !e.has(i)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-  return o === "m" ? t : o === "a" ? t.call(i) : t ? t.value : e.get(i);
-}, $, l, X;
-class I extends HTMLElement {
+Lt.formAssociated = !0;
+var f = function(o, t, e, i) {
+  if (e === "a" && !i) throw new TypeError("Private accessor was defined without a getter");
+  if (typeof t == "function" ? o !== t || !i : !t.has(o)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+  return e === "m" ? i : e === "a" ? i.call(o) : i ? i.value : t.get(o);
+}, it, p, Ct;
+class nt extends HTMLElement {
   get value() {
-    return h(this, l, "f").value;
+    return f(this, p, "f").value;
   }
-  set value(e) {
-    h(this, l, "f").value = e;
+  set value(t) {
+    f(this, p, "f").value = t;
   }
-  set name(e) {
-    this.setAttribute("name", e), h(this, l, "f").name = e;
+  set name(t) {
+    this.setAttribute("name", t), f(this, p, "f").name = t;
   }
   get checked() {
-    return h(this, l, "f").checked;
+    return f(this, p, "f").checked;
   }
-  set checked(e) {
-    e ? this.setAttribute("checked", "") : this.removeAttribute("checked"), h(this, l, "f").checked = e, this.internals.setFormValue(e ? this.value : null);
+  set checked(t) {
+    t ? this.setAttribute("checked", "") : this.removeAttribute("checked"), f(this, p, "f").checked = t, this.internals.setFormValue(t ? this.value : null);
   }
   get indeterminate() {
-    return h(this, l, "f").indeterminate;
+    return f(this, p, "f").indeterminate;
   }
-  set indeterminate(e) {
-    h(this, l, "f").indeterminate = e;
+  set indeterminate(t) {
+    f(this, p, "f").indeterminate = t;
   }
-  set disabled(e) {
-    h(this, l, "f").disabled = e;
+  set disabled(t) {
+    f(this, p, "f").disabled = t;
   }
   static get observedAttributes() {
     return ["value", "name", "checked", "indeterminate", "disabled"];
   }
   constructor() {
-    super(), $.add(this), l.set(this, document.createElement("input")), this.attachShadow({ mode: "open" }), this.internals = this.attachInternals();
+    super(), it.add(this), p.set(this, document.createElement("input")), this.attachShadow({ mode: "open" }), this.internals = this.attachInternals();
   }
   connectedCallback() {
-    const e = document.createElement("label"), o = document.createElement("span");
-    e.classList.add("base"), o.classList.add("checkmark"), h(this, l, "f").setAttribute("type", "checkbox"), h(this, l, "f").classList.add("input"), h(this, l, "f").addEventListener("change", () => h(this, $, "m", X).call(this));
-    const t = document.createElement("div");
-    t.classList.add("text");
-    const s = document.createElement("slot");
-    t.appendChild(s), o.appendChild(h(this, l, "f")), e.appendChild(o), e.appendChild(t), this.shadowRoot.appendChild(e);
+    const t = document.createElement("label"), e = document.createElement("span");
+    t.classList.add("base"), e.classList.add("checkmark"), f(this, p, "f").setAttribute("type", "checkbox"), f(this, p, "f").classList.add("input"), f(this, p, "f").addEventListener("change", () => f(this, it, "m", Ct).call(this));
+    const i = document.createElement("div");
+    i.classList.add("text");
+    const r = document.createElement("slot");
+    i.appendChild(r), e.appendChild(f(this, p, "f")), t.appendChild(e), t.appendChild(i), this.shadowRoot.appendChild(t);
   }
-  attributeChangedCallback(e, o, t) {
-    if (o !== t)
-      switch (e) {
+  attributeChangedCallback(t, e, i) {
+    if (e !== i)
+      switch (t) {
         case "value":
-          this.value = t;
+          this.value = i;
           break;
         case "name":
-          this.name = t;
+          this.name = i;
           break;
         case "checked":
-          this.checked = t === "true" || t === "";
+          this.checked = i === "true" || i === "";
           break;
         case "indeterminate":
-          this.indeterminate = t === "true" || t === "";
+          this.indeterminate = i === "true" || i === "";
           break;
         case "disabled":
-          this.disabled = t === "true" || t === "";
+          this.disabled = i === "true" || i === "";
           break;
       }
   }
@@ -254,7 +259,7 @@ class I extends HTMLElement {
     this.checked = !1;
   }
 }
-l = /* @__PURE__ */ new WeakMap(), $ = /* @__PURE__ */ new WeakSet(), X = function() {
+p = /* @__PURE__ */ new WeakMap(), it = /* @__PURE__ */ new WeakSet(), Ct = function() {
   this.dispatchEvent(new CustomEvent("change", {
     bubbles: !0,
     composed: !0,
@@ -264,138 +269,138 @@ l = /* @__PURE__ */ new WeakMap(), $ = /* @__PURE__ */ new WeakSet(), X = functi
     }
   }));
 };
-I.formAssociated = !0;
-var m = function(i, e, o, t) {
-  if (o === "a" && !t) throw new TypeError("Private accessor was defined without a getter");
-  if (typeof e == "function" ? i !== e || !t : !e.has(i)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-  return o === "m" ? t : o === "a" ? t.call(i) : t ? t.value : e.get(i);
-}, Te = function(i, e, o, t, s) {
-  if (t === "m") throw new TypeError("Private method is not writable");
-  if (t === "a" && !s) throw new TypeError("Private accessor was defined without a setter");
-  if (typeof e == "function" ? i !== e || !s : !e.has(i)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-  return t === "a" ? s.call(i, o) : s ? s.value = o : e.set(i, o), o;
-}, w, b;
-const Re = ["small", "medium"];
-function ze(i) {
-  return Re.some((e) => e === i);
+nt.formAssociated = !0;
+var k = function(o, t, e, i) {
+  if (e === "a" && !i) throw new TypeError("Private accessor was defined without a getter");
+  if (typeof t == "function" ? o !== t || !i : !t.has(o)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+  return e === "m" ? i : e === "a" ? i.call(o) : i ? i.value : t.get(o);
+}, Wt = function(o, t, e, i, r) {
+  if (i === "m") throw new TypeError("Private method is not writable");
+  if (i === "a" && !r) throw new TypeError("Private accessor was defined without a setter");
+  if (typeof t == "function" ? o !== t || !r : !t.has(o)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+  return i === "a" ? r.call(o, e) : r ? r.value = e : t.set(o, e), e;
+}, I, y;
+const Ft = ["small", "medium"];
+function jt(o) {
+  return Ft.some((t) => t === o);
 }
-class Be extends HTMLElement {
-  set type(e) {
-    m(this, b, "f").innerHTML = e in this.paths ? this.paths[e] : "";
+class Nt extends HTMLElement {
+  set type(t) {
+    k(this, y, "f").innerHTML = t in this.paths ? this.paths[t] : "";
   }
-  set text(e) {
-    m(this, b, "f").setAttribute("aria-label", e);
+  set text(t) {
+    k(this, y, "f").setAttribute("aria-label", t);
   }
   get size() {
-    return m(this, w, "f");
+    return k(this, I, "f");
   }
-  set size(e) {
-    const o = {
+  set size(t) {
+    const e = {
       small: "size__small",
       medium: "size__medium"
     };
-    m(this, b, "f").classList.remove(o[m(this, w, "f")]), m(this, b, "f").classList.add(o[e]), Te(this, w, e, "f");
+    k(this, y, "f").classList.remove(e[k(this, I, "f")]), k(this, y, "f").classList.add(e[t]), Wt(this, I, t, "f");
   }
   static get observedAttributes() {
     return ["type", "text", "size"];
   }
   constructor() {
-    super(), w.set(this, "medium"), b.set(this, document.createElementNS("http://www.w3.org/2000/svg", "svg")), this.paths = {}, this.attachShadow({ mode: "open" }), this.size = "medium";
+    super(), I.set(this, "medium"), y.set(this, document.createElementNS("http://www.w3.org/2000/svg", "svg")), this.paths = {}, this.attachShadow({ mode: "open" }), this.size = "medium";
   }
   connectedCallback() {
-    m(this, b, "f").setAttribute("role", "img"), m(this, b, "f").setAttribute("viewBox", "0 0 24 24"), m(this, b, "f").classList.add("icon"), this.shadowRoot.appendChild(m(this, b, "f"));
+    k(this, y, "f").setAttribute("role", "img"), k(this, y, "f").setAttribute("viewBox", "0 0 24 24"), k(this, y, "f").classList.add("icon"), this.shadowRoot.appendChild(k(this, y, "f"));
   }
-  attributeChangedCallback(e, o, t) {
-    if (o !== t)
-      switch (e) {
+  attributeChangedCallback(t, e, i) {
+    if (e !== i)
+      switch (t) {
         case "type":
-          this.type = t;
+          this.type = i;
           break;
         case "text":
-          this.text = t;
+          this.text = i;
           break;
         case "size":
-          ze(t) ? this.size = t : (console.warn(`${t}は無効なsize属性です。`), this.size = "medium");
+          jt(i) ? this.size = i : (console.warn(`${i}は無効なsize属性です。`), this.size = "medium");
           break;
       }
   }
 }
-w = /* @__PURE__ */ new WeakMap(), b = /* @__PURE__ */ new WeakMap();
-var a = function(i, e, o, t) {
-  if (o === "a" && !t) throw new TypeError("Private accessor was defined without a getter");
-  if (typeof e == "function" ? i !== e || !t : !e.has(i)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-  return o === "m" ? t : o === "a" ? t.call(i) : t ? t.value : e.get(i);
-}, M = function(i, e, o, t, s) {
-  if (t === "m") throw new TypeError("Private method is not writable");
-  if (t === "a" && !s) throw new TypeError("Private accessor was defined without a setter");
-  if (typeof e == "function" ? i !== e || !s : !e.has(i)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-  return t === "a" ? s.call(i, o) : s ? s.value = o : e.set(i, o), o;
-}, E, A, Z, T, f, v, P, F;
-const $e = ["horizontal", "vertical"];
-function Pe(i) {
-  return $e.some((e) => e === i);
+I = /* @__PURE__ */ new WeakMap(), y = /* @__PURE__ */ new WeakMap();
+var d = function(o, t, e, i) {
+  if (e === "a" && !i) throw new TypeError("Private accessor was defined without a getter");
+  if (typeof t == "function" ? o !== t || !i : !t.has(o)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+  return e === "m" ? i : e === "a" ? i.call(o) : i ? i.value : t.get(o);
+}, N = function(o, t, e, i, r) {
+  if (i === "m") throw new TypeError("Private method is not writable");
+  if (i === "a" && !r) throw new TypeError("Private accessor was defined without a setter");
+  if (typeof t == "function" ? o !== t || !r : !t.has(o)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+  return i === "a" ? r.call(o, e) : r ? r.value = e : t.set(o, e), e;
+}, q, O, Y, J, H, Z, ot, pt;
+const Ot = ["horizontal", "vertical"];
+function Yt(o) {
+  return Ot.some((t) => t === o);
 }
-class D extends HTMLElement {
+class ct extends HTMLElement {
   get name() {
-    return a(this, A, "f");
+    return d(this, O, "f");
   }
-  set name(e) {
-    a(this, v, "f").map((o) => o.setAttribute("name", e)), this.setAttribute("name", e), M(this, A, e, "f");
+  set name(t) {
+    d(this, Z, "f").map((e) => e.setAttribute("name", t)), this.setAttribute("name", t), N(this, O, t, "f");
   }
-  set direction(e) {
-    const o = e === "vertical" ? "vertical" : "horizontal";
-    a(this, f, "f").classList.remove(a(this, Z, "f")), a(this, f, "f").classList.add(o), M(this, Z, o, "f");
+  set direction(t) {
+    const e = t === "vertical" ? "vertical" : "horizontal";
+    d(this, H, "f").classList.remove(d(this, Y, "f")), d(this, H, "f").classList.add(e), N(this, Y, e, "f");
   }
   get data() {
-    return a(this, T, "f");
+    return d(this, J, "f");
   }
-  set data(e) {
-    M(this, T, e, "f"), a(this, E, "m", P).call(this);
+  set data(t) {
+    N(this, J, t, "f"), d(this, q, "m", ot).call(this);
   }
   static get observedAttributes() {
     return ["name", "direction", "json-data"];
   }
   constructor() {
-    super(), E.add(this), A.set(this, ""), Z.set(this, "horizontal"), T.set(this, []), f.set(this, document.createElement("ul")), v.set(this, []), this.attachShadow({ mode: "open" }), this.internals = this.attachInternals(), this.direction = "horizontal";
+    super(), q.add(this), O.set(this, ""), Y.set(this, "horizontal"), J.set(this, []), H.set(this, document.createElement("ul")), Z.set(this, []), this.attachShadow({ mode: "open" }), this.internals = this.attachInternals(), this.direction = "horizontal";
   }
   connectedCallback() {
-    a(this, f, "f").classList.add("base"), a(this, f, "f").setAttribute("role", "radiogroup"), this.shadowRoot.appendChild(a(this, f, "f")), a(this, E, "m", P).call(this);
+    d(this, H, "f").classList.add("base"), d(this, H, "f").setAttribute("role", "radiogroup"), this.shadowRoot.appendChild(d(this, H, "f")), d(this, q, "m", ot).call(this);
   }
-  attributeChangedCallback(e, o, t) {
-    if (o !== t)
-      switch (e) {
+  attributeChangedCallback(t, e, i) {
+    if (e !== i)
+      switch (t) {
         case "name":
-          this.name = t;
+          this.name = i;
           break;
         case "direction":
-          Pe(t) ? this.direction = t : this.direction = "horizontal";
+          Yt(i) ? this.direction = i : this.direction = "horizontal";
           break;
         case "json-data":
-          t === null ? this.data = [] : this.data = JSON.parse(t);
+          i === null ? this.data = [] : this.data = JSON.parse(i);
           break;
       }
   }
   formResetCallback() {
-    a(this, v, "f").map((e) => e.checked = !1), this.internals.setFormValue(null);
+    d(this, Z, "f").map((t) => t.checked = !1), this.internals.setFormValue(null);
   }
 }
-A = /* @__PURE__ */ new WeakMap(), Z = /* @__PURE__ */ new WeakMap(), T = /* @__PURE__ */ new WeakMap(), f = /* @__PURE__ */ new WeakMap(), v = /* @__PURE__ */ new WeakMap(), E = /* @__PURE__ */ new WeakSet(), P = function() {
-  a(this, f, "f").innerHTML = "", M(this, v, [], "f"), this.data.map((e, o) => {
-    const t = document.createElement("li"), s = document.createElement("input"), u = document.createElement("span"), L = document.createElement("label"), x = document.createElement("span"), W = e.value || "on";
-    t.classList.add("item"), s.setAttribute("type", "radio"), s.setAttribute("value", W), this.name !== "" && s.setAttribute("name", this.name), s.setAttribute("id", "radioButton" + o), s.checked = e.checked ?? !1, s.disabled = e.disabled ?? !1, e.checked && this.internals.setFormValue(W), s.classList.add("input"), s.addEventListener("change", (Ee) => a(this, E, "m", F).call(this, Ee)), a(this, v, "f").push(s), u.classList.add("radio"), L.classList.add("text"), L.setAttribute("for", "radioButton" + o), L.setAttribute("aria-labeledby", "radioButtonLabel" + o), x.setAttribute("aria-hidden", "true"), x.setAttribute("id", "radioButtonLabel" + o), x.classList.add("text-inner"), x.innerText = e.text, u.appendChild(s), t.appendChild(u), L.appendChild(x), t.appendChild(L), a(this, f, "f").appendChild(t);
+O = /* @__PURE__ */ new WeakMap(), Y = /* @__PURE__ */ new WeakMap(), J = /* @__PURE__ */ new WeakMap(), H = /* @__PURE__ */ new WeakMap(), Z = /* @__PURE__ */ new WeakMap(), q = /* @__PURE__ */ new WeakSet(), ot = function() {
+  d(this, H, "f").innerHTML = "", N(this, Z, [], "f"), this.data.map((t, e) => {
+    const i = document.createElement("li"), r = document.createElement("input"), h = document.createElement("span"), R = document.createElement("label"), z = document.createElement("span"), ht = t.value || "on";
+    i.classList.add("item"), r.setAttribute("type", "radio"), r.setAttribute("value", ht), this.name !== "" && r.setAttribute("name", this.name), r.setAttribute("id", "radioButton" + e), r.checked = t.checked ?? !1, r.disabled = t.disabled ?? !1, t.checked && this.internals.setFormValue(ht), r.classList.add("input"), r.addEventListener("change", (Tt) => d(this, q, "m", pt).call(this, Tt)), d(this, Z, "f").push(r), h.classList.add("radio"), R.classList.add("text"), R.setAttribute("for", "radioButton" + e), R.setAttribute("aria-labeledby", "radioButtonLabel" + e), z.setAttribute("aria-hidden", "true"), z.setAttribute("id", "radioButtonLabel" + e), z.classList.add("text-inner"), z.innerText = t.text, h.appendChild(r), i.appendChild(h), R.appendChild(z), i.appendChild(R), d(this, H, "f").appendChild(i);
   });
-}, F = function(e) {
-  const o = e.currentTarget.value;
-  this.internals.setFormValue(o), this.dispatchEvent(new CustomEvent("change", {
+}, pt = function(t) {
+  const e = t.currentTarget.value;
+  this.internals.setFormValue(e), this.dispatchEvent(new CustomEvent("change", {
     bubbles: !0,
     composed: !0,
     detail: {
-      value: o
+      value: e
     }
   }));
 };
-D.formAssociated = !0;
-const r = ':host{--font-family-zh: Arial, YakuHanJPs, "PingFang SC", "Microsoft YaHei", "PingFang TC", Microsoft JhengHei, sans-serif;--font-family-ja: Arial, YakuHanJPs, Hiragino Sans, Hiragino Kaku Gothic ProN, Meiryo, Noto Sans JP, sans-serif;--color-semantic-text-weak: #6f6f6f;--color-semantic-text-text-link: #404fbf;--color-semantic-text-semi-weak: #363636;--color-semantic-text-required: #ca3232;--color-semantic-text-regular: #191919;--color-semantic-text-placeholder: #6f6f6f;--color-semantic-text-inverse: #ffffff;--color-semantic-text-error: #ca3232;--color-semantic-text-disabled: #cbcbcb;--color-semantic-text-destructive: #ca3232;--color-semantic-text-current: #404fbf;--color-semantic-text-button-text-hover: #191919;--color-semantic-text-button-text-focus: #191919;--color-semantic-text-button-text-destructive-hover: #ca3232;--color-semantic-text-button-text-destructive-focus: #ca3232;--color-semantic-text-button-text-destructive-default: #ca3232;--color-semantic-text-button-text-default: #191919;--color-semantic-text-button-selected-hover: #ffffff;--color-semantic-text-button-selected: #ffffff;--color-semantic-text-button-outline-hover: #6f6f6f;--color-semantic-text-button-outline-focus: #6f6f6f;--color-semantic-text-button-outline-destructive-hover: #da7070;--color-semantic-text-button-outline-destructive-focus: #da7070;--color-semantic-text-button-outline-destructive-default: #ca3232;--color-semantic-text-button-outline-default: #191919;--color-semantic-text-button-loading: #cbcbcb;--color-semantic-text-button-fill-hover: #ffffff;--color-semantic-text-button-fill-focus: #ffffff;--color-semantic-text-button-fill-destructive-hover: #ffffff;--color-semantic-text-button-fill-destructive-focus: #ffffff;--color-semantic-text-button-fill-destructive-default: #ffffff;--color-semantic-text-button-fill-default: #ffffff;--color-semantic-text-button-disabled: #cbcbcb;--color-semantic-surface-warning-3: #f9e8b3;--color-semantic-surface-warning-1: #fdf7e6;--color-semantic-surface-success-3: #bad4c3;--color-semantic-surface-success-1: #e8f1eb;--color-semantic-surface-selected-hover: #5361c5;--color-semantic-surface-selected-focus: #404fbf;--color-semantic-surface-selected: #404fbf;--color-semantic-surface-regular-9: #191919;--color-semantic-surface-regular-8: #282828;--color-semantic-surface-regular-7: #363636;--color-semantic-surface-regular-6: #cbcbcb;--color-semantic-surface-regular-5: #e5e5e5;--color-semantic-surface-regular-4: #ededed;--color-semantic-surface-regular-3: #f5f5f5;--color-semantic-surface-regular-2: #f8f8f8;--color-semantic-surface-regular-1: #ffffff;--color-semantic-surface-information-3: #c4d7ec;--color-semantic-surface-information-1: #ebf2f9;--color-semantic-surface-error-3: #efc2c2;--color-semantic-surface-error-1: #faebeb;--color-semantic-surface-checked-hover: #d9dcf2;--color-semantic-surface-checked: #ecedf9;--color-semantic-surface-check-disabled: #ededed;--color-semantic-surface-button-text-hover: #f5f5f5;--color-semantic-surface-button-text-focus: #f5f5f5;--color-semantic-surface-button-text-destructive-hover: #f4d6d6;--color-semantic-surface-button-text-destructive-focus: #f4d6d6;--color-semantic-surface-button-text-destructive-default: rgba(202, 50, 50, 0);--color-semantic-surface-button-text-default: rgba(25, 25, 25, 0);--color-semantic-surface-button-selected-hover: #5361c5;--color-semantic-surface-button-selected: #404fbf;--color-semantic-surface-button-outline-hover: rgba(25, 25, 25, 0);--color-semantic-surface-button-outline-focus: rgba(25, 25, 25, 0);--color-semantic-surface-button-outline-destructive-hover: rgba(218, 112, 112, 0);--color-semantic-surface-button-outline-destructive-focus: rgba(218, 112, 112, 0);--color-semantic-surface-button-outline-destructive-default: rgba(202, 50, 50, 0);--color-semantic-surface-button-outline-default: rgba(25, 25, 25, 0);--color-semantic-surface-button-loading: #f8f8f8;--color-semantic-surface-button-fill-hover: #363636;--color-semantic-surface-button-fill-focus: #363636;--color-semantic-surface-button-fill-destructive-hover: #d55b5b;--color-semantic-surface-button-fill-destructive-focus: #d55b5b;--color-semantic-surface-button-fill-destructive-default: #ca3232;--color-semantic-surface-button-fill-default: #191919;--color-semantic-surface-button-disabled: #f8f8f8;--color-semantic-surface-temp-tag-yellow: #fdf7e6;--color-semantic-surface-temp-tag-red: #faebeb;--color-semantic-surface-temp-tag-marine: #ebf2f9;--color-semantic-surface-temp-tag-green: #e8f1eb;--color-semantic-surface-temp-tag-gray: #f8f8f8;--color-semantic-surface-temp-tag-darkyellow: #eab100;--color-semantic-surface-temp-tag-darkred: #ca3232;--color-semantic-surface-temp-tag-darkmarine: #3978bf;--color-semantic-surface-temp-tag-darkgreen: #1a7037;--color-semantic-highlight-text: #ffe7ec;--color-semantic-highlight-focus-ring-error: #f7e0e0;--color-semantic-highlight-focus-ring-default: #e2e5f5;--color-semantic-elevation-sort: rgba(25, 25, 25, .2);--color-semantic-elevation-regular: rgba(25, 25, 25, .2);--color-semantic-elevation-modal: rgba(25, 25, 25, .2);--color-semantic-chart-single-8: #d6e3ff;--color-semantic-chart-single-7: #c6d7ff;--color-semantic-chart-single-6: #b6ccff;--color-semantic-chart-single-5: #a5c0ff;--color-semantic-chart-single-4: #95b5ff;--color-semantic-chart-single-3: #85aaff;--color-semantic-chart-single-2: #749eff;--color-semantic-chart-single-1: #5c8dff;--color-semantic-chart-multi-line-9: #df8484;--color-semantic-chart-multi-line-8: #b3308a;--color-semantic-chart-multi-line-7: #404fbf;--color-semantic-chart-multi-line-6: #3978bf;--color-semantic-chart-multi-line-5: #248a6a;--color-semantic-chart-multi-line-4: #a9ad2f;--color-semantic-chart-multi-line-3: #eab100;--color-semantic-chart-multi-line-2: #b38732;--color-semantic-chart-multi-line-16: #d183b9;--color-semantic-chart-multi-line-15: #8c95d9;--color-semantic-chart-multi-line-14: #88aed9;--color-semantic-chart-multi-line-13: #7cb9a6;--color-semantic-chart-multi-line-12: #cbce82;--color-semantic-chart-multi-line-11: #f2d066;--color-semantic-chart-multi-line-10: #d1b784;--color-semantic-chart-multi-line-1: #ca3232;--color-semantic-chart-multi-fill-9: #cc9ee3;--color-semantic-chart-multi-fill-8: #e59999;--color-semantic-chart-multi-fill-7: #dead9c;--color-semantic-chart-multi-fill-6: #d9c399;--color-semantic-chart-multi-fill-5: #e6e197;--color-semantic-chart-multi-fill-4: #b0ce94;--color-semantic-chart-multi-fill-38: #d1c5e8;--color-semantic-chart-multi-fill-37: #e8c1dc;--color-semantic-chart-multi-fill-36: #edc6c1;--color-semantic-chart-multi-fill-35: #e5d4c0;--color-semantic-chart-multi-fill-34: #f9e8b3;--color-semantic-chart-multi-fill-33: #e5e6c1;--color-semantic-chart-multi-fill-32: #c3daba;--color-semantic-chart-multi-fill-31: #bddcd2;--color-semantic-chart-multi-fill-30: #bedbe2;--color-semantic-chart-multi-fill-3: #8db89b;--color-semantic-chart-multi-fill-29: #c6caec;--color-semantic-chart-multi-fill-28: #e0c5ee;--color-semantic-chart-multi-fill-27: #efc2c2;--color-semantic-chart-multi-fill-26: #ebcec4;--color-semantic-chart-multi-fill-25: #e8dbc2;--color-semantic-chart-multi-fill-24: #f0edc1;--color-semantic-chart-multi-fill-23: #cfe1bf;--color-semantic-chart-multi-fill-22: #bad4c3;--color-semantic-chart-multi-fill-21: #c0e5e3;--color-semantic-chart-multi-fill-20: #c4d7ec;--color-semantic-chart-multi-fill-2: #96d4d1;--color-semantic-chart-multi-fill-19: #b29ed9;--color-semantic-chart-multi-fill-18: #d998c5;--color-semantic-chart-multi-fill-17: #e1a098;--color-semantic-chart-multi-fill-16: #d4b797;--color-semantic-chart-multi-fill-15: #f5d880;--color-semantic-chart-multi-fill-14: #d4d697;--color-semantic-chart-multi-fill-13: #9bc28c;--color-semantic-chart-multi-fill-12: #92c5b5;--color-semantic-chart-multi-fill-11: #93c4cf;--color-semantic-chart-multi-fill-10: #a0a7df;--color-semantic-chart-multi-fill-1: #9cbcdf;--color-semantic-chart-heatmap-4: #dee8ff;--color-semantic-chart-heatmap-3: #bed1ff;--color-semantic-chart-heatmap-2: #9dbbff;--color-semantic-chart-heatmap-1: #7da4ff;--color-semantic-brand-default: #ff5e83;--color-semantic-border-warning: #eab100;--color-semantic-border-success: #1a7037;--color-semantic-border-strong: #191919;--color-semantic-border-semi-weak: #ededed;--color-semantic-border-semi-strong: #363636;--color-semantic-border-selected-hover: #5361c5;--color-semantic-border-selected: #404fbf;--color-semantic-border-regular: #e5e5e5;--color-semantic-border-inverse: #ffffff;--color-semantic-border-information: #3978bf;--color-semantic-border-focus: #404fbf;--color-semantic-border-error: #ca3232;--color-semantic-border-check-unchecked: #cbcbcb;--color-semantic-border-button-text-hover: #f5f5f5;--color-semantic-border-button-text-focus: #f5f5f5;--color-semantic-border-button-text-destructive-hover: #f4d6d6;--color-semantic-border-button-text-destructive-focus: #f4d6d6;--color-semantic-border-button-text-destructive-default: rgba(202, 50, 50, 0);--color-semantic-border-button-text-default: rgba(25, 25, 25, 0);--color-semantic-border-button-selected-hover: #5361c5;--color-semantic-border-button-selected: #404fbf;--color-semantic-border-button-outline-hover: #6f6f6f;--color-semantic-border-button-outline-focus: #6f6f6f;--color-semantic-border-button-outline-destructive-hover: #da7070;--color-semantic-border-button-outline-destructive-focus: #da7070;--color-semantic-border-button-outline-destructive-default: #ca3232;--color-semantic-border-button-outline-default: #191919;--color-semantic-border-button-loading: #e5e5e5;--color-semantic-border-button-fill-hover: #363636;--color-semantic-border-button-fill-focus: #363636;--color-semantic-border-button-fill-destructive-hover: #d55b5b;--color-semantic-border-button-fill-destructive-focus: #d55b5b;--color-semantic-border-button-fill-destructive-default: #ca3232;--color-semantic-border-button-fill-default: #191919;--color-semantic-border-button-disabled: #e5e5e5;--color-semantic-border-temp-tag-yellow: #f7e099;--color-semantic-border-temp-tag-red: #eaadad;--color-semantic-border-temp-tag-marine: #b0c9e5;--color-semantic-border-temp-tag-green: #a3c6af;--color-semantic-border-temp-tag-gray: #e5e5e5;--color-semantic-border-temp-tag-darkyellow: #a47c00;--color-semantic-border-temp-tag-darkred: #8d2323;--color-semantic-border-temp-tag-darkmarine: #285486;--color-semantic-border-temp-tag-darkgreen: #124e27;--color-semantic-background-default: #f8f8f8;--color-primitive-yellow-60: #f2d066;--color-primitive-yellow-50: #f5d880;--color-primitive-yellow-40: #f7e099;--color-primitive-yellow-30: #f9e8b3;--color-primitive-yellow-130: #a47c00;--color-primitive-yellow-100: #eab100;--color-primitive-yellow-10: #fdf7e6;--color-primitive-white: #ffffff;--color-primitive-viridian-60: #7cb9a6;--color-primitive-viridian-50: #92c5b5;--color-primitive-viridian-30: #bddcd2;--color-primitive-viridian-100: #248a6a;--color-primitive-violet-50: #b29ed9;--color-primitive-violet-30: #d1c5e8;--color-primitive-turquoise-50: #93c4cf;--color-primitive-turquoise-30: #bedbe2;--color-primitive-tomato-80: #d55b5b;--color-primitive-tomato-70: #da7070;--color-primitive-tomato-60: #df8484;--color-primitive-tomato-50: #e59999;--color-primitive-tomato-40: #eaadad;--color-primitive-tomato-30: #efc2c2;--color-primitive-tomato-20: #f4d6d6;--color-primitive-tomato-15: #f7e0e0;--color-primitive-tomato-130: #8d2323;--color-primitive-tomato-100: #ca3232;--color-primitive-tomato-10: #faebeb;--color-primitive-terracotta-50: #e1a098;--color-primitive-terracotta-30: #edc6c1;--color-primitive-sky-85: #749eff;--color-primitive-sky-80: #7da4ff;--color-primitive-sky-75: #85aaff;--color-primitive-sky-65: #95b5ff;--color-primitive-sky-60: #9dbbff;--color-primitive-sky-55: #a5c0ff;--color-primitive-sky-45: #b6ccff;--color-primitive-sky-40: #bed1ff;--color-primitive-sky-35: #c6d7ff;--color-primitive-sky-25: #d6e3ff;--color-primitive-sky-20: #dee8ff;--color-primitive-sky-100: #5c8dff;--color-primitive-purple-50: #cc9ee3;--color-primitive-purple-30: #e0c5ee;--color-primitive-plum-60: #d183b9;--color-primitive-plum-50: #d998c5;--color-primitive-plum-30: #e8c1dc;--color-primitive-plum-100: #b3308a;--color-primitive-pink-15: #ffe7ec;--color-primitive-pink-100: #ff5e83;--color-primitive-neutral-90: #282828;--color-primitive-neutral-80: #363636;--color-primitive-neutral-70: #6f6f6f;--color-primitive-neutral-50: #cbcbcb;--color-primitive-neutral-40: #e5e5e5;--color-primitive-neutral-30: #ededed;--color-primitive-neutral-20: #f5f5f5;--color-primitive-neutral-100: #191919;--color-primitive-neutral-10: #f8f8f8;--color-primitive-marine-60: #88aed9;--color-primitive-marine-50: #9cbcdf;--color-primitive-marine-40: #b0c9e5;--color-primitive-marine-30: #c4d7ec;--color-primitive-marine-130: #285486;--color-primitive-marine-100: #3978bf;--color-primitive-marine-10: #ebf2f9;--color-primitive-lime-60: #cbce82;--color-primitive-lime-50: #d4d697;--color-primitive-lime-30: #e5e6c1;--color-primitive-lime-100: #a9ad2f;--color-primitive-lemon-50: #e6e197;--color-primitive-lemon-30: #f0edc1;--color-primitive-leaf-50: #b0ce94;--color-primitive-leaf-30: #cfe1bf;--color-primitive-green-50: #8db89b;--color-primitive-green-40: #a3c6af;--color-primitive-green-30: #bad4c3;--color-primitive-green-130: #124e27;--color-primitive-green-100: #1a7037;--color-primitive-green-10: #e8f1eb;--color-primitive-emerald-50: #96d4d1;--color-primitive-emerald-30: #c0e5e3;--color-primitive-cork-60: #d1b784;--color-primitive-cork-50: #d9c399;--color-primitive-cork-30: #e8dbc2;--color-primitive-cork-100: #b38732;--color-primitive-brown-50: #dead9c;--color-primitive-brown-30: #ebcec4;--color-primitive-blue-90: #5361c5;--color-primitive-blue-60: #8c95d9;--color-primitive-blue-50: #a0a7df;--color-primitive-blue-30: #c6caec;--color-primitive-blue-20: #d9dcf2;--color-primitive-blue-15: #e2e5f5;--color-primitive-blue-100: #404fbf;--color-primitive-blue-10: #ecedf9;--color-primitive-bamboo-50: #9bc28c;--color-primitive-bamboo-30: #c3daba;--color-primitive-amber-50: #d4b797;--color-primitive-amber-30: #e5d4c0}:host,*{overflow-wrap:break-word;min-width:0}:host{font-family:var(--font-family-ja)}:host:lang(zh){font-family:var(--font-family-zh)}button{box-sizing:border-box}', Ie = ":host{flex-grow:0;flex-shrink:0;display:inline-block;line-height:0;vertical-align:middle}.icon{display:inline-block;fill:currentcolor}.size__small{width:16px;height:16px}.size__medium{width:24px;height:24px}", K = {
+ct.formAssociated = !0;
+const Jt = ":host{flex-grow:0;flex-shrink:0;display:inline-block;line-height:0;vertical-align:middle}.icon{display:inline-block;fill:currentcolor}.size__small{width:16px;height:16px}.size__medium{width:24px;height:24px}", kt = {
   arrow_down: '<path d="M12 16.99L4 8.98999L5.06 7.92999L12 14.87L18.94 7.92999L20 8.98999L12 16.99Z"/>',
   arrow_down_link: '<path d="M11.98 20.03L18.42 13.6L17.36 12.53L12.73 17.16V4.04001H11.23V17.16L6.59 12.53L5.59 13.6L11.98 20.03Z"/>',
   arrow_left: '<path d="M14.99 20L7 12L14.99 4L16.05 5.06L9.12 12L16.05 18.94L14.99 20Z"/>',
@@ -447,16 +452,16 @@ const r = ':host{--font-family-zh: Arial, YakuHanJPs, "PingFang SC", "Microsoft 
   toggle_arrow_right: '<path d="M15.3216 11.576C15.6349 11.7718 15.6349 12.2282 15.3216 12.424L8.765 16.5219C8.43198 16.73 8 16.4906 8 16.0979L8 7.90212C8 7.50941 8.43198 7.26998 8.765 7.47812L15.3216 11.576Z"/>',
   zip: '<path d="M21 18L20 19H4L3 18V6L4 5H10L11 7H20L21 8V14H19.5V8.50999H10.05L9.04999 6.50999H4.48999V17.51H19.49V15.51H21V18ZM9 11.5H7.5V12.5H9V11.5ZM10.5 12.5V13.5H9V12.5H10.5ZM9 13.5V14.5H7.5V13.5H9ZM10.5 14.5V15.5H9V14.5H10.5ZM9 15.5V16.5H7.5V15.5H9ZM10.5 16.5V17.5H9V16.5H10.5Z"/>'
 };
-function j(i) {
-  return Object.hasOwnProperty.call(K, i);
+function mt(o) {
+  return Object.hasOwnProperty.call(kt, o);
 }
-const ee = new CSSStyleSheet();
-ee.replaceSync(Ie);
-class U extends Be {
+const yt = new CSSStyleSheet();
+yt.replaceSync(Jt);
+class lt extends Nt {
   constructor() {
-    super(), this.paths = { ...K, "": "" }, this.shadowRoot.adoptedStyleSheets = [
+    super(), this.paths = { ...kt, "": "" }, this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      ee
+      yt
     ];
   }
   /**
@@ -518,23 +523,29 @@ class U extends Be {
    * @attribute
    * @type {string}
    */
-  set type(e) {
-    super.type = j(e) ? e : "";
+  set type(t) {
+    super.type = mt(t) ? t : "";
   }
-  attributeChangedCallback(e, o, t) {
-    if (e === "type") {
-      const s = j(t) ? t : "";
-      super.attributeChangedCallback(e, o, s);
+  attributeChangedCallback(t, e, i) {
+    if (t === "type") {
+      const r = mt(i) ? i : "";
+      super.attributeChangedCallback(t, e, r);
     } else
-      super.attributeChangedCallback(e, o, t);
+      super.attributeChangedCallback(t, e, i);
   }
 }
-customElements.get("sp-icon") || customElements.define("sp-icon", U);
-const te = ':host{--icon-color: var(--color-semantic-text-button-outline-default);--padding-inline: 16px;display:inline-block;max-width:100%}.base{display:inline-flex;align-items:center;justify-content:center;column-gap:4px;color:var(--color-semantic-text-button-outline-default);border-radius:5px;border:1px solid transparent;background-color:transparent;min-height:28px;max-width:100%;padding-inline:var(--padding-inline);position:relative;overflow:hidden;cursor:pointer}.base__text{font-size:10px;font-weight:700;line-height:1}.type__default.appearance__outline{border-color:var(--color-semantic-border-button-outline-default)}.type__default.appearance__outline:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-hover);border-color:var(--color-semantic-border-button-outline-hover);color:var(--color-semantic-text-button-outline-hover)}.type__default.appearance__outline:focus-visible:not(:is(:disabled,.isSelected)){--icon-color: var(--color-semantic-text-button-outline-focus);border-color:var(--color-semantic-border-button-outline-focus);color:var(--color-semantic-text-button-outline-focus)}.type__default.appearance__fill{--icon-color: var(--color-semantic-text-button-fill-default);border-color:var(--color-semantic-border-button-fill-default);background-color:var(--color-semantic-surface-button-fill-default);color:var(--color-semantic-text-button-fill-default)}.type__default.appearance__fill:hover:not(:disabled){border-color:var(--color-semantic-border-button-fill-hover);background-color:var(--color-semantic-surface-button-fill-hover)}.type__default.appearance__fill:focus-visible:not(:is(:disabled,.isSelected)){border-color:var(--color-semantic-border-button-fill-focus);background-color:var(--color-semantic-surface-button-fill-focus)}.type__default.appearance__text{border-color:var(--color-semantic-border-button-text-default);background-color:var(--color-semantic-surface-button-text-default)}.type__default.appearance__text:hover:not(:disabled){border-color:var(--color-semantic-border-button-text-hover);background-color:var(--color-semantic-surface-button-text-hover)}.type__default.appearance__text:focus-visible:not(:is(:disabled,.isSelected)){border-color:var(--color-semantic-border-button-text-focus);background-color:var(--color-semantic-surface-button-text-focus)}.type__default.isSelected{--icon-color: var(--color-semantic-text-button-selected);border-color:var(--color-semantic-border-button-selected);background-color:var(--color-semantic-surface-button-selected);color:var(--color-semantic-text-button-selected)}.type__default.isSelected:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-selected);border-color:var(--color-semantic-border-button-selected-hover);background-color:var(--color-semantic-surface-button-selected-hover);color:var(--color-semantic-text-button-selected)}.type__destructive.appearance__outline{--icon-color: var(--color-semantic-text-button-outline-destructive-default);border-color:var(--color-semantic-border-button-outline-destructive-default);color:var(--color-semantic-text-button-outline-destructive-default)}.type__destructive.appearance__outline:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-destructive-hover);border-color:var(--color-semantic-border-button-outline-destructive-hover);color:var(--color-semantic-text-button-outline-destructive-hover)}.type__destructive.appearance__outline:focus-visible:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-destructive-focus);border-color:var(--color-semantic-border-button-outline-destructive-focus);color:var(--color-semantic-text-button-outline-destructive-focus)}.type__destructive.appearance__fill{--icon-color: var(--color-semantic-text-button-fill-destructive-default);border-color:var(--color-semantic-border-button-fill-destructive-default);background-color:var( --color-semantic-surface-button-fill-destructive-default );color:var(--color-semantic-text-button-fill-destructive-default)}.type__destructive.appearance__fill:hover:not(:disabled){border-color:var(--color-semantic-border-button-fill-destructive-hover);background-color:var(--color-semantic-surface-button-fill-destructive-hover)}.type__destructive.appearance__fill:focus-visible:not(:disabled){border-color:var(--color-semantic-border-button-fill-destructive-focus);background-color:var(--color-semantic-surface-button-fill-destructive-focus)}.type__destructive.appearance__text{--icon-color: var(--color-semantic-text-button-text-destructive-default);border-color:transparent;background-color:transparent;color:var(--color-semantic-text-button-text-destructive-default)}.type__destructive.appearance__text:hover:not(:disabled){border-color:var(--color-semantic-border-button-text-destructive-hover);background-color:var(--color-semantic-surface-button-text-destructive-hover)}.type__destructive.appearance__text:focus-visible:not(:disabled){border-color:var(--color-semantic-border-button-text-destructive-focus);background-color:var(--color-semantic-surface-button-text-destructive-focus)}:is(.type__default,.type__destructive):disabled{--icon-color: var(--color-semantic-text-button-disabled);border-color:var(--color-semantic-border-button-disabled);background-color:var(--color-semantic-surface-button-disabled);color:var(--color-semantic-text-button-disabled);cursor:not-allowed}:is(.type__default,.type__destructive).isLoading{border-color:var(--color-semantic-border-button-loading);background-color:var(--color-semantic-surface-button-loading)}:is(.type__default,.type__destructive).isLoading:before{content:"";display:block;background:transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJcEhZcwAALEsAACxLAaU9lqkAAAMAUExURUdwTP///8jIyLi4uLGxsUdHR9LS0vHx8by8vKSkpNnZ2b6+vpSUlLe3t+Dg4N/f37Ozs/X19W5ubvj4+CMjI8/Pz+/v78bGxqampp+fnzIyMufn59HR0a+vr+Xl5dbW1tbW1sHBwezs7MLCwvDw8JCQkJubm6mpqZiYmO7u7rW1tdvb29/f32VlZfb29szMzPDw8Ovr65OTk/Dw8KGhoZ2dnYeHh/Ly8tfX19TU1Nzc3Pr6+qmpqcrKysnJyYqKioyMjIODg5KSkpeXl1tbW+bm5uvr66ysrL+/v46Ojvz8/CMjI8TExMjIyIODg4GBgYaGhisrK4+Pj6CgoDw8PM/Pz6enp+Li4hsbG0xMTK2trYmJiYSEhICAgI6OjoiIiJqamq+vrykpKa2trVRUVNPT04ODg2FhYcPDwxkZGVpaWlhYWCkpKTExMSYmJp2dnY2NjSUlJSMjIzs7O0xMTJubm3l5eb+/v6urqyMjI0RERCgoKKenp3Jycqmpqa6urnh4eG1tbUxMTHFxcWhoaMzMzEBAQEBAQLe3t1ZWVpiYmEpKSqqqqm1tbXR0dJWVlWVlZSEhIWFhYSMjI5iYmJCQkKysrIuLi4CAgGtrazk5OWtra3x8fHl5eVBQUFFRURwcHLm5uYWFhS8vL2ZmZlVVVVFRUaampszMzDg4OHd3dzU1NUZGRtfX13V1dYqKisnJyXh4eLm5uXJyckVFRZeXl3Jycp+fnzs7OzIyMh4eHkhISERERIODg8TExCkpKTY2NoqKioyMjJ2dnYiIiIWFhWNjY09baWKUV+SEe0xGWUVXdUpKSkRERFdXV3V1dU5OTkBAQFlZWWlpaXFxcWtrayEhIUxMTGVlZW1tbT4+Ph4eHi0tLS8vL3h4eGFhYV5eXisrK3p6ehoaGjc3NzU1NTMzMyYmJnx8fH5+flJSUlBQUDw8PEJCQjo6OmNjY3Nzc1xcXCkpKR8fHzk5ORwcHDExMVRUVCQkJGBgYCgoKGdnZ29vb1VVVXt7e1paWtg57TgAAADLdFJOUwABB4yc/lkEhrdLgdaQOUCYBx8JEGETcbLBIC9doTRUUX0lehzdyK7OIZVHPBAQZh4oDRm8xfEWTi1EC6pqaOrm+trR7zErpnTfDf52bvf+9G9tpN8ZFTf+EKXt9v7i7cpjjzw/IEtwEf6AUO/ffxjk/t+g4LavR2vvr0BSL5aNv19w399hf19rv1ofJN+AyN9Qj8Bz0KjoD5+Pj+BwzqDPLJfP7u+QQk1g7zBQJmA7PUA+nzBAYDBf7p+/wNhfUN+urauFxs/+0H/4BcBv2gAABJ1JREFUWMPtlWdck1cUxjESA0gihIjILkUNIywpDWAFSwpFbCvTCgqCQilQqXuvKo66V7F7t3bvvecnQIMiiBiCoCEGVAgyxGrPue9LBmRcPrcPP76c+3v+9znn3vvGxuZ/mZVoQ+r3ry1vfXIMz9nZhcMbrfvw0XVarfbm462tAIidHeJ6f4jLKOxL1/WnpJzTai8AYQgw3d/flUdpL1OplvWfMwS4IiAgwI8G8cvy7m4EIOHCTZyBCwDAHxbgFx7uF2Jt+4KWlm4gLIMWdADswB8DhCd6ePhbDOH+ZlNTExBuqVRsglYWMB0DJCZ6POTtwbHgf+riRQAAQdWPPZAZOAOA7QD98wTeHPP+3l4CaIEppPQfLTjsLrKxGQMZQmCEjN9bIAie52zOf+VKLxvhVtlSkeEaLzaMAQiCgydMEJjMIPr1MgAYQlnqyPXZfqQB8McECUxN8oW2y0AgGQpEpnbghLH+mCCH6JHL7/W0tSECMqSaG1Ims3+Qg4M0c8QAMnp6ekiG7zaYP6bYYOKXSn2lw5vY2XHtGhAA8YGli1Icg9v7+vr4DGvCvQMAhJBq+aoW4vbgH+drfBIrGjsYxAprbyWa2EHGETIaQYDIcLcG4EnR7unpOc4wwi65vJEgvrX+XD8i9okVEwsNius7O+WgxgyaD4YPsYeGnjSocTtRcvkuGkB0BdpDZ1boe1hSXV1NEHtpABx0PwDSX6ZnuNWozh/pvpknwfwISH8O67lcgthJB/gUzJNAa3SVH7iMPqQDFE4imvOzrrKyCtzw/yUdoHgOo5m6ShWr+XQAzr2sDAD18FdVT/vLcw8rXaGeFS1gPCtd4TQr2hbsUOPt9ICV6Nac1uylA2TaMXpYV3lFA7qq0ZTSAV4fS2S3W1d59SpR3zt0gDV8Ph8J+fqrjO6+f/r20AF2BwYGAoP/uf4x9YEdRTXFYienQBR/n640/21019TUltAAFtva2joBZKxBbU8NqrZWRgPY4mWLclprUCsl9rt3u56gCJCU7eWFjMUGRYkM3ODvkkms+bM2zyAEry1G5RJ0dymVyiPWAGunTZvxXFJ2tle+UVkiI/aBgWYrTWx0cwMCIJKyjBdKutA+0Nx8fYkl/z57e3sGsXHYikSmJPbrDW9tMu//ZlUkS9icNXytVMn4GxoGzXbx7H2TJ0dGIsHt3ZGrR4b8Z+qeF5qyRxxbNBUJkME+38S65G/Wf6aubv82E9sfTBBPBUIkZEiPMLWD8NCQ//zt29u/NkpxIu24o2OCGCJghvQs0y0KDw0ODqIfAGdvnNp6oGgT3KsTwqI/f4vPnfIgQ4AM6eXmhiTcwQQ4D/4bpxSKS+3t6sdmLYjKi4vPTQZCghgz/FFu/piEO5gGzkIABNxRqxfOWjA3J67y6WQmgnhRermliyJ5kW2ABbQvxARROZXQA0ZIEB+LsHLXt+1nAQqF4g60gAmi8iqZHhxXfWX9uQoPYAdkBJfa1SwgLh56mHIwLYLqmyf8YvtQB2oY4qNzo2AI8bnHKe1EH69+3xCQl5P8e9Eo7ESfvbx660sI+OmvN9I+Ga37P6V/ARSAhtS32QauAAAAAElFTkSuQmCC) no-repeat 50% 50%;background-size:16px 16px;animation:1s linear infinite loading;transform-origin:center center;width:100%;height:100%;z-index:2;position:absolute;left:0;top:0;border-radius:5px}@keyframes loading{0%{transform:rotate(0)}to{transform:rotate(360deg)}}:is(.type__default,.type__destructive).isLoading:hover{cursor:not-allowed;border-color:var(--color-semantic-border-button-loading)}:is(.type__default,.type__destructive).isLoading .base__text{visibility:hidden}:is(.type__default,.type__destructive).isLoading .base__icon{visibility:hidden}.type__default.size__large{--padding-inline: 24px;column-gap:8px;min-height:32px;font-size:12px}.type__default.size__xLarge{--padding-inline: 40px;column-gap:8px;min-height:40px;font-size:12px}.size__width80{--padding-inline: 4px;width:80px}.size__width160{--padding-inline: 4px;width:160px}', oe = new CSSStyleSheet();
-oe.replaceSync(`${r} ${te}`);
-class ie extends Ze {
-  #o = "";
-  #t = new U();
+customElements.get("sp-icon") || customElements.define("sp-icon", lt);
+const Qt = '*,*:before,*:after{box-sizing:border-box}html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}[hidden]:not([hidden=until-found]){display:none!important}body,article,p,span,div,li,td,th,dt,dd,h1,h2,h3,h4,h5,h6{overflow-wrap:anywhere;line-break:strict}body{line-height:1;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}li{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:"";content:none}table{border-collapse:collapse;border-spacing:0}a{text-decoration:none;color:inherit}button{all:unset;box-sizing:border-box}button,label,select,summary,[role=button],[role=option]{cursor:pointer}button,input,select,textarea{margin:0;font-family:inherit;font-size:100%}button,input{overflow:visible}button,select{text-transform:none}button,[type=button],[type=reset],[type=submit]{-webkit-appearance:button}button::-moz-focus-inner,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{border-style:none;padding:0}@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}input[type=text],input[type=email],input[type=password],input[type=search],input[type=tel],input[type=url],input[type=number],textarea{-webkit-appearance:none}a,button,input,select,textarea{touch-action:manipulation}:focus{outline:auto;outline-offset:2px}:focus:not(:focus-visible){outline:0}:focus-visible{outline:auto;outline-offset:2px}img{max-width:100%;height:auto}', Xt = ':host{--font-family-zh: Arial, YakuHanJPs, "PingFang SC", "Microsoft YaHei", "PingFang TC", Microsoft JhengHei, sans-serif;--font-family-ja: Arial, YakuHanJPs, Hiragino Sans, Hiragino Kaku Gothic ProN, Meiryo, Noto Sans JP, sans-serif;--color-semantic-text-weak: #6f6f6f;--color-semantic-text-text-link: #404fbf;--color-semantic-text-semi-weak: #363636;--color-semantic-text-required: #ca3232;--color-semantic-text-regular: #191919;--color-semantic-text-placeholder: #6f6f6f;--color-semantic-text-inverse: #ffffff;--color-semantic-text-error: #ca3232;--color-semantic-text-disabled: #cbcbcb;--color-semantic-text-destructive: #ca3232;--color-semantic-text-current: #404fbf;--color-semantic-text-button-text-hover: #191919;--color-semantic-text-button-text-focus: #191919;--color-semantic-text-button-text-destructive-hover: #ca3232;--color-semantic-text-button-text-destructive-focus: #ca3232;--color-semantic-text-button-text-destructive-default: #ca3232;--color-semantic-text-button-text-default: #191919;--color-semantic-text-button-selected-hover: #ffffff;--color-semantic-text-button-selected: #ffffff;--color-semantic-text-button-outline-hover: #6f6f6f;--color-semantic-text-button-outline-focus: #6f6f6f;--color-semantic-text-button-outline-destructive-hover: #da7070;--color-semantic-text-button-outline-destructive-focus: #da7070;--color-semantic-text-button-outline-destructive-default: #ca3232;--color-semantic-text-button-outline-default: #191919;--color-semantic-text-button-loading: #cbcbcb;--color-semantic-text-button-fill-hover: #ffffff;--color-semantic-text-button-fill-focus: #ffffff;--color-semantic-text-button-fill-destructive-hover: #ffffff;--color-semantic-text-button-fill-destructive-focus: #ffffff;--color-semantic-text-button-fill-destructive-default: #ffffff;--color-semantic-text-button-fill-default: #ffffff;--color-semantic-text-button-disabled: #cbcbcb;--color-semantic-surface-warning-3: #f9e8b3;--color-semantic-surface-warning-1: #fdf7e6;--color-semantic-surface-success-3: #bad4c3;--color-semantic-surface-success-1: #e8f1eb;--color-semantic-surface-selected-hover: #5361c5;--color-semantic-surface-selected-focus: #404fbf;--color-semantic-surface-selected: #404fbf;--color-semantic-surface-regular-9: #191919;--color-semantic-surface-regular-8: #282828;--color-semantic-surface-regular-7: #363636;--color-semantic-surface-regular-6: #cbcbcb;--color-semantic-surface-regular-5: #e5e5e5;--color-semantic-surface-regular-4: #ededed;--color-semantic-surface-regular-3: #f5f5f5;--color-semantic-surface-regular-2: #f8f8f8;--color-semantic-surface-regular-1: #ffffff;--color-semantic-surface-information-3: #c4d7ec;--color-semantic-surface-information-1: #ebf2f9;--color-semantic-surface-error-3: #efc2c2;--color-semantic-surface-error-1: #faebeb;--color-semantic-surface-checked-hover: #d9dcf2;--color-semantic-surface-checked: #ecedf9;--color-semantic-surface-check-disabled: #ededed;--color-semantic-surface-button-text-hover: #f5f5f5;--color-semantic-surface-button-text-focus: #f5f5f5;--color-semantic-surface-button-text-destructive-hover: #f4d6d6;--color-semantic-surface-button-text-destructive-focus: #f4d6d6;--color-semantic-surface-button-text-destructive-default: rgba(202, 50, 50, 0);--color-semantic-surface-button-text-default: rgba(25, 25, 25, 0);--color-semantic-surface-button-selected-hover: #5361c5;--color-semantic-surface-button-selected: #404fbf;--color-semantic-surface-button-outline-hover: rgba(25, 25, 25, 0);--color-semantic-surface-button-outline-focus: rgba(25, 25, 25, 0);--color-semantic-surface-button-outline-destructive-hover: rgba(218, 112, 112, 0);--color-semantic-surface-button-outline-destructive-focus: rgba(218, 112, 112, 0);--color-semantic-surface-button-outline-destructive-default: rgba(202, 50, 50, 0);--color-semantic-surface-button-outline-default: rgba(25, 25, 25, 0);--color-semantic-surface-button-loading: #f8f8f8;--color-semantic-surface-button-fill-hover: #363636;--color-semantic-surface-button-fill-focus: #363636;--color-semantic-surface-button-fill-destructive-hover: #d55b5b;--color-semantic-surface-button-fill-destructive-focus: #d55b5b;--color-semantic-surface-button-fill-destructive-default: #ca3232;--color-semantic-surface-button-fill-default: #191919;--color-semantic-surface-button-disabled: #f8f8f8;--color-semantic-surface-temp-tag-yellow: #fdf7e6;--color-semantic-surface-temp-tag-red: #faebeb;--color-semantic-surface-temp-tag-marine: #ebf2f9;--color-semantic-surface-temp-tag-green: #e8f1eb;--color-semantic-surface-temp-tag-gray: #f8f8f8;--color-semantic-surface-temp-tag-darkyellow: #eab100;--color-semantic-surface-temp-tag-darkred: #ca3232;--color-semantic-surface-temp-tag-darkmarine: #3978bf;--color-semantic-surface-temp-tag-darkgreen: #1a7037;--color-semantic-highlight-text: #ffe7ec;--color-semantic-highlight-focus-ring-error: #f7e0e0;--color-semantic-highlight-focus-ring-default: #e2e5f5;--color-semantic-elevation-sort: rgba(25, 25, 25, .2);--color-semantic-elevation-regular: rgba(25, 25, 25, .2);--color-semantic-elevation-modal: rgba(25, 25, 25, .2);--color-semantic-chart-single-8: #d6e3ff;--color-semantic-chart-single-7: #c6d7ff;--color-semantic-chart-single-6: #b6ccff;--color-semantic-chart-single-5: #a5c0ff;--color-semantic-chart-single-4: #95b5ff;--color-semantic-chart-single-3: #85aaff;--color-semantic-chart-single-2: #749eff;--color-semantic-chart-single-1: #5c8dff;--color-semantic-chart-multi-line-9: #df8484;--color-semantic-chart-multi-line-8: #b3308a;--color-semantic-chart-multi-line-7: #404fbf;--color-semantic-chart-multi-line-6: #3978bf;--color-semantic-chart-multi-line-5: #248a6a;--color-semantic-chart-multi-line-4: #a9ad2f;--color-semantic-chart-multi-line-3: #eab100;--color-semantic-chart-multi-line-2: #b38732;--color-semantic-chart-multi-line-16: #d183b9;--color-semantic-chart-multi-line-15: #8c95d9;--color-semantic-chart-multi-line-14: #88aed9;--color-semantic-chart-multi-line-13: #7cb9a6;--color-semantic-chart-multi-line-12: #cbce82;--color-semantic-chart-multi-line-11: #f2d066;--color-semantic-chart-multi-line-10: #d1b784;--color-semantic-chart-multi-line-1: #ca3232;--color-semantic-chart-multi-fill-9: #cc9ee3;--color-semantic-chart-multi-fill-8: #e59999;--color-semantic-chart-multi-fill-7: #dead9c;--color-semantic-chart-multi-fill-6: #d9c399;--color-semantic-chart-multi-fill-5: #e6e197;--color-semantic-chart-multi-fill-4: #b0ce94;--color-semantic-chart-multi-fill-38: #d1c5e8;--color-semantic-chart-multi-fill-37: #e8c1dc;--color-semantic-chart-multi-fill-36: #edc6c1;--color-semantic-chart-multi-fill-35: #e5d4c0;--color-semantic-chart-multi-fill-34: #f9e8b3;--color-semantic-chart-multi-fill-33: #e5e6c1;--color-semantic-chart-multi-fill-32: #c3daba;--color-semantic-chart-multi-fill-31: #bddcd2;--color-semantic-chart-multi-fill-30: #bedbe2;--color-semantic-chart-multi-fill-3: #8db89b;--color-semantic-chart-multi-fill-29: #c6caec;--color-semantic-chart-multi-fill-28: #e0c5ee;--color-semantic-chart-multi-fill-27: #efc2c2;--color-semantic-chart-multi-fill-26: #ebcec4;--color-semantic-chart-multi-fill-25: #e8dbc2;--color-semantic-chart-multi-fill-24: #f0edc1;--color-semantic-chart-multi-fill-23: #cfe1bf;--color-semantic-chart-multi-fill-22: #bad4c3;--color-semantic-chart-multi-fill-21: #c0e5e3;--color-semantic-chart-multi-fill-20: #c4d7ec;--color-semantic-chart-multi-fill-2: #96d4d1;--color-semantic-chart-multi-fill-19: #b29ed9;--color-semantic-chart-multi-fill-18: #d998c5;--color-semantic-chart-multi-fill-17: #e1a098;--color-semantic-chart-multi-fill-16: #d4b797;--color-semantic-chart-multi-fill-15: #f5d880;--color-semantic-chart-multi-fill-14: #d4d697;--color-semantic-chart-multi-fill-13: #9bc28c;--color-semantic-chart-multi-fill-12: #92c5b5;--color-semantic-chart-multi-fill-11: #93c4cf;--color-semantic-chart-multi-fill-10: #a0a7df;--color-semantic-chart-multi-fill-1: #9cbcdf;--color-semantic-chart-heatmap-4: #dee8ff;--color-semantic-chart-heatmap-3: #bed1ff;--color-semantic-chart-heatmap-2: #9dbbff;--color-semantic-chart-heatmap-1: #7da4ff;--color-semantic-brand-default: #ff5e83;--color-semantic-border-warning: #eab100;--color-semantic-border-success: #1a7037;--color-semantic-border-strong: #191919;--color-semantic-border-semi-weak: #ededed;--color-semantic-border-semi-strong: #363636;--color-semantic-border-selected-hover: #5361c5;--color-semantic-border-selected: #404fbf;--color-semantic-border-regular: #e5e5e5;--color-semantic-border-inverse: #ffffff;--color-semantic-border-information: #3978bf;--color-semantic-border-focus: #404fbf;--color-semantic-border-error: #ca3232;--color-semantic-border-check-unchecked: #cbcbcb;--color-semantic-border-button-text-hover: #f5f5f5;--color-semantic-border-button-text-focus: #f5f5f5;--color-semantic-border-button-text-destructive-hover: #f4d6d6;--color-semantic-border-button-text-destructive-focus: #f4d6d6;--color-semantic-border-button-text-destructive-default: rgba(202, 50, 50, 0);--color-semantic-border-button-text-default: rgba(25, 25, 25, 0);--color-semantic-border-button-selected-hover: #5361c5;--color-semantic-border-button-selected: #404fbf;--color-semantic-border-button-outline-hover: #6f6f6f;--color-semantic-border-button-outline-focus: #6f6f6f;--color-semantic-border-button-outline-destructive-hover: #da7070;--color-semantic-border-button-outline-destructive-focus: #da7070;--color-semantic-border-button-outline-destructive-default: #ca3232;--color-semantic-border-button-outline-default: #191919;--color-semantic-border-button-loading: #e5e5e5;--color-semantic-border-button-fill-hover: #363636;--color-semantic-border-button-fill-focus: #363636;--color-semantic-border-button-fill-destructive-hover: #d55b5b;--color-semantic-border-button-fill-destructive-focus: #d55b5b;--color-semantic-border-button-fill-destructive-default: #ca3232;--color-semantic-border-button-fill-default: #191919;--color-semantic-border-button-disabled: #e5e5e5;--color-semantic-border-temp-tag-yellow: #f7e099;--color-semantic-border-temp-tag-red: #eaadad;--color-semantic-border-temp-tag-marine: #b0c9e5;--color-semantic-border-temp-tag-green: #a3c6af;--color-semantic-border-temp-tag-gray: #e5e5e5;--color-semantic-border-temp-tag-darkyellow: #a47c00;--color-semantic-border-temp-tag-darkred: #8d2323;--color-semantic-border-temp-tag-darkmarine: #285486;--color-semantic-border-temp-tag-darkgreen: #124e27;--color-semantic-background-default: #f8f8f8;--color-primitive-yellow-60: #f2d066;--color-primitive-yellow-50: #f5d880;--color-primitive-yellow-40: #f7e099;--color-primitive-yellow-30: #f9e8b3;--color-primitive-yellow-130: #a47c00;--color-primitive-yellow-100: #eab100;--color-primitive-yellow-10: #fdf7e6;--color-primitive-white: #ffffff;--color-primitive-viridian-60: #7cb9a6;--color-primitive-viridian-50: #92c5b5;--color-primitive-viridian-30: #bddcd2;--color-primitive-viridian-100: #248a6a;--color-primitive-violet-50: #b29ed9;--color-primitive-violet-30: #d1c5e8;--color-primitive-turquoise-50: #93c4cf;--color-primitive-turquoise-30: #bedbe2;--color-primitive-tomato-80: #d55b5b;--color-primitive-tomato-70: #da7070;--color-primitive-tomato-60: #df8484;--color-primitive-tomato-50: #e59999;--color-primitive-tomato-40: #eaadad;--color-primitive-tomato-30: #efc2c2;--color-primitive-tomato-20: #f4d6d6;--color-primitive-tomato-15: #f7e0e0;--color-primitive-tomato-130: #8d2323;--color-primitive-tomato-100: #ca3232;--color-primitive-tomato-10: #faebeb;--color-primitive-terracotta-50: #e1a098;--color-primitive-terracotta-30: #edc6c1;--color-primitive-sky-85: #749eff;--color-primitive-sky-80: #7da4ff;--color-primitive-sky-75: #85aaff;--color-primitive-sky-65: #95b5ff;--color-primitive-sky-60: #9dbbff;--color-primitive-sky-55: #a5c0ff;--color-primitive-sky-45: #b6ccff;--color-primitive-sky-40: #bed1ff;--color-primitive-sky-35: #c6d7ff;--color-primitive-sky-25: #d6e3ff;--color-primitive-sky-20: #dee8ff;--color-primitive-sky-100: #5c8dff;--color-primitive-purple-50: #cc9ee3;--color-primitive-purple-30: #e0c5ee;--color-primitive-plum-60: #d183b9;--color-primitive-plum-50: #d998c5;--color-primitive-plum-30: #e8c1dc;--color-primitive-plum-100: #b3308a;--color-primitive-pink-15: #ffe7ec;--color-primitive-pink-100: #ff5e83;--color-primitive-neutral-90: #282828;--color-primitive-neutral-80: #363636;--color-primitive-neutral-70: #6f6f6f;--color-primitive-neutral-50: #cbcbcb;--color-primitive-neutral-40: #e5e5e5;--color-primitive-neutral-30: #ededed;--color-primitive-neutral-20: #f5f5f5;--color-primitive-neutral-100: #191919;--color-primitive-neutral-10: #f8f8f8;--color-primitive-marine-60: #88aed9;--color-primitive-marine-50: #9cbcdf;--color-primitive-marine-40: #b0c9e5;--color-primitive-marine-30: #c4d7ec;--color-primitive-marine-130: #285486;--color-primitive-marine-100: #3978bf;--color-primitive-marine-10: #ebf2f9;--color-primitive-lime-60: #cbce82;--color-primitive-lime-50: #d4d697;--color-primitive-lime-30: #e5e6c1;--color-primitive-lime-100: #a9ad2f;--color-primitive-lemon-50: #e6e197;--color-primitive-lemon-30: #f0edc1;--color-primitive-leaf-50: #b0ce94;--color-primitive-leaf-30: #cfe1bf;--color-primitive-green-50: #8db89b;--color-primitive-green-40: #a3c6af;--color-primitive-green-30: #bad4c3;--color-primitive-green-130: #124e27;--color-primitive-green-100: #1a7037;--color-primitive-green-10: #e8f1eb;--color-primitive-emerald-50: #96d4d1;--color-primitive-emerald-30: #c0e5e3;--color-primitive-cork-60: #d1b784;--color-primitive-cork-50: #d9c399;--color-primitive-cork-30: #e8dbc2;--color-primitive-cork-100: #b38732;--color-primitive-brown-50: #dead9c;--color-primitive-brown-30: #ebcec4;--color-primitive-blue-90: #5361c5;--color-primitive-blue-60: #8c95d9;--color-primitive-blue-50: #a0a7df;--color-primitive-blue-30: #c6caec;--color-primitive-blue-20: #d9dcf2;--color-primitive-blue-15: #e2e5f5;--color-primitive-blue-100: #404fbf;--color-primitive-blue-10: #ecedf9;--color-primitive-bamboo-50: #9bc28c;--color-primitive-bamboo-30: #c3daba;--color-primitive-amber-50: #d4b797;--color-primitive-amber-30: #e5d4c0}:host,*{overflow-wrap:break-word;min-width:0}:host{font-family:var(--font-family-ja)}:host:lang(zh){font-family:var(--font-family-zh)}button{box-sizing:border-box}';
+function l(...o) {
+  const t = new CSSStyleSheet();
+  return t.replaceSync(
+    `${Qt} ${Xt} ${o.join(" ")}`
+  ), t;
+}
+const Et = ':host{--icon-color: var(--color-semantic-text-button-outline-default);--padding-inline: 16px;display:inline-block;max-width:100%}.base{display:inline-flex;align-items:center;justify-content:center;column-gap:4px;color:var(--color-semantic-text-button-outline-default);border-radius:5px;border:1px solid transparent;background-color:transparent;min-height:28px;max-width:100%;padding-inline:var(--padding-inline);position:relative;overflow:hidden;cursor:pointer}.base__text{font-size:10px;font-weight:700;line-height:1}.type__default.appearance__outline{border-color:var(--color-semantic-border-button-outline-default)}.type__default.appearance__outline:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-hover);border-color:var(--color-semantic-border-button-outline-hover);color:var(--color-semantic-text-button-outline-hover)}.type__default.appearance__outline:focus-visible:not(:is(:disabled,.isSelected)){--icon-color: var(--color-semantic-text-button-outline-focus);border-color:var(--color-semantic-border-button-outline-focus);color:var(--color-semantic-text-button-outline-focus)}.type__default.appearance__fill{--icon-color: var(--color-semantic-text-button-fill-default);border-color:var(--color-semantic-border-button-fill-default);background-color:var(--color-semantic-surface-button-fill-default);color:var(--color-semantic-text-button-fill-default)}.type__default.appearance__fill:hover:not(:disabled){border-color:var(--color-semantic-border-button-fill-hover);background-color:var(--color-semantic-surface-button-fill-hover)}.type__default.appearance__fill:focus-visible:not(:is(:disabled,.isSelected)){border-color:var(--color-semantic-border-button-fill-focus);background-color:var(--color-semantic-surface-button-fill-focus)}.type__default.appearance__text{border-color:var(--color-semantic-border-button-text-default);background-color:var(--color-semantic-surface-button-text-default)}.type__default.appearance__text:hover:not(:disabled){border-color:var(--color-semantic-border-button-text-hover);background-color:var(--color-semantic-surface-button-text-hover)}.type__default.appearance__text:focus-visible:not(:is(:disabled,.isSelected)){border-color:var(--color-semantic-border-button-text-focus);background-color:var(--color-semantic-surface-button-text-focus)}.type__default.isSelected{--icon-color: var(--color-semantic-text-button-selected);border-color:var(--color-semantic-border-button-selected);background-color:var(--color-semantic-surface-button-selected);color:var(--color-semantic-text-button-selected)}.type__default.isSelected:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-selected);border-color:var(--color-semantic-border-button-selected-hover);background-color:var(--color-semantic-surface-button-selected-hover);color:var(--color-semantic-text-button-selected)}.type__destructive.appearance__outline{--icon-color: var(--color-semantic-text-button-outline-destructive-default);border-color:var(--color-semantic-border-button-outline-destructive-default);color:var(--color-semantic-text-button-outline-destructive-default)}.type__destructive.appearance__outline:hover:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-destructive-hover);border-color:var(--color-semantic-border-button-outline-destructive-hover);color:var(--color-semantic-text-button-outline-destructive-hover)}.type__destructive.appearance__outline:focus-visible:not(:disabled){--icon-color: var(--color-semantic-text-button-outline-destructive-focus);border-color:var(--color-semantic-border-button-outline-destructive-focus);color:var(--color-semantic-text-button-outline-destructive-focus)}.type__destructive.appearance__fill{--icon-color: var(--color-semantic-text-button-fill-destructive-default);border-color:var(--color-semantic-border-button-fill-destructive-default);background-color:var( --color-semantic-surface-button-fill-destructive-default );color:var(--color-semantic-text-button-fill-destructive-default)}.type__destructive.appearance__fill:hover:not(:disabled){border-color:var(--color-semantic-border-button-fill-destructive-hover);background-color:var(--color-semantic-surface-button-fill-destructive-hover)}.type__destructive.appearance__fill:focus-visible:not(:disabled){border-color:var(--color-semantic-border-button-fill-destructive-focus);background-color:var(--color-semantic-surface-button-fill-destructive-focus)}.type__destructive.appearance__text{--icon-color: var(--color-semantic-text-button-text-destructive-default);border-color:transparent;background-color:transparent;color:var(--color-semantic-text-button-text-destructive-default)}.type__destructive.appearance__text:hover:not(:disabled){border-color:var(--color-semantic-border-button-text-destructive-hover);background-color:var(--color-semantic-surface-button-text-destructive-hover)}.type__destructive.appearance__text:focus-visible:not(:disabled){border-color:var(--color-semantic-border-button-text-destructive-focus);background-color:var(--color-semantic-surface-button-text-destructive-focus)}:is(.type__default,.type__destructive):disabled{--icon-color: var(--color-semantic-text-button-disabled);border-color:var(--color-semantic-border-button-disabled);background-color:var(--color-semantic-surface-button-disabled);color:var(--color-semantic-text-button-disabled);cursor:not-allowed}:is(.type__default,.type__destructive).isLoading{border-color:var(--color-semantic-border-button-loading);background-color:var(--color-semantic-surface-button-loading)}:is(.type__default,.type__destructive).isLoading:before{content:"";display:block;background:transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJcEhZcwAALEsAACxLAaU9lqkAAAMAUExURUdwTP///8jIyLi4uLGxsUdHR9LS0vHx8by8vKSkpNnZ2b6+vpSUlLe3t+Dg4N/f37Ozs/X19W5ubvj4+CMjI8/Pz+/v78bGxqampp+fnzIyMufn59HR0a+vr+Xl5dbW1tbW1sHBwezs7MLCwvDw8JCQkJubm6mpqZiYmO7u7rW1tdvb29/f32VlZfb29szMzPDw8Ovr65OTk/Dw8KGhoZ2dnYeHh/Ly8tfX19TU1Nzc3Pr6+qmpqcrKysnJyYqKioyMjIODg5KSkpeXl1tbW+bm5uvr66ysrL+/v46Ojvz8/CMjI8TExMjIyIODg4GBgYaGhisrK4+Pj6CgoDw8PM/Pz6enp+Li4hsbG0xMTK2trYmJiYSEhICAgI6OjoiIiJqamq+vrykpKa2trVRUVNPT04ODg2FhYcPDwxkZGVpaWlhYWCkpKTExMSYmJp2dnY2NjSUlJSMjIzs7O0xMTJubm3l5eb+/v6urqyMjI0RERCgoKKenp3Jycqmpqa6urnh4eG1tbUxMTHFxcWhoaMzMzEBAQEBAQLe3t1ZWVpiYmEpKSqqqqm1tbXR0dJWVlWVlZSEhIWFhYSMjI5iYmJCQkKysrIuLi4CAgGtrazk5OWtra3x8fHl5eVBQUFFRURwcHLm5uYWFhS8vL2ZmZlVVVVFRUaampszMzDg4OHd3dzU1NUZGRtfX13V1dYqKisnJyXh4eLm5uXJyckVFRZeXl3Jycp+fnzs7OzIyMh4eHkhISERERIODg8TExCkpKTY2NoqKioyMjJ2dnYiIiIWFhWNjY09baWKUV+SEe0xGWUVXdUpKSkRERFdXV3V1dU5OTkBAQFlZWWlpaXFxcWtrayEhIUxMTGVlZW1tbT4+Ph4eHi0tLS8vL3h4eGFhYV5eXisrK3p6ehoaGjc3NzU1NTMzMyYmJnx8fH5+flJSUlBQUDw8PEJCQjo6OmNjY3Nzc1xcXCkpKR8fHzk5ORwcHDExMVRUVCQkJGBgYCgoKGdnZ29vb1VVVXt7e1paWtg57TgAAADLdFJOUwABB4yc/lkEhrdLgdaQOUCYBx8JEGETcbLBIC9doTRUUX0lehzdyK7OIZVHPBAQZh4oDRm8xfEWTi1EC6pqaOrm+trR7zErpnTfDf52bvf+9G9tpN8ZFTf+EKXt9v7i7cpjjzw/IEtwEf6AUO/ffxjk/t+g4LavR2vvr0BSL5aNv19w399hf19rv1ofJN+AyN9Qj8Bz0KjoD5+Pj+BwzqDPLJfP7u+QQk1g7zBQJmA7PUA+nzBAYDBf7p+/wNhfUN+urauFxs/+0H/4BcBv2gAABJ1JREFUWMPtlWdck1cUxjESA0gihIjILkUNIywpDWAFSwpFbCvTCgqCQilQqXuvKo66V7F7t3bvvecnQIMiiBiCoCEGVAgyxGrPue9LBmRcPrcPP76c+3v+9znn3vvGxuZ/mZVoQ+r3ry1vfXIMz9nZhcMbrfvw0XVarfbm462tAIidHeJ6f4jLKOxL1/WnpJzTai8AYQgw3d/flUdpL1OplvWfMwS4IiAgwI8G8cvy7m4EIOHCTZyBCwDAHxbgFx7uF2Jt+4KWlm4gLIMWdADswB8DhCd6ePhbDOH+ZlNTExBuqVRsglYWMB0DJCZ6POTtwbHgf+riRQAAQdWPPZAZOAOA7QD98wTeHPP+3l4CaIEppPQfLTjsLrKxGQMZQmCEjN9bIAie52zOf+VKLxvhVtlSkeEaLzaMAQiCgydMEJjMIPr1MgAYQlnqyPXZfqQB8McECUxN8oW2y0AgGQpEpnbghLH+mCCH6JHL7/W0tSECMqSaG1Ims3+Qg4M0c8QAMnp6ekiG7zaYP6bYYOKXSn2lw5vY2XHtGhAA8YGli1Icg9v7+vr4DGvCvQMAhJBq+aoW4vbgH+drfBIrGjsYxAprbyWa2EHGETIaQYDIcLcG4EnR7unpOc4wwi65vJEgvrX+XD8i9okVEwsNius7O+WgxgyaD4YPsYeGnjSocTtRcvkuGkB0BdpDZ1boe1hSXV1NEHtpABx0PwDSX6ZnuNWozh/pvpknwfwISH8O67lcgthJB/gUzJNAa3SVH7iMPqQDFE4imvOzrrKyCtzw/yUdoHgOo5m6ShWr+XQAzr2sDAD18FdVT/vLcw8rXaGeFS1gPCtd4TQr2hbsUOPt9ICV6Nac1uylA2TaMXpYV3lFA7qq0ZTSAV4fS2S3W1d59SpR3zt0gDV8Ph8J+fqrjO6+f/r20AF2BwYGAoP/uf4x9YEdRTXFYienQBR/n640/21019TUltAAFtva2joBZKxBbU8NqrZWRgPY4mWLclprUCsl9rt3u56gCJCU7eWFjMUGRYkM3ODvkkms+bM2zyAEry1G5RJ0dymVyiPWAGunTZvxXFJ2tle+UVkiI/aBgWYrTWx0cwMCIJKyjBdKutA+0Nx8fYkl/z57e3sGsXHYikSmJPbrDW9tMu//ZlUkS9icNXytVMn4GxoGzXbx7H2TJ0dGIsHt3ZGrR4b8Z+qeF5qyRxxbNBUJkME+38S65G/Wf6aubv82E9sfTBBPBUIkZEiPMLWD8NCQ//zt29u/NkpxIu24o2OCGCJghvQs0y0KDw0ODqIfAGdvnNp6oGgT3KsTwqI/f4vPnfIgQ4AM6eXmhiTcwQQ4D/4bpxSKS+3t6sdmLYjKi4vPTQZCghgz/FFu/piEO5gGzkIABNxRqxfOWjA3J67y6WQmgnhRermliyJ5kW2ABbQvxARROZXQA0ZIEB+LsHLXt+1nAQqF4g60gAmi8iqZHhxXfWX9uQoPYAdkBJfa1SwgLh56mHIwLYLqmyf8YvtQB2oY4qNzo2AI8bnHKe1EH69+3xCQl5P8e9Eo7ESfvbx660sI+OmvN9I+Ga37P6V/ARSAhtS32QauAAAAAElFTkSuQmCC) no-repeat 50% 50%;background-size:16px 16px;animation:1s linear infinite loading;transform-origin:center center;width:100%;height:100%;z-index:2;position:absolute;left:0;top:0;border-radius:5px}@keyframes loading{0%{transform:rotate(0)}to{transform:rotate(360deg)}}:is(.type__default,.type__destructive).isLoading:hover{cursor:not-allowed;border-color:var(--color-semantic-border-button-loading)}:is(.type__default,.type__destructive).isLoading .base__text{visibility:hidden}:is(.type__default,.type__destructive).isLoading .base__icon{visibility:hidden}.type__default.size__large{--padding-inline: 24px;column-gap:8px;min-height:32px;font-size:12px}.type__default.size__xLarge{--padding-inline: 40px;column-gap:8px;min-height:40px;font-size:12px}.size__width80{--padding-inline: 4px;width:80px}.size__width160{--padding-inline: 4px;width:160px}';
+class wt extends Gt {
+  #e = "";
+  #i = new lt();
   /**
    * ボタンに表示するアイコン名
    * 指定しない場合はアイコンを表示しません
@@ -543,10 +554,10 @@ class ie extends Ze {
    * @type {string}
    */
   get icon() {
-    return this.#o;
+    return this.#e;
   }
-  set icon(e) {
-    !this.#o && e ? (this.#e(), this.#s(e)) : e === "" ? this.#i() : this.#s(e), this.#o = e;
+  set icon(t) {
+    !this.#e && t ? (this.#t(), this.#s(t)) : t === "" ? this.#o() : this.#s(t), this.#e = t;
   }
   static get observedAttributes() {
     return [...super.observedAttributes, "icon"];
@@ -554,193 +565,175 @@ class ie extends Ze {
   constructor() {
     super(), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      oe
-    ], this.#t.classList.add("base__icon"), this.#t.size = "small";
+      l(Et)
+    ], this.#i.classList.add("base__icon"), this.#i.size = "small";
   }
-  attributeChangedCallback(e, o, t) {
-    if (o !== t)
-      switch (super.attributeChangedCallback(e, o, t), e) {
+  attributeChangedCallback(t, e, i) {
+    if (e !== i)
+      switch (super.attributeChangedCallback(t, e, i), t) {
         case "icon":
-          this.icon = t;
+          this.icon = i;
           break;
       }
   }
-  #e() {
-    this.buttonElement.prepend(this.#t);
-  }
-  #i() {
-    this.#t.remove();
-  }
-  #s(e) {
-    this.#t.type = e;
-  }
-}
-customElements.get("sp-button") || customElements.define("sp-button", ie);
-const De = ":host{display:inline-block}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:hover .checkmark:has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-regular-3)}.base:hover .checkmark:has(:is(.input:checked,.input:indeterminate)):has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}", G = '.checkmark{flex-grow:0;flex-shrink:0;display:inline-flex;padding-block:4px;padding-inline:4px;cursor:pointer}.checkmark:before{content:"";display:inline-block;width:16px;height:16px;background:var(--color-semantic-surface-regular-1) 50% 50% no-repeat;border:1px solid var(--color-semantic-border-check-unchecked);border-radius:2px}.checkmark:has(.input:focus-visible):before{border-color:var(--color-semantic-border-focus);box-shadow:0 0 0 3px var(--color-semantic-highlight-focus-ring-default)}.checkmark:has(:is(.input:checked,.input:indeterminate)):before{background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected)}.checkmark:has(.input:checked):before{background-image:url(data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%227%22%20fill%3D%22none%22%3E%3Cpath%20stroke%3D%22%23fff%22%20stroke-width%3D%221.5%22%20d%3D%22m1%203%202%202%204-4%22%2F%3E%3C%2Fsvg%3E)}.checkmark:has(.input:indeterminate):before{background-image:url(data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%222%22%20fill%3D%22none%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M0%200h8v2H0z%22%2F%3E%3C%2Fsvg%3E)}.checkmark:has(.input:disabled){cursor:not-allowed}.checkmark:has(:is(.input:disabled)):before{background-color:var(--color-semantic-surface-check-disabled);border-color:var(--color-semantic-border-regular)}.checkmark .input{position:absolute;z-index:-1;opacity:0}', se = new CSSStyleSheet();
-se.replaceSync(`${r} ${G} ${De}`);
-class Ue extends q {
-  constructor() {
-    super(), this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      se
-    ];
-  }
-}
-customElements.get("sp-checkbox") || customElements.define("sp-checkbox", Ue);
-const Ge = ":host{display:block}.base{display:flex;align-items:flex-start;justify-content:flex-start;padding-block:1px;cursor:pointer}.base:has(input:disabled){cursor:not-allowed}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:has(input):not(:has(input:disabled)):hover{background:var(--color-semantic-surface-regular-3)}.base:has(input:checked):not(:has(input:disabled)){background:var(--color-semantic-surface-checked)}.base:has(input:checked):not(:has(input:disabled)):hover{background:var(--color-semantic-surface-checked-hover)}.text{padding-block-start:2.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.base:has(input:disabled) .text{color:var(--color-semantic-text-disabled)}", re = new CSSStyleSheet();
-re.replaceSync(`${r} ${G} ${Ge}`);
-class We extends I {
-  constructor() {
-    super(), this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      re
-    ];
-  }
-}
-customElements.get("sp-checkbox-list") || customElements.define("sp-checkbox-list", We);
-const Fe = ":host{display:inline-block;max-width:100%}.base{display:inline-flex;align-items:flex-start;justify-content:flex-start;max-width:100%;cursor:pointer}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:has(.input:disabled){cursor:not-allowed}.text{padding-block-start:2.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.base:has(.input:disabled) .text{color:var(--color-semantic-text-disabled)}.base:hover .checkmark:has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-regular-3)}.base:hover .checkmark:has(:is(.input:checked,.input:indeterminate)):has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}", ae = new CSSStyleSheet();
-ae.replaceSync(`${r} ${G} ${Fe}`);
-class je extends I {
-  constructor() {
-    super(), this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      ae
-    ];
-  }
-}
-customElements.get("sp-checkbox-text") || customElements.define("sp-checkbox-text", je);
-const n = "*,*:before,*:after{margin:0;padding:0;box-sizing:border-box}:where([hidden]:not([hidden=until-found])){display:none!important}:where(html){-webkit-text-size-adjust:none;color-scheme:dark light;tab-size:2;scrollbar-gutter:stable;interpolate-size:allow-keywords;line-height:1.5}:where(html:has(dialog:modal[open])){overflow:clip}@media (prefers-reduced-motion: no-preference){:where(html:focus-within){scroll-behavior:smooth}}:where(body){line-height:inherit;font-family:system-ui,sans-serif;-webkit-font-smoothing:antialiased}:where(button){all:unset}:where(input,button,textarea,select){font:inherit;color:inherit;letter-spacing:inherit;word-spacing:inherit;font-feature-settings:inherit;font-variation-settings:inherit}:where(textarea){resize:vertical;resize:block}:where(button,label,select,summary,[role=button],[role=option]){cursor:pointer}:where(:disabled,label:has(>:disabled,+disabled)){cursor:not-allowed}:where(a){color:inherit;text-underline-offset:.2ex}:where(ul,ol){list-style:none}:where(img,svg,video,canvas,audio,iframe,embed,object){display:block}:where(img,picture,svg,video){max-inline-size:100%;block-size:auto}:where(p,h1,h2,h3,h4,h5,h6){overflow-wrap:break-word}:where(h1,h2,h3){line-height:calc(1em + .5rem);text-wrap:balance}:where(hr){border:none;border-block-start:1px solid;color:inherit;block-size:0;overflow:visible}:where(dialog,[popover]){border:none;background:none;color:inherit;inset:unset;max-width:unset;max-height:unset;overflow:unset}:where(dialog:not([open],[popover]),[popover]:not(:popover-open)){display:none!important}:where(:focus-visible){outline:3px solid CanvasText;box-shadow:0 0 0 5px Canvas;outline-offset:1px}:where(:focus-visible,:target){scroll-margin-block:8vh}:where(.visually-hidden:not(:focus-within,:active)){clip-path:inset(50%)!important;height:1px!important;width:1px!important;overflow:hidden!important;position:absolute!important;white-space:nowrap!important;border:0!important;-webkit-user-select:none!important;user-select:none!important}", Oe = ".base{display:grid;grid-template-columns:160px 1fr;gap:16px 8px}", ne = new CSSStyleSheet();
-ne.replaceSync(`${n} ${r} ${Oe}`);
-class Ye extends HTMLElement {
-  #o = document.createElement("dl");
-  #t = document.createElement("slot");
-  constructor() {
-    super(), this.attachShadow({ mode: "open" });
-  }
-  connectedCallback() {
-    this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      ne
-    ], this.#o.classList.add("base"), this.#o.appendChild(this.#t), this.shadowRoot.appendChild(this.#o);
-  }
-}
-customElements.get("sp-definition-list") || customElements.define("sp-definition-list", Ye);
-const Ne = ".base{padding:4.5px 0;color:var(--color-semantic-text-body-regular);font-size:12px;font-weight:400;line-height:1.6}", ce = new CSSStyleSheet();
-ce.replaceSync(
-  `${n} ${r} ${Ne}`
-);
-class Je extends HTMLElement {
-  #o = document.createElement("dd");
-  constructor() {
-    super(), this.attachShadow({ mode: "open" });
-  }
-  connectedCallback() {
-    this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      ce
-    ], this.#o.classList.add("base"), this.#o.innerHTML = this.innerHTML, this.shadowRoot.appendChild(this.#o);
-  }
-}
-customElements.get("sp-definition-list-dd") || customElements.define("sp-definition-list-dd", Je);
-const Qe = ".base{padding:4.5px 0;color:var(--color-semantic-text-body-regular);font-size:12px;font-weight:700;line-height:1.6}", le = new CSSStyleSheet();
-le.replaceSync(
-  `${n} ${r} ${Qe}`
-);
-class qe extends HTMLElement {
-  #o = document.createElement("dt");
-  constructor() {
-    super(), this.attachShadow({ mode: "open" });
-  }
-  connectedCallback() {
-    this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      le
-    ], this.#o.classList.add("base"), this.#o.innerHTML = this.innerHTML, this.shadowRoot.appendChild(this.#o);
-  }
-}
-customElements.get("sp-definition-list-dt") || customElements.define("sp-definition-list-dt", qe);
-const Xe = ".base{min-width:80px;width:100%;flex-direction:row-reverse}", de = new CSSStyleSheet();
-de.replaceSync(
-  `${r} ${te} ${Xe}`
-);
-class Ke extends ie {
-  constructor() {
-    super(), this.shadowRoot.adoptedStyleSheets = [
-      ...this.shadowRoot.adoptedStyleSheets,
-      de
-    ];
-  }
-  connectedCallback() {
-    super.connectedCallback(), this.#o();
+  #t() {
+    this.buttonElement.prepend(this.#i);
   }
   #o() {
-    this.icon = "arrow_down";
+    this.#i.remove();
   }
-  setAriaHasPopup(e) {
-    this.buttonElement.setAttribute("aria-haspopup", e);
-  }
-  setAriaExpanded(e) {
-    this.buttonElement.setAttribute("aria-expanded", e);
-  }
-  setAriaControls(e) {
-    this.buttonElement.setAttribute("aria-controls", e);
+  #s(t) {
+    this.#i.type = t;
   }
 }
-customElements.get("sp-dropdown-action-button") || customElements.define("sp-dropdown-action-button", Ke);
-const et = ".action{display:block;width:100%;min-height:26px;padding-inline:8px;padding-block:3.5px;background:none;border:0;color:var(--color-semantic-text-regular);font-size:12px;text-align:left;line-height:1.6}.action:hover,.action:focus{background:var(--color-semantic-surface-regular-3)}.base{margin:0}", he = new CSSStyleSheet();
-he.replaceSync(
-  `${n} ${r} ${et}`
-);
-class tt extends HTMLElement {
+customElements.get("sp-button") || customElements.define("sp-button", wt);
+const Kt = ":host{display:inline-block}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:hover .checkmark:has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-regular-3)}.base:hover .checkmark:has(:is(.input:checked,.input:indeterminate)):has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}", dt = '.checkmark{flex-grow:0;flex-shrink:0;display:inline-flex;padding-block:4px;padding-inline:4px;cursor:pointer}.checkmark:before{content:"";display:inline-block;width:16px;height:16px;background:var(--color-semantic-surface-regular-1) 50% 50% no-repeat;border:1px solid var(--color-semantic-border-check-unchecked);border-radius:2px}.checkmark:has(.input:focus-visible):before{border-color:var(--color-semantic-border-focus);box-shadow:0 0 0 3px var(--color-semantic-highlight-focus-ring-default)}.checkmark:has(:is(.input:checked,.input:indeterminate)):before{background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected)}.checkmark:has(.input:checked):before{background-image:url(data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%227%22%20fill%3D%22none%22%3E%3Cpath%20stroke%3D%22%23fff%22%20stroke-width%3D%221.5%22%20d%3D%22m1%203%202%202%204-4%22%2F%3E%3C%2Fsvg%3E)}.checkmark:has(.input:indeterminate):before{background-image:url(data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%222%22%20fill%3D%22none%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M0%200h8v2H0z%22%2F%3E%3C%2Fsvg%3E)}.checkmark:has(.input:disabled){cursor:not-allowed}.checkmark:has(:is(.input:disabled)):before{background-color:var(--color-semantic-surface-check-disabled);border-color:var(--color-semantic-border-regular)}.checkmark .input{position:absolute;z-index:-1;opacity:0}';
+class $t extends Lt {
+  constructor() {
+    super(), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      l(dt, Kt)
+    ];
+  }
+}
+customElements.get("sp-checkbox") || customElements.define("sp-checkbox", $t);
+const te = ":host{display:block}.base{display:flex;align-items:flex-start;justify-content:flex-start;padding-block:1px;cursor:pointer}.base:has(input:disabled){cursor:not-allowed}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:has(input):not(:has(input:disabled)):hover{background:var(--color-semantic-surface-regular-3)}.base:has(input:checked):not(:has(input:disabled)){background:var(--color-semantic-surface-checked)}.base:has(input:checked):not(:has(input:disabled)):hover{background:var(--color-semantic-surface-checked-hover)}.text{padding-block-start:2.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.base:has(input:disabled) .text{color:var(--color-semantic-text-disabled)}";
+class ee extends nt {
+  constructor() {
+    super(), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      l(dt, te)
+    ];
+  }
+}
+customElements.get("sp-checkbox-list") || customElements.define("sp-checkbox-list", ee);
+const ie = ":host{display:inline-block;max-width:100%}.base{display:inline-flex;align-items:flex-start;justify-content:flex-start;max-width:100%;cursor:pointer}.base:has(.input:focus-visible){outline:2px solid var(--color-semantic-text-regular);outline-offset:2px}.base:has(.input:disabled){cursor:not-allowed}.text{padding-block-start:2.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.base:has(.input:disabled) .text{color:var(--color-semantic-text-disabled)}.base:hover .checkmark:has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-regular-3)}.base:hover .checkmark:has(:is(.input:checked,.input:indeterminate)):has(:not(.input:disabled)):before{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}";
+class oe extends nt {
+  constructor() {
+    super(), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      l(dt, ie)
+    ];
+  }
+}
+customElements.get("sp-checkbox-text") || customElements.define("sp-checkbox-text", oe);
+const se = ".base{display:grid;grid-template-columns:160px 1fr;gap:16px 8px}";
+class re extends HTMLElement {
+  #e = document.createElement("dl");
+  #i = document.createElement("slot");
+  constructor() {
+    super(), this.attachShadow({ mode: "open" });
+  }
+  connectedCallback() {
+    this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      l(se)
+    ], this.#e.classList.add("base"), this.#e.appendChild(this.#i), this.shadowRoot.appendChild(this.#e);
+  }
+}
+customElements.get("sp-definition-list") || customElements.define("sp-definition-list", re);
+const ae = ".base{padding:4.5px 0;color:var(--color-semantic-text-body-regular);font-size:12px;font-weight:400;line-height:1.6}";
+class ne extends HTMLElement {
+  #e = document.createElement("dd");
+  constructor() {
+    super(), this.attachShadow({ mode: "open" });
+  }
+  connectedCallback() {
+    this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      l(ae)
+    ], this.#e.classList.add("base"), this.#e.innerHTML = this.innerHTML, this.shadowRoot.appendChild(this.#e);
+  }
+}
+customElements.get("sp-definition-list-dd") || customElements.define("sp-definition-list-dd", ne);
+const ce = ".base{padding:4.5px 0;color:var(--color-semantic-text-body-regular);font-size:12px;font-weight:700;line-height:1.6}";
+class le extends HTMLElement {
+  #e = document.createElement("dt");
+  constructor() {
+    super(), this.attachShadow({ mode: "open" });
+  }
+  connectedCallback() {
+    this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      l(ce)
+    ], this.#e.classList.add("base"), this.#e.innerHTML = this.innerHTML, this.shadowRoot.appendChild(this.#e);
+  }
+}
+customElements.get("sp-definition-list-dt") || customElements.define("sp-definition-list-dt", le);
+const de = ".base{min-width:80px;width:100%;flex-direction:row-reverse}";
+class he extends wt {
+  constructor() {
+    super(), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      l(Et, de)
+    ];
+  }
+  connectedCallback() {
+    super.connectedCallback(), this.#e();
+  }
+  #e() {
+    this.icon = "arrow_down";
+  }
+  setAriaHasPopup(t) {
+    this.buttonElement.setAttribute("aria-haspopup", t);
+  }
+  setAriaExpanded(t) {
+    this.buttonElement.setAttribute("aria-expanded", t);
+  }
+  setAriaControls(t) {
+    this.buttonElement.setAttribute("aria-controls", t);
+  }
+}
+customElements.get("sp-dropdown-action-button") || customElements.define("sp-dropdown-action-button", he);
+const ue = ".action{display:block;width:100%;min-height:26px;padding-inline:8px;padding-block:3.5px;background:none;border:0;color:var(--color-semantic-text-regular);font-size:12px;text-align:left;line-height:1.6}.action:hover,.action:focus{background:var(--color-semantic-surface-regular-3)}.base{margin:0}";
+class pe extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      he
+      l(ue)
     ];
   }
   connectedCallback() {
-    const e = document.createElement("div"), o = document.createElement("button"), t = document.createElement("slot");
-    this.#o(), this.#t(e, o), this.#e(e, o, t), this.shadowRoot.appendChild(e);
+    const t = document.createElement("div"), e = document.createElement("button"), i = document.createElement("slot");
+    this.#e(), this.#i(t, e), this.#t(t, e, i), this.shadowRoot.appendChild(t);
   }
-  #o() {
+  #e() {
     this.role = "menuitem";
   }
-  #t(e, o) {
-    e.classList.add("base"), o.classList.add("action");
+  #i(t, e) {
+    t.classList.add("base"), e.classList.add("action");
   }
-  #e(e, o, t) {
-    o.appendChild(t), e.appendChild(o);
+  #t(t, e, i) {
+    e.appendChild(i), t.appendChild(e);
   }
 }
-customElements.get("sp-dropdown-action-item") || customElements.define("sp-dropdown-action-item", tt);
-const ot = ".base{position:relative}.menu{position:absolute;top:100%;left:0;margin-block-start:8px;padding-block:8px;background:var(--color-semantic-surface-regular-1);border:1px solid var(--color-semantic-border-regular);border-radius:5px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular)}.menu.position__left{left:0;right:auto}.menu.position__right{left:auto;right:0}", it = ["left", "right"];
-function st(i) {
-  return it.some((e) => e === i);
+customElements.get("sp-dropdown-action-item") || customElements.define("sp-dropdown-action-item", pe);
+const me = ".base{position:relative}.menu{position:absolute;top:100%;left:0;margin-block-start:8px;padding-block:8px;background:var(--color-semantic-surface-regular-1);border:1px solid var(--color-semantic-border-regular);border-radius:5px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular)}.menu.position__left{left:0;right:auto}.menu.position__right{left:auto;right:0}", be = ["left", "right"];
+function fe(o) {
+  return be.some((t) => t === o);
 }
-function rt() {
+function ge() {
   return `sp-dropdown-action-menu-${Math.random().toString(32).substring(2)}`;
 }
-const ue = new CSSStyleSheet();
-ue.replaceSync(`${n} ${r} ${ot}`);
-class at extends HTMLElement {
-  #o = document.createElement("div");
-  #t = document.createElement("sp-dropdown-action-button");
+class ve extends HTMLElement {
   #e = document.createElement("div");
-  #i = document.createElement("slot");
+  #i = document.createElement("sp-dropdown-action-button");
+  #t = document.createElement("div");
+  #o = document.createElement("slot");
   #s = [];
-  #a = rt();
-  #r = !1;
+  #r = ge();
+  #a = !1;
   #n = !1;
-  #c = "left";
-  #l = this.#E.bind(this);
+  #l = "left";
+  #c = this.#w.bind(this);
   /**
    * ドロップダウンボタンのラベルテキスト
    *
    * @attribute
    * @type {string}
    */
-  set label(e) {
-    this.#t.textContent = e, this.#p();
+  set label(t) {
+    this.#i.textContent = t, this.#p();
   }
   /**
    * ドロップダウンメニューの開閉状態
@@ -750,10 +743,10 @@ class at extends HTMLElement {
    * @default false
    */
   get open() {
-    return this.#r;
+    return this.#a;
   }
-  set open(e) {
-    this.#r = e, e ? this.#t.setAttribute("selected", "") : this.#t.removeAttribute("selected"), this.#w();
+  set open(t) {
+    this.#a = t, t ? this.#i.setAttribute("selected", "") : this.#i.removeAttribute("selected"), this.#E();
   }
   /**
    * ドロップダウンの無効状態
@@ -765,8 +758,8 @@ class at extends HTMLElement {
   get disabled() {
     return this.#n;
   }
-  set disabled(e) {
-    this.#n = e, this.#t.disabled = e, this.#w();
+  set disabled(t) {
+    this.#n = t, this.#i.disabled = t, this.#E();
   }
   /**
    * ドロップダウンメニューの表示位置（"left" または "right"）
@@ -778,10 +771,10 @@ class at extends HTMLElement {
    * @default "left"
    */
   get position() {
-    return this.#c;
+    return this.#l;
   }
-  set position(e) {
-    e === "left" ? (this.#e.classList.add("position__left"), this.#e.classList.remove("position__right")) : (this.#e.classList.add("position__right"), this.#e.classList.remove("position__left")), this.#c = e;
+  set position(t) {
+    t === "left" ? (this.#t.classList.add("position__left"), this.#t.classList.remove("position__right")) : (this.#t.classList.add("position__right"), this.#t.classList.remove("position__left")), this.#l = t;
   }
   static get observedAttributes() {
     return ["label", "open", "disabled", "position"];
@@ -789,108 +782,106 @@ class at extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      ue
+      l(me)
     ], this.open = !1, this.disabled = !1, this.position = "left";
   }
   connectedCallback() {
-    this.#d(), this.#h(), this.#u(), this.#L(), this.shadowRoot.appendChild(this.#o), this.#x(), this.#p();
+    this.#d(), this.#h(), this.#u(), this.#x(), this.shadowRoot.appendChild(this.#e), this.#L(), this.#p();
   }
   #d() {
-    this.#t.setAttribute("part", "button"), this.#t.addEventListener(
+    this.#i.setAttribute("part", "button"), this.#i.addEventListener(
       "click",
       this.#b.bind(this)
     );
   }
   #h() {
-    this.#e.classList.add("menu"), this.#e.role = "menu", this.#e.appendChild(this.#i);
+    this.#t.classList.add("menu"), this.#t.role = "menu", this.#t.appendChild(this.#o);
   }
   #u() {
-    this.#o.appendChild(this.#t), this.#o.appendChild(this.#e), this.#o.classList.add("base");
-  }
-  #L() {
-    this.#i.addEventListener(
-      "slotchange",
-      this.#f.bind(this)
-    ), window.addEventListener("click", this.#l);
+    this.#e.appendChild(this.#i), this.#e.appendChild(this.#t), this.#e.classList.add("base");
   }
   #x() {
-    this.#t.setAriaHasPopup("true"), this.#t.setAriaControls(this.#a), this.#e.setAttribute("id", this.#a), this.#v();
+    this.#o.addEventListener(
+      "slotchange",
+      this.#f.bind(this)
+    ), window.addEventListener("click", this.#c);
+  }
+  #L() {
+    this.#i.setAriaHasPopup("true"), this.#i.setAriaControls(this.#r), this.#t.setAttribute("id", this.#r), this.#v();
   }
   #p() {
-    const e = this.#t.offsetWidth;
-    this.#e.style.minWidth = `${e}px`;
+    const t = this.#i.offsetWidth;
+    this.#t.style.minWidth = `${t}px`;
   }
   disconnectedCallback() {
-    this.#s.forEach((e) => {
-      e.removeEventListener(
+    this.#s.forEach((t) => {
+      t.removeEventListener(
         "click",
         this.#g.bind(this)
       );
-    }), this.#i.removeEventListener(
+    }), this.#o.removeEventListener(
       "slotchange",
       this.#f.bind(this)
-    ), window.removeEventListener("click", this.#l);
+    ), window.removeEventListener("click", this.#c);
   }
-  attributeChangedCallback(e, o, t) {
-    o !== t && (e === "label" && this.#m(t), e === "open" && this.#C(t), e === "disabled" && this.#y(t), e === "position" && this.#k(t));
+  attributeChangedCallback(t, e, i) {
+    e !== i && (t === "label" && this.#m(i), t === "open" && this.#C(i), t === "disabled" && this.#k(i), t === "position" && this.#y(i));
   }
-  #m(e) {
-    this.label = e;
+  #m(t) {
+    this.label = t;
   }
-  #C(e) {
-    this.open = e === "true" || e === "";
+  #C(t) {
+    this.open = t === "true" || t === "";
   }
-  #y(e) {
-    this.disabled = e === "true" || e === "";
+  #k(t) {
+    this.disabled = t === "true" || t === "";
   }
-  #k(e) {
-    st(e) ? this.position = e : (console.warn(`${e}は無効なposition属性です。`), this.position = "left");
+  #y(t) {
+    fe(t) ? this.position = t : (console.warn(`${t}は無効なposition属性です。`), this.position = "left");
   }
-  #b(e) {
-    e.stopPropagation(), this.open = !this.open, this.#v();
+  #b(t) {
+    t.stopPropagation(), this.open = !this.open, this.#v();
   }
   #f() {
-    this.#s = this.#i.assignedElements().filter((e) => e instanceof HTMLElement), this.#s.forEach((e) => {
-      e.addEventListener("click", this.#g.bind(this));
+    this.#s = this.#o.assignedElements().filter((t) => t instanceof HTMLElement), this.#s.forEach((t) => {
+      t.addEventListener("click", this.#g.bind(this));
     });
   }
-  #g(e) {
-    e.stopPropagation(), this.open = !1, this.#v();
+  #g(t) {
+    t.stopPropagation(), this.open = !1, this.#v();
   }
-  #E(e) {
-    e.stopPropagation(), this.contains(e.target) || (this.open = !1, this.#v());
+  #w(t) {
+    t.stopPropagation(), this.contains(t.target) || (this.open = !1, this.#v());
   }
-  #w() {
-    this.#e.style.display = this.open && !this.disabled ? "block" : "none";
+  #E() {
+    this.#t.style.display = this.open && !this.disabled ? "block" : "none";
   }
   #v() {
-    this.#t.setAriaExpanded(this.open ? "true" : "false");
+    this.#i.setAriaExpanded(this.open ? "true" : "false");
   }
 }
-customElements.get("sp-dropdown-action") || customElements.define("sp-dropdown-action", at);
-const nt = ".base{position:relative}.dialog{position:absolute;z-index:1;min-width:560px;margin-block-start:8px;padding:24px;background:var(--color-semantic-surface-regular-1);border:1px solid var(--color-semantic-border-semi-weak);border-radius:5px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular);font-size:12px;line-height:1.6}.dialog.position__left{left:0;right:auto}.dialog.position__right{left:auto;right:0}", ct = ["left", "right"];
-function lt(i) {
-  return ct.some((e) => e === i);
+customElements.get("sp-dropdown-action") || customElements.define("sp-dropdown-action", ve);
+const xe = ".base{position:relative}.dialog{position:absolute;z-index:1;min-width:560px;margin-block-start:8px;padding:24px;background:var(--color-semantic-surface-regular-1);border:1px solid var(--color-semantic-border-semi-weak);border-radius:5px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular);font-size:12px;line-height:1.6}.dialog.position__left{left:0;right:auto}.dialog.position__right{left:auto;right:0}", Le = ["left", "right"];
+function Ce(o) {
+  return Le.some((t) => t === o);
 }
-const pe = new CSSStyleSheet();
-pe.replaceSync(`${n} ${r} ${nt}`);
-class dt extends HTMLElement {
-  #o = document.createElement("div");
-  #t = document.createElement("sp-button");
+class ke extends HTMLElement {
   #e = document.createElement("div");
-  #i = document.createElement("slot");
+  #i = document.createElement("sp-button");
+  #t = document.createElement("div");
+  #o = document.createElement("slot");
   #s = !1;
-  #a = !1;
-  #r = "left";
-  #n = this.#l.bind(this);
+  #r = !1;
+  #a = "left";
+  #n = this.#c.bind(this);
   /**
    * ドロップダウンボタンのラベルテキスト
    *
    * @attribute
    * @type {string}
    */
-  set label(e) {
-    this.#t.textContent = e;
+  set label(t) {
+    this.#i.textContent = t;
   }
   /**
    * ドロップダウンダイアログの開閉状態
@@ -902,8 +893,8 @@ class dt extends HTMLElement {
   get open() {
     return this.#s;
   }
-  set open(e) {
-    this.#s = e, e ? this.#t.setAttribute("selected", "") : this.#t.removeAttribute("selected"), this.#d();
+  set open(t) {
+    this.#s = t, t ? this.#i.setAttribute("selected", "") : this.#i.removeAttribute("selected"), this.#d();
   }
   /**
    * ドロップダウンの無効状態
@@ -913,10 +904,10 @@ class dt extends HTMLElement {
    * @default false
    */
   get disabled() {
-    return this.#a;
+    return this.#r;
   }
-  set disabled(e) {
-    this.#a = e, this.#t.disabled = e, this.#d();
+  set disabled(t) {
+    this.#r = t, this.#i.disabled = t, this.#d();
   }
   /**
    * ドロップダウンダイアログの表示位置（"left" または "right"）
@@ -928,10 +919,10 @@ class dt extends HTMLElement {
    * @default "left"
    */
   get position() {
-    return this.#r;
+    return this.#a;
   }
-  set position(e) {
-    e === "left" ? (this.#e.classList.add("position__left"), this.#e.classList.remove("position__right")) : (this.#e.classList.add("position__right"), this.#e.classList.remove("position__left")), this.#r = e;
+  set position(t) {
+    t === "left" ? (this.#t.classList.add("position__left"), this.#t.classList.remove("position__right")) : (this.#t.classList.add("position__right"), this.#t.classList.remove("position__left")), this.#a = t;
   }
   static get observedAttributes() {
     return ["label", "open", "disabled", "position"];
@@ -939,107 +930,422 @@ class dt extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      pe
+      l(xe)
     ], this.open = !1, this.disabled = !1, this.position = "left";
   }
   connectedCallback() {
-    this.#t.setAttribute("part", "button"), this.#t.addEventListener(
+    this.#i.setAttribute("part", "button"), this.#i.addEventListener(
       "click",
-      this.#c.bind(this)
-    ), this.#o.appendChild(this.#t), this.#e.classList.add("dialog"), this.#e.role = "dialog", this.#e.appendChild(this.#i), window.addEventListener("click", this.#n), this.#o.appendChild(this.#e), this.#o.classList.add("base"), this.shadowRoot.appendChild(this.#o);
+      this.#l.bind(this)
+    ), this.#e.appendChild(this.#i), this.#t.classList.add("dialog"), this.#t.role = "dialog", this.#t.appendChild(this.#o), window.addEventListener("click", this.#n), this.#e.appendChild(this.#t), this.#e.classList.add("base"), this.shadowRoot.appendChild(this.#e);
   }
   disconnectedCallback() {
     window.removeEventListener("click", this.#n);
   }
-  attributeChangedCallback(e, o, t) {
-    if (o !== t)
-      switch (e) {
+  attributeChangedCallback(t, e, i) {
+    if (e !== i)
+      switch (t) {
         case "label":
-          this.label = t;
+          this.label = i;
           break;
         case "open":
-          this.open = t === "true" || t === "";
+          this.open = i === "true" || i === "";
           break;
         case "disabled":
-          this.disabled = t === "true" || t === "";
+          this.disabled = i === "true" || i === "";
           break;
         case "position":
-          lt(t) ? this.position = t : (console.warn(`${t}は無効なposition属性です。`), this.position = "left");
+          Ce(i) ? this.position = i : (console.warn(`${i}は無効なposition属性です。`), this.position = "left");
       }
   }
-  #c(e) {
-    e.stopPropagation(), this.open = !this.open;
+  #l(t) {
+    t.stopPropagation(), this.open = !this.open;
   }
-  #l(e) {
-    e.stopPropagation(), this.contains(e.target) || (this.open = !1);
+  #c(t) {
+    t.stopPropagation(), this.contains(t.target) || (this.open = !1);
   }
   #d() {
-    this.#e.style.display = this.open && !this.disabled ? "block" : "none";
+    this.#t.style.display = this.open && !this.disabled ? "block" : "none";
   }
 }
-customElements.get("sp-dropdown-dialog") || customElements.define("sp-dropdown-dialog", dt);
-const ht = ':host{display:block}.container{display:flex;justify-content:space-between;align-items:center;gap:16px}.main{display:flex;align-items:center;gap:16px}.heading{display:flex;align-items:center;gap:8px}.text-links{display:flex;flex-shrink:0;align-items:center;gap:16px}.buttons{display:flex;flex-shrink:0;align-items:center;gap:8px}h3{margin-block:3px;padding-inline-start:8px;font-size:14px;font-weight:700;line-height:1.6;position:relative}h3:before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:2px;height:calc(100% - 2.4px);background-color:var(--color-semantic-surface-regular-6)}', me = new CSSStyleSheet();
-me.replaceSync(`${n} ${r} ${ht}`);
-class ut extends HTMLElement {
-  #o = document.createElement("h3");
+customElements.get("sp-dropdown-dialog") || customElements.define("sp-dropdown-dialog", ke);
+const ye = ':host{display:block}.container{display:flex;justify-content:space-between;align-items:center;gap:16px}.main{display:flex;align-items:center;gap:16px}.heading{display:flex;align-items:center;gap:8px}.text-links{display:flex;flex-shrink:0;align-items:center;gap:16px}.buttons{display:flex;flex-shrink:0;align-items:center;gap:8px}h3{margin-block:3px;padding-inline-start:8px;font-size:14px;font-weight:700;line-height:1.6;position:relative}h3:before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:2px;height:calc(100% - 2.4px);background-color:var(--color-semantic-surface-regular-6)}';
+class Ee extends HTMLElement {
+  #e = document.createElement("h3");
+  #i = document.createElement("slot");
   #t = document.createElement("slot");
-  #e = document.createElement("slot");
   constructor() {
-    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [me], this.#t.name = "text-links", this.#e.name = "buttons";
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      l(ye)
+    ], this.#i.name = "text-links", this.#t.name = "buttons";
   }
   connectedCallback() {
-    this.shadowRoot.appendChild(this.#i()), this.#t.assignedElements().length === 0 && this.shadowRoot.querySelector(".text-links")?.remove(), this.#e.assignedElements().length === 0 && this.shadowRoot.querySelector(".buttons")?.remove();
+    this.shadowRoot.appendChild(this.#o()), this.#i.assignedElements().length === 0 && this.shadowRoot.querySelector(".text-links")?.remove(), this.#t.assignedElements().length === 0 && this.shadowRoot.querySelector(".buttons")?.remove();
   }
-  #i() {
-    const e = document.createElement("div");
-    return e.classList.add("container"), e.appendChild(this.#s()), e.appendChild(this.#n()), e;
+  #o() {
+    const t = document.createElement("div");
+    return t.classList.add("container"), t.appendChild(this.#s()), t.appendChild(this.#n()), t;
   }
   #s() {
-    const e = document.createElement("div");
-    return e.classList.add("main"), e.appendChild(this.#a()), e.appendChild(this.#r()), e;
-  }
-  #a() {
-    const e = document.createElement("slot");
-    this.#o.appendChild(e);
-    const o = document.createElement("div");
-    return o.classList.add("heading"), o.appendChild(this.#o), o;
+    const t = document.createElement("div");
+    return t.classList.add("main"), t.appendChild(this.#r()), t.appendChild(this.#a()), t;
   }
   #r() {
+    const t = document.createElement("slot");
+    this.#e.appendChild(t);
     const e = document.createElement("div");
-    return e.classList.add("text-links"), e.appendChild(this.#t), e;
+    return e.classList.add("heading"), e.appendChild(this.#e), e;
+  }
+  #a() {
+    const t = document.createElement("div");
+    return t.classList.add("text-links"), t.appendChild(this.#i), t;
   }
   #n() {
-    const e = document.createElement("div");
-    return e.classList.add("buttons"), e.appendChild(this.#e), e;
+    const t = document.createElement("div");
+    return t.classList.add("buttons"), t.appendChild(this.#t), t;
   }
 }
-customElements.get("sp-element-title") || customElements.define("sp-element-title", ut);
-const pt = ".base{display:flex;justify-content:space-between;border:1px solid;border-radius:5px;padding-block:8px;padding-inline:16px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular)}.body{display:flex}.icon{margin-inline-end:8px;display:inline-block;flex-shrink:0;width:24px;height:24px}.base.type__error{border-color:var(--color-semantic-border-error);background-color:var(--color-semantic-surface-error-1)}.base.type__information{border-color:var(--color-semantic-border-information);background-color:var(--color-semantic-surface-information-1)}.base.type__success{border-color:var(--color-semantic-border-success);background-color:var(--color-semantic-surface-success-1)}.base.type__warning{border-color:var(--color-semantic-border-warning);background-color:var(--color-semantic-surface-warning-1)}.content{font-size:12px;line-height:1.6;padding-block:2.5px;color:var(--color-semantic-text-regular)}.action{padding-inline-start:16px;margin-block:auto;flex-shrink:0}.close{border-radius:100%;display:flex;align-items:center;justify-content:center}.base.type__error .close:hover{background-color:var(--color-semantic-surface-error-3)}.base.type__information .close:hover{background-color:var(--color-semantic-surface-information-3)}.base.type__success .close:hover{background-color:var(--color-semantic-surface-success-3)}.base.type__warning .close:hover{background-color:var(--color-semantic-surface-warning-3)}", mt = ["error", "warning", "information", "success"];
-function bt(i) {
-  return mt.some((e) => e === i);
+customElements.get("sp-element-title") || customElements.define("sp-element-title", Ee);
+const we = ".label{display:inline-block;cursor:default;font-size:12px;font-weight:700;line-height:1.6;color:var(--color-semantic-text-regular);padding-block:5px 4px}.required{color:var(--color-semantic-text-required);margin-inline-start:4px}";
+class He extends HTMLElement {
+  #e = document.createElement("label");
+  #i = document.createElement("slot");
+  #t = document.createElement("span");
+  #o = !1;
+  static get observedAttributes() {
+    return ["required"];
+  }
+  get required() {
+    return this.#o;
+  }
+  set required(t) {
+    t !== this.#o && (this.#o = t, this.#r());
+  }
+  constructor() {
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      l(we)
+    ], this.#s();
+  }
+  #s() {
+    this.#e.classList.add("label"), this.#e.appendChild(this.#i), this.#t.classList.add("required"), this.#t.textContent = "*", this.#t.setAttribute("aria-hidden", "true");
+  }
+  connectedCallback() {
+    this.shadowRoot.appendChild(this.#e);
+  }
+  attributeChangedCallback(t, e, i) {
+    e !== i && t === "required" && (this.required = i === "" || i === "true");
+  }
+  #r() {
+    this.#o ? this.#e.appendChild(this.#t) : this.#t.remove();
+  }
 }
-const O = {
+customElements.get("sp-label") || customElements.define("sp-label", He);
+const _e = ".base{color:var(--color-semantic-text-error);font-size:12px;font-weight:700;line-height:1.6}";
+class Se extends HTMLElement {
+  #e = document.createElement("div");
+  #i = document.createElement("slot");
+  static get observedAttributes() {
+    return ["id"];
+  }
+  constructor() {
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      l(_e)
+    ], this.#t();
+  }
+  #t() {
+    this.#e.classList.add("base"), this.#e.setAttribute("role", "alert"), this.#e.appendChild(this.#i);
+  }
+  connectedCallback() {
+    this.shadowRoot.appendChild(this.#e);
+  }
+  attributeChangedCallback(t, e, i) {
+    e !== i && t === "id" && this.#o(i);
+  }
+  #o(t) {
+    t ? this.#e.setAttribute("id", t) : this.#e.removeAttribute("id");
+  }
+}
+customElements.get("sp-error-text") || customElements.define("sp-error-text", Se);
+const Ae = ".base{display:inline-block;font-size:12px;font-weight:400;line-height:1.6;color:var(--color-semantic-text-weak)}.current-count.limit-reached{color:var(--color-semantic-text-regular);font-weight:700}.current-count.limit-exceeded{color:var(--color-semantic-text-error);font-weight:700}";
+class Ve extends HTMLElement {
+  #e = document.createElement("div");
+  #i = document.createElement("span");
+  #t = document.createElement("span");
+  #o = document.createElement("span");
+  static get observedAttributes() {
+    return ["current", "max"];
+  }
+  get current() {
+    return Number(this.getAttribute("current")) || 0;
+  }
+  set current(t) {
+    this.setAttribute("current", String(t));
+  }
+  get max() {
+    return Number(this.getAttribute("max")) || 0;
+  }
+  set max(t) {
+    this.setAttribute("max", String(t));
+  }
+  constructor() {
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      l(Ae)
+    ], this.#s();
+  }
+  #s() {
+    this.#e.classList.add("base"), this.#i.classList.add("current-count"), this.#t.classList.add("separator"), this.#t.textContent = "/", this.#o.classList.add("max-count"), this.#e.appendChild(this.#i), this.#e.appendChild(this.#t), this.#e.appendChild(this.#o), this.shadowRoot.appendChild(this.#e);
+  }
+  connectedCallback() {
+    this.#r("current"), this.#r("max"), this.#n(), this.#l(), this.#c();
+  }
+  #r(t) {
+    const e = this.getAttribute(t);
+    this.#a(e) || this.setAttribute(t, "0");
+  }
+  #a(t) {
+    if (t === null) return !0;
+    const e = Number(t);
+    return !isNaN(e) && e >= 0;
+  }
+  attributeChangedCallback(t, e, i) {
+    if (e !== i) {
+      if (t === "current") {
+        if (!this.#a(i))
+          return;
+        this.#n(), this.#c();
+      } else if (t === "max") {
+        if (!this.#a(i))
+          return;
+        this.#l(), this.#c();
+      }
+    }
+  }
+  #n() {
+    this.#i.textContent = String(this.current).padStart(2, "0");
+  }
+  #l() {
+    this.#o.textContent = String(this.max).padStart(2, "0");
+  }
+  #c() {
+    this.#i.classList.remove("limit-reached", "limit-exceeded"), this.current === this.max ? this.#i.classList.add("limit-reached") : this.current > this.max && this.#i.classList.add("limit-exceeded");
+  }
+}
+customElements.get("sp-character-counter") || customElements.define("sp-character-counter", Ve);
+const Me = ".text-field{display:block;width:100%;background-color:var(--color-semantic-surface-regular-1);border:1px solid var(--color-semantic-border-regular);border-radius:2px;padding-inline:8px;padding-block:4px 3px;font-size:12px;font-weight:400;line-height:1.6}.text-field::placeholder{color:var(--color-semantic-text-placeholder)}.text-field:focus-visible{outline:none;border-color:var(--color-semantic-border-focus);box-shadow:0 0 0 3px var(--color-semantic-highlight-focus-ring-default)}.text-field:disabled{color:var(--color-semantic-text-disabled);background:var(--color-semantic-surface-regular-4)}.text-field[aria-invalid=true]{border-color:var(--color-semantic-border-error)}.text-field[aria-invalid=true]:focus-visible{box-shadow:0 0 0 3px var(--color-semantic-highlight-focus-ring-error)}.wrapper{display:flex}.wrapper[data-orientation=vertical]{flex-direction:column}.wrapper[data-orientation=horizontal]{gap:8px}.wrapper[data-orientation=horizontal] .label-wrapper{flex-shrink:0;width:160px}.container{position:relative;display:block;width:100%}.info{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}.info>*{margin-block-start:4px}.info sp-error-text{display:block}.info sp-error-text:not(:last-of-type){margin-block-end:2px}.info .error-container{flex:1;display:none;flex-direction:column}.info .character-counter{margin-inline-start:auto}";
+var E, c, S, A, m, C, g, w, v, a, Ht, _t, St, D, M, At, Vt, Mt, rt, Zt, Rt, U, zt, Q, at;
+const X = class X extends HTMLElement {
+  constructor() {
+    super();
+    x(this, a);
+    x(this, E, document.createElement("div"));
+    x(this, c, document.createElement("input"));
+    x(this, S, document.createElement("div"));
+    x(this, A, document.createElement("slot"));
+    x(this, m, document.createElement("div"));
+    x(this, C, document.createElement(
+      "sp-character-counter"
+    ));
+    x(this, g, null);
+    x(this, w, null);
+    x(this, v);
+    this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      l(Me)
+    ], this.internals = this.attachInternals(), n(this, a, Ht).call(this), n(this, a, _t).call(this), n(this, a, St).call(this), n(this, a, At).call(this), n(this, a, Vt).call(this), n(this, a, U).call(this), n(this, a, Q).call(this), n(this, a, at).call(this);
+  }
+  get value() {
+    return s(this, c).value;
+  }
+  set value(e) {
+    s(this, c).value = e, this.internals.setFormValue(e), n(this, a, M).call(this);
+  }
+  get name() {
+    return s(this, c).name;
+  }
+  set name(e) {
+    this.setAttribute("name", e), s(this, c).name = e;
+  }
+  get disabled() {
+    return s(this, c).disabled;
+  }
+  set disabled(e) {
+    e ? this.setAttribute("disabled", "") : this.removeAttribute("disabled"), s(this, c).disabled = e;
+  }
+  get required() {
+    return s(this, c).required;
+  }
+  set required(e) {
+    e ? this.setAttribute("required", "") : this.removeAttribute("required"), s(this, c).required = e;
+  }
+  get characterLimit() {
+    return s(this, v);
+  }
+  set characterLimit(e) {
+    _(this, v, e), e === void 0 ? this.removeAttribute("character-limit") : this.setAttribute("character-limit", String(e)), n(this, a, M).call(this), n(this, a, D).call(this);
+  }
+  get placeholder() {
+    return s(this, c).placeholder;
+  }
+  set placeholder(e) {
+    this.setAttribute("placeholder", e), s(this, c).placeholder = e;
+  }
+  get type() {
+    return s(this, c).type;
+  }
+  set type(e) {
+    this.setAttribute("type", e), s(this, c).type = e;
+  }
+  get autocomplete() {
+    return s(this, c).autocomplete;
+  }
+  set autocomplete(e) {
+    this.setAttribute("autocomplete", e), s(this, c).setAttribute("autocomplete", e);
+  }
+  get label() {
+    return this.getAttribute("label") || "";
+  }
+  set label(e) {
+    e ? this.setAttribute("label", e) : this.removeAttribute("label"), n(this, a, U).call(this);
+  }
+  get orientation() {
+    return this.getAttribute("orientation") === "horizontal" ? "horizontal" : "vertical";
+  }
+  set orientation(e) {
+    e === "horizontal" || e === "vertical" ? this.setAttribute("orientation", e) : this.removeAttribute("orientation"), n(this, a, Q).call(this);
+  }
+  static get observedAttributes() {
+    return [
+      "value",
+      "placeholder",
+      "disabled",
+      "character-limit",
+      "name",
+      "required",
+      "type",
+      "autocomplete",
+      "label",
+      "orientation"
+    ];
+  }
+  attributeChangedCallback(e, i, r) {
+    if (i !== r)
+      if (e === "value")
+        this.value = r || "";
+      else if (e === "placeholder")
+        this.placeholder = r || "";
+      else if (e === "disabled")
+        this.disabled = r === "" || r === "true";
+      else if (e === "character-limit") {
+        if (!r)
+          _(this, v, void 0);
+        else {
+          const h = parseInt(r);
+          if (h <= 0) {
+            console.error(
+              `Invalid character-limit: ${h}. Must be greater than 0.`
+            );
+            return;
+          }
+          _(this, v, h);
+        }
+        n(this, a, M).call(this), n(this, a, D).call(this);
+      } else e === "name" ? this.name = r || "" : e === "required" ? (this.required = r === "" || r === "true", n(this, a, U).call(this)) : e === "type" ? this.type = r || "text" : e === "autocomplete" ? this.autocomplete = r || "" : e === "label" ? n(this, a, U).call(this) : e === "orientation" && n(this, a, Q).call(this);
+  }
+  connectedCallback() {
+    this.setAttribute("role", "group");
+    for (const e of X.observedAttributes) {
+      const i = this.getAttribute(e);
+      i !== null && this.attributeChangedCallback(e, "", i);
+    }
+    n(this, a, D).call(this);
+  }
+};
+E = new WeakMap(), c = new WeakMap(), S = new WeakMap(), A = new WeakMap(), m = new WeakMap(), C = new WeakMap(), g = new WeakMap(), w = new WeakMap(), v = new WeakMap(), a = new WeakSet(), Ht = function() {
+  s(this, A).name = "error-text", s(this, m).classList.add("error-container"), s(this, m).setAttribute("role", "alert"), s(this, m).setAttribute("aria-live", "polite"), s(this, m).id = n(this, a, Mt).call(this), s(this, m).appendChild(s(this, A));
+}, _t = function() {
+  s(this, c).classList.add("text-field"), s(this, c).type = "text", s(this, c).setAttribute(
+    "aria-describedby",
+    s(this, m).id
+  ), s(this, E).classList.add("wrapper"), s(this, S).classList.add("container"), s(this, S).appendChild(s(this, c)), s(this, E).appendChild(s(this, S)), this.shadowRoot.appendChild(s(this, E));
+}, St = function() {
+  s(this, C).classList.add("character-counter");
+  const e = document.createElement("div");
+  e.classList.add("info"), e.appendChild(s(this, m)), e.appendChild(s(this, C)), s(this, E).appendChild(e), n(this, a, D).call(this);
+}, D = function() {
+  if (!s(this, C)) return;
+  s(this, v) !== void 0 && s(this, v) > 0 ? (s(this, C).style.display = "inline-block", n(this, a, M).call(this)) : s(this, C).style.display = "none";
+}, M = function() {
+  if (!s(this, C) || s(this, v) === void 0 || s(this, v) <= 0)
+    return;
+  const e = this.value.length, i = s(this, v);
+  s(this, C).setAttribute("current", String(e)), s(this, C).setAttribute("max", String(i));
+}, At = function() {
+  s(this, c).addEventListener("input", (e) => {
+    const i = new Event("input", {
+      bubbles: e.bubbles,
+      cancelable: e.cancelable
+    });
+    this.dispatchEvent(i);
+  }), s(this, c).addEventListener("input", () => {
+    this.value = s(this, c).value, n(this, a, M).call(this);
+  });
+}, Vt = function() {
+  s(this, A).addEventListener("slotchange", () => {
+    n(this, a, rt).call(this);
+  }), n(this, a, rt).call(this);
+}, Mt = function() {
+  return `error-${Math.random().toString(36).substring(2, 11)}`;
+}, rt = function() {
+  s(this, A).assignedElements().length > 0 ? (s(this, c).setAttribute("aria-invalid", "true"), n(this, a, Zt).call(this)) : (s(this, c).removeAttribute("aria-invalid"), n(this, a, Rt).call(this));
+}, Zt = function() {
+  s(this, m) && (s(this, m).style.display = "flex");
+}, Rt = function() {
+  s(this, m) && (s(this, m).style.display = "none");
+}, U = function() {
+  const e = this.getAttribute("label");
+  e ? (s(this, g) || (_(this, w, document.createElement("div")), s(this, w).classList.add("label-wrapper"), _(this, g, document.createElement("sp-label")), s(this, w).appendChild(s(this, g)), s(this, E) && s(this, S) && s(this, E).insertBefore(s(this, w), s(this, S)), n(this, a, zt).call(this)), s(this, g).textContent = e, s(this, c).setAttribute("aria-label", e), this.required ? s(this, g).setAttribute("required", "") : s(this, g).removeAttribute("required")) : s(this, w) && (s(this, c).removeAttribute("aria-label"), s(this, w).remove(), _(this, w, null), _(this, g, null)), n(this, a, at).call(this);
+}, zt = function() {
+  s(this, g) && s(this, g).addEventListener("click", (e) => {
+    this.disabled || e.defaultPrevented || s(this, c).focus();
+  });
+}, Q = function() {
+  const e = this.orientation;
+  s(this, E).setAttribute("data-orientation", e);
+}, at = function() {
+  const e = this.label;
+  e ? this.setAttribute("aria-label", e) : this.removeAttribute("aria-label");
+}, X.formAssociated = !0;
+let st = X;
+customElements.get("sp-text-field") || customElements.define("sp-text-field", st);
+const Ze = ".base{display:flex;justify-content:space-between;border:1px solid;border-radius:5px;padding-block:8px;padding-inline:16px;box-shadow:0 3px 12px 0 var(--color-semantic-elevation-regular)}.body{display:flex}.icon{margin-inline-end:8px;display:inline-block;flex-shrink:0;width:24px;height:24px}.base.type__error{border-color:var(--color-semantic-border-error);background-color:var(--color-semantic-surface-error-1)}.base.type__information{border-color:var(--color-semantic-border-information);background-color:var(--color-semantic-surface-information-1)}.base.type__success{border-color:var(--color-semantic-border-success);background-color:var(--color-semantic-surface-success-1)}.base.type__warning{border-color:var(--color-semantic-border-warning);background-color:var(--color-semantic-surface-warning-1)}.content{font-size:12px;line-height:1.6;padding-block:2.5px;color:var(--color-semantic-text-regular)}.action{padding-inline-start:16px;margin-block:auto;flex-shrink:0}.close{border-radius:100%;display:flex;align-items:center;justify-content:center}.base.type__error .close:hover{background-color:var(--color-semantic-surface-error-3)}.base.type__information .close:hover{background-color:var(--color-semantic-surface-information-3)}.base.type__success .close:hover{background-color:var(--color-semantic-surface-success-3)}.base.type__warning .close:hover{background-color:var(--color-semantic-surface-warning-3)}", Re = ["error", "warning", "information", "success"];
+function ze(o) {
+  return Re.some((t) => t === o);
+}
+const bt = {
   error: "type__error",
   warning: "type__warning",
   information: "type__information",
   success: "type__success"
-}, Y = {
+}, ft = {
   error: '<path fill-rule="evenodd" clip-rule="evenodd" d="M2.58 18.8574L11.3416 3.99902H12.6459L21.4075 18.8574L20.7554 19.999H3.23212L2.58 18.8574ZM11.2 9.5V14.5H12.8V9.5H11.2ZM11.2 16V17.5H12.8V16H11.2Z" fill="#CA3232"></path>',
   information: '<path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM11.2 7.71997V9.49997H12.8V7.71997H11.2ZM10.5 16.2V16.72H13.5V16.2L12.8 16V11H10.5V11.8L11.2 12V16L10.5 16.2Z" fill="#3978BF"></path>',
   success: '<path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM15.5303 10.5303L14.4697 9.46967L11 12.9393L9.53033 11.4697L8.46967 12.5303L10.4697 14.5303L11 15.0607L11.5303 14.5303L15.5303 10.5303Z" fill="#1A7037"></path>',
   warning: '<path fill-rule="evenodd" clip-rule="evenodd" d="M2.58 18.8574L11.3416 3.99902H12.6459L21.4075 18.8574L20.7554 19.999H3.23212L2.58 18.8574ZM11.2 9.5V14.5H12.8V9.5H11.2ZM11.2 16V17.5H12.8V16H11.2Z" fill="#EAB100"></path>'
-}, ft = {
+}, Te = {
   error: "エラー",
   warning: "警告",
   information: "情報",
   success: "成功"
-}, be = new CSSStyleSheet();
-be.replaceSync(`${n} ${r} ${pt}`);
-class gt extends HTMLElement {
-  #o = "information";
-  #t = document.createElement("div");
-  #e = document.createElement("div");
+};
+class Be extends HTMLElement {
+  #e = "information";
   #i = document.createElement("div");
+  #t = document.createElement("div");
+  #o = document.createElement("div");
   #s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   /**
    * 通知の種類（"error"、"warning"、"information"、または "success"）
@@ -1053,10 +1359,10 @@ class gt extends HTMLElement {
    * @default "information"
    */
   get type() {
-    return this.#o;
+    return this.#e;
   }
-  set type(e) {
-    this.#t.classList.remove(O[this.#o]), this.#t.classList.add(O[e]), this.#s.innerHTML = Y[e], this.#o = e;
+  set type(t) {
+    this.#i.classList.remove(bt[this.#e]), this.#i.classList.add(bt[t]), this.#s.innerHTML = ft[t], this.#e = t;
   }
   static get observedAttributes() {
     return ["type"];
@@ -1064,79 +1370,76 @@ class gt extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      be
+      l(Ze)
     ], this.type = "information";
   }
   connectedCallback() {
-    this.#a(), this.#r(), this.#n();
-    const e = this.#c();
-    this.#l(e), this.#d(), this.#h(), this.shadowRoot.appendChild(this.#t);
-  }
-  #a() {
-    this.#t.classList.add("base");
+    this.#r(), this.#a(), this.#n();
+    const t = this.#l();
+    this.#c(t), this.#d(), this.#h(), this.shadowRoot.appendChild(this.#i);
   }
   #r() {
-    this.#e.classList.add("body"), this.#e.setAttribute("role", "alert");
+    this.#i.classList.add("base");
+  }
+  #a() {
+    this.#t.classList.add("body"), this.#t.setAttribute("role", "alert");
   }
   #n() {
-    this.#s.setAttribute("role", "img"), this.#s.setAttribute("viewBox", "0 0 24 24"), this.#s.setAttribute("aria-hidden", "false"), this.#s.setAttribute("aria-label", ft[this.type]), this.#s.classList.add("icon"), this.#s.innerHTML = Y[this.type];
+    this.#s.setAttribute("role", "img"), this.#s.setAttribute("viewBox", "0 0 24 24"), this.#s.setAttribute("aria-hidden", "false"), this.#s.setAttribute("aria-label", Te[this.type]), this.#s.classList.add("icon"), this.#s.innerHTML = ft[this.type];
   }
-  #c() {
-    const e = document.createElement("div");
-    e.classList.add("content");
-    const o = document.createElement("slot");
-    return e.appendChild(o), e;
+  #l() {
+    const t = document.createElement("div");
+    t.classList.add("content");
+    const e = document.createElement("slot");
+    return t.appendChild(e), t;
   }
-  #l(e) {
-    this.#e.appendChild(this.#s), this.#e.appendChild(e);
+  #c(t) {
+    this.#t.appendChild(this.#s), this.#t.appendChild(t);
   }
   #d() {
-    this.#i.classList.add("action");
-    const e = new U();
-    e.type = "close", e.setAttribute("aria-hidden", "true");
-    const o = document.createElement("button");
-    o.classList.add("close"), o.setAttribute("aria-label", "閉じる"), o.addEventListener("click", () => {
+    this.#o.classList.add("action");
+    const t = new lt();
+    t.type = "close", t.setAttribute("aria-hidden", "true");
+    const e = document.createElement("button");
+    e.classList.add("close"), e.setAttribute("aria-label", "閉じる"), e.addEventListener("click", () => {
       this.dispatchEvent(new CustomEvent("close"));
-    }), o.appendChild(e), this.#i.appendChild(o);
+    }), e.appendChild(t), this.#o.appendChild(e);
   }
   #h() {
-    this.#t.appendChild(this.#e), this.#t.appendChild(this.#i);
+    this.#i.appendChild(this.#t), this.#i.appendChild(this.#o);
   }
-  attributeChangedCallback(e, o, t) {
-    o !== t && e === "type" && this.#u(t);
+  attributeChangedCallback(t, e, i) {
+    e !== i && t === "type" && this.#u(i);
   }
-  #u(e) {
-    bt(e) ? this.type = e : (console.warn(`${e}は無効なtype属性です。`), this.type = "information");
+  #u(t) {
+    ze(t) ? this.type = t : (console.warn(`${t}は無効なtype属性です。`), this.type = "information");
   }
 }
-customElements.get("sp-notification-bar") || customElements.define("sp-notification-bar", gt);
-const vt = ".base{display:flex;gap:8px;border:1px solid;border-radius:5px;padding-block:8px;padding-inline:16px}.icon{display:inline-block;flex-shrink:0;width:24px;height:24px}.base.type__error{border-color:var(--color-semantic-border-error);background-color:var(--color-semantic-surface-error-1)}.base.type__information{border-color:var(--color-semantic-border-information);background-color:var(--color-semantic-surface-information-1)}.base.type__success{border-color:var(--color-semantic-border-success);background-color:var(--color-semantic-surface-success-1)}.base.type__warning{border-color:var(--color-semantic-border-warning);background-color:var(--color-semantic-surface-warning-1)}.content{font-size:12px;line-height:1.6;padding-block:2.5px;color:var(--color-semantic-text-regular)}", Lt = ["error", "warning", "information", "success"];
-function xt(i) {
-  return Lt.some((e) => e === i);
+customElements.get("sp-notification-bar") || customElements.define("sp-notification-bar", Be);
+const Pe = ".base{display:flex;gap:8px;border:1px solid;border-radius:5px;padding-block:8px;padding-inline:16px}.icon{display:inline-block;flex-shrink:0;width:24px;height:24px}.base.type__error{border-color:var(--color-semantic-border-error);background-color:var(--color-semantic-surface-error-1)}.base.type__information{border-color:var(--color-semantic-border-information);background-color:var(--color-semantic-surface-information-1)}.base.type__success{border-color:var(--color-semantic-border-success);background-color:var(--color-semantic-surface-success-1)}.base.type__warning{border-color:var(--color-semantic-border-warning);background-color:var(--color-semantic-surface-warning-1)}.content{font-size:12px;line-height:1.6;padding-block:2.5px;color:var(--color-semantic-text-regular)}", Ie = ["error", "warning", "information", "success"];
+function De(o) {
+  return Ie.some((t) => t === o);
 }
-const Ct = {
+const Ue = {
   error: "エラー",
   warning: "警告",
   information: "情報",
   success: "成功"
-}, N = {
+}, gt = {
   error: "type__error",
   warning: "type__warning",
   information: "type__information",
   success: "type__success"
-}, J = {
+}, vt = {
   error: '<path fill-rule="evenodd" clip-rule="evenodd" d="M2.58 18.8574L11.3416 3.99902H12.6459L21.4075 18.8574L20.7554 19.999H3.23212L2.58 18.8574ZM11.2 9.5V14.5H12.8V9.5H11.2ZM11.2 16V17.5H12.8V16H11.2Z" fill="#CA3232"></path>',
   information: '<path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM11.2 7.71997V9.49997H12.8V7.71997H11.2ZM10.5 16.2V16.72H13.5V16.2L12.8 16V11H10.5V11.8L11.2 12V16L10.5 16.2Z" fill="#3978BF"></path>',
   success: '<path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM15.5303 10.5303L14.4697 9.46967L11 12.9393L9.53033 11.4697L8.46967 12.5303L10.4697 14.5303L11 15.0607L11.5303 14.5303L15.5303 10.5303Z" fill="#1A7037"></path>',
   warning: '<path fill-rule="evenodd" clip-rule="evenodd" d="M2.58 18.8574L11.3416 3.99902H12.6459L21.4075 18.8574L20.7554 19.999H3.23212L2.58 18.8574ZM11.2 9.5V14.5H12.8V9.5H11.2ZM11.2 16V17.5H12.8V16H11.2Z" fill="#EAB100"></path>'
-}, fe = new CSSStyleSheet();
-fe.replaceSync(
-  `${n} ${r} ${vt}`
-);
-class yt extends HTMLElement {
-  #o = "information";
-  #t = document.createElement("div");
-  #e = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+};
+class qe extends HTMLElement {
+  #e = "information";
+  #i = document.createElement("div");
+  #t = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   /**
    * 通知の種類（"error"、"warning"、"information"、または "success"）
    * - "error": エラーメッセージ
@@ -1149,10 +1452,10 @@ class yt extends HTMLElement {
    * @default "information"
    */
   get type() {
-    return this.#o;
+    return this.#e;
   }
-  set type(e) {
-    this.#t.classList.remove(N[this.#o]), this.#t.classList.add(N[e]), this.#e.innerHTML = J[e], this.#o = e;
+  set type(t) {
+    this.#i.classList.remove(gt[this.#e]), this.#i.classList.add(gt[t]), this.#t.innerHTML = vt[t], this.#e = t;
   }
   static get observedAttributes() {
     return ["type"];
@@ -1160,45 +1463,43 @@ class yt extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      fe
+      l(Pe)
     ], this.type = "information";
   }
   connectedCallback() {
-    this.#i(), this.#s();
-    const e = this.#a();
-    this.#r(e), this.shadowRoot.appendChild(this.#t);
+    this.#o(), this.#s();
+    const t = this.#r();
+    this.#a(t), this.shadowRoot.appendChild(this.#i);
   }
-  #i() {
-    this.#t.classList.add("base");
+  #o() {
+    this.#i.classList.add("base");
   }
   #s() {
-    this.#e.setAttribute("role", "img"), this.#e.setAttribute("viewBox", "0 0 24 24"), this.#e.setAttribute("aria-hidden", "false"), this.#e.setAttribute("aria-label", Ct[this.type]), this.#e.classList.add("icon"), this.#e.innerHTML = J[this.type];
+    this.#t.setAttribute("role", "img"), this.#t.setAttribute("viewBox", "0 0 24 24"), this.#t.setAttribute("aria-hidden", "false"), this.#t.setAttribute("aria-label", Ue[this.type]), this.#t.classList.add("icon"), this.#t.innerHTML = vt[this.type];
   }
-  #a() {
-    const e = document.createElement("div");
-    e.classList.add("content");
-    const o = document.createElement("slot");
-    return e.appendChild(o), e;
+  #r() {
+    const t = document.createElement("div");
+    t.classList.add("content");
+    const e = document.createElement("slot");
+    return t.appendChild(e), t;
   }
-  #r(e) {
-    this.#t.appendChild(this.#e), this.#t.appendChild(e);
+  #a(t) {
+    this.#i.appendChild(this.#t), this.#i.appendChild(t);
   }
-  attributeChangedCallback(e, o, t) {
-    o !== t && e === "type" && this.#n(t);
+  attributeChangedCallback(t, e, i) {
+    e !== i && t === "type" && this.#n(i);
   }
-  #n(e) {
-    xt(e) ? this.type = e : (console.warn(`${e}は無効なtype属性です。`), this.type = "information");
+  #n(t) {
+    De(t) ? this.type = t : (console.warn(`${t}は無効なtype属性です。`), this.type = "information");
   }
 }
-customElements.get("sp-notification-message") || customElements.define("sp-notification-message", yt);
-const kt = ".page-group{display:inline-flex}.page,.previous,.next,.first,.last{display:grid;place-content:center;border-radius:2px;padding-block:.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.page{padding-inline:6px}.previous,.next,.first,.last{padding-inline:8px}.previous:disabled,.next:disabled,.first:disabled,.last:disabled{color:var(--color-semantic-text-disabled)}.page:focus,.previous:focus,.next:focus,.first:focus,.last:focus{background-color:var(--color-semantic-surface-regular-3);outline:none}.page:hover:enabled,.previous:hover:enabled,.next:hover:enabled,.first:hover:enabled,.last:hover:enabled{background-color:var(--color-semantic-surface-regular-3)}.page.selected,.previous.selected,.next.selected,.first.selected,.last.selected{color:var(--color-semantic-text-current);background-color:var(--color-semantic-surface-regular-3);font-weight:700}", ge = new CSSStyleSheet();
-ge.replaceSync(`${n} ${r} ${kt}`);
-const R = 10, wt = 4;
-class Et extends HTMLElement {
-  #o = 1;
-  #t = 1;
-  #e = document.createElement("nav");
-  #i = document.createElement("ul");
+customElements.get("sp-notification-message") || customElements.define("sp-notification-message", qe);
+const Ge = ".page-group{display:inline-flex}.page,.previous,.next,.first,.last{display:grid;place-content:center;border-radius:2px;padding-block:.5px;color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6}.page{padding-inline:6px}.previous,.next,.first,.last{padding-inline:8px}.previous:disabled,.next:disabled,.first:disabled,.last:disabled{color:var(--color-semantic-text-disabled)}.page:focus,.previous:focus,.next:focus,.first:focus,.last:focus{background-color:var(--color-semantic-surface-regular-3);outline:none}.page:hover:enabled,.previous:hover:enabled,.next:hover:enabled,.first:hover:enabled,.last:hover:enabled{background-color:var(--color-semantic-surface-regular-3)}.page.selected,.previous.selected,.next.selected,.first.selected,.last.selected{color:var(--color-semantic-text-current);background-color:var(--color-semantic-surface-regular-3);font-weight:700}", $ = 10, We = 4;
+class Fe extends HTMLElement {
+  #e = 1;
+  #i = 1;
+  #t = document.createElement("nav");
+  #o = document.createElement("ul");
   #s = [];
   /**
    * 総ページ数
@@ -1208,10 +1509,10 @@ class Et extends HTMLElement {
    * @default 1
    */
   get total() {
-    return this.#o;
+    return this.#e;
   }
-  set total(e) {
-    this.#o = e;
+  set total(t) {
+    this.#e = t;
   }
   /**
    * 現在選択されているページ番号
@@ -1221,10 +1522,10 @@ class Et extends HTMLElement {
    * @default 1
    */
   get selected() {
-    return this.#t;
+    return this.#i;
   }
-  set selected(e) {
-    this.#t = e;
+  set selected(t) {
+    this.#i = t;
   }
   static get observedAttributes() {
     return ["total", "selected"];
@@ -1232,30 +1533,30 @@ class Et extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      ge
+      l(Ge)
     ];
   }
   connectedCallback() {
-    this.#a(), this.#c();
+    this.#r(), this.#l();
   }
-  #a() {
-    this.#i.classList.add("page-group"), this.#e.appendChild(this.#i), this.shadowRoot.appendChild(this.#e);
+  #r() {
+    this.#o.classList.add("page-group"), this.#t.appendChild(this.#o), this.shadowRoot.appendChild(this.#t);
   }
-  attributeChangedCallback(e, o, t) {
-    o !== t && (e === "total" && this.#r(t), e === "selected" && this.#n(t));
+  attributeChangedCallback(t, e, i) {
+    e !== i && (t === "total" && this.#a(i), t === "selected" && this.#n(i));
   }
-  #r(e) {
-    const o = Number(e);
-    !Number.isNaN(o) && Number.isInteger(o) && o > 0 ? this.total = o : (console.warn(`${e}は無効なtotal属性です。`), this.total = 1), this.#c();
+  #a(t) {
+    const e = Number(t);
+    !Number.isNaN(e) && Number.isInteger(e) && e > 0 ? this.total = e : (console.warn(`${t}は無効なtotal属性です。`), this.total = 1), this.#l();
   }
-  #n(e) {
-    const o = Number(e);
-    !Number.isNaN(o) && Number.isInteger(o) && o > 0 && o <= this.total ? this.selected = o : (console.warn(`${e}は無効なselected属性です。`), this.selected = 1), this.#b();
-  }
-  #c() {
-    this.#i.innerHTML = "", this.#s = [], this.#l().map((o) => this.#u(o)).forEach((o) => this.#i.appendChild(o));
+  #n(t) {
+    const e = Number(t);
+    !Number.isNaN(e) && Number.isInteger(e) && e > 0 && e <= this.total ? this.selected = e : (console.warn(`${t}は無効なselected属性です。`), this.selected = 1), this.#b();
   }
   #l() {
+    this.#o.innerHTML = "", this.#s = [], this.#c().map((e) => this.#u(e)).forEach((e) => this.#o.appendChild(e));
+  }
+  #c() {
     return [
       { type: "first", text: "最初へ", targetPage: 1 },
       {
@@ -1273,157 +1574,156 @@ class Et extends HTMLElement {
     ];
   }
   #d() {
-    const { firstVisiblePage: e, lastVisiblePage: o } = this.#h();
+    const { firstVisiblePage: t, lastVisiblePage: e } = this.#h();
     return Array.from(
-      { length: o - e + 1 },
-      (t, s) => {
-        const u = e + s;
+      { length: e - t + 1 },
+      (i, r) => {
+        const h = t + r;
         return {
           type: "page",
-          text: String(u),
-          targetPage: u
+          text: String(h),
+          targetPage: h
         };
       }
     );
   }
   #h() {
-    let e = Math.max(1, this.selected - wt);
-    e + R - 1 > this.total && (e = Math.max(1, this.total - R + 1));
-    const o = Math.min(
+    let t = Math.max(1, this.selected - We);
+    t + $ - 1 > this.total && (t = Math.max(1, this.total - $ + 1));
+    const e = Math.min(
       this.total,
-      e + R - 1
+      t + $ - 1
     );
-    return { firstVisiblePage: e, lastVisiblePage: o };
+    return { firstVisiblePage: t, lastVisiblePage: e };
   }
-  #u({ type: e, text: o, targetPage: t }) {
-    const s = this.#L(e, o, t);
-    this.#s.push(s);
-    const u = document.createElement("li");
-    return u.appendChild(s), u;
+  #u({ type: t, text: e, targetPage: i }) {
+    const r = this.#x(t, e, i);
+    this.#s.push(r);
+    const h = document.createElement("li");
+    return h.appendChild(r), h;
   }
-  #L(e, o, t) {
-    const s = document.createElement("button");
-    s.textContent = o, s.classList.add(e), e === "page" && this.#x(s, t);
-    const u = this.#p(e);
-    return s.disabled = u, s.onclick = () => this.#m(t), s;
+  #x(t, e, i) {
+    const r = document.createElement("button");
+    r.textContent = e, r.classList.add(t), t === "page" && this.#L(r, i);
+    const h = this.#p(t);
+    return r.disabled = h, r.onclick = () => this.#m(i), r;
   }
-  #x(e, o) {
-    e.setAttribute("aria-label", `${o}ページ目へ`), o === this.selected && (e.classList.add("selected"), e.setAttribute("aria-current", "page"));
+  #L(t, e) {
+    t.setAttribute("aria-label", `${e}ページ目へ`), e === this.selected && (t.classList.add("selected"), t.setAttribute("aria-current", "page"));
   }
-  #p(e) {
-    return e === "first" || e === "previous" ? this.selected === 1 : e === "next" || e === "last" ? this.selected === this.total : !1;
+  #p(t) {
+    return t === "first" || t === "previous" ? this.selected === 1 : t === "next" || t === "last" ? this.selected === this.total : !1;
   }
-  #m(e) {
-    this.#C(e) || (this.#y(e), this.#k(e), this.#b());
+  #m(t) {
+    this.#C(t) || (this.#k(t), this.#y(t), this.#b());
   }
-  #C(e) {
-    return e === this.selected || e < 1 || e > this.total;
+  #C(t) {
+    return t === this.selected || t < 1 || t > this.total;
   }
-  #y(e) {
-    this.selected = e, this.setAttribute("selected", String(e));
+  #k(t) {
+    this.selected = t, this.setAttribute("selected", String(t));
   }
-  #k(e) {
+  #y(t) {
     this.dispatchEvent(
       new CustomEvent("change", {
-        detail: { page: e }
+        detail: { page: t }
       })
     );
   }
   #b() {
-    const e = this.#l();
-    this.#s.forEach((o, t) => {
-      const s = e[t];
-      o.classList.contains("page") && this.#f(o, s), this.#g(o, s);
+    const t = this.#c();
+    this.#s.forEach((e, i) => {
+      const r = t[i];
+      e.classList.contains("page") && this.#f(e, r), this.#g(e, r);
     });
   }
-  #f(e, o) {
-    e.textContent = o.text;
-    const t = o.targetPage === this.selected;
-    e.classList.toggle("selected", t), e.setAttribute("aria-label", `${o.targetPage}ページ目へ`), t ? e.setAttribute("aria-current", "page") : e.removeAttribute("aria-current");
+  #f(t, e) {
+    t.textContent = e.text;
+    const i = e.targetPage === this.selected;
+    t.classList.toggle("selected", i), t.setAttribute("aria-label", `${e.targetPage}ページ目へ`), i ? t.setAttribute("aria-current", "page") : t.removeAttribute("aria-current");
   }
-  #g(e, o) {
-    const t = this.#p(o.type);
-    e.disabled = t, e.onclick = () => this.#m(o.targetPage);
+  #g(t, e) {
+    const i = this.#p(e.type);
+    t.disabled = i, t.onclick = () => this.#m(e.targetPage);
   }
 }
-customElements.get("sp-pagination") || customElements.define("sp-pagination", Et);
-const Ht = ':host{display:inline-block;max-width:100%}.base{display:flex;flex-wrap:wrap;gap:8px}.base:has(:focus-visible){outline:auto}.base.horizontal{flex-direction:row}.base.vertical{flex-direction:column}.item{display:inline-flex;justify-content:flex-start;align-items:flex-start}.text{color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6;padding-block:2.5px;cursor:pointer}.input{position:absolute;left:0;top:0;opacity:0;width:100%;height:100%;cursor:pointer}.radio{position:relative;flex-grow:0;flex-shrink:0;display:inline-flex;padding-block:4px;padding-inline:4px}.radio:before{content:"";display:inline-block;width:16px;height:16px;background:var(--color-semantic-surface-regular-1) 50% 50% no-repeat;border:1px solid var(--color-semantic-border-check-unchecked);border-radius:50%}.radio:has(.input:focus-visible):before{outline:auto;outline-offset:4px;border-color:var(--color-semantic-border-focus);box-shadow:0 0 0 3px var(--color-semantic-highlight-focus-ring-default)}.radio:has(.input:checked):before{background-color:var(--color-semantic-surface-regular-1);border-width:4px}.radio:has(.input:checked:not(:disabled)):before{border-color:var(--color-semantic-border-selected)}.item:has(.input:disabled) :is(.input,.text){cursor:not-allowed}.item:has(.input:disabled) .text{color:var(--color-semantic-text-disabled)}.item .radio:has(.input:disabled):before{background-color:var(--color-semantic-surface-check-disabled);border-color:var(--color-semantic-border-regular)}.item .radio:has(.input:checked:disabled):before{background-color:var(--color-semantic-surface-regular-1)}.item:has(:is(.input:hover,.text:hover)):not(:has(:is(.input:checked,.input:disabled))) .radio:before{background-color:var(--color-semantic-surface-regular-3)}.item:has(.input:checked:hover:not(:disabled)) .radio:before,.item:has(.input:checked:not(:disabled)):has(.text:hover) .radio:before{border-color:var(--color-semantic-border-selected-hover)}', ve = new CSSStyleSheet();
-ve.replaceSync(`${r} ${Ht}`);
-class St extends D {
+customElements.get("sp-pagination") || customElements.define("sp-pagination", Fe);
+const je = ':host{display:inline-block;max-width:100%}.base{display:flex;flex-wrap:wrap;gap:8px}.base:has(:focus-visible){outline:auto}.base.horizontal{flex-direction:row}.base.vertical{flex-direction:column}.item{display:inline-flex;justify-content:flex-start;align-items:flex-start}.text{color:var(--color-semantic-text-regular);font-size:12px;line-height:1.6;padding-block:2.5px;cursor:pointer}.input{position:absolute;left:0;top:0;opacity:0;width:100%;height:100%;cursor:pointer}.radio{position:relative;flex-grow:0;flex-shrink:0;display:inline-flex;padding-block:4px;padding-inline:4px}.radio:before{content:"";display:inline-block;width:16px;height:16px;background:var(--color-semantic-surface-regular-1) 50% 50% no-repeat;border:1px solid var(--color-semantic-border-check-unchecked);border-radius:50%}.radio:has(.input:focus-visible):before{outline:auto;outline-offset:4px;border-color:var(--color-semantic-border-focus);box-shadow:0 0 0 3px var(--color-semantic-highlight-focus-ring-default)}.radio:has(.input:checked):before{background-color:var(--color-semantic-surface-regular-1);border-width:4px}.radio:has(.input:checked:not(:disabled)):before{border-color:var(--color-semantic-border-selected)}.item:has(.input:disabled) :is(.input,.text){cursor:not-allowed}.item:has(.input:disabled) .text{color:var(--color-semantic-text-disabled)}.item .radio:has(.input:disabled):before{background-color:var(--color-semantic-surface-check-disabled);border-color:var(--color-semantic-border-regular)}.item .radio:has(.input:checked:disabled):before{background-color:var(--color-semantic-surface-regular-1)}.item:has(:is(.input:hover,.text:hover)):not(:has(:is(.input:checked,.input:disabled))) .radio:before{background-color:var(--color-semantic-surface-regular-3)}.item:has(.input:checked:hover:not(:disabled)) .radio:before,.item:has(.input:checked:not(:disabled)):has(.text:hover) .radio:before{border-color:var(--color-semantic-border-selected-hover)}';
+class Ne extends ct {
   constructor() {
     super(), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      ve
+      l(je)
     ];
   }
 }
-customElements.get("sp-radio-button-text-group") || customElements.define("sp-radio-button-text-group", St);
-const _t = ":host{display:block}.container{display:flex;justify-content:space-between;align-items:center;gap:16px}.main{display:flex;align-items:center;gap:16px}.heading{display:flex;align-items:center;gap:8px}.text-links{display:flex;flex-shrink:0;align-items:center;gap:16px}.buttons{display:flex;flex-shrink:0;align-items:center;gap:8px}h2{margin-block:3px;font-size:14px;font-weight:700;line-height:1.6;position:relative}", Le = new CSSStyleSheet();
-Le.replaceSync(`${n} ${r} ${_t}`);
-class Vt extends HTMLElement {
-  #o = document.createElement("h2");
+customElements.get("sp-radio-button-text-group") || customElements.define("sp-radio-button-text-group", Ne);
+const Oe = ":host{display:block}.container{display:flex;justify-content:space-between;align-items:center;gap:16px}.main{display:flex;align-items:center;gap:16px}.heading{display:flex;align-items:center;gap:8px}.text-links{display:flex;flex-shrink:0;align-items:center;gap:16px}.buttons{display:flex;flex-shrink:0;align-items:center;gap:8px}h2{margin-block:3px;font-size:14px;font-weight:700;line-height:1.6;position:relative}";
+class Ye extends HTMLElement {
+  #e = document.createElement("h2");
+  #i = document.createElement("slot");
   #t = document.createElement("slot");
-  #e = document.createElement("slot");
   /**
    * セクションタイトルのテキスト
    *
    * @attribute
    * @type {string}
    */
-  set text(e) {
-    this.#o.textContent = e;
+  set text(t) {
+    this.#e.textContent = t;
   }
   static get observedAttributes() {
     return ["text"];
   }
   constructor() {
-    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [Le], this.#t.name = "text-links", this.#e.name = "buttons";
+    super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+      ...this.shadowRoot.adoptedStyleSheets,
+      l(Oe)
+    ], this.#i.name = "text-links", this.#t.name = "buttons";
   }
   connectedCallback() {
-    this.shadowRoot.appendChild(this.#i()), this.#t.assignedElements().length === 0 && this.shadowRoot.querySelector(".text-links")?.remove(), this.#e.assignedElements().length === 0 && this.shadowRoot.querySelector(".buttons")?.remove();
+    this.shadowRoot.appendChild(this.#o()), this.#i.assignedElements().length === 0 && this.shadowRoot.querySelector(".text-links")?.remove(), this.#t.assignedElements().length === 0 && this.shadowRoot.querySelector(".buttons")?.remove();
   }
-  attributeChangedCallback(e, o, t) {
-    e === "text" && o !== t && (this.text = t);
+  attributeChangedCallback(t, e, i) {
+    t === "text" && e !== i && (this.text = i);
   }
-  #i() {
-    const e = document.createElement("div");
-    return e.classList.add("container"), e.appendChild(this.#s()), e.appendChild(this.#n()), e;
+  #o() {
+    const t = document.createElement("div");
+    return t.classList.add("container"), t.appendChild(this.#s()), t.appendChild(this.#n()), t;
   }
   #s() {
-    const e = document.createElement("div");
-    return e.classList.add("main"), e.appendChild(this.#a()), e.appendChild(this.#r()), e;
-  }
-  #a() {
-    const e = document.createElement("div");
-    return e.classList.add("heading"), e.appendChild(this.#o), e;
+    const t = document.createElement("div");
+    return t.classList.add("main"), t.appendChild(this.#r()), t.appendChild(this.#a()), t;
   }
   #r() {
-    const e = document.createElement("div");
-    return e.classList.add("text-links"), e.appendChild(this.#t), e;
+    const t = document.createElement("div");
+    return t.classList.add("heading"), t.appendChild(this.#e), t;
+  }
+  #a() {
+    const t = document.createElement("div");
+    return t.classList.add("text-links"), t.appendChild(this.#i), t;
   }
   #n() {
-    const e = document.createElement("div");
-    return e.classList.add("buttons"), e.appendChild(this.#e), e;
+    const t = document.createElement("div");
+    return t.classList.add("buttons"), t.appendChild(this.#t), t;
   }
 }
-customElements.get("sp-section-title") || customElements.define("sp-section-title", Vt);
-const Mt = ":host{display:inline-block;max-width:100%;line-height:0;vertical-align:middle}.base{display:inline-flex;max-width:100%}.item{flex:1 0 80px;position:relative;display:flex;align-items:stretch;min-width:80px}.radio{position:absolute;z-index:-1;width:100%;height:100%}.input{width:100%;height:100%;opacity:0}.text{flex-grow:1;display:flex;align-items:center;justify-content:center;padding-block:8px;padding-inline:8px;background-color:var(--color-semantic-surface-regular-2);border:1px solid var(--color-semantic-border-regular);border-right:none;color:var(--color-semantic-text-weak);font-size:10px;line-height:1.6;text-align:center}.text:hover{background-color:var(--color-semantic-surface-regular-4)}.item:first-child .text{border-radius:5px 0 0 5px}.item:last-child .text{border-radius:0 5px 5px 0;border-right:1px solid var(--color-semantic-border-regular)}.item:has(.input:focus-visible) .text{outline:auto;outline-offset:-4px;background-color:var(--color-semantic-surface-regular-4)}.item:has(.input:checked) .text{background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected);color:var(--color-semantic-text-inverse);font-weight:700;cursor:default}.item:has(.input:disabled) .text{background-color:var(--color-semantic-surface-regular-2);color:var(--color-semantic-text-disabled);cursor:not-allowed}", xe = new CSSStyleSheet();
-xe.replaceSync(`${r} ${Mt}`);
-class At extends D {
+customElements.get("sp-section-title") || customElements.define("sp-section-title", Ye);
+const Je = ":host{display:inline-block;max-width:100%;line-height:0;vertical-align:middle}.base{display:inline-flex;max-width:100%}.item{flex:1 0 80px;position:relative;display:flex;align-items:stretch;min-width:80px}.radio{position:absolute;z-index:-1;width:100%;height:100%}.input{width:100%;height:100%;opacity:0}.text{flex-grow:1;display:flex;align-items:center;justify-content:center;padding-block:8px;padding-inline:8px;background-color:var(--color-semantic-surface-regular-2);border:1px solid var(--color-semantic-border-regular);border-right:none;color:var(--color-semantic-text-weak);font-size:10px;line-height:1.6;text-align:center}.text:hover{background-color:var(--color-semantic-surface-regular-4)}.item:first-child .text{border-radius:5px 0 0 5px}.item:last-child .text{border-radius:0 5px 5px 0;border-right:1px solid var(--color-semantic-border-regular)}.item:has(.input:focus-visible) .text{outline:auto;outline-offset:-4px;background-color:var(--color-semantic-surface-regular-4)}.item:has(.input:checked) .text{background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected);color:var(--color-semantic-text-inverse);font-weight:700;cursor:default}.item:has(.input:disabled) .text{background-color:var(--color-semantic-surface-regular-2);color:var(--color-semantic-text-disabled);cursor:not-allowed}";
+class Qe extends ct {
   constructor() {
     super(), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      xe
+      l(Je)
     ];
   }
 }
-customElements.get("sp-segmented-control") || customElements.define("sp-segmented-control", At);
-const Zt = ".button{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-regular)}.button:hover{background-color:var(--color-semantic-surface-regular-4)}:host([selected]) .button{font-weight:700;color:var(--color-semantic-text-inverse);background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected)}:host([disabled]){pointer-events:none}:host([disabled]) .button{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-disabled);cursor:default}:host([selected]) .button:hover{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}", Ce = new CSSStyleSheet();
-Ce.replaceSync(`${n} ${r} ${Zt}`);
-class Tt extends HTMLElement {
-  #o = !1;
-  #t = !1;
-  #e = document.createElement("button");
+customElements.get("sp-segmented-control") || customElements.define("sp-segmented-control", Qe);
+const Xe = ".button{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-regular)}.button:hover{background-color:var(--color-semantic-surface-regular-4)}:host([selected]) .button{font-weight:700;color:var(--color-semantic-text-inverse);background-color:var(--color-semantic-surface-selected);border-color:var(--color-semantic-border-selected)}:host([disabled]){pointer-events:none}:host([disabled]) .button{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-disabled);cursor:default}:host([selected]) .button:hover{background-color:var(--color-semantic-surface-selected-hover);border-color:var(--color-semantic-border-selected-hover)}";
+class Ke extends HTMLElement {
+  #e = !1;
+  #i = !1;
+  #t = document.createElement("button");
   /**
    * タグの選択状態
    *
@@ -1432,10 +1732,10 @@ class Tt extends HTMLElement {
    * @default false
    */
   get selected() {
-    return this.#o;
+    return this.#e;
   }
-  set selected(e) {
-    this.#o !== e && (this.#o = e, e ? this.#e.classList.add("isSelected") : this.#e.classList.remove("isSelected"));
+  set selected(t) {
+    this.#e !== t && (this.#e = t, t ? this.#t.classList.add("isSelected") : this.#t.classList.remove("isSelected"));
   }
   /**
    * タグの無効状態
@@ -1445,10 +1745,10 @@ class Tt extends HTMLElement {
    * @default false
    */
   get disabled() {
-    return this.#t;
+    return this.#i;
   }
-  set disabled(e) {
-    this.#t !== e && (this.#t = e, e ? (this.setAttribute("aria-disabled", "true"), this.#e.disabled = !0, this.#e.classList.add("isDisabled")) : (this.removeAttribute("aria-disabled"), this.#e.disabled = !1, this.#e.classList.remove("isDisabled")));
+  set disabled(t) {
+    this.#i !== t && (this.#i = t, t ? (this.setAttribute("aria-disabled", "true"), this.#t.disabled = !0, this.#t.classList.add("isDisabled")) : (this.removeAttribute("aria-disabled"), this.#t.disabled = !1, this.#t.classList.remove("isDisabled")));
   }
   static get observedAttributes() {
     return ["selected", "disabled"];
@@ -1456,46 +1756,45 @@ class Tt extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      Ce
+      l(Xe)
     ], this.selected = !1, this.disabled = !1;
   }
   connectedCallback() {
-    this.#o = this.hasAttribute("selected"), this.#t = this.hasAttribute("disabled"), this.#e.classList.add("button"), this.#e.setAttribute("type", "button"), this.#e.addEventListener("click", this.#i.bind(this)), this.#s();
+    this.#e = this.hasAttribute("selected"), this.#i = this.hasAttribute("disabled"), this.#t.classList.add("button"), this.#t.setAttribute("type", "button"), this.#t.addEventListener("click", this.#o.bind(this)), this.#s();
   }
-  attributeChangedCallback(e, o, t) {
-    if (o !== t)
-      switch (e) {
+  attributeChangedCallback(t, e, i) {
+    if (e !== i)
+      switch (t) {
         case "selected":
-          this.selected = t === "true" || t === "";
+          this.selected = i === "true" || i === "";
           break;
         case "disabled":
-          this.disabled = t === "true" || t === "";
+          this.disabled = i === "true" || i === "";
           break;
       }
   }
-  #i(e) {
+  #o(t) {
     this.disabled || this.dispatchEvent(
-      new CustomEvent("click", { detail: { originalEvent: e } })
+      new CustomEvent("click", { detail: { originalEvent: t } })
     );
   }
   #s() {
     this.shadowRoot.textContent = "";
-    const e = document.createElement("slot");
-    this.#e.textContent = "", this.#e.appendChild(e), this.#t ? this.#e.disabled = !0 : this.#e.disabled = !1, this.shadowRoot.appendChild(this.#e);
+    const t = document.createElement("slot");
+    this.#t.textContent = "", this.#t.appendChild(t), this.#i ? this.#t.disabled = !0 : this.#t.disabled = !1, this.shadowRoot.appendChild(this.#t);
   }
 }
-customElements.get("sp-tag-clickable") || customElements.define("sp-tag-clickable", Tt);
-const Rt = ".link{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;text-decoration:none;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-text-link)}.link:hover{background-color:var(--color-semantic-surface-regular-4)}.link:focus{background-color:var(--color-semantic-surface-regular-4)}:host([disabled]){pointer-events:none}:host([disabled]) .link{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-disabled)}", ye = new CSSStyleSheet();
-ye.replaceSync(`${n} ${r} ${Rt}`);
-class zt extends HTMLElement {
+customElements.get("sp-tag-clickable") || customElements.define("sp-tag-clickable", Ke);
+const $e = ".link{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;text-decoration:none;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-text-link)}.link:hover{background-color:var(--color-semantic-surface-regular-4)}.link:focus{background-color:var(--color-semantic-surface-regular-4)}:host([disabled]){pointer-events:none}:host([disabled]) .link{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular);color:var(--color-semantic-text-disabled)}";
+class ti extends HTMLElement {
   constructor() {
-    super(), this.href = "", this.#o = !1, this.#t = document.createElement("a"), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
+    super(), this.href = "", this.#e = !1, this.#i = document.createElement("a"), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      ye
+      l($e)
     ];
   }
-  #o;
-  #t;
+  #e;
+  #i;
   /**
    * タグの無効状態
    *
@@ -1504,41 +1803,40 @@ class zt extends HTMLElement {
    * @default false
    */
   get disabled() {
-    return this.#o;
+    return this.#e;
   }
-  set disabled(e) {
-    this.#o !== e && (this.#o = e, e ? (this.setAttribute("aria-disabled", "true"), this.setAttribute("tabindex", "-1")) : (this.removeAttribute("aria-disabled"), this.removeAttribute("tabindex")));
+  set disabled(t) {
+    this.#e !== t && (this.#e = t, t ? (this.setAttribute("aria-disabled", "true"), this.setAttribute("tabindex", "-1")) : (this.removeAttribute("aria-disabled"), this.removeAttribute("tabindex")));
   }
   static get observedAttributes() {
     return ["href", "disabled"];
   }
   connectedCallback() {
-    this.#e();
+    this.#t();
   }
-  attributeChangedCallback(e, o, t) {
-    if (o !== t)
-      switch (e) {
+  attributeChangedCallback(t, e, i) {
+    if (e !== i)
+      switch (t) {
         case "href":
-          this.#t.setAttribute("href", t);
+          this.#i.setAttribute("href", i);
           break;
         case "disabled":
-          this.disabled = t === "true" || t === "";
+          this.disabled = i === "true" || i === "";
           break;
       }
   }
-  #e() {
-    this.shadowRoot.textContent = "", this.#t.classList.add("link");
-    const e = document.createElement("slot");
-    this.#t.appendChild(e), this.shadowRoot.appendChild(this.#t);
+  #t() {
+    this.shadowRoot.textContent = "", this.#i.classList.add("link");
+    const t = document.createElement("slot");
+    this.#i.appendChild(t), this.shadowRoot.appendChild(this.#i);
   }
 }
-customElements.get("sp-tag-link") || customElements.define("sp-tag-link", zt);
-const Bt = ".base{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center}.type__gray{background-color:var(--color-semantic-surface-temp-tag-gray);border-color:var(--color-semantic-border-temp-tag-gray);color:var(--color-semantic-text-regular)}.type__green.light{background-color:var(--color-semantic-surface-temp-tag-green);border-color:var(--color-semantic-border-temp-tag-green);color:var(--color-semantic-text-success)}.type__green:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkgreen);border-color:var(--color-semantic-border-temp-tag-darkgreen);color:var(--color-semantic-text-inverse)}.type__red.light{background-color:var(--color-semantic-surface-temp-tag-red);border-color:var(--color-semantic-border-temp-tag-red);color:var(--color-semantic-text-danger)}.type__red:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkred);border-color:var(--color-semantic-border-temp-tag-darkred);color:var(--color-semantic-text-inverse)}.type__yellow.light{background-color:var(--color-semantic-surface-temp-tag-yellow);border-color:var(--color-semantic-border-temp-tag-yellow);color:var(--color-semantic-text-warning)}.type__yellow:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkyellow);border-color:var(--color-semantic-border-temp-tag-darkyellow);color:var(--color-semantic-text-inverse)}.type__blue.light{background-color:var(--color-semantic-surface-temp-tag-marine);border-color:var(--color-semantic-border-temp-tag-marine);color:var(--color-semantic-text-marine)}.type__blue:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkmarine);border-color:var(--color-semantic-border-temp-tag-darkmarine);color:var(--color-semantic-text-inverse)}", ke = new CSSStyleSheet();
-ke.replaceSync(`${n} ${r} ${Bt}`);
-class $t extends HTMLElement {
-  #o = "gray";
-  #t = !0;
-  #e = document.createElement("div");
+customElements.get("sp-tag-link") || customElements.define("sp-tag-link", ti);
+const ei = ".base{display:inline-flex;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center}.type__gray{background-color:var(--color-semantic-surface-temp-tag-gray);border-color:var(--color-semantic-border-temp-tag-gray);color:var(--color-semantic-text-regular)}.type__green.light{background-color:var(--color-semantic-surface-temp-tag-green);border-color:var(--color-semantic-border-temp-tag-green);color:var(--color-semantic-text-success)}.type__green:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkgreen);border-color:var(--color-semantic-border-temp-tag-darkgreen);color:var(--color-semantic-text-inverse)}.type__red.light{background-color:var(--color-semantic-surface-temp-tag-red);border-color:var(--color-semantic-border-temp-tag-red);color:var(--color-semantic-text-danger)}.type__red:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkred);border-color:var(--color-semantic-border-temp-tag-darkred);color:var(--color-semantic-text-inverse)}.type__yellow.light{background-color:var(--color-semantic-surface-temp-tag-yellow);border-color:var(--color-semantic-border-temp-tag-yellow);color:var(--color-semantic-text-warning)}.type__yellow:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkyellow);border-color:var(--color-semantic-border-temp-tag-darkyellow);color:var(--color-semantic-text-inverse)}.type__blue.light{background-color:var(--color-semantic-surface-temp-tag-marine);border-color:var(--color-semantic-border-temp-tag-marine);color:var(--color-semantic-text-marine)}.type__blue:not(.light){background-color:var(--color-semantic-surface-temp-tag-darkmarine);border-color:var(--color-semantic-border-temp-tag-darkmarine);color:var(--color-semantic-text-inverse)}";
+class ii extends HTMLElement {
+  #e = "gray";
+  #i = !0;
+  #t = document.createElement("div");
   /**
    * タグの色の種類（"gray"、"green"、"red"、"yellow"、または "blue"）
    * - "gray": グレー
@@ -1552,10 +1850,10 @@ class $t extends HTMLElement {
    * @default "gray"
    */
   get type() {
-    return this.#o;
+    return this.#e;
   }
-  set type(e) {
-    this.#o !== e && (this.#e.classList.remove(`type__${this.#o}`), this.#a(e) ? (this.#o = e, this.#e.classList.add(`type__${e}`), this.light = this.hasAttribute("light")) : (console.warn(`${e}は無効なtype属性です。`), this.#o = "gray", this.#e.classList.add("type__gray")));
+  set type(t) {
+    this.#e !== t && (this.#t.classList.remove(`type__${this.#e}`), this.#r(t) ? (this.#e = t, this.#t.classList.add(`type__${t}`), this.light = this.hasAttribute("light")) : (console.warn(`${t}は無効なtype属性です。`), this.#e = "gray", this.#t.classList.add("type__gray")));
   }
   /**
    * ライトモードの有効状態（※grayカラーはライトモードのみ）
@@ -1565,10 +1863,10 @@ class $t extends HTMLElement {
    * @default true
    */
   get light() {
-    return this.#t;
+    return this.#i;
   }
-  set light(e) {
-    this.#t !== e && (e ? this.#e.classList.add("light") : this.#e.classList.remove("light"), this.#t = e, e ? this.setAttribute("light", "") : this.removeAttribute("light"));
+  set light(t) {
+    this.#i !== t && (t ? this.#t.classList.add("light") : this.#t.classList.remove("light"), this.#i = t, t ? this.setAttribute("light", "") : this.removeAttribute("light"));
   }
   static get observedAttributes() {
     return ["type", "light"];
@@ -1576,50 +1874,49 @@ class $t extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      ke
+      l(ei)
     ];
   }
   connectedCallback() {
-    this.#o = this.#i(), this.#t = this.#s(), this.#r();
+    this.#e = this.#o(), this.#i = this.#s(), this.#a();
   }
-  attributeChangedCallback(e, o, t) {
-    if (o !== t)
-      switch (e) {
+  attributeChangedCallback(t, e, i) {
+    if (e !== i)
+      switch (t) {
         case "type":
-          this.type = t;
+          this.type = i;
           break;
         case "light":
-          this.light = t === "true" || t === "";
+          this.light = i === "true" || i === "";
           break;
       }
   }
-  #i() {
-    const e = this.getAttribute("type");
-    return this.#a(e) ? e : "gray";
+  #o() {
+    const t = this.getAttribute("type");
+    return this.#r(t) ? t : "gray";
   }
   #s() {
-    return this.#o === "gray" ? !0 : this.hasAttribute("light");
+    return this.#e === "gray" ? !0 : this.hasAttribute("light");
   }
-  #a(e) {
-    return e === "gray" || e === "green" || e === "red" || e === "yellow" || e === "blue";
+  #r(t) {
+    return t === "gray" || t === "green" || t === "red" || t === "yellow" || t === "blue";
   }
-  #r() {
-    this.shadowRoot.textContent = "", this.#e.classList.add("base"), this.#e.classList.add(`type__${this.#o}`), this.#t && this.#e.classList.add("light");
-    const e = document.createElement("slot");
-    this.#e.appendChild(e), this.shadowRoot.appendChild(this.#e);
+  #a() {
+    this.shadowRoot.textContent = "", this.#t.classList.add("base"), this.#t.classList.add(`type__${this.#e}`), this.#i && this.#t.classList.add("light");
+    const t = document.createElement("slot");
+    this.#t.appendChild(t), this.shadowRoot.appendChild(this.#t);
   }
 }
-customElements.get("sp-tag-liquid") || customElements.define("sp-tag-liquid", $t);
-const Pt = ".base{display:inline-flex;vertical-align:middle;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;gap:4px;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular)}.base:hover{background-color:var(--color-semantic-surface-regular-4)}.label{color:var(--color-semantic-text-regular)}.remove{color:var(--color-primitive-neutral-100);display:flex;align-items:center;justify-content:center}.drag-icon{display:flex;align-items:center;justify-content:center;color:var(--color-semantic-text-regular);cursor:grab;margin-right:2px}.drag-icon:active{cursor:grabbing}.base.dragging{opacity:.8;box-shadow:0 2px 4px #0003}:host([disabled]) .base{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular)}:host([disabled]) .label{color:var(--color-semantic-text-disabled)}:host([disabled]) .remove{color:var(--color-semantic-text-disabled)}:host([disabled]) .drag-icon{color:var(--color-semantic-text-disabled);cursor:default}", we = new CSSStyleSheet();
-we.replaceSync(`${n} ${r} ${Pt}`);
-class It extends HTMLElement {
-  #o = !1;
-  #t = !1;
-  #e = document.createElement("button");
-  #i = null;
+customElements.get("sp-tag-liquid") || customElements.define("sp-tag-liquid", ii);
+const oi = ".base{display:inline-flex;vertical-align:middle;align-items:center;font-size:12px;border-radius:2px;line-height:1.6;padding-block:.5px;padding-inline:8px;white-space:nowrap;box-sizing:border-box;border:1px solid;justify-content:center;gap:4px;background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular)}.base:hover{background-color:var(--color-semantic-surface-regular-4)}.label{color:var(--color-semantic-text-regular)}.remove{color:var(--color-primitive-neutral-100);display:flex;align-items:center;justify-content:center}.drag-icon{display:flex;align-items:center;justify-content:center;color:var(--color-semantic-text-regular);cursor:grab;margin-right:2px}.drag-icon:active{cursor:grabbing}.base.dragging{opacity:.8;box-shadow:0 2px 4px #0003}:host([disabled]) .base{background-color:var(--color-semantic-surface-regular-2);border-color:var(--color-semantic-border-regular)}:host([disabled]) .label{color:var(--color-semantic-text-disabled)}:host([disabled]) .remove{color:var(--color-semantic-text-disabled)}:host([disabled]) .drag-icon{color:var(--color-semantic-text-disabled);cursor:default}";
+class si extends HTMLElement {
+  #e = !1;
+  #i = !1;
+  #t = document.createElement("button");
+  #o = null;
   #s = 0;
-  #a = 0;
-  #r = !1;
+  #r = 0;
+  #a = !1;
   /**
    * タグの無効状態
    *
@@ -1628,10 +1925,10 @@ class It extends HTMLElement {
    * @default false
    */
   get disabled() {
-    return this.#o;
+    return this.#e;
   }
-  set disabled(e) {
-    this.#o !== e && (this.#o = e, this.#e.disabled = e, this.#d());
+  set disabled(t) {
+    this.#e !== t && (this.#e = t, this.#t.disabled = t, this.#d());
   }
   /**
    * タグのドラッグ可能状態
@@ -1641,10 +1938,10 @@ class It extends HTMLElement {
    * @default false
    */
   get draggable() {
-    return this.#t;
+    return this.#i;
   }
-  set draggable(e) {
-    this.#t !== e && (this.#t = e, this.#d());
+  set draggable(t) {
+    this.#i !== t && (this.#i = t, this.#d());
   }
   static get observedAttributes() {
     return ["disabled", "draggable"];
@@ -1652,97 +1949,99 @@ class It extends HTMLElement {
   constructor() {
     super(), this.attachShadow({ mode: "open" }), this.shadowRoot.adoptedStyleSheets = [
       ...this.shadowRoot.adoptedStyleSheets,
-      we
+      l(oi)
     ], this.disabled = !1;
   }
   connectedCallback() {
-    this.#e.classList.add("remove"), this.#e.setAttribute("aria-label", "削除"), this.#e.setAttribute("type", "button");
-    const e = document.createElement("sp-icon");
-    e.size = "small", e.type = "close", e.setAttribute("aria-hidden", "true"), this.#e.appendChild(e), this.#e.addEventListener(
+    this.#t.classList.add("remove"), this.#t.setAttribute("aria-label", "削除"), this.#t.setAttribute("type", "button");
+    const t = document.createElement("sp-icon");
+    t.size = "small", t.type = "close", t.setAttribute("aria-hidden", "true"), this.#t.appendChild(t), this.#t.addEventListener(
       "click",
       () => this.dispatchEvent(new CustomEvent("remove"))
     ), this.#d();
   }
-  attributeChangedCallback(e, o, t) {
-    if (o !== t)
-      switch (e) {
+  attributeChangedCallback(t, e, i) {
+    if (e !== i)
+      switch (t) {
         case "disabled":
-          this.disabled = t === "true" || t === "";
+          this.disabled = i === "true" || i === "";
           break;
         case "draggable":
-          this.draggable = t === "true" || t === "";
+          this.draggable = i === "true" || i === "";
           break;
       }
   }
-  #n = (e) => {
-    if (this.#o) return;
-    this.#r = !0, this.#s = e.clientX, this.#a = e.clientY;
-    const o = this.shadowRoot?.querySelector(".base");
-    o && o.classList.add("dragging"), this.dispatchEvent(
+  #n = (t) => {
+    if (this.#e) return;
+    this.#a = !0, this.#s = t.clientX, this.#r = t.clientY;
+    const e = this.shadowRoot?.querySelector(".base");
+    e && e.classList.add("dragging"), this.dispatchEvent(
       new CustomEvent("dragstart", {
-        detail: { x: e.clientX, y: e.clientY }
+        detail: { x: t.clientX, y: t.clientY }
       })
-    ), document.addEventListener("mousemove", this.#c), document.addEventListener("mouseup", this.#l), e.preventDefault();
+    ), document.addEventListener("mousemove", this.#l), document.addEventListener("mouseup", this.#c), t.preventDefault();
   };
-  #c = (e) => {
-    if (!this.#r) return;
-    const o = e.clientX - this.#s, t = e.clientY - this.#a;
+  #l = (t) => {
+    if (!this.#a) return;
+    const e = t.clientX - this.#s, i = t.clientY - this.#r;
     this.dispatchEvent(
       new CustomEvent("drag", {
         detail: {
-          x: e.clientX,
-          y: e.clientY,
-          deltaX: o,
-          deltaY: t
+          x: t.clientX,
+          y: t.clientY,
+          deltaX: e,
+          deltaY: i
         }
       })
     );
   };
-  #l = (e) => {
-    if (!this.#r) return;
-    this.#r = !1;
-    const o = this.shadowRoot?.querySelector(".base");
-    o && o.classList.remove("dragging"), this.dispatchEvent(
+  #c = (t) => {
+    if (!this.#a) return;
+    this.#a = !1;
+    const e = this.shadowRoot?.querySelector(".base");
+    e && e.classList.remove("dragging"), this.dispatchEvent(
       new CustomEvent("dragend", {
-        detail: { x: e.clientX, y: e.clientY }
+        detail: { x: t.clientX, y: t.clientY }
       })
-    ), document.removeEventListener("mousemove", this.#c), document.removeEventListener("mouseup", this.#l);
+    ), document.removeEventListener("mousemove", this.#l), document.removeEventListener("mouseup", this.#c);
   };
   disconnectedCallback() {
-    this.#i && this.#i.removeEventListener("mousedown", this.#n), document.removeEventListener("mousemove", this.#c), document.removeEventListener("mouseup", this.#l);
+    this.#o && this.#o.removeEventListener("mousedown", this.#n), document.removeEventListener("mousemove", this.#l), document.removeEventListener("mouseup", this.#c);
   }
   #d() {
     this.shadowRoot.textContent = "";
-    const e = document.createElement("div");
-    e.classList.add("base"), e.setAttribute("role", "tag"), this.#t && (this.#i = document.createElement("sp-icon"), this.#i.setAttribute("type", "drag"), this.#i.setAttribute("size", "small"), this.#i.setAttribute("aria-hidden", "true"), this.#i.classList.add("drag-icon"), this.#i.style.cursor = this.#o ? "default" : "grab", this.#i.setAttribute("role", "button"), this.#i.setAttribute("aria-label", "ドラッグハンドル"), this.#o || this.#i.addEventListener("mousedown", this.#n), e.appendChild(this.#i));
-    const o = document.createElement("span");
-    o.classList.add("label");
-    const t = document.createElement("slot");
-    o.appendChild(t), e.appendChild(o), e.appendChild(this.#e), this.shadowRoot.appendChild(e);
+    const t = document.createElement("div");
+    t.classList.add("base"), t.setAttribute("role", "tag"), this.#i && (this.#o = document.createElement("sp-icon"), this.#o.setAttribute("type", "drag"), this.#o.setAttribute("size", "small"), this.#o.setAttribute("aria-hidden", "true"), this.#o.classList.add("drag-icon"), this.#o.style.cursor = this.#e ? "default" : "grab", this.#o.setAttribute("role", "button"), this.#o.setAttribute("aria-label", "ドラッグハンドル"), this.#e || this.#o.addEventListener("mousedown", this.#n), t.appendChild(this.#o));
+    const e = document.createElement("span");
+    e.classList.add("label");
+    const i = document.createElement("slot");
+    e.appendChild(i), t.appendChild(e), t.appendChild(this.#t), this.shadowRoot.appendChild(t);
   }
 }
-customElements.get("sp-tag-removable") || customElements.define("sp-tag-removable", It);
+customElements.get("sp-tag-removable") || customElements.define("sp-tag-removable", si);
 export {
-  ie as SpButton,
-  Ue as SpCheckbox,
-  We as SpCheckboxList,
-  je as SpCheckboxText,
-  Ye as SpDefinitionList,
-  Je as SpDefinitionListDd,
-  qe as SpDefinitionListDt,
-  at as SpDropdownAction,
-  tt as SpDropdownActionItem,
-  dt as SpDropdownDialog,
-  ut as SpElementTitle,
-  U as SpIcon,
-  gt as SpNotificationBar,
-  yt as SpNotificationMessage,
-  Et as SpPagination,
-  St as SpRadioButtonTextGroup,
-  Vt as SpSectionTitle,
-  At as SpSegmentedControl,
-  Tt as SpTagClickable,
-  zt as SpTagLink,
-  $t as SpTagLiquid,
-  It as SpTagRemovable
+  wt as SpButton,
+  $t as SpCheckbox,
+  ee as SpCheckboxList,
+  oe as SpCheckboxText,
+  re as SpDefinitionList,
+  ne as SpDefinitionListDd,
+  le as SpDefinitionListDt,
+  ve as SpDropdownAction,
+  pe as SpDropdownActionItem,
+  ke as SpDropdownDialog,
+  Ee as SpElementTitle,
+  lt as SpIcon,
+  He as SpLabel,
+  Be as SpNotificationBar,
+  qe as SpNotificationMessage,
+  Fe as SpPagination,
+  Ne as SpRadioButtonTextGroup,
+  Ye as SpSectionTitle,
+  Qe as SpSegmentedControl,
+  Ke as SpTagClickable,
+  ti as SpTagLink,
+  ii as SpTagLiquid,
+  si as SpTagRemovable,
+  st as SpTextField
 };

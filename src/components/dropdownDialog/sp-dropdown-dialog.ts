@@ -1,8 +1,6 @@
 import "../button/sp-button";
 
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import dropdownDialogStyle from "./dropdown-dialog.css?inline";
 
 type Position = "left" | "right";
@@ -12,9 +10,6 @@ const positions: Position[] = ["left", "right"];
 function isValidPosition(value: string): value is Position {
   return positions.some((position) => position === value);
 }
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownDialogStyle}`);
 
 /**
  * SpDropdownDialogは、デザインシステム2.0におけるドロップダウンダイアログコンポーネントです。
@@ -119,7 +114,7 @@ export class SpDropdownDialog extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(dropdownDialogStyle),
     ];
 
     this.open = false;

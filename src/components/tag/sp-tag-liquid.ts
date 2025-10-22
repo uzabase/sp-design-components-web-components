@@ -1,10 +1,5 @@
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import tagLiquidStyle from "./tag-liquid.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${tagLiquidStyle}`);
 
 export type SpTagLiquidType = "gray" | "green" | "red" | "yellow" | "blue";
 export type SpTagLiquidMode = "light" | "dark";
@@ -92,7 +87,7 @@ export class SpTagLiquid extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(tagLiquidStyle),
     ];
   }
 

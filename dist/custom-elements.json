@@ -4,6 +4,34 @@
   "modules": [
     {
       "kind": "javascript-module",
+      "path": "src/components/styles.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "makeStyleSheet",
+          "parameters": [
+            {
+              "name": "styles",
+              "type": {
+                "text": "string[]"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "makeStyleSheet",
+          "declaration": {
+            "name": "makeStyleSheet",
+            "module": "src/components/styles.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/button/sp-button.ts",
       "declarations": [
         {
@@ -32,7 +60,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(buttonStyle), ]"
             },
             {
               "kind": "field",
@@ -102,7 +130,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(checkmarkStyle, checkboxListStyle), ]"
             }
           ],
           "superclass": {
@@ -154,7 +182,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(checkmarkStyle, checkboxTextStyle), ]"
             }
           ],
           "superclass": {
@@ -200,7 +228,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(checkmarkStyle, checkboxStyle), ]"
             }
           ],
           "superclass": {
@@ -408,7 +436,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]",
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(buttonStyle, dropdownActionButtonStyle), ]",
               "inheritedFrom": {
                 "name": "SpButton",
                 "module": "src/components/button/sp-button.ts"
@@ -513,7 +541,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(dropdownActionItemStyle), ]"
             }
           ],
           "superclass": {
@@ -603,7 +631,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(dropdownActionStyle), ]"
             }
           ],
           "attributes": [
@@ -730,7 +758,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(dropdownDialogStyle), ]"
             }
           ],
           "attributes": [
@@ -826,7 +854,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[styles]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(elementTitleStyle), ]"
             },
             {
               "kind": "field",
@@ -1025,7 +1053,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(notificationBarStyle), ]"
             }
           ],
           "events": [
@@ -1138,7 +1166,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(notificationMessageStyle), ]"
             }
           ],
           "attributes": [
@@ -1230,7 +1258,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(paginationStyle), ]"
             }
           ],
           "events": [
@@ -1310,7 +1338,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(radioButtonTextGroupStyle), ]"
             }
           ],
           "superclass": {
@@ -1375,7 +1403,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[styles]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(sectionTitleStyle), ]"
             },
             {
               "kind": "field",
@@ -1444,7 +1472,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(segmentedControlStyle), ]"
             }
           ],
           "superclass": {
@@ -1516,7 +1544,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(tagClickableStyle), ]"
             }
           ],
           "events": [
@@ -1616,7 +1644,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(tagLinkStyle), ]"
             }
           ],
           "attributes": [
@@ -1707,7 +1735,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(tagLiquidStyle), ]"
             }
           ],
           "attributes": [
@@ -1798,7 +1826,7 @@
               "type": {
                 "text": "array"
               },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, styles, ]"
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(tagRemovableStyle), ]"
             }
           ],
           "events": [
@@ -1865,6 +1893,293 @@
           "declaration": {
             "name": "SpTagRemovable",
             "module": "src/components/tag/sp-tag-removable.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/form/character-counter/sp-character-counter.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SpCharacterCounter",
+          "members": [
+            {
+              "kind": "field",
+              "name": "current"
+            },
+            {
+              "kind": "field",
+              "name": "max"
+            },
+            {
+              "kind": "field",
+              "name": "adoptedStyleSheets",
+              "type": {
+                "text": "array"
+              },
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(characterCounterStyle), ]"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "current"
+            },
+            {
+              "name": "max"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-character-counter",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpCharacterCounter",
+          "declaration": {
+            "name": "SpCharacterCounter",
+            "module": "src/components/form/character-counter/sp-character-counter.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-character-counter",
+          "declaration": {
+            "name": "SpCharacterCounter",
+            "module": "src/components/form/character-counter/sp-character-counter.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/form/error-text/sp-error-text.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SpErrorText",
+          "members": [
+            {
+              "kind": "field",
+              "name": "adoptedStyleSheets",
+              "type": {
+                "text": "array"
+              },
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(errorTextStyle), ]"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "id"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-error-text",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpErrorText",
+          "declaration": {
+            "name": "SpErrorText",
+            "module": "src/components/form/error-text/sp-error-text.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-error-text",
+          "declaration": {
+            "name": "SpErrorText",
+            "module": "src/components/form/error-text/sp-error-text.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/form/label/sp-label.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SpLabel",
+          "members": [
+            {
+              "kind": "field",
+              "name": "required"
+            },
+            {
+              "kind": "field",
+              "name": "adoptedStyleSheets",
+              "type": {
+                "text": "array"
+              },
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(labelStyle), ]"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "required"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-label",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpLabel",
+          "declaration": {
+            "name": "SpLabel",
+            "module": "src/components/form/label/sp-label.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-label",
+          "declaration": {
+            "name": "SpLabel",
+            "module": "src/components/form/label/sp-label.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/form/text-field/sp-text-field.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SpTextField",
+          "members": [
+            {
+              "kind": "field",
+              "name": "formAssociated",
+              "type": {
+                "text": "boolean"
+              },
+              "static": true,
+              "default": "true"
+            },
+            {
+              "kind": "field",
+              "name": "value"
+            },
+            {
+              "kind": "field",
+              "name": "name"
+            },
+            {
+              "kind": "field",
+              "name": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "required"
+            },
+            {
+              "kind": "field",
+              "name": "characterLimit"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "type"
+            },
+            {
+              "kind": "field",
+              "name": "autocomplete"
+            },
+            {
+              "kind": "field",
+              "name": "label"
+            },
+            {
+              "kind": "field",
+              "name": "orientation"
+            },
+            {
+              "kind": "field",
+              "name": "adoptedStyleSheets",
+              "type": {
+                "text": "array"
+              },
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(textFieldStyle), ]"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value"
+            },
+            {
+              "name": "placeholder"
+            },
+            {
+              "name": "disabled"
+            },
+            {
+              "name": "character-limit"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "required"
+            },
+            {
+              "name": "type"
+            },
+            {
+              "name": "autocomplete"
+            },
+            {
+              "name": "label"
+            },
+            {
+              "name": "orientation"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-text-field",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpTextField",
+          "declaration": {
+            "name": "SpTextField",
+            "module": "src/components/form/text-field/sp-text-field.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-text-field",
+          "declaration": {
+            "name": "SpTextField",
+            "module": "src/components/form/text-field/sp-text-field.ts"
           }
         }
       ]

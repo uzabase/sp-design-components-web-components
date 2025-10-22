@@ -9,6 +9,8 @@ export { SpDropdownAction } from "./components/dropdownAction/sp-dropdown-action
 export { SpDropdownActionItem } from "./components/dropdownAction/sp-dropdown-action-item";
 export { SpDropdownDialog } from "./components/dropdownDialog/sp-dropdown-dialog";
 export { SpElementTitle } from "./components/elementTitle/sp-element-title";
+export { SpLabel } from "./components/form/label/sp-label";
+export { SpTextField } from "./components/form/text-field/sp-text-field";
 export { SpIcon } from "./components/icon/sp-icon";
 export { SpNotificationBar } from "./components/notificationBar/sp-notification-bar";
 export { SpNotificationMessage } from "./components/notificationMessage/sp-notification-message";

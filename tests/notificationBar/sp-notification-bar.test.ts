@@ -14,16 +14,18 @@ function getSpNotificationBar() {
   return document.querySelector("sp-notification-bar") as SpNotificationBar;
 }
 
+function getSlot() {
+  const spNotificationBar = getSpNotificationBar();
+  const shadowRoot = spNotificationBar.shadowRoot!;
+  return shadowRoot.querySelector("slot") as HTMLSlotElement;
+}
+
 function getIconByLabel(label: IconLabel) {
   return screen.getByShadowLabelText(label);
 }
 
 function getCloseButton() {
   return screen.getByShadowRole("button");
-}
-
-function queryContentByText(text: string) {
-  return screen.queryByShadowText(text);
 }
 
 describe("sp-notification-bar", () => {
@@ -80,9 +82,10 @@ describe("sp-notification-bar", () => {
         </sp-notification-bar>
       `;
 
-      const content = queryContentByText("Hello, World!");
+      const slot = getSlot();
+      const [text] = slot.assignedNodes();
 
-      expect(content).not.toBeNull();
+      expect(text.textContent!.trim()).toBe("Hello, World!");
     });
   });
 

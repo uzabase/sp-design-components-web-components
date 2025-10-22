@@ -13,12 +13,14 @@ function getSpNotificationMessage() {
   ) as SpNotificationMessage;
 }
 
-function getIcon() {
-  return screen.getByShadowRole("img", { hidden: true });
+function getSlot() {
+  const spNotificationMessage = getSpNotificationMessage();
+  const shadowRoot = spNotificationMessage.shadowRoot!;
+  return shadowRoot.querySelector("slot") as HTMLSlotElement;
 }
 
-function queryContentByText(text: string) {
-  return screen.queryByShadowText(text);
+function getIcon() {
+  return screen.getByShadowRole("img", { hidden: true });
 }
 
 describe("sp-notification-message", () => {
@@ -70,9 +72,10 @@ describe("sp-notification-message", () => {
         </sp-notification-message>
       `;
 
-      const content = queryContentByText("Hello, World!");
+      const slot = getSlot();
+      const [text] = slot.assignedNodes();
 
-      expect(content).not.toBeNull();
+      expect(text.textContent!.trim()).toBe("Hello, World!");
     });
   });
 });

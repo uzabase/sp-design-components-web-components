@@ -1,12 +1,7 @@
 import "../icon/sp-icon";
 
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import tagClickableStyle from "./tag-clickable.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${tagClickableStyle}`);
 
 /**
  * SpTagClickableは、デザインシステム2.0におけるクリック可能なタグコンポーネントです。
@@ -34,6 +29,7 @@ export class SpTagClickable extends HTMLElement {
   get selected() {
     return this.#selected;
   }
+
   set selected(value: boolean) {
     if (this.#selected === value) return;
 
@@ -55,6 +51,7 @@ export class SpTagClickable extends HTMLElement {
   get disabled() {
     return this.#disabled;
   }
+
   set disabled(value: boolean) {
     if (this.#disabled === value) return;
 
@@ -80,7 +77,7 @@ export class SpTagClickable extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(tagClickableStyle),
     ];
 
     this.selected = false;

@@ -1,10 +1,5 @@
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import sectionTitleStyle from "./section-title.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${sectionTitleStyle}`);
 
 /**
  * SpSectionTitleは、デザインシステム2.0におけるセクションタイトルコンポーネントです。
@@ -39,7 +34,10 @@ export class SpSectionTitle extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
 
-    this.shadowRoot!.adoptedStyleSheets = [styles];
+    this.shadowRoot!.adoptedStyleSheets = [
+      ...this.shadowRoot!.adoptedStyleSheets,
+      makeStyleSheet(sectionTitleStyle),
+    ];
 
     this.#textLinkSlotElement.name = "text-links";
     this.#buttonSlotElement.name = "buttons";

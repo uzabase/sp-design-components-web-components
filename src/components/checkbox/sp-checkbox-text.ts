@@ -1,11 +1,8 @@
 import { UbCheckboxText } from "@ub-design/components-web-components/";
 
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import checkboxTextStyle from "./checkbox-text.css?inline";
 import checkmarkStyle from "./checkmark.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${foundationStyle} ${checkmarkStyle} ${checkboxTextStyle}`);
 
 /**
  * SpCheckboxTextは、デザインシステム2.0におけるテキスト付きチェックボックスコンポーネントです。
@@ -21,7 +18,7 @@ export class SpCheckboxText extends UbCheckboxText {
 
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(checkmarkStyle, checkboxTextStyle),
     ];
   }
 }

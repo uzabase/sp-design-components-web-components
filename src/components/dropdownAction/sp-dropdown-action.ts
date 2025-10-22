@@ -1,9 +1,7 @@
 import "./sp-dropdown-action-button";
 import "./sp-dropdown-action-item";
 
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import dropdownActionStyle from "./dropdown-action.css?inline";
 
 type Position = "left" | "right";
@@ -17,9 +15,6 @@ function isValidPosition(value: string): value is Position {
 function createMenuId() {
   return `sp-dropdown-action-menu-${Math.random().toString(32).substring(2)}`;
 }
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${dropdownActionStyle}`);
 
 /**
  * SpDropdownActionは、デザインシステム2.0におけるドロップダウンアクションコンポーネントです。
@@ -128,7 +123,7 @@ export class SpDropdownAction extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(dropdownActionStyle),
     ];
 
     this.open = false;

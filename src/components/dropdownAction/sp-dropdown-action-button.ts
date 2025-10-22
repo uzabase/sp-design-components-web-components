@@ -2,13 +2,8 @@ import "../icon/sp-icon";
 
 import buttonStyle from "../button/button.css?inline";
 import { SpButton } from "../button/sp-button";
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import dropdownActionButtonStyle from "./dropdown-action-button.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(
-  `${foundationStyle} ${buttonStyle} ${dropdownActionButtonStyle}`,
-);
 
 /**
  * SpDropdownActionButtonは、デザインシステム2.0におけるドロップダウンアクション用ボタンコンポーネントです。
@@ -23,7 +18,7 @@ export class SpDropdownActionButton extends SpButton {
 
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(buttonStyle, dropdownActionButtonStyle),
     ];
   }
 

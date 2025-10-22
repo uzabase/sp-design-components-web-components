@@ -1,12 +1,7 @@
 import "../icon/sp-icon";
 
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import tagLinkStyle from "./tag-link.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${tagLinkStyle}`);
 
 /**
  * SpTagLinkは、デザインシステム2.0におけるリンク機能付きタグコンポーネントです。
@@ -65,7 +60,7 @@ export class SpTagLink extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(tagLinkStyle),
     ];
   }
 

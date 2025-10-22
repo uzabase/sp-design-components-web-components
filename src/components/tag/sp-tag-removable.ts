@@ -1,12 +1,7 @@
 import "../icon/sp-icon";
 
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import tagRemovableStyle from "./tag-removable.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${resetStyle} ${foundationStyle} ${tagRemovableStyle}`);
 
 /**
  * SpTagRemovableは、デザインシステム2.0における削除可能なタグコンポーネントです。
@@ -41,6 +36,7 @@ export class SpTagRemovable extends HTMLElement {
   get disabled() {
     return this.#disabled;
   }
+
   set disabled(value: boolean) {
     if (this.#disabled === value) return;
 
@@ -59,6 +55,7 @@ export class SpTagRemovable extends HTMLElement {
   get draggable() {
     return this.#draggable;
   }
+
   set draggable(value: boolean) {
     if (this.#draggable === value) return;
 
@@ -76,7 +73,7 @@ export class SpTagRemovable extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(tagRemovableStyle),
     ];
 
     this.disabled = false;

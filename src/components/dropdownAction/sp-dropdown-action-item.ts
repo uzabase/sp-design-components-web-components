@@ -1,12 +1,5 @@
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import dropdownActionItemStyle from "./dropdown-action-item.css?inline";
-
-const styles = new CSSStyleSheet();
-styles.replaceSync(
-  `${resetStyle} ${foundationStyle} ${dropdownActionItemStyle}`,
-);
 
 /**
  * SpDropdownActionItemは、デザインシステム2.0におけるドロップダウンアクション項目コンポーネントです。
@@ -24,7 +17,7 @@ export class SpDropdownActionItem extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.shadowRoot!.adoptedStyleSheets = [
       ...this.shadowRoot!.adoptedStyleSheets,
-      styles,
+      makeStyleSheet(dropdownActionItemStyle),
     ];
   }
 
