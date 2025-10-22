@@ -1,10 +1,7 @@
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import tabPanelStyle from "./tab-panel.css?inline";
 
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${foundationStyle} ${tabPanelStyle} ${resetStyle}`);
+const styles = makeStyleSheet(tabPanelStyle);
 
 export class SpTabPanel extends HTMLElement {
   #contentWrapper = document.createElement("div");

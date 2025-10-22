@@ -261,126 +261,127 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/definitionList/sp-definition-list-dd.ts",
+      "path": "src/components/dropdownDialog/sp-dropdown-dialog.ts",
       "declarations": [
         {
           "kind": "class",
-          "description": "SpDefinitionListDdは、デザインシステム2.0における定義リストの説明項目コンポーネントです。\n定義リスト内で用語の説明を表示するために使用します。",
-          "name": "SpDefinitionListDd",
+          "description": "SpDropdownDialogは、デザインシステム2.0におけるドロップダウンダイアログコンポーネントです。\nボタンをクリックすると表示されるダイアログコンテンツを提供します。",
+          "name": "SpDropdownDialog",
           "slots": [
             {
-              "description": "説明のテキストコンテンツ（デフォルトスロット）",
+              "description": "ドロップダウンダイアログのコンテンツ（デフォルトスロット）",
               "name": ""
             }
           ],
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "description": "ドロップダウンボタンのラベルテキスト",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "description": "ドロップダウンダイアログの開閉状態",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "open"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "description": "ドロップダウンの無効状態",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "position",
+              "description": "ドロップダウンダイアログの表示位置（\"left\" または \"right\"）\n- \"left\": 左寄せ\n- \"right\": 右寄せ",
+              "type": {
+                "text": "\"left\"|\"right\""
+              },
+              "default": "\"left\"",
+              "attribute": "position"
+            },
+            {
+              "kind": "field",
+              "name": "adoptedStyleSheets",
+              "type": {
+                "text": "array"
+              },
+              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(dropdownDialogStyle), ]"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "description": "ドロップダウンボタンのラベルテキスト",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "label"
+            },
+            {
+              "name": "open",
+              "description": "ドロップダウンダイアログの開閉状態",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "open"
+            },
+            {
+              "name": "disabled",
+              "description": "ドロップダウンの無効状態",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "position",
+              "description": "ドロップダウンダイアログの表示位置（\"left\" または \"right\"）\n- \"left\": 左寄せ\n- \"right\": 右寄せ",
+              "type": {
+                "text": "\"left\"|\"right\""
+              },
+              "default": "\"left\"",
+              "fieldName": "position"
+            }
+          ],
           "superclass": {
             "name": "HTMLElement"
           },
-          "tagName": "sp-definition-list-dd",
+          "tagName": "sp-dropdown-dialog",
           "customElement": true,
-          "summary": "定義リストの説明項目コンポーネント"
+          "summary": "ドロップダウンダイアログコンポーネント"
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "SpDefinitionListDd",
+          "name": "SpDropdownDialog",
           "declaration": {
-            "name": "SpDefinitionListDd",
-            "module": "src/components/definitionList/sp-definition-list-dd.ts"
+            "name": "SpDropdownDialog",
+            "module": "src/components/dropdownDialog/sp-dropdown-dialog.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "sp-definition-list-dd",
+          "name": "sp-dropdown-dialog",
           "declaration": {
-            "name": "SpDefinitionListDd",
-            "module": "src/components/definitionList/sp-definition-list-dd.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/definitionList/sp-definition-list-dt.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "SpDefinitionListDtは、デザインシステム2.0における定義リストの用語項目コンポーネントです。\n定義リスト内で用語を表示するために使用します。",
-          "name": "SpDefinitionListDt",
-          "slots": [
-            {
-              "description": "用語のテキストコンテンツ（デフォルトスロット）",
-              "name": ""
-            }
-          ],
-          "members": [],
-          "superclass": {
-            "name": "HTMLElement"
-          },
-          "tagName": "sp-definition-list-dt",
-          "customElement": true,
-          "summary": "定義リストの用語項目コンポーネント"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SpDefinitionListDt",
-          "declaration": {
-            "name": "SpDefinitionListDt",
-            "module": "src/components/definitionList/sp-definition-list-dt.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sp-definition-list-dt",
-          "declaration": {
-            "name": "SpDefinitionListDt",
-            "module": "src/components/definitionList/sp-definition-list-dt.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/definitionList/sp-definition-list.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "SpDefinitionListは、デザインシステム2.0における定義リストコンポーネントです。\n用語とその定義をペアで表示するリストを提供します。",
-          "name": "SpDefinitionList",
-          "slots": [
-            {
-              "description": "定義リストの項目（デフォルトスロット）",
-              "name": ""
-            }
-          ],
-          "members": [],
-          "superclass": {
-            "name": "HTMLElement"
-          },
-          "tagName": "sp-definition-list",
-          "customElement": true,
-          "summary": "定義リストコンポーネント"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SpDefinitionList",
-          "declaration": {
-            "name": "SpDefinitionList",
-            "module": "src/components/definitionList/sp-definition-list.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sp-definition-list",
-          "declaration": {
-            "name": "SpDefinitionList",
-            "module": "src/components/definitionList/sp-definition-list.ts"
+            "name": "SpDropdownDialog",
+            "module": "src/components/dropdownDialog/sp-dropdown-dialog.ts"
           }
         }
       ]
@@ -700,127 +701,126 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/dropdownDialog/sp-dropdown-dialog.ts",
+      "path": "src/components/definitionList/sp-definition-list-dd.ts",
       "declarations": [
         {
           "kind": "class",
-          "description": "SpDropdownDialogは、デザインシステム2.0におけるドロップダウンダイアログコンポーネントです。\nボタンをクリックすると表示されるダイアログコンテンツを提供します。",
-          "name": "SpDropdownDialog",
+          "description": "SpDefinitionListDdは、デザインシステム2.0における定義リストの説明項目コンポーネントです。\n定義リスト内で用語の説明を表示するために使用します。",
+          "name": "SpDefinitionListDd",
           "slots": [
             {
-              "description": "ドロップダウンダイアログのコンテンツ（デフォルトスロット）",
+              "description": "説明のテキストコンテンツ（デフォルトスロット）",
               "name": ""
             }
           ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "label",
-              "description": "ドロップダウンボタンのラベルテキスト",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "description": "ドロップダウンダイアログの開閉状態",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "open"
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
-              "description": "ドロップダウンの無効状態",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "attribute": "disabled"
-            },
-            {
-              "kind": "field",
-              "name": "position",
-              "description": "ドロップダウンダイアログの表示位置（\"left\" または \"right\"）\n- \"left\": 左寄せ\n- \"right\": 右寄せ",
-              "type": {
-                "text": "\"left\"|\"right\""
-              },
-              "default": "\"left\"",
-              "attribute": "position"
-            },
-            {
-              "kind": "field",
-              "name": "adoptedStyleSheets",
-              "type": {
-                "text": "array"
-              },
-              "default": "[ ...this.shadowRoot!.adoptedStyleSheets, makeStyleSheet(dropdownDialogStyle), ]"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "label",
-              "description": "ドロップダウンボタンのラベルテキスト",
-              "type": {
-                "text": "string"
-              },
-              "fieldName": "label"
-            },
-            {
-              "name": "open",
-              "description": "ドロップダウンダイアログの開閉状態",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "open"
-            },
-            {
-              "name": "disabled",
-              "description": "ドロップダウンの無効状態",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "fieldName": "disabled"
-            },
-            {
-              "name": "position",
-              "description": "ドロップダウンダイアログの表示位置（\"left\" または \"right\"）\n- \"left\": 左寄せ\n- \"right\": 右寄せ",
-              "type": {
-                "text": "\"left\"|\"right\""
-              },
-              "default": "\"left\"",
-              "fieldName": "position"
-            }
-          ],
+          "members": [],
           "superclass": {
             "name": "HTMLElement"
           },
-          "tagName": "sp-dropdown-dialog",
+          "tagName": "sp-definition-list-dd",
           "customElement": true,
-          "summary": "ドロップダウンダイアログコンポーネント"
+          "summary": "定義リストの説明項目コンポーネント"
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "SpDropdownDialog",
+          "name": "SpDefinitionListDd",
           "declaration": {
-            "name": "SpDropdownDialog",
-            "module": "src/components/dropdownDialog/sp-dropdown-dialog.ts"
+            "name": "SpDefinitionListDd",
+            "module": "src/components/definitionList/sp-definition-list-dd.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "sp-dropdown-dialog",
+          "name": "sp-definition-list-dd",
           "declaration": {
-            "name": "SpDropdownDialog",
-            "module": "src/components/dropdownDialog/sp-dropdown-dialog.ts"
+            "name": "SpDefinitionListDd",
+            "module": "src/components/definitionList/sp-definition-list-dd.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/definitionList/sp-definition-list-dt.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "SpDefinitionListDtは、デザインシステム2.0における定義リストの用語項目コンポーネントです。\n定義リスト内で用語を表示するために使用します。",
+          "name": "SpDefinitionListDt",
+          "slots": [
+            {
+              "description": "用語のテキストコンテンツ（デフォルトスロット）",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-definition-list-dt",
+          "customElement": true,
+          "summary": "定義リストの用語項目コンポーネント"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpDefinitionListDt",
+          "declaration": {
+            "name": "SpDefinitionListDt",
+            "module": "src/components/definitionList/sp-definition-list-dt.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-definition-list-dt",
+          "declaration": {
+            "name": "SpDefinitionListDt",
+            "module": "src/components/definitionList/sp-definition-list-dt.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/definitionList/sp-definition-list.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "SpDefinitionListは、デザインシステム2.0における定義リストコンポーネントです。\n用語とその定義をペアで表示するリストを提供します。",
+          "name": "SpDefinitionList",
+          "slots": [
+            {
+              "description": "定義リストの項目（デフォルトスロット）",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-definition-list",
+          "customElement": true,
+          "summary": "定義リストコンポーネント"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpDefinitionList",
+          "declaration": {
+            "name": "SpDefinitionList",
+            "module": "src/components/definitionList/sp-definition-list.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-definition-list",
+          "declaration": {
+            "name": "SpDefinitionList",
+            "module": "src/components/definitionList/sp-definition-list.ts"
           }
         }
       ]
@@ -1499,6 +1499,193 @@
           "declaration": {
             "name": "SpSegmentedControl",
             "module": "src/components/segmentedControl/sp-segmented-control.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/tab/sp-tab-group.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SpTabGroup",
+          "members": [
+            {
+              "kind": "field",
+              "name": "adoptedStyleSheets",
+              "type": {
+                "text": "array"
+              },
+              "default": "[styles]"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "default-panel"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-tab-group",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpTabGroup",
+          "declaration": {
+            "name": "SpTabGroup",
+            "module": "src/components/tab/sp-tab-group.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-tab-group",
+          "declaration": {
+            "name": "SpTabGroup",
+            "module": "src/components/tab/sp-tab-group.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/tab/sp-tab-panel.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SpTabPanel",
+          "members": [
+            {
+              "kind": "field",
+              "name": "name"
+            },
+            {
+              "kind": "field",
+              "name": "active"
+            },
+            {
+              "kind": "field",
+              "name": "adoptedStyleSheets",
+              "type": {
+                "text": "array"
+              },
+              "default": "[styles]"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name"
+            },
+            {
+              "name": "active"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-tab-panel",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpTabPanel",
+          "declaration": {
+            "name": "SpTabPanel",
+            "module": "src/components/tab/sp-tab-panel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-tab-panel",
+          "declaration": {
+            "name": "SpTabPanel",
+            "module": "src/components/tab/sp-tab-panel.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/tab/sp-tab.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SpTab",
+          "members": [
+            {
+              "kind": "field",
+              "name": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "selected"
+            },
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"gray\""
+            },
+            {
+              "kind": "field",
+              "name": "plusIcon"
+            },
+            {
+              "kind": "field",
+              "name": "adoptedStyleSheets",
+              "type": {
+                "text": "array"
+              },
+              "default": "[styles]"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "selected"
+            },
+            {
+              "name": "plus-icon"
+            },
+            {
+              "name": "disabled"
+            },
+            {
+              "name": "fill"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "sp-tab",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SpTab",
+          "declaration": {
+            "name": "SpTab",
+            "module": "src/components/tab/sp-tab.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sp-tab",
+          "declaration": {
+            "name": "SpTab",
+            "module": "src/components/tab/sp-tab.ts"
           }
         }
       ]

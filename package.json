@@ -67,5 +67,6 @@
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^3.2.4",
     "@storybook/addon-docs": "^9.1.13"
-  }
+  },
+  "customElements": "dist/custom-elements.json"
 }

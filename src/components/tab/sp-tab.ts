@@ -1,7 +1,5 @@
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
 import { SpIcon } from "../icon/sp-icon";
+import { makeStyleSheet } from "../styles";
 import tabStyle from "./tab.css?inline";
 
 type TabType = "white" | "gray";
@@ -14,8 +12,7 @@ function isBooleanAttribute(value: string | null): boolean {
   return value === "true" || value === "";
 }
 
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${foundationStyle} ${tabStyle} ${resetStyle}`);
+const styles = makeStyleSheet(tabStyle);
 
 export class SpTab extends HTMLElement {
   #disabled!: boolean;

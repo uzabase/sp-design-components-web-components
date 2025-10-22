@@ -1,14 +1,11 @@
 import "./sp-tab";
 import "./sp-tab-panel";
 
-import resetStyle from "@acab/reset.css?inline";
-
-import foundationStyle from "../foundation.css?inline";
+import { makeStyleSheet } from "../styles";
 import type { SpTab } from "./sp-tab";
 import tabGroupStyle from "./tab-group.css?inline";
 
-const styles = new CSSStyleSheet();
-styles.replaceSync(`${foundationStyle} ${tabGroupStyle} ${resetStyle}`);
+const styles = makeStyleSheet(tabGroupStyle);
 
 export class SpTabGroup extends HTMLElement {
   #navSlot = document.createElement("slot");
