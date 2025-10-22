@@ -1,0 +1,148 @@
+:host {
+  display: inline-flex;
+  max-width: 100%;
+  outline: none;
+  font: inherit;
+  background: none;
+  min-width: 80px;
+  padding-block: 2px;
+  padding-inline: 16px;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-semantic-text-regular);
+  font-size: 14px;
+  border-radius: 1rem;
+  min-height: 28px;
+  column-gap: 4px;
+  line-height: 160%;
+  box-sizing: border-box;
+
+  --icon-color: var(--color-semantic-text-button-outline-default);
+}
+
+:host(:hover) {
+  cursor: pointer;
+}
+
+:host([fill="gray"]) {
+  border: 1px solid var(--color-semantic-border-regular);
+  background-color: var(--color-semantic-surface-regular-2);
+}
+
+:host([fill="gray"]:hover) {
+  background-color: var(--color-semantic-surface-regular-4);
+}
+
+:host([fill="gray"][selected]) {
+  border-color: var(--color-semantic-border-selected);
+  background-color: var(--color-semantic-surface-selected);
+  color: var(--color-semantic-text-inverse);
+  font-weight: bold;
+
+  --icon-color: var(--color-semantic-text-button-selected);
+}
+
+:host([fill="gray"][selected]:hover) {
+  border-color: var(--color-semantic-surface-selected-hover);
+  background-color: var(--color-semantic-surface-selected-hover);
+}
+
+:host([fill="gray"][selected][disabled]) {
+  border-color: var(--color-semantic-border-regular);
+  background-color: var(--color-semantic-surface-regular-2);
+  color: var(--color-semantic-text-disabled);
+  cursor: not-allowed;
+  font-weight: normal;
+
+  --icon-color: var(--color-semantic-text-button-disabled);
+}
+
+:host([fill="gray"][disabled]) {
+  border-color: var(--color-semantic-border-regular);
+  background-color: var(--color-semantic-surface-regular-2);
+  color: var(--color-semantic-text-disabled);
+  cursor: not-allowed;
+
+  --icon-color: var(--color-semantic-text-button-disabled);
+}
+
+:host([fill="white"]) {
+  border: 1px solid var(--color-semantic-border-regular);
+  background-color: var(--color-semantic-surface-regular-1);
+}
+
+:host([fill="white"]:hover) {
+  background-color: var(--color-semantic-surface-regular-3);
+}
+
+:host([fill="white"][selected]) {
+  border-color: var(--color-semantic-border-selected);
+  background-color: var(--color-semantic-surface-selected);
+  color: var(--color-semantic-text-inverse);
+  font-weight: bold;
+
+  --icon-color: var(--color-semantic-text-button-selected);
+}
+
+:host([fill="white"][selected]:hover) {
+  border-color: var(--color-semantic-surface-selected-hover);
+  background-color: var(--color-semantic-surface-selected-hover);
+}
+
+:host([fill="white"][selected][disabled]) {
+  border-color: var(--color-semantic-border-regular);
+  background-color: var(--color-semantic-surface-regular-2);
+  color: var(--color-semantic-text-disabled);
+  cursor: not-allowed;
+  font-weight: normal;
+
+  --icon-color: var(--color-semantic-text-button-disabled);
+}
+
+:host([fill="white"][disabled]) {
+  border-color: var(--color-semantic-border-regular);
+  background-color: var(--color-semantic-surface-regular-2);
+  color: var(--color-semantic-text-disabled);
+  cursor: not-allowed;
+}
+
+:host([disabled]) {
+  border-color: var(--color-semantic-border-regular);
+  background-color: var(--color-semantic-surface-regular-2);
+  color: var(--color-semantic-text-disabled);
+  cursor: not-allowed;
+}
+
+:host(:focus-visible) {
+  outline: canvastext solid 3px;
+  box-shadow: canvas 0 0 0 5px;
+  outline-offset: 1px;
+  background-color: var(--color-semantic-surface-regular-4);
+}
+
+.spds__tabInner{
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+}
+
+.spds__tabIcon {
+  display: none;
+}
+
+.spds__tabIcon.-show {
+  display: block;
+}
+
+/* 外部からのスタイリング */
+sp-tab[disabled] {
+  cursor: not-allowed;
+}
+
+.spds__tabText {
+  color: inherit;
+}
+
+:host([disabled]) .spds__tabText {
+  color: var(--color-semantic-text-disabled);
+}
