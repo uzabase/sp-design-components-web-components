@@ -6,6 +6,10 @@
   vertical-align: middle;
 }
 
+:host([hidden]) {
+  display: none;
+}
+
 .icon {
   display: inline-block;
   fill: currentcolor;
