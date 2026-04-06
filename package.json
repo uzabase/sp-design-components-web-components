@@ -63,7 +63,7 @@
     "stylelint-config-standard": "^39.0.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.1",
-    "vite": "^7.1.10",
+    "vite": "^7.3.2",
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^3.2.4",
     "@storybook/addon-docs": "^9.1.13"
